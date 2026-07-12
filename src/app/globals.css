@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #05070d;
+  --foreground: #eef2f8;
+  --surface: #0b0f1a;
+  --surface-2: #0f1524;
+  --border: #1c2436;
+  --muted: #8a94a8;
+  --grid-line: rgba(148, 163, 184, 0.07);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.3);
+  color: #ffffff;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #34d399 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-grid {
+    background-image: var(--tw-gradient-stops), linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 100% 100%, 44px 44px, 44px 44px;
+  }
+
+  .card-surface {
+    background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+    border: 1px solid var(--border);
+  }
+}
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a3550;
+  }
+}
