@@ -8,13 +8,9 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent-cyan to-accent-violet font-mono text-sm font-bold text-background">
-                O
-              </span>
-              <span className="text-lg font-semibold tracking-tight">
-                OHIHO
-              </span>
+            <Link href="/" className="flex items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-mark.svg" alt="OHIHO" className="h-9 w-auto rounded-md" />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
               OHIHO relie l&apos;humain et la machine : support informatique et
