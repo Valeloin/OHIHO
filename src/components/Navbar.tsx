@@ -54,7 +54,13 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-5 md:flex">
+          <Link
+            href="/connexion"
+            className="text-sm text-muted transition-colors hover:text-foreground"
+          >
+            Connexion
+          </Link>
           <Link
             href="/#contact"
             className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-transform hover:scale-105"
@@ -101,6 +107,13 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/connexion"
+              onClick={() => setOpen(false)}
+              className="text-sm text-muted hover:text-foreground"
+            >
+              Connexion
+            </Link>
             <Link
               href="/#contact"
               onClick={() => setOpen(false)}
