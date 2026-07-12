@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { signOut } from "@/lib/supabase/actions";
 
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
@@ -91,12 +92,31 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-5 md:flex">
-          <Link
-            href={firstName ? "/portail" : "/connexion"}
-            className="text-sm text-muted transition-colors hover:text-foreground"
-          >
-            {firstName ? `Bonjour, ${firstName}` : "Connexion"}
-          </Link>
+          {firstName ? (
+            <>
+              <Link
+                href="/portail"
+                className="text-sm text-foreground transition-colors hover:text-accent-cyan"
+              >
+                Bonjour, {firstName}
+              </Link>
+              <form action={signOut}>
+                <button
+                  type="submit"
+                  className="text-sm text-muted transition-colors hover:text-foreground"
+                >
+                  Déconnexion
+                </button>
+              </form>
+            </>
+          ) : (
+            <Link
+              href="/connexion"
+              className="text-sm text-muted transition-colors hover:text-foreground"
+            >
+              Connexion
+            </Link>
+          )}
           <Link
             href="/#contact"
             className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-transform hover:scale-105"
@@ -143,13 +163,33 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href={firstName ? "/portail" : "/connexion"}
-              onClick={() => setOpen(false)}
-              className="text-sm text-muted hover:text-foreground"
-            >
-              {firstName ? `Bonjour, ${firstName}` : "Connexion"}
-            </Link>
+            {firstName ? (
+              <>
+                <Link
+                  href="/portail"
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-foreground hover:text-accent-cyan"
+                >
+                  Bonjour, {firstName}
+                </Link>
+                <form action={signOut}>
+                  <button
+                    type="submit"
+                    className="text-sm text-muted hover:text-foreground"
+                  >
+                    Déconnexion
+                  </button>
+                </form>
+              </>
+            ) : (
+              <Link
+                href="/connexion"
+                onClick={() => setOpen(false)}
+                className="text-sm text-muted hover:text-foreground"
+              >
+                Connexion
+              </Link>
+            )}
             <Link
               href="/#contact"
               onClick={() => setOpen(false)}
