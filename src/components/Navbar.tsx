@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/supabase/actions";
 
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState<string | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -57,7 +59,7 @@ export default function Navbar() {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [pathname]);
 
   return (
     <header
