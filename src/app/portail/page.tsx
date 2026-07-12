@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/lib/supabase/actions";
 
@@ -39,14 +40,22 @@ export default async function PortailPage() {
             votre compte fonctionne.
           </p>
 
-          <form action={signOut} className="mt-6">
-            <button
-              type="submit"
-              className="rounded-full border border-border px-6 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/portail/profil"
+              className="rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
             >
-              Se déconnecter
-            </button>
-          </form>
+              Mon profil
+            </Link>
+            <form action={signOut}>
+              <button
+                type="submit"
+                className="rounded-full border border-border px-6 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
+              >
+                Se déconnecter
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </main>

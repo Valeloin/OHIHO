@@ -105,6 +105,11 @@ export type Database = {
       };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      update_own_profile: {
+        Args: { p_full_name: string; p_company: string | null };
+        Returns: void;
+      };
+    };
   };
 };

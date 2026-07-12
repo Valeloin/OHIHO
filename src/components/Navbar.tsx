@@ -102,6 +102,12 @@ export default function Navbar() {
               >
                 Bonjour, {firstName}
               </Link>
+              <Link
+                href="/portail/profil"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                Mon profil
+              </Link>
               <form action={signOut}>
                 <button
                   type="submit"
@@ -173,6 +179,13 @@ export default function Navbar() {
                   className="text-sm text-foreground hover:text-accent-cyan"
                 >
                   Bonjour, {firstName}
+                </Link>
+                <Link
+                  href="/portail/profil"
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-muted hover:text-foreground"
+                >
+                  Mon profil
                 </Link>
                 <form action={signOut}>
                   <button
