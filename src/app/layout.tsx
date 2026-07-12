@@ -16,6 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ohiho.fr"),
   title: "OHIHO — Le lien entre l'humain et la machine",
   description:
     "OHIHO accompagne les entreprises avec du support informatique et des formations aux nouvelles technologies. Support, pédagogie, solutions sur-mesure.",
@@ -32,6 +33,15 @@ export const metadata: Metadata = {
       "Support informatique et formation aux nouvelles technologies pour les entreprises.",
     type: "website",
     locale: "fr_FR",
+    url: "https://ohiho.fr",
+    images: ["/logo.svg"],
+  },
+  twitter: {
+    card: "summary",
+    title: "OHIHO — Le lien entre l'humain et la machine",
+    description:
+      "Support informatique et formation aux nouvelles technologies pour les entreprises.",
+    images: ["/logo.svg"],
   },
 };
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -8,9 +9,14 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Link href="/" className="flex items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo-mark.svg" alt="OHIHO" className="h-9 w-auto rounded-md" />
+            <Link href="/" className="flex items-center group">
+              <Image
+                src="/logo-mark.svg"
+                alt="OHIHO"
+                width={120}
+                height={36}
+                className="h-9 w-auto rounded-md transition-transform duration-300 ease-out group-hover:scale-110"
+              />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
               OHIHO relie l&apos;humain et la machine : support informatique et

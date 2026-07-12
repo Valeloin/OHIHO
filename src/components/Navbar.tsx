@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
@@ -30,9 +31,15 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-mark.svg" alt="OHIHO" className="h-9 w-auto rounded-md" />
+        <Link href="/" className="flex items-center group">
+          <Image
+            src="/logo-mark.svg"
+            alt="OHIHO"
+            width={120}
+            height={36}
+            priority
+            className="h-9 w-auto rounded-md transition-transform duration-300 ease-out group-hover:scale-110"
+          />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
