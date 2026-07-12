@@ -1,18 +1,18 @@
 const VALUES = [
   {
-    title: "Pédagogie avant tout",
+    title: "Solutions sur-mesure",
     description:
-      "Nous prenons le temps d'expliquer, pas seulement de résoudre. L'objectif est votre autonomie, pas votre dépendance.",
+      "Chaque structure a ses contraintes de budget, de taille et de maturité numérique. Nous nous y adaptons, pas l'inverse.",
+  },
+  {
+    title: "Réactivité",
+    description:
+      "Un problème informatique ne peut pas attendre. Notre équipe intervient rapidement, à distance ou sur site.",
   },
   {
     title: "Langage clair",
     description:
       "Pas de jargon inutile. Nous parlons de vos outils avec les mots de votre métier, pas ceux de l'informatique.",
-  },
-  {
-    title: "Solutions sur-mesure",
-    description:
-      "Chaque structure a ses contraintes de budget, de taille et de maturité numérique. Nous nous y adaptons, pas l'inverse.",
   },
   {
     title: "Accompagnement dans la durée",
@@ -30,8 +30,8 @@ export default function WhyUs() {
             Pourquoi OHIHO
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Une approche centrée sur les personnes, pas seulement sur les
-            machines
+            Un support informatique pensé pour votre entreprise, pas pour
+            n&apos;importe qui
           </p>
         </div>
 

@@ -6,10 +6,10 @@ const SERVICES = [
     points: ["Assistance à distance", "Maintenance préventive", "Gestion du parc"],
   },
   {
-    title: "Formation & pédagogie",
+    title: "Solutions sur-mesure",
     description:
-      "Des ateliers clairs, sans jargon, pour que vos équipes comprennent et utilisent les outils numériques et l'IA en toute confiance.",
-    points: ["Ateliers sur-mesure", "Supports pédagogiques", "Accompagnement continu"],
+      "Chaque entreprise a ses contraintes. Nous concevons des solutions adaptées à votre taille, votre budget et votre niveau de maturité numérique.",
+    points: ["Cahier des charges", "Choix des outils", "Intégration accompagnée"],
   },
   {
     title: "Transformation digitale",
@@ -18,10 +18,10 @@ const SERVICES = [
     points: ["Audit des outils existants", "Feuille de route", "Mise en œuvre progressive"],
   },
   {
-    title: "Solutions sur-mesure",
+    title: "Formation & pédagogie",
     description:
-      "Chaque entreprise a ses contraintes. Nous concevons des solutions adaptées à votre taille, votre budget et votre niveau de maturité numérique.",
-    points: ["Cahier des charges", "Choix des outils", "Intégration accompagnée"],
+      "Des ateliers clairs, sans jargon, pour que vos équipes comprennent et utilisent les outils numériques et l'IA en toute confiance.",
+    points: ["Ateliers sur-mesure", "Supports pédagogiques", "Accompagnement continu"],
   },
 ];
 
@@ -34,13 +34,12 @@ export default function Services() {
             Nos services
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Des solutions informatiques pensées pour les humains qui les
-            utilisent
+            Un support informatique adapté à la réalité de votre entreprise
           </p>
           <p className="mt-4 text-muted">
-            Que vous ayez besoin d&apos;un support réactif ou d&apos;une
-            montée en compétences de vos équipes, nous adaptons notre
-            accompagnement à votre réalité de terrain.
+            Que vous ayez besoin d&apos;un dépannage rapide ou d&apos;un
+            accompagnement plus global, nous adaptons nos solutions à votre
+            taille, votre budget et vos contraintes.
           </p>
         </div>
 

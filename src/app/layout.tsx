@@ -17,20 +17,21 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
-  title: "OHIHO — Le lien entre l'humain et la machine",
+  title: "OHIHO — Support informatique sur-mesure pour entreprises",
   description:
-    "OHIHO accompagne les entreprises avec du support informatique et des formations aux nouvelles technologies. Support, pédagogie, solutions sur-mesure.",
+    "OHIHO accompagne les entreprises avec un support informatique réactif et personnalisé. Dépannage, infogérance, accompagnement — et des formations pour vos équipes.",
   keywords: [
     "support informatique",
+    "infogérance entreprise",
+    "support informatique sur-mesure",
     "formation nouvelles technologies",
-    "pédagogie numérique",
     "solutions entreprises",
     "OHIHO",
   ],
   openGraph: {
-    title: "OHIHO — Le lien entre l'humain et la machine",
+    title: "OHIHO — Support informatique sur-mesure pour entreprises",
     description:
-      "Support informatique et formation aux nouvelles technologies pour les entreprises.",
+      "Support informatique réactif et personnalisé pour les entreprises, avec des formations pour vos équipes.",
     type: "website",
     locale: "fr_FR",
     url: "https://ohiho.fr",
@@ -38,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "OHIHO — Le lien entre l'humain et la machine",
+    title: "OHIHO — Support informatique sur-mesure pour entreprises",
     description:
-      "Support informatique et formation aux nouvelles technologies pour les entreprises.",
+      "Support informatique réactif et personnalisé pour les entreprises, avec des formations pour vos équipes.",
     images: ["/logo.svg"],
   },
 };

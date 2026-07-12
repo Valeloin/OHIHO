@@ -19,9 +19,9 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              OHIHO relie l&apos;humain et la machine : support informatique et
-              formation aux nouvelles technologies pour accompagner durablement
-              les entreprises dans leur transformation numérique.
+              OHIHO accompagne les entreprises avec un support informatique
+              réactif et personnalisé, complété par des formations pour vos
+              équipes selon vos besoins.
             </p>
           </div>
 
@@ -72,7 +72,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted md:flex-row">
           <p>© {year} OHIHO. Tous droits réservés.</p>
-          <p className="font-mono">Le lien entre l&apos;humain et la machine</p>
+          <p className="font-mono">Support informatique sur-mesure</p>
         </div>
       </div>
     </footer>

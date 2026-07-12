@@ -13,15 +13,16 @@ export default function Hero() {
           </span>
 
           <h1 className="mt-8 max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-            Le lien entre <span className="text-gradient">l&apos;humain</span>{" "}
-            et <span className="text-gradient">la machine</span>
+            Le support informatique{" "}
+            <span className="text-gradient">sur-mesure</span> pour votre{" "}
+            <span className="text-gradient">entreprise</span>
           </h1>
 
           <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted">
-            OHIHO accompagne les entreprises avec du support informatique
-            fiable et des formations claires aux nouvelles technologies —
-            pour que vos équipes gagnent en autonomie, pas seulement en
-            outils.
+            OHIHO accompagne les entreprises avec un support informatique
+            réactif et personnalisé — pensé pour votre activité, pas une
+            solution générique. Formations disponibles pour vos équipes selon
+            vos besoins.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -43,7 +44,7 @@ export default function Hero() {
         <div className="mt-20 grid grid-cols-2 gap-6 sm:grid-cols-4">
           {[
             { label: "Support technique", value: "Réactif" },
-            { label: "Formations", value: "Sur-mesure" },
+            { label: "Solutions IT", value: "Sur-mesure" },
             { label: "Accompagnement", value: "Sans jargon" },
             { label: "Suivi", value: "Continu" },
           ].map((item) => (
