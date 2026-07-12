@@ -27,10 +27,10 @@ export default function Hero() {
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
-              href="/#contact"
+              href="/inscription"
               className="rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-transform hover:scale-105"
             >
-              Demander un devis
+              S&apos;inscrire
             </Link>
             <Link
               href="/#services"

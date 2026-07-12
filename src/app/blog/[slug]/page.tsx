@@ -75,10 +75,10 @@ export default function BlogPostPage({
             vos équipes.
           </p>
           <Link
-            href="/#contact"
+            href="/inscription"
             className="mt-5 inline-block rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-transform hover:scale-105"
           >
-            Demander un devis
+            S&apos;inscrire
           </Link>
         </div>
       </article>

@@ -11,6 +11,10 @@ const signUpSchema = z.object({
   password: z
     .string()
     .min(8, "Le mot de passe doit contenir au moins 8 caractères."),
+  phone: z.string().trim().optional(),
+  companySize: z.string().trim().optional(),
+  need: z.string().trim().optional(),
+  message: z.string().trim().optional(),
 });
 
 export async function signUp(
@@ -22,13 +26,18 @@ export async function signUp(
     company: formData.get("company"),
     email: formData.get("email"),
     password: formData.get("password"),
+    phone: formData.get("phone"),
+    companySize: formData.get("companySize"),
+    need: formData.get("need"),
+    message: formData.get("message"),
   });
 
   if (!parsed.success) {
     return { error: parsed.error.issues[0]?.message ?? "Formulaire invalide." };
   }
 
-  const { fullName, company, email, password } = parsed.data;
+  const { fullName, company, email, password, phone, companySize, need, message } =
+    parsed.data;
   const supabase = createClient();
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ohiho.fr";
@@ -37,7 +46,14 @@ export async function signUp(
     email,
     password,
     options: {
-      data: { full_name: fullName, company: company || null },
+      data: {
+        full_name: fullName,
+        company: company || null,
+        phone: phone || null,
+        company_size: companySize || null,
+        need: need || null,
+        signup_message: message || null,
+      },
       emailRedirectTo: `${siteUrl}/auth/callback`,
     },
   });

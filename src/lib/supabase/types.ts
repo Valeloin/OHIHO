@@ -21,6 +21,10 @@ export type Profile = {
   email: string;
   full_name: string | null;
   company: string | null;
+  phone: string | null;
+  company_size: string | null;
+  need: string | null;
+  signup_message: string | null;
   role: UserRole;
   created_at: string;
 };

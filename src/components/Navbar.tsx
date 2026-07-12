@@ -118,19 +118,21 @@ export default function Navbar() {
               </form>
             </>
           ) : (
-            <Link
-              href="/connexion"
-              className="text-sm text-muted transition-colors hover:text-foreground"
-            >
-              Connexion
-            </Link>
+            <>
+              <Link
+                href="/connexion"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                Connexion
+              </Link>
+              <Link
+                href="/inscription"
+                className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-transform hover:scale-105"
+              >
+                S&apos;inscrire
+              </Link>
+            </>
           )}
-          <Link
-            href="/#contact"
-            className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-transform hover:scale-105"
-          >
-            Demander un devis
-          </Link>
         </div>
 
         <button
@@ -197,21 +199,23 @@ export default function Navbar() {
                 </form>
               </>
             ) : (
-              <Link
-                href="/connexion"
-                onClick={() => setOpen(false)}
-                className="text-sm text-muted hover:text-foreground"
-              >
-                Connexion
-              </Link>
+              <>
+                <Link
+                  href="/connexion"
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-muted hover:text-foreground"
+                >
+                  Connexion
+                </Link>
+                <Link
+                  href="/inscription"
+                  onClick={() => setOpen(false)}
+                  className="mt-2 rounded-full bg-foreground px-5 py-2 text-center text-sm font-medium text-background"
+                >
+                  S&apos;inscrire
+                </Link>
+              </>
             )}
-            <Link
-              href="/#contact"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-full bg-foreground px-5 py-2 text-center text-sm font-medium text-background"
-            >
-              Demander un devis
-            </Link>
           </div>
         </div>
       )}

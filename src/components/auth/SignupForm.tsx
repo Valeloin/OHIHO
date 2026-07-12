@@ -3,6 +3,20 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { signUp } from "@/app/inscription/actions";
 
+const NEEDS = [
+  "Support informatique",
+  "Formation d'équipe",
+  "Transformation digitale",
+  "Autre demande",
+];
+
+const COMPANY_SIZES = [
+  "1 à 10 employés",
+  "11 à 50 employés",
+  "51 à 200 employés",
+  "Plus de 200 employés",
+];
+
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
@@ -21,8 +35,8 @@ export default function SignupForm() {
 
   return (
     <form action={formAction} className="card-surface rounded-2xl p-8">
-      <div className="grid gap-5">
-        <div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div className="sm:col-span-1">
           <label htmlFor="fullName" className="text-xs font-medium text-muted">
             Nom complet
           </label>
@@ -35,9 +49,9 @@ export default function SignupForm() {
             placeholder="Jean Dupont"
           />
         </div>
-        <div>
+        <div className="sm:col-span-1">
           <label htmlFor="company" className="text-xs font-medium text-muted">
-            Entreprise (optionnel)
+            Entreprise
           </label>
           <input
             id="company"
@@ -47,7 +61,7 @@ export default function SignupForm() {
             placeholder="Nom de votre entreprise"
           />
         </div>
-        <div>
+        <div className="sm:col-span-1">
           <label htmlFor="email" className="text-xs font-medium text-muted">
             Email
           </label>
@@ -60,7 +74,19 @@ export default function SignupForm() {
             placeholder="vous@entreprise.fr"
           />
         </div>
-        <div>
+        <div className="sm:col-span-1">
+          <label htmlFor="phone" className="text-xs font-medium text-muted">
+            Téléphone (optionnel)
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            placeholder="06 00 00 00 00"
+          />
+        </div>
+        <div className="sm:col-span-1">
           <label htmlFor="password" className="text-xs font-medium text-muted">
             Mot de passe
           </label>
@@ -72,6 +98,52 @@ export default function SignupForm() {
             minLength={8}
             className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
             placeholder="8 caractères minimum"
+          />
+        </div>
+        <div className="sm:col-span-1">
+          <label htmlFor="companySize" className="text-xs font-medium text-muted">
+            Taille de l&apos;entreprise
+          </label>
+          <select
+            id="companySize"
+            name="companySize"
+            defaultValue={COMPANY_SIZES[0]}
+            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+          >
+            {COMPANY_SIZES.map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="need" className="text-xs font-medium text-muted">
+            Type de besoin
+          </label>
+          <select
+            id="need"
+            name="need"
+            defaultValue={NEEDS[0]}
+            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+          >
+            {NEEDS.map((need) => (
+              <option key={need} value={need}>
+                {need}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="message" className="text-xs font-medium text-muted">
+            Votre besoin en quelques mots (optionnel)
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows={3}
+            className="mt-2 w-full resize-none rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            placeholder="Décrivez brièvement votre besoin..."
           />
         </div>
       </div>
