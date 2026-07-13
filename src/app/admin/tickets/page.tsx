@@ -7,7 +7,7 @@ import InboxCard from "@/components/tickets/InboxCard";
 import type { Ticket, TicketPriority, TicketStatus } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Dashboard — OHIHO",
+  title: "Gestionnaire de ticket — OHIHO",
 };
 
 export default async function AdminTicketsPage({

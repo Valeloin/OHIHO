@@ -130,7 +130,7 @@ export default function Navbar() {
                   href="/admin/tickets"
                   className="text-sm text-accent-violet transition-colors hover:text-foreground"
                 >
-                  Dashboard
+                  Gestionnaire de ticket
                 </Link>
               )}
               <form action={signOut}>
@@ -223,7 +223,7 @@ export default function Navbar() {
                     onClick={() => setOpen(false)}
                     className="text-sm text-accent-violet hover:text-foreground"
                   >
-                    Dashboard
+                    Gestionnaire de ticket
                   </Link>
                 )}
                 <form action={signOut}>
