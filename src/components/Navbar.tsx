@@ -10,6 +10,7 @@ import { signOut } from "@/lib/supabase/actions";
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
   { href: "/#expertise", label: "Expertise" },
+  { href: "/portfolio", label: "Portfolio" },
   { href: "/blog", label: "Ressources" },
   { href: "/#a-propos", label: "À propos" },
 ];

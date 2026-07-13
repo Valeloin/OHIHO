@@ -19,7 +19,20 @@ const SERVICES = [
       "Accès depuis votre espace client",
     ],
   },
+  {
+    title: "Création de sites web & applications",
+    description:
+      "Un site vitrine, une application web sur mesure ? Je conçois et développe votre projet de A à Z, adapté à votre besoin.",
+    points: [
+      "Sites vitrines & applications",
+      "Sur mesure, de A à Z",
+      "Accompagnement dans la durée",
+    ],
+    portfolioLink: true,
+  },
 ];
+
+import Link from "next/link";
 
 export default function Services() {
   return (
@@ -30,20 +43,20 @@ export default function Services() {
             Nos services
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Deux façons de vous accompagner : dépanner et former
+            Trois façons de vous accompagner : dépanner, former et créer
           </p>
           <p className="mt-4 text-muted">
-            Un support informatique réactif à distance, et des formations en
-            ligne pour gagner en autonomie — pour les entreprises comme pour
-            les particuliers.
+            Un support informatique réactif à distance, des formations en
+            ligne pour gagner en autonomie, et la création de votre site ou
+            application — pour les entreprises comme pour les particuliers.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, i) => (
             <div
               key={service.title}
-              className="card-surface group relative overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40"
+              className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40"
             >
               <span className="font-mono text-xs text-muted">
                 {String(i + 1).padStart(2, "0")}
@@ -63,6 +76,15 @@ export default function Services() {
                   </li>
                 ))}
               </ul>
+              {service.portfolioLink && (
+                <Link
+                  href="/portfolio"
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"
+                >
+                  Voir mon portfolio
+                  <span aria-hidden="true">→</span>
+                </Link>
+              )}
               <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent-cyan/0 transition-colors group-hover:bg-accent-cyan/5" />
             </div>
           ))}
