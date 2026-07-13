@@ -26,21 +26,23 @@
   <!-- fond arrondi -->
   
 
-  <!-- O : anneau -->
-  <circle cx="256" cy="256" r="170" fill="none" stroke="#D6DEEA" stroke-width="42"/>
+  <g transform="translate(256 256) scale(1.3) translate(-256 -256)">
+    <!-- O : anneau -->
+    <circle cx="256" cy="256" r="170" fill="none" stroke="#D6DEEA" stroke-width="42"/>
 
-  <!-- H : deux montants + barre -->
-  <!-- H : boîte carrée 168 x 168, centrée en (256,256) -->
-  <g fill="#D6DEEA">
-    <rect x="172" y="172" width="38" height="168" rx="19"/>
-    <rect x="302" y="172" width="38" height="168" rx="19"/>
-    <rect x="180" y="237" width="152" height="38" rx="19"/>
-  </g>
+    <!-- H : deux montants + barre -->
+    <!-- H : boîte carrée 168 x 168, centrée en (256,256) -->
+    <g fill="#D6DEEA">
+      <rect x="172" y="172" width="38" height="168" rx="19"/>
+      <rect x="302" y="172" width="38" height="168" rx="19"/>
+      <rect x="180" y="237" width="152" height="38" rx="19"/>
+    </g>
 
-  <!-- I : capsule lumineuse, meme hauteur que le H (168), reflet centre pile sur 256 -->
-  <g>
-    <rect x="237" y="172" width="38" height="168" rx="19" fill="#2EA8FF" filter="url(#glow)" opacity="0.9"/>
-    <rect x="237" y="172" width="38" height="168" rx="19" fill="url(#cap)"/>
-    <rect x="242" y="186" width="28" height="140" rx="14" fill="url(#shine)"/>
+    <!-- I : capsule lumineuse, meme hauteur que le H (168), reflet centre pile sur 256 -->
+    <g>
+      <rect x="237" y="172" width="38" height="168" rx="19" fill="#2EA8FF" filter="url(#glow)" opacity="0.9"/>
+      <rect x="237" y="172" width="38" height="168" rx="19" fill="url(#cap)"/>
+      <rect x="242" y="186" width="28" height="140" rx="14" fill="url(#shine)"/>
+    </g>
   </g>
 </svg>
