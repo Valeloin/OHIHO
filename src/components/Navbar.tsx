@@ -66,14 +66,25 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-colors duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
-          : "bg-transparent border-b border-transparent"
+      className={`sticky top-0 z-50 border-b border-accent-cyan/25 bg-gradient-to-b from-[#0d1730] to-[#0a1228] backdrop-blur-md transition-shadow duration-300 ${
+        scrolled ? "shadow-lg shadow-black/40" : ""
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center group">
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="text-xl font-semibold tracking-tight">
+            <span className="text-foreground">OH</span>
+            <span
+              className="text-accent-cyan"
+              style={{
+                filter:
+                  "drop-shadow(0 0 4px #7dd3fc) drop-shadow(0 0 10px #38bdf8)",
+              }}
+            >
+              I
+            </span>
+            <span className="text-foreground">HO</span>
+          </span>
           <Image
             src="/logo-mark.png"
             alt="OHIHO"
