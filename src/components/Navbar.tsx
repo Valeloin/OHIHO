@@ -135,7 +135,7 @@ export default function Navbar() {
             <>
               <Link
                 href="/connexion"
-                className="text-sm text-muted transition-colors hover:text-foreground"
+                className="rounded-full border border-accent-cyan/60 px-5 py-2 text-sm font-medium text-accent-cyan transition-colors hover:bg-accent-cyan/10"
               >
                 Connexion
               </Link>
@@ -229,7 +229,7 @@ export default function Navbar() {
                 <Link
                   href="/connexion"
                   onClick={() => setOpen(false)}
-                  className="text-sm text-muted hover:text-foreground"
+                  className="rounded-full border border-accent-cyan/60 px-5 py-2 text-center text-sm font-medium text-accent-cyan transition-colors hover:bg-accent-cyan/10"
                 >
                   Connexion
                 </Link>
