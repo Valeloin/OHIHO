@@ -70,6 +70,14 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2 group">
+          <Image
+            src="/logo-mark.png"
+            alt="OHIHO"
+            width={256}
+            height={256}
+            priority
+            className="h-10 w-10 transition-transform duration-300 ease-out group-hover:scale-110"
+          />
           <span className="text-xl font-semibold tracking-tight">
             <span className="text-foreground">OH</span>
             <span
@@ -83,14 +91,6 @@ export default function Navbar() {
             </span>
             <span className="text-foreground">HO</span>
           </span>
-          <Image
-            src="/logo-mark.png"
-            alt="OHIHO"
-            width={256}
-            height={256}
-            priority
-            className="h-10 w-10 transition-transform duration-300 ease-out group-hover:scale-110"
-          />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
