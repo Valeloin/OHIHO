@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -44,6 +44,19 @@ export const metadata: Metadata = {
       "Prise en main à distance et formations en ligne, à votre rythme.",
     images: ["/logo.svg"],
   },
+  icons: {
+    icon: [
+      { url: "/ohiho_emblem.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon-180.png", sizes: "180x180" }],
+  },
+  manifest: "/site.webmanifest",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0A0E1A",
 };
 
 export default function RootLayout({
