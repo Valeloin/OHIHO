@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/lib/supabase/actions";
 import PortailTabs from "@/components/portail/PortailTabs";
@@ -13,10 +14,12 @@ export default async function PortailLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
+  if (!user) redirect("/connexion");
+
   const { data: profile } = await supabase
     .from("profiles")
     .select("full_name, company")
-    .eq("id", user!.id)
+    .eq("id", user.id)
     .single();
 
   return (
