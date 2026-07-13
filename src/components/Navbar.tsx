@@ -3,6 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { signOut } from "@/lib/supabase/actions";
 
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
@@ -14,6 +17,8 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [firstName, setFirstName] = useState<string | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -21,6 +26,40 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    async function loadProfile() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        setFirstName(null);
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .single();
+
+      const name = profile?.full_name?.trim().split(" ")[0];
+      setFirstName(name || user.email || "Mon compte");
+    }
+
+    loadProfile();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
+      loadProfile();
+    });
+
+    return () => subscription.unsubscribe();
+  }, [pathname]);
 
   return (
     <header
@@ -54,13 +93,46 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="hidden md:block">
-          <Link
-            href="/#contact"
-            className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-transform hover:scale-105"
-          >
-            Nous contacter
-          </Link>
+        <div className="hidden items-center gap-5 md:flex">
+          {firstName ? (
+            <>
+              <Link
+                href="/portail"
+                className="text-sm text-foreground transition-colors hover:text-accent-cyan"
+              >
+                Bonjour, {firstName}
+              </Link>
+              <Link
+                href="/portail/profil"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                Mon profil
+              </Link>
+              <form action={signOut}>
+                <button
+                  type="submit"
+                  className="text-sm text-muted transition-colors hover:text-foreground"
+                >
+                  Déconnexion
+                </button>
+              </form>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/connexion"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                Connexion
+              </Link>
+              <Link
+                href="/inscription"
+                className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-transform hover:scale-105"
+              >
+                S&apos;inscrire
+              </Link>
+            </>
+          )}
         </div>
 
         <button
@@ -101,13 +173,49 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/#contact"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-full bg-foreground px-5 py-2 text-center text-sm font-medium text-background"
-            >
-              Nous contacter
-            </Link>
+            {firstName ? (
+              <>
+                <Link
+                  href="/portail"
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-foreground hover:text-accent-cyan"
+                >
+                  Bonjour, {firstName}
+                </Link>
+                <Link
+                  href="/portail/profil"
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-muted hover:text-foreground"
+                >
+                  Mon profil
+                </Link>
+                <form action={signOut}>
+                  <button
+                    type="submit"
+                    className="text-sm text-muted hover:text-foreground"
+                  >
+                    Déconnexion
+                  </button>
+                </form>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/connexion"
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-muted hover:text-foreground"
+                >
+                  Connexion
+                </Link>
+                <Link
+                  href="/inscription"
+                  onClick={() => setOpen(false)}
+                  className="mt-2 rounded-full bg-foreground px-5 py-2 text-center text-sm font-medium text-background"
+                >
+                  S&apos;inscrire
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}
