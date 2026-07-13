@@ -12,15 +12,16 @@ export default function Hero() {
             Support informatique & formation en ligne
           </span>
 
-          <h1 className="mt-8 max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
+          <h1 className="mt-8 max-w-4xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
             Support informatique{" "}
-            <span className="text-gradient">sur mesure</span>
+            <span className="text-gradient">sur mesure</span> pour
+            entreprises et particuliers
           </h1>
 
           <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted">
             Prise en main à distance pour résoudre vos problèmes rapidement,
-            et formations en ligne pour que vos équipes gagnent en autonomie
-            à leur rythme. Un accompagnement clair, sans jargon.
+            et formations en ligne pour gagner en autonomie à votre rythme.
+            Un accompagnement clair, sans jargon.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">

@@ -3,13 +3,13 @@ const STEPS = [
     step: "01",
     title: "Échange initial",
     description:
-      "Un échange pour comprendre votre besoin : un problème à résoudre maintenant, ou une formation à mettre en place pour vos équipes.",
+      "Un échange pour comprendre votre besoin : un problème à résoudre maintenant, ou une formation à mettre en place pour vous ou votre équipe.",
   },
   {
     step: "02",
     title: "Diagnostic",
     description:
-      "Nous identifions la meilleure réponse : une intervention à distance immédiate, ou un parcours de formation adapté à votre équipe.",
+      "Nous identifions la meilleure réponse : une intervention à distance immédiate, ou un parcours de formation adapté à votre situation.",
   },
   {
     step: "03",

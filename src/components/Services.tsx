@@ -12,7 +12,7 @@ const SERVICES = [
   {
     title: "Formation en ligne",
     description:
-      "Des modules vidéo pour que vos équipes comprennent les usages informatiques du quotidien et gagnent en autonomie, à leur rythme.",
+      "Des modules vidéo pour comprendre les usages informatiques du quotidien et gagner en autonomie, à votre rythme.",
     points: [
       "Vidéos à suivre à son rythme",
       "Cas concrets",
@@ -34,7 +34,8 @@ export default function Services() {
           </p>
           <p className="mt-4 text-muted">
             Un support informatique réactif à distance, et des formations en
-            ligne pour que vos équipes gagnent en autonomie.
+            ligne pour gagner en autonomie — pour les entreprises comme pour
+            les particuliers.
           </p>
         </div>
 

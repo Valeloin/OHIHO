@@ -19,8 +19,9 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              OHIHO accompagne vos équipes au quotidien : support
-              informatique à distance et formations en ligne, sans jargon.
+              OHIHO accompagne entreprises et particuliers au quotidien :
+              support informatique à distance et formations en ligne, sans
+              jargon.
             </p>
           </div>
 

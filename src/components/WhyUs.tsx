@@ -17,7 +17,7 @@ const VALUES = [
   {
     title: "À votre rythme",
     description:
-      "Formations et support disponibles quand vos équipes en ont besoin, sans contrainte d'agenda.",
+      "Formations et support disponibles quand vous en avez besoin, sans contrainte d'agenda.",
   },
 ];
 
@@ -30,7 +30,7 @@ export default function WhyUs() {
             Pourquoi OHIHO
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Un support pensé pour les équipes non-techniques
+            Un support pensé pour les utilisateurs non-techniques
           </p>
         </div>
 

@@ -22,8 +22,7 @@ export default function Expertise() {
               Beaucoup de supports informatiques se contentent de résoudre le
               problème du jour. Chez OHIHO, chaque intervention à distance
               est aussi l&apos;occasion d&apos;expliquer ce qui s&apos;est
-              passé, pour que vos équipes comprennent et gagnent en
-              autonomie.
+              passé, pour que vous compreniez et gagniez en autonomie.
             </p>
             <p className="mt-4 leading-relaxed text-muted">
               Les demandes restent suivies via un ticket jusqu&apos;à leur

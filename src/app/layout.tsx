@@ -19,12 +19,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
   title: "OHIHO — Support informatique sur mesure",
   description:
-    "OHIHO accompagne vos équipes avec un support informatique à distance réactif et des formations en ligne à leur rythme, sans jargon.",
+    "OHIHO accompagne entreprises et particuliers avec un support informatique à distance réactif et des formations en ligne à leur rythme, sans jargon.",
   keywords: [
     "support informatique",
     "assistance informatique à distance",
     "formation informatique en ligne",
     "dépannage informatique entreprise",
+    "dépannage informatique particulier",
     "OHIHO",
   ],
   openGraph: {
