@@ -1,10 +1,12 @@
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/motion/Reveal";
+import AnimatedGlow from "@/components/motion/AnimatedGlow";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="border-t border-border bg-surface">
-      <div className="mx-auto max-w-6xl px-6 py-24">
+    <section id="contact" className="relative overflow-hidden border-t border-border bg-surface">
+      <AnimatedGlow variant="subtle" />
+      <div className="relative mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <Reveal>
             <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">

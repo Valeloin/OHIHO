@@ -2,6 +2,7 @@ import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
+import AnimatedGlow from "@/components/motion/AnimatedGlow";
 
 const SERVICES = [
   {
@@ -39,8 +40,9 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section id="services" className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-6 py-24">
+    <section id="services" className="relative overflow-hidden border-t border-border">
+      <AnimatedGlow variant="subtle" />
+      <div className="relative mx-auto max-w-6xl px-6 py-24">
         <Reveal className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
             Nos services
@@ -59,7 +61,8 @@ export default function Services() {
           {SERVICES.map((service, i) => (
             <RevealItem
               key={service.title}
-              className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40"
+              hover
+              className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]"
             >
               <span className="font-mono text-xs text-muted">
                 {String(i + 1).padStart(2, "0")}

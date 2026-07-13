@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
+import AnimatedGlow from "@/components/motion/AnimatedGlow";
 
 const CONTAINER: Variants = {
   hidden: {},
@@ -20,7 +21,7 @@ const ITEM: Variants = {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-grid">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/3 bg-glow-radial" />
+      <AnimatedGlow variant="hero" />
 
       <motion.div
         className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 sm:pt-28"
@@ -33,7 +34,10 @@ export default function Hero() {
             variants={ITEM}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-emerald opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-emerald" />
+            </span>
             Développement web & applications sur mesure
           </motion.span>
 
@@ -58,18 +62,22 @@ export default function Hero() {
             variants={ITEM}
             className="mt-10 flex flex-col gap-4 sm:flex-row"
           >
-            <Link
-              href="/#contact"
-              className="rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-transform hover:scale-105"
-            >
-              Nous contacter
-            </Link>
-            <Link
-              href="/portfolio"
-              className="rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
-            >
-              Voir mon portfolio
-            </Link>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/#contact"
+                className="block rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background shadow-[0_0_0_0_rgba(56,189,248,0)] transition-shadow hover:shadow-[0_0_24px_4px_rgba(56,189,248,0.35)]"
+              >
+                Nous contacter
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/portfolio"
+                className="block rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
+              >
+                Voir mon portfolio
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -83,15 +91,16 @@ export default function Hero() {
             { label: "Stack", value: "Moderne" },
             { label: "Délai", value: "Sur devis" },
           ].map((item) => (
-            <div
+            <motion.div
               key={item.label}
-              className="card-surface rounded-2xl px-4 py-5 text-center"
+              whileHover={{ y: -4 }}
+              className="card-surface rounded-2xl px-4 py-5 text-center transition-colors hover:border-accent-cyan/40"
             >
               <p className="font-mono text-sm font-semibold text-accent-cyan">
                 {item.value}
               </p>
               <p className="mt-1 text-xs text-muted">{item.label}</p>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </motion.div>

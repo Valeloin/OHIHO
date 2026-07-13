@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #05070d;
+  --background: #080c17;
   --foreground: #eef2f8;
-  --surface: #0b0f1a;
-  --surface-2: #0f1524;
-  --border: #1c2436;
+  --surface: #0d1220;
+  --surface-2: #111828;
+  --border: #202b42;
   --muted: #8a94a8;
-  --grid-line: rgba(148, 163, 184, 0.07);
+  --grid-line: rgba(148, 163, 184, 0.08);
 }
 
 html {
@@ -32,10 +32,30 @@ body {
   }
 
   .text-gradient {
-    background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #34d399 100%);
+    background: linear-gradient(
+      90deg,
+      #38bdf8 0%,
+      #818cf8 35%,
+      #34d399 65%,
+      #38bdf8 100%
+    );
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    animation: gradient-shift 6s ease-in-out infinite;
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   .bg-grid {

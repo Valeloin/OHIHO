@@ -1,4 +1,5 @@
 import Reveal from "@/components/motion/Reveal";
+import AnimatedGlow from "@/components/motion/AnimatedGlow";
 
 const COVERAGE = [
   "Sites vitrines",
@@ -9,8 +10,9 @@ const COVERAGE = [
 
 export default function Expertise() {
   return (
-    <section id="expertise" className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-6 py-24">
+    <section id="expertise" className="relative overflow-hidden border-t border-border">
+      <AnimatedGlow variant="subtle" />
+      <div className="relative mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
           <Reveal>
             <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-emerald">

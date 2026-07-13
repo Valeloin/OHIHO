@@ -4,6 +4,7 @@ import ProjectMockup from "@/components/portfolio/ProjectMockup";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
+import AnimatedGlow from "@/components/motion/AnimatedGlow";
 
 export const metadata: Metadata = {
   title: "Portfolio — OHIHO",
@@ -40,8 +41,9 @@ const PLACEHOLDER_PROJECTS = [
 
 export default function PortfolioPage() {
   return (
-    <main className="bg-grid">
-      <div className="mx-auto max-w-6xl px-6 py-24">
+    <main className="relative overflow-hidden bg-grid">
+      <AnimatedGlow variant="subtle" />
+      <div className="relative mx-auto max-w-6xl px-6 py-24">
         <Reveal>
           <p className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
             Réalisations
@@ -58,10 +60,10 @@ export default function PortfolioPage() {
 
         <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PLACEHOLDER_PROJECTS.map((project) => (
-            <RevealItem key={project.title}>
+            <RevealItem key={project.title} hover>
               <Link
                 href={project.href}
-                className="card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40"
+                className="card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]"
               >
                 <div className="aspect-[400/260] w-full border-b border-border">
                   <ProjectMockup accent={project.accent} />
