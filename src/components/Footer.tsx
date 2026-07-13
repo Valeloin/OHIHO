@@ -19,9 +19,8 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              OHIHO forme vos équipes non-techniques au RGPD et à
-              l&apos;intelligence artificielle, en ligne, pour les structures
-              qui ne peuvent pas se tromper.
+              OHIHO accompagne vos équipes au quotidien : support
+              informatique à distance et formations en ligne, sans jargon.
             </p>
           </div>
 
@@ -64,7 +63,7 @@ export default function Footer() {
                   contact@ohiho.fr
                 </a>
               </li>
-              <li>Formations RGPD &amp; IA</li>
+              <li>Support & formation en ligne</li>
               <li>Réponse sous 24h ouvrées</li>
             </ul>
           </div>
@@ -72,7 +71,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted md:flex-row">
           <p>© {year} OHIHO. Tous droits réservés.</p>
-          <p className="font-mono">Formations RGPD &amp; IA</p>
+          <p className="font-mono">Support informatique & formation en ligne</p>
         </div>
       </div>
     </footer>

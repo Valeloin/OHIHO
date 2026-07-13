@@ -17,21 +17,20 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
-  title: "OHIHO — Formation à la protection des données et à l'IA",
+  title: "OHIHO — Support informatique sur mesure",
   description:
-    "OHIHO forme vos équipes non-techniques à la protection des données (RGPD) et à l'IA — formations vidéo en ligne, à leur rythme. 7-8 ans d'expérience en justice, santé et notariat.",
+    "OHIHO accompagne vos équipes avec un support informatique à distance réactif et des formations en ligne à leur rythme, sans jargon.",
   keywords: [
-    "formation RGPD",
-    "formation IA entreprise",
-    "conformité RGPD",
-    "formation secteur réglementé",
-    "formation données sensibles",
+    "support informatique",
+    "assistance informatique à distance",
+    "formation informatique en ligne",
+    "dépannage informatique entreprise",
     "OHIHO",
   ],
   openGraph: {
-    title: "OHIHO — Formation à la protection des données et à l'IA",
+    title: "OHIHO — Support informatique sur mesure",
     description:
-      "Formation à la protection des données et à l'IA pour structures réglementées, en ligne, à votre rythme.",
+      "Prise en main à distance et formations en ligne, à votre rythme.",
     type: "website",
     locale: "fr_FR",
     url: "https://ohiho.fr",
@@ -39,9 +38,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "OHIHO — Formation à la protection des données et à l'IA",
+    title: "OHIHO — Support informatique sur mesure",
     description:
-      "Formation à la protection des données et à l'IA pour structures réglementées, en ligne, à votre rythme.",
+      "Prise en main à distance et formations en ligne, à votre rythme.",
     images: ["/logo.svg"],
   },
 };

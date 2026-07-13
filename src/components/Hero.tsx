@@ -9,21 +9,18 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
-            Formation à la protection des données et à l&apos;IA pour
-            structures réglementées
+            Support informatique & formation en ligne
           </span>
 
           <h1 className="mt-8 max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-            La <span className="text-gradient">protection des données</span>{" "}
-            et l&apos;<span className="text-gradient">IA</span>, expliquées
-            aux équipes qui ne peuvent pas se tromper
+            Support informatique{" "}
+            <span className="text-gradient">sur mesure</span>
           </h1>
 
           <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted">
-            7-8 ans passés à former des équipes non-techniques au Ministère de
-            la Justice, à l&apos;Établissement français du sang et chez des
-            notaires. OHIHO forme vos collaborateurs au RGPD et à l&apos;IA —
-            sans jargon, en formation vidéo à leur rythme.
+            Prise en main à distance pour résoudre vos problèmes rapidement,
+            et formations en ligne pour que vos équipes gagnent en autonomie
+            à leur rythme. Un accompagnement clair, sans jargon.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -37,16 +34,16 @@ export default function Hero() {
               href="/#services"
               className="rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
             >
-              Voir les formations
+              Voir nos services
             </Link>
           </div>
         </div>
 
         <div className="mt-20 grid grid-cols-2 gap-6 sm:grid-cols-4">
           {[
-            { label: "Expérience", value: "7-8 ans" },
-            { label: "Secteurs formés", value: "Justice · Santé · Notariat" },
-            { label: "Format", value: "100% en ligne" },
+            { label: "Délai de réponse", value: "< 24h" },
+            { label: "Intervention", value: "À distance" },
+            { label: "Formation", value: "Vidéo, à son rythme" },
             { label: "Pédagogie", value: "Sans jargon" },
           ].map((item) => (
             <div

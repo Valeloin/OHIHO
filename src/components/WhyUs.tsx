@@ -1,23 +1,23 @@
 const VALUES = [
   {
-    title: "Expérience terrain",
+    title: "Réactivité",
     description:
-      "Sept à huit ans passés dans des structures où la conformité n'est pas une option — justice, santé, notariat.",
+      "Une intervention à distance dès que le problème survient, sans attendre un rendez-vous.",
   },
   {
     title: "Langage clair",
     description:
-      "Pas de jargon juridique ou technique. Nous expliquons le RGPD et l'IA avec les mots de votre métier.",
+      "Pas de jargon technique. On explique ce qu'on fait et pourquoi, avec des mots simples.",
   },
   {
-    title: "Conformité concrète",
+    title: "On explique, pas seulement on répare",
     description:
-      "Pas de check-list générique. Des exemples et des cas réels adaptés à votre secteur d'activité.",
+      "Chaque intervention est l'occasion de comprendre ce qui s'est passé, pour que ça ne se reproduise plus.",
   },
   {
     title: "À votre rythme",
     description:
-      "Vos équipes suivent les modules quand elles le souhaitent, sans contrainte d'agenda ni de déplacement.",
+      "Formations et support disponibles quand vos équipes en ont besoin, sans contrainte d'agenda.",
   },
 ];
 
@@ -30,7 +30,7 @@ export default function WhyUs() {
             Pourquoi OHIHO
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Une pédagogie forgée sur le terrain, pas en salle de classe
+            Un support pensé pour les équipes non-techniques
           </p>
         </div>
 

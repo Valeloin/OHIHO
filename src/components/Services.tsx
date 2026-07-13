@@ -1,22 +1,22 @@
 const SERVICES = [
   {
-    title: "Module protection des données",
+    title: "Prise en main à distance",
     description:
-      "Comprendre vos obligations légales de protection des données (RGPD), sans jargon juridique. Cas concrets tirés de secteurs à forte exigence de conformité.",
+      "Un problème sur un poste, un logiciel ou un compte ? On se connecte à distance pour diagnostiquer et résoudre rapidement, sans déplacement.",
     points: [
-      "Vidéos à suivre à son rythme",
-      "Exemples sectoriels concrets",
-      "Mises à jour réglementaires",
+      "Intervention rapide",
+      "Suivi via ticket",
+      "Sans déplacement",
     ],
   },
   {
-    title: "Module intelligence artificielle",
+    title: "Formation en ligne",
     description:
-      "Utiliser l'IA de façon responsable et conforme au quotidien : risques, limites et bonnes pratiques expliqués simplement à des équipes non-techniques.",
+      "Des modules vidéo pour que vos équipes comprennent les usages informatiques du quotidien et gagnent en autonomie, à leur rythme.",
     points: [
       "Vidéos à suivre à son rythme",
-      "Risques & bonnes pratiques",
-      "Cas d'usage concrets",
+      "Cas concrets",
+      "Accès depuis votre espace client",
     ],
   },
 ];
@@ -27,16 +27,14 @@ export default function Services() {
       <div className="mx-auto max-w-6xl px-6 py-24">
         <div className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-            Nos formations
+            Nos services
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Deux modules, un seul objectif : rendre la protection des données
-            et l&apos;IA accessibles à vos équipes
+            Deux façons de vous accompagner : dépanner et former
           </p>
           <p className="mt-4 text-muted">
-            Des formations en ligne pensées pour des équipes non-techniques,
-            dans des secteurs qui ne peuvent pas se permettre
-            l&apos;approximation.
+            Un support informatique réactif à distance, et des formations en
+            ligne pour que vos équipes gagnent en autonomie.
           </p>
         </div>
 

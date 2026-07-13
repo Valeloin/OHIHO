@@ -5,8 +5,8 @@ import { useState, FormEvent } from "react";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const NEEDS = [
-  "Formation en ligne (RGPD)",
-  "Formation en ligne (IA)",
+  "Prise en main à distance",
+  "Formation en ligne",
   "Autre demande",
 ];
 

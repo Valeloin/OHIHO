@@ -3,25 +3,25 @@ const STEPS = [
     step: "01",
     title: "Échange initial",
     description:
-      "Un échange pour comprendre votre secteur, vos obligations de conformité et le niveau d'aisance de vos équipes avec ces sujets.",
+      "Un échange pour comprendre votre besoin : un problème à résoudre maintenant, ou une formation à mettre en place pour vos équipes.",
   },
   {
     step: "02",
-    title: "Sélection des modules",
+    title: "Diagnostic",
     description:
-      "Nous identifions les modules RGPD et IA les plus pertinents pour votre secteur et le niveau de vos équipes.",
+      "Nous identifions la meilleure réponse : une intervention à distance immédiate, ou un parcours de formation adapté à votre équipe.",
   },
   {
     step: "03",
-    title: "Formation",
+    title: "Intervention ou formation",
     description:
-      "Vos équipes suivent les modules vidéo à leur rythme, avec des exemples concrets tirés de votre secteur d'activité.",
+      "Dépannage à distance en direct, ou modules vidéo à suivre à son rythme depuis votre espace client.",
   },
   {
     step: "04",
     title: "Suivi",
     description:
-      "Un accompagnement disponible pour les questions qui arrivent une fois les modules terminés.",
+      "Chaque demande reste suivie via un ticket, et nous restons disponibles pour les questions qui arrivent ensuite.",
   },
 ];
 
