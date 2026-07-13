@@ -18,7 +18,7 @@ const PROJECTS = [
     category: "Site vitrine",
     description:
       "Site vitrine pour une salle de sport, avec un espace admin permettant au client de modifier lui-même les textes, la galerie, le planning des cours et les tarifs, sans toucher au code.",
-    href: null,
+    href: "https://cadance-coaching.vercel.app",
     accent: "red" as const,
   },
   {
@@ -52,10 +52,9 @@ export default function PortfolioPage() {
             Mon portfolio
           </h1>
           <p className="mt-4 max-w-2xl leading-relaxed text-muted">
-            Cadance Coaching est un projet réel, en cours de finalisation
-            avant mise en ligne. Les deux cards suivantes sont des exemples
-            génériques illustrant d&apos;autres formats de projet, en
-            attendant d&apos;autres réalisations.
+            Cadance Coaching est un projet réel, en ligne. Les deux cards
+            suivantes sont des exemples génériques illustrant d&apos;autres
+            formats de projet, en attendant d&apos;autres réalisations.
           </p>
         </Reveal>
 
@@ -94,10 +93,17 @@ export default function PortfolioPage() {
             const className =
               "card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]";
 
+            const isExternal = project.href?.startsWith("http");
+
             return (
               <RevealItem key={project.title} hover>
                 {project.href ? (
-                  <Link href={project.href} className={className}>
+                  <Link
+                    href={project.href}
+                    className={className}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                  >
                     {content}
                   </Link>
                 ) : (
