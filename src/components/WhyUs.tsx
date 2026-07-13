@@ -4,7 +4,7 @@ import RevealItem from "@/components/motion/RevealItem";
 
 const VALUES = [
   {
-    title: "Code propre & maintenable",
+    title: "Un travail soigné & durable",
     description:
       "Une stack moderne et un code lisible, pensés pour évoluer avec votre projet, pas contre lui.",
   },

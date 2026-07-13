@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/lib/supabase/actions";
+import PortailTabs from "@/components/portail/PortailTabs";
 
 export default async function PortailLayout({
   children,
@@ -46,6 +47,10 @@ export default async function PortailLayout({
               Se déconnecter
             </button>
           </form>
+        </div>
+
+        <div className="mt-8">
+          <PortailTabs />
         </div>
 
         <div className="mt-8">{children}</div>

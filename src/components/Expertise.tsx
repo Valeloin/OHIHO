@@ -17,7 +17,7 @@ export default function Expertise() {
               Notre approche
             </h2>
             <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-              Un code propre, une communication claire, du début à la fin
+              Un travail soigné, une communication claire, du début à la fin
             </p>
             <p className="mt-4 leading-relaxed text-muted">
               Chaque projet est développé avec une stack moderne et un code
