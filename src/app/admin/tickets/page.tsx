@@ -3,21 +3,24 @@ import { createClient } from "@/lib/supabase/server";
 import TicketCard from "@/components/tickets/TicketCard";
 import TicketFilters from "@/components/tickets/TicketFilters";
 import TicketStats from "@/components/tickets/TicketStats";
+import InboxCard from "@/components/tickets/InboxCard";
 import type { Ticket, TicketPriority, TicketStatus } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Ticket Dashboard — OHIHO",
+  title: "Dashboard — OHIHO",
 };
 
 export default async function AdminTicketsPage({
   searchParams,
 }: {
-  searchParams: { status?: string; priority?: string };
+  searchParams: { status?: string; priority?: string; assigned?: string };
 }) {
   const supabase = createClient();
 
-  const { data: allStatuses } = await supabase.from("tickets").select("status");
-  const statusList = (allStatuses ?? []) as { status: TicketStatus }[];
+  const { data: allTickets } = await supabase
+    .from("tickets")
+    .select("status, assigned_to");
+  const overview = (allTickets ?? []) as { status: TicketStatus; assigned_to: string | null }[];
   const counts: Record<TicketStatus, number> = {
     open: 0,
     in_progress: 0,
@@ -25,8 +28,10 @@ export default async function AdminTicketsPage({
     resolved: 0,
     closed: 0,
   };
-  statusList.forEach((t) => {
+  let unassignedCount = 0;
+  overview.forEach((t) => {
     counts[t.status] += 1;
+    if (!t.assigned_to) unassignedCount += 1;
   });
 
   let query = supabase
@@ -40,15 +45,26 @@ export default async function AdminTicketsPage({
   if (searchParams.priority) {
     query = query.eq("priority", searchParams.priority as TicketPriority);
   }
+  if (searchParams.assigned === "unassigned") {
+    query = query.is("assigned_to", null);
+  }
 
   const { data: tickets } = await query;
   const list = (tickets ?? []) as Ticket[];
 
   return (
     <div>
-      <TicketStats total={statusList.length} counts={counts} />
+      <TicketStats total={overview.length} counts={counts} />
 
-      <div className="mt-6">
+      <div className="mt-4">
+        <InboxCard count={unassignedCount} />
+      </div>
+
+      <h2 className="mt-10 text-lg font-semibold tracking-tight">
+        Tous les tickets
+      </h2>
+
+      <div className="mt-4">
         <TicketFilters />
       </div>
 

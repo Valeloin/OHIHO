@@ -10,7 +10,7 @@ import { CATEGORY_LABELS } from "@/lib/tickets/constants";
 import type { Ticket, TicketMessage } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Ticket — Ticket Dashboard — OHIHO",
+  title: "Ticket — Dashboard — OHIHO",
 };
 
 export default async function AdminTicketDetailPage({
