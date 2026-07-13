@@ -84,6 +84,18 @@ export default function Navbar() {
           />
         </Link>
 
+        <div className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
         <div className="hidden items-center gap-5 md:flex">
           {firstName ? (
             <>
@@ -135,18 +147,6 @@ export default function Navbar() {
               </Link>
             </>
           )}
-        </div>
-
-        <div className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm text-muted transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
         </div>
 
         <button
