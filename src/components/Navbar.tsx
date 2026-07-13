@@ -98,9 +98,12 @@ export default function Navbar() {
             <>
               <Link
                 href="/portail"
-                className="text-sm text-foreground transition-colors hover:text-accent-cyan"
+                className="text-sm text-muted transition-colors hover:text-foreground"
               >
-                Bonjour, {firstName}
+                Bonjour,{" "}
+                <span className="font-semibold text-accent-cyan">
+                  {firstName}
+                </span>
               </Link>
               <Link
                 href="/portail/profil"
@@ -178,9 +181,12 @@ export default function Navbar() {
                 <Link
                   href="/portail"
                   onClick={() => setOpen(false)}
-                  className="text-sm text-foreground hover:text-accent-cyan"
+                  className="text-sm text-muted hover:text-foreground"
                 >
-                  Bonjour, {firstName}
+                  Bonjour,{" "}
+                  <span className="font-semibold text-accent-cyan">
+                    {firstName}
+                  </span>
                 </Link>
                 <Link
                   href="/portail/profil"
