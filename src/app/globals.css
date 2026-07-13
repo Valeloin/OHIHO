@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #080c17;
-  --foreground: #eef2f8;
-  --surface: #0d1220;
-  --surface-2: #111828;
-  --border: #202b42;
-  --muted: #8a94a8;
-  --grid-line: rgba(148, 163, 184, 0.08);
+  --background: #f6f7fa;
+  --foreground: #10141f;
+  --surface: #ffffff;
+  --surface-2: #eef0f5;
+  --border: #e1e4ea;
+  --muted: #5b6472;
+  --grid-line: rgba(16, 20, 31, 0.06);
 }
 
 html {
@@ -22,8 +22,8 @@ body {
 }
 
 ::selection {
-  background: rgba(56, 189, 248, 0.3);
-  color: #ffffff;
+  background: rgba(56, 189, 248, 0.25);
+  color: #10141f;
 }
 
 @layer utilities {
@@ -82,6 +82,6 @@ body {
     border-radius: 8px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #2a3550;
+    background: #c3c9d4;
   }
 }
