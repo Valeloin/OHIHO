@@ -9,13 +9,14 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
-            Formations RGPD &amp; IA pour structures réglementées
+            Formation à la protection des données et à l&apos;IA pour
+            structures réglementées
           </span>
 
           <h1 className="mt-8 max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-            Le <span className="text-gradient">RGPD</span> et{" "}
-            l&apos;<span className="text-gradient">IA</span>, expliqués aux
-            équipes qui ne peuvent pas se tromper
+            La <span className="text-gradient">protection des données</span>{" "}
+            et l&apos;<span className="text-gradient">IA</span>, expliquées
+            aux équipes qui ne peuvent pas se tromper
           </h1>
 
           <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted">
