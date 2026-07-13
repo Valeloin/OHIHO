@@ -20,8 +20,8 @@ export default function Hero() {
 
           <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted">
             Prise en main à distance pour résoudre vos problèmes rapidement,
-            et formations en ligne pour gagner en autonomie à votre rythme.
-            Un accompagnement clair, sans jargon.
+            et formations en ligne pour gagner en autonomie à votre rythme et
+            en productivité. Un accompagnement clair, sans jargon.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
