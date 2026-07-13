@@ -81,7 +81,8 @@ export default async function TicketDetailPage({
       </div>
 
       <div className="card-surface mt-6 rounded-2xl p-5">
-        <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
+        <p className="text-xs font-medium text-muted">Description</p>
+        <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
           {t.description}
         </p>
       </div>
