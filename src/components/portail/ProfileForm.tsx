@@ -31,18 +31,6 @@ export default function ProfileForm({
     <form action={formAction} className="card-surface rounded-2xl p-8">
       <div className="grid gap-5">
         <div>
-          <label className="text-xs font-medium text-muted">Email</label>
-          <input
-            type="email"
-            value={email}
-            disabled
-            className="mt-2 w-full cursor-not-allowed rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-muted outline-none"
-          />
-          <p className="mt-1.5 text-xs text-muted">
-            L&apos;email ne peut pas être modifié ici.
-          </p>
-        </div>
-        <div>
           <label htmlFor="fullName" className="text-xs font-medium text-muted">
             Nom complet
           </label>
@@ -55,6 +43,18 @@ export default function ProfileForm({
             className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
             placeholder="Jean Dupont"
           />
+        </div>
+        <div>
+          <label className="text-xs font-medium text-muted">Email</label>
+          <input
+            type="email"
+            value={email}
+            disabled
+            className="mt-2 w-full cursor-not-allowed rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-muted outline-none"
+          />
+          <p className="mt-1.5 text-xs text-muted">
+            L&apos;email ne peut pas être modifié ici.
+          </p>
         </div>
         <div>
           <label htmlFor="company" className="text-xs font-medium text-muted">
