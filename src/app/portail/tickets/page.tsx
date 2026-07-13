@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import TicketCard from "@/components/tickets/TicketCard";
+import TicketSearchList from "@/components/tickets/TicketSearchList";
 import type { Ticket } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
@@ -41,22 +41,8 @@ export default async function TicketsPage() {
         </Link>
       </div>
 
-      <div className="mt-6 flex flex-col gap-3">
-        {list.length === 0 && (
-          <div className="card-surface rounded-2xl p-8 text-center">
-            <p className="text-sm text-muted">
-              Vous n&apos;avez pas encore de ticket. Créez-en un si vous avez
-              une question.
-            </p>
-          </div>
-        )}
-        {list.map((ticket) => (
-          <TicketCard
-            key={ticket.id}
-            ticket={ticket}
-            href={`/portail/tickets/${ticket.id}`}
-          />
-        ))}
+      <div className="mt-6">
+        <TicketSearchList tickets={list} basePath="/portail/tickets" />
       </div>
     </div>
   );
