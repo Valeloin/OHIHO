@@ -11,11 +11,11 @@ export default function Footer() {
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center group">
               <Image
-                src="/logo-mark.svg"
+                src="/logo-mark.png"
                 alt="OHIHO"
-                width={120}
-                height={36}
-                className="h-9 w-auto rounded-md transition-transform duration-300 ease-out group-hover:scale-110"
+                width={256}
+                height={256}
+                className="h-10 w-10 transition-transform duration-300 ease-out group-hover:scale-110"
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">

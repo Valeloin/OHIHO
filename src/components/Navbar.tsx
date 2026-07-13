@@ -75,12 +75,12 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center group">
           <Image
-            src="/logo-mark.svg"
+            src="/logo-mark.png"
             alt="OHIHO"
-            width={120}
-            height={36}
+            width={256}
+            height={256}
             priority
-            className="h-9 w-auto rounded-md transition-transform duration-300 ease-out group-hover:scale-110"
+            className="h-10 w-10 transition-transform duration-300 ease-out group-hover:scale-110"
           />
         </Link>
 
