@@ -2,12 +2,15 @@ const ACCENT_COLORS = {
   cyan: "#38bdf8",
   violet: "#818cf8",
   emerald: "#34d399",
+  red: "#ef4444",
 } as const;
 
 export default function ProjectMockup({
   accent = "cyan",
+  label = "Aperçu générique de site",
 }: {
   accent?: keyof typeof ACCENT_COLORS;
+  label?: string;
 }) {
   const color = ACCENT_COLORS[accent];
 
@@ -17,7 +20,7 @@ export default function ProjectMockup({
       xmlns="http://www.w3.org/2000/svg"
       className="h-full w-full"
       role="img"
-      aria-label="Aperçu générique de site"
+      aria-label={label}
     >
       <rect width="400" height="260" rx="14" fill="#0f1524" />
 

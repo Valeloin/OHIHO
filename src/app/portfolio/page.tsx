@@ -9,17 +9,17 @@ import AnimatedGlow from "@/components/motion/AnimatedGlow";
 export const metadata: Metadata = {
   title: "Portfolio — OHIHO",
   description:
-    "Les sites et applications web réalisés par OHIHO — portfolio en cours de construction.",
+    "Les sites et applications web réalisés par OHIHO.",
 };
 
-const PLACEHOLDER_PROJECTS = [
+const PROJECTS = [
   {
-    title: "Site vitrine — Exemple",
+    title: "Cadance Coaching",
     category: "Site vitrine",
     description:
-      "Présentation d'activité, mise en avant des services et prise de contact — pensé pour convertir les visiteurs en clients.",
-    href: "#",
-    accent: "cyan" as const,
+      "Site vitrine pour une salle de sport, avec un espace admin permettant au client de modifier lui-même les textes, la galerie, le planning des cours et les tarifs, sans toucher au code.",
+    href: null,
+    accent: "red" as const,
   },
   {
     title: "Application web — Exemple",
@@ -52,21 +52,22 @@ export default function PortfolioPage() {
             Mon portfolio
           </h1>
           <p className="mt-4 max-w-2xl leading-relaxed text-muted">
-            Aperçu du type de projets que je réalise. Les captures et liens
-            définitifs de mes propres sites arrivent bientôt — en attendant,
-            voici des exemples génériques pour illustrer le rendu.
+            Cadance Coaching est un projet réel, en cours de finalisation
+            avant mise en ligne. Les deux cards suivantes sont des exemples
+            génériques illustrant d&apos;autres formats de projet, en
+            attendant d&apos;autres réalisations.
           </p>
         </Reveal>
 
         <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {PLACEHOLDER_PROJECTS.map((project) => (
-            <RevealItem key={project.title} hover>
-              <Link
-                href={project.href}
-                className="card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]"
-              >
+          {PROJECTS.map((project) => {
+            const content = (
+              <>
                 <div className="aspect-[400/260] w-full border-b border-border">
-                  <ProjectMockup accent={project.accent} />
+                  <ProjectMockup
+                    accent={project.accent}
+                    label={`Aperçu du site ${project.title}`}
+                  />
                 </div>
                 <div className="p-6">
                   <p className="font-mono text-xs uppercase tracking-wide text-muted">
@@ -76,14 +77,35 @@ export default function PortfolioPage() {
                   <p className="mt-2 text-sm leading-relaxed text-muted">
                     {project.description}
                   </p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan">
-                    Voir le site
-                    <span aria-hidden="true">→</span>
-                  </span>
+                  {project.href ? (
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan">
+                      Voir le site
+                      <span aria-hidden="true">→</span>
+                    </span>
+                  ) : (
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-muted">
+                      Bientôt en ligne
+                    </span>
+                  )}
                 </div>
-              </Link>
-            </RevealItem>
-          ))}
+              </>
+            );
+
+            const className =
+              "card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]";
+
+            return (
+              <RevealItem key={project.title} hover>
+                {project.href ? (
+                  <Link href={project.href} className={className}>
+                    {content}
+                  </Link>
+                ) : (
+                  <div className={className}>{content}</div>
+                )}
+              </RevealItem>
+            );
+          })}
         </RevealGroup>
 
         <div className="card-surface mt-10 rounded-2xl p-8 text-center">
