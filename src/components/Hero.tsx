@@ -81,7 +81,7 @@ export default function Hero() {
             { label: "Approche", value: "Sur mesure" },
             { label: "Accompagnement", value: "De A à Z" },
             { label: "Stack", value: "Moderne" },
-            { label: "Délai de réponse", value: "< 24h" },
+            { label: "Délai", value: "Sur devis" },
           ].map((item) => (
             <div
               key={item.label}
