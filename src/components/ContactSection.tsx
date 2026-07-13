@@ -10,11 +10,11 @@ export default function ContactSection() {
               Contact
             </h2>
             <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-              Parlons de votre projet
+              Parlons de votre besoin en formation
             </p>
             <p className="mt-4 max-w-md leading-relaxed text-muted">
-              Décrivez votre besoin en quelques mots — support, formation ou
-              accompagnement plus global — et nous revenons vers vous
+              Décrivez votre besoin en quelques mots — formation RGPD, IA, ou
+              intervention en présentiel — et nous revenons vers vous
               rapidement pour en discuter.
             </p>
 

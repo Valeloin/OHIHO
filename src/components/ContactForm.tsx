@@ -5,9 +5,9 @@ import { useState, FormEvent } from "react";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const NEEDS = [
-  "Support informatique",
-  "Formation d'équipe",
-  "Transformation digitale",
+  "Formation en ligne (RGPD)",
+  "Formation en ligne (IA)",
+  "Intervention en présentiel",
   "Autre demande",
 ];
 

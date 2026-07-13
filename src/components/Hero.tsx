@@ -9,44 +9,44 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
-            Support informatique &amp; formation pour entreprises
+            Formations RGPD &amp; IA pour structures réglementées
           </span>
 
           <h1 className="mt-8 max-w-3xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-            Le support informatique{" "}
-            <span className="text-gradient">sur-mesure</span> pour votre{" "}
-            <span className="text-gradient">entreprise</span>
+            Le <span className="text-gradient">RGPD</span> et{" "}
+            l&apos;<span className="text-gradient">IA</span>, expliqués aux
+            équipes qui ne peuvent pas se tromper
           </h1>
 
           <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted">
-            OHIHO accompagne les entreprises avec un support informatique
-            réactif et personnalisé — pensé pour votre activité, pas une
-            solution générique. Formations disponibles pour vos équipes selon
-            vos besoins.
+            7-8 ans passés à former des équipes non-techniques au Ministère de
+            la Justice, à l&apos;Établissement français du sang et chez des
+            notaires. OHIHO forme vos collaborateurs au RGPD et à l&apos;IA —
+            sans jargon, en ligne ou en présentiel.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
-              href="/inscription"
+              href="/#contact"
               className="rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-transform hover:scale-105"
             >
-              S&apos;inscrire
+              Réserver une intervention
             </Link>
             <Link
               href="/#services"
               className="rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
             >
-              Découvrir nos services
+              Voir les formations
             </Link>
           </div>
         </div>
 
         <div className="mt-20 grid grid-cols-2 gap-6 sm:grid-cols-4">
           {[
-            { label: "Support technique", value: "Réactif" },
-            { label: "Solutions IT", value: "Sur-mesure" },
-            { label: "Accompagnement", value: "Sans jargon" },
-            { label: "Suivi", value: "Continu" },
+            { label: "Expérience", value: "7-8 ans" },
+            { label: "Secteurs formés", value: "Justice · Santé · Notariat" },
+            { label: "Formats", value: "En ligne & présentiel" },
+            { label: "Pédagogie", value: "Sans jargon" },
           ].map((item) => (
             <div
               key={item.label}

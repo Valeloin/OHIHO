@@ -68,17 +68,17 @@ export default function BlogPostPage({
 
         <div className="mt-14 card-surface rounded-2xl p-8 text-center">
           <h2 className="text-lg font-semibold">
-            Une question sur ce sujet dans votre entreprise ?
+            Une question sur ce sujet dans votre organisation ?
           </h2>
           <p className="mt-2 text-sm text-muted">
-            Nous proposons des formations et un accompagnement sur-mesure pour
-            vos équipes.
+            Nous proposons des formations RGPD et IA en ligne et en
+            présentiel pour vos équipes.
           </p>
           <Link
-            href="/inscription"
+            href="/#contact"
             className="mt-5 inline-block rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-transform hover:scale-105"
           >
-            S&apos;inscrire
+            Nous contacter
           </Link>
         </div>
       </article>

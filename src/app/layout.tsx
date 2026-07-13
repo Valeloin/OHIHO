@@ -17,21 +17,21 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
-  title: "OHIHO — Support informatique sur-mesure pour entreprises",
+  title: "OHIHO — Formations RGPD & IA pour structures réglementées",
   description:
-    "OHIHO accompagne les entreprises avec un support informatique réactif et personnalisé. Dépannage, infogérance, accompagnement — et des formations pour vos équipes.",
+    "OHIHO forme vos équipes non-techniques au RGPD et à l'IA — formations en ligne et interventions en présentiel. 7-8 ans d'expérience en justice, santé et notariat.",
   keywords: [
-    "support informatique",
-    "infogérance entreprise",
-    "support informatique sur-mesure",
-    "formation nouvelles technologies",
-    "solutions entreprises",
+    "formation RGPD",
+    "formation IA entreprise",
+    "conformité RGPD",
+    "formation secteur réglementé",
+    "formation données sensibles",
     "OHIHO",
   ],
   openGraph: {
-    title: "OHIHO — Support informatique sur-mesure pour entreprises",
+    title: "OHIHO — Formations RGPD & IA pour structures réglementées",
     description:
-      "Support informatique réactif et personnalisé pour les entreprises, avec des formations pour vos équipes.",
+      "Formations RGPD et IA pour structures réglementées, en ligne et en présentiel.",
     type: "website",
     locale: "fr_FR",
     url: "https://ohiho.fr",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "OHIHO — Support informatique sur-mesure pour entreprises",
+    title: "OHIHO — Formations RGPD & IA pour structures réglementées",
     description:
-      "Support informatique réactif et personnalisé pour les entreprises, avec des formations pour vos équipes.",
+      "Formations RGPD et IA pour structures réglementées, en ligne et en présentiel.",
     images: ["/logo.svg"],
   },
 };

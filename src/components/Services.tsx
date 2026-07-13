@@ -1,27 +1,23 @@
 const SERVICES = [
   {
-    title: "Support informatique",
+    title: "Formations en ligne",
     description:
-      "Dépannage, maintenance et infogérance de votre parc informatique. Une équipe disponible pour résoudre les problèmes du quotidien, à distance ou sur site.",
-    points: ["Assistance à distance", "Maintenance préventive", "Gestion du parc"],
+      "Des modules vidéo sur le RGPD et l'intelligence artificielle, pensés pour des équipes non-techniques. À suivre à son rythme, avec des exemples concrets tirés de secteurs à forte exigence de conformité.",
+    points: [
+      "Modules RGPD",
+      "Modules intelligence artificielle",
+      "À suivre à son rythme",
+    ],
   },
   {
-    title: "Solutions sur-mesure",
+    title: "Interventions en présentiel",
     description:
-      "Chaque entreprise a ses contraintes. Nous concevons des solutions adaptées à votre taille, votre budget et votre niveau de maturité numérique.",
-    points: ["Cahier des charges", "Choix des outils", "Intégration accompagnée"],
-  },
-  {
-    title: "Transformation digitale",
-    description:
-      "Un diagnostic de vos usages actuels et un plan d'action concret pour moderniser vos outils sans rupture dans votre activité.",
-    points: ["Audit des outils existants", "Feuille de route", "Mise en œuvre progressive"],
-  },
-  {
-    title: "Formation & pédagogie",
-    description:
-      "Des ateliers clairs, sans jargon, pour que vos équipes comprennent et utilisent les outils numériques et l'IA en toute confiance.",
-    points: ["Ateliers sur-mesure", "Supports pédagogiques", "Accompagnement continu"],
+      "Une demi-journée ou une journée dans vos locaux, pour former vos équipes en direct : obligations RGPD, usages responsables de l'IA, bonnes pratiques adaptées à votre secteur.",
+    points: [
+      "Format demi-journée ou journée",
+      "Sur site, dans vos locaux",
+      "Adapté à votre secteur",
+    ],
   },
 ];
 
@@ -31,15 +27,17 @@ export default function Services() {
       <div className="mx-auto max-w-6xl px-6 py-24">
         <div className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-            Nos services
+            Nos formations
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Un support informatique adapté à la réalité de votre entreprise
+            Deux formats, un seul objectif : rendre le RGPD et l&apos;IA
+            accessibles à vos équipes
           </p>
           <p className="mt-4 text-muted">
-            Que vous ayez besoin d&apos;un dépannage rapide ou d&apos;un
-            accompagnement plus global, nous adaptons nos solutions à votre
-            taille, votre budget et vos contraintes.
+            Que vous préfériez un format autonome ou une session animée en
+            direct, chaque formation est pensée pour des équipes
+            non-techniques, dans des secteurs qui ne peuvent pas se permettre
+            l&apos;approximation.
           </p>
         </div>
 

@@ -1,23 +1,23 @@
 const VALUES = [
   {
-    title: "Solutions sur-mesure",
+    title: "Expérience terrain",
     description:
-      "Chaque structure a ses contraintes de budget, de taille et de maturité numérique. Nous nous y adaptons, pas l'inverse.",
-  },
-  {
-    title: "Réactivité",
-    description:
-      "Un problème informatique ne peut pas attendre. Notre équipe intervient rapidement, à distance ou sur site.",
+      "Sept à huit ans passés dans des structures où la conformité n'est pas une option — justice, santé, notariat.",
   },
   {
     title: "Langage clair",
     description:
-      "Pas de jargon inutile. Nous parlons de vos outils avec les mots de votre métier, pas ceux de l'informatique.",
+      "Pas de jargon juridique ou technique. Nous expliquons le RGPD et l'IA avec les mots de votre métier.",
   },
   {
-    title: "Accompagnement dans la durée",
+    title: "Conformité concrète",
     description:
-      "Le support ne s'arrête pas à la mise en place. Nous restons disponibles pour ajuster et faire évoluer vos outils.",
+      "Pas de check-list générique. Des exemples et des cas réels adaptés à votre secteur d'activité.",
+  },
+  {
+    title: "Formats flexibles",
+    description:
+      "En ligne à votre rythme, ou en présentiel pour une session animée — selon ce qui convient à vos équipes.",
   },
 ];
 
@@ -30,8 +30,7 @@ export default function WhyUs() {
             Pourquoi OHIHO
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Un support informatique pensé pour votre entreprise, pas pour
-            n&apos;importe qui
+            Une pédagogie forgée sur le terrain, pas en salle de classe
           </p>
         </div>
 

@@ -1,27 +1,27 @@
 const STEPS = [
   {
     step: "01",
-    title: "Diagnostic",
+    title: "Échange initial",
     description:
-      "Un échange pour comprendre vos outils actuels, vos irritants et le niveau à l'aise de vos équipes avec la technologie.",
+      "Un échange pour comprendre votre secteur, vos obligations de conformité et le niveau d'aisance de vos équipes avec ces sujets.",
   },
   {
     step: "02",
-    title: "Plan d'action",
+    title: "Format adapté",
     description:
-      "Nous proposons des recommandations concrètes et priorisées, avec un budget et un calendrier réalistes.",
+      "Modules vidéo en ligne, session en présentiel, ou les deux — selon vos contraintes d'organisation et vos effectifs.",
   },
   {
     step: "03",
-    title: "Déploiement & formation",
+    title: "Formation",
     description:
-      "Mise en place des solutions retenues, accompagnée d'ateliers pour que vos équipes soient autonomes rapidement.",
+      "RGPD et IA expliqués sans jargon, avec des exemples concrets tirés de votre secteur d'activité.",
   },
   {
     step: "04",
-    title: "Suivi continu",
+    title: "Suivi",
     description:
-      "Un support disponible dans la durée, pour ajuster, dépanner et faire évoluer vos outils au fil de votre croissance.",
+      "Supports remis à chaque participant, et un accompagnement disponible pour les questions qui arrivent une fois la formation terminée.",
   },
 ];
 
