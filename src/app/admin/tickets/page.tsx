@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import TicketCard from "@/components/tickets/TicketCard";
 import TicketFilters from "@/components/tickets/TicketFilters";
+import TicketStats from "@/components/tickets/TicketStats";
 import type { Ticket, TicketPriority, TicketStatus } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
-  title: "Tous les tickets — OHIHO",
+  title: "Ticket Dashboard — OHIHO",
 };
 
 export default async function AdminTicketsPage({
@@ -14,6 +15,19 @@ export default async function AdminTicketsPage({
   searchParams: { status?: string; priority?: string };
 }) {
   const supabase = createClient();
+
+  const { data: allStatuses } = await supabase.from("tickets").select("status");
+  const statusList = (allStatuses ?? []) as { status: TicketStatus }[];
+  const counts: Record<TicketStatus, number> = {
+    open: 0,
+    in_progress: 0,
+    waiting_customer: 0,
+    resolved: 0,
+    closed: 0,
+  };
+  statusList.forEach((t) => {
+    counts[t.status] += 1;
+  });
 
   let query = supabase
     .from("tickets")
@@ -32,7 +46,11 @@ export default async function AdminTicketsPage({
 
   return (
     <div>
-      <TicketFilters />
+      <TicketStats total={statusList.length} counts={counts} />
+
+      <div className="mt-6">
+        <TicketFilters />
+      </div>
 
       <div className="mt-6 flex flex-col gap-3">
         {list.length === 0 && (

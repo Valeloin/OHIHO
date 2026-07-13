@@ -119,7 +119,7 @@ export default function Navbar() {
                   href="/admin/tickets"
                   className="text-sm text-accent-violet transition-colors hover:text-foreground"
                 >
-                  Espace équipe
+                  Ticket Dashboard
                 </Link>
               )}
               <form action={signOut}>

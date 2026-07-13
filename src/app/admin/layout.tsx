@@ -35,7 +35,7 @@ export default async function AdminLayout({
               Espace équipe
             </p>
             <h1 className="mt-2 text-2xl font-semibold tracking-tight">
-              Tickets clients
+              Ticket Dashboard
             </h1>
           </div>
           <div className="flex items-center gap-4 text-sm">
