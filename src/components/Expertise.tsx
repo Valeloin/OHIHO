@@ -1,5 +1,5 @@
 const COVERAGE = [
-  "Postes de travail (Windows, Mac)",
+  "Postes de travail (Windows)",
   "Logiciels et outils métier du quotidien",
   "Comptes, accès et mots de passe",
   "Bonnes pratiques numériques",
