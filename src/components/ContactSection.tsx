@@ -13,9 +13,8 @@ export default function ContactSection() {
               Parlons de votre besoin en formation
             </p>
             <p className="mt-4 max-w-md leading-relaxed text-muted">
-              Décrivez votre besoin en quelques mots — formation RGPD, IA, ou
-              intervention en présentiel — et nous revenons vers vous
-              rapidement pour en discuter.
+              Décrivez votre besoin en quelques mots — formation RGPD ou IA —
+              et nous revenons vers vous rapidement pour en discuter.
             </p>
 
             <div className="mt-8 space-y-4 text-sm">

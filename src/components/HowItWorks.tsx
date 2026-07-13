@@ -7,21 +7,21 @@ const STEPS = [
   },
   {
     step: "02",
-    title: "Format adapté",
+    title: "Sélection des modules",
     description:
-      "Modules vidéo en ligne, session en présentiel, ou les deux — selon vos contraintes d'organisation et vos effectifs.",
+      "Nous identifions les modules RGPD et IA les plus pertinents pour votre secteur et le niveau de vos équipes.",
   },
   {
     step: "03",
     title: "Formation",
     description:
-      "RGPD et IA expliqués sans jargon, avec des exemples concrets tirés de votre secteur d'activité.",
+      "Vos équipes suivent les modules vidéo à leur rythme, avec des exemples concrets tirés de votre secteur d'activité.",
   },
   {
     step: "04",
     title: "Suivi",
     description:
-      "Supports remis à chaque participant, et un accompagnement disponible pour les questions qui arrivent une fois la formation terminée.",
+      "Un accompagnement disponible pour les questions qui arrivent une fois les modules terminés.",
   },
 ];
 

@@ -71,8 +71,8 @@ export default function BlogPostPage({
             Une question sur ce sujet dans votre organisation ?
           </h2>
           <p className="mt-2 text-sm text-muted">
-            Nous proposons des formations RGPD et IA en ligne et en
-            présentiel pour vos équipes.
+            Nous proposons des formations RGPD et IA en ligne pour vos
+            équipes.
           </p>
           <Link
             href="/#contact"

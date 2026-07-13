@@ -1,22 +1,22 @@
 const SERVICES = [
   {
-    title: "Formations en ligne",
+    title: "Module protection des données",
     description:
-      "Des modules vidéo sur le RGPD et l'intelligence artificielle, pensés pour des équipes non-techniques. À suivre à son rythme, avec des exemples concrets tirés de secteurs à forte exigence de conformité.",
+      "Comprendre vos obligations légales de protection des données (RGPD), sans jargon juridique. Cas concrets tirés de secteurs à forte exigence de conformité.",
     points: [
-      "Modules RGPD",
-      "Modules intelligence artificielle",
-      "À suivre à son rythme",
+      "Vidéos à suivre à son rythme",
+      "Exemples sectoriels concrets",
+      "Mises à jour réglementaires",
     ],
   },
   {
-    title: "Interventions en présentiel",
+    title: "Module intelligence artificielle",
     description:
-      "Une demi-journée ou une journée dans vos locaux, pour former vos équipes en direct : obligations RGPD, usages responsables de l'IA, bonnes pratiques adaptées à votre secteur.",
+      "Utiliser l'IA de façon responsable et conforme au quotidien : risques, limites et bonnes pratiques expliqués simplement à des équipes non-techniques.",
     points: [
-      "Format demi-journée ou journée",
-      "Sur site, dans vos locaux",
-      "Adapté à votre secteur",
+      "Vidéos à suivre à son rythme",
+      "Risques & bonnes pratiques",
+      "Cas d'usage concrets",
     ],
   },
 ];
@@ -30,13 +30,12 @@ export default function Services() {
             Nos formations
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Deux formats, un seul objectif : rendre le RGPD et l&apos;IA
-            accessibles à vos équipes
+            Deux modules, un seul objectif : rendre la protection des données
+            et l&apos;IA accessibles à vos équipes
           </p>
           <p className="mt-4 text-muted">
-            Que vous préfériez un format autonome ou une session animée en
-            direct, chaque formation est pensée pour des équipes
-            non-techniques, dans des secteurs qui ne peuvent pas se permettre
+            Des formations en ligne pensées pour des équipes non-techniques,
+            dans des secteurs qui ne peuvent pas se permettre
             l&apos;approximation.
           </p>
         </div>

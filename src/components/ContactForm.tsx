@@ -7,7 +7,6 @@ type Status = "idle" | "submitting" | "success" | "error";
 const NEEDS = [
   "Formation en ligne (RGPD)",
   "Formation en ligne (IA)",
-  "Intervention en présentiel",
   "Autre demande",
 ];
 

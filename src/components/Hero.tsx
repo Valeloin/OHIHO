@@ -23,7 +23,7 @@ export default function Hero() {
             7-8 ans passés à former des équipes non-techniques au Ministère de
             la Justice, à l&apos;Établissement français du sang et chez des
             notaires. OHIHO forme vos collaborateurs au RGPD et à l&apos;IA —
-            sans jargon, en ligne ou en présentiel.
+            sans jargon, en formation vidéo à leur rythme.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -31,7 +31,7 @@ export default function Hero() {
               href="/#contact"
               className="rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-transform hover:scale-105"
             >
-              Réserver une intervention
+              Nous contacter
             </Link>
             <Link
               href="/#services"
@@ -46,7 +46,7 @@ export default function Hero() {
           {[
             { label: "Expérience", value: "7-8 ans" },
             { label: "Secteurs formés", value: "Justice · Santé · Notariat" },
-            { label: "Formats", value: "En ligne & présentiel" },
+            { label: "Format", value: "100% en ligne" },
             { label: "Pédagogie", value: "Sans jargon" },
           ].map((item) => (
             <div

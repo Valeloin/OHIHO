@@ -15,9 +15,9 @@ const VALUES = [
       "Pas de check-list générique. Des exemples et des cas réels adaptés à votre secteur d'activité.",
   },
   {
-    title: "Formats flexibles",
+    title: "À votre rythme",
     description:
-      "En ligne à votre rythme, ou en présentiel pour une session animée — selon ce qui convient à vos équipes.",
+      "Vos équipes suivent les modules quand elles le souhaitent, sans contrainte d'agenda ni de déplacement.",
   },
 ];
 

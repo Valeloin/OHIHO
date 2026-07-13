@@ -20,8 +20,8 @@ export default function Footer() {
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
               OHIHO forme vos équipes non-techniques au RGPD et à
-              l&apos;intelligence artificielle — en ligne ou en présentiel,
-              pour les structures qui ne peuvent pas se tromper.
+              l&apos;intelligence artificielle, en ligne, pour les structures
+              qui ne peuvent pas se tromper.
             </p>
           </div>
 

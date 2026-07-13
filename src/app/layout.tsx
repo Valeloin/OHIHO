@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
   title: "OHIHO — Formation à la protection des données et à l'IA",
   description:
-    "OHIHO forme vos équipes non-techniques à la protection des données (RGPD) et à l'IA — formations en ligne et interventions en présentiel. 7-8 ans d'expérience en justice, santé et notariat.",
+    "OHIHO forme vos équipes non-techniques à la protection des données (RGPD) et à l'IA — formations vidéo en ligne, à leur rythme. 7-8 ans d'expérience en justice, santé et notariat.",
   keywords: [
     "formation RGPD",
     "formation IA entreprise",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "OHIHO — Formation à la protection des données et à l'IA",
     description:
-      "Formation à la protection des données et à l'IA pour structures réglementées, en ligne et en présentiel.",
+      "Formation à la protection des données et à l'IA pour structures réglementées, en ligne, à votre rythme.",
     type: "website",
     locale: "fr_FR",
     url: "https://ohiho.fr",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "OHIHO — Formation à la protection des données et à l'IA",
     description:
-      "Formation à la protection des données et à l'IA pour structures réglementées, en ligne et en présentiel.",
+      "Formation à la protection des données et à l'IA pour structures réglementées, en ligne, à votre rythme.",
     images: ["/logo.svg"],
   },
 };
