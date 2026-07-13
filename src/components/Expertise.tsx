@@ -1,8 +1,10 @@
+import Reveal from "@/components/motion/Reveal";
+
 const COVERAGE = [
-  "Postes de travail (Windows)",
-  "Logiciels et outils métier du quotidien",
-  "Comptes, accès et mots de passe",
-  "Bonnes pratiques numériques",
+  "Sites vitrines",
+  "Applications web sur mesure",
+  "Refonte de sites existants",
+  "Maintenance & évolutions",
 ];
 
 export default function Expertise() {
@@ -10,28 +12,26 @@ export default function Expertise() {
     <section id="expertise" className="border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
-          <div>
+          <Reveal>
             <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-emerald">
               Notre approche
             </h2>
             <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-              Un accompagnement qui combine dépannage immédiat et montée en
-              compétence
+              Un code propre, une communication claire, du début à la fin
             </p>
             <p className="mt-4 leading-relaxed text-muted">
-              Beaucoup de supports informatiques se contentent de résoudre le
-              problème du jour. Chez OHIHO, chaque intervention à distance
-              est aussi l&apos;occasion d&apos;expliquer ce qui s&apos;est
-              passé, pour que vous compreniez et gagniez en autonomie.
+              Chaque projet est développé avec une stack moderne et un code
+              pensé pour durer — pas de solution générique, pas de boîte
+              noire. Vous savez toujours où en est votre projet.
             </p>
             <p className="mt-4 leading-relaxed text-muted">
-              Les demandes restent suivies via un ticket jusqu&apos;à leur
-              résolution, et les sujets qui reviennent souvent deviennent des
-              modules de formation à suivre en ligne.
+              Une fois votre site ou application en ligne, l&apos;accompagnement
+              continue : les demandes d&apos;évolution ou de correction
+              restent suivies via un ticket, jusqu&apos;à leur résolution.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="card-surface rounded-2xl p-8">
+          <Reveal delay={0.15} className="card-surface rounded-2xl p-8">
             <h3 className="text-sm font-semibold text-foreground">
               Ce qu&apos;on couvre
             </h3>
@@ -46,7 +46,7 @@ export default function Expertise() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

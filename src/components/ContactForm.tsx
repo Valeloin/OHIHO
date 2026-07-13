@@ -5,9 +5,9 @@ import { useState, FormEvent } from "react";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const NEEDS = [
-  "Prise en main à distance",
-  "Formation en ligne",
-  "Création de site web / application",
+  "Site vitrine",
+  "Application web sur mesure",
+  "Refonte de site existant",
   "Autre demande",
 ];
 

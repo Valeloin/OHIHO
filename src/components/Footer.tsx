@@ -19,9 +19,8 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              OHIHO accompagne entreprises et particuliers au quotidien :
-              support informatique à distance et formations en ligne, sans
-              jargon.
+              OHIHO conçoit et développe des sites et applications web sur
+              mesure, pour entreprises et particuliers, pensés pour durer.
             </p>
           </div>
 
@@ -69,7 +68,7 @@ export default function Footer() {
                   contact@ohiho.fr
                 </a>
               </li>
-              <li>Support & formation en ligne</li>
+              <li>Développement web sur mesure</li>
               <li>Réponse sous 24h ouvrées</li>
             </ul>
           </div>
@@ -77,7 +76,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted md:flex-row">
           <p>© {year} OHIHO. Tous droits réservés.</p>
-          <p className="font-mono">Support informatique & formation en ligne</p>
+          <p className="font-mono">Création de sites web & applications</p>
         </div>
       </div>
     </footer>

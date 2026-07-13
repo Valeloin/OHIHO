@@ -1,30 +1,63 @@
+"use client";
+
 import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
+
+const CONTAINER: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+
+const ITEM: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-grid">
       <div className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/3 bg-glow-radial" />
 
-      <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 sm:pt-28">
+      <motion.div
+        className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 sm:pt-28"
+        variants={CONTAINER}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="flex flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted">
+          <motion.span
+            variants={ITEM}
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted"
+          >
             <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
-            Support informatique & formation en ligne
-          </span>
+            Développement web & applications sur mesure
+          </motion.span>
 
-          <h1 className="mt-8 max-w-4xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-            Support informatique{" "}
-            <span className="text-gradient">sur mesure</span> pour
-            entreprises et particuliers
-          </h1>
+          <motion.h1
+            variants={ITEM}
+            className="mt-8 max-w-4xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl"
+          >
+            Des sites et applications web{" "}
+            <span className="text-gradient">pensés pour durer</span>
+          </motion.h1>
 
-          <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted">
-            Prise en main à distance pour résoudre vos problèmes rapidement,
-            et formations en ligne pour gagner en autonomie et en
-            productivité.
-          </p>
+          <motion.p
+            variants={ITEM}
+            className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted"
+          >
+            De l&apos;idée au déploiement, je conçois et développe votre site
+            ou application — sur mesure, avec un accompagnement dans la
+            durée.
+          </motion.p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <motion.div
+            variants={ITEM}
+            className="mt-10 flex flex-col gap-4 sm:flex-row"
+          >
             <Link
               href="/#contact"
               className="rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-transform hover:scale-105"
@@ -32,20 +65,23 @@ export default function Hero() {
               Nous contacter
             </Link>
             <Link
-              href="/#services"
+              href="/portfolio"
               className="rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
             >
-              Voir nos services
+              Voir mon portfolio
             </Link>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-20 grid grid-cols-2 gap-6 sm:grid-cols-4">
+        <motion.div
+          variants={ITEM}
+          className="mt-20 grid grid-cols-2 gap-6 sm:grid-cols-4"
+        >
           {[
+            { label: "Approche", value: "Sur mesure" },
+            { label: "Accompagnement", value: "De A à Z" },
+            { label: "Stack", value: "Moderne" },
             { label: "Délai de réponse", value: "< 24h" },
-            { label: "Intervention", value: "À distance" },
-            { label: "Formation", value: "Vidéo, à son rythme" },
-            { label: "Pédagogie", value: "Sans jargon" },
           ].map((item) => (
             <div
               key={item.label}
@@ -57,8 +93,8 @@ export default function Hero() {
               <p className="mt-1 text-xs text-muted">{item.label}</p>
             </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { posts } from "@/lib/posts";
+import Reveal from "@/components/motion/Reveal";
+import RevealGroup from "@/components/motion/RevealGroup";
+import RevealItem from "@/components/motion/RevealItem";
 
 export default function BlogPreview() {
   return (
     <section className="border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+        <Reveal className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
             <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-violet">
               Ressources
@@ -20,33 +23,34 @@ export default function BlogPreview() {
           >
             Voir toutes les ressources →
           </Link>
-        </div>
+        </Reveal>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+        <RevealGroup className="mt-14 grid gap-6 lg:grid-cols-3">
           {posts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="card-surface group flex flex-col rounded-2xl p-7 transition-colors hover:border-accent-cyan/40"
-            >
-              <span className="text-xs font-mono text-accent-cyan">
-                {post.category}
-              </span>
-              <h3 className="mt-3 text-lg font-semibold leading-snug">
-                {post.title}
-              </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                {post.excerpt}
-              </p>
-              <div className="mt-6 flex items-center justify-between text-xs text-muted">
-                <span>{post.readTime} de lecture</span>
-                <span className="text-foreground opacity-0 transition-opacity group-hover:opacity-100">
-                  Lire →
+            <RevealItem key={post.slug}>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="card-surface group flex h-full flex-col rounded-2xl p-7 transition-colors hover:border-accent-cyan/40"
+              >
+                <span className="text-xs font-mono text-accent-cyan">
+                  {post.category}
                 </span>
-              </div>
-            </Link>
+                <h3 className="mt-3 text-lg font-semibold leading-snug">
+                  {post.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                  {post.excerpt}
+                </p>
+                <div className="mt-6 flex items-center justify-between text-xs text-muted">
+                  <span>{post.readTime} de lecture</span>
+                  <span className="text-foreground opacity-0 transition-opacity group-hover:opacity-100">
+                    Lire →
+                  </span>
+                </div>
+              </Link>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

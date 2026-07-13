@@ -1,60 +1,63 @@
+import Link from "next/link";
+import Reveal from "@/components/motion/Reveal";
+import RevealGroup from "@/components/motion/RevealGroup";
+import RevealItem from "@/components/motion/RevealItem";
+
 const SERVICES = [
   {
-    title: "Prise en main à distance",
+    title: "Sites vitrines",
     description:
-      "Un problème sur un poste, un logiciel ou un compte ? On se connecte à distance pour diagnostiquer et résoudre rapidement, sans déplacement.",
+      "Un site clair et rapide pour présenter votre activité, vos services, et convertir vos visiteurs en clients.",
     points: [
-      "Intervention rapide",
-      "Suivi via ticket",
-      "Sans déplacement",
+      "Design sur mesure",
+      "Pensé pour convertir",
+      "Rapide et responsive",
     ],
   },
   {
-    title: "Formation en ligne",
+    title: "Applications web sur mesure",
     description:
-      "Des modules vidéo pour comprendre les usages informatiques du quotidien et gagner en autonomie, à votre rythme.",
+      "Espace client, tableau de bord, outil métier : je développe l'application qui correspond exactement à votre besoin.",
     points: [
-      "Vidéos à suivre à son rythme",
-      "Cas concrets",
-      "Accès depuis votre espace client",
-    ],
-  },
-  {
-    title: "Création de sites web & applications",
-    description:
-      "Un site vitrine, une application web sur mesure ? Je conçois et développe votre projet de A à Z, adapté à votre besoin.",
-    points: [
-      "Sites vitrines & applications",
-      "Sur mesure, de A à Z",
-      "Accompagnement dans la durée",
+      "Comptes & espaces client",
+      "Logique métier sur mesure",
+      "Architecture pensée pour durer",
     ],
     portfolioLink: true,
   },
+  {
+    title: "Maintenance & évolutions",
+    description:
+      "Après la mise en ligne, je reste disponible pour les corrections, mises à jour et nouvelles fonctionnalités.",
+    points: [
+      "Suivi via ticket",
+      "Corrections rapides",
+      "Nouvelles fonctionnalités",
+    ],
+  },
 ];
-
-import Link from "next/link";
 
 export default function Services() {
   return (
     <section id="services" className="border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
             Nos services
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Trois façons de vous accompagner : dépanner, former et créer
+            De l&apos;idée au site en ligne
           </p>
           <p className="mt-4 text-muted">
-            Un support informatique réactif à distance, des formations en
-            ligne pour gagner en autonomie, et la création de votre site ou
-            application — pour les entreprises comme pour les particuliers.
+            Conception, développement et suivi dans la durée — pour un site
+            vitrine ou une application web sur mesure, pour les entreprises
+            comme pour les particuliers.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, i) => (
-            <div
+            <RevealItem
               key={service.title}
               className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40"
             >
@@ -86,9 +89,9 @@ export default function Services() {
                 </Link>
               )}
               <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent-cyan/0 transition-colors group-hover:bg-accent-cyan/5" />
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

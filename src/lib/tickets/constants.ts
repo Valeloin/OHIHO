@@ -35,8 +35,8 @@ export const PRIORITY_COLORS: Record<TicketPriority, string> = {
 };
 
 export const CATEGORY_LABELS: Record<TicketCategory, string> = {
-  hardware: "Accès à la plateforme",
-  software: "Contenu d'une formation",
+  hardware: "Accès au site/à l'application",
+  software: "Bug ou anomalie",
   network: "Problème technique",
   account_access: "Compte & facturation",
   other: "Autre",

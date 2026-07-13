@@ -17,21 +17,21 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
-  title: "OHIHO — Support informatique sur mesure",
+  title: "OHIHO — Création de sites web & applications sur mesure",
   description:
-    "OHIHO accompagne entreprises et particuliers avec un support informatique à distance réactif et des formations en ligne à leur rythme, sans jargon.",
+    "OHIHO conçoit et développe des sites web et applications sur mesure, pour entreprises et particuliers, de l'idée à la mise en ligne et au-delà.",
   keywords: [
-    "support informatique",
-    "assistance informatique à distance",
-    "formation informatique en ligne",
-    "dépannage informatique entreprise",
-    "dépannage informatique particulier",
+    "création site web",
+    "développement web",
+    "application web sur mesure",
+    "développeur web freelance",
+    "refonte site web",
     "OHIHO",
   ],
   openGraph: {
-    title: "OHIHO — Support informatique sur mesure",
+    title: "OHIHO — Création de sites web & applications sur mesure",
     description:
-      "Prise en main à distance et formations en ligne, à votre rythme.",
+      "Des sites et applications web sur mesure, de l'idée à la mise en ligne.",
     type: "website",
     locale: "fr_FR",
     url: "https://ohiho.fr",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "OHIHO — Support informatique sur mesure",
+    title: "OHIHO — Création de sites web & applications sur mesure",
     description:
-      "Prise en main à distance et formations en ligne, à votre rythme.",
+      "Des sites et applications web sur mesure, de l'idée à la mise en ligne.",
     images: ["/logo.svg"],
   },
   icons: {

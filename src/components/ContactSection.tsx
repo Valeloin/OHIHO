@@ -1,11 +1,12 @@
 import ContactForm from "@/components/ContactForm";
+import Reveal from "@/components/motion/Reveal";
 
 export default function ContactSection() {
   return (
     <section id="contact" className="border-t border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
+          <Reveal>
             <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
               Contact
             </h2>
@@ -13,9 +14,9 @@ export default function ContactSection() {
               Parlons de votre besoin
             </p>
             <p className="mt-4 max-w-md leading-relaxed text-muted">
-              Décrivez votre besoin en quelques mots — dépannage ou
-              formation — et nous revenons vers vous rapidement pour en
-              discuter.
+              Décrivez votre projet en quelques mots — site vitrine,
+              application, refonte — et je reviens vers vous rapidement pour
+              en discuter.
             </p>
 
             <div className="mt-8 space-y-4 text-sm">
@@ -30,9 +31,11 @@ export default function ContactSection() {
                 <span className="text-muted">Réponse sous 24h ouvrées</span>
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <ContactForm />
+          <Reveal delay={0.15}>
+            <ContactForm />
+          </Reveal>
         </div>
       </div>
     </section>

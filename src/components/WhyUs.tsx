@@ -1,23 +1,27 @@
+import Reveal from "@/components/motion/Reveal";
+import RevealGroup from "@/components/motion/RevealGroup";
+import RevealItem from "@/components/motion/RevealItem";
+
 const VALUES = [
   {
-    title: "Réactivité",
+    title: "Code propre & maintenable",
     description:
-      "Une intervention à distance dès que le problème survient, sans attendre un rendez-vous.",
+      "Une stack moderne et un code lisible, pensés pour évoluer avec votre projet, pas contre lui.",
   },
   {
-    title: "Langage clair",
+    title: "Communication claire",
     description:
-      "Pas de jargon technique. On explique ce qu'on fait et pourquoi, avec des mots simples.",
+      "Pas de jargon technique. Vous comprenez toujours où en est votre projet et pourquoi.",
   },
   {
-    title: "On explique, pas seulement on répare",
+    title: "Livraison dans les délais",
     description:
-      "Chaque intervention est l'occasion de comprendre ce qui s'est passé, pour que ça ne se reproduise plus.",
+      "Un devis clair en amont, et des points d'étape réguliers pour suivre l'avancement sans surprise.",
   },
   {
-    title: "À votre rythme",
+    title: "Accompagnement dans la durée",
     description:
-      "Formations et support disponibles quand vous en avez besoin, sans contrainte d'agenda.",
+      "Après la mise en ligne, je reste disponible pour les évolutions et corrections, via un suivi de ticket.",
   },
 ];
 
@@ -25,18 +29,18 @@ export default function WhyUs() {
   return (
     <section id="a-propos" className="border-t border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
             Pourquoi OHIHO
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Un support pensé pour les utilisateurs non-techniques
+            Un développeur qui reste disponible après la mise en ligne
           </p>
-        </div>
+        </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VALUES.map((value) => (
-            <div
+            <RevealItem
               key={value.title}
               className="rounded-2xl border border-border p-6"
             >
@@ -44,9 +48,9 @@ export default function WhyUs() {
               <p className="mt-2 text-sm leading-relaxed text-muted">
                 {value.description}
               </p>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );
