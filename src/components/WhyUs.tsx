@@ -21,7 +21,7 @@ const VALUES = [
   {
     title: "Accompagnement dans la durée",
     description:
-      "Après la mise en ligne, je reste disponible pour les évolutions et corrections, via un suivi de ticket.",
+      "Après la mise en ligne, je reste disponible pour les évolutions et corrections, par email.",
   },
 ];
 

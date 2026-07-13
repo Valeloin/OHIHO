@@ -25,9 +25,10 @@ export default function Expertise() {
               noire. Vous savez toujours où en est votre projet.
             </p>
             <p className="mt-4 leading-relaxed text-muted">
-              Une fois votre site ou application en ligne, l&apos;accompagnement
-              continue : les demandes d&apos;évolution ou de correction
-              restent suivies via un ticket, jusqu&apos;à leur résolution.
+              Une fois votre site ou application en ligne,
+              l&apos;accompagnement continue : les demandes
+              d&apos;évolution ou de correction se font simplement par
+              email, jusqu&apos;à leur résolution.
             </p>
           </Reveal>
 

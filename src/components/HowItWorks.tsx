@@ -25,7 +25,7 @@ const STEPS = [
     step: "04",
     title: "Mise en ligne & suivi",
     description:
-      "Déploiement, puis accompagnement dans la durée pour les évolutions et le suivi via ticket.",
+      "Déploiement, puis accompagnement dans la durée pour les évolutions et le suivi par email.",
   },
 ];
 

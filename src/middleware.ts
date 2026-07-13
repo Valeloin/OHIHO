@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/lib/supabase/types";
 
-const PROTECTED_PREFIXES = ["/portail", "/admin"];
+const PROTECTED_PREFIXES = ["/portail"];
 const AUTH_PAGES = ["/connexion", "/inscription"];
 
 export async function middleware(request: NextRequest) {

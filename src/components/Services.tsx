@@ -30,7 +30,7 @@ const SERVICES = [
     description:
       "Après la mise en ligne, je reste disponible pour les corrections, mises à jour et nouvelles fonctionnalités.",
     points: [
-      "Suivi via ticket",
+      "Suivi par email",
       "Corrections rapides",
       "Nouvelles fonctionnalités",
     ],

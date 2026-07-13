@@ -19,7 +19,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState<string | null>(null);
-  const [isStaff, setIsStaff] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,19 +38,17 @@ export default function Navbar() {
 
       if (!user) {
         setFirstName(null);
-        setIsStaff(false);
         return;
       }
 
       const { data: profile } = await supabase
         .from("profiles")
-        .select("full_name, role")
+        .select("full_name")
         .eq("id", user.id)
         .single();
 
       const name = profile?.full_name?.trim().split(" ")[0];
       setFirstName(name || user.email || "Mon compte");
-      setIsStaff(profile?.role === "technician" || profile?.role === "admin");
     }
 
     loadProfile();
@@ -126,14 +123,6 @@ export default function Navbar() {
               >
                 Mon profil
               </Link>
-              {isStaff && (
-                <Link
-                  href="/admin/tickets"
-                  className="text-sm text-accent-violet transition-colors hover:text-foreground"
-                >
-                  Gestionnaire de ticket
-                </Link>
-              )}
               <form action={signOut}>
                 <button
                   type="submit"
@@ -218,15 +207,6 @@ export default function Navbar() {
                 >
                   Mon profil
                 </Link>
-                {isStaff && (
-                  <Link
-                    href="/admin/tickets"
-                    onClick={() => setOpen(false)}
-                    className="text-sm text-accent-violet hover:text-foreground"
-                  >
-                    Gestionnaire de ticket
-                  </Link>
-                )}
                 <form action={signOut}>
                   <button
                     type="submit"
