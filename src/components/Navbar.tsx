@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/supabase/actions";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
@@ -64,7 +65,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-border bg-white/85 backdrop-blur-md transition-shadow duration-300 ${
+      className={`sticky top-0 z-50 border-b border-border bg-[var(--header-bg)] backdrop-blur-md transition-shadow duration-300 ${
         scrolled ? "shadow-md shadow-black/5" : ""
       }`}
     >
@@ -106,6 +107,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-5 md:flex">
+          <ThemeToggle />
           {firstName ? (
             <>
               <Link
@@ -150,29 +152,32 @@ export default function Navbar() {
           )}
         </div>
 
-        <button
-          aria-label="Ouvrir le menu"
-          className="flex h-9 w-9 items-center justify-center rounded-md border border-border md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="relative block h-3 w-4">
-            <span
-              className={`absolute left-0 top-0 h-[1.5px] w-4 bg-foreground transition-transform ${
-                open ? "translate-y-[5px] rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-[5px] h-[1.5px] w-4 bg-foreground transition-opacity ${
-                open ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-[10px] h-[1.5px] w-4 bg-foreground transition-transform ${
-                open ? "-translate-y-[5px] -rotate-45" : ""
-              }`}
-            />
-          </span>
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <ThemeToggle />
+          <button
+            aria-label="Ouvrir le menu"
+            className="flex h-9 w-9 items-center justify-center rounded-md border border-border"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="relative block h-3 w-4">
+              <span
+                className={`absolute left-0 top-0 h-[1.5px] w-4 bg-foreground transition-transform ${
+                  open ? "translate-y-[5px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-[5px] h-[1.5px] w-4 bg-foreground transition-opacity ${
+                  open ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-[10px] h-[1.5px] w-4 bg-foreground transition-transform ${
+                  open ? "-translate-y-[5px] -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
+        </div>
       </nav>
 
       {open && (

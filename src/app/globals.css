@@ -10,6 +10,18 @@
   --border: #e1e4ea;
   --muted: #5b6472;
   --grid-line: rgba(16, 20, 31, 0.06);
+  --header-bg: rgba(255, 255, 255, 0.85);
+}
+
+.dark {
+  --background: #080c17;
+  --foreground: #eef2f8;
+  --surface: #0d1220;
+  --surface-2: #111828;
+  --border: #202b42;
+  --muted: #8a94a8;
+  --grid-line: rgba(148, 163, 184, 0.08);
+  --header-bg: rgba(8, 12, 23, 0.85);
 }
 
 html {
@@ -19,11 +31,12 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
   background: rgba(56, 189, 248, 0.25);
-  color: #10141f;
+  color: var(--foreground);
 }
 
 @layer utilities {
