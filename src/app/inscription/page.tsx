@@ -13,7 +13,7 @@ export default function InscriptionPage() {
         <p className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
           Espace client
         </p>
-        <h1 className="mt-4 text-3xl font-semibold tracking-tight">
+        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-accent-violet">
           Créer votre compte
         </h1>
         <p className="mt-3 text-sm text-muted">
