@@ -47,7 +47,7 @@ export default function ContactSection() {
                 proposition adaptée.
               </p>
 
-              <div className="mt-6">
+              <div className="mt-6 flex justify-center">
                 <Link
                   href="/inscription"
                   className="inline-block rounded-full bg-foreground px-8 py-3 text-center text-sm font-semibold text-background transition-all hover:opacity-90 hover:shadow-[0_0_24px_4px_rgba(56,189,248,0.35)]"
