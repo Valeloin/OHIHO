@@ -13,6 +13,7 @@
   --surface-2: #dde7f3;
   --border: #cdd9e8;
   --muted: #55647c;
+  --card-bg: #131c2b;
   --grid-line: rgba(27, 58, 95, 0.06);
   --header-bg: #131c2b;
   --header-fg: #eaf1f9;
@@ -32,6 +33,7 @@
   --surface-2: #26456d;
   --border: #33507a;
   --muted: #9fb0c8;
+  --card-bg: #131c2b;
   --grid-line: rgba(159, 191, 216, 0.08);
   --header-bg: #0f1826;
   --header-fg: #eaf1f9;
@@ -78,9 +80,23 @@ body {
   }
 
   .card-surface {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: var(--card-shadow);
+    color: var(--foreground);
+    /* Les cards sont des îlots navy : on inverse les tokens à l'intérieur pour
+       que texte, libellés, champs et boutons s'adaptent sans éditer chaque
+       composant (le contenu passe en clair, les champs en navy plus clair). */
+    --foreground: #eaf1f9;
+    --background: #1f2b3e;
+    --surface: #263349;
+    --surface-2: #2d3b53;
+    --muted: #a9bccf;
+    --border: rgba(255, 255, 255, 0.14);
+  }
+
+  .card-surface ::placeholder {
+    color: rgba(234, 241, 249, 0.45);
   }
 }
 
