@@ -16,7 +16,7 @@ let baseBehavior = "";
 export function animateScrollTo(
   target: number,
   onTick?: () => void,
-  duration = 550
+  duration = 280
 ) {
   const el = document.documentElement;
 
