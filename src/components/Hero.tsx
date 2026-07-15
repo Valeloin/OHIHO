@@ -80,7 +80,7 @@ export default function Hero() {
 
         <motion.div
           variants={ITEM}
-          className="mt-20 grid grid-cols-2 gap-6 sm:grid-cols-4"
+          className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4"
         >
           {[
             { label: "Approche", value: "Sur mesure" },
