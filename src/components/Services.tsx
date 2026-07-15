@@ -84,7 +84,7 @@ export default function Services() {
               </ul>
               {service.portfolioLink && (
                 <Link
-                  href="/portfolio"
+                  href="/#portfolio"
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"
                 >
                   Voir nos réalisations

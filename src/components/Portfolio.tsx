@@ -86,13 +86,17 @@ export default function Portfolio() {
         </RevealGroup>
 
         <Reveal>
-          <Link
-            href="/portfolio"
-            className="mt-10 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"
-          >
-            Voir toutes nos réalisations
-            <span aria-hidden="true">→</span>
-          </Link>
+          <div className="card-surface mx-auto mt-14 max-w-xl rounded-2xl p-8 text-center">
+            <p className="text-sm text-muted">
+              Vous avez un projet de site ou d&apos;application en tête ?
+            </p>
+            <Link
+              href="/portail/devis/nouveau"
+              className="mt-6 inline-flex rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+            >
+              Demander un devis
+            </Link>
+          </div>
         </Reveal>
       </div>
     </section>

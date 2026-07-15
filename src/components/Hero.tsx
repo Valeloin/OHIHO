@@ -69,7 +69,7 @@ export default function Hero() {
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="/portfolio"
+                href="/#portfolio"
                 className="block rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
               >
                 Voir nos réalisations
