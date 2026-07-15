@@ -14,14 +14,14 @@
 }
 
 .dark {
-  --background: #1a2338;
+  --background: #223150;
   --foreground: #eef2f8;
-  --surface: #222d46;
-  --surface-2: #283351;
-  --border: #38455f;
-  --muted: #97a1b5;
+  --surface: #31446b;
+  --surface-2: #3a4f7b;
+  --border: #4c6191;
+  --muted: #a2acc0;
   --grid-line: rgba(148, 163, 184, 0.10);
-  --header-bg: rgba(26, 35, 56, 0.85);
+  --header-bg: rgba(34, 49, 80, 0.85);
 }
 
 html {
