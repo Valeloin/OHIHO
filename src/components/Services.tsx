@@ -87,7 +87,7 @@ export default function Services() {
                   href="/portfolio"
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"
                 >
-                  Voir mon portfolio
+                  Voir mes réalisations
                   <span aria-hidden="true">→</span>
                 </Link>
               )}

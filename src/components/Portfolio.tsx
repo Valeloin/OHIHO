@@ -77,7 +77,7 @@ export default function Portfolio() {
             href="/portfolio"
             className="mt-10 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"
           >
-            Voir tout le portfolio
+            Voir toutes mes réalisations
             <span aria-hidden="true">→</span>
           </Link>
         </Reveal>

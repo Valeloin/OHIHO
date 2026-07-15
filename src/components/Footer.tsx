@@ -41,7 +41,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/portfolio" className="hover:text-foreground">
-                  Portfolio
+                  Réalisations
                 </Link>
               </li>
               <li>

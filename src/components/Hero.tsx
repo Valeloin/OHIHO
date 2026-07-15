@@ -75,7 +75,7 @@ export default function Hero() {
                 href="/portfolio"
                 className="block rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
               >
-                Voir mon portfolio
+                Voir mes réalisations
               </Link>
             </motion.div>
           </motion.div>

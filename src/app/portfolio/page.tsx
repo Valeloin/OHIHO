@@ -8,7 +8,7 @@ import AnimatedGlow from "@/components/motion/AnimatedGlow";
 import { PROJECTS } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Portfolio — OHIHO",
+  title: "Réalisations — OHIHO",
   description:
     "Les sites et applications web réalisés par OHIHO.",
 };
@@ -23,7 +23,7 @@ export default function PortfolioPage() {
             Réalisations
           </p>
           <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Mon portfolio
+            Mes réalisations
           </h1>
           <p className="mt-4 max-w-2xl leading-relaxed text-muted">
             Cadance Coaching est un projet réel, en ligne. Les deux cards
