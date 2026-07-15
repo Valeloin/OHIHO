@@ -7,30 +7,47 @@
 // `auto` : sinon le smooth natif l'emporte et cale sur les pages très animées,
 // empêchant tout défilement programmatique de progresser.
 
+// Une seule animation à la fois. Deux clics rapprochés lançaient auparavant deux
+// timers concurrents qui corrompaient la restauration de `scroll-behavior`
+// (laissant `auto` figé en inline, ce qui désactivait le smooth sur tout le site).
+let activeTimer: number | null = null;
+let baseBehavior = "";
+
 export function animateScrollTo(
   target: number,
   onTick?: () => void,
   duration = 550
 ) {
   const el = document.documentElement;
-  const previous = el.style.scrollBehavior;
+
+  if (activeTimer !== null) {
+    // Une animation tourne déjà : on l'annule mais on conserve le
+    // `baseBehavior` d'origine (ne pas recapturer le "auto" déjà posé).
+    window.clearInterval(activeTimer);
+    activeTimer = null;
+  } else {
+    baseBehavior = el.style.scrollBehavior;
+  }
   el.style.scrollBehavior = "auto";
+
   const start = window.scrollY;
   const distance = target - start;
   if (Math.abs(distance) < 2) {
-    el.style.scrollBehavior = previous;
+    el.style.scrollBehavior = baseBehavior;
     return;
   }
+
   const ease = (t: number) =>
     t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   const startTime = performance.now();
-  const timer = window.setInterval(() => {
+  activeTimer = window.setInterval(() => {
     const p = Math.min(1, (performance.now() - startTime) / duration);
     window.scrollTo(0, Math.round(start + distance * ease(p)));
     onTick?.();
     if (p >= 1) {
-      window.clearInterval(timer);
-      el.style.scrollBehavior = previous;
+      if (activeTimer !== null) window.clearInterval(activeTimer);
+      activeTimer = null;
+      el.style.scrollBehavior = baseBehavior;
     }
   }, 16);
 }

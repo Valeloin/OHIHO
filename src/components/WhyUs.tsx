@@ -40,7 +40,7 @@ export default function WhyUs() {
             Pourquoi OHIHO
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Un développeur qui reste disponible après la mise en ligne
+            Un accompagnement qui continue après la mise en ligne
           </p>
         </Reveal>
 

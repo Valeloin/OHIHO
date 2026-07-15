@@ -49,19 +49,24 @@ export default function DevisWizard({
   async function handleSubmit() {
     setStatus("submitting");
     setError("");
-    const result = await submitQuoteRequest({
-      projectType: type!,
-      company,
-      budgetRange: budget,
-      timeline,
-      description,
-      options,
-    });
-    if (result.ok) {
-      setReference(result.reference);
-    } else {
+    try {
+      const result = await submitQuoteRequest({
+        projectType: type!,
+        company,
+        budgetRange: budget,
+        timeline,
+        description,
+        options,
+      });
+      if (result.ok) {
+        setReference(result.reference);
+      } else {
+        setStatus("error");
+        setError(result.error);
+      }
+    } catch {
       setStatus("error");
-      setError(result.error);
+      setError("Une erreur est survenue, veuillez réessayer.");
     }
   }
 

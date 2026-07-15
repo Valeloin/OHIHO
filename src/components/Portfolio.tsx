@@ -49,24 +49,37 @@ export default function Portfolio() {
                   <p className="mt-2 text-sm leading-relaxed text-muted">
                     {project.description}
                   </p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan">
-                    Voir le site
-                    <span aria-hidden="true">→</span>
-                  </span>
+                  {project.href ? (
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan">
+                      Voir le site
+                      <span aria-hidden="true">→</span>
+                    </span>
+                  ) : (
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-muted">
+                      Bientôt en ligne
+                    </span>
+                  )}
                 </div>
               </>
             );
 
+            const cardClass =
+              "card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]";
+
             return (
               <RevealItem key={project.title} hover>
-                <Link
-                  href={project.href}
-                  className="card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]"
-                  target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                >
-                  {content}
-                </Link>
+                {project.href ? (
+                  <Link
+                    href={project.href}
+                    className={cardClass}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                  >
+                    {content}
+                  </Link>
+                ) : (
+                  <div className={cardClass}>{content}</div>
+                )}
               </RevealItem>
             );
           })}

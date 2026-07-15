@@ -2,7 +2,8 @@ import ProjectMockup from "@/components/portfolio/ProjectMockup";
 
 type Accent = "cyan" | "violet" | "emerald" | "red";
 
-function hostnameOf(url: string): string {
+function hostnameOf(url: string | undefined): string {
+  if (!url) return "";
   try {
     return new URL(url).hostname.replace(/^www\./, "");
   } catch {
@@ -25,7 +26,7 @@ export default function ProjectVisual({
   accent,
   title,
 }: {
-  href: string;
+  href?: string;
   accent: Accent;
   title: string;
 }) {

@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
  * Envoi d'email transactionnel via SMTP (OVH / Zimbra).
  * Config lue depuis les variables d'environnement :
  *   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO
- * Utilisé par le formulaire de contact et le parcours de devis.
+ * Utilisé par le parcours de devis (src/app/portail/devis/actions.ts).
  */
 
 type SendMailInput = {

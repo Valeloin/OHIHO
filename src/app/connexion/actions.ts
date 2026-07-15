@@ -33,5 +33,15 @@ export async function signIn(
     return { error: "Email ou mot de passe incorrect." };
   }
 
-  redirect(next && next.startsWith("/") ? next : "/portail");
+  // N'accepter qu'un chemin interne : on rejette les URL protocol-relative
+  // (//evil.com, /\evil.com) pour éviter une redirection ouverte (phishing).
+  const safeNext =
+    next &&
+    next.startsWith("/") &&
+    !next.startsWith("//") &&
+    !next.startsWith("/\\")
+      ? next
+      : "/portail";
+
+  redirect(safeNext);
 }
