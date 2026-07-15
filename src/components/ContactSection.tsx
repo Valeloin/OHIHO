@@ -39,7 +39,7 @@ export default function ContactSection() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="card-surface rounded-2xl p-8">
+            <div className="card-surface rounded-2xl p-6">
               <h3 className="text-lg font-semibold">Demander un devis</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">
                 Depuis votre espace client, choisissez une formule (landing
