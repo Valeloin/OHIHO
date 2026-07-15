@@ -47,16 +47,10 @@ export default function ContactSection() {
                 proposition adaptée.
               </p>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-6">
                 <Link
                   href="/inscription"
-                  className="flex-1 rounded-full bg-foreground px-6 py-3 text-center text-sm font-semibold text-background transition-all hover:opacity-90 hover:shadow-[0_0_24px_4px_rgba(56,189,248,0.35)]"
-                >
-                  Créer un compte
-                </Link>
-                <Link
-                  href="/portail/devis/nouveau"
-                  className="flex-1 rounded-full border border-border px-6 py-3 text-center text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
+                  className="block w-full rounded-full bg-foreground px-6 py-3 text-center text-sm font-semibold text-background transition-all hover:opacity-90 hover:shadow-[0_0_24px_4px_rgba(56,189,248,0.35)]"
                 >
                   Demander un devis
                 </Link>
