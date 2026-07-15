@@ -30,16 +30,37 @@ export async function updatePassword(
   }
 
   const supabase = createClient();
+
+  // Sans session de récupération valide, on ne peut pas changer le mot de passe.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return {
+      error:
+        "Votre session de réinitialisation a expiré ou le lien a déjà été utilisé. Demandez un nouveau lien depuis « Mot de passe oublié ».",
+    };
+  }
+
   const { error } = await supabase.auth.updateUser({
     password: parsed.data.password,
   });
 
   if (error) {
-    console.error("[updatePassword] Supabase error:", error.message);
-    return {
-      error:
-        "Le lien de réinitialisation est invalide ou a expiré. Redemandez-en un.",
-    };
+    console.error("[updatePassword] Supabase error:", error.status, error.message);
+    const msg = error.message.toLowerCase();
+    if (msg.includes("different") || msg.includes("same")) {
+      return {
+        error: "Le nouveau mot de passe doit être différent de l'ancien.",
+      };
+    }
+    if (msg.includes("session") || msg.includes("token") || msg.includes("jwt")) {
+      return {
+        error:
+          "Lien de réinitialisation expiré ou déjà utilisé. Demandez-en un nouveau.",
+      };
+    }
+    return { error: `Impossible de changer le mot de passe : ${error.message}` };
   }
 
   redirect("/portail");
