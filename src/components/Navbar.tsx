@@ -64,6 +64,20 @@ export default function Navbar() {
     return () => subscription.unsubscribe();
   }, [pathname]);
 
+  // Liens d'ancre (/#section) : défilement fluide maison quand on est déjà sur
+  // l'accueil (le smooth natif cale à cause des animations de la page).
+  function handleNavClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
+    if (href.startsWith("/#") && pathname === "/") {
+      const id = href.slice(2);
+      if (document.getElementById(id)) {
+        e.preventDefault();
+        scrollToId(id);
+        window.history.replaceState(null, "", href.slice(1));
+      }
+    }
+    setOpen(false);
+  }
+
   return (
     <header
       className={`sticky top-0 z-50 border-b border-border bg-[var(--header-bg)] backdrop-blur-md transition-shadow duration-300 ${
@@ -100,6 +114,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-sm text-muted transition-colors hover:text-foreground"
             >
               {link.label}
@@ -189,6 +204,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="shrink-0 whitespace-nowrap text-sm font-medium text-muted transition-colors hover:text-foreground"
             >
               {link.label}

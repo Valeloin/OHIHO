@@ -1,44 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { animateScrollTo } from "@/lib/scroll";
 
 // Décalage pour compenser la navbar sticky lors du scroll vers une section.
 const HEADER_OFFSET = 80;
-
-// Défilement fluide maison, piloté par un timer (setInterval) et non par
-// requestAnimationFrame (throttlé dans certains contextes). On neutralise aussi
-// temporairement `scroll-behavior: smooth` (défini globalement en CSS) via un
-// style inline `auto` : sinon le smooth natif l'emporte et cale sur cette page
-// très animée, empêchant tout défilement programmatique de progresser.
-function animateScrollTo(
-  target: number,
-  onTick?: () => void,
-  duration = 550
-) {
-  const el = document.documentElement;
-  const previous = el.style.scrollBehavior;
-  el.style.scrollBehavior = "auto";
-  const start = window.scrollY;
-  const distance = target - start;
-  if (Math.abs(distance) < 2) {
-    el.style.scrollBehavior = previous;
-    return;
-  }
-  const ease = (t: number) =>
-    t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-  const startTime = performance.now();
-  const timer = window.setInterval(() => {
-    const p = Math.min(1, (performance.now() - startTime) / duration);
-    window.scrollTo(0, Math.round(start + distance * ease(p)));
-    // Recalcule l'état (flèches / progression) à chaque tick : les événements
-    // scroll programmatiques ne sont pas garantis dans tous les contextes.
-    onTick?.();
-    if (p >= 1) {
-      window.clearInterval(timer);
-      el.style.scrollBehavior = previous;
-    }
-  }, 16);
-}
 
 export default function ScrollNav() {
   const [progress, setProgress] = useState(0);
