@@ -89,7 +89,7 @@ export default function PortfolioPage() {
           })}
         </RevealGroup>
 
-        <div className="card-surface mt-10 rounded-2xl p-8 text-center">
+        <div className="card-surface mx-auto mt-10 max-w-xl rounded-2xl p-8 text-center">
           <p className="text-sm text-muted">
             Vous avez un projet de site ou d&apos;application en tête ?
           </p>
