@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/supabase/actions";
+import { scrollToId } from "@/lib/scroll";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const NAV_LINKS = [
@@ -180,19 +181,25 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* Sections directement accessibles dans le header — mobile & tablette (sous md).
+          Défilement horizontal si l'écran est trop étroit pour tout afficher. */}
+      <div className="border-t border-border md:hidden">
+        <div className="flex items-center gap-6 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="shrink-0 whitespace-nowrap text-sm font-medium text-muted transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {open && (
         <div className="border-t border-border bg-background px-6 py-4 md:hidden">
           <div className="flex flex-col gap-4">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="text-sm text-muted hover:text-foreground"
-              >
-                {link.label}
-              </Link>
-            ))}
             {firstName ? (
               <>
                 <Link
