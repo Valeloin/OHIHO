@@ -2,48 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Palette dérivée du logo OHIHO :
-   fond blanc · cards bleu-gris pastel · header navy · accent bleu (le « I »).
-   --accent est en canaux RGB pour supporter les modificateurs d'opacité Tailwind
-   (accent-cyan/60, etc.) et s'adapter au mode via cette seule variable. */
+/* Thème OHIHO — dérivé du logo (navy + bleu).
+   Clair : page blanc cassé, cartes blanches nettes, header navy, accent bleu.
+   Sombre : navy assorti. Une seule variable --accent (canaux RGB) pilote le
+   bleu partout et s'adapte au mode (supporte accent-cyan/60, etc.). */
 :root {
-  --background: #ffffff;
-  --foreground: #14243c;
-  --surface: #e9eff7;
-  --surface-2: #dde7f3;
-  --border: #cdd9e8;
-  --muted: #55647c;
-  --card-bg: #34517a;
-  --grid-line: rgba(27, 58, 95, 0.06);
-  --header-bg: #131c2b;
+  --background: #f5f8fc;
+  --foreground: #152238;
+  --surface: #ffffff;
+  --surface-2: #eef3fa;
+  --border: #e4eaf3;
+  --muted: #5c6a80;
+  --grid-line: rgba(21, 34, 56, 0.04);
+  --header-bg: #0f1b2e;
   --header-fg: #eaf1f9;
   --header-muted: #aebfd6;
-  --header-border: rgba(255, 255, 255, 0.12);
+  --header-border: rgba(255, 255, 255, 0.1);
   --accent: 47 159 228;
   --accent-2: #7fd4f5;
-  --accent-glow: rgb(47 159 228 / 0.35);
-  --card-shadow: 0 1px 2px rgba(20, 36, 60, 0.05),
-    0 14px 34px -16px rgba(20, 36, 60, 0.22);
+  --accent-glow: rgb(47 159 228 / 0.3);
+  --card-shadow: 0 1px 2px rgba(21, 34, 56, 0.04),
+    0 12px 28px -14px rgba(21, 34, 56, 0.16);
 }
 
 .dark {
-  --background: #16304e;
-  --foreground: #e8edf4;
-  --surface: #203c60;
-  --surface-2: #26456d;
-  --border: #33507a;
+  --background: #0f1b2e;
+  --foreground: #e8eef6;
+  --surface: #182a44;
+  --surface-2: #1f3352;
+  --border: #2a3d5c;
   --muted: #9fb0c8;
-  --card-bg: #131c2b;
-  --grid-line: rgba(159, 191, 216, 0.08);
-  --header-bg: #0f1826;
+  --grid-line: rgba(159, 191, 216, 0.07);
+  --header-bg: #0b1524;
   --header-fg: #eaf1f9;
   --header-muted: #aebfd6;
   --header-border: rgba(255, 255, 255, 0.08);
   --accent: 63 170 240;
   --accent-2: #8fd6f5;
-  --accent-glow: rgb(63 170 240 / 0.30);
-  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.30),
-    0 16px 36px -16px rgba(0, 0, 0, 0.55);
+  --accent-glow: rgb(63 170 240 / 0.28);
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 14px 30px -16px rgba(0, 0, 0, 0.5);
 }
 
 html {
@@ -80,23 +78,9 @@ body {
   }
 
   .card-surface {
-    background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--surface);
+    border: 1px solid var(--border);
     box-shadow: var(--card-shadow);
-    color: var(--foreground);
-    /* Les cards sont des îlots navy : on inverse les tokens à l'intérieur pour
-       que texte, libellés, champs et boutons s'adaptent sans éditer chaque
-       composant (le contenu passe en clair, les champs en navy plus clair). */
-    --foreground: #eaf1f9;
-    --background: #1f2b3e;
-    --surface: #263349;
-    --surface-2: #2d3b53;
-    --muted: #a9bccf;
-    --border: rgba(255, 255, 255, 0.14);
-  }
-
-  .card-surface ::placeholder {
-    color: rgba(234, 241, 249, 0.45);
   }
 }
 
