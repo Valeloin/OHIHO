@@ -1,7 +1,7 @@
 const ACCENT_COLORS = {
-  cyan: "#38bdf8",
-  violet: "#818cf8",
-  emerald: "#34d399",
+  cyan: "#2f9fe4",
+  violet: "#2f9fe4",
+  emerald: "#2f9fe4",
   red: "#ef4444",
 } as const;
 

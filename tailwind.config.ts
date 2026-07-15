@@ -17,8 +17,8 @@ const config: Config = {
         border: "var(--border)",
         muted: "var(--muted)",
         accent: {
-          DEFAULT: "#38bdf8",
-          cyan: "#38bdf8",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          cyan: "rgb(var(--accent) / <alpha-value>)",
           violet: "#818cf8",
           emerald: "#34d399",
         },

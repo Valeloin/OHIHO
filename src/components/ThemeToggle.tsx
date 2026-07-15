@@ -27,7 +27,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted transition-colors hover:text-foreground hover:border-accent-cyan/50"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--header-border)] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)] hover:border-accent-cyan/50"
     >
       {isDark ? (
         <svg

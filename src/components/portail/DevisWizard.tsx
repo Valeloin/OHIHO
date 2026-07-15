@@ -348,7 +348,7 @@ export default function DevisWizard({
             type="button"
             onClick={handleSubmit}
             disabled={status === "submitting"}
-            className="rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background shadow-[0_0_0_0_rgba(56,189,248,0)] transition-all hover:opacity-90 hover:shadow-[0_0_24px_4px_rgba(56,189,248,0.35)] disabled:opacity-50"
+            className="rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-all hover:opacity-90 hover:shadow-[0_0_24px_4px_var(--accent-glow)] disabled:opacity-50"
           >
             {status === "submitting" ? "Envoi en cours..." : "Envoyer ma demande"}
           </button>

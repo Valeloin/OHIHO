@@ -2,30 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Palette dérivée du logo OHIHO :
+   fond blanc · cards bleu-gris pastel · header navy · accent bleu (le « I »).
+   --accent est en canaux RGB pour supporter les modificateurs d'opacité Tailwind
+   (accent-cyan/60, etc.) et s'adapter au mode via cette seule variable. */
 :root {
-  --background: #a8bcdc;
-  --foreground: #0f1524;
-  --surface: #ffffff;
-  --surface-2: #e7eef8;
-  --border: #8fa5c8;
-  --muted: #414c60;
-  --grid-line: rgba(37, 71, 128, 0.08);
-  --header-bg: rgba(168, 188, 220, 0.85);
-  --card-shadow: 0 1px 2px rgba(15, 21, 36, 0.06),
-    0 12px 30px -14px rgba(15, 21, 36, 0.28);
+  --background: #ffffff;
+  --foreground: #14243c;
+  --surface: #e9eff7;
+  --surface-2: #dde7f3;
+  --border: #cdd9e8;
+  --muted: #55647c;
+  --grid-line: rgba(27, 58, 95, 0.06);
+  --header-bg: #131c2b;
+  --header-fg: #eaf1f9;
+  --header-muted: #aebfd6;
+  --header-border: rgba(255, 255, 255, 0.12);
+  --accent: 47 159 228;
+  --accent-2: #7fd4f5;
+  --accent-glow: rgb(47 159 228 / 0.35);
+  --card-shadow: 0 1px 2px rgba(20, 36, 60, 0.05),
+    0 14px 34px -16px rgba(20, 36, 60, 0.22);
 }
 
 .dark {
-  --background: #16223a;
-  --foreground: #eef2f8;
-  --surface: #2a3c60;
-  --surface-2: #33476e;
-  --border: #4a5f8f;
-  --muted: #a5afc3;
-  --grid-line: rgba(148, 163, 184, 0.10);
-  --header-bg: rgba(22, 34, 58, 0.85);
-  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.35),
-    0 14px 32px -14px rgba(0, 0, 0, 0.6);
+  --background: #16304e;
+  --foreground: #e8edf4;
+  --surface: #203c60;
+  --surface-2: #26456d;
+  --border: #33507a;
+  --muted: #9fb0c8;
+  --grid-line: rgba(159, 191, 216, 0.08);
+  --header-bg: #0f1826;
+  --header-fg: #eaf1f9;
+  --header-muted: #aebfd6;
+  --header-border: rgba(255, 255, 255, 0.08);
+  --accent: 63 170 240;
+  --accent-2: #8fd6f5;
+  --accent-glow: rgb(63 170 240 / 0.30);
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.30),
+    0 16px 36px -16px rgba(0, 0, 0, 0.55);
 }
 
 html {
@@ -39,7 +55,7 @@ body {
 }
 
 ::selection {
-  background: rgba(56, 189, 248, 0.25);
+  background: rgb(var(--accent) / 0.25);
   color: var(--foreground);
 }
 
@@ -49,7 +65,7 @@ body {
   }
 
   .text-gradient {
-    background: linear-gradient(90deg, #38bdf8 0%, #818cf8 100%);
+    background: linear-gradient(90deg, var(--accent-2) 0%, rgb(var(--accent)) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -92,6 +108,6 @@ html.hide-scrollbar::-webkit-scrollbar {
     border-radius: 8px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #c3c9d4;
+    background: rgb(var(--accent) / 0.5);
   }
 }

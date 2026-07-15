@@ -1,6 +1,6 @@
 const PALETTES = {
   // Un seul halo statique et discret sur le hero — plus de blobs animés.
-  hero: "radial-gradient(circle, rgba(56,189,248,0.10) 0%, rgba(56,189,248,0) 70%)",
+  hero: "radial-gradient(circle, rgb(var(--accent) / 0.12) 0%, rgb(var(--accent) / 0) 70%)",
   subtle: null,
 };
 

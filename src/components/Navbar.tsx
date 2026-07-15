@@ -79,7 +79,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-border bg-[var(--header-bg)] backdrop-blur-md transition-shadow duration-300 ${
+      className={`sticky top-0 z-50 border-b border-[var(--header-border)] bg-[var(--header-bg)] backdrop-blur-md transition-shadow duration-300 ${
         scrolled ? "shadow-md shadow-black/5" : ""
       }`}
     >
@@ -94,9 +94,9 @@ export default function Navbar() {
             className="h-10 w-10 transition-transform duration-300 ease-out group-hover:scale-110"
           />
           <span className="text-xl font-semibold tracking-tight">
-            <span className="text-foreground">OH</span>
+            <span className="text-[var(--header-fg)]">OH</span>
             <span className="text-accent-cyan">I</span>
-            <span className="text-foreground">HO</span>
+            <span className="text-[var(--header-fg)]">HO</span>
           </span>
         </Link>
 
@@ -106,7 +106,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-sm text-muted transition-colors hover:text-foreground"
+              className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
             >
               {link.label}
             </Link>
@@ -119,7 +119,7 @@ export default function Navbar() {
             <>
               <Link
                 href="/portail"
-                className="text-sm text-muted transition-colors hover:text-foreground"
+                className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
               >
                 Bonjour,{" "}
                 <span className="font-semibold text-accent-cyan">
@@ -128,14 +128,14 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/portail/profil"
-                className="text-sm text-muted transition-colors hover:text-foreground"
+                className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
               >
                 Mon profil
               </Link>
               <form action={signOut}>
                 <button
                   type="submit"
-                  className="text-sm text-muted transition-colors hover:text-foreground"
+                  className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
                 >
                   Déconnexion
                 </button>
@@ -151,7 +151,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/inscription"
-                className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-transform hover:scale-105"
+                className="rounded-full bg-accent-cyan px-5 py-2 text-sm font-medium text-white transition-transform hover:scale-105"
               >
                 S&apos;inscrire
               </Link>
@@ -163,22 +163,22 @@ export default function Navbar() {
           <ThemeToggle />
           <button
             aria-label="Ouvrir le menu"
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-border"
+            className="flex h-9 w-9 items-center justify-center rounded-md border border-[var(--header-border)]"
             onClick={() => setOpen((v) => !v)}
           >
             <span className="relative block h-3 w-4">
               <span
-                className={`absolute left-0 top-0 h-[1.5px] w-4 bg-foreground transition-transform ${
+                className={`absolute left-0 top-0 h-[1.5px] w-4 bg-[var(--header-fg)] transition-transform ${
                   open ? "translate-y-[5px] rotate-45" : ""
                 }`}
               />
               <span
-                className={`absolute left-0 top-[5px] h-[1.5px] w-4 bg-foreground transition-opacity ${
+                className={`absolute left-0 top-[5px] h-[1.5px] w-4 bg-[var(--header-fg)] transition-opacity ${
                   open ? "opacity-0" : "opacity-100"
                 }`}
               />
               <span
-                className={`absolute left-0 top-[10px] h-[1.5px] w-4 bg-foreground transition-transform ${
+                className={`absolute left-0 top-[10px] h-[1.5px] w-4 bg-[var(--header-fg)] transition-transform ${
                   open ? "-translate-y-[5px] -rotate-45" : ""
                 }`}
               />
@@ -189,14 +189,14 @@ export default function Navbar() {
 
       {/* Sections directement accessibles dans le header — mobile & tablette (sous md).
           Défilement horizontal si l'écran est trop étroit pour tout afficher. */}
-      <div className="border-t border-border md:hidden">
+      <div className="border-t border-[var(--header-border)] md:hidden">
         <div className="flex items-center gap-6 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="shrink-0 whitespace-nowrap text-sm font-medium text-muted transition-colors hover:text-foreground"
+              className="shrink-0 whitespace-nowrap text-sm font-medium text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
             >
               {link.label}
             </Link>

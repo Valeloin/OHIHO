@@ -11,10 +11,10 @@ import type { QuoteProjectType } from "@/lib/supabase/types";
  */
 
 const ACCENT: Record<QuoteProjectType, string> = {
-  landing: "#38bdf8",
-  intermediaire: "#818cf8",
-  refonte: "#34d399",
-  application: "#38bdf8",
+  landing: "#2f9fe4",
+  intermediaire: "#2f9fe4",
+  refonte: "#2f9fe4",
+  application: "#2f9fe4",
 };
 
 const SCREEN = "#0e1526";
