@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ProjectMockup from "@/components/portfolio/ProjectMockup";
+import ProjectVisual from "@/components/portfolio/ProjectVisual";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
@@ -32,10 +32,11 @@ export default function Portfolio() {
             const isExternal = project.href?.startsWith("http");
             const content = (
               <>
-                <div className="aspect-[400/260] w-full border-b border-border">
-                  <ProjectMockup
+                <div className="aspect-[400/260] w-full overflow-hidden border-b border-border">
+                  <ProjectVisual
+                    href={project.href}
                     accent={project.accent}
-                    label={`Aperçu du site ${project.title}`}
+                    title={project.title}
                   />
                 </div>
                 <div className="p-6">

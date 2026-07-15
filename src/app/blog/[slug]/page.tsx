@@ -75,10 +75,10 @@ export default function BlogPostPage({
             un accompagnement dans la durée. Parlons de votre projet.
           </p>
           <Link
-            href="/#contact"
+            href="/portail/devis/nouveau"
             className="mt-5 inline-block rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-transform hover:scale-105"
           >
-            Nous contacter
+            Demander un devis
           </Link>
         </div>
       </article>

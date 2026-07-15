@@ -37,16 +37,31 @@ export default function SignupForm() {
     <form action={formAction} className="card-surface rounded-2xl p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="sm:col-span-1">
-          <label htmlFor="fullName" className="text-xs font-medium text-muted">
-            Nom complet
+          <label htmlFor="firstName" className="text-xs font-medium text-muted">
+            Prénom
           </label>
           <input
-            id="fullName"
-            name="fullName"
+            id="firstName"
+            name="firstName"
             type="text"
             required
+            autoComplete="given-name"
             className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
-            placeholder="Jean Dupont"
+            placeholder="Jean"
+          />
+        </div>
+        <div className="sm:col-span-1">
+          <label htmlFor="lastName" className="text-xs font-medium text-muted">
+            Nom
+          </label>
+          <input
+            id="lastName"
+            name="lastName"
+            type="text"
+            required
+            autoComplete="family-name"
+            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            placeholder="Dupont"
           />
         </div>
         <div className="sm:col-span-1">

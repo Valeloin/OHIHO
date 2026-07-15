@@ -10,6 +10,7 @@ import {
   formulaLabel,
 } from "@/lib/quotes";
 import { submitQuoteRequest } from "@/app/portail/devis/actions";
+import FormulaPreview from "@/components/portail/FormulaPreview";
 
 type Status = "idle" | "submitting" | "error";
 
@@ -152,6 +153,9 @@ export default function DevisWizard({
                       : "hover:border-accent-cyan/40"
                   }`}
                 >
+                  <div className="mb-4 aspect-[400/220] overflow-hidden rounded-xl border border-border/50">
+                    <FormulaPreview type={f.type} />
+                  </div>
                   <p className="text-xs font-mono uppercase tracking-wider text-accent-cyan">
                     {f.tagline}
                   </p>

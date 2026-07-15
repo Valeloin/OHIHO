@@ -64,10 +64,10 @@ export default function Hero() {
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="/#contact"
+                href="/portail/devis/nouveau"
                 className="block rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background shadow-[0_0_0_0_rgba(56,189,248,0)] transition-shadow hover:shadow-[0_0_24px_4px_rgba(56,189,248,0.35)]"
               >
-                Nous contacter
+                Demander un devis
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>

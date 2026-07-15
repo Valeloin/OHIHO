@@ -5,7 +5,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 const signUpSchema = z.object({
-  fullName: z.string().trim().min(1, "Le nom est requis."),
+  firstName: z.string().trim().min(1, "Le prénom est requis."),
+  lastName: z.string().trim().min(1, "Le nom est requis."),
   company: z.string().trim().optional(),
   email: z.string().trim().email("Adresse email invalide."),
   password: z
@@ -22,7 +23,8 @@ export async function signUp(
   formData: FormData
 ): Promise<{ error: string } | null> {
   const parsed = signUpSchema.safeParse({
-    fullName: formData.get("fullName"),
+    firstName: formData.get("firstName"),
+    lastName: formData.get("lastName"),
     company: formData.get("company"),
     email: formData.get("email"),
     password: formData.get("password"),
@@ -36,11 +38,21 @@ export async function signUp(
     return { error: parsed.error.issues[0]?.message ?? "Formulaire invalide." };
   }
 
-  const { fullName, company, email, password, phone, companySize, need, message } =
-    parsed.data;
+  const {
+    firstName,
+    lastName,
+    company,
+    email,
+    password,
+    phone,
+    companySize,
+    need,
+    message,
+  } = parsed.data;
   const supabase = createClient();
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ohiho.fr";
+  const fullName = `${firstName} ${lastName}`.trim();
 
   const { error } = await supabase.auth.signUp({
     email,
@@ -48,6 +60,8 @@ export async function signUp(
     options: {
       data: {
         full_name: fullName,
+        first_name: firstName,
+        last_name: lastName,
         company: company || null,
         phone: phone || null,
         company_size: companySize || null,

@@ -7,6 +7,15 @@ export async function GET(request: Request) {
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;
   const code = searchParams.get("code");
+  const nextParam = searchParams.get("next");
+  // Destination par défaut : le portail. Une réinitialisation de mot de passe
+  // (type=recovery) envoie plutôt vers la page de nouveau mot de passe.
+  const destination =
+    nextParam && nextParam.startsWith("/")
+      ? nextParam
+      : type === "recovery"
+        ? "/nouveau-mot-de-passe"
+        : "/portail";
 
   const supabase = createClient();
 
@@ -17,7 +26,7 @@ export async function GET(request: Request) {
       token_hash: tokenHash,
     });
     if (!error) {
-      return NextResponse.redirect(`${origin}/portail`);
+      return NextResponse.redirect(`${origin}${destination}`);
     }
   }
 
@@ -25,7 +34,7 @@ export async function GET(request: Request) {
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      return NextResponse.redirect(`${origin}/portail`);
+      return NextResponse.redirect(`${origin}${destination}`);
     }
   }
 

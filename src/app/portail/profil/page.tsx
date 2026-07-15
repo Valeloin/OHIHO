@@ -14,14 +14,17 @@ export default async function ProfilPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, company, email")
+    .select("first_name, last_name, phone, address, company, email")
     .eq("id", user!.id)
     .single();
 
   return (
     <ProfileForm
       email={profile?.email ?? user?.email ?? ""}
-      fullName={profile?.full_name ?? null}
+      firstName={profile?.first_name ?? null}
+      lastName={profile?.last_name ?? null}
+      phone={profile?.phone ?? null}
+      address={profile?.address ?? null}
       company={profile?.company ?? null}
     />
   );

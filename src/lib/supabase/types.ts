@@ -12,8 +12,11 @@ export type Profile = {
   id: string;
   email: string;
   full_name: string | null;
+  first_name: string | null;
+  last_name: string | null;
   company: string | null;
   phone: string | null;
+  address: string | null;
   company_size: string | null;
   need: string | null;
   signup_message: string | null;
@@ -65,7 +68,13 @@ export type Database = {
     Views: Record<string, never>;
     Functions: {
       update_own_profile: {
-        Args: { p_full_name: string; p_company: string | null };
+        Args: {
+          p_first_name: string;
+          p_last_name: string | null;
+          p_phone: string | null;
+          p_address: string | null;
+          p_company: string | null;
+        };
         Returns: void;
       };
     };

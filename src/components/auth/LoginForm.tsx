@@ -55,7 +55,16 @@ export default function LoginForm({ next }: { next?: string }) {
         <p className="mt-4 text-sm text-red-400">{state.error}</p>
       )}
 
-      <div className="mt-6">
+      <div className="mt-4 text-right">
+        <a
+          href="/connexion/mot-de-passe-oublie"
+          className="text-xs text-muted hover:text-accent-cyan hover:underline"
+        >
+          Mot de passe oublié ?
+        </a>
+      </div>
+
+      <div className="mt-4">
         <SubmitButton />
       </div>
 

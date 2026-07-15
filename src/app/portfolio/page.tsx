@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import ProjectMockup from "@/components/portfolio/ProjectMockup";
+import ProjectVisual from "@/components/portfolio/ProjectVisual";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
@@ -36,10 +36,11 @@ export default function PortfolioPage() {
           {PROJECTS.map((project) => {
             const content = (
               <>
-                <div className="aspect-[400/260] w-full border-b border-border">
-                  <ProjectMockup
+                <div className="aspect-[400/260] w-full overflow-hidden border-b border-border">
+                  <ProjectVisual
+                    href={project.href}
                     accent={project.accent}
-                    label={`Aperçu du site ${project.title}`}
+                    title={project.title}
                   />
                 </div>
                 <div className="p-6">
@@ -93,10 +94,10 @@ export default function PortfolioPage() {
             Vous avez un projet de site ou d&apos;application en tête ?
           </p>
           <Link
-            href="/#contact"
+            href="/portail/devis/nouveau"
             className="mt-6 inline-flex rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
           >
-            Discuter de mon projet
+            Demander un devis
           </Link>
         </div>
 
