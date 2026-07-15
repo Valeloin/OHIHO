@@ -1,10 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { animateScrollTo } from "@/lib/scroll";
-
-// Décalage pour compenser la navbar sticky lors du scroll vers une section.
-const HEADER_OFFSET = 80;
+import { animateScrollTo, sectionScrollTarget } from "@/lib/scroll";
 
 export default function ScrollNav() {
   const [progress, setProgress] = useState(0);
@@ -35,22 +32,28 @@ export default function ScrollNav() {
     };
   }, [update]);
 
-  function sectionTops(): number[] {
-    return Array.from(document.querySelectorAll<HTMLElement>("main > section"))
-      .map((s) => s.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET)
-      .map((t) => Math.max(0, Math.round(t)))
-      .sort((a, b) => a - b);
+  // Points d'arrêt des flèches : le haut de page (le Hero), puis le titre de
+  // chaque section suivante. On exclut le Hero des cibles "titre" (sa 1re étape
+  // est le sommet, à 0), sinon le premier clic vers le bas s'arrêterait sur le
+  // titre du Hero au lieu de sauter à la section Services.
+  function sectionTargets(): number[] {
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("main > section")
+    );
+    return [0, ...sections.slice(1).map((s) => sectionScrollTarget(s))].sort(
+      (a, b) => a - b
+    );
   }
 
   function scrollToNext() {
     const y = window.scrollY;
-    const next = sectionTops().find((t) => t > y + 4);
+    const next = sectionTargets().find((t) => t > y + 4);
     animateScrollTo(next ?? document.documentElement.scrollHeight, update);
   }
 
   function scrollToPrev() {
     const y = window.scrollY;
-    const prev = sectionTops().filter((t) => t < y - 4);
+    const prev = sectionTargets().filter((t) => t < y - 4);
     animateScrollTo(prev.length ? prev[prev.length - 1] : 0, update);
   }
 

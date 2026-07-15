@@ -35,12 +35,26 @@ export function animateScrollTo(
   }, 16);
 }
 
-// Fait défiler vers l'élément d'id donné (compense la navbar sticky).
-// Retourne false si l'élément n'existe pas sur la page courante.
-export function scrollToId(id: string, offset = 80): boolean {
-  const target = document.getElementById(id);
-  if (!target) return false;
-  const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
-  animateScrollTo(top);
+// Petit espace entre le header et le titre de la section une fois arrivé.
+const LANDING_GAP = 20;
+
+// Position de défilement idéale pour arriver sur une section : on cale son
+// PREMIER TITRE juste sous le header (dont la hauteur est mesurée en direct, car
+// elle varie selon la taille d'écran), plutôt que le bord haut de la section —
+// sinon la grande marge interne de la section laisse une bande vide sous le header.
+export function sectionScrollTarget(section: HTMLElement): number {
+  const header = document.querySelector("header");
+  const headerH = header ? header.offsetHeight : 72;
+  const anchor =
+    section.querySelector<HTMLElement>("h1, h2, h3, p") ?? section;
+  const anchorTop = anchor.getBoundingClientRect().top + window.scrollY;
+  return Math.max(0, Math.round(anchorTop - headerH - LANDING_GAP));
+}
+
+// Fait défiler vers la section d'id donné. Retourne false si absente de la page.
+export function scrollToId(id: string): boolean {
+  const section = document.getElementById(id);
+  if (!section) return false;
+  animateScrollTo(sectionScrollTarget(section));
   return true;
 }
