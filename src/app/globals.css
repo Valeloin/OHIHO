@@ -82,6 +82,17 @@ body {
     border: 1px solid var(--border);
     box-shadow: var(--card-shadow);
   }
+
+  /* Carte sombre : le corps reprend le navy des maquettes (haut + bas
+     uniformes). Le contenu passe en clair via l'inversion des tokens. */
+  .card-dark {
+    background: #0e1526;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--card-shadow);
+    --foreground: #eaf1f9;
+    --muted: #9fb2cc;
+    --border: rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Barre de défilement masquée sur la page d'accueil (navigation par flèches).

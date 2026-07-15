@@ -64,7 +64,7 @@ export default function Portfolio() {
             );
 
             const cardClass =
-              "card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40";
+              "card-dark group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40";
 
             return (
               <RevealItem key={project.title} hover>
