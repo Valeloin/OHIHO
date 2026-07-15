@@ -13,7 +13,6 @@ const NAV_LINKS = [
   { href: "/#services", label: "Services" },
   { href: "/#expertise", label: "Expertise" },
   { href: "/#portfolio", label: "Réalisations" },
-  { href: "/blog", label: "Ressources" },
   { href: "/#a-propos", label: "À propos" },
 ];
 
