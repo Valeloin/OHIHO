@@ -53,7 +53,7 @@ export default function Hero() {
             variants={ITEM}
             className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted"
           >
-            De l&apos;idée au déploiement, je conçois et développe votre site
+            De l&apos;idée au déploiement, nous concevons et développons votre site
             ou application — sur mesure, avec un accompagnement dans la
             durée.
           </motion.p>
@@ -75,7 +75,7 @@ export default function Hero() {
                 href="/portfolio"
                 className="block rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
               >
-                Voir mes réalisations
+                Voir nos réalisations
               </Link>
             </motion.div>
           </motion.div>

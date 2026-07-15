@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import Expertise from "@/components/Expertise";
 import WhyUs from "@/components/WhyUs";
 import ContactSection from "@/components/ContactSection";
+import ScrollNav from "@/components/ScrollNav";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Expertise />
       <WhyUs />
       <ContactSection />
+      <ScrollNav />
     </main>
   );
 }

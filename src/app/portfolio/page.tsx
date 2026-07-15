@@ -23,7 +23,7 @@ export default function PortfolioPage() {
             Réalisations
           </p>
           <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Mes réalisations
+            Nos réalisations
           </h1>
           <p className="mt-4 max-w-2xl leading-relaxed text-muted">
             Cadance Coaching est un projet réel, en ligne. Les deux cards

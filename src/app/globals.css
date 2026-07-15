@@ -83,6 +83,18 @@ body {
   }
 }
 
+/* Barre de défilement masquée sur la page d'accueil (navigation par flèches).
+   La molette et le tactile restent fonctionnels ; la barre de progression
+   cyan de l'en-tête garde le repère de position. */
+html.hide-scrollbar {
+  scrollbar-width: none;
+}
+html.hide-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 @layer base {
   ::-webkit-scrollbar {
     width: 10px;

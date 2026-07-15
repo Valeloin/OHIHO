@@ -86,8 +86,8 @@ export default function DevisWizard({
         <h3 className="mt-5 text-xl font-semibold">Demande envoyée</h3>
         <p className="mt-3 text-sm leading-relaxed text-muted">
           Votre demande de devis <span className="font-mono text-foreground">{reference}</span>{" "}
-          a bien été enregistrée. Je reviens vers vous rapidement pour en
-          discuter.
+          a bien été enregistrée. Nous revenons vers vous rapidement pour
+          en discuter.
         </p>
         <Link
           href="/portail/devis"

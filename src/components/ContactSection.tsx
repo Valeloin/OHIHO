@@ -20,8 +20,8 @@ export default function ContactSection() {
             </p>
             <p className="mt-4 max-w-md leading-relaxed text-muted">
               Créez votre compte en une minute, puis décrivez votre besoin via
-              une demande de devis guidée. Je reviens vers vous rapidement pour
-              en discuter.
+              une demande de devis guidée. Nous revenons vers vous rapidement
+              pour en discuter.
             </p>
 
             <div className="mt-8 space-y-4 text-sm">

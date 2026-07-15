@@ -18,7 +18,7 @@ const SERVICES = [
   {
     title: "Applications web sur mesure",
     description:
-      "Espace client, tableau de bord, outil métier : je développe l'application qui correspond exactement à votre besoin.",
+      "Espace client, tableau de bord, outil métier : nous développons l'application qui correspond exactement à votre besoin.",
     points: [
       "Comptes & espaces client",
       "Logique métier sur mesure",
@@ -29,7 +29,7 @@ const SERVICES = [
   {
     title: "Maintenance & évolutions",
     description:
-      "Après la mise en ligne, je reste disponible pour les corrections, mises à jour et nouvelles fonctionnalités.",
+      "Après la mise en ligne, nous restons disponibles pour les corrections, mises à jour et nouvelles fonctionnalités.",
     points: [
       "Suivi par email",
       "Corrections rapides",
@@ -87,7 +87,7 @@ export default function Services() {
                   href="/portfolio"
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"
                 >
-                  Voir mes réalisations
+                  Voir nos réalisations
                   <span aria-hidden="true">→</span>
                 </Link>
               )}

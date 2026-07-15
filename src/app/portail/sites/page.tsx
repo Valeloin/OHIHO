@@ -9,7 +9,7 @@ export default function PortailSitesPage() {
   return (
     <div className="card-surface rounded-2xl p-8 text-center">
       <p className="text-sm text-muted">
-        Les sites et applications que je développe pour vous apparaîtront
+        Les sites et applications que nous développons pour vous apparaîtront
         ici une fois livrés, avec un accès direct.
       </p>
       <Link

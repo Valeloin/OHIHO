@@ -25,7 +25,7 @@ const VALUES = [
   {
     title: "Accompagnement dans la durée",
     description:
-      "Après la mise en ligne, je reste disponible pour les évolutions et corrections, par email.",
+      "Après la mise en ligne, nous restons disponibles pour les évolutions et corrections, par email.",
     accent: "hover:border-accent-cyan/50 hover:shadow-[0_12px_28px_-10px_rgba(56,189,248,0.3)]",
   },
 ];

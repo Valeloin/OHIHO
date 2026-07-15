@@ -23,7 +23,7 @@ export default function Portfolio() {
           </p>
           <p className="mt-4 text-muted">
             Cadance Coaching est un projet réel, livré et utilisé par un
-            client. Un aperçu de ce que je peux construire pour vous.
+            client. Un aperçu de ce que nous pouvons construire pour vous.
           </p>
         </Reveal>
 
@@ -77,7 +77,7 @@ export default function Portfolio() {
             href="/portfolio"
             className="mt-10 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"
           >
-            Voir toutes mes réalisations
+            Voir toutes nos réalisations
             <span aria-hidden="true">→</span>
           </Link>
         </Reveal>

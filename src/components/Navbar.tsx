@@ -94,7 +94,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-6 xl:flex">
+        <div className="hidden items-center gap-5 md:flex lg:gap-6">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -106,7 +106,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-4 xl:flex">
+        <div className="hidden items-center gap-3 md:flex lg:gap-4">
           <ThemeToggle />
           {firstName ? (
             <>
@@ -152,7 +152,7 @@ export default function Navbar() {
           )}
         </div>
 
-        <div className="flex items-center gap-3 xl:hidden">
+        <div className="flex items-center gap-3 md:hidden">
           <ThemeToggle />
           <button
             aria-label="Ouvrir le menu"
@@ -181,7 +181,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-border bg-background px-6 py-4 xl:hidden">
+        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
           <div className="flex flex-col gap-4">
             {NAV_LINKS.map((link) => (
               <Link
