@@ -3,7 +3,7 @@ import LoginForm from "@/components/auth/LoginForm";
 
 export const metadata: Metadata = {
   title: "Connexion — OHIHO",
-  description: "Connectez-vous à votre espace client OHIHO pour accéder à vos formations.",
+  description: "Connectez-vous à votre espace client OHIHO pour suivre l'avancement de vos projets web.",
 };
 
 export default function ConnexionPage({
@@ -21,7 +21,7 @@ export default function ConnexionPage({
           Se connecter
         </h1>
         <p className="mt-3 text-sm text-muted">
-          Accédez à vos formations RGPD et IA.
+          Accédez à votre espace pour suivre vos projets web.
         </p>
 
         {searchParams.error === "confirmation" && (

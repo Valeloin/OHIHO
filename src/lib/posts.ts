@@ -20,7 +20,7 @@ export const posts: Post[] = [
     content: [
       "L'intelligence artificielle est souvent présentée comme une rupture radicale. En pratique, il s'agit d'un ensemble d'outils qui automatisent des tâches répétitives, analysent de grands volumes de données ou génèrent du texte et des images à partir d'exemples.",
       "Pour une entreprise, la question n'est pas « faut-il faire de l'IA ? » mais « quel problème concret cherchons-nous à résoudre ? ». Un chatbot de support, un outil de tri de documents ou un assistant de rédaction répondent à des besoins très différents.",
-      "Notre rôle chez OHIHO est d'abord pédagogique : démystifier ces outils, identifier les cas d'usage pertinents pour votre activité et former vos équipes à les utiliser de façon fiable et responsable, avant de parler d'intégration technique.",
+      "Notre rôle chez OHIHO est d'abord pédagogique : démystifier ces outils et identifier les cas d'usage pertinents pour votre activité, avant de parler d'intégration technique.",
       "Trois questions simples permettent de démarrer : quelles tâches répétitives consomment le plus de temps dans vos équipes ? Quelles données fiables avez-vous déjà à disposition ? Et quel niveau de contrôle humain souhaitez-vous garder sur les décisions finales ?",
     ],
   },
@@ -36,7 +36,7 @@ export const posts: Post[] = [
       "La majorité des incidents de sécurité en entreprise ne viennent pas d'attaques sophistiquées, mais de négligences simples : mots de passe réutilisés, logiciels non mis à jour, ou absence de sauvegarde récente.",
       "Un gestionnaire de mots de passe et l'activation de la double authentification sur les comptes sensibles (messagerie, banque, outils de gestion) réduisent déjà une grande partie du risque.",
       "Les sauvegardes doivent suivre la règle du 3-2-1 : trois copies des données, sur deux supports différents, dont une hors site. C'est ce qui permet de repartir rapidement après un incident, qu'il s'agisse d'une panne matérielle ou d'un rançongiciel.",
-      "Enfin, la sensibilisation des équipes reste le levier le plus rentable : savoir reconnaître un email de phishing évite souvent plus de dégâts qu'un outil de sécurité supplémentaire. C'est pourquoi nous intégrons systématiquement un volet formation dans nos missions de support.",
+      "Enfin, la sensibilisation des équipes reste le levier le plus rentable : savoir reconnaître un email de phishing évite souvent plus de dégâts qu'un outil de sécurité supplémentaire.",
     ],
   },
   {

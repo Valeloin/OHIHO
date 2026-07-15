@@ -45,8 +45,8 @@ export default function Hero() {
             variants={ITEM}
             className="mt-8 max-w-4xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl"
           >
-            Des sites et applications web{" "}
-            <span className="text-gradient">pensés pour durer</span>
+            Site web et application web{" "}
+            <span className="text-gradient">sur mesure</span>
           </motion.h1>
 
           <motion.p

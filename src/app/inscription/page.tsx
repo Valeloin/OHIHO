@@ -3,7 +3,7 @@ import SignupForm from "@/components/auth/SignupForm";
 
 export const metadata: Metadata = {
   title: "Créer un compte — OHIHO",
-  description: "Créez votre compte pour accéder à vos formations OHIHO.",
+  description: "Créez votre compte OHIHO pour suivre vos projets web et demander un devis.",
 };
 
 export default function InscriptionPage() {
@@ -17,7 +17,7 @@ export default function InscriptionPage() {
           Créer votre compte
         </h1>
         <p className="mt-3 text-sm text-muted">
-          Créez votre compte pour accéder à vos formations RGPD et IA.
+          Créez votre compte pour suivre vos projets et échanger avec OHIHO.
         </p>
 
         <div className="mt-8">

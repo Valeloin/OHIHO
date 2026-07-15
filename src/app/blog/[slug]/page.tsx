@@ -68,11 +68,11 @@ export default function BlogPostPage({
 
         <div className="mt-14 card-surface rounded-2xl p-8 text-center">
           <h2 className="text-lg font-semibold">
-            Une question sur ce sujet dans votre organisation ?
+            Un projet de site ou d&apos;application web ?
           </h2>
           <p className="mt-2 text-sm text-muted">
-            Nous proposons des formations RGPD et IA en ligne pour vos
-            équipes.
+            Nous concevons des sites et des applications web sur mesure, avec
+            un accompagnement dans la durée. Parlons de votre projet.
           </p>
           <Link
             href="/#contact"

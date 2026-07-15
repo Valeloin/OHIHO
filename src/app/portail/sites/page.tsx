@@ -13,10 +13,10 @@ export default function PortailSitesPage() {
         ici une fois livrés, avec un accès direct.
       </p>
       <Link
-        href="/#contact"
+        href="/portail/devis/nouveau"
         className="mt-6 inline-flex rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
       >
-        Discuter d&apos;un projet
+        Demander un devis
       </Link>
     </div>
   );

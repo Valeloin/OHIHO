@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { sendMail, EmailConfigError } from "@/lib/email";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -19,36 +19,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO } =
-    process.env;
-
-  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
-    console.error(
-      "Variables SMTP manquantes — email non envoyé.",
-      body
-    );
-    return NextResponse.json(
-      { error: "Configuration email manquante côté serveur." },
-      { status: 500 }
-    );
-  }
-
-  const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT),
-    secure: Number(SMTP_PORT) === 465,
-    auth: {
-      user: SMTP_USER,
-      pass: SMTP_PASS,
-    },
-  });
-
   try {
-    await transporter.sendMail({
-      from: `"Site OHIHO" <${SMTP_USER}>`,
-      to: CONTACT_TO || SMTP_USER,
-      replyTo: email,
+    await sendMail({
       subject: `Nouvelle demande de contact — ${need || "Non précisé"}`,
+      replyTo: email,
       text: [
         `Nom : ${name}`,
         `Entreprise : ${company || "-"}`,
@@ -61,6 +35,13 @@ export async function POST(request: Request) {
       ].join("\n"),
     });
   } catch (err) {
+    if (err instanceof EmailConfigError) {
+      console.error(err.message, body);
+      return NextResponse.json(
+        { error: "Configuration email manquante côté serveur." },
+        { status: 500 }
+      );
+    }
     console.error("Échec de l'envoi de l'email de contact:", err);
     return NextResponse.json(
       { error: "Échec de l'envoi de l'email." },

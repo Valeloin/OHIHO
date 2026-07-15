@@ -4,8 +4,9 @@ import { useFormState, useFormStatus } from "react-dom";
 import { signUp } from "@/app/inscription/actions";
 
 const NEEDS = [
-  "Formation en ligne (RGPD)",
-  "Formation en ligne (IA)",
+  "Site vitrine",
+  "Application web sur mesure",
+  "Refonte de site existant",
   "Autre demande",
 ];
 
