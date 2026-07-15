@@ -8,25 +8,21 @@ const VALUES = [
     title: "Un travail soigné & durable",
     description:
       "Une stack moderne et un code lisible, pensés pour évoluer avec votre projet, pas contre lui.",
-    accent: "hover:border-accent-cyan/50 hover:shadow-[0_12px_28px_-10px_rgba(56,189,248,0.3)]",
   },
   {
     title: "Communication claire",
     description:
       "Pas de jargon technique. Vous comprenez toujours où en est votre projet et pourquoi.",
-    accent: "hover:border-accent-violet/50 hover:shadow-[0_12px_28px_-10px_rgba(129,140,248,0.3)]",
   },
   {
     title: "Livraison dans les délais",
     description:
       "Un devis clair en amont, et des points d'étape réguliers pour suivre l'avancement sans surprise.",
-    accent: "hover:border-accent-emerald/50 hover:shadow-[0_12px_28px_-10px_rgba(52,211,153,0.3)]",
   },
   {
     title: "Accompagnement dans la durée",
     description:
       "Après la mise en ligne, nous restons disponibles pour les évolutions et corrections, par email.",
-    accent: "hover:border-accent-cyan/50 hover:shadow-[0_12px_28px_-10px_rgba(56,189,248,0.3)]",
   },
 ];
 
@@ -49,7 +45,7 @@ export default function WhyUs() {
             <RevealItem
               key={value.title}
               hover
-              className={`rounded-2xl border border-border p-6 transition-colors ${value.accent}`}
+              className="card-surface rounded-2xl p-6 transition-colors hover:border-accent-cyan/40"
             >
               <h3 className="text-base font-semibold">{value.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">

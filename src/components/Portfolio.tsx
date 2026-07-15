@@ -10,7 +10,7 @@ export default function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="relative overflow-hidden border-t border-border"
+      className="relative overflow-hidden border-t border-border bg-surface"
     >
       <AnimatedGlow variant="subtle" />
       <div className="relative mx-auto max-w-6xl px-6 py-24">
@@ -64,7 +64,7 @@ export default function Portfolio() {
             );
 
             const cardClass =
-              "card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]";
+              "card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40";
 
             return (
               <RevealItem key={project.title} hover>

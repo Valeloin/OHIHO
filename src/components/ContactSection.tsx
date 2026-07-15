@@ -6,7 +6,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-t border-border bg-surface"
+      className="relative overflow-hidden border-t border-border"
     >
       <AnimatedGlow variant="subtle" />
       <div className="relative mx-auto max-w-6xl px-6 py-24">
@@ -50,7 +50,7 @@ export default function ContactSection() {
               <div className="mt-6 flex justify-center">
                 <Link
                   href="/inscription"
-                  className="inline-block rounded-full bg-foreground px-8 py-3 text-center text-sm font-semibold text-background transition-all hover:opacity-90 hover:shadow-[0_0_24px_4px_rgba(56,189,248,0.35)]"
+                  className="inline-block rounded-full bg-foreground px-8 py-3 text-center text-sm font-semibold text-background transition-opacity hover:opacity-90"
                 >
                   Demander un devis
                 </Link>

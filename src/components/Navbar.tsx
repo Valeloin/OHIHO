@@ -96,15 +96,7 @@ export default function Navbar() {
           />
           <span className="text-xl font-semibold tracking-tight">
             <span className="text-foreground">OH</span>
-            <span
-              className="text-accent-cyan"
-              style={{
-                filter:
-                  "drop-shadow(0 0 4px #7dd3fc) drop-shadow(0 0 10px #38bdf8)",
-              }}
-            >
-              I
-            </span>
+            <span className="text-accent-cyan">I</span>
             <span className="text-foreground">HO</span>
           </span>
         </Link>

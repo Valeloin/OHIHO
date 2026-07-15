@@ -62,7 +62,7 @@ export default function Services() {
             <RevealItem
               key={service.title}
               hover
-              className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]"
+              className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40"
             >
               <span className="font-mono text-xs text-muted">
                 {String(i + 1).padStart(2, "0")}
@@ -91,7 +91,6 @@ export default function Services() {
                   <span aria-hidden="true">→</span>
                 </Link>
               )}
-              <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent-cyan/0 transition-colors group-hover:bg-accent-cyan/5" />
             </RevealItem>
           ))}
         </RevealGroup>

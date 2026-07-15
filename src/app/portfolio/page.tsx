@@ -66,7 +66,7 @@ export default function PortfolioPage() {
             );
 
             const className =
-              "card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40 hover:shadow-[0_12px_32px_-8px_rgba(56,189,248,0.25)]";
+              "card-surface group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40";
 
             const isExternal = project.href?.startsWith("http");
 

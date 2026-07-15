@@ -34,10 +34,7 @@ export default function Hero() {
             variants={ITEM}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-emerald opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-emerald" />
-            </span>
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
             Développement web & applications sur mesure
           </motion.span>
 
@@ -65,7 +62,7 @@ export default function Hero() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/portail/devis/nouveau"
-                className="block rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background shadow-[0_0_0_0_rgba(56,189,248,0)] transition-shadow hover:shadow-[0_0_24px_4px_rgba(56,189,248,0.35)]"
+                className="block rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
               >
                 Demander un devis
               </Link>

@@ -3,25 +3,29 @@
 @tailwind utilities;
 
 :root {
-  --background: #e4eaf3;
-  --foreground: #131826;
+  --background: #c6d3e8;
+  --foreground: #0f1524;
   --surface: #ffffff;
-  --surface-2: #f3f7fc;
-  --border: #cdd7e6;
-  --muted: #5b6675;
-  --grid-line: rgba(37, 71, 128, 0.05);
-  --header-bg: rgba(228, 234, 243, 0.82);
+  --surface-2: #e7eef8;
+  --border: #a5b6d2;
+  --muted: #495468;
+  --grid-line: rgba(37, 71, 128, 0.07);
+  --header-bg: rgba(198, 211, 232, 0.85);
+  --card-shadow: 0 1px 2px rgba(15, 21, 36, 0.06),
+    0 12px 30px -14px rgba(15, 21, 36, 0.28);
 }
 
 .dark {
-  --background: #223150;
+  --background: #16223a;
   --foreground: #eef2f8;
-  --surface: #31446b;
-  --surface-2: #3a4f7b;
-  --border: #4c6191;
-  --muted: #a2acc0;
+  --surface: #2a3c60;
+  --surface-2: #33476e;
+  --border: #4a5f8f;
+  --muted: #a5afc3;
   --grid-line: rgba(148, 163, 184, 0.10);
-  --header-bg: rgba(34, 49, 80, 0.85);
+  --header-bg: rgba(22, 34, 58, 0.85);
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.35),
+    0 14px 32px -14px rgba(0, 0, 0, 0.6);
 }
 
 html {
@@ -45,30 +49,10 @@ body {
   }
 
   .text-gradient {
-    background: linear-gradient(
-      90deg,
-      #38bdf8 0%,
-      #818cf8 35%,
-      #34d399 65%,
-      #38bdf8 100%
-    );
-    background-size: 200% auto;
+    background: linear-gradient(90deg, #38bdf8 0%, #818cf8 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradient-shift 6s ease-in-out infinite;
-  }
-
-  @keyframes gradient-shift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
   }
 
   .bg-grid {
@@ -78,8 +62,9 @@ body {
   }
 
   .card-surface {
-    background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+    background: var(--surface);
     border: 1px solid var(--border);
+    box-shadow: var(--card-shadow);
   }
 }
 
