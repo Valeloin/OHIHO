@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 
 const PALETTES = {
   hero: [
-    "radial-gradient(circle, rgba(56,189,248,0.28) 0%, rgba(56,189,248,0) 70%)",
-    "radial-gradient(circle, rgba(129,140,248,0.24) 0%, rgba(129,140,248,0) 70%)",
-    "radial-gradient(circle, rgba(52,211,153,0.22) 0%, rgba(52,211,153,0) 70%)",
+    "radial-gradient(circle, rgba(56,189,248,0.16) 0%, rgba(56,189,248,0) 70%)",
+    "radial-gradient(circle, rgba(129,140,248,0.12) 0%, rgba(129,140,248,0) 70%)",
+    "radial-gradient(circle, rgba(52,211,153,0.09) 0%, rgba(52,211,153,0) 70%)",
   ],
   subtle: [
-    "radial-gradient(circle, rgba(56,189,248,0.14) 0%, rgba(56,189,248,0) 70%)",
-    "radial-gradient(circle, rgba(129,140,248,0.12) 0%, rgba(129,140,248,0) 70%)",
-    "radial-gradient(circle, rgba(52,211,153,0.1) 0%, rgba(52,211,153,0) 70%)",
+    "radial-gradient(circle, rgba(56,189,248,0.08) 0%, rgba(56,189,248,0) 70%)",
+    "radial-gradient(circle, rgba(129,140,248,0.06) 0%, rgba(129,140,248,0) 70%)",
+    "radial-gradient(circle, rgba(52,211,153,0.05) 0%, rgba(52,211,153,0) 70%)",
   ],
 };
 
