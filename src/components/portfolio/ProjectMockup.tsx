@@ -1,7 +1,8 @@
+// DA bleu → vert : les maquettes déclinent les teintes de la marque.
 const ACCENT_COLORS = {
-  cyan: "#2f9fe4",
-  violet: "#2f9fe4",
-  emerald: "#2f9fe4",
+  cyan: "#38bdf8",
+  violet: "#22d3c4",
+  emerald: "#34d399",
   red: "#ef4444",
 } as const;
 

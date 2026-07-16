@@ -21,9 +21,9 @@ export type PreviewColors = {
 };
 
 const DEFAULT_COLORS: PreviewColors = {
-  screen: "#0e1526",
-  blocks: "#26314a",
-  accent: "#2f9fe4",
+  screen: "#0a1524",
+  blocks: "#223a55",
+  accent: "#22d3c4",
 };
 
 const HEX = /^#[0-9a-fA-F]{6}$/;

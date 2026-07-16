@@ -6,27 +6,64 @@ import {
   CONTENT_ROW_ID,
 } from "@/lib/supabase/config";
 import { defaultContent } from "./defaults";
-import type { SiteContent, ThemeContent } from "./types";
+import type { SiteContent, ThemeContent, QuoteColorsContent } from "./types";
 
-// Valeurs par défaut de l'ANCIEN thème (avant la bascule en sombre unique du
-// 2026-07-16). Un enregistrement fait à cette époque a figé ces valeurs en
-// base sans que ce soit un choix : on les traite comme « non personnalisées »
-// et on les remplace par les défauts actuels.
-const LEGACY_THEME_DEFAULTS: Partial<ThemeContent> = {
-  accent: "#2f9fe4",
-  headerBg: "#0f1b2e",
+// Valeurs par défaut des ANCIENS thèmes (thème clair, puis navy/bleu d'avant
+// la DA bleu → vert du 2026-07-16). Un enregistrement fait à ces époques a
+// figé ces valeurs en base sans que ce soit un choix : on les traite comme
+// « non personnalisées » et on les remplace par les défauts actuels.
+const LEGACY_THEME_DEFAULTS: Partial<Record<keyof ThemeContent, string[]>> = {
+  accent: ["#2f9fe4", "#3faaf0"],
+  headerBg: ["#0f1b2e", "#0b1524"],
+  cardDark: ["#0e1526"],
+  darkBackground: ["#0f1b2e"],
+  darkSurface: ["#182a44"],
 };
 
-function normalizeTheme(stored: Partial<ThemeContent> | undefined): ThemeContent {
-  const theme = { ...defaultContent.theme, ...stored };
-  (Object.keys(LEGACY_THEME_DEFAULTS) as (keyof ThemeContent)[]).forEach(
-    (key) => {
-      if (theme[key]?.toLowerCase() === LEGACY_THEME_DEFAULTS[key]) {
-        theme[key] = defaultContent.theme[key];
-      }
+const LEGACY_QUOTE_COLORS: Partial<Record<keyof QuoteColorsContent, string[]>> =
+  {
+    cardBg: ["#ffffff", "#182a44"],
+    text: ["#152238", "#e8eef6"],
+    textMuted: ["#5c6a80", "#9fb0c8"],
+    accent: ["#2f9fe4", "#3faaf0"],
+    previewScreen: ["#0e1526"],
+    previewBlocks: ["#26314a"],
+    previewAccent: ["#2f9fe4"],
+  };
+
+function normalizeLegacy<T extends Record<string, unknown>>(
+  merged: T,
+  defaults: T,
+  legacy: Partial<Record<keyof T, string[]>>
+): T {
+  (Object.keys(legacy) as (keyof T)[]).forEach((key) => {
+    const value = merged[key];
+    if (
+      typeof value === "string" &&
+      legacy[key]!.includes(value.toLowerCase())
+    ) {
+      merged[key] = defaults[key];
     }
+  });
+  return merged;
+}
+
+function normalizeTheme(stored: Partial<ThemeContent> | undefined): ThemeContent {
+  return normalizeLegacy(
+    { ...defaultContent.theme, ...stored },
+    defaultContent.theme,
+    LEGACY_THEME_DEFAULTS
   );
-  return theme;
+}
+
+function normalizeQuoteColors(
+  stored: Partial<QuoteColorsContent> | undefined
+): QuoteColorsContent {
+  return normalizeLegacy(
+    { ...defaultContent.quotes.colors, ...stored },
+    defaultContent.quotes.colors,
+    LEGACY_QUOTE_COLORS
+  );
 }
 
 // Fusionne le contenu enregistré par-dessus les valeurs par défaut, section par
@@ -46,10 +83,7 @@ function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
     quotes: {
       ...defaultContent.quotes,
       ...stored.quotes,
-      colors: {
-        ...defaultContent.quotes.colors,
-        ...stored.quotes?.colors,
-      },
+      colors: normalizeQuoteColors(stored.quotes?.colors),
       formulas: {
         landing: {
           ...defaultContent.quotes.formulas.landing,

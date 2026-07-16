@@ -2,26 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Thème OHIHO — sombre unique, dérivé du logo (navy + bleu).
-   Page navy, cartes navy plus claires, header presque noir, accent bleu.
-   Une seule variable --accent (canaux RGB) pilote le bleu partout
-   (supporte accent-cyan/60, etc.). Les couleurs clés sont modifiables
-   depuis /admin (voir src/lib/content/theme-css.ts). */
+/* Thème OHIHO — sombre unique, DA « onde » bleu → vert (2026-07-16).
+   Fond bleu nuit #0D1B2E, surfaces nuit, header nuit profond #0A1524,
+   texte blanc bleuté, muted gris ardoise. L'accent est le TEAL #22D3C4
+   (une seule variable --accent en canaux RGB : accent-cyan/60, etc.) et
+   le dégradé de marque bleu ciel → vert émeraude vit dans
+   --gradient-from / --gradient-to (titre, boutons). Les couleurs clés
+   sont modifiables depuis /admin (voir src/lib/content/theme-css.ts). */
 :root {
-  --background: #0f1b2e;
-  --foreground: #e8eef6;
-  --surface: #182a44;
-  --surface-2: #1f3352;
-  --border: #2a3d5c;
-  --muted: #9fb0c8;
-  --grid-line: rgba(159, 191, 216, 0.07);
-  --header-bg: #0b1524;
-  --header-fg: #eaf1f9;
-  --header-muted: #aebfd6;
+  --background: #0d1b2e;
+  --foreground: #eef4fc;
+  --surface: #14273e;
+  --surface-2: #1b3252;
+  --border: #27405f;
+  --muted: #9fb2cc;
+  --grid-line: rgba(159, 178, 204, 0.07);
+  --header-bg: #0a1524;
+  --header-fg: #eef4fc;
+  --header-muted: #9fb2cc;
   --header-border: rgba(255, 255, 255, 0.08);
-  --accent: 63 170 240;
-  --accent-2: #8fd6f5;
-  --accent-glow: rgb(63 170 240 / 0.28);
+  --accent: 34 211 196;
+  --gradient-from: #38bdf8;
+  --gradient-to: #34d399;
+  --accent-glow: rgb(34 211 196 / 0.28);
   --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
     0 14px 30px -16px rgba(0, 0, 0, 0.5);
 }
@@ -45,14 +48,14 @@ body {
     text-wrap: balance;
   }
 
-  /* Dégradé animé du titre : gradient symétrique + balayage de position,
+  /* Dégradé animé du titre : bleu → vert symétrique + balayage de position,
      la boucle est invisible (début = fin). */
   .text-gradient {
     background: linear-gradient(
       90deg,
-      var(--accent-2) 0%,
-      rgb(var(--accent)) 50%,
-      var(--accent-2) 100%
+      var(--gradient-from) 0%,
+      var(--gradient-to) 50%,
+      var(--gradient-from) 100%
     );
     background-size: 200% auto;
     -webkit-background-clip: text;
@@ -61,16 +64,16 @@ body {
     animation: gradient-pan 8s linear infinite;
   }
 
-  /* Bouton principal : le dégradé du thème en mouvement + halo lumineux. */
+  /* Bouton principal : le dégradé de marque en mouvement + halo lumineux. */
   .btn-accent {
     background-image: linear-gradient(
       110deg,
-      rgb(var(--accent)) 0%,
-      var(--accent-2) 50%,
-      rgb(var(--accent)) 100%
+      var(--gradient-from) 0%,
+      var(--gradient-to) 50%,
+      var(--gradient-from) 100%
     );
     background-size: 200% 100%;
-    color: #0b1524;
+    color: #0a1524;
     animation: gradient-pan 5s linear infinite;
     box-shadow: 0 0 22px -8px var(--accent-glow);
     transition: box-shadow 0.3s ease;
@@ -91,14 +94,14 @@ body {
     box-shadow: var(--card-shadow);
   }
 
-  /* Carte navy profonde : le corps reprend le navy des maquettes (haut + bas
+  /* Carte nuit profonde : le corps reprend le fond des maquettes (haut + bas
      uniformes). Le contenu passe en clair via l'inversion des tokens. */
   .card-dark {
-    background: #0e1526;
+    background: #0a1524;
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--card-shadow);
     color: var(--foreground);
-    --foreground: #eaf1f9;
+    --foreground: #eef4fc;
     --muted: #9fb2cc;
     --border: rgba(255, 255, 255, 0.1);
   }

@@ -43,10 +43,12 @@ export function themeCss(theme: ThemeContent): string {
 
   if (accent.toLowerCase() !== d.accent.toLowerCase()) {
     const [r, g, b] = hexToRgb(accent);
-    const accent2 = lighten(accent, 0.55);
+    // Le dégradé de marque (titre, boutons) suit l'accent personnalisé :
+    // accent → version éclaircie. Par défaut il reste bleu → vert (globals).
     vars.push(
       `--accent: ${r} ${g} ${b};`,
-      `--accent-2: ${accent2};`,
+      `--gradient-from: ${lighten(accent, 0.4)};`,
+      `--gradient-to: ${accent};`,
       `--accent-glow: rgb(${r} ${g} ${b} / 0.28);`
     );
   }

@@ -18,7 +18,8 @@ const config: Config = {
         accent: {
           DEFAULT: "rgb(var(--accent) / <alpha-value>)",
           cyan: "rgb(var(--accent) / <alpha-value>)",
-          violet: "#818cf8",
+          // DA bleu → vert : « violet » (nom historique) = bleu ciel du dégradé.
+          violet: "#38bdf8",
           emerald: "#34d399",
         },
       },
