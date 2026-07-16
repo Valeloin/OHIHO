@@ -71,6 +71,10 @@ export default function Footer({ data }: { data: FooterContent }) {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted md:flex-row">
           <p>© {year} OHIHO. Tous droits réservés.</p>
+          <p>
+            Réalisé par{" "}
+            <span className="font-semibold text-accent-cyan">OHIHO</span>
+          </p>
           <p className="font-mono">{data.bottomNote}</p>
         </div>
       </div>
