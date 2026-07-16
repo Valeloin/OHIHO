@@ -6,14 +6,35 @@ import {
   CONTENT_ROW_ID,
 } from "@/lib/supabase/config";
 import { defaultContent } from "./defaults";
-import type { SiteContent } from "./types";
+import type { SiteContent, ThemeContent } from "./types";
+
+// Valeurs par défaut de l'ANCIEN thème (avant la bascule en sombre unique du
+// 2026-07-16). Un enregistrement fait à cette époque a figé ces valeurs en
+// base sans que ce soit un choix : on les traite comme « non personnalisées »
+// et on les remplace par les défauts actuels.
+const LEGACY_THEME_DEFAULTS: Partial<ThemeContent> = {
+  accent: "#2f9fe4",
+  headerBg: "#0f1b2e",
+};
+
+function normalizeTheme(stored: Partial<ThemeContent> | undefined): ThemeContent {
+  const theme = { ...defaultContent.theme, ...stored };
+  (Object.keys(LEGACY_THEME_DEFAULTS) as (keyof ThemeContent)[]).forEach(
+    (key) => {
+      if (theme[key]?.toLowerCase() === LEGACY_THEME_DEFAULTS[key]) {
+        theme[key] = defaultContent.theme[key];
+      }
+    }
+  );
+  return theme;
+}
 
 // Fusionne le contenu enregistré par-dessus les valeurs par défaut, section par
 // section, pour qu'un champ manquant ne casse jamais l'affichage.
 function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
   if (!stored) return defaultContent;
   return {
-    theme: { ...defaultContent.theme, ...stored.theme },
+    theme: normalizeTheme(stored.theme),
     hero: { ...defaultContent.hero, ...stored.hero },
     portfolio: { ...defaultContent.portfolio, ...stored.portfolio },
     services: { ...defaultContent.services, ...stored.services },

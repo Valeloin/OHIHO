@@ -74,10 +74,12 @@ export default async function RootLayout({
 
   return (
     <html lang="fr">
+      {/* `null` (jamais une chaîne vide) : un nœud texte dans <head> casse
+          l'hydratation React et vide tout le head côté client. */}
       <head>
-        {customThemeCss && (
+        {customThemeCss ? (
           <style dangerouslySetInnerHTML={{ __html: customThemeCss }} />
-        )}
+        ) : null}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
