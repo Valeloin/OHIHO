@@ -34,13 +34,13 @@ export default function ProjectVisual({
 
   if (isExternal) {
     return (
-      <div className="flex h-full w-full flex-col bg-[#0e1526]">
-        {/* Barre de navigateur */}
-        <div className="flex h-6 shrink-0 items-center gap-1.5 bg-[#172033] px-3">
-          <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
-          <span className="ml-2 truncate font-mono text-[9px] text-white/40">
+      <div className="flex h-full w-full flex-col bg-[#f2f5f9]">
+        {/* Barre de navigateur — mode clair, comme un vrai navigateur */}
+        <div className="flex h-6 shrink-0 items-center gap-1.5 bg-[#e4e9f1] px-3">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#b7c2d2]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#b7c2d2]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#b7c2d2]" />
+          <span className="ml-2 truncate font-mono text-[9px] text-[#5c6a80]">
             {hostnameOf(href)}
           </span>
         </div>
