@@ -8,11 +8,17 @@ export const metadata: Metadata = {
   title: "Mes devis — OHIHO",
 };
 
+// En mode clair, les teintes d'accent claires sont illisibles en petit texte
+// sur fond pâle. On utilise des versions foncées des mêmes teintes en clair,
+// et les claires d'origine en mode sombre.
 const STATUS_STYLES: Record<string, string> = {
-  received: "border-accent-cyan/40 bg-accent-cyan/10 text-accent-cyan",
-  in_review: "border-accent-violet/40 bg-accent-violet/10 text-accent-violet",
-  quoted: "border-accent-emerald/40 bg-accent-emerald/10 text-accent-emerald",
-  closed: "border-border bg-surface text-muted",
+  received:
+    "border-accent-cyan/40 bg-accent-cyan/10 text-[#0f6fb0] dark:text-accent-cyan",
+  in_review:
+    "border-accent-violet/40 bg-accent-violet/10 text-[#4f46e5] dark:text-accent-violet",
+  quoted:
+    "border-accent-emerald/40 bg-accent-emerald/10 text-[#047857] dark:text-accent-emerald",
+  closed: "border-border bg-surface-2 text-muted",
 };
 
 function formatDate(iso: string): string {
@@ -82,7 +88,7 @@ export default async function DevisPage() {
                 </p>
               </div>
               <span
-                className={`rounded-full border px-3 py-1 text-xs font-medium ${
+                className={`rounded-full border px-3 py-1 text-xs font-semibold ${
                   STATUS_STYLES[q.status] ?? STATUS_STYLES.closed
                 }`}
               >
