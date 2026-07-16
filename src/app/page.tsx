@@ -6,11 +6,13 @@ import Expertise from "@/components/Expertise";
 import WhyUs from "@/components/WhyUs";
 import ContactSection from "@/components/ContactSection";
 import ScrollNav from "@/components/ScrollNav";
+import { getContent } from "@/lib/content";
 
-export default function Home() {
+export default async function Home() {
+  const content = await getContent();
   return (
     <main>
-      <Hero />
+      <Hero data={content.hero} />
       <Portfolio />
       <Services />
       <HowItWorks />

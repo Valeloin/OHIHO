@@ -64,6 +64,12 @@ export type Database = {
         Update: Partial<QuoteRequest>;
         Relationships: [];
       };
+      site_content: {
+        Row: { id: string; data: unknown; updated_at: string };
+        Insert: { id: string; data: unknown; updated_at?: string };
+        Update: { id?: string; data?: unknown; updated_at?: string };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {

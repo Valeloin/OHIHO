@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import type { HeroContent } from "@/lib/content/types";
 
 const CONTAINER: Variants = {
   hidden: {},
@@ -18,7 +19,7 @@ const ITEM: Variants = {
   },
 };
 
-export default function Hero() {
+export default function Hero({ data }: { data: HeroContent }) {
   return (
     <section className="relative overflow-hidden bg-grid">
       <AnimatedGlow variant="hero" />
@@ -35,24 +36,22 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
-            Développement web & applications sur mesure
+            {data.badge}
           </motion.span>
 
           <motion.h1
             variants={ITEM}
             className="mt-8 max-w-4xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl"
           >
-            Site web et application web{" "}
-            <span className="text-gradient">sur mesure</span>
+            {data.titleLead}{" "}
+            <span className="text-gradient">{data.titleAccent}</span>
           </motion.h1>
 
           <motion.p
             variants={ITEM}
             className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted"
           >
-            De l&apos;idée au déploiement, nous concevons et développons votre site
-            ou application — sur mesure, avec un accompagnement dans la
-            durée.
+            {data.subtitle}
           </motion.p>
 
           <motion.div
@@ -64,7 +63,7 @@ export default function Hero() {
                 href="/portail/devis/nouveau"
                 className="block rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
               >
-                Demander un devis
+                {data.ctaPrimary}
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
@@ -72,7 +71,7 @@ export default function Hero() {
                 href="/#portfolio"
                 className="block rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
               >
-                Voir nos réalisations
+                {data.ctaSecondary}
               </Link>
             </motion.div>
           </motion.div>
@@ -82,12 +81,7 @@ export default function Hero() {
           variants={ITEM}
           className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4"
         >
-          {[
-            { label: "Approche", value: "Sur mesure" },
-            { label: "Accompagnement", value: "De A à Z" },
-            { label: "Stack", value: "Moderne" },
-            { label: "Délai", value: "Sur devis" },
-          ].map((item) => (
+          {data.stats.map((item) => (
             <motion.div
               key={item.label}
               whileHover={{ y: -4 }}
