@@ -19,6 +19,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -38,17 +39,19 @@ export default function Navbar() {
 
       if (!user) {
         setFirstName(null);
+        setIsAdmin(false);
         return;
       }
 
       const { data: profile } = await supabase
         .from("profiles")
-        .select("full_name")
+        .select("full_name, role")
         .eq("id", user.id)
         .single();
 
       const name = profile?.full_name?.trim().split(" ")[0];
       setFirstName(name || user.email || "Mon compte");
+      setIsAdmin(profile?.role === "admin");
     }
 
     loadProfile();
@@ -162,6 +165,14 @@ export default function Navbar() {
               >
                 Mon profil
               </Link>
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className="rounded-full border border-accent-cyan/60 px-4 py-1.5 text-sm font-medium text-accent-cyan transition-colors hover:bg-accent-cyan/10"
+                >
+                  Outil dev
+                </Link>
+              )}
               <form action={signOut}>
                 <button
                   type="submit"
@@ -255,6 +266,15 @@ export default function Navbar() {
                 >
                   Mon profil
                 </Link>
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    onClick={() => setOpen(false)}
+                    className="text-sm font-medium text-accent-cyan hover:underline"
+                  >
+                    Outil dev
+                  </Link>
+                )}
                 <form action={signOut}>
                   <button
                     type="submit"
