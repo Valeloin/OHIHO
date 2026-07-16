@@ -2,14 +2,15 @@
 // Tout le contenu modifiable par l'admin est regroupé dans un seul document,
 // section par section, plus le thème (couleurs clés).
 
+// Thème sombre unique. Les clés darkBackground/darkSurface sont historiques
+// (elles datent de l'époque à deux modes) : on les garde pour ne pas perdre
+// les valeurs déjà enregistrées en base.
 export type ThemeContent = {
   accent: string; // couleur d'accent (boutons, liens, badges) — hex #rrggbb
-  background: string; // fond du site en mode clair
-  surface: string; // fond des cartes en mode clair
-  headerBg: string; // bandeau du header (appliqué aux deux modes)
-  cardDark: string; // cartes navy (réalisations, panneau du portail)
-  darkBackground: string; // fond du site en mode sombre
-  darkSurface: string; // fond des cartes en mode sombre
+  headerBg: string; // bandeau du header
+  cardDark: string; // cartes navy profondes (réalisations, panneau du portail)
+  darkBackground: string; // fond du site
+  darkSurface: string; // fond des cartes
 };
 
 export type HeroContent = {

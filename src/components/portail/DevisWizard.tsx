@@ -23,7 +23,7 @@ function hexChannels(hex: string): string {
 
 // Variables CSS locales au formulaire, issues des couleurs éditées dans
 // l'admin. On n'écrase QUE ce qui diffère des défauts : tant que rien n'est
-// personnalisé, le thème global s'applique et s'adapte au mode sombre.
+// personnalisé, le thème global s'applique.
 function quoteStyleVars(quotes: QuotesContent): React.CSSProperties {
   const c = quotes.colors;
   const d = defaultContent.quotes.colors;

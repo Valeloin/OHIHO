@@ -2,30 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Thème OHIHO — dérivé du logo (navy + bleu).
-   Clair : page blanc cassé, cartes blanches nettes, header navy, accent bleu.
-   Sombre : navy assorti. Une seule variable --accent (canaux RGB) pilote le
-   bleu partout et s'adapte au mode (supporte accent-cyan/60, etc.). */
+/* Thème OHIHO — sombre unique, dérivé du logo (navy + bleu).
+   Page navy, cartes navy plus claires, header presque noir, accent bleu.
+   Une seule variable --accent (canaux RGB) pilote le bleu partout
+   (supporte accent-cyan/60, etc.). Les couleurs clés sont modifiables
+   depuis /admin (voir src/lib/content/theme-css.ts). */
 :root {
-  --background: #f5f8fc;
-  --foreground: #152238;
-  --surface: #ffffff;
-  --surface-2: #eef3fa;
-  --border: #e4eaf3;
-  --muted: #5c6a80;
-  --grid-line: rgba(21, 34, 56, 0.04);
-  --header-bg: #0f1b2e;
-  --header-fg: #eaf1f9;
-  --header-muted: #aebfd6;
-  --header-border: rgba(255, 255, 255, 0.1);
-  --accent: 47 159 228;
-  --accent-2: #7fd4f5;
-  --accent-glow: rgb(47 159 228 / 0.3);
-  --card-shadow: 0 1px 2px rgba(21, 34, 56, 0.04),
-    0 12px 28px -14px rgba(21, 34, 56, 0.16);
-}
-
-.dark {
   --background: #0f1b2e;
   --foreground: #e8eef6;
   --surface: #182a44;
@@ -51,7 +33,6 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
@@ -83,7 +64,7 @@ body {
     box-shadow: var(--card-shadow);
   }
 
-  /* Carte sombre : le corps reprend le navy des maquettes (haut + bas
+  /* Carte navy profonde : le corps reprend le navy des maquettes (haut + bas
      uniformes). Le contenu passe en clair via l'inversion des tokens. */
   .card-dark {
     background: #0e1526;

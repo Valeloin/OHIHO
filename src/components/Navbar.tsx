@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/supabase/actions";
 import { scrollToId } from "@/lib/scroll";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
@@ -114,7 +113,6 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex lg:gap-4">
-          <ThemeToggle />
           {firstName ? (
             <>
               <Link
@@ -160,7 +158,6 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
-          <ThemeToggle />
           <button
             aria-label="Ouvrir le menu"
             className="flex h-9 w-9 items-center justify-center rounded-md border border-[var(--header-border)]"

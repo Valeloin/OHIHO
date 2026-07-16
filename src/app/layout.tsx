@@ -58,20 +58,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#0f1b2e",
 };
-
-// Le thème clair est la valeur par défaut : le mode sombre ne s'applique que si
-// le visiteur l'a explicitement choisi via le bouton, pas selon son réglage système.
-const THEME_INIT_SCRIPT = `
-(function () {
-  try {
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-  } catch (e) {}
-})();
-`;
 
 export default async function RootLayout({
   children,
@@ -85,9 +73,8 @@ export default async function RootLayout({
   const customThemeCss = themeCss(content.theme);
 
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="fr">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         {customThemeCss && (
           <style dangerouslySetInnerHTML={{ __html: customThemeCss }} />
         )}

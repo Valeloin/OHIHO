@@ -339,52 +339,35 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
           >
             <ColorField
               label="Couleur d'accent"
-              hint="boutons, liens, badges (les deux modes)"
+              hint="boutons, liens, badges"
               value={theme.accent}
               defaultValue={dTheme.accent}
               onChange={(v) => set("theme", { accent: v })}
             />
             <ColorField
               label="Fond du site"
-              hint="mode clair"
-              value={theme.background}
-              defaultValue={dTheme.background}
-              onChange={(v) => set("theme", { background: v })}
-            />
-            <ColorField
-              label="Fond des cartes"
-              hint="mode clair"
-              value={theme.surface}
-              defaultValue={dTheme.surface}
-              onChange={(v) => set("theme", { surface: v })}
-            />
-            <ColorField
-              label="Bandeau du header"
-              hint="les deux modes"
-              value={theme.headerBg}
-              defaultValue={dTheme.headerBg}
-              onChange={(v) => set("theme", { headerBg: v })}
-            />
-            <ColorField
-              label="Cartes navy"
-              hint="réalisations, panneau de l'espace client"
-              value={theme.cardDark}
-              defaultValue={dTheme.cardDark}
-              onChange={(v) => set("theme", { cardDark: v })}
-            />
-            <ColorField
-              label="Fond du site"
-              hint="mode sombre"
               value={theme.darkBackground}
               defaultValue={dTheme.darkBackground}
               onChange={(v) => set("theme", { darkBackground: v })}
             />
             <ColorField
               label="Fond des cartes"
-              hint="mode sombre"
               value={theme.darkSurface}
               defaultValue={dTheme.darkSurface}
               onChange={(v) => set("theme", { darkSurface: v })}
+            />
+            <ColorField
+              label="Bandeau du header"
+              value={theme.headerBg}
+              defaultValue={dTheme.headerBg}
+              onChange={(v) => set("theme", { headerBg: v })}
+            />
+            <ColorField
+              label="Cartes navy profondes"
+              hint="réalisations, panneau de l'espace client"
+              value={theme.cardDark}
+              defaultValue={dTheme.cardDark}
+              onChange={(v) => set("theme", { cardDark: v })}
             />
           </Section>
         )}

@@ -5,10 +5,8 @@ import type { SiteContent } from "./types";
 // l'admin. Les couleurs doivent rester alignées sur globals.css.
 export const defaultContent: SiteContent = {
   theme: {
-    accent: "#2f9fe4",
-    background: "#f5f8fc",
-    surface: "#ffffff",
-    headerBg: "#0f1b2e",
+    accent: "#3faaf0",
+    headerBg: "#0b1524",
     cardDark: "#0e1526",
     darkBackground: "#0f1b2e",
     darkSurface: "#182a44",
@@ -164,12 +162,12 @@ export const defaultContent: SiteContent = {
       "Choisissez la formule la plus proche de votre besoin — on affinera ensemble.",
     step2Subtitle: "Quelques précisions pour préparer un devis au plus juste.",
     // Couleurs du formulaire de devis. Tant qu'une valeur = défaut, la couleur
-    // globale du thème s'applique (et s'adapte au mode sombre).
+    // globale du thème s'applique.
     colors: {
-      cardBg: "#ffffff",
-      text: "#152238",
-      textMuted: "#5c6a80",
-      accent: "#2f9fe4",
+      cardBg: "#182a44",
+      text: "#e8eef6",
+      textMuted: "#9fb0c8",
+      accent: "#3faaf0",
       previewScreen: "#0e1526",
       previewBlocks: "#26314a",
       previewAccent: "#2f9fe4",
