@@ -47,7 +47,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
               <div className="mt-6 flex justify-center">
                 <Link
                   href="/inscription"
-                  className="inline-block rounded-full bg-foreground px-8 py-3 text-center text-sm font-semibold text-background transition-opacity hover:opacity-90"
+                  className="btn-accent inline-block rounded-full px-8 py-3 text-center text-sm font-semibold"
                 >
                   {data.cardCta}
                 </Link>

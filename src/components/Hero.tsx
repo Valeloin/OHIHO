@@ -35,7 +35,10 @@ export default function Hero({ data }: { data: HeroContent }) {
             variants={ITEM}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-emerald opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-emerald" />
+            </span>
             {data.badge}
           </motion.span>
 
@@ -61,7 +64,7 @@ export default function Hero({ data }: { data: HeroContent }) {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/portail/devis/nouveau"
-                className="block rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+                className="btn-accent block rounded-full px-7 py-3 text-sm font-semibold"
               >
                 {data.ctaPrimary}
               </Link>

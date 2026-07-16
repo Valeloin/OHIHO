@@ -92,7 +92,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
             <p className="text-sm text-muted">{data.ctaText}</p>
             <Link
               href="/portail/devis/nouveau"
-              className="mt-6 inline-flex rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+              className="btn-accent mt-6 inline-flex rounded-full px-6 py-2.5 text-sm font-semibold"
             >
               {data.ctaButton}
             </Link>

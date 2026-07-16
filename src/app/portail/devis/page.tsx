@@ -46,7 +46,7 @@ export default async function DevisPage() {
         </div>
         <Link
           href="/portail/devis/nouveau"
-          className="rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+          className="btn-accent rounded-full px-6 py-2.5 text-sm font-semibold"
         >
           Demander un devis
         </Link>
