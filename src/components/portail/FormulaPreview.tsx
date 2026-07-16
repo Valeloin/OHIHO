@@ -155,12 +155,14 @@ function Refonte({ color }: { color: string }) {
 
 function Application({ color }: { color: string }) {
   // Tableau de bord : barre latérale + tuiles + graphique animé.
+  // Les barres sont ancrées au BAS du cadre du graphique (y=132..212) : base à
+  // 204 et hauteurs ≤ 62 pour rester à l'intérieur pendant l'animation.
   const bars = [
-    { x: 214, base: 150, min: 40, max: 96 },
-    { x: 250, base: 150, min: 66, max: 30 },
-    { x: 286, base: 150, min: 30, max: 82 },
-    { x: 322, base: 150, min: 88, max: 52 },
-    { x: 358, base: 150, min: 48, max: 74 },
+    { x: 208, base: 204, min: 26, max: 62 },
+    { x: 240, base: 204, min: 46, max: 20 },
+    { x: 272, base: 204, min: 18, max: 54 },
+    { x: 304, base: 204, min: 58, max: 34 },
+    { x: 336, base: 204, min: 30, max: 50 },
   ];
   return (
     <>
