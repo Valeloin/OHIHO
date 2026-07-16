@@ -163,6 +163,17 @@ export const defaultContent: SiteContent = {
     step1Subtitle:
       "Choisissez la formule la plus proche de votre besoin — on affinera ensemble.",
     step2Subtitle: "Quelques précisions pour préparer un devis au plus juste.",
+    // Couleurs du formulaire de devis. Tant qu'une valeur = défaut, la couleur
+    // globale du thème s'applique (et s'adapte au mode sombre).
+    colors: {
+      cardBg: "#ffffff",
+      text: "#152238",
+      textMuted: "#5c6a80",
+      accent: "#2f9fe4",
+      previewScreen: "#0e1526",
+      previewBlocks: "#26314a",
+      previewAccent: "#2f9fe4",
+    },
     budgets: [
       "Moins de 1 000 €",
       "1 000 – 3 000 €",

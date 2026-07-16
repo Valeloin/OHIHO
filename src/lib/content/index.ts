@@ -25,6 +25,10 @@ function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
     quotes: {
       ...defaultContent.quotes,
       ...stored.quotes,
+      colors: {
+        ...defaultContent.quotes.colors,
+        ...stored.quotes?.colors,
+      },
       formulas: {
         landing: {
           ...defaultContent.quotes.formulas.landing,

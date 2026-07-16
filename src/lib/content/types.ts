@@ -99,11 +99,22 @@ export type QuoteFormulaContent = {
   options: string[];
 };
 
+export type QuoteColorsContent = {
+  cardBg: string; // fond des cartes du formulaire (formules, récapitulatif)
+  text: string; // textes principaux (titres) dans le formulaire
+  textMuted: string; // textes secondaires (descriptions, libellés)
+  accent: string; // accents : accroche, carte sélectionnée, options cochées
+  previewScreen: string; // maquettes animées : fond d'écran
+  previewBlocks: string; // maquettes animées : blocs de contenu
+  previewAccent: string; // maquettes animées : éléments colorés/animés
+};
+
 export type QuotesContent = {
   // Assistant de demande de devis
   step1Title: string;
   step1Subtitle: string;
   step2Subtitle: string;
+  colors: QuoteColorsContent;
   budgets: string[];
   timelines: string[];
   formulas: {

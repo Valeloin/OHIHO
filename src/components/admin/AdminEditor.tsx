@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { SiteContent, QuoteFormulaContent } from "@/lib/content/types";
 import { saveContent } from "@/lib/content/actions";
 import { defaultContent } from "@/lib/content/defaults";
+import FormulaPreview from "@/components/portail/FormulaPreview";
 
 type Status = "idle" | "saving" | "saved" | "error";
 
@@ -257,6 +258,13 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
       },
       quotes: {
         ...content.quotes,
+        colors: (() => {
+          const qc = { ...content.quotes.colors };
+          (Object.keys(qc) as (keyof typeof qc)[]).forEach((k) => {
+            if (!HEX.test(qc[k])) qc[k] = defaultContent.quotes.colors[k];
+          });
+          return qc;
+        })(),
         budgets: cleanList(content.quotes.budgets),
         timelines: cleanList(content.quotes.timelines),
         formulas: {
@@ -763,8 +771,97 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
         {active === "quotesForm" && (
           <Section
             title="Devis — formulaire et suivi"
-            hint="Les textes de l'assistant de demande de devis et de la page « Mes devis »."
+            hint="Les textes et couleurs de l'assistant de demande de devis, et la page « Mes devis »."
           >
+            <div className="rounded-xl border border-border p-4">
+              <p className="text-xs font-semibold text-muted">
+                Couleurs du formulaire (les deux étapes + récapitulatif)
+              </p>
+              <div className="mt-3 grid gap-4">
+                <ColorField
+                  label="Fond des cartes"
+                  hint="cartes de formule et récapitulatif"
+                  value={quotes.colors.cardBg}
+                  defaultValue={defaultContent.quotes.colors.cardBg}
+                  onChange={(v) =>
+                    set("quotes", { colors: { ...quotes.colors, cardBg: v } })
+                  }
+                />
+                <ColorField
+                  label="Textes principaux"
+                  hint="titres"
+                  value={quotes.colors.text}
+                  defaultValue={defaultContent.quotes.colors.text}
+                  onChange={(v) =>
+                    set("quotes", { colors: { ...quotes.colors, text: v } })
+                  }
+                />
+                <ColorField
+                  label="Textes secondaires"
+                  hint="descriptions, libellés des champs"
+                  value={quotes.colors.textMuted}
+                  defaultValue={defaultContent.quotes.colors.textMuted}
+                  onChange={(v) =>
+                    set("quotes", { colors: { ...quotes.colors, textMuted: v } })
+                  }
+                />
+                <ColorField
+                  label="Couleur d'accent"
+                  hint="accroche, carte sélectionnée, options cochées"
+                  value={quotes.colors.accent}
+                  defaultValue={defaultContent.quotes.colors.accent}
+                  onChange={(v) =>
+                    set("quotes", { colors: { ...quotes.colors, accent: v } })
+                  }
+                />
+                <ColorField
+                  label="Maquettes — fond d'écran"
+                  value={quotes.colors.previewScreen}
+                  defaultValue={defaultContent.quotes.colors.previewScreen}
+                  onChange={(v) =>
+                    set("quotes", {
+                      colors: { ...quotes.colors, previewScreen: v },
+                    })
+                  }
+                />
+                <ColorField
+                  label="Maquettes — blocs de contenu"
+                  value={quotes.colors.previewBlocks}
+                  defaultValue={defaultContent.quotes.colors.previewBlocks}
+                  onChange={(v) =>
+                    set("quotes", {
+                      colors: { ...quotes.colors, previewBlocks: v },
+                    })
+                  }
+                />
+                <ColorField
+                  label="Maquettes — éléments animés"
+                  value={quotes.colors.previewAccent}
+                  defaultValue={defaultContent.quotes.colors.previewAccent}
+                  onChange={(v) =>
+                    set("quotes", {
+                      colors: { ...quotes.colors, previewAccent: v },
+                    })
+                  }
+                />
+                {/* Aperçu en direct de la maquette avec les couleurs choisies */}
+                <div>
+                  <p className="text-xs font-medium text-muted">
+                    Aperçu en direct
+                  </p>
+                  <div className="mt-2 max-w-sm overflow-hidden rounded-xl border border-border">
+                    <FormulaPreview
+                      type="application"
+                      colors={{
+                        screen: quotes.colors.previewScreen,
+                        blocks: quotes.colors.previewBlocks,
+                        accent: quotes.colors.previewAccent,
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
             <Field
               label="Titre de l'étape 1"
               value={quotes.step1Title}

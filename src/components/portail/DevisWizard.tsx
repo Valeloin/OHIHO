@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import type { QuoteProjectType } from "@/lib/supabase/types";
 import type { QuotesContent } from "@/lib/content/types";
+import { defaultContent } from "@/lib/content/defaults";
 import { formulasFrom } from "@/lib/quotes";
 import { submitQuoteRequest } from "@/app/portail/devis/actions";
 import FormulaPreview from "@/components/portail/FormulaPreview";
@@ -11,6 +12,30 @@ import FormulaPreview from "@/components/portail/FormulaPreview";
 type Status = "idle" | "submitting" | "error";
 
 const STEPS = ["Formule", "Détails", "Récapitulatif"] as const;
+
+const HEX = /^#[0-9a-fA-F]{6}$/;
+
+function hexChannels(hex: string): string {
+  return [hex.slice(1, 3), hex.slice(3, 5), hex.slice(5, 7)]
+    .map((c) => parseInt(c, 16))
+    .join(" ");
+}
+
+// Variables CSS locales au formulaire, issues des couleurs éditées dans
+// l'admin. On n'écrase QUE ce qui diffère des défauts : tant que rien n'est
+// personnalisé, le thème global s'applique et s'adapte au mode sombre.
+function quoteStyleVars(quotes: QuotesContent): React.CSSProperties {
+  const c = quotes.colors;
+  const d = defaultContent.quotes.colors;
+  const vars: Record<string, string> = {};
+  const changed = (v: string, dv: string) =>
+    HEX.test(v) && v.toLowerCase() !== dv.toLowerCase();
+  if (changed(c.cardBg, d.cardBg)) vars["--surface"] = c.cardBg;
+  if (changed(c.text, d.text)) vars["--foreground"] = c.text;
+  if (changed(c.textMuted, d.textMuted)) vars["--muted"] = c.textMuted;
+  if (changed(c.accent, d.accent)) vars["--accent"] = hexChannels(c.accent);
+  return vars as React.CSSProperties;
+}
 
 export default function DevisWizard({
   defaultCompany,
@@ -32,6 +57,12 @@ export default function DevisWizard({
 
   const formulas = formulasFrom(quotes);
   const selectedFormula = formulas.find((f) => f.type === type) ?? null;
+  const styleVars = quoteStyleVars(quotes);
+  const previewColors = {
+    screen: quotes.colors.previewScreen,
+    blocks: quotes.colors.previewBlocks,
+    accent: quotes.colors.previewAccent,
+  };
 
   function toggleOption(opt: string) {
     setOptions((prev) =>
@@ -109,7 +140,9 @@ export default function DevisWizard({
     step === 2;
 
   return (
-    <div>
+    // text-foreground : fait repartir l'héritage de couleur depuis ce wrapper,
+    // pour que les titres sans classe de couleur suivent aussi la variable locale.
+    <div style={styleVars} className="text-foreground">
       {/* Fil d'étapes */}
       <ol className="mb-8 flex items-center gap-3 text-xs font-medium">
         {STEPS.map((label, i) => (
@@ -155,7 +188,7 @@ export default function DevisWizard({
                   }`}
                 >
                   <div className="mb-4 aspect-[400/220] overflow-hidden rounded-xl border border-border/50">
-                    <FormulaPreview type={f.type} />
+                    <FormulaPreview type={f.type} colors={previewColors} />
                   </div>
                   <p className="text-xs font-mono uppercase tracking-wider text-accent-cyan">
                     {f.tagline}
