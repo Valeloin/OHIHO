@@ -48,7 +48,7 @@ export default function Services({
                 href={devisHref}
                 className="card-surface flex h-full flex-col overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40"
               >
-                <div className="aspect-[400/220] w-full border-b border-border/50">
+                <div className="aspect-[400/220] w-full">
                   <FormulaPreview type={formula.type} />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
