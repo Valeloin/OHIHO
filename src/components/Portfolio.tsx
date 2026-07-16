@@ -37,7 +37,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                     title={project.title}
                   />
                 </div>
-                <div className="p-6">
+                <div className="flex flex-1 flex-col p-6">
                   <p className="font-mono text-xs uppercase tracking-wide text-muted">
                     {project.category}
                   </p>
@@ -47,13 +47,15 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                   <p className="mt-2 text-sm leading-relaxed text-muted">
                     {project.description}
                   </p>
+                  {/* mt-auto : le lien reste collé en bas quelle que soit la
+                      longueur du texte, les cartes étant à hauteur égale. */}
                   {project.href ? (
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan">
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-medium text-accent-cyan">
                       Voir le site
                       <span aria-hidden="true">→</span>
                     </span>
                   ) : (
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-muted">
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-medium text-muted">
                       Bientôt en ligne
                     </span>
                   )}
@@ -61,11 +63,13 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
               </>
             );
 
+            // h-full + flex-col : les trois cartes s'alignent sur la hauteur
+            // de la rangée (la plus grande), quel que soit leur volume de texte.
             const cardClass =
-              "card-dark group block overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40";
+              "card-dark group flex h-full flex-col overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40";
 
             return (
-              <RevealItem key={project.title} hover>
+              <RevealItem key={project.title} hover className="h-full">
                 {project.href ? (
                   <Link
                     href={project.href}
