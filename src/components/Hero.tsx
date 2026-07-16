@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import HeroParticles from "@/components/motion/HeroParticles";
 import type { HeroContent } from "@/lib/content/types";
 
 const CONTAINER: Variants = {
@@ -23,6 +24,7 @@ export default function Hero({ data }: { data: HeroContent }) {
   return (
     <section className="relative overflow-hidden bg-grid">
       <AnimatedGlow variant="hero" />
+      <HeroParticles />
 
       <motion.div
         className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 sm:pt-28"

@@ -137,13 +137,41 @@ body {
   }
 }
 
+/* Pastilles lumineuses du hero : montée-descente douce avec balancement,
+   opacité qui respire. Chaque pastille varie durée et délai en inline. */
+@keyframes particle-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.35;
+  }
+  25% {
+    transform: translate3d(7px, -16px, 0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(-5px, -32px, 0);
+    opacity: 0.95;
+  }
+  75% {
+    transform: translate3d(9px, -12px, 0);
+    opacity: 0.6;
+  }
+}
+.particle {
+  animation-name: particle-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
 /* Respect du réglage « réduire les animations » du visiteur. */
 @media (prefers-reduced-motion: reduce) {
   .drift-a,
   .drift-b,
   .drift-c,
   .btn-accent,
-  .text-gradient {
+  .text-gradient,
+  .particle {
     animation: none;
   }
 }
