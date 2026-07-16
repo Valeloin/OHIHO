@@ -74,16 +74,16 @@ export default async function RootLayout({
 
   return (
     <html lang="fr">
-      {/* `null` (jamais une chaîne vide) : un nœud texte dans <head> casse
-          l'hydratation React et vide tout le head côté client. */}
-      <head>
-        {customThemeCss ? (
-          <style dangerouslySetInnerHTML={{ __html: customThemeCss }} />
-        ) : null}
-      </head>
+      {/* Pas de <head> manuel (source d'erreurs d'hydratation dans l'App
+          Router) : le style du thème est rendu en tête de body, les
+          navigateurs l'appliquent à l'identique. Jamais de chaîne vide ici
+          (nœud texte parasite) : ternaire null. */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
+        {customThemeCss ? (
+          <style dangerouslySetInnerHTML={{ __html: customThemeCss }} />
+        ) : null}
         <Navbar />
         {children}
         <Footer data={content.footer} />

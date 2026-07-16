@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/supabase/actions";
@@ -62,17 +62,49 @@ export default function Navbar() {
     return () => subscription.unsubscribe();
   }, [pathname]);
 
-  // Liens d'ancre (/#section) : défilement fluide maison quand on est déjà sur
-  // l'accueil (le smooth natif cale à cause des animations de la page).
-  function handleNavClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
-    if (href.startsWith("/#") && pathname === "/") {
-      const id = href.slice(2);
-      if (document.getElementById(id)) {
-        e.preventDefault();
-        scrollToId(id);
-        window.history.replaceState(null, "", href.slice(1));
-      }
+  // Liens d'ancre (/#section) sur l'accueil : défilement fluide maison SANS
+  // écrire le hash dans l'URL — la page principale reste « ohiho.fr/ ».
+  // Délégué au document pour couvrir aussi les liens du Hero, des sections et
+  // du footer sans devoir passer chaque composant en client.
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    function onDocumentClick(e: MouseEvent) {
+      const link = (e.target as HTMLElement).closest?.("a");
+      if (!link || e.defaultPrevented) return;
+      const href = link.getAttribute("href") ?? "";
+      if (!href.startsWith("/#") && !href.startsWith("#")) return;
+      const id = href.replace(/^\/?#/, "");
+      if (!document.getElementById(id)) return;
+      e.preventDefault();
+      scrollToId(id);
+      window.history.replaceState(null, "", "/");
     }
+
+    // Phase de capture : il faut passer AVANT le gestionnaire interne de
+    // next/link (attaché à la racine React), qui sinon pousse /#section dans
+    // l'URL via son routeur. Link ignore le clic si defaultPrevented est posé.
+    document.addEventListener("click", onDocumentClick, true);
+    return () => document.removeEventListener("click", onDocumentClick, true);
+  }, [pathname]);
+
+  // Arrivée sur l'accueil avec un hash (ex. lien /#portfolio depuis une autre
+  // page) : on défile jusqu'à la section puis on nettoie l'URL.
+  useEffect(() => {
+    if (pathname !== "/" || !window.location.hash) return;
+    const id = window.location.hash.slice(1);
+    // Délai : au chargement initial, le routeur Next réécrit lui-même l'URL
+    // (hash compris) pendant son initialisation — on nettoie après lui.
+    const timer = window.setTimeout(() => {
+      scrollToId(id);
+      window.history.replaceState(null, "", "/");
+    }, 600);
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
+
+  // Ferme le menu mobile au clic sur un lien (le défilement est géré par la
+  // délégation ci-dessus).
+  function handleNavClick() {
     setOpen(false);
   }
 
@@ -104,7 +136,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
+              onClick={handleNavClick}
               className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
             >
               {link.label}
@@ -149,7 +181,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/inscription"
-                className="rounded-full bg-accent-cyan px-5 py-2 text-sm font-medium text-white transition-transform hover:scale-105"
+                className="btn-accent rounded-full px-5 py-2 text-sm font-semibold transition-transform hover:scale-105"
               >
                 S&apos;inscrire
               </Link>
@@ -192,7 +224,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
+              onClick={handleNavClick}
               className="shrink-0 whitespace-nowrap text-sm font-medium text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
             >
               {link.label}
