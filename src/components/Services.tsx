@@ -1,21 +1,23 @@
-import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
 import FormulaPreview from "@/components/portail/FormulaPreview";
-import type { QuoteProjectType } from "@/lib/supabase/types";
-import type { ServicesContent } from "@/lib/content/types";
+import { formulasFrom } from "@/lib/quotes";
+import type { ServicesContent, QuotesContent } from "@/lib/content/types";
 
-// Maquette animée illustrant chaque carte de service (mêmes visuels que le
-// formulaire de devis) : site multi-pages, tableau de bord, avant/après.
-const SERVICE_PREVIEWS: QuoteProjectType[] = [
-  "intermediaire",
-  "application",
-  "refonte",
-];
+// Les cartes reprennent les 4 formules du parcours de devis (mêmes vignettes
+// animées, mêmes textes — édités dans l'admin sous « Devis — formules ») :
+// ce que le site vend = ce que le devis propose.
+export default function Services({
+  data,
+  quotes,
+}: {
+  data: ServicesContent;
+  quotes: QuotesContent;
+}) {
+  const formulas = formulasFrom(quotes);
 
-export default function Services({ data }: { data: ServicesContent }) {
   return (
     <section id="services" className="relative overflow-hidden border-t border-border">
       <AnimatedGlow variant="subtle" />
@@ -30,47 +32,29 @@ export default function Services({ data }: { data: ServicesContent }) {
           <p className="mt-4 text-muted">{data.subtitle}</p>
         </Reveal>
 
-        {/* Même seuil que les réalisations : 3 colonnes dès 768px. */}
-        <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3">
-          {data.items.map((service, i) => (
+        <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {formulas.map((formula, i) => (
             <RevealItem
-              key={i}
+              key={formula.type}
               hover
-              className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40"
+              className="card-surface flex h-full flex-col rounded-2xl p-6 transition-colors hover:border-accent-cyan/40"
             >
-              {SERVICE_PREVIEWS[i] && (
-                <div className="mb-5 aspect-[400/220] overflow-hidden rounded-xl border border-border/50">
-                  <FormulaPreview type={SERVICE_PREVIEWS[i]} />
-                </div>
-              )}
+              <div className="mb-4 aspect-[400/220] overflow-hidden rounded-xl border border-border/50">
+                <FormulaPreview type={formula.type} />
+              </div>
               <span className="font-mono text-xs text-muted">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-3 text-xl font-semibold">{service.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">
-                {service.description}
+              <p className="mt-2 font-mono text-xs uppercase tracking-wider text-accent-cyan">
+                {formula.tagline}
               </p>
-              <ul className="mt-5 space-y-2">
-                {service.points.map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-center gap-2 text-sm text-foreground/90"
-                  >
-                    <span className="h-1 w-1 rounded-full bg-accent-cyan" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-              {/* Lien vers les réalisations sur la carte Applications (2e) */}
-              {i === 1 && (
-                <Link
-                  href="/#portfolio"
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"
-                >
-                  Voir nos réalisations
-                  <span aria-hidden="true">→</span>
-                </Link>
-              )}
+              <h3 className="mt-2 text-lg font-semibold">{formula.label}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                {formula.description}
+              </p>
+              <p className="mt-auto pt-3 text-xs italic text-muted">
+                {formula.examples}
+              </p>
             </RevealItem>
           ))}
         </RevealGroup>

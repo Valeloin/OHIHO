@@ -39,38 +39,6 @@ export const defaultContent: SiteContent = {
     title: "De l'idée au site en ligne",
     subtitle:
       "Conception, développement et suivi dans la durée — pour un site vitrine ou une application web sur mesure, pour les entreprises comme pour les particuliers.",
-    items: [
-      {
-        title: "Sites vitrines",
-        description:
-          "Un site clair et rapide pour présenter votre activité, vos services, et convertir vos visiteurs en clients.",
-        points: [
-          "Design sur mesure",
-          "Pensé pour convertir",
-          "Rapide et responsive",
-        ],
-      },
-      {
-        title: "Applications web sur mesure",
-        description:
-          "Espace client, tableau de bord, outil métier : nous développons l'application qui correspond exactement à votre besoin.",
-        points: [
-          "Comptes & espaces client",
-          "Logique métier sur mesure",
-          "Architecture pensée pour durer",
-        ],
-      },
-      {
-        title: "Maintenance & évolutions",
-        description:
-          "Après la mise en ligne, nous restons disponibles pour les corrections, mises à jour et nouvelles fonctionnalités.",
-        points: [
-          "Suivi par email",
-          "Corrections rapides",
-          "Nouvelles fonctionnalités",
-        ],
-      },
-    ],
   },
   method: {
     kicker: "Méthode",

@@ -31,17 +31,12 @@ export type PortfolioContent = {
   ctaButton: string;
 };
 
-export type ServiceItem = {
-  title: string;
-  description: string;
-  points: string[];
-};
-
+// L'en-tête seulement : les 4 cartes de la section reprennent les formules
+// du parcours de devis (voir QuotesContent.formulas).
 export type ServicesContent = {
   kicker: string;
   title: string;
   subtitle: string;
-  items: ServiceItem[];
 };
 
 export type MethodStep = {

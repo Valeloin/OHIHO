@@ -14,7 +14,7 @@ export default async function Home() {
     <main>
       <Hero data={content.hero} />
       <Portfolio data={content.portfolio} />
-      <Services data={content.services} />
+      <Services data={content.services} quotes={content.quotes} />
       <HowItWorks data={content.method} />
       <Expertise data={content.expertise} />
       <WhyUs data={content.whyUs} />

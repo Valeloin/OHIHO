@@ -245,13 +245,6 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
     const cleaned: SiteContent = {
       ...content,
       theme,
-      services: {
-        ...content.services,
-        items: content.services.items.map((it) => ({
-          ...it,
-          points: cleanList(it.points),
-        })),
-      },
       expertise: {
         ...content.expertise,
         coverage: cleanList(content.expertise.coverage),
@@ -481,7 +474,10 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
         )}
 
         {active === "services" && (
-          <Section title="Nos services" hint="L'en-tête et les 3 cartes de services.">
+          <Section
+            title="Nos services"
+            hint="L'en-tête de la section. Les 4 cartes reprennent automatiquement les formules du devis — modifiez-les dans « Devis — formules »."
+          >
             <Field
               label="Petit titre (kicker)"
               value={services.kicker}
@@ -498,31 +494,13 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               onChange={(v) => set("services", { subtitle: v })}
               textarea
             />
-            {services.items.map((item, i) => (
-              <div key={i} className="rounded-xl border border-border p-4">
-                <p className="text-xs font-semibold text-muted">Carte {i + 1}</p>
-                <div className="mt-3 grid gap-4">
-                  <Field
-                    label="Titre"
-                    value={item.title}
-                    onChange={(v) => setItem("services", "items", i, { title: v })}
-                  />
-                  <Field
-                    label="Description"
-                    value={item.description}
-                    onChange={(v) =>
-                      setItem("services", "items", i, { description: v })
-                    }
-                    textarea
-                  />
-                  <ListField
-                    label="Points"
-                    value={item.points}
-                    onChange={(v) => setItem("services", "items", i, { points: v })}
-                  />
-                </div>
-              </div>
-            ))}
+            <button
+              type="button"
+              onClick={() => openSection("quotesFormulas")}
+              className="w-fit rounded-lg border border-accent-cyan/40 px-4 py-2 text-sm font-medium text-accent-cyan transition-colors hover:bg-accent-cyan/10"
+            >
+              Modifier les 4 formules →
+            </button>
           </Section>
         )}
 
