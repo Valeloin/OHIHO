@@ -90,11 +90,14 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
         </RevealGroup>
 
         <Reveal>
-          <div className="card-surface mx-auto mt-14 max-w-xl rounded-2xl p-8 text-center">
+          {/* Encart compact : il épouse son contenu (w-fit) et se détache de
+              la section avec un fond plus clair (surface-2), la section étant
+              déjà sur --surface. */}
+          <div className="mx-auto mt-14 w-fit max-w-full rounded-2xl border border-border bg-surface-2 px-8 py-6 text-center shadow-[var(--card-shadow)]">
             <p className="text-sm text-muted">{data.ctaText}</p>
             <Link
               href="/portail/devis/nouveau"
-              className="btn-accent mt-6 inline-flex rounded-full px-6 py-2.5 text-sm font-semibold"
+              className="btn-accent mt-4 inline-flex rounded-full px-6 py-2.5 text-sm font-semibold"
             >
               {data.ctaButton}
             </Link>
