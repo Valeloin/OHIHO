@@ -3,7 +3,17 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import FormulaPreview from "@/components/portail/FormulaPreview";
+import type { QuoteProjectType } from "@/lib/supabase/types";
 import type { ServicesContent } from "@/lib/content/types";
+
+// Maquette animée illustrant chaque carte de service (mêmes visuels que le
+// formulaire de devis) : site multi-pages, tableau de bord, avant/après.
+const SERVICE_PREVIEWS: QuoteProjectType[] = [
+  "intermediaire",
+  "application",
+  "refonte",
+];
 
 export default function Services({ data }: { data: ServicesContent }) {
   return (
@@ -20,13 +30,19 @@ export default function Services({ data }: { data: ServicesContent }) {
           <p className="mt-4 text-muted">{data.subtitle}</p>
         </Reveal>
 
-        <RevealGroup className="mt-14 grid gap-6 lg:grid-cols-3">
+        {/* Même seuil que les réalisations : 3 colonnes dès 768px. */}
+        <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3">
           {data.items.map((service, i) => (
             <RevealItem
               key={i}
               hover
               className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40"
             >
+              {SERVICE_PREVIEWS[i] && (
+                <div className="mb-5 aspect-[400/220] overflow-hidden rounded-xl border border-border/50">
+                  <FormulaPreview type={SERVICE_PREVIEWS[i]} />
+                </div>
+              )}
               <span className="font-mono text-xs text-muted">
                 {String(i + 1).padStart(2, "0")}
               </span>

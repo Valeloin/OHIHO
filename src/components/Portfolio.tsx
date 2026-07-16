@@ -25,7 +25,9 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
           <p className="mt-4 text-muted">{data.subtitle}</p>
         </Reveal>
 
-        <RevealGroup className="mt-14 grid gap-6 lg:grid-cols-3">
+        {/* 3 colonnes dès 768px : les cartes restent alignées horizontalement
+            au maximum (une carte seule pleine largeur devient géante). */}
+        <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3">
           {PROJECTS.map((project) => {
             const isExternal = project.href?.startsWith("http");
             const content = (
