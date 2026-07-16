@@ -8,10 +8,12 @@ import { PROJECTS } from "@/lib/projects";
 import type { PortfolioContent } from "@/lib/content/types";
 
 export default function Portfolio({ data }: { data: PortfolioContent }) {
+  // Fond par défaut : la section est entre deux sections sur --surface
+  // (Pourquoi OHIHO et Votre projet), l'alternance reste lisible.
   return (
     <section
       id="portfolio"
-      className="relative overflow-hidden border-t border-border bg-surface"
+      className="relative overflow-hidden border-t border-border"
     >
       <AnimatedGlow variant="subtle" />
       <div className="relative mx-auto max-w-6xl px-6 py-24">

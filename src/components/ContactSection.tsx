@@ -7,7 +7,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-t border-border"
+      className="relative overflow-hidden border-t border-border bg-surface"
     >
       <AnimatedGlow variant="subtle" />
       <div className="relative mx-auto max-w-6xl px-6 py-24">

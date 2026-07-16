@@ -27,7 +27,6 @@ export default async function Home() {
   return (
     <main>
       <Hero data={content.hero} />
-      <Portfolio data={content.portfolio} />
       <Services
         data={content.services}
         quotes={content.quotes}
@@ -36,6 +35,7 @@ export default async function Home() {
       <HowItWorks data={content.method} />
       <Expertise data={content.expertise} />
       <WhyUs data={content.whyUs} />
+      <Portfolio data={content.portfolio} />
       <ContactSection data={content.contact} />
       <ScrollNav />
     </main>

@@ -8,11 +8,12 @@ import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/supabase/actions";
 import { scrollToId } from "@/lib/scroll";
 
+// Ordre aligné sur le déroulé de la page.
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
   { href: "/#expertise", label: "Expertise" },
-  { href: "/#portfolio", label: "Réalisations" },
   { href: "/#a-propos", label: "À propos" },
+  { href: "/#portfolio", label: "Réalisations" },
 ];
 
 export default function Navbar() {
