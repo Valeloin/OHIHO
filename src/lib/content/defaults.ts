@@ -158,4 +158,93 @@ export const defaultContent: SiteContent = {
       "OHIHO conçoit et développe des sites et applications web sur mesure, pour entreprises et particuliers, pensés pour durer.",
     bottomNote: "Création de sites web & applications",
   },
+  quotes: {
+    step1Title: "Quel type de projet ?",
+    step1Subtitle:
+      "Choisissez la formule la plus proche de votre besoin — on affinera ensemble.",
+    step2Subtitle: "Quelques précisions pour préparer un devis au plus juste.",
+    budgets: [
+      "Moins de 1 000 €",
+      "1 000 – 3 000 €",
+      "3 000 – 6 000 €",
+      "Plus de 6 000 €",
+      "Je ne sais pas encore",
+    ],
+    timelines: [
+      "Urgent (moins d'un mois)",
+      "1 à 3 mois",
+      "Flexible / pas de date précise",
+    ],
+    formulas: {
+      landing: {
+        label: "Landing page",
+        tagline: "Une page unique, efficace",
+        description:
+          "Une seule page pensée pour présenter une offre précise et transformer vos visiteurs en contacts. Idéale pour un lancement, une campagne ou une activité qui tient sur une page.",
+        examples:
+          "Ex. : lancement de produit, page de réservation, mise en avant d'une offre.",
+        options: [
+          "Formulaire de contact",
+          "Prise de rendez-vous",
+          "Nom de domaine",
+          "Rédaction des textes",
+        ],
+      },
+      intermediaire: {
+        label: "Site intermédiaire",
+        tagline: "Un site vitrine multi-pages",
+        description:
+          "Un site complet de plusieurs pages (accueil, services, à propos, contact…) pour présenter votre activité dans le détail et inspirer confiance.",
+        examples:
+          "Ex. : artisan, cabinet, salle de sport, restaurant, association.",
+        options: [
+          "Formulaire de contact",
+          "Galerie / photos",
+          "Blog / actualités",
+          "Multilingue",
+          "Nom de domaine",
+          "Rédaction des textes",
+        ],
+      },
+      refonte: {
+        label: "Refonte de site",
+        tagline: "Moderniser un site existant",
+        description:
+          "Reprendre votre site actuel pour le moderniser : nouveau design, meilleure performance, adapté au mobile et au référencement, sans repartir de zéro.",
+        examples:
+          "Ex. : site vieillissant, lent, non responsive, ou à rafraîchir.",
+        options: [
+          "Reprise du contenu existant",
+          "Nouveau design",
+          "Optimisation référencement (SEO)",
+          "Migration d'hébergement",
+        ],
+      },
+      application: {
+        label: "Application web",
+        tagline: "Un outil sur mesure",
+        description:
+          "Une application web développée pour votre besoin précis : espace client, tableau de bord, réservation, outil métier interne. Comptes utilisateurs et logique adaptée à votre activité.",
+        examples:
+          "Ex. : espace client, gestion de réservations, tableau de bord, outil interne.",
+        options: [
+          "Comptes / espace client",
+          "Tableau de bord",
+          "Paiement en ligne",
+          "Espace administrateur",
+          "Notifications email",
+        ],
+      },
+    },
+    listTitle: "Mes demandes de devis",
+    listSubtitle: "Suivez l'avancement de vos demandes ici.",
+    emptyText:
+      "Vous n'avez pas encore de demande de devis. Lancez-vous en quelques minutes.",
+    statusLabels: {
+      received: "Reçu",
+      in_review: "En cours d'étude",
+      quoted: "Devis envoyé",
+      closed: "Clôturé",
+    },
+  },
 };

@@ -3,12 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { QuoteProjectType } from "@/lib/supabase/types";
-import {
-  FORMULAS,
-  BUDGET_OPTIONS,
-  TIMELINE_OPTIONS,
-  formulaLabel,
-} from "@/lib/quotes";
+import type { QuotesContent } from "@/lib/content/types";
+import { formulasFrom } from "@/lib/quotes";
 import { submitQuoteRequest } from "@/app/portail/devis/actions";
 import FormulaPreview from "@/components/portail/FormulaPreview";
 
@@ -18,8 +14,10 @@ const STEPS = ["Formule", "Détails", "Récapitulatif"] as const;
 
 export default function DevisWizard({
   defaultCompany,
+  quotes,
 }: {
   defaultCompany: string;
+  quotes: QuotesContent;
 }) {
   const [step, setStep] = useState(0);
   const [type, setType] = useState<QuoteProjectType | null>(null);
@@ -32,7 +30,8 @@ export default function DevisWizard({
   const [error, setError] = useState("");
   const [reference, setReference] = useState("");
 
-  const selectedFormula = FORMULAS.find((f) => f.type === type) ?? null;
+  const formulas = formulasFrom(quotes);
+  const selectedFormula = formulas.find((f) => f.type === type) ?? null;
 
   function toggleOption(opt: string) {
     setOptions((prev) =>
@@ -139,13 +138,10 @@ export default function DevisWizard({
       {/* Étape 1 — Formule */}
       {step === 0 && (
         <div>
-          <h2 className="text-lg font-semibold">Quel type de projet ?</h2>
-          <p className="mt-1 text-sm text-muted">
-            Choisissez la formule la plus proche de votre besoin — on affinera
-            ensemble.
-          </p>
+          <h2 className="text-lg font-semibold">{quotes.step1Title}</h2>
+          <p className="mt-1 text-sm text-muted">{quotes.step1Subtitle}</p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {FORMULAS.map((f) => {
+            {formulas.map((f) => {
               const active = f.type === type;
               return (
                 <button
@@ -182,9 +178,7 @@ export default function DevisWizard({
           <h2 className="text-lg font-semibold">
             Votre projet : {selectedFormula.label}
           </h2>
-          <p className="mt-1 text-sm text-muted">
-            Quelques précisions pour préparer un devis au plus juste.
-          </p>
+          <p className="mt-1 text-sm text-muted">{quotes.step2Subtitle}</p>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             <div className="sm:col-span-2">
@@ -212,7 +206,7 @@ export default function DevisWizard({
                 className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
               >
                 <option value="">— À préciser —</option>
-                {BUDGET_OPTIONS.map((b) => (
+                {quotes.budgets.map((b) => (
                   <option key={b} value={b}>
                     {b}
                   </option>
@@ -231,7 +225,7 @@ export default function DevisWizard({
                 className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
               >
                 <option value="">— À préciser —</option>
-                {TIMELINE_OPTIONS.map((t) => (
+                {quotes.timelines.map((t) => (
                   <option key={t} value={t}>
                     {t}
                   </option>
@@ -297,7 +291,7 @@ export default function DevisWizard({
           </p>
 
           <dl className="card-surface mt-6 divide-y divide-border rounded-2xl">
-            <RecapRow label="Formule" value={formulaLabel(selectedFormula.type)} />
+            <RecapRow label="Formule" value={selectedFormula.label} />
             <RecapRow label="Entreprise" value={company || "—"} />
             <RecapRow label="Budget" value={budget || "—"} />
             <RecapRow label="Délai" value={timeline || "—"} />

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
+import { getContent } from "@/lib/content";
 import DevisWizard from "@/components/portail/DevisWizard";
 
 export const metadata: Metadata = {
@@ -18,5 +19,12 @@ export default async function NouveauDevisPage() {
     .eq("id", user!.id)
     .single();
 
-  return <DevisWizard defaultCompany={profile?.company ?? ""} />;
+  const content = await getContent();
+
+  return (
+    <DevisWizard
+      defaultCompany={profile?.company ?? ""}
+      quotes={content.quotes}
+    />
+  );
 }

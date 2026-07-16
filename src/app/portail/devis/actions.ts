@@ -4,6 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { sendMail } from "@/lib/email";
+import { getContent } from "@/lib/content";
 import { formulaLabel } from "@/lib/quotes";
 
 const quoteSchema = z.object({
@@ -72,12 +73,13 @@ export async function submitQuoteRequest(
   // Notification email (best-effort) : le devis est déjà enregistré, donc un
   // échec d'envoi ne doit pas faire perdre la demande au client.
   try {
+    const { quotes } = await getContent();
     await sendMail({
-      subject: `Nouveau pré-devis ${data.reference} — ${formulaLabel(projectType)}`,
+      subject: `Nouveau pré-devis ${data.reference} — ${formulaLabel(projectType, quotes)}`,
       replyTo: user.email,
       text: [
         `Référence : ${data.reference}`,
-        `Formule : ${formulaLabel(projectType)}`,
+        `Formule : ${formulaLabel(projectType, quotes)}`,
         `Client : ${user.email}`,
         `Entreprise : ${company || "-"}`,
         `Budget : ${budgetRange || "-"}`,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { SiteContent } from "@/lib/content/types";
+import type { SiteContent, QuoteFormulaContent } from "@/lib/content/types";
 import { saveContent } from "@/lib/content/actions";
 import { defaultContent } from "@/lib/content/defaults";
 
@@ -19,7 +19,17 @@ type SectionId =
   | "expertise"
   | "whyUs"
   | "contact"
-  | "footer";
+  | "footer"
+  | "quotesFormulas"
+  | "quotesForm";
+
+// Clés techniques des 4 formules de devis (ordre d'affichage).
+const FORMULA_KEYS = [
+  "landing",
+  "intermediaire",
+  "refonte",
+  "application",
+] as const;
 
 const MENU: { id: SectionId; label: string }[] = [
   { id: "theme", label: "Couleurs du site" },
@@ -31,6 +41,8 @@ const MENU: { id: SectionId; label: string }[] = [
   { id: "whyUs", label: "Pourquoi OHIHO" },
   { id: "contact", label: "Votre projet" },
   { id: "footer", label: "Footer" },
+  { id: "quotesFormulas", label: "Devis — formules" },
+  { id: "quotesForm", label: "Devis — formulaire" },
 ];
 
 function Field({
@@ -201,6 +213,23 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
     });
   }
 
+  // Patch d'une des 4 formules de devis.
+  function setFormula(
+    key: (typeof FORMULA_KEYS)[number],
+    patch: Partial<QuoteFormulaContent>
+  ) {
+    setContent((c) => ({
+      ...c,
+      quotes: {
+        ...c.quotes,
+        formulas: {
+          ...c.quotes.formulas,
+          [key]: { ...c.quotes.formulas[key], ...patch },
+        },
+      },
+    }));
+  }
+
   async function handleSave() {
     setStatus("saving");
     setError("");
@@ -226,6 +255,29 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
         ...content.expertise,
         coverage: cleanList(content.expertise.coverage),
       },
+      quotes: {
+        ...content.quotes,
+        budgets: cleanList(content.quotes.budgets),
+        timelines: cleanList(content.quotes.timelines),
+        formulas: {
+          landing: {
+            ...content.quotes.formulas.landing,
+            options: cleanList(content.quotes.formulas.landing.options),
+          },
+          intermediaire: {
+            ...content.quotes.formulas.intermediaire,
+            options: cleanList(content.quotes.formulas.intermediaire.options),
+          },
+          refonte: {
+            ...content.quotes.formulas.refonte,
+            options: cleanList(content.quotes.formulas.refonte.options),
+          },
+          application: {
+            ...content.quotes.formulas.application,
+            options: cleanList(content.quotes.formulas.application.options),
+          },
+        },
+      },
     };
     try {
       const result = await saveContent(cleaned);
@@ -243,7 +295,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
     }
   }
 
-  const { theme, hero, portfolio, services, method, expertise, whyUs, contact, footer } =
+  const { theme, hero, portfolio, services, method, expertise, whyUs, contact, footer, quotes } =
     content;
   const dTheme = defaultContent.theme;
 
@@ -659,6 +711,155 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               value={footer.bottomNote}
               onChange={(v) => set("footer", { bottomNote: v })}
             />
+          </Section>
+        )}
+
+        {active === "quotesFormulas" && (
+          <Section
+            title="Devis — les 4 formules"
+            hint="Les cartes proposées à l'étape 1 de la demande de devis. Le nom de la formule apparaît aussi dans « Mes devis » et dans l'email de pré-devis."
+          >
+            {FORMULA_KEYS.map((key) => {
+              const f = quotes.formulas[key];
+              return (
+                <div key={key} className="rounded-xl border border-border p-4">
+                  <p className="text-xs font-semibold text-muted">{f.label}</p>
+                  <div className="mt-3 grid gap-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Field
+                        label="Nom de la formule"
+                        value={f.label}
+                        onChange={(v) => setFormula(key, { label: v })}
+                      />
+                      <Field
+                        label="Accroche (petit titre bleu)"
+                        value={f.tagline}
+                        onChange={(v) => setFormula(key, { tagline: v })}
+                      />
+                    </div>
+                    <Field
+                      label="Description"
+                      value={f.description}
+                      onChange={(v) => setFormula(key, { description: v })}
+                      textarea
+                    />
+                    <Field
+                      label="Exemples (ligne en italique)"
+                      value={f.examples}
+                      onChange={(v) => setFormula(key, { examples: v })}
+                    />
+                    <ListField
+                      label="Options à cocher"
+                      value={f.options}
+                      onChange={(v) => setFormula(key, { options: v })}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </Section>
+        )}
+
+        {active === "quotesForm" && (
+          <Section
+            title="Devis — formulaire et suivi"
+            hint="Les textes de l'assistant de demande de devis et de la page « Mes devis »."
+          >
+            <Field
+              label="Titre de l'étape 1"
+              value={quotes.step1Title}
+              onChange={(v) => set("quotes", { step1Title: v })}
+            />
+            <Field
+              label="Sous-titre de l'étape 1"
+              value={quotes.step1Subtitle}
+              onChange={(v) => set("quotes", { step1Subtitle: v })}
+            />
+            <Field
+              label="Sous-titre de l'étape 2 (détails)"
+              value={quotes.step2Subtitle}
+              onChange={(v) => set("quotes", { step2Subtitle: v })}
+            />
+            <div className="grid gap-5 sm:grid-cols-2">
+              <ListField
+                label="Choix de budget"
+                value={quotes.budgets}
+                onChange={(v) => set("quotes", { budgets: v })}
+              />
+              <ListField
+                label="Choix de délai"
+                value={quotes.timelines}
+                onChange={(v) => set("quotes", { timelines: v })}
+              />
+            </div>
+            <div className="rounded-xl border border-border p-4">
+              <p className="text-xs font-semibold text-muted">
+                Page « Mes devis »
+              </p>
+              <div className="mt-3 grid gap-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field
+                    label="Titre"
+                    value={quotes.listTitle}
+                    onChange={(v) => set("quotes", { listTitle: v })}
+                  />
+                  <Field
+                    label="Sous-titre"
+                    value={quotes.listSubtitle}
+                    onChange={(v) => set("quotes", { listSubtitle: v })}
+                  />
+                </div>
+                <Field
+                  label="Message quand il n'y a aucun devis"
+                  value={quotes.emptyText}
+                  onChange={(v) => set("quotes", { emptyText: v })}
+                  textarea
+                />
+              </div>
+            </div>
+            <div className="rounded-xl border border-border p-4">
+              <p className="text-xs font-semibold text-muted">
+                Libellés des statuts
+              </p>
+              <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                <Field
+                  label="Demande reçue"
+                  value={quotes.statusLabels.received}
+                  onChange={(v) =>
+                    set("quotes", {
+                      statusLabels: { ...quotes.statusLabels, received: v },
+                    })
+                  }
+                />
+                <Field
+                  label="En cours d'étude"
+                  value={quotes.statusLabels.in_review}
+                  onChange={(v) =>
+                    set("quotes", {
+                      statusLabels: { ...quotes.statusLabels, in_review: v },
+                    })
+                  }
+                />
+                <Field
+                  label="Devis envoyé"
+                  value={quotes.statusLabels.quoted}
+                  onChange={(v) =>
+                    set("quotes", {
+                      statusLabels: { ...quotes.statusLabels, quoted: v },
+                    })
+                  }
+                />
+                <Field
+                  label="Clôturé"
+                  value={quotes.statusLabels.closed}
+                  onChange={(v) =>
+                    set("quotes", {
+                      statusLabels: { ...quotes.statusLabels, closed: v },
+                    })
+                  }
+                />
+              </div>
+            </div>
           </Section>
         )}
       </div>

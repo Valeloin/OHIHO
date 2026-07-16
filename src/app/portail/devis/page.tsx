@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import type { QuoteRequest } from "@/lib/supabase/types";
-import { formulaLabel, STATUS_LABELS } from "@/lib/quotes";
+import { getContent } from "@/lib/content";
+import { formulaLabel, statusLabel } from "@/lib/quotes";
 
 export const metadata: Metadata = {
   title: "Mes devis — OHIHO",
@@ -30,6 +31,7 @@ function formatDate(iso: string): string {
 }
 
 export default async function DevisPage() {
+  const { quotes: quotesContent } = await getContent();
   const supabase = createClient();
   const { data: quotes } = await supabase
     .from("quote_requests")
@@ -45,10 +47,8 @@ export default async function DevisPage() {
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-semibold">Mes demandes de devis</h2>
-          <p className="mt-1 text-sm text-muted">
-            Suivez l&apos;avancement de vos demandes ici.
-          </p>
+          <h2 className="text-lg font-semibold">{quotesContent.listTitle}</h2>
+          <p className="mt-1 text-sm text-muted">{quotesContent.listSubtitle}</p>
         </div>
         <Link
           href="/portail/devis/nouveau"
@@ -60,10 +60,7 @@ export default async function DevisPage() {
 
       {list.length === 0 ? (
         <div className="card-surface mt-6 rounded-2xl p-10 text-center">
-          <p className="text-sm text-muted">
-            Vous n&apos;avez pas encore de demande de devis. Lancez-vous en
-            quelques minutes.
-          </p>
+          <p className="text-sm text-muted">{quotesContent.emptyText}</p>
           <Link
             href="/portail/devis/nouveau"
             className="mt-6 inline-flex rounded-full border border-border px-6 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
@@ -81,7 +78,7 @@ export default async function DevisPage() {
               <div>
                 <p className="font-mono text-xs text-muted">{q.reference}</p>
                 <p className="mt-0.5 font-semibold">
-                  {formulaLabel(q.project_type)}
+                  {formulaLabel(q.project_type, quotesContent)}
                 </p>
                 <p className="mt-0.5 text-xs text-muted">
                   Envoyée le {formatDate(q.created_at)}
@@ -92,7 +89,7 @@ export default async function DevisPage() {
                   STATUS_STYLES[q.status] ?? STATUS_STYLES.closed
                 }`}
               >
-                {STATUS_LABELS[q.status]}
+                {statusLabel(q.status, quotesContent)}
               </span>
             </li>
           ))}

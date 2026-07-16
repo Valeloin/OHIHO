@@ -22,6 +22,32 @@ function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
     whyUs: { ...defaultContent.whyUs, ...stored.whyUs },
     contact: { ...defaultContent.contact, ...stored.contact },
     footer: { ...defaultContent.footer, ...stored.footer },
+    quotes: {
+      ...defaultContent.quotes,
+      ...stored.quotes,
+      formulas: {
+        landing: {
+          ...defaultContent.quotes.formulas.landing,
+          ...stored.quotes?.formulas?.landing,
+        },
+        intermediaire: {
+          ...defaultContent.quotes.formulas.intermediaire,
+          ...stored.quotes?.formulas?.intermediaire,
+        },
+        refonte: {
+          ...defaultContent.quotes.formulas.refonte,
+          ...stored.quotes?.formulas?.refonte,
+        },
+        application: {
+          ...defaultContent.quotes.formulas.application,
+          ...stored.quotes?.formulas?.application,
+        },
+      },
+      statusLabels: {
+        ...defaultContent.quotes.statusLabels,
+        ...stored.quotes?.statusLabels,
+      },
+    },
   };
 }
 

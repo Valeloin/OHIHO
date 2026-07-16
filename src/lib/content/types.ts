@@ -90,6 +90,40 @@ export type FooterContent = {
   bottomNote: string;
 };
 
+export type QuoteFormulaContent = {
+  label: string;
+  tagline: string;
+  description: string;
+  examples: string;
+  /** Options / fonctionnalités proposées à cocher pour cette formule. */
+  options: string[];
+};
+
+export type QuotesContent = {
+  // Assistant de demande de devis
+  step1Title: string;
+  step1Subtitle: string;
+  step2Subtitle: string;
+  budgets: string[];
+  timelines: string[];
+  formulas: {
+    landing: QuoteFormulaContent;
+    intermediaire: QuoteFormulaContent;
+    refonte: QuoteFormulaContent;
+    application: QuoteFormulaContent;
+  };
+  // Page « Mes devis »
+  listTitle: string;
+  listSubtitle: string;
+  emptyText: string;
+  statusLabels: {
+    received: string;
+    in_review: string;
+    quoted: string;
+    closed: string;
+  };
+};
+
 export type SiteContent = {
   theme: ThemeContent;
   hero: HeroContent;
@@ -100,4 +134,5 @@ export type SiteContent = {
   whyUs: WhyUsContent;
   contact: ContactContent;
   footer: FooterContent;
+  quotes: QuotesContent;
 };
