@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { QuoteProjectType } from "@/lib/supabase/types";
 import type { QuotesContent } from "@/lib/content/types";
@@ -45,6 +45,32 @@ export default function DevisWizard({
   quotes: QuotesContent;
 }) {
   const [step, setStep] = useState(0);
+
+  // Les étapes s'inscrivent dans l'historique du navigateur : le bouton
+  // Précédent revient à l'étape d'avant au lieu de quitter la page.
+  // On fusionne avec l'état existant pour ne pas casser celui du routeur Next.
+  useEffect(() => {
+    window.history.replaceState(
+      { ...window.history.state, devisStep: 0 },
+      ""
+    );
+    function onPopState(e: PopStateEvent) {
+      const s =
+        typeof e.state?.devisStep === "number" ? e.state.devisStep : 0;
+      setStep(Math.min(Math.max(s, 0), 2));
+    }
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  function goToStep(next: number) {
+    window.history.pushState(
+      { ...window.history.state, devisStep: next },
+      ""
+    );
+    setStep(next);
+  }
+
   const [type, setType] = useState<QuoteProjectType | null>(null);
   const [company, setCompany] = useState(defaultCompany);
   const [budget, setBudget] = useState("");
@@ -76,7 +102,7 @@ export default function DevisWizard({
     setType(next);
     // Cliquer sur une carte enregistre la formule ET passe aux détails :
     // pas besoin d'un second clic sur « Continuer ».
-    setStep(1);
+    goToStep(1);
   }
 
   async function handleSubmit() {
@@ -349,7 +375,7 @@ export default function DevisWizard({
         {step > 0 ? (
           <button
             type="button"
-            onClick={() => setStep((s) => s - 1)}
+            onClick={() => window.history.back()}
             disabled={status === "submitting"}
             className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface disabled:opacity-50"
           >
@@ -367,7 +393,7 @@ export default function DevisWizard({
         {step < 2 ? (
           <button
             type="button"
-            onClick={() => setStep((s) => s + 1)}
+            onClick={() => goToStep(step + 1)}
             disabled={!canContinue}
             className="rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-40"
           >
