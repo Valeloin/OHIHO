@@ -33,6 +33,10 @@ export default function ProjectVisual({
   const isExternal = href?.startsWith("http");
 
   if (isExternal) {
+    // La vignette force la version claire du site aperçu (?theme=light,
+    // supporté par Cadance Coaching) pour s'accorder au cadre clair —
+    // sinon l'iframe suivrait le réglage sombre du navigateur du visiteur.
+    const previewSrc = `${href}${href!.includes("?") ? "&" : "?"}theme=light`;
     return (
       <div className="flex h-full w-full flex-col bg-[#f2f5f9]">
         {/* Barre de navigateur — mode clair, comme un vrai navigateur */}
@@ -47,7 +51,7 @@ export default function ProjectVisual({
         {/* Aperçu live */}
         <div className="relative flex-1 overflow-hidden">
           <iframe
-            src={href}
+            src={previewSrc}
             title={`Aperçu du site ${title}`}
             loading="lazy"
             scrolling="no"
