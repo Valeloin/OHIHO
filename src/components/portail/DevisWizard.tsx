@@ -74,6 +74,9 @@ export default function DevisWizard({
     // Changer de formule réinitialise les options (elles diffèrent par formule).
     if (next !== type) setOptions([]);
     setType(next);
+    // Cliquer sur une carte enregistre la formule ET passe aux détails :
+    // pas besoin d'un second clic sur « Continuer ».
+    setStep(1);
   }
 
   async function handleSubmit() {
