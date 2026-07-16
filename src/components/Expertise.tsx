@@ -1,11 +1,11 @@
 import Reveal from "@/components/motion/Reveal";
-import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import type { ExpertiseContent } from "@/lib/content/types";
 
 export default function Expertise({ data }: { data: ExpertiseContent }) {
   return (
     <section id="expertise" className="relative overflow-hidden border-t border-border">
-      <AnimatedGlow variant="subtle" />
+      <SectionBackdrop />
       <div className="relative mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
           <Reveal>

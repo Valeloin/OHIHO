@@ -1,13 +1,13 @@
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
-import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import type { MethodContent } from "@/lib/content/types";
 
 export default function HowItWorks({ data }: { data: MethodContent }) {
   return (
     <section className="relative overflow-hidden border-t border-border bg-surface">
-      <AnimatedGlow variant="subtle" />
+      <SectionBackdrop />
       <div className="relative mx-auto max-w-6xl px-6 py-24">
         <Reveal className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-violet">

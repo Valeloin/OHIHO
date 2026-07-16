@@ -2,7 +2,7 @@ import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
-import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import FormulaPreview from "@/components/portail/FormulaPreview";
 import { formulasFrom } from "@/lib/quotes";
 import type { ServicesContent, QuotesContent } from "@/lib/content/types";
@@ -24,7 +24,7 @@ export default function Services({
 
   return (
     <section id="services" className="relative overflow-hidden border-t border-border">
-      <AnimatedGlow variant="subtle" />
+      <SectionBackdrop />
       <div className="relative mx-auto max-w-6xl px-6 py-24">
         {/* Pas de largeur max sur le titre : il tient sur une seule ligne sur
             desktop. Le sous-titre garde sa largeur de lecture. */}

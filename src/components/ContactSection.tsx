@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
-import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import type { ContactContent } from "@/lib/content/types";
 
 export default function ContactSection({ data }: { data: ContactContent }) {
@@ -9,7 +9,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
       id="contact"
       className="relative overflow-hidden border-t border-border bg-surface"
     >
-      <AnimatedGlow variant="subtle" />
+      <SectionBackdrop />
       <div className="relative mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <Reveal>
