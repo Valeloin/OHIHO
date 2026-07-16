@@ -13,7 +13,15 @@ import type { SiteContent } from "./types";
 function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
   if (!stored) return defaultContent;
   return {
+    theme: { ...defaultContent.theme, ...stored.theme },
     hero: { ...defaultContent.hero, ...stored.hero },
+    portfolio: { ...defaultContent.portfolio, ...stored.portfolio },
+    services: { ...defaultContent.services, ...stored.services },
+    method: { ...defaultContent.method, ...stored.method },
+    expertise: { ...defaultContent.expertise, ...stored.expertise },
+    whyUs: { ...defaultContent.whyUs, ...stored.whyUs },
+    contact: { ...defaultContent.contact, ...stored.contact },
+    footer: { ...defaultContent.footer, ...stored.footer },
   };
 }
 

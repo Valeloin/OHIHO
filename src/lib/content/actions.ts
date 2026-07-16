@@ -38,7 +38,9 @@ export async function saveContent(content: SiteContent): Promise<ActionResult> {
     return { ok: false, error: "Enregistrement impossible (droits admin ?)." };
   }
 
-  revalidatePath("/");
+  // Le thème et le footer sont injectés dans le layout racine : on revalide
+  // tout l'arbre pour que les couleurs changent sur toutes les pages.
+  revalidatePath("/", "layout");
   revalidatePath("/admin");
   return { ok: true };
 }

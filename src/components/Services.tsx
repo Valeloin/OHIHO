@@ -3,64 +3,27 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import type { ServicesContent } from "@/lib/content/types";
 
-const SERVICES = [
-  {
-    title: "Sites vitrines",
-    description:
-      "Un site clair et rapide pour présenter votre activité, vos services, et convertir vos visiteurs en clients.",
-    points: [
-      "Design sur mesure",
-      "Pensé pour convertir",
-      "Rapide et responsive",
-    ],
-  },
-  {
-    title: "Applications web sur mesure",
-    description:
-      "Espace client, tableau de bord, outil métier : nous développons l'application qui correspond exactement à votre besoin.",
-    points: [
-      "Comptes & espaces client",
-      "Logique métier sur mesure",
-      "Architecture pensée pour durer",
-    ],
-    portfolioLink: true,
-  },
-  {
-    title: "Maintenance & évolutions",
-    description:
-      "Après la mise en ligne, nous restons disponibles pour les corrections, mises à jour et nouvelles fonctionnalités.",
-    points: [
-      "Suivi par email",
-      "Corrections rapides",
-      "Nouvelles fonctionnalités",
-    ],
-  },
-];
-
-export default function Services() {
+export default function Services({ data }: { data: ServicesContent }) {
   return (
     <section id="services" className="relative overflow-hidden border-t border-border">
       <AnimatedGlow variant="subtle" />
       <div className="relative mx-auto max-w-6xl px-6 py-24">
         <Reveal className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-            Nos services
+            {data.kicker}
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            De l&apos;idée au site en ligne
+            {data.title}
           </p>
-          <p className="mt-4 text-muted">
-            Conception, développement et suivi dans la durée — pour un site
-            vitrine ou une application web sur mesure, pour les entreprises
-            comme pour les particuliers.
-          </p>
+          <p className="mt-4 text-muted">{data.subtitle}</p>
         </Reveal>
 
         <RevealGroup className="mt-14 grid gap-6 lg:grid-cols-3">
-          {SERVICES.map((service, i) => (
+          {data.items.map((service, i) => (
             <RevealItem
-              key={service.title}
+              key={i}
               hover
               className="card-surface group relative flex flex-col overflow-hidden rounded-2xl p-8 transition-colors hover:border-accent-cyan/40"
             >
@@ -82,7 +45,8 @@ export default function Services() {
                   </li>
                 ))}
               </ul>
-              {service.portfolioLink && (
+              {/* Lien vers les réalisations sur la carte Applications (2e) */}
+              {i === 1 && (
                 <Link
                   href="/#portfolio"
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan hover:underline"

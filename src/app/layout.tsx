@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getContent } from "@/lib/content";
+import { themeCss } from "@/lib/content/theme-css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -71,22 +73,31 @@ const THEME_INIT_SCRIPT = `
 })();
 `;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Contenu éditable depuis /admin : couleurs du thème + texte du footer.
+  // Les couleurs personnalisées sont injectées en <style> après validation
+  // (voir themeCss) ; vide tant que rien ne diffère des valeurs par défaut.
+  const content = await getContent();
+  const customThemeCss = themeCss(content.theme);
+
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        {customThemeCss && (
+          <style dangerouslySetInnerHTML={{ __html: customThemeCss }} />
+        )}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <Navbar />
         {children}
-        <Footer />
+        <Footer data={content.footer} />
       </body>
     </html>
   );

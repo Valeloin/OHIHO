@@ -13,12 +13,12 @@ export default async function Home() {
   return (
     <main>
       <Hero data={content.hero} />
-      <Portfolio />
-      <Services />
-      <HowItWorks />
-      <Expertise />
-      <WhyUs />
-      <ContactSection />
+      <Portfolio data={content.portfolio} />
+      <Services data={content.services} />
+      <HowItWorks data={content.method} />
+      <Expertise data={content.expertise} />
+      <WhyUs data={content.whyUs} />
+      <ContactSection data={content.contact} />
       <ScrollNav />
     </main>
   );

@@ -2,48 +2,26 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import type { WhyUsContent } from "@/lib/content/types";
 
-const VALUES = [
-  {
-    title: "Un travail soigné & durable",
-    description:
-      "Une stack moderne et un code lisible, pensés pour évoluer avec votre projet, pas contre lui.",
-  },
-  {
-    title: "Communication claire",
-    description:
-      "Pas de jargon technique. Vous comprenez toujours où en est votre projet et pourquoi.",
-  },
-  {
-    title: "Livraison dans les délais",
-    description:
-      "Un devis clair en amont, et des points d'étape réguliers pour suivre l'avancement sans surprise.",
-  },
-  {
-    title: "Accompagnement dans la durée",
-    description:
-      "Après la mise en ligne, nous restons disponibles pour les évolutions et corrections, par email.",
-  },
-];
-
-export default function WhyUs() {
+export default function WhyUs({ data }: { data: WhyUsContent }) {
   return (
     <section id="a-propos" className="relative overflow-hidden border-t border-border bg-surface">
       <AnimatedGlow variant="subtle" />
       <div className="relative mx-auto max-w-6xl px-6 py-24">
         <Reveal className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-            Pourquoi OHIHO
+            {data.kicker}
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Un accompagnement qui continue après la mise en ligne
+            {data.title}
           </p>
         </Reveal>
 
         <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {VALUES.map((value) => (
+          {data.values.map((value, i) => (
             <RevealItem
-              key={value.title}
+              key={i}
               hover
               className="card-surface rounded-2xl p-6 transition-colors hover:border-accent-cyan/40"
             >

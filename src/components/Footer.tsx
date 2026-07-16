@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { FooterContent } from "@/lib/content/types";
 
-export default function Footer() {
+export default function Footer({ data }: { data: FooterContent }) {
   const year = new Date().getFullYear();
 
   return (
@@ -19,8 +20,7 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              OHIHO conçoit et développe des sites et applications web sur
-              mesure, pour entreprises et particuliers, pensés pour durer.
+              {data.tagline}
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted md:flex-row">
           <p>© {year} OHIHO. Tous droits réservés.</p>
-          <p className="font-mono">Création de sites web & applications</p>
+          <p className="font-mono">{data.bottomNote}</p>
         </div>
       </div>
     </footer>

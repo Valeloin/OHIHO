@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
+import type { ContactContent } from "@/lib/content/types";
 
-export default function ContactSection() {
+export default function ContactSection({ data }: { data: ContactContent }) {
   return (
     <section
       id="contact"
@@ -13,38 +14,34 @@ export default function ContactSection() {
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <Reveal>
             <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-              Votre projet
+              {data.kicker}
             </h2>
             <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-              Prêt à lancer votre site ou application ?
+              {data.title}
             </p>
             <p className="mt-4 max-w-md leading-relaxed text-muted">
-              Créez votre compte en une minute, puis décrivez votre besoin via
-              une demande de devis guidée. Nous revenons vers vous rapidement
-              pour en discuter.
+              {data.subtitle}
             </p>
 
             <div className="mt-8 space-y-4 text-sm">
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
-                <a href="mailto:contact@ohiho.fr" className="hover:underline">
-                  contact@ohiho.fr
+                <a href={`mailto:${data.email}`} className="hover:underline">
+                  {data.email}
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
-                <span className="text-muted">Réponse sous 24h ouvrées</span>
+                <span className="text-muted">{data.responseNote}</span>
               </div>
             </div>
           </Reveal>
 
           <Reveal delay={0.15}>
             <div className="card-surface mx-auto w-full max-w-md rounded-2xl p-6">
-              <h3 className="text-lg font-semibold">Demander un devis</h3>
+              <h3 className="text-lg font-semibold">{data.cardTitle}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                Depuis votre espace client, choisissez une formule (landing
-                page, site vitrine, application, refonte) et recevez une
-                proposition adaptée.
+                {data.cardText}
               </p>
 
               <div className="mt-6 flex justify-center">
@@ -52,7 +49,7 @@ export default function ContactSection() {
                   href="/inscription"
                   className="inline-block rounded-full bg-foreground px-8 py-3 text-center text-sm font-semibold text-background transition-opacity hover:opacity-90"
                 >
-                  Demander un devis
+                  {data.cardCta}
                 </Link>
               </div>
 

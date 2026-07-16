@@ -5,8 +5,9 @@ import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
 import { PROJECTS } from "@/lib/projects";
+import type { PortfolioContent } from "@/lib/content/types";
 
-export default function Portfolio() {
+export default function Portfolio({ data }: { data: PortfolioContent }) {
   return (
     <section
       id="portfolio"
@@ -16,15 +17,12 @@ export default function Portfolio() {
       <div className="relative mx-auto max-w-6xl px-6 py-24">
         <Reveal className="max-w-2xl">
           <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-            Réalisations
+            {data.kicker}
           </h2>
           <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Des projets concrets, en ligne
+            {data.title}
           </p>
-          <p className="mt-4 text-muted">
-            Cadance Coaching est un projet réel, livré et utilisé par un
-            client. Un aperçu de ce que nous pouvons construire pour vous.
-          </p>
+          <p className="mt-4 text-muted">{data.subtitle}</p>
         </Reveal>
 
         <RevealGroup className="mt-14 grid gap-6 lg:grid-cols-3">
@@ -87,14 +85,12 @@ export default function Portfolio() {
 
         <Reveal>
           <div className="card-surface mx-auto mt-14 max-w-xl rounded-2xl p-8 text-center">
-            <p className="text-sm text-muted">
-              Vous avez un projet de site ou d&apos;application en tête ?
-            </p>
+            <p className="text-sm text-muted">{data.ctaText}</p>
             <Link
               href="/portail/devis/nouveau"
               className="mt-6 inline-flex rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
             >
-              Demander un devis
+              {data.ctaButton}
             </Link>
           </div>
         </Reveal>
