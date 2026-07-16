@@ -38,31 +38,34 @@ export default function Services({
           <p className="mt-4 max-w-2xl text-muted">{data.subtitle}</p>
         </Reveal>
 
-        {/* 2×2 : cartes larges, les maquettes animées restent bien visibles
-            (en 4 colonnes elles devenaient trop petites). */}
-        <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2">
+        {/* Les 4 formules alignées sur une seule rangée (dès lg). Les vignettes
+            animées occupent toute la largeur de la carte (pleine largeur, sans
+            marge intérieure) pour rester bien lisibles malgré les 4 colonnes. */}
+        <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula, i) => (
             <RevealItem key={formula.type} hover className="h-full">
               <Link
                 href={devisHref}
-                className="card-surface flex h-full flex-col rounded-2xl p-6 transition-colors hover:border-accent-cyan/40"
+                className="card-surface flex h-full flex-col overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40"
               >
-                <div className="mb-4 aspect-[400/220] overflow-hidden rounded-xl border border-border/50">
+                <div className="aspect-[400/220] w-full border-b border-border/50">
                   <FormulaPreview type={formula.type} />
                 </div>
-                <span className="font-mono text-xs text-muted">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-2 font-mono text-xs uppercase tracking-wider text-accent-cyan">
-                  {formula.tagline}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold">{formula.label}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {formula.description}
-                </p>
-                <p className="mt-auto pt-3 text-xs italic text-muted">
-                  {formula.examples}
-                </p>
+                <div className="flex flex-1 flex-col p-5">
+                  <span className="font-mono text-xs text-muted">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-2 font-mono text-xs uppercase tracking-wider text-accent-cyan">
+                    {formula.tagline}
+                  </p>
+                  <h3 className="mt-2 text-lg font-semibold">{formula.label}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                    {formula.description}
+                  </p>
+                  <p className="mt-auto pt-3 text-xs italic text-muted">
+                    {formula.examples}
+                  </p>
+                </div>
               </Link>
             </RevealItem>
           ))}
