@@ -17,13 +17,38 @@ const COMPANY_SIZES = [
   "Plus de 200 employés",
 ];
 
+// Style commun des champs : plus grands, focus visible, placeholders discrets.
+const FIELD =
+  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-2 focus:ring-accent-cyan/20";
+
+function Label({
+  htmlFor,
+  children,
+  optional = false,
+}: {
+  htmlFor: string;
+  children: React.ReactNode;
+  optional?: boolean;
+}) {
+  return (
+    <label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
+      {children}
+      {optional && (
+        <span className="ml-1.5 text-xs font-normal text-muted">
+          (facultatif)
+        </span>
+      )}
+    </label>
+  );
+}
+
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-50"
+      className="btn-accent w-full rounded-full px-6 py-3.5 text-sm font-semibold disabled:opacity-50"
     >
       {pending ? "Création en cours..." : "Créer mon compte"}
     </button>
@@ -34,140 +59,150 @@ export default function SignupForm() {
   const [state, formAction] = useFormState(signUp, null);
 
   return (
-    <form action={formAction} className="card-surface rounded-2xl p-8">
+    <form action={formAction} className="card-surface rounded-3xl p-8 sm:p-10">
+      {/* L'essentiel : 4 champs seulement */}
       <div className="grid gap-5 sm:grid-cols-2">
-        <div className="sm:col-span-1">
-          <label htmlFor="firstName" className="text-xs font-medium text-muted">
-            Prénom
-          </label>
+        <div>
+          <Label htmlFor="firstName">Prénom</Label>
           <input
             id="firstName"
             name="firstName"
             type="text"
             required
             autoComplete="given-name"
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            className={FIELD}
             placeholder="Jean"
           />
         </div>
-        <div className="sm:col-span-1">
-          <label htmlFor="lastName" className="text-xs font-medium text-muted">
-            Nom
-          </label>
+        <div>
+          <Label htmlFor="lastName">Nom</Label>
           <input
             id="lastName"
             name="lastName"
             type="text"
             required
             autoComplete="family-name"
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            className={FIELD}
             placeholder="Dupont"
           />
         </div>
-        <div className="sm:col-span-1">
-          <label htmlFor="company" className="text-xs font-medium text-muted">
-            Entreprise
-          </label>
-          <input
-            id="company"
-            name="company"
-            type="text"
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
-            placeholder="Nom de votre entreprise"
-          />
-        </div>
-        <div className="sm:col-span-1">
-          <label htmlFor="email" className="text-xs font-medium text-muted">
-            Email
-          </label>
+        <div className="sm:col-span-2">
+          <Label htmlFor="email">Email</Label>
           <input
             id="email"
             name="email"
             type="email"
             required
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            autoComplete="email"
+            className={FIELD}
             placeholder="vous@entreprise.fr"
           />
         </div>
-        <div className="sm:col-span-1">
-          <label htmlFor="phone" className="text-xs font-medium text-muted">
-            Téléphone (optionnel)
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
-            placeholder="06 00 00 00 00"
-          />
-        </div>
-        <div className="sm:col-span-1">
-          <label htmlFor="password" className="text-xs font-medium text-muted">
-            Mot de passe
-          </label>
+        <div className="sm:col-span-2">
+          <Label htmlFor="password">Mot de passe</Label>
           <input
             id="password"
             name="password"
             type="password"
             required
             minLength={8}
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            autoComplete="new-password"
+            className={FIELD}
             placeholder="8 caractères minimum"
-          />
-        </div>
-        <div className="sm:col-span-1">
-          <label htmlFor="companySize" className="text-xs font-medium text-muted">
-            Taille de l&apos;entreprise
-          </label>
-          <select
-            id="companySize"
-            name="companySize"
-            defaultValue={COMPANY_SIZES[0]}
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
-          >
-            {COMPANY_SIZES.map((size) => (
-              <option key={size} value={size}>
-                {size}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label htmlFor="need" className="text-xs font-medium text-muted">
-            Type de besoin
-          </label>
-          <select
-            id="need"
-            name="need"
-            defaultValue={NEEDS[0]}
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
-          >
-            {NEEDS.map((need) => (
-              <option key={need} value={need}>
-                {need}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="sm:col-span-2">
-          <label htmlFor="message" className="text-xs font-medium text-muted">
-            Votre besoin en quelques mots (optionnel)
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={3}
-            className="mt-2 w-full resize-none rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
-            placeholder="Décrivez brièvement votre besoin..."
           />
         </div>
       </div>
 
+      {/* Le projet : tout est facultatif, clairement annoncé */}
+      <div className="mt-9 border-t border-border pt-7">
+        <p className="text-sm font-semibold">
+          Votre projet{" "}
+          <span className="font-normal text-muted">— tout est facultatif</span>
+        </p>
+        <p className="mt-1 text-xs text-muted">
+          Ces informations nous aident simplement à préparer notre premier
+          échange.
+        </p>
+
+        <div className="mt-5 grid gap-5 sm:grid-cols-2">
+          <div>
+            <Label htmlFor="company" optional>
+              Entreprise
+            </Label>
+            <input
+              id="company"
+              name="company"
+              type="text"
+              autoComplete="organization"
+              className={FIELD}
+              placeholder="Nom de votre entreprise"
+            />
+          </div>
+          <div>
+            <Label htmlFor="phone" optional>
+              Téléphone
+            </Label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              className={FIELD}
+              placeholder="06 00 00 00 00"
+            />
+          </div>
+          <div>
+            <Label htmlFor="companySize">Taille de l&apos;entreprise</Label>
+            <select
+              id="companySize"
+              name="companySize"
+              defaultValue={COMPANY_SIZES[0]}
+              className={FIELD}
+            >
+              {COMPANY_SIZES.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <Label htmlFor="need">Type de besoin</Label>
+            <select
+              id="need"
+              name="need"
+              defaultValue={NEEDS[0]}
+              className={FIELD}
+            >
+              {NEEDS.map((need) => (
+                <option key={need} value={need}>
+                  {need}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="sm:col-span-2">
+            <Label htmlFor="message" optional>
+              Votre besoin en quelques mots
+            </Label>
+            <textarea
+              id="message"
+              name="message"
+              rows={3}
+              className={`${FIELD} resize-none`}
+              placeholder="Décrivez brièvement votre besoin..."
+            />
+          </div>
+        </div>
+      </div>
+
       {state?.error && (
-        <p className="mt-4 text-sm text-red-400">{state.error}</p>
+        <p className="mt-5 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+          {state.error}
+        </p>
       )}
 
-      <div className="mt-6">
+      <div className="mt-7">
         <SubmitButton />
       </div>
 
