@@ -44,7 +44,7 @@ export default function Hero({ data }: { data: HeroContent }) {
 
           <motion.h1
             variants={ITEM}
-            className="mt-8 max-w-4xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl"
+            className="mt-8 max-w-6xl text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-6xl"
           >
             {data.titleLead}{" "}
             <span className="text-gradient">{data.titleAccent}</span>
