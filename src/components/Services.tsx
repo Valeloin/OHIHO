@@ -32,7 +32,9 @@ export default function Services({
           <p className="mt-4 text-muted">{data.subtitle}</p>
         </Reveal>
 
-        <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* 2×2 : cartes larges, les maquettes animées restent bien visibles
+            (en 4 colonnes elles devenaient trop petites). */}
+        <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2">
           {formulas.map((formula, i) => (
             <RevealItem
               key={formula.type}
