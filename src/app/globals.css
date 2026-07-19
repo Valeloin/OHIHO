@@ -1104,12 +1104,31 @@ html.hide-scrollbar::-webkit-scrollbar {
     transform: scale(1);
   }
 }
+/* Gerbe d'étincelles : les rayons JAILLISSENT de la coche vers l'extérieur.
+   Chaque gerbe suit toujours le même sens : 0.3 (au centre, invisible) → 1
+   (apparition) → 1.8 (elle s'ouvre en s'effaçant). Le retour au centre se
+   fait systématiquement à opacité 0, donc il ne se voit pas.
+
+   ⚠️ La version d'origine laissait les rayons au repos à scale(1.8) entre
+   deux gerbes : ils RÉTRÉCISSAIENT de 1.8 vers 1 en devenant visibles, ce
+   qui donnait des traits fonçant vers le cercle au lieu d'en partir. Seule
+   la 1re gerbe était correcte. */
 @keyframes pv-burst {
+  /* La 4e gerbe est à cheval sur la boucle : la coche (pv-ok) est visible
+     de 0 à 1,2 %, la gerbe culmine donc à 0,6 %. */
   0% {
-    opacity: 0.55;
-    transform: scale(1.25);
+    opacity: 0;
+    transform: scale(0.3);
   }
-  1.4%,
+  0.6% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  1.8% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+  2.4%,
   24.6% {
     opacity: 0;
     transform: scale(0.3);
@@ -1118,32 +1137,40 @@ html.hide-scrollbar::-webkit-scrollbar {
     opacity: 0.9;
     transform: scale(1);
   }
-  26.4%,
-  49.6% {
+  26.4% {
     opacity: 0;
     transform: scale(1.8);
+  }
+  27%,
+  49.6% {
+    opacity: 0;
+    transform: scale(0.3);
   }
   50.2% {
     opacity: 0.9;
     transform: scale(1);
   }
-  51.4%,
-  74.6% {
+  51.4% {
     opacity: 0;
     transform: scale(1.8);
+  }
+  52%,
+  74.6% {
+    opacity: 0;
+    transform: scale(0.3);
   }
   75.2% {
     opacity: 0.9;
     transform: scale(1);
   }
-  76.4%,
-  99.6% {
+  76.4% {
     opacity: 0;
     transform: scale(1.8);
   }
+  77%,
   100% {
-    opacity: 0.55;
-    transform: scale(1.25);
+    opacity: 0;
+    transform: scale(0.3);
   }
 }
 

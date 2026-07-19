@@ -35,11 +35,14 @@ export default function HeroShowcase() {
       focusable="false"
     >
       <rect width="400" height="220" fill="var(--pv-screen, #071522)" />
+      {/* L'ordre suit PROJECT_TYPES (landing, intermediaire, refonte,
+          application), car les libellés `pv-title-*` et les puces de
+          progression sont branchés dessus côté Hero. */}
       <g className="pv-scene-1">
-        <SceneDigitalisation />
+        <SceneMaintenance />
       </g>
       <g className="pv-scene-2">
-        <SceneMaintenance />
+        <SceneDigitalisation />
       </g>
       <g className="pv-scene-3">
         <SceneRefonte />

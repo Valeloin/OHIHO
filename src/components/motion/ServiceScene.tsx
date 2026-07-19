@@ -11,8 +11,8 @@
 // accompagne porte le sens.
 //
 // Correspondance formule → scène (l'API reste celle des devis) :
-//   landing       → SceneDigitalisation (les tâches se cochent)
-//   intermediaire → SceneMaintenance    (l'erreur est corrigée)
+//   landing       → SceneMaintenance    (l'erreur est corrigée)
+//   intermediaire → SceneDigitalisation (les tâches se cochent)
 //   refonte       → SceneRefonte        (avant / après)
 //   application   → SceneApplication    (tableau de bord)
 //
@@ -499,8 +499,8 @@ export function SceneApplication() {
 
 /* --- Aiguillage : la scène correspondant à une formule --- */
 export function Scene({ type }: { type: QuoteProjectType }) {
-  if (type === "landing") return <SceneDigitalisation />;
-  if (type === "intermediaire") return <SceneMaintenance />;
+  if (type === "landing") return <SceneMaintenance />;
+  if (type === "intermediaire") return <SceneDigitalisation />;
   if (type === "refonte") return <SceneRefonte />;
   return <SceneApplication />;
 }
