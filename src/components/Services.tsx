@@ -3,7 +3,10 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
-import FormulaPreview from "@/components/portail/FormulaPreview";
+// Les vignettes du site public utilisent les scènes en CSS pur (plus abouties
+// et sans JavaScript). `FormulaPreview`, piloté par les 3 couleurs éditables
+// du CMS, reste en service dans le tunnel de devis et l'aperçu de l'admin.
+import ServiceScene from "@/components/motion/ServiceScene";
 import { formulasFrom } from "@/lib/quotes";
 import type { ServicesContent, QuotesContent } from "@/lib/content/types";
 
@@ -51,7 +54,7 @@ export default function Services({
                 className="card-surface flex h-full flex-col overflow-hidden transition-colors hover:border-accent-cyan/50"
               >
                 <div className="aspect-[400/220] w-full">
-                  <FormulaPreview type={formula.type} />
+                  <ServiceScene type={formula.type} />
                 </div>
                 <div className="flex flex-1 flex-col border-t border-border p-5">
                   {/* Index de formule en mono teal de marque : repère éditorial. */}

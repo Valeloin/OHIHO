@@ -46,8 +46,13 @@ export const metadata: Metadata = {
       "Des sites et applications web sur mesure, de l'idée à la mise en ligne.",
     images: ["/logo.svg"],
   },
+  // Le SVG est déclaré en premier : les navigateurs modernes le préfèrent et
+  // il porte l'anneau au dégradé de marque. Les PNG restent en repli pour les
+  // navigateurs sans support SVG — ils datent de l'anneau argenté et sont
+  // encore à régénérer.
   icons: {
     icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
       { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },

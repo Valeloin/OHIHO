@@ -1,0 +1,20 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Favicon : même emblème que public/logo-mark.svg, mais redessiné pour
+       les très petites tailles (16 px). Différences volontaires :
+       - le disque remplit tout le cadre (pas de marge perdue),
+       - l'anneau et les barres sont épaissis, les écarts élargis,
+       - le disque est un aplat : un dégradé radial serait invisible à 16 px
+         et ne ferait que salir le rendu.
+       Les navigateurs modernes acceptent un favicon SVG ; les PNG restent
+       déclarés en repli dans src/app/layout.tsx. -->
+  <defs>
+    <linearGradient id="ring" x1="16" y1="8" x2="88" y2="94" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38bdf8"/><stop offset="0.5" stop-color="#22d3c4"/><stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="47" fill="#0a1524" stroke="url(#ring)" stroke-width="6"/>
+  <!-- Trident : bleu ciel, teal, vert — la barre centrale plus haute -->
+  <rect x="27" y="30" width="10" height="40" rx="5" fill="#38bdf8"/>
+  <rect x="45" y="22" width="10" height="56" rx="5" fill="#22d3c4"/>
+  <rect x="63" y="30" width="10" height="40" rx="5" fill="#34d399"/>
+</svg>

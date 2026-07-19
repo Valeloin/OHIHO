@@ -211,6 +211,30 @@ body {
   }
 }
 
+/* Lucioles du fond (composant motion/Fireflies) : clignotement d'opacité,
+   jamais de déplacement ni de `scale` — l'ondulation est proscrite sur les
+   projets de Valentin. Chaque luciole porte sa durée, son délai, son sommet
+   d'opacité (--fly-peak) et sa taille de halo (--fly-halo) en style inline,
+   pour qu'aucune ne clignote en cadence avec une autre. */
+@keyframes firefly-glow {
+  0%,
+  100% {
+    opacity: 0.1;
+    box-shadow: 0 0 2px rgb(var(--brand-emerald) / 0.3);
+  }
+  50% {
+    opacity: var(--fly-peak, 0.8);
+    box-shadow: 0 0 var(--fly-halo, 6px) rgb(var(--brand-emerald) / 0.85);
+  }
+}
+.firefly {
+  background: rgb(var(--brand-emerald));
+  box-shadow: 0 0 var(--fly-halo, 6px) rgb(var(--brand-emerald) / 0.5);
+  animation-name: firefly-glow;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
 /* Respect du réglage « réduire les animations » du visiteur. Les apparitions
    au scroll sont gérées côté JS (framer-motion lit la même préférence). */
 @media (prefers-reduced-motion: reduce) {
@@ -250,5 +274,1105 @@ html.hide-scrollbar::-webkit-scrollbar {
   }
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(var(--accent) / 0.5);
+  }
+}
+
+/* ============================================================
+   VITRINE ANIMÉE DES FORMULES (pur CSS, zéro JS)
+   Portée depuis les vignettes du site Mailys, elles-mêmes nées
+   des maquettes d'OHIHO — remises aux couleurs de la DA
+   « Banderole » (thème sombre) et aux 4 formules de devis.
+
+   TIMELINE MAÎTRESSE — cycle histoire : 8,4 s / vitrine : 33,6 s.
+   Chaque histoire (en % de 8,4 s) :
+     0 → 40   phase 1 (vue 1 / avant / défilement / cochage…)
+    40 → 45   bascule interne (onglet, fondu avant→après)
+    45 → 85   phase 2 (courbe, cascade, correction…)
+    85 → 88   repos : l'histoire TERMINÉE reste affichée
+    88 → 100  transition de la vitrine (voile → emblème qui tourne
+              → coche) pendant que tout se réinitialise à couvert
+   La vitrine bascule de scène pile à 100 % : chaque histoire se
+   joue donc EN ENTIER, jamais coupée par la suivante.
+
+   Règles d'animation à respecter en cas de retouche :
+   - aucun mouvement ondulatoire (barres = 3 motifs × 3 durées) ;
+   - les pastilles scintillent en OPACITÉ, jamais en scale ;
+   - grossissements subtils (0,88 → 1,03 maximum) ;
+   - rythme lent, horloges verrouillées entre elles.
+
+   Couleurs : trois variables pilotables par un parent en style
+   inline (même patron que quoteStyleVars de DevisWizard) —
+   --pv-screen (fond d'écran), --pv-blocks (aplats), --pv-accent.
+   Le trio de marque (sky / teal / emerald) reste fixe.
+
+   Sans animation (prefers-reduced-motion) : rien n'est déclaré,
+   les réglages statiques plus bas montrent la scène 1 terminée.
+   ============================================================ */
+
+/* ---------- Ambiance (rythme propre, non scénarisé) ---------- */
+/* Barres de graphique : trois motifs × durées différentes
+   = données vivantes « anarchiques », jamais de vague. */
+@keyframes pv-bar-a {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+  }
+  22% {
+    transform: scaleY(0.95);
+  }
+  48% {
+    transform: scaleY(0.55);
+  }
+  74% {
+    transform: scaleY(1);
+  }
+}
+@keyframes pv-bar-b {
+  0%,
+  100% {
+    transform: scaleY(0.85);
+  }
+  18% {
+    transform: scaleY(0.4);
+  }
+  52% {
+    transform: scaleY(1);
+  }
+  80% {
+    transform: scaleY(0.6);
+  }
+}
+@keyframes pv-bar-c {
+  0%,
+  100% {
+    transform: scaleY(0.6);
+  }
+  30% {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(0.22);
+  }
+  85% {
+    transform: scaleY(0.9);
+  }
+}
+/* Scintillement des pastilles : clignotement bref, sans zoom. */
+@keyframes pv-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.25;
+  }
+  20% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Bascule vue 1 → vue 2 (40-45 %) ---------- */
+@keyframes pv-show-old {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  45%,
+  96% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes pv-show-new {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  45%,
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* Indicateur d'onglet actif de la barre latérale + couleur qui le suit */
+@keyframes pv-side {
+  0%,
+  40% {
+    transform: translateY(0);
+  }
+  45%,
+  95% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes pv-tab-1 {
+  0%,
+  40% {
+    fill: var(--pv-accent, #22d3c4);
+    fill-opacity: 0.8;
+  }
+  45%,
+  95% {
+    fill: var(--pv-blocks, #23405c);
+    fill-opacity: 1;
+  }
+  100% {
+    fill: var(--pv-accent, #22d3c4);
+    fill-opacity: 0.8;
+  }
+}
+@keyframes pv-tab-2 {
+  0%,
+  40% {
+    fill: var(--pv-blocks, #23405c);
+    fill-opacity: 1;
+  }
+  45%,
+  95% {
+    fill: var(--pv-accent, #22d3c4);
+    fill-opacity: 0.8;
+  }
+  100% {
+    fill: var(--pv-blocks, #23405c);
+    fill-opacity: 1;
+  }
+}
+
+/* ---------- Application : 5 points (47-61) puis courbe (63-83) ---------- */
+@keyframes pv-peak-1 {
+  0%,
+  46% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  49% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-peak-2 {
+  0%,
+  49% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  52% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-peak-3 {
+  0%,
+  52% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-peak-4 {
+  0%,
+  55% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  58% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-peak-5 {
+  0%,
+  58% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  61% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-draw {
+  0%,
+  63% {
+    stroke-dashoffset: 420;
+  }
+  83%,
+  95% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 420;
+  }
+}
+
+/* ---------- Cascade d'apparition (45-66), barres (66-74),
+     reflet en DERNIER acte (76-84) — tout est fini à 85 % ---------- */
+@keyframes pv-in-1 {
+  0%,
+  45% {
+    transform: scale(0.88);
+  }
+  51%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pv-in-2 {
+  0%,
+  48% {
+    transform: scale(0.88);
+  }
+  54%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pv-in-3 {
+  0%,
+  51% {
+    transform: scale(0.88);
+  }
+  57%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pv-in-4 {
+  0%,
+  54% {
+    transform: scale(0.88);
+  }
+  60%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pv-in-5 {
+  0%,
+  57% {
+    transform: scale(0.88);
+  }
+  63%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pv-in-6 {
+  0%,
+  60% {
+    transform: scale(0.88);
+  }
+  66%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pv-spark {
+  0%,
+  66% {
+    transform: scaleX(0);
+  }
+  74%,
+  95% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+@keyframes pv-shine {
+  0%,
+  76% {
+    transform: translateX(0) skewX(-18deg);
+    opacity: 0;
+  }
+  78% {
+    opacity: 1;
+  }
+  84% {
+    transform: translateX(520px) skewX(-18deg);
+    opacity: 1;
+  }
+  86%,
+  100% {
+    transform: translateX(520px) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* ---------- Digitalisation : cochage séquentiel (2-50), la
+     progression avance, tout se décoche ENSEMBLE en fin de cycle ---------- */
+@keyframes pv-pop-1 {
+  0%,
+  2% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  8% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes pv-pop-2 {
+  0%,
+  16% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  22% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes pv-pop-3 {
+  0%,
+  30% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  36% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes pv-pop-4 {
+  0%,
+  44% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes pv-fill {
+  0% {
+    transform: scaleX(0.06);
+  }
+  56% {
+    transform: scaleX(1);
+  }
+  90% {
+    transform: scaleX(1);
+  }
+  96%,
+  100% {
+    transform: scaleX(0.06);
+  }
+}
+
+/* ---------- Maintenance : défilement (0-20), arrêt sur la ligne
+     fautive, clignotement + ✕ (26-46), correction validée ✓ (52-95) ---------- */
+@keyframes pv-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  20%,
+  100% {
+    transform: translateY(-110px);
+  }
+}
+@keyframes pv-code {
+  0%,
+  24% {
+    fill: #9fb2cc;
+    fill-opacity: 0.28;
+  }
+  28% {
+    fill: var(--pv-accent, #22d3c4);
+    fill-opacity: 0.9;
+  }
+  32% {
+    fill: var(--pv-accent, #22d3c4);
+    fill-opacity: 0.35;
+  }
+  36% {
+    fill: var(--pv-accent, #22d3c4);
+    fill-opacity: 0.9;
+  }
+  40% {
+    fill: var(--pv-accent, #22d3c4);
+    fill-opacity: 0.35;
+  }
+  44% {
+    fill: var(--pv-accent, #22d3c4);
+    fill-opacity: 0.9;
+  }
+  52%,
+  100% {
+    fill: #9fb2cc;
+    fill-opacity: 0.28;
+  }
+}
+@keyframes pv-err {
+  0%,
+  26% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  46% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  52%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-fix {
+  0%,
+  52% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  57% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Vitrine du hero (33,6 s = 4 × 8,4 s) ----------
+   Scènes visibles sur leur quart exact ; les histoires étant
+   terminées à 85 % et la transition couvrant 88,8-100 %, RIEN
+   n'est jamais coupé. Fondus croisés doux (zones de 2 % ≈ 0,67 s) :
+   la couture de boucle tombe pile dans le maintien de la scène 1. */
+@keyframes pv-scene-1 {
+  0% {
+    opacity: 1;
+  }
+  24% {
+    opacity: 1;
+  }
+  26%,
+  98% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes pv-scene-2 {
+  0%,
+  24% {
+    opacity: 0;
+  }
+  26%,
+  49% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-scene-3 {
+  0%,
+  49% {
+    opacity: 0;
+  }
+  51%,
+  74% {
+    opacity: 1;
+  }
+  76%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-scene-4 {
+  0%,
+  74% {
+    opacity: 0;
+  }
+  76%,
+  98% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* Titres : cross-slide — l'ancien titre s'efface vers le haut, le
+   nouveau monte depuis le bas, calé sur les fondus des scènes
+   (fenêtres 24-26 / 49-51 / 74-76 / 98-100). À poser sur les
+   libellés de formule qui accompagnent la vitrine. */
+@keyframes pv-title-1 {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  24% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  26% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  30%,
+  98% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pv-title-2 {
+  0%,
+  24% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  26%,
+  49% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  51% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  55%,
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes pv-title-3 {
+  0%,
+  49% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  51%,
+  74% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  76% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes pv-title-4 {
+  0%,
+  74% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  76%,
+  98% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* ---------- Interstitiel : voile + emblème OHIHO dont l'anneau
+     tourne + coche + feu d'artifice ---------- */
+@keyframes pv-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pv-trans {
+  0%,
+  1.2% {
+    opacity: 1;
+  }
+  1.8%,
+  21.3% {
+    opacity: 0;
+  }
+  21.9%,
+  26.2% {
+    opacity: 1;
+  }
+  26.8%,
+  46.3% {
+    opacity: 0;
+  }
+  46.9%,
+  51.2% {
+    opacity: 1;
+  }
+  51.8%,
+  71.3% {
+    opacity: 0;
+  }
+  71.9%,
+  76.2% {
+    opacity: 1;
+  }
+  76.8%,
+  96.3% {
+    opacity: 0;
+  }
+  96.9%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes pv-spin-vis {
+  0%,
+  21.9% {
+    opacity: 0;
+  }
+  22.4%,
+  24.3% {
+    opacity: 1;
+  }
+  24.6%,
+  46.9% {
+    opacity: 0;
+  }
+  47.4%,
+  49.3% {
+    opacity: 1;
+  }
+  49.6%,
+  71.9% {
+    opacity: 0;
+  }
+  72.4%,
+  74.3% {
+    opacity: 1;
+  }
+  74.6%,
+  96.9% {
+    opacity: 0;
+  }
+  97.4%,
+  99.3% {
+    opacity: 1;
+  }
+  99.6%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pv-ok {
+  0%,
+  1.2% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  1.7%,
+  24.5% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  24.9% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  26.2% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  26.7%,
+  49.5% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  49.9% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  51.2% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  51.7%,
+  74.5% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  74.9% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  76.2% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  76.7%,
+  99.5% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  99.9%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes pv-burst {
+  0% {
+    opacity: 0.55;
+    transform: scale(1.25);
+  }
+  1.4%,
+  24.6% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  25.2% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  26.4%,
+  49.6% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+  50.2% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  51.4%,
+  74.6% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+  75.2% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  76.4%,
+  99.6% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+  100% {
+    opacity: 0.55;
+    transform: scale(1.25);
+  }
+}
+
+/* ---------- Réglages statiques (= état au repos, sans animation) ---------- */
+.pv-trans,
+.pv-spin-vis,
+.pv-ok,
+.pv-burst {
+  opacity: 0;
+}
+.pv-bar,
+.pv-dot,
+.pv-side,
+.pv-shine,
+.pv-spark,
+.pv-fill,
+.pv-scroll,
+.pv-pop-1,
+.pv-pop-2,
+.pv-pop-3,
+.pv-pop-4,
+.pv-err,
+.pv-fix,
+.pv-ok,
+.pv-burst,
+.pv-rotate,
+.pv-in-1,
+.pv-in-2,
+.pv-in-3,
+.pv-in-4,
+.pv-in-5,
+.pv-in-6,
+.pv-peak-1,
+.pv-peak-2,
+.pv-peak-3,
+.pv-peak-4,
+.pv-peak-5 {
+  transform-box: fill-box;
+}
+.pv-ok,
+.pv-burst,
+.pv-rotate,
+.pv-pop-1,
+.pv-pop-2,
+.pv-pop-3,
+.pv-pop-4,
+.pv-err,
+.pv-fix,
+.pv-in-1,
+.pv-in-2,
+.pv-in-3,
+.pv-in-4,
+.pv-in-5,
+.pv-in-6,
+.pv-peak-1,
+.pv-peak-2,
+.pv-peak-3,
+.pv-peak-4,
+.pv-peak-5 {
+  transform-origin: center;
+}
+.pv-bar {
+  transform-origin: center bottom;
+}
+.pv-fill,
+.pv-spark {
+  transform-origin: left center;
+}
+/* Sans animation : état FINAL de la scène 1 (tâches cochées,
+   progression pleine) — jamais de voile ni de transition affichés. */
+.pv-old {
+  opacity: 0;
+}
+/* Sans animation, une seule scène / un seul titre visible (le 1er).
+   Pour la maintenance : le fichier reste défilé sur la ligne fautive,
+   déjà corrigée — jamais d'erreur affichée. */
+.pv-scene-2,
+.pv-scene-3,
+.pv-scene-4,
+.pv-title-2,
+.pv-title-3,
+.pv-title-4,
+.pv-err {
+  opacity: 0;
+}
+.pv-scroll {
+  transform: translateY(-110px);
+}
+.pv-line {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pv-bar-a {
+    animation: pv-bar-a 6.5s ease-in-out infinite;
+  }
+  .pv-bar-b {
+    animation: pv-bar-b 7.9s ease-in-out infinite;
+  }
+  .pv-bar-c {
+    animation: pv-bar-c 9.4s ease-in-out infinite;
+  }
+  .pv-dot {
+    animation: pv-dot 3.1s ease-in-out infinite;
+  }
+  /* --- horloge histoire : 8,4 s, verrouillée pour toutes les scènes --- */
+  .pv-old {
+    animation: pv-show-old 8.4s ease-in-out infinite;
+  }
+  .pv-new {
+    animation: pv-show-new 8.4s ease-in-out infinite;
+  }
+  .pv-side {
+    animation: pv-side 8.4s ease-in-out infinite;
+  }
+  .pv-tab-1 {
+    animation: pv-tab-1 8.4s ease-in-out infinite;
+  }
+  .pv-tab-2 {
+    animation: pv-tab-2 8.4s ease-in-out infinite;
+  }
+  .pv-peak-1 {
+    animation: pv-peak-1 8.4s ease-in-out infinite;
+  }
+  .pv-peak-2 {
+    animation: pv-peak-2 8.4s ease-in-out infinite;
+  }
+  .pv-peak-3 {
+    animation: pv-peak-3 8.4s ease-in-out infinite;
+  }
+  .pv-peak-4 {
+    animation: pv-peak-4 8.4s ease-in-out infinite;
+  }
+  .pv-peak-5 {
+    animation: pv-peak-5 8.4s ease-in-out infinite;
+  }
+  .pv-line {
+    animation: pv-draw 8.4s ease-in-out infinite;
+  }
+  .pv-in-1 {
+    animation: pv-in-1 8.4s ease-in-out infinite;
+  }
+  .pv-in-2 {
+    animation: pv-in-2 8.4s ease-in-out infinite;
+  }
+  .pv-in-3 {
+    animation: pv-in-3 8.4s ease-in-out infinite;
+  }
+  .pv-in-4 {
+    animation: pv-in-4 8.4s ease-in-out infinite;
+  }
+  .pv-in-5 {
+    animation: pv-in-5 8.4s ease-in-out infinite;
+  }
+  .pv-in-6 {
+    animation: pv-in-6 8.4s ease-in-out infinite;
+  }
+  .pv-spark {
+    animation: pv-spark 8.4s ease-in-out infinite;
+  }
+  .pv-shine {
+    animation: pv-shine 8.4s ease-in-out infinite;
+  }
+  .pv-pop-1 {
+    animation: pv-pop-1 8.4s ease-in-out infinite;
+  }
+  .pv-pop-2 {
+    animation: pv-pop-2 8.4s ease-in-out infinite;
+  }
+  .pv-pop-3 {
+    animation: pv-pop-3 8.4s ease-in-out infinite;
+  }
+  .pv-pop-4 {
+    animation: pv-pop-4 8.4s ease-in-out infinite;
+  }
+  .pv-fill {
+    animation: pv-fill 8.4s ease-in-out infinite;
+  }
+  .pv-scroll {
+    animation: pv-scroll 8.4s ease-in-out infinite;
+  }
+  .pv-code {
+    animation: pv-code 8.4s ease-in-out infinite;
+  }
+  .pv-err {
+    animation: pv-err 8.4s ease-in-out infinite;
+  }
+  .pv-fix {
+    animation: pv-fix 8.4s ease-in-out infinite;
+  }
+  /* --- horloge vitrine : 33,6 s = 4 × 8,4 s --- */
+  .pv-scene-1 {
+    animation: pv-scene-1 33.6s linear infinite;
+  }
+  .pv-scene-2 {
+    animation: pv-scene-2 33.6s linear infinite;
+  }
+  .pv-scene-3 {
+    animation: pv-scene-3 33.6s linear infinite;
+  }
+  .pv-scene-4 {
+    animation: pv-scene-4 33.6s linear infinite;
+  }
+  .pv-title-1 {
+    animation: pv-title-1 33.6s ease-in-out infinite;
+  }
+  .pv-title-2 {
+    animation: pv-title-2 33.6s ease-in-out infinite;
+  }
+  .pv-title-3 {
+    animation: pv-title-3 33.6s ease-in-out infinite;
+  }
+  .pv-title-4 {
+    animation: pv-title-4 33.6s ease-in-out infinite;
+  }
+  .pv-trans {
+    animation: pv-trans 33.6s linear infinite;
+  }
+  .pv-spin-vis {
+    animation: pv-spin-vis 33.6s linear infinite;
+  }
+  .pv-ok {
+    animation: pv-ok 33.6s ease-in-out infinite;
+  }
+  .pv-burst {
+    animation: pv-burst 33.6s ease-out infinite;
+  }
+  .pv-rotate {
+    animation: pv-rotate 2.2s linear infinite;
   }
 }

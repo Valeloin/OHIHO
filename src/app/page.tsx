@@ -1,4 +1,6 @@
 import Hero from "@/components/Hero";
+import HeroShowcase from "@/components/motion/HeroShowcase";
+import { formulasFrom } from "@/lib/quotes";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
 import HowItWorks from "@/components/HowItWorks";
@@ -26,7 +28,15 @@ export default async function Home() {
   const devisHref = loggedIn ? "/portail/devis/nouveau" : "/inscription";
   return (
     <main>
-      <Hero data={content.hero} />
+      {/* La vitrine est passée en prop (et non importée par Hero) : Hero est
+          un composant client, un import y embarquerait tout le SVG des scènes
+          dans le bundle. Les libellés suivent l'ordre de PROJECT_TYPES, qui
+          est aussi celui des scènes de la vitrine. */}
+      <Hero
+        data={content.hero}
+        formulaLabels={formulasFrom(content.quotes).map((f) => f.label)}
+        showcase={<HeroShowcase />}
+      />
       <Services
         data={content.services}
         quotes={content.quotes}
