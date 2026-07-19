@@ -13,22 +13,22 @@ import type { SiteContent, ThemeContent, QuoteColorsContent } from "./types";
 // figé ces valeurs en base sans que ce soit un choix : on les traite comme
 // « non personnalisées » et on les remplace par les défauts actuels.
 const LEGACY_THEME_DEFAULTS: Partial<Record<keyof ThemeContent, string[]>> = {
-  accent: ["#2f9fe4", "#3faaf0"],
-  headerBg: ["#0f1b2e", "#0b1524"],
-  cardDark: ["#0e1526"],
-  darkBackground: ["#0f1b2e"],
-  darkSurface: ["#182a44"],
+  accent: ["#2f9fe4", "#3faaf0", "#34d399"],
+  headerBg: ["#0f1b2e", "#0b1524", "#0a1524", "#0b0b0d", "#0a1512"],
+  cardDark: ["#0e1526", "#0a1524", "#08080a", "#071310"],
+  darkBackground: ["#0f1b2e", "#0d1b2e", "#0b0b0d", "#0a1512"],
+  darkSurface: ["#182a44", "#14273e", "#131316", "#101f1a"],
 };
 
 const LEGACY_QUOTE_COLORS: Partial<Record<keyof QuoteColorsContent, string[]>> =
   {
-    cardBg: ["#ffffff", "#182a44"],
-    text: ["#152238", "#e8eef6"],
-    textMuted: ["#5c6a80", "#9fb0c8"],
-    accent: ["#2f9fe4", "#3faaf0"],
-    previewScreen: ["#0e1526"],
-    previewBlocks: ["#26314a"],
-    previewAccent: ["#2f9fe4"],
+    cardBg: ["#ffffff", "#182a44", "#14273e", "#131316", "#101f1a"],
+    text: ["#152238", "#e8eef6", "#f2efe9", "#e9f1ed"],
+    textMuted: ["#5c6a80", "#9fb0c8", "#a09d97", "#91a79e"],
+    accent: ["#2f9fe4", "#3faaf0", "#34d399"],
+    previewScreen: ["#0e1526", "#0a1524", "#08080a", "#071310"],
+    previewBlocks: ["#26314a", "#223a55", "#2b2b32", "#244037"],
+    previewAccent: ["#2f9fe4", "#34d399"],
   };
 
 function normalizeLegacy<T extends Record<string, unknown>>(

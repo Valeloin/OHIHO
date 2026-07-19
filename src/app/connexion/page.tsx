@@ -12,12 +12,10 @@ export default function ConnexionPage({
   searchParams: { next?: string; error?: string };
 }) {
   return (
-    <main className="bg-grid">
+    <main>
       <div className="mx-auto max-w-md px-6 py-16">
-        <p className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-          Espace client
-        </p>
-        <h1 className="mt-4 text-3xl font-semibold tracking-tight">
+        <p className="kicker">Espace client</p>
+        <h1 className="mt-5 text-3xl font-semibold tracking-display">
           Se connecter
         </h1>
         <p className="mt-3 text-sm text-muted">
@@ -25,7 +23,7 @@ export default function ConnexionPage({
         </p>
 
         {searchParams.error === "confirmation" && (
-          <p className="mt-4 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+          <p className="mt-4 rounded-xl border-l-2 border-red-400/60 bg-red-400/10 px-4 py-3 text-sm text-red-400">
             Le lien de confirmation est invalide ou a expiré. Réessayez de
             vous connecter ou de vous inscrire.
           </p>

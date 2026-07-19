@@ -20,11 +20,17 @@ export type PreviewColors = {
   accent: string;
 };
 
+// Replis de la DA « Banderole » : neutres nuit bleu-teal + le teal du wordmark.
+// (Les anciens replis venaient des DA vert-nuit / encre, abandonnées.)
 const DEFAULT_COLORS: PreviewColors = {
-  screen: "#0a1524",
-  blocks: "#223a55",
+  screen: "#071522",
+  blocks: "#23405c",
   accent: "#22d3c4",
 };
+
+// Gris bleuté servant à éclaircir les mélanges (pastilles du navigateur, blocs
+// « avant » de la refonte) : le gris de texte de la palette nuit.
+const STONE = "#9fb2cc";
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
@@ -71,7 +77,7 @@ function buildPalette(colors?: Partial<PreviewColors>): Palette {
     block: blocks,
     blockSoft: mix(screen, blocks, 0.55),
     sidebar: mix(screen, blocks, 0.2),
-    dot: mix(blocks, "#8090b0", 0.35),
+    dot: mix(blocks, STONE, 0.35),
     accent,
   };
 }
@@ -79,7 +85,7 @@ function buildPalette(colors?: Partial<PreviewColors>): Palette {
 function Chrome({ p }: { p: Palette }) {
   return (
     <>
-      <rect width="400" height="26" rx="12" fill={p.chrome} />
+      <rect width="400" height="26" rx="8" fill={p.chrome} />
       <rect y="14" width="400" height="12" fill={p.chrome} />
       <circle cx="18" cy="13" r="3.5" fill={p.dot} />
       <circle cx="30" cy="13" r="3.5" fill={p.dot} />
@@ -105,6 +111,7 @@ function Landing({ p }: { p: Palette }) {
           {/* Hero */}
           <rect x="40" y="48" width="220" height="18" rx="5" fill={p.block} />
           <rect x="40" y="74" width="150" height="10" rx="5" fill={p.blockSoft} />
+          {/* Bouton en pilule, comme les boutons de la banderole. */}
           <rect x="40" y="98" width="80" height="22" rx="11" fill={p.accent} />
           <rect x="300" y="48" width="72" height="72" rx="10" fill={p.blockSoft} />
           <rect x="312" y="60" width="48" height="8" rx="4" fill={p.accent} opacity="0.6" />
@@ -169,9 +176,9 @@ function Intermediaire({ p }: { p: Palette }) {
 
 function Refonte({ p }: { p: Palette }) {
   // Avant / après : fondu croisé entre un ancien site terne et une version moderne.
-  const oldBlock = mix(p.screen, "#8090a8", 0.28);
-  const oldSoft = mix(p.screen, "#8090a8", 0.18);
-  const oldText = mix(p.screen, "#8090a8", 0.55);
+  const oldBlock = mix(p.screen, STONE, 0.28);
+  const oldSoft = mix(p.screen, STONE, 0.18);
+  const oldText = mix(p.screen, STONE, 0.55);
   return (
     <>
       {/* AVANT — terne et tassé */}
@@ -283,7 +290,8 @@ export default function FormulaPreview({
       role="img"
       aria-label={`Aperçu — ${type}`}
     >
-      <rect width="400" height="220" rx="12" fill={p.screen} />
+      {/* Arrondi doux : la maquette s'inscrit dans son cadre arrondi. */}
+      <rect width="400" height="220" rx="10" fill={p.screen} />
       {type === "application" ? (
         <Application p={p} />
       ) : (
@@ -300,7 +308,7 @@ export default function FormulaPreview({
         y="0.5"
         width="399"
         height="219"
-        rx="12"
+        rx="10"
         fill="none"
         stroke="rgba(255,255,255,0.06)"
       />

@@ -24,16 +24,18 @@ export default async function ProfilPage() {
       {/* Raccourci vers l'espace admin, réservé au rôle admin (la page /admin
           revérifie le rôle de son côté). */}
       {profile?.role === "admin" && (
-        <div className="card-dark mb-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl px-6 py-5">
+        <div className="card-dark mb-6 flex flex-wrap items-center justify-between gap-4 px-6 py-5">
           <div>
-            <p className="text-sm font-semibold text-foreground">Outil dev</p>
-            <p className="mt-1 text-xs text-muted">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-cyan">
+              Outil dev
+            </p>
+            <p className="mt-2 text-xs text-muted">
               Modifier les textes et les couleurs du site.
             </p>
           </div>
           <Link
             href="/admin"
-            className="shrink-0 rounded-full bg-accent-cyan px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            className="btn-accent shrink-0 px-5 py-2 text-sm font-semibold"
           >
             Ouvrir l&apos;outil dev
           </Link>

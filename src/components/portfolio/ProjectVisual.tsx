@@ -38,13 +38,15 @@ export default function ProjectVisual({
     // sinon l'iframe suivrait le réglage sombre du navigateur du visiteur.
     const previewSrc = `${href}${href!.includes("?") ? "&" : "?"}theme=light`;
     return (
-      <div className="flex h-full w-full flex-col bg-[#f2f5f9]">
-        {/* Barre de navigateur — mode clair, comme un vrai navigateur */}
-        <div className="flex h-6 shrink-0 items-center gap-1.5 bg-[#e4e9f1] px-3">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#b7c2d2]" />
-          <span className="h-1.5 w-1.5 rounded-full bg-[#b7c2d2]" />
-          <span className="h-1.5 w-1.5 rounded-full bg-[#b7c2d2]" />
-          <span className="ml-2 truncate font-mono text-[9px] text-[#5c6a80]">
+      <div className="flex h-full w-full flex-col bg-[#eef2f8]">
+        {/* Barre de navigateur — neutres clairs légèrement bleutés, accordés à
+            la nuit bleu-teal, filet 1px : elle imite une vraie fenêtre, elle
+            reste donc claire. */}
+        <div className="flex h-6 shrink-0 items-center gap-1.5 border-b border-[#d5dde8] bg-[#e2e9f2] px-3">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#9fb2cc]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#9fb2cc]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#9fb2cc]" />
+          <span className="ml-2 truncate font-mono text-[9px] tracking-wide text-[#63708a]">
             {hostnameOf(href)}
           </span>
         </div>

@@ -2,31 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Thème OHIHO — sombre unique, DA « onde » bleu → vert (2026-07-16).
-   Fond bleu nuit #0D1B2E, surfaces nuit, header nuit profond #0A1524,
-   texte blanc bleuté, muted gris ardoise. L'accent est le TEAL #22D3C4
-   (une seule variable --accent en canaux RGB : accent-cyan/60, etc.) et
-   le dégradé de marque bleu ciel → vert émeraude vit dans
-   --gradient-from / --gradient-to (titre, boutons). Les couleurs clés
-   sont modifiables depuis /admin (voir src/lib/content/theme-css.ts). */
+/* Thème OHIHO — DA « Banderole » (2026-07-19, v3).
+   Référence : la banderole LinkedIn réalisée par Valentin. Le site s'aligne
+   dessus, pixel d'intention par pixel d'intention.
+
+   Ce que la banderole impose :
+   - Fond NUIT BLEU-TEAL avec un halo teal au centre et un ciel étoilé discret.
+   - Le TRIO DE MARQUE du logo : bleu ciel #38bdf8 → teal #22d3c4 → vert
+     émeraude #34d399. Le dégradé revient (anneau du logo, « I » du wordmark,
+     titres, boutons) — mais STATIQUE, jamais animé.
+   - Des PILULES (rounded-full) pour les boutons et les puces d'arguments,
+     chacune précédée d'un point vert.
+   - Des libellés mono en capitales très espacées précédés d'un POINT
+     (« ● WEB & DESIGN »), pas d'un filet.
+
+   Ce qui est conservé des itérations précédentes : la composition éditoriale
+   (titres larges alignés à gauche, cartes, patron d'en-tête de section) que
+   Valentin a validée, et l'immobilité au repos (aucune animation en boucle).
+
+   Les couleurs clés restent modifiables depuis /admin
+   (voir src/lib/content/theme-css.ts). */
 :root {
-  --background: #0d1b2e;
+  --background: #091a29;
   --foreground: #eef4fc;
-  --surface: #14273e;
-  --surface-2: #1b3252;
-  --border: #27405f;
+  --surface: #102436;
+  --surface-2: #17304a;
+  --border: #23405c;
   --muted: #9fb2cc;
-  --grid-line: rgba(159, 178, 204, 0.07);
-  --header-bg: #0a1524;
+  --header-bg: #071522;
   --header-fg: #eef4fc;
   --header-muted: #9fb2cc;
-  --header-border: rgba(255, 255, 255, 0.08);
+  --header-border: rgba(238, 244, 252, 0.1);
+
+  /* Trio de marque, repris tel quel du logo (public/logo-mark.svg).
+     Déclaré en CANAUX RGB (et non en hex) pour que Tailwind puisse appliquer
+     les modificateurs d'opacité : `bg-brand-emerald/10` fonctionne. */
+  --brand-sky: 56 189 248; /* #38bdf8 */
+  --brand-teal: 34 211 196; /* #22d3c4 */
+  --brand-emerald: 52 211 153; /* #34d399 */
+
+  /* L'accent interactif est le teal, celui du « I » du wordmark. */
   --accent: 34 211 196;
   --gradient-from: #38bdf8;
   --gradient-to: #34d399;
   --accent-glow: rgb(34 211 196 / 0.28);
-  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
-    0 14px 30px -16px rgba(0, 0, 0, 0.5);
+
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.35),
+    0 18px 40px -24px rgba(0, 0, 0, 0.7);
+  --radius: 16px;
 }
 
 html {
@@ -39,7 +62,7 @@ body {
 }
 
 ::selection {
-  background: rgb(var(--accent) / 0.25);
+  background: rgb(var(--accent) / 0.28);
   color: var(--foreground);
 }
 
@@ -48,137 +71,163 @@ body {
     text-wrap: balance;
   }
 
-  /* Dégradé animé du titre : bleu → vert symétrique + balayage de position,
-     la boucle est invisible (début = fin). */
+  /* Libellé de section, calqué sur « ● WEB & DESIGN » de la banderole :
+     mono, capitales, très espacé, précédé d'un point teal. */
+  .kicker {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(var(--brand-teal));
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .kicker::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: rgb(var(--brand-emerald));
+    box-shadow: 0 0 8px rgb(52 211 153 / 0.7);
+  }
+
+  /* Dégradé de marque sur le texte (titres). Statique : la banderole ne
+     bouge pas, le site non plus. */
   .text-gradient {
     background: linear-gradient(
-      90deg,
+      100deg,
       var(--gradient-from) 0%,
-      var(--gradient-to) 50%,
-      var(--gradient-from) 100%
+      rgb(var(--brand-teal)) 50%,
+      var(--gradient-to) 100%
     );
-    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradient-pan 8s linear infinite;
   }
 
-  /* Bouton principal : le dégradé de marque en mouvement + halo lumineux. */
+  /* Bouton principal : pilule au dégradé de marque, comme la banderole. */
   .btn-accent {
     background-image: linear-gradient(
-      110deg,
+      100deg,
       var(--gradient-from) 0%,
-      var(--gradient-to) 50%,
-      var(--gradient-from) 100%
+      rgb(var(--brand-teal)) 55%,
+      var(--gradient-to) 100%
     );
-    background-size: 200% 100%;
-    color: #0a1524;
-    animation: gradient-pan 5s linear infinite;
-    box-shadow: 0 0 22px -8px var(--accent-glow);
-    transition: box-shadow 0.3s ease;
+    color: #071522;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 0 24px -10px var(--accent-glow);
+    transition: box-shadow 0.25s ease, filter 0.25s ease;
   }
   .btn-accent:hover {
-    box-shadow: 0 0 30px 0 var(--accent-glow);
+    box-shadow: 0 0 32px -6px var(--accent-glow);
+    filter: brightness(1.06);
   }
 
-  .bg-grid {
-    background-image: var(--tw-gradient-stops), linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-    background-size: 100% 100%, 44px 44px, 44px 44px;
+  /* Bouton secondaire : pilule cernée d'un filet, fond nuit translucide —
+     exactement les puces d'arguments de la banderole. */
+  .btn-outline {
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    background: rgb(9 26 41 / 0.6);
+    color: var(--foreground);
+    transition: border-color 0.25s ease, background 0.25s ease;
+  }
+  .btn-outline:hover {
+    border-color: rgb(var(--accent) / 0.55);
+    background: rgb(var(--accent) / 0.08);
   }
 
+  /* Puce d'argument de la banderole : pilule + point vert lumineux. */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    background: rgb(9 26 41 / 0.6);
+    padding: 0.55rem 1.1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .pill::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: rgb(var(--brand-emerald));
+    box-shadow: 0 0 8px rgb(52 211 153 / 0.8);
+    flex: none;
+  }
+
+  /* Carte : nuit légèrement plus claire que le fond, filet, arrondi doux. */
   .card-surface {
     background: var(--surface);
     border: 1px solid var(--border);
+    border-radius: var(--radius);
     box-shadow: var(--card-shadow);
   }
 
-  /* Carte nuit profonde : le corps reprend le fond des maquettes (haut + bas
-     uniformes). Le contenu passe en clair via l'inversion des tokens. */
+  /* Carte profonde (réalisations) : plus sombre que le fond, pour que les
+     maquettes claires ressortent. */
   .card-dark {
-    background: #0a1524;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #071522;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     box-shadow: var(--card-shadow);
     color: var(--foreground);
-    --foreground: #eef4fc;
-    --muted: #9fb2cc;
-    --border: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Filet de séparation qui s'estompe : règle éditoriale entre blocs. */
+  .rule-fade {
+    background: linear-gradient(
+      to right,
+      var(--border),
+      var(--border) 30%,
+      transparent
+    );
+  }
+
+  /* Filet au dégradé de marque, pour souligner un élément actif. */
+  .rule-brand {
+    background: linear-gradient(
+      to right,
+      var(--gradient-from),
+      rgb(var(--brand-teal)),
+      var(--gradient-to)
+    );
+  }
+
+  /* Version verticale : sur un filet d'1px de large, un dégradé horizontal
+     ne montrerait qu'une seule couleur. */
+  .rule-brand-y {
+    background: linear-gradient(
+      to bottom,
+      var(--gradient-from),
+      rgb(var(--brand-teal)),
+      var(--gradient-to)
+    );
   }
 }
 
-/* Halos lumineux flottants (AnimatedGlow) : dérive lente et organique. */
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  33% {
-    transform: translate3d(40px, -30px, 0) scale(1.08);
-  }
-  66% {
-    transform: translate3d(-30px, 20px, 0) scale(0.94);
-  }
-}
-.drift-a {
-  animation: drift 18s ease-in-out infinite;
-}
-.drift-b {
-  animation: drift 24s ease-in-out infinite reverse;
-}
-.drift-c {
-  animation: drift 30s ease-in-out infinite;
-  animation-delay: -12s;
-}
-
-@keyframes gradient-pan {
-  to {
-    background-position: 200% 50%;
-  }
-}
-
-/* Pastilles lumineuses du hero : montée-descente douce avec balancement,
-   opacité qui respire. Chaque pastille varie durée et délai en inline. */
-@keyframes particle-float {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.35;
-  }
-  25% {
-    transform: translate3d(7px, -16px, 0);
-    opacity: 0.7;
-  }
-  50% {
-    transform: translate3d(-5px, -32px, 0);
-    opacity: 0.95;
-  }
-  75% {
-    transform: translate3d(9px, -12px, 0);
-    opacity: 0.6;
-  }
-}
-.particle {
-  animation-name: particle-float;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-/* Respect du réglage « réduire les animations » du visiteur. */
+/* Respect du réglage « réduire les animations » du visiteur. Les apparitions
+   au scroll sont gérées côté JS (framer-motion lit la même préférence). */
 @media (prefers-reduced-motion: reduce) {
-  .drift-a,
-  .drift-b,
-  .drift-c,
-  .btn-accent,
-  .text-gradient,
-  .particle {
-    animation: none;
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 /* Barre de défilement masquée sur la page d'accueil (navigation par flèches).
    La molette et le tactile restent fonctionnels ; la barre de progression
-   cyan de l'en-tête garde le repère de position. */
+   de l'en-tête garde le repère de position. */
 html.hide-scrollbar {
   scrollbar-width: none;
 }

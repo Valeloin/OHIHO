@@ -13,6 +13,11 @@ type Status = "idle" | "submitting" | "error";
 
 const STEPS = ["Formule", "Détails", "Récapitulatif"] as const;
 
+// Mêmes patrons de champ / libellé que les autres formulaires connectés.
+const FIELD =
+  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
+const LABEL = "font-mono text-[11px] uppercase tracking-[0.16em] text-muted";
+
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
 function hexChannels(hex: string): string {
@@ -132,8 +137,10 @@ export default function DevisWizard({
   // ---- Écran de confirmation ----
   if (reference) {
     return (
-      <div className="card-surface rounded-2xl p-10 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent-emerald/15 text-accent-emerald">
+      // Confirmation : coche dans une pilule ronde cernée d'un filet d'1px,
+      // dans le teal interactif.
+      <div className="card-surface p-10">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-accent-cyan text-accent-cyan">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -142,12 +149,15 @@ export default function DevisWizard({
             strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="h-6 w-6"
+            className="h-5 w-5"
+            aria-hidden="true"
           >
             <path d="M20 6 9 17l-5-5" />
           </svg>
         </div>
-        <h3 className="mt-5 text-xl font-semibold">Demande envoyée</h3>
+        <h3 className="mt-5 text-xl font-semibold tracking-display">
+          Demande envoyée
+        </h3>
         <p className="mt-3 text-sm leading-relaxed text-muted">
           Votre demande de devis <span className="font-mono text-foreground">{reference}</span>{" "}
           a bien été enregistrée. Nous revenons vers vous rapidement pour
@@ -155,7 +165,7 @@ export default function DevisWizard({
         </p>
         <Link
           href="/portail/devis"
-          className="mt-6 inline-flex rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+          className="btn-accent mt-6 inline-flex px-6 py-2.5 text-sm font-semibold"
         >
           Voir mes devis
         </Link>
@@ -173,25 +183,36 @@ export default function DevisWizard({
     // pour que les titres sans classe de couleur suivent aussi la variable locale.
     <div style={styleVars} className="text-foreground">
       {/* Fil d'étapes */}
-      <ol className="mb-8 flex items-center gap-3 text-xs font-medium">
+      {/* Fil d'étapes : chiffres en pilules rondes et libellés en mono, filets
+          d'1px entre les étapes. Le teal ne marque que l'étape courante ; les
+          étapes passées sont en texte plein, les suivantes en gris bleuté. */}
+      <ol className="mb-8 flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.14em]">
         {STEPS.map((label, i) => (
           <li key={label} className="flex items-center gap-3">
             <span
-              className={`flex h-6 w-6 items-center justify-center rounded-full border text-[11px] ${
+              className={`flex h-6 w-6 items-center justify-center rounded-full border ${
                 i === step
-                  ? "border-accent-cyan bg-accent-cyan/10 text-accent-cyan"
+                  ? "border-accent-cyan text-accent-cyan"
                   : i < step
-                    ? "border-accent-emerald/60 bg-accent-emerald/10 text-accent-emerald"
+                    ? "border-foreground/40 text-foreground"
                     : "border-border text-muted"
               }`}
             >
               {i + 1}
             </span>
-            <span className={i === step ? "text-foreground" : "text-muted"}>
+            <span
+              className={
+                i === step
+                  ? "text-accent-cyan"
+                  : i < step
+                    ? "text-foreground"
+                    : "text-muted"
+              }
+            >
               {label}
             </span>
             {i < STEPS.length - 1 && (
-              <span className="h-px w-6 bg-border" aria-hidden="true" />
+              <span className="h-px w-8 bg-border" aria-hidden="true" />
             )}
           </li>
         ))}
@@ -200,7 +221,9 @@ export default function DevisWizard({
       {/* Étape 1 — Formule */}
       {step === 0 && (
         <div>
-          <h2 className="text-lg font-semibold">{quotes.step1Title}</h2>
+          <h2 className="text-lg font-semibold tracking-display">
+            {quotes.step1Title}
+          </h2>
           <p className="mt-1 text-sm text-muted">{quotes.step1Subtitle}</p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {formulas.map((f) => {
@@ -210,19 +233,21 @@ export default function DevisWizard({
                   key={f.type}
                   type="button"
                   onClick={() => chooseType(f.type)}
-                  className={`card-surface rounded-2xl p-6 text-left transition-colors ${
+                  className={`card-surface p-6 text-left transition-colors ${
                     active
-                      ? "border-accent-cyan ring-1 ring-accent-cyan"
+                      ? "border-accent-cyan"
                       : "hover:border-accent-cyan/40"
                   }`}
                 >
-                  <div className="mb-4 aspect-[400/220] overflow-hidden rounded-xl border border-border/50">
+                  <div className="mb-4 aspect-[400/220] overflow-hidden rounded-xl border border-border">
                     <FormulaPreview type={f.type} colors={previewColors} />
                   </div>
-                  <p className="text-xs font-mono uppercase tracking-wider text-accent-cyan">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-cyan">
                     {f.tagline}
                   </p>
-                  <h3 className="mt-2 font-semibold">{f.label}</h3>
+                  <h3 className="mt-2 font-semibold tracking-display">
+                    {f.label}
+                  </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">
                     {f.description}
                   </p>
@@ -237,14 +262,14 @@ export default function DevisWizard({
       {/* Étape 2 — Détails */}
       {step === 1 && selectedFormula && (
         <div>
-          <h2 className="text-lg font-semibold">
+          <h2 className="text-lg font-semibold tracking-display">
             Votre projet : {selectedFormula.label}
           </h2>
           <p className="mt-1 text-sm text-muted">{quotes.step2Subtitle}</p>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             <div className="sm:col-span-2">
-              <label htmlFor="devis-company" className="text-xs font-medium text-muted">
+              <label htmlFor="devis-company" className={LABEL}>
                 Entreprise
               </label>
               <input
@@ -252,20 +277,20 @@ export default function DevisWizard({
                 type="text"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+                className={FIELD}
                 placeholder="Nom de votre entreprise"
               />
             </div>
 
             <div>
-              <label htmlFor="devis-budget" className="text-xs font-medium text-muted">
+              <label htmlFor="devis-budget" className={LABEL}>
                 Budget envisagé
               </label>
               <select
                 id="devis-budget"
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
-                className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+                className={FIELD}
               >
                 <option value="">— À préciser —</option>
                 {quotes.budgets.map((b) => (
@@ -277,14 +302,14 @@ export default function DevisWizard({
             </div>
 
             <div>
-              <label htmlFor="devis-timeline" className="text-xs font-medium text-muted">
+              <label htmlFor="devis-timeline" className={LABEL}>
                 Délai souhaité
               </label>
               <select
                 id="devis-timeline"
                 value={timeline}
                 onChange={(e) => setTimeline(e.target.value)}
-                className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+                className={FIELD}
               >
                 <option value="">— À préciser —</option>
                 {quotes.timelines.map((t) => (
@@ -297,10 +322,8 @@ export default function DevisWizard({
 
             {selectedFormula.options.length > 0 && (
               <div className="sm:col-span-2">
-                <p className="text-xs font-medium text-muted">
-                  Options souhaitées (facultatif)
-                </p>
-                <div className="mt-2 flex flex-wrap gap-2">
+                <p className={LABEL}>Options souhaitées (facultatif)</p>
+                <div className="mt-3 flex flex-wrap gap-2">
                   {selectedFormula.options.map((opt) => {
                     const active = options.includes(opt);
                     return (
@@ -308,7 +331,8 @@ export default function DevisWizard({
                         key={opt}
                         type="button"
                         onClick={() => toggleOption(opt)}
-                        className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-colors ${
+                        aria-pressed={active}
+                        className={`rounded-full border px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors ${
                           active
                             ? "border-accent-cyan bg-accent-cyan/10 text-accent-cyan"
                             : "border-border text-muted hover:border-accent-cyan/40"
@@ -323,7 +347,7 @@ export default function DevisWizard({
             )}
 
             <div className="sm:col-span-2">
-              <label htmlFor="devis-description" className="text-xs font-medium text-muted">
+              <label htmlFor="devis-description" className={LABEL}>
                 Décrivez votre projet
               </label>
               <textarea
@@ -331,7 +355,7 @@ export default function DevisWizard({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={5}
-                className="mt-2 w-full resize-none rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+                className={`${FIELD} resize-none`}
                 placeholder="Votre activité, vos objectifs, ce que le site ou l'outil devra permettre..."
               />
               <p className="mt-1.5 text-xs text-muted">
@@ -347,12 +371,14 @@ export default function DevisWizard({
       {/* Étape 3 — Récapitulatif */}
       {step === 2 && selectedFormula && (
         <div>
-          <h2 className="text-lg font-semibold">Récapitulatif</h2>
+          <h2 className="text-lg font-semibold tracking-display">
+            Récapitulatif
+          </h2>
           <p className="mt-1 text-sm text-muted">
             Vérifiez votre demande avant de l&apos;envoyer.
           </p>
 
-          <dl className="card-surface mt-6 divide-y divide-border rounded-2xl">
+          <dl className="card-surface mt-6 divide-y divide-border">
             <RecapRow label="Formule" value={selectedFormula.label} />
             <RecapRow label="Entreprise" value={company || "—"} />
             <RecapRow label="Budget" value={budget || "—"} />
@@ -365,26 +391,30 @@ export default function DevisWizard({
           </dl>
 
           {status === "error" && (
-            <p className="mt-4 text-sm text-red-500">{error}</p>
+            <p className="mt-4 rounded-xl border-l-2 border-red-400/60 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+              {error}
+            </p>
           )}
         </div>
       )}
 
       {/* Navigation */}
-      <div className="mt-8 flex items-center justify-between">
+      {/* Navigation : pilule à filet pour l'action secondaire, pilule au
+          dégradé de marque pour l'action principale. */}
+      <div className="mt-8 flex items-center justify-between border-t border-border pt-6">
         {step > 0 ? (
           <button
             type="button"
             onClick={() => window.history.back()}
             disabled={status === "submitting"}
-            className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface disabled:opacity-50"
+            className="btn-outline px-5 py-2.5 text-sm font-semibold disabled:opacity-50"
           >
             ← Retour
           </button>
         ) : (
           <Link
             href="/portail/devis"
-            className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
+            className="btn-outline px-5 py-2.5 text-sm font-semibold"
           >
             Annuler
           </Link>
@@ -395,7 +425,7 @@ export default function DevisWizard({
             type="button"
             onClick={() => goToStep(step + 1)}
             disabled={!canContinue}
-            className="rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-40"
+            className="btn-accent px-6 py-2.5 text-sm font-semibold disabled:opacity-40"
           >
             Continuer →
           </button>
@@ -404,7 +434,7 @@ export default function DevisWizard({
             type="button"
             onClick={handleSubmit}
             disabled={status === "submitting"}
-            className="rounded-full bg-foreground px-6 py-2.5 text-sm font-semibold text-background transition-all hover:opacity-90 hover:shadow-[0_0_24px_4px_var(--accent-glow)] disabled:opacity-50"
+            className="btn-accent px-6 py-2.5 text-sm font-semibold disabled:opacity-50"
           >
             {status === "submitting" ? "Envoi en cours..." : "Envoyer ma demande"}
           </button>
@@ -417,7 +447,7 @@ export default function DevisWizard({
 function RecapRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col gap-1 px-6 py-4 sm:flex-row sm:gap-4">
-      <dt className="w-32 shrink-0 text-xs font-medium uppercase tracking-wider text-muted">
+      <dt className="w-32 shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
         {label}
       </dt>
       <dd className="text-sm text-foreground whitespace-pre-wrap">{value}</dd>

@@ -57,11 +57,15 @@ function Field({
   onChange: (v: string) => void;
   textarea?: boolean;
 }) {
+  // Champ rectangulaire à coins arrondis (rounded-xl = --radius), filet 1px,
+  // focus souligné par le teal interactif.
   const cls =
-    "mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan";
+    "mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
   return (
     <div>
-      <label className="text-xs font-medium text-muted">{label}</label>
+      <label className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+        {label}
+      </label>
       {textarea ? (
         <textarea
           value={value}
@@ -93,20 +97,20 @@ function ListField({
 }) {
   return (
     <div>
-      <label className="text-xs font-medium text-muted">
+      <label className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
         {label} <span className="opacity-70">(une ligne par point)</span>
       </label>
       <textarea
         value={value.join("\n")}
         onChange={(e) => onChange(e.target.value.split("\n"))}
         rows={Math.max(3, value.length)}
-        className="mt-2 w-full resize-none rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+        className="mt-2 w-full resize-none rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25"
       />
     </div>
   );
 }
 
-// Sélecteur de couleur : pastille + code hex + retour à la couleur d'origine.
+// Sélecteur de couleur : nuancier + code hex + retour à la couleur d'origine.
 function ColorField({
   label,
   hint,
@@ -129,19 +133,19 @@ function ColorField({
         value={valid ? value : defaultValue}
         onChange={(e) => onChange(e.target.value)}
         aria-label={`${label} — sélecteur`}
-        className="h-10 w-14 shrink-0 cursor-pointer rounded-lg border border-border bg-background p-1"
+        className="h-10 w-10 shrink-0 cursor-pointer rounded-xl border border-border bg-background p-1"
       />
       <div className="min-w-0 flex-1">
-        <label className="text-xs font-medium text-muted">
+        <label className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
           {label}
-          {hint && <span className="opacity-70"> — {hint}</span>}
+          {hint && <span className="normal-case tracking-normal opacity-70"> — {hint}</span>}
         </label>
         <input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           spellCheck={false}
-          className={`mt-2 w-full rounded-lg border bg-background px-4 py-2 font-mono text-sm outline-none focus:border-accent-cyan ${
+          className={`mt-2 w-full rounded-xl border bg-background px-3 py-2 font-mono text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25 ${
             valid ? "border-border" : "border-red-400"
           }`}
         />
@@ -150,7 +154,7 @@ function ColorField({
         type="button"
         onClick={() => onChange(defaultValue)}
         disabled={!changed}
-        className="shrink-0 rounded-lg border border-border px-3 py-2 text-xs font-medium text-muted transition-colors hover:text-foreground disabled:opacity-40"
+        className="btn-outline shrink-0 px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] disabled:opacity-40"
       >
         Réinitialiser
       </button>
@@ -168,10 +172,11 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="card-surface rounded-2xl p-6">
+    <section className="card-surface p-6">
       <h2 className="text-base font-semibold">{title}</h2>
-      {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
-      <div className="mt-5 grid gap-5">{children}</div>
+      {hint && <p className="mt-1 text-xs leading-relaxed text-muted">{hint}</p>}
+      {/* Filet 1px en guise de séparateur d'en-tête */}
+      <div className="mt-5 border-t border-border pt-5 grid gap-5">{children}</div>
     </section>
   );
 }
@@ -313,10 +318,11 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             key={item.id}
             type="button"
             onClick={() => openSection(item.id)}
-            className={`shrink-0 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors ${
+            aria-current={active === item.id ? "true" : undefined}
+            className={`shrink-0 border-b-2 px-3 py-2 text-left font-mono text-xs uppercase tracking-[0.14em] transition-colors lg:border-b-0 lg:border-l-2 ${
               active === item.id
-                ? "bg-accent-cyan/10 text-accent-cyan"
-                : "text-muted hover:bg-surface-2 hover:text-foreground"
+                ? "border-accent-cyan text-accent-cyan"
+                : "border-transparent text-muted hover:border-border hover:text-foreground"
             }`}
           >
             {item.label}
@@ -328,23 +334,25 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
         {active === "theme" && (
           <Section
             title="Couleurs du site"
-            hint="Chaque couleur peut revenir à sa valeur d'origine avec « Réinitialiser ». Le dégradé du grand titre et les halos suivent automatiquement la couleur d'accent."
+            hint="Le site utilise une palette de nuit bleu-teal et le trio de marque du logo (bleu ciel, teal, émeraude). Chaque couleur peut revenir à sa valeur d'origine avec « Réinitialiser »."
           >
             <ColorField
-              label="Couleur d'accent"
-              hint="boutons, liens, badges"
+              label="Accent teal"
+              hint="boutons, liens, filets actifs"
               value={theme.accent}
               defaultValue={dTheme.accent}
               onChange={(v) => set("theme", { accent: v })}
             />
             <ColorField
-              label="Fond du site"
+              label="Fond nuit"
+              hint="le fond général du site"
               value={theme.darkBackground}
               defaultValue={dTheme.darkBackground}
               onChange={(v) => set("theme", { darkBackground: v })}
             />
             <ColorField
-              label="Fond des cartes"
+              label="Surface des panneaux"
+              hint="cartes et blocs posés sur le fond"
               value={theme.darkSurface}
               defaultValue={dTheme.darkSurface}
               onChange={(v) => set("theme", { darkSurface: v })}
@@ -356,7 +364,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               onChange={(v) => set("theme", { headerBg: v })}
             />
             <ColorField
-              label="Cartes navy profondes"
+              label="Nuit profonde"
               hint="réalisations, panneau de l'espace client"
               value={theme.cardDark}
               defaultValue={dTheme.cardDark}
@@ -371,7 +379,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             hint="Le grand bandeau en haut de la page d'accueil."
           >
             <Field
-              label="Badge (petite pastille au-dessus du titre)"
+              label="Badge (petite pilule au-dessus du titre)"
               value={hero.badge}
               onChange={(v) => set("hero", { badge: v })}
             />
@@ -382,7 +390,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                 onChange={(v) => set("hero", { titleLead: v })}
               />
               <Field
-                label="Titre — partie en bleu"
+                label="Titre — partie au dégradé de marque"
                 value={hero.titleAccent}
                 onChange={(v) => set("hero", { titleAccent: v })}
               />
@@ -406,7 +414,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               />
             </div>
             <div>
-              <p className="text-xs font-medium text-muted">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
                 Les 4 cartes de chiffres clés
               </p>
               <div className="mt-2 grid gap-3">
@@ -419,7 +427,8 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                         setItem("hero", "stats", i, { value: e.target.value })
                       }
                       placeholder="Valeur (ex. Sur mesure)"
-                      className="rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+                      aria-label={`Carte ${i + 1} — valeur`}
+                      className="rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25"
                     />
                     <input
                       type="text"
@@ -428,7 +437,8 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                         setItem("hero", "stats", i, { label: e.target.value })
                       }
                       placeholder="Libellé (ex. Approche)"
-                      className="rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+                      aria-label={`Carte ${i + 1} — libellé`}
+                      className="rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25"
                     />
                   </div>
                 ))}
@@ -497,7 +507,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             <button
               type="button"
               onClick={() => openSection("quotesFormulas")}
-              className="w-fit rounded-lg border border-accent-cyan/40 px-4 py-2 text-sm font-medium text-accent-cyan transition-colors hover:bg-accent-cyan/10"
+              className="btn-outline w-fit px-4 py-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan"
             >
               Modifier les 4 formules →
             </button>
@@ -517,8 +527,8 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               onChange={(v) => set("method", { title: v })}
             />
             {method.steps.map((step, i) => (
-              <div key={i} className="rounded-xl border border-border p-4">
-                <p className="text-xs font-semibold text-muted">
+              <div key={i} className="rounded-xl border border-border bg-surface-2/40 p-4">
+                <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">
                   Étape {String(i + 1).padStart(2, "0")}
                 </p>
                 <div className="mt-3 grid gap-4">
@@ -591,8 +601,8 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               onChange={(v) => set("whyUs", { title: v })}
             />
             {whyUs.values.map((value, i) => (
-              <div key={i} className="rounded-xl border border-border p-4">
-                <p className="text-xs font-semibold text-muted">Carte {i + 1}</p>
+              <div key={i} className="rounded-xl border border-border bg-surface-2/40 p-4">
+                <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">Carte {i + 1}</p>
                 <div className="mt-3 grid gap-4">
                   <Field
                     label="Titre"
@@ -691,8 +701,8 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             {FORMULA_KEYS.map((key) => {
               const f = quotes.formulas[key];
               return (
-                <div key={key} className="rounded-xl border border-border p-4">
-                  <p className="text-xs font-semibold text-muted">{f.label}</p>
+                <div key={key} className="rounded-xl border border-border bg-surface-2/40 p-4">
+                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">{f.label}</p>
                   <div className="mt-3 grid gap-4">
                     <div className="grid gap-4 sm:grid-cols-2">
                       <Field
@@ -701,7 +711,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                         onChange={(v) => setFormula(key, { label: v })}
                       />
                       <Field
-                        label="Accroche (petit titre bleu)"
+                        label="Accroche (petit titre en accent)"
                         value={f.tagline}
                         onChange={(v) => setFormula(key, { tagline: v })}
                       />
@@ -734,8 +744,8 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             title="Devis — formulaire et suivi"
             hint="Les textes et couleurs de l'assistant de demande de devis, et la page « Mes devis »."
           >
-            <div className="rounded-xl border border-border p-4">
-              <p className="text-xs font-semibold text-muted">
+            <div className="rounded-xl border border-border bg-surface-2/40 p-4">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">
                 Couleurs du formulaire (les deux étapes + récapitulatif)
               </p>
               <div className="mt-3 grid gap-4">
@@ -807,7 +817,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                 />
                 {/* Aperçu en direct de la maquette avec les couleurs choisies */}
                 <div>
-                  <p className="text-xs font-medium text-muted">
+                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
                     Aperçu en direct
                   </p>
                   <div className="mt-2 max-w-sm overflow-hidden rounded-xl border border-border">
@@ -850,8 +860,8 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                 onChange={(v) => set("quotes", { timelines: v })}
               />
             </div>
-            <div className="rounded-xl border border-border p-4">
-              <p className="text-xs font-semibold text-muted">
+            <div className="rounded-xl border border-border bg-surface-2/40 p-4">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">
                 Page « Mes devis »
               </p>
               <div className="mt-3 grid gap-4">
@@ -875,8 +885,8 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                 />
               </div>
             </div>
-            <div className="rounded-xl border border-border p-4">
-              <p className="text-xs font-semibold text-muted">
+            <div className="rounded-xl border border-border bg-surface-2/40 p-4">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">
                 Libellés des statuts
               </p>
               <div className="mt-3 grid gap-4 sm:grid-cols-2">
@@ -935,7 +945,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             type="button"
             onClick={handleSave}
             disabled={status === "saving"}
-            className="shrink-0 rounded-full bg-accent-cyan px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+            className="btn-accent shrink-0 px-6 py-2.5 font-mono text-xs uppercase tracking-[0.14em] disabled:opacity-50"
           >
             {status === "saving" ? "Enregistrement..." : "Enregistrer"}
           </button>

@@ -6,10 +6,10 @@ import type { SiteContent } from "./types";
 export const defaultContent: SiteContent = {
   theme: {
     accent: "#22d3c4",
-    headerBg: "#0a1524",
-    cardDark: "#0a1524",
-    darkBackground: "#0d1b2e",
-    darkSurface: "#14273e",
+    headerBg: "#071522",
+    cardDark: "#071522",
+    darkBackground: "#091a29",
+    darkSurface: "#102436",
   },
   hero: {
     badge: "Développement web & applications sur mesure",
@@ -132,12 +132,12 @@ export const defaultContent: SiteContent = {
     // Couleurs du formulaire de devis. Tant qu'une valeur = défaut, la couleur
     // globale du thème s'applique.
     colors: {
-      cardBg: "#14273e",
+      cardBg: "#102436",
       text: "#eef4fc",
       textMuted: "#9fb2cc",
       accent: "#22d3c4",
-      previewScreen: "#0a1524",
-      previewBlocks: "#223a55",
+      previewScreen: "#071522",
+      previewBlocks: "#23405c",
       previewAccent: "#22d3c4",
     },
     budgets: [

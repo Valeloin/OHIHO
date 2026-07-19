@@ -112,64 +112,79 @@ export default function Navbar() {
     setOpen(false);
   }
 
+  // L'en-tête partage le fond de la page : ce n'est plus une barre posée dessus
+  // mais un bandeau, tenu par un simple filet 1px en bas. Au scroll on passe le
+  // fond en semi-transparent + flou pour rester lisible au-dessus du contenu,
+  // sans jamais poser d'ombre.
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-[var(--header-border)] bg-[var(--header-bg)] backdrop-blur-md transition-shadow duration-300 ${
-        scrolled ? "shadow-md shadow-black/5" : ""
+      className={`sticky top-0 z-50 border-b border-[var(--header-border)] transition-colors duration-300 ${
+        scrolled
+          ? "bg-[color-mix(in_srgb,var(--header-bg)_82%,transparent)] backdrop-blur-md"
+          : "bg-[var(--header-bg)]"
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2 group">
           <Image
-            src="/logo-mark.png"
+            /* SVG et non PNG : le PNG date de l'anneau argenté, le SVG porte
+               l'anneau au dégradé de marque de la banderole (et reste net à
+               toutes les tailles). */
+            src="/logo-mark.svg"
             alt="OHIHO"
             width={256}
             height={256}
             priority
-            className="h-10 w-10 transition-transform duration-300 ease-out group-hover:scale-110"
+            className="h-10 w-10"
           />
-          <span className="text-xl font-semibold tracking-tight">
+          <span className="text-xl font-semibold tracking-display">
             <span className="text-[var(--header-fg)]">OH</span>
-            <span className="text-accent-cyan">I</span>
+            {/* Le « I » en teal, exactement comme le wordmark de la banderole. */}
+            <span className="text-brand-teal">I</span>
             <span className="text-[var(--header-fg)]">HO</span>
           </span>
         </Link>
 
-        <div className="hidden items-center gap-5 md:flex lg:gap-6">
+        {/* Libellés de nav : mono, capitales espacées. L'état actif/survolé est
+            marqué par un filet au DÉGRADÉ DE MARQUE sous le lien (bleu ciel →
+            teal → émeraude), pas par une pastille. */}
+        <div className="hidden items-center gap-6 md:flex lg:gap-8">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={handleNavClick}
-              className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+              className="group relative py-1 font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)] focus-visible:text-[var(--header-fg)]"
             >
               {link.label}
+              <span
+                aria-hidden="true"
+                className="rule-brand absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
+              />
             </Link>
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 md:flex lg:gap-4">
+        <div className="hidden items-center gap-4 md:flex lg:gap-5">
           {firstName ? (
             <>
               <Link
                 href="/portail"
-                className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
               >
                 Bonjour,{" "}
-                <span className="font-semibold text-accent-cyan">
-                  {firstName}
-                </span>
+                <span className="text-accent-cyan">{firstName}</span>
               </Link>
               <Link
                 href="/portail/profil"
-                className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
               >
                 Mon profil
               </Link>
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="rounded-full border border-accent-cyan/60 px-4 py-1.5 text-sm font-medium text-accent-cyan transition-colors hover:bg-accent-cyan/10"
+                  className="btn-outline px-5 py-2 text-sm !text-accent-cyan"
                 >
                   Outil dev
                 </Link>
@@ -177,7 +192,7 @@ export default function Navbar() {
               <form action={signOut}>
                 <button
                   type="submit"
-                  className="text-sm text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                  className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
                 >
                   Déconnexion
                 </button>
@@ -185,16 +200,10 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link
-                href="/connexion"
-                className="rounded-full border border-accent-cyan/60 px-5 py-2 text-sm font-medium text-accent-cyan transition-colors hover:bg-accent-cyan/10"
-              >
+              <Link href="/connexion" className="btn-outline px-5 py-2 text-sm">
                 Connexion
               </Link>
-              <Link
-                href="/inscription"
-                className="btn-accent rounded-full px-5 py-2 text-sm font-semibold transition-transform hover:scale-105"
-              >
+              <Link href="/inscription" className="btn-accent px-5 py-2 text-sm">
                 S&apos;inscrire
               </Link>
             </>
@@ -204,7 +213,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3 md:hidden">
           <button
             aria-label="Ouvrir le menu"
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-[var(--header-border)]"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--header-border)] transition-colors hover:border-accent-cyan/60"
             onClick={() => setOpen((v) => !v)}
           >
             <span className="relative block h-3 w-4">
@@ -237,7 +246,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={handleNavClick}
-              className="shrink-0 whitespace-nowrap text-sm font-medium text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+              className="shrink-0 whitespace-nowrap font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
             >
               {link.label}
             </Link>
@@ -245,6 +254,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Tiroir mobile : même langage que le bandeau — filets, mono, boutons en pilule. */}
       {open && (
         <div className="border-t border-border bg-background px-6 py-4 md:hidden">
           <div className="flex flex-col gap-4">
@@ -253,17 +263,15 @@ export default function Navbar() {
                 <Link
                   href="/portail"
                   onClick={() => setOpen(false)}
-                  className="text-sm text-muted hover:text-foreground"
+                  className="font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:text-foreground"
                 >
                   Bonjour,{" "}
-                  <span className="font-semibold text-accent-cyan">
-                    {firstName}
-                  </span>
+                  <span className="text-accent-cyan">{firstName}</span>
                 </Link>
                 <Link
                   href="/portail/profil"
                   onClick={() => setOpen(false)}
-                  className="text-sm text-muted hover:text-foreground"
+                  className="font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:text-foreground"
                 >
                   Mon profil
                 </Link>
@@ -271,7 +279,7 @@ export default function Navbar() {
                   <Link
                     href="/admin"
                     onClick={() => setOpen(false)}
-                    className="text-sm font-medium text-accent-cyan hover:underline"
+                    className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan"
                   >
                     Outil dev
                   </Link>
@@ -279,7 +287,7 @@ export default function Navbar() {
                 <form action={signOut}>
                   <button
                     type="submit"
-                    className="text-sm text-muted hover:text-foreground"
+                    className="font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:text-foreground"
                   >
                     Déconnexion
                   </button>
@@ -290,14 +298,14 @@ export default function Navbar() {
                 <Link
                   href="/connexion"
                   onClick={() => setOpen(false)}
-                  className="rounded-full border border-accent-cyan/60 px-5 py-2 text-center text-sm font-medium text-accent-cyan transition-colors hover:bg-accent-cyan/10"
+                  className="btn-outline px-5 py-2 text-center text-sm"
                 >
                   Connexion
                 </Link>
                 <Link
                   href="/inscription"
                   onClick={() => setOpen(false)}
-                  className="mt-2 rounded-full bg-foreground px-5 py-2 text-center text-sm font-medium text-background"
+                  className="btn-accent px-5 py-2 text-center text-sm"
                 >
                   S&apos;inscrire
                 </Link>

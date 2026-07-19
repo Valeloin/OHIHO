@@ -15,33 +15,38 @@ const config: Config = {
         "surface-2": "var(--surface-2)",
         border: "var(--border)",
         muted: "var(--muted)",
+        // DA « Banderole » : le trio de marque du logo. `accent`/`accent-cyan`
+        // = le teal interactif (pilotable depuis /admin) ; `brand-*` = les
+        // trois teintes fixes du logo, pour le dégradé et les points verts.
         accent: {
           DEFAULT: "rgb(var(--accent) / <alpha-value>)",
           cyan: "rgb(var(--accent) / <alpha-value>)",
-          // DA bleu → vert : « violet » (nom historique) = bleu ciel du dégradé.
-          violet: "#38bdf8",
-          emerald: "#34d399",
+          // Noms hérités des DA précédentes, conservés le temps que les
+          // derniers usages soient nettoyés.
+          violet: "rgb(var(--accent) / <alpha-value>)",
+          emerald: "rgb(var(--brand-emerald) / <alpha-value>)",
+        },
+        brand: {
+          sky: "rgb(var(--brand-sky) / <alpha-value>)",
+          teal: "rgb(var(--brand-teal) / <alpha-value>)",
+          emerald: "rgb(var(--brand-emerald) / <alpha-value>)",
         },
       },
       fontFamily: {
         sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
-      backgroundImage: {
-        "grid-pattern":
-          "linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)",
-        "glow-radial":
-          "radial-gradient(circle, rgba(56,189,248,0.18) 0%, rgba(56,189,248,0) 70%)",
+      borderRadius: {
+        // Le rayon des cartes vient du token CSS ; les pilules gardent
+        // `rounded-full`, qui n'est pas surchargé ici.
+        DEFAULT: "var(--radius)",
+        md: "var(--radius)",
+        lg: "var(--radius)",
+        xl: "var(--radius)",
+        "2xl": "var(--radius)",
       },
-      animation: {
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        float: "float 6s ease-in-out infinite",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-12px)" },
-        },
+      letterSpacing: {
+        display: "-0.03em",
       },
     },
   },

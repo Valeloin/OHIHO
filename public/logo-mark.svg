@@ -1,7 +1,9 @@
 <svg width="512" height="512" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="ring" x1="22" y1="8" x2="82" y2="94" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#e3e9f1"/><stop offset="1" stop-color="#b7c2d2"/>
+    <!-- Anneau au dégradé de marque (bleu ciel → teal → vert), comme sur la
+         banderole. Remplace l'anneau argenté de la version précédente. -->
+    <linearGradient id="ring" x1="18" y1="10" x2="86" y2="92" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38bdf8"/><stop offset="0.5" stop-color="#22d3c4"/><stop offset="1" stop-color="#34d399"/>
     </linearGradient>
     <radialGradient id="disc" cx="0.4" cy="0.32" r="0.9">
       <stop offset="0" stop-color="#16273f"/><stop offset="1" stop-color="#0a1524"/>

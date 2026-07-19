@@ -16,20 +16,22 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
       className="relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-24">
-        <Reveal className="max-w-2xl">
-          <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-            {data.kicker}
-          </h2>
-          <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+      <div className="relative mx-auto max-w-6xl px-6 py-28 sm:py-32">
+        {/* En-tête éditorial : libellé mono, titre large à gauche, filet. */}
+        <Reveal>
+          <span className="kicker">{data.kicker}</span>
+          <h2 className="mt-6 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">
             {data.title}
+          </h2>
+          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
+            {data.subtitle}
           </p>
-          <p className="mt-4 text-muted">{data.subtitle}</p>
         </Reveal>
+        <div className="mt-12 h-px rule-fade" />
 
         {/* 3 colonnes dès 768px : les cartes restent alignées horizontalement
             au maximum (une carte seule pleine largeur devient géante). */}
-        <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3">
+        <RevealGroup className="mt-12 grid gap-6 md:grid-cols-3">
           {PROJECTS.map((project) => {
             const isExternal = project.href?.startsWith("http");
             const content = (
@@ -42,10 +44,10 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="font-mono text-xs uppercase tracking-wide text-muted">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-teal">
                     {project.category}
                   </p>
-                  <h3 className="mt-2 text-lg font-semibold">
+                  <h3 className="mt-3 text-lg font-semibold tracking-display">
                     {project.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">
@@ -69,8 +71,9 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
 
             // h-full + flex-col : les trois cartes s'alignent sur la hauteur
             // de la rangée (la plus grande), quel que soit leur volume de texte.
+            // Survol : le filet passe au teal interactif (l'élévation vient de RevealItem).
             const cardClass =
-              "card-dark group flex h-full flex-col overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40";
+              "card-dark group flex h-full flex-col overflow-hidden transition-colors hover:border-accent-cyan/50";
 
             return (
               <RevealItem key={project.title} hover className="h-full">
@@ -92,14 +95,15 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
         </RevealGroup>
 
         <Reveal>
-          {/* Encart compact : il épouse son contenu (w-fit) et se détache de
-              la section avec un fond plus clair (surface-2), la section étant
-              déjà sur --surface. */}
-          <div className="mx-auto mt-14 w-fit max-w-full rounded-2xl border border-border bg-surface-2 px-8 py-6 text-center shadow-[var(--card-shadow)]">
-            <p className="text-sm text-muted">{data.ctaText}</p>
+          {/* Encart de fin en carte : texte à gauche, bouton à droite ;
+              empilé sous sm. */}
+          <div className="card-surface mt-20 flex flex-col items-start gap-6 p-8 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-xl text-sm leading-relaxed text-muted">
+              {data.ctaText}
+            </p>
             <Link
               href="/portail/devis/nouveau"
-              className="btn-accent mt-4 inline-flex rounded-full px-6 py-2.5 text-sm font-semibold"
+              className="btn-accent inline-flex shrink-0 px-6 py-3 text-sm"
             >
               {data.ctaButton}
             </Link>

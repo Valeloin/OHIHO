@@ -23,19 +23,17 @@ export default async function PortailLayout({
     .single();
 
   return (
-    <main className="bg-grid">
+    <main>
       <div className="mx-auto max-w-3xl px-6 py-16">
-        {/* Panneau bleu nuit aux couleurs du site : l'accent cyan y est très
-            lisible (il était noyé sur le fond clair) et l'espace client reprend
-            l'identité de l'en-tête du site public. card-dark inverse les tokens
-            foreground/muted/border, donc le contenu passe en clair tout seul. */}
-        <div className="card-dark rounded-3xl px-7 py-7 sm:px-9 sm:py-8">
+        {/* Panneau profond de la DA « Banderole » : un aplat de nuit plus
+            sombre que le fond, cerné d'un filet d'1px, aux angles adoucis et
+            posé d'une ombre douce. Le point vert du kicker est la seule
+            touche de couleur. */}
+        <div className="card-dark px-7 py-7 sm:px-9 sm:py-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="font-mono text-sm font-medium uppercase tracking-wider text-accent-cyan">
-                Espace client
-              </p>
-              <h1 className="mt-4 text-3xl font-semibold tracking-tight text-foreground">
+              <p className="kicker">Espace client</p>
+              <h1 className="mt-5 text-3xl font-semibold tracking-display text-foreground">
                 Bienvenue{profile?.full_name ? `, ${profile.full_name}` : ""}
               </h1>
               <p className="mt-3 text-sm text-muted">
@@ -47,7 +45,7 @@ export default async function PortailLayout({
             <form action={signOut}>
               <button
                 type="submit"
-                className="rounded-full border border-border px-5 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-white/10"
+                className="btn-outline px-5 py-2 font-mono text-[11px] uppercase tracking-[0.16em]"
               >
                 Se déconnecter
               </button>

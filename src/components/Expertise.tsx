@@ -6,30 +6,37 @@ export default function Expertise({ data }: { data: ExpertiseContent }) {
   return (
     <section id="expertise" className="relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-24">
-        <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
+      <div className="relative mx-auto max-w-6xl px-6 py-28 sm:py-32">
+        <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
+          {/* Colonne éditoriale : libellé, titre, filet, prose */}
           <Reveal>
-            <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-emerald">
-              {data.kicker}
-            </h2>
-            <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+            <span className="kicker">{data.kicker}</span>
+            <h2 className="mt-6 max-w-xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">
               {data.title}
-            </p>
-            <p className="mt-4 leading-relaxed text-muted">{data.paragraph1}</p>
-            <p className="mt-4 leading-relaxed text-muted">{data.paragraph2}</p>
+            </h2>
+            <div className="mt-10 h-px rule-fade" />
+            <p className="mt-8 leading-relaxed text-muted">{data.paragraph1}</p>
+            <p className="mt-5 leading-relaxed text-muted">{data.paragraph2}</p>
           </Reveal>
 
-          <Reveal delay={0.15} className="card-surface rounded-2xl p-8">
-            <h3 className="text-sm font-semibold text-foreground">
+          {/* Panneau de couverture : carte arrondie, lignes séparées par des
+              filets. `overflow-hidden` recoupe le filet d'en-tête et les
+              séparateurs de liste sur l'arrondi de la carte. */}
+          <Reveal delay={0.15} className="card-surface overflow-hidden">
+            <h3 className="border-b border-border px-6 py-4 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-muted">
               {data.panelTitle}
             </h3>
-            <ul className="mt-5 grid gap-3">
+            <ul className="divide-y divide-border">
               {data.coverage.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2 rounded-xl border border-border bg-background/40 px-3 py-3 text-sm"
+                  className="flex items-start gap-3 px-6 py-4 text-sm"
                 >
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-emerald" />
+                  {/* Point rond vert lumineux, aligné sur la première ligne */}
+                  <span
+                    aria-hidden="true"
+                    className="mt-[0.4rem] h-[6px] w-[6px] shrink-0 rounded-full bg-brand-emerald shadow-[0_0_10px_rgba(52,211,153,0.8)]"
+                  />
                   {item}
                 </li>
               ))}

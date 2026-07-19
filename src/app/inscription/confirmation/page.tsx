@@ -6,12 +6,12 @@ export const metadata: Metadata = {
 
 export default function ConfirmationPage() {
   return (
-    <main className="bg-grid">
-      <div className="mx-auto max-w-md px-6 py-16 text-center">
-        <p className="text-sm font-mono font-medium uppercase tracking-wider text-accent-emerald">
-          Presque terminé
-        </p>
-        <h1 className="mt-4 text-3xl font-semibold tracking-tight">
+    <main>
+      {/* Aligné à gauche comme les autres pages de l'espace client : le point
+          vert du kicker et la chasse serrée du titre donnent le ton éditorial. */}
+      <div className="mx-auto max-w-md px-6 py-16">
+        <p className="kicker">Presque terminé</p>
+        <h1 className="mt-5 text-3xl font-semibold tracking-display">
           Confirmez votre email
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-muted">
@@ -21,7 +21,7 @@ export default function ConfirmationPage() {
         </p>
         <a
           href="/connexion"
-          className="mt-8 inline-block rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+          className="btn-accent mt-8 inline-block px-6 py-3 text-sm font-semibold"
         >
           Aller à la connexion
         </a>

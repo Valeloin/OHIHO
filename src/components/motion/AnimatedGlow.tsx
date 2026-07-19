@@ -1,65 +1,48 @@
-// Halos lumineux flottants, purs CSS (keyframes `drift` dans globals.css) :
-// aucun JavaScript côté client, le composant reste un server component.
-// DA bleu → vert : les halos déclinent les trois teintes de la marque
-// (bleu ciel, teal, vert émeraude) pour faire vivre le dégradé en fond.
-const BLEU = "56, 189, 248"; // #38bdf8
+// Halo de fond de la DA « Banderole ».
+// Sur la banderole, le fond nuit s'éclaircit en son centre d'un voile teal,
+// et le bord bas-droite porte une pointe de vert. Reproduit ici en nappes
+// FIXES (aucune animation) : pur CSS, le composant reste un server component.
 const TEAL = "34, 211, 196"; // #22d3c4
-const VERT = "52, 211, 153"; // #34d399
+const EMERALD = "52, 211, 153"; // #34d399
+const SKY = "56, 189, 248"; // #38bdf8
 
-type Blob = {
+type Wash = {
   pos: string; // classes de positionnement
   size: string;
-  rgb: string; // teinte du halo (canaux R, G, B)
-  alpha: number; // intensité du halo
-  drift: string; // classe d'animation drift-a / drift-b / drift-c
+  rgb: string;
+  alpha: number;
 };
 
-const VARIANTS: Record<"hero" | "subtle", Blob[]> = {
+const VARIANTS: Record<"hero" | "subtle", Wash[]> = {
+  // Hero : la nappe teal centrale de la banderole, plus deux touches de
+  // bleu et de vert aux extrémités du dégradé de marque.
   hero: [
     {
       pos: "left-1/2 top-0 -translate-x-1/2 -translate-y-1/4",
-      size: "h-[520px] w-[720px]",
+      size: "h-[640px] w-[1100px]",
       rgb: TEAL,
-      alpha: 0.13,
-      drift: "drift-a",
+      alpha: 0.14,
     },
     {
-      pos: "left-[6%] top-[38%]",
-      size: "h-[340px] w-[340px]",
-      rgb: BLEU,
-      alpha: 0.1,
-      drift: "drift-b",
-    },
-    {
-      pos: "right-[4%] top-[12%]",
-      size: "h-[300px] w-[300px]",
-      rgb: VERT,
+      pos: "left-[4%] top-[45%]",
+      size: "h-[380px] w-[380px]",
+      rgb: SKY,
       alpha: 0.09,
-      drift: "drift-c",
+    },
+    {
+      pos: "right-[2%] bottom-[6%]",
+      size: "h-[360px] w-[360px]",
+      rgb: EMERALD,
+      alpha: 0.09,
     },
   ],
-  // Sections intérieures : présence discrète mais vivante.
+  // Sections intérieures : une seule nappe, très diluée.
   subtle: [
     {
-      pos: "left-[8%] top-[18%]",
-      size: "h-[420px] w-[420px]",
-      rgb: BLEU,
-      alpha: 0.08,
-      drift: "drift-b",
-    },
-    {
-      pos: "left-[42%] top-[46%]",
-      size: "h-[320px] w-[320px]",
+      pos: "right-[-8%] top-[8%]",
+      size: "h-[520px] w-[560px]",
       rgb: TEAL,
       alpha: 0.06,
-      drift: "drift-a",
-    },
-    {
-      pos: "right-[4%] bottom-[8%]",
-      size: "h-[360px] w-[360px]",
-      rgb: VERT,
-      alpha: 0.07,
-      drift: "drift-c",
     },
   ],
 };
@@ -71,21 +54,21 @@ export default function AnimatedGlow({
   variant?: keyof typeof VARIANTS;
   className?: string;
 }) {
-  const blobs = VARIANTS[variant];
+  const washes = VARIANTS[variant];
 
   return (
     <div
+      aria-hidden="true"
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
     >
-      {blobs.map((blob, i) => (
-        <div key={i} className={`absolute ${blob.pos} ${blob.size}`}>
-          <div
-            className={`h-full w-full rounded-full blur-3xl ${blob.drift}`}
-            style={{
-              background: `radial-gradient(circle, rgba(${blob.rgb}, ${blob.alpha}) 0%, rgba(${blob.rgb}, 0) 70%)`,
-            }}
-          />
-        </div>
+      {washes.map((wash, i) => (
+        <div
+          key={i}
+          className={`absolute rounded-full blur-3xl ${wash.pos} ${wash.size}`}
+          style={{
+            background: `radial-gradient(circle, rgba(${wash.rgb}, ${wash.alpha}) 0%, rgba(${wash.rgb}, 0) 70%)`,
+          }}
+        />
       ))}
     </div>
   );

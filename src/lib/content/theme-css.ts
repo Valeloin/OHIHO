@@ -21,15 +21,6 @@ function hexToRgb(hex: string): [number, number, number] {
   ];
 }
 
-// Éclaircit une couleur vers le blanc (pour dériver le second ton du dégradé
-// de titre quand l'accent change).
-function lighten(hex: string, amount: number): string {
-  const mix = (c: number) => Math.round(c + (255 - c) * amount);
-  const [r, g, b] = hexToRgb(hex).map(mix) as [number, number, number];
-  const to = (c: number) => c.toString(16).padStart(2, "0");
-  return `#${to(r)}${to(g)}${to(b)}`;
-}
-
 export function themeCss(theme: ThemeContent): string {
   const d = defaultContent.theme;
   const accent = safeHex(theme.accent, d.accent);
@@ -43,11 +34,14 @@ export function themeCss(theme: ThemeContent): string {
 
   if (accent.toLowerCase() !== d.accent.toLowerCase()) {
     const [r, g, b] = hexToRgb(accent);
-    // Le dégradé de marque (titre, boutons) suit l'accent personnalisé :
-    // accent → version éclaircie. Par défaut il reste bleu → vert (globals).
+    // DA « Banderole » : par défaut le dégradé de marque reste le trio du
+    // logo (bleu → teal → vert, défini dans globals.css). Si l'accent est
+    // personnalisé depuis l'admin, on aligne aussi la teinte centrale et les
+    // deux bornes dessus, pour que rien ne jure avec la couleur choisie.
     vars.push(
       `--accent: ${r} ${g} ${b};`,
-      `--gradient-from: ${lighten(accent, 0.4)};`,
+      `--brand-teal: ${r} ${g} ${b};`,
+      `--gradient-from: ${accent};`,
       `--gradient-to: ${accent};`,
       `--accent-glow: rgb(${r} ${g} ${b} / 0.28);`
     );

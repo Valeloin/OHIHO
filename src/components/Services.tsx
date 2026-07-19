@@ -25,44 +25,50 @@ export default function Services({
   return (
     <section id="services" className="relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-24">
-        {/* Pas de largeur max sur le titre : il tient sur une seule ligne sur
-            desktop. Le sous-titre garde sa largeur de lecture. */}
+      <div className="relative mx-auto max-w-6xl px-6 py-28 sm:py-32">
+        {/* En-tête au patron commun : libellé mono + filet, titre à chasse
+            serrée aligné à gauche, sous-titre à largeur de lecture. */}
         <Reveal>
-          <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-            {data.kicker}
-          </h2>
-          <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+          <span className="kicker">{data.kicker}</span>
+          <h2 className="mt-6 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">
             {data.title}
+          </h2>
+          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
+            {data.subtitle}
           </p>
-          <p className="mt-4 max-w-2xl text-muted">{data.subtitle}</p>
         </Reveal>
+        <div className="mt-12 h-px rule-fade" />
 
         {/* Les 4 formules alignées sur une seule rangée (dès lg). Les vignettes
             animées occupent toute la largeur de la carte (pleine largeur, sans
-            marge intérieure) pour rester bien lisibles malgré les 4 colonnes. */}
-        <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            marge intérieure) pour rester bien lisibles malgré les 4 colonnes ;
+            `overflow-hidden` les recoupe sur l'arrondi des coins hauts. */}
+        <RevealGroup className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula, i) => (
             <RevealItem key={formula.type} hover className="h-full">
               <Link
                 href={devisHref}
-                className="card-surface flex h-full flex-col overflow-hidden rounded-2xl transition-colors hover:border-accent-cyan/40"
+                className="card-surface flex h-full flex-col overflow-hidden transition-colors hover:border-accent-cyan/50"
               >
                 <div className="aspect-[400/220] w-full">
                   <FormulaPreview type={formula.type} />
                 </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <span className="font-mono text-xs text-muted">
+                <div className="flex flex-1 flex-col border-t border-border p-5">
+                  {/* Index de formule en mono teal de marque : repère éditorial. */}
+                  <span className="font-mono text-xs text-brand-teal">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="mt-2 font-mono text-xs uppercase tracking-wider text-accent-cyan">
+                  <p className="mt-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-muted">
                     {formula.tagline}
                   </p>
-                  <h3 className="mt-2 text-lg font-semibold">{formula.label}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                  <h3 className="mt-2 text-lg font-semibold tracking-display">
+                    {formula.label}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">
                     {formula.description}
                   </p>
-                  <p className="mt-auto pt-3 text-xs italic text-muted">
+                  {/* Exemple détaché par un filet, en bas de carte. */}
+                  <p className="mt-auto border-t border-border pt-4 text-xs leading-relaxed text-muted">
                     {formula.examples}
                   </p>
                 </div>

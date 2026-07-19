@@ -9,11 +9,16 @@ export const metadata: Metadata = {
   title: "Mes devis — OHIHO",
 };
 
+// Statuts en PILULES, comme les puces de la banderole : les neutres nuit
+// portent les états passifs, le teal marque le statut actif (en cours d'étude)
+// et le vert émeraude le statut abouti (devis envoyé).
 const STATUS_STYLES: Record<string, string> = {
-  received: "border-accent-cyan/40 bg-accent-cyan/10 text-accent-cyan",
-  in_review: "border-accent-violet/40 bg-accent-violet/10 text-accent-violet",
-  quoted: "border-accent-emerald/40 bg-accent-emerald/10 text-accent-emerald",
-  closed: "border-border bg-surface-2 text-muted",
+  received: "rounded-full border-border bg-surface-2 text-foreground",
+  in_review:
+    "rounded-full border-accent-cyan/50 bg-accent-cyan/10 text-accent-cyan",
+  quoted:
+    "rounded-full border-brand-emerald/50 bg-brand-emerald/10 text-brand-emerald",
+  closed: "rounded-full border-border bg-transparent text-muted",
 };
 
 function formatDate(iso: string): string {
@@ -41,45 +46,51 @@ export default async function DevisPage() {
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-semibold">{quotesContent.listTitle}</h2>
+          <h2 className="text-lg font-semibold tracking-display">
+            {quotesContent.listTitle}
+          </h2>
           <p className="mt-1 text-sm text-muted">{quotesContent.listSubtitle}</p>
         </div>
         <Link
           href="/portail/devis/nouveau"
-          className="btn-accent rounded-full px-6 py-2.5 text-sm font-semibold"
+          className="btn-accent px-6 py-2.5 text-sm font-semibold"
         >
           Demander un devis
         </Link>
       </div>
 
       {list.length === 0 ? (
-        <div className="card-surface mt-6 rounded-2xl p-10 text-center">
-          <p className="text-sm text-muted">{quotesContent.emptyText}</p>
+        <div className="card-surface mt-6 p-10">
+          <p className="text-sm leading-relaxed text-muted">
+            {quotesContent.emptyText}
+          </p>
           <Link
             href="/portail/devis/nouveau"
-            className="mt-6 inline-flex rounded-full border border-border px-6 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent-cyan/60 hover:bg-surface"
+            className="btn-outline mt-6 inline-flex px-6 py-2.5 text-sm font-semibold"
           >
             Créer ma première demande
           </Link>
         </div>
       ) : (
-        <ul className="mt-6 space-y-3">
+        <ul className="mt-6 space-y-2">
           {list.map((q) => (
             <li
               key={q.id}
-              className="card-surface flex flex-wrap items-center justify-between gap-3 rounded-2xl px-6 py-4"
+              className="card-surface flex flex-wrap items-center justify-between gap-3 px-6 py-4"
             >
               <div>
-                <p className="font-mono text-xs text-muted">{q.reference}</p>
-                <p className="mt-0.5 font-semibold">
+                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent-cyan">
+                  {q.reference}
+                </p>
+                <p className="mt-1 font-semibold tracking-display">
                   {formulaLabel(q.project_type, quotesContent)}
                 </p>
-                <p className="mt-0.5 text-xs text-muted">
+                <p className="mt-1 font-mono text-[11px] text-muted">
                   Envoyée le {formatDate(q.created_at)}
                 </p>
               </div>
               <span
-                className={`rounded-full border px-3 py-1 text-xs font-semibold ${
+                className={`border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] ${
                   STATUS_STYLES[q.status] ?? STATUS_STYLES.closed
                 }`}
               >

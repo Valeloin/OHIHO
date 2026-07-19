@@ -8,30 +8,48 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
   return (
     <section className="relative overflow-hidden border-t border-border bg-surface">
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-24">
-        <Reveal className="max-w-2xl">
-          <h2 className="text-sm font-mono font-medium uppercase tracking-wider text-accent-violet">
-            {data.kicker}
-          </h2>
-          <p className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+      <div className="relative mx-auto max-w-6xl px-6 py-28 sm:py-32">
+        <Reveal>
+          <span className="kicker">{data.kicker}</span>
+          <h2 className="mt-6 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">
             {data.title}
-          </p>
+          </h2>
         </Reveal>
+        <div className="mt-12 h-px rule-fade" />
 
-        <RevealGroup className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Timeline : filet continu horizontal en desktop, filet vertical à
+            gauche en mobile. Le filet porteur prend le dégradé de marque
+            (bleu ciel → teal → émeraude), seul filet dégradé du site, et
+            chaque étape est jalonnée d'un point rond vert lumineux. */}
+        <RevealGroup className="relative mt-16 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Le filet porteur de la timeline (desktop uniquement) */}
+          <div
+            aria-hidden="true"
+            className="rule-brand absolute inset-x-0 top-0 hidden h-px lg:block"
+          />
+
           {data.steps.map((item, i) => (
-            <RevealItem key={i} className="relative pl-6">
-              <div className="absolute left-0 top-1 h-full w-px bg-border sm:hidden" />
-              <span className="font-mono text-2xl font-semibold text-accent-cyan/70">
+            <RevealItem key={i} className="relative pl-6 lg:pl-0 lg:pt-10">
+              {/* Filet porteur en colonne (mobile / tablette) */}
+              <div
+                aria-hidden="true"
+                className="rule-brand-y absolute left-0 top-0 h-full w-px lg:hidden"
+              />
+              {/* Jalon : point rond vert lumineux posé sur le filet */}
+              <div
+                aria-hidden="true"
+                className="absolute left-0 top-2 h-[7px] w-[7px] -translate-x-1/2 rounded-full bg-brand-emerald shadow-[0_0_10px_rgba(52,211,153,0.8)] lg:top-0 lg:translate-x-0 lg:-translate-y-1/2"
+              />
+
+              <span className="text-gradient font-mono text-3xl font-semibold tracking-display">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-3 text-lg font-semibold">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
+              <h3 className="mt-4 text-lg font-semibold tracking-display">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">
                 {item.description}
               </p>
-              {i < data.steps.length - 1 && (
-                <div className="mt-6 hidden h-px w-full bg-gradient-to-r from-border to-transparent lg:block" />
-              )}
             </RevealItem>
           ))}
         </RevealGroup>

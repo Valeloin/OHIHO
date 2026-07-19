@@ -17,9 +17,11 @@ const COMPANY_SIZES = [
   "Plus de 200 employés",
 ];
 
-// Style commun des champs : plus grands, focus visible, placeholders discrets.
+// Style commun des champs — DA « Banderole » : aplat nuit bleu-teal, filet
+// d'1px, coins arrondis (rounded-xl = --radius), focus signalé par le teal.
+// Les champs restent rectangulaires ; la pilule est réservée aux boutons.
 const FIELD =
-  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-2 focus:ring-accent-cyan/20";
+  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
 
 function Label({
   htmlFor,
@@ -31,10 +33,15 @@ function Label({
   optional?: boolean;
 }) {
   return (
-    <label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
+    // Libellé en mono capitales : dans la nouvelle DA, le mono porte les
+    // libellés et les chiffres, le sans-serif le texte courant.
+    <label
+      htmlFor={htmlFor}
+      className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted"
+    >
       {children}
       {optional && (
-        <span className="ml-1.5 text-xs font-normal text-muted">
+        <span className="ml-1.5 normal-case tracking-normal text-muted/70">
           (facultatif)
         </span>
       )}
@@ -48,7 +55,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="btn-accent w-full rounded-full px-6 py-3.5 text-sm font-semibold disabled:opacity-50"
+      className="btn-accent w-full px-6 py-3.5 text-sm font-semibold disabled:opacity-50"
     >
       {pending ? "Création en cours..." : "Créer mon compte"}
     </button>
@@ -59,7 +66,7 @@ export default function SignupForm() {
   const [state, formAction] = useFormState(signUp, null);
 
   return (
-    <form action={formAction} className="card-surface rounded-3xl p-8 sm:p-10">
+    <form action={formAction} className="card-surface p-8 sm:p-10">
       {/* L'essentiel : 4 champs seulement */}
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
@@ -115,9 +122,11 @@ export default function SignupForm() {
 
       {/* Le projet : tout est facultatif, clairement annoncé */}
       <div className="mt-9 border-t border-border pt-7">
-        <p className="text-sm font-semibold">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-accent-cyan">
           Votre projet{" "}
-          <span className="font-normal text-muted">— tout est facultatif</span>
+          <span className="normal-case tracking-normal text-muted">
+            — tout est facultatif
+          </span>
         </p>
         <p className="mt-1 text-xs text-muted">
           Ces informations nous aident simplement à préparer notre premier
@@ -197,7 +206,7 @@ export default function SignupForm() {
       </div>
 
       {state?.error && (
-        <p className="mt-5 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+        <p className="mt-5 rounded-xl border-l-2 border-red-400/60 bg-red-400/10 px-4 py-3 text-sm text-red-400">
           {state.error}
         </p>
       )}

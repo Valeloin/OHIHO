@@ -25,16 +25,14 @@ const BENEFITS = [
 
 export default function InscriptionPage() {
   return (
-    <main className="relative overflow-hidden bg-grid">
+    <main className="relative overflow-hidden">
       <AnimatedGlow variant="subtle" />
       <div className="relative mx-auto max-w-5xl px-6 py-16 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           {/* Panneau de bienvenue */}
-          <div className="card-dark rounded-3xl p-8 sm:p-9 lg:sticky lg:top-24">
-            <p className="text-sm font-mono font-medium uppercase tracking-wider text-accent-cyan">
-              Espace client
-            </p>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight">
+          <div className="card-dark p-8 sm:p-9 lg:sticky lg:top-24">
+            <p className="kicker">Espace client</p>
+            <h1 className="mt-5 text-3xl font-semibold tracking-display">
               Créer votre compte
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-muted">
@@ -42,26 +40,18 @@ export default function InscriptionPage() {
               passe sont nécessaires.
             </p>
 
-            <ul className="mt-8 space-y-5">
+            {/* Points ronds verts lumineux (comme les libellés de la banderole)
+                et filets d'1px entre les entrées. */}
+            <ul className="mt-8 divide-y divide-border border-t border-border">
               {BENEFITS.map((b) => (
-                <li key={b.title} className="flex gap-3">
-                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-cyan/15">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-3 w-3 text-accent-cyan"
-                    >
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  </span>
+                <li key={b.title} className="flex gap-4 py-5">
+                  <span
+                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-emerald shadow-[0_0_8px_rgba(52,211,153,0.8)]"
+                    aria-hidden="true"
+                  />
                   <div>
                     <p className="text-sm font-semibold">{b.title}</p>
-                    <p className="mt-0.5 text-sm leading-relaxed text-muted">
+                    <p className="mt-1 text-sm leading-relaxed text-muted">
                       {b.text}
                     </p>
                   </div>

@@ -3,13 +3,18 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { updateProfile } from "@/app/portail/profil/actions";
 
+// Même patron de champ / libellé que les formulaires d'authentification.
+const FIELD =
+  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
+const LABEL = "font-mono text-[11px] uppercase tracking-[0.16em] text-muted";
+
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <button
       type="submit"
       disabled={pending}
-      className="rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-50"
+      className="btn-accent px-6 py-3 text-sm font-semibold disabled:opacity-50"
     >
       {pending ? "Enregistrement..." : "Enregistrer"}
     </button>
@@ -34,10 +39,10 @@ export default function ProfileForm({
   const [state, formAction] = useFormState(updateProfile, null);
 
   return (
-    <form action={formAction} className="card-surface rounded-2xl p-8">
+    <form action={formAction} className="card-surface p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="firstName" className="text-xs font-medium text-muted">
+          <label htmlFor="firstName" className={LABEL}>
             Prénom
           </label>
           <input
@@ -47,12 +52,12 @@ export default function ProfileForm({
             required
             autoComplete="given-name"
             defaultValue={firstName ?? ""}
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            className={FIELD}
             placeholder="Jean"
           />
         </div>
         <div>
-          <label htmlFor="lastName" className="text-xs font-medium text-muted">
+          <label htmlFor="lastName" className={LABEL}>
             Nom
           </label>
           <input
@@ -62,26 +67,29 @@ export default function ProfileForm({
             required
             autoComplete="family-name"
             defaultValue={lastName ?? ""}
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            className={FIELD}
             placeholder="Dupont"
           />
         </div>
 
         <div className="sm:col-span-2">
-          <label className="text-xs font-medium text-muted">Email</label>
+          <label htmlFor="email-readonly" className={LABEL}>
+            Email
+          </label>
           <input
+            id="email-readonly"
             type="email"
             value={email}
             disabled
-            className="mt-2 w-full cursor-not-allowed rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-muted outline-none"
+            className={`${FIELD} cursor-not-allowed bg-surface-2 text-muted`}
           />
-          <p className="mt-1.5 text-xs text-muted">
+          <p className="mt-2 text-xs text-muted">
             L&apos;email ne peut pas être modifié ici.
           </p>
         </div>
 
         <div>
-          <label htmlFor="phone" className="text-xs font-medium text-muted">
+          <label htmlFor="phone" className={LABEL}>
             Téléphone (optionnel)
           </label>
           <input
@@ -90,12 +98,12 @@ export default function ProfileForm({
             type="tel"
             autoComplete="tel"
             defaultValue={phone ?? ""}
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            className={FIELD}
             placeholder="06 00 00 00 00"
           />
         </div>
         <div>
-          <label htmlFor="company" className="text-xs font-medium text-muted">
+          <label htmlFor="company" className={LABEL}>
             Entreprise (optionnel)
           </label>
           <input
@@ -104,13 +112,13 @@ export default function ProfileForm({
             type="text"
             autoComplete="organization"
             defaultValue={company ?? ""}
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            className={FIELD}
             placeholder="Nom de votre entreprise"
           />
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="address" className="text-xs font-medium text-muted">
+          <label htmlFor="address" className={LABEL}>
             Adresse (optionnel)
           </label>
           <input
@@ -119,17 +127,19 @@ export default function ProfileForm({
             type="text"
             autoComplete="street-address"
             defaultValue={address ?? ""}
-            className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm outline-none focus:border-accent-cyan"
+            className={FIELD}
             placeholder="12 rue de l'Exemple, 75000 Paris"
           />
         </div>
       </div>
 
       {state?.error && (
-        <p className="mt-4 text-sm text-red-400">{state.error}</p>
+        <p className="mt-4 rounded-xl border-l-2 border-red-400/60 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+          {state.error}
+        </p>
       )}
       {state?.success && (
-        <p className="mt-4 text-sm text-accent-emerald">
+        <p className="mt-4 rounded-xl border-l-2 border-accent-cyan bg-accent-cyan/10 px-4 py-3 text-sm text-accent-cyan">
           Profil mis à jour avec succès.
         </p>
       )}

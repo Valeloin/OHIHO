@@ -59,12 +59,18 @@ export default function ScrollNav() {
 
   return (
     <>
-      {/* Barre de progression du défilement */}
+      {/* Barre de progression du défilement, posée sur un rail visible : on lit
+          la position ET la course restante. La barre porte le dégradé de marque
+          (bleu ciel → teal → émeraude), statique comme la banderole. */}
       <div
-        className="fixed left-0 top-0 z-[60] h-0.5 bg-accent-cyan"
-        style={{ width: `${progress}%` }}
+        className="fixed left-0 top-0 z-[60] h-0.5 w-full bg-border"
         aria-hidden="true"
-      />
+      >
+        <div
+          className="rule-brand h-full"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
 
       {/* Flèches de navigation par section — desktop uniquement */}
       <div className="fixed bottom-6 right-6 z-50 hidden flex-col gap-3 lg:flex">
@@ -96,13 +102,15 @@ function ArrowButton({
   onClick: () => void;
   hidden: boolean;
 }) {
+  // Pilules rondes posées sur la surface nuit bleu-teal : filet fin, fond de
+  // surface, seul le teal interactif marque le survol.
   return (
     <button
       type="button"
       aria-label={label}
       onClick={onClick}
       disabled={hidden}
-      className={`flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#141416] shadow-lg ring-1 ring-black/10 transition-all duration-300 hover:scale-110 ${
+      className={`card-surface flex h-11 w-11 items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-accent-cyan ${
         hidden ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
