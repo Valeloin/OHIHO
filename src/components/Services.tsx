@@ -28,50 +28,66 @@ export default function Services({
   return (
     <section id="services" className="relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-28 sm:py-32">
+      {/* Rythme vertical resserré par rapport aux autres sections : c'est la
+          plus chargée du site (4 cartes), et elle doit tenir sur un écran. */}
+      <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-16">
         {/* En-tête au patron commun : libellé mono + filet, titre à chasse
             serrée aligné à gauche, sous-titre à largeur de lecture. */}
         <Reveal>
           <span className="kicker">{data.kicker}</span>
-          <h2 className="mt-6 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">
+          <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">
             {data.title}
           </h2>
-          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
+          <p className="mt-4 max-w-2xl leading-relaxed text-muted">
             {data.subtitle}
           </p>
         </Reveal>
-        <div className="mt-12 h-px rule-fade" />
+        <div className="mt-8 h-px rule-fade" />
 
-        {/* Les 4 formules alignées sur une seule rangée (dès lg). Les vignettes
-            animées occupent toute la largeur de la carte (pleine largeur, sans
-            marge intérieure) pour rester bien lisibles malgré les 4 colonnes ;
-            `overflow-hidden` les recoupe sur l'arrondi des coins hauts. */}
-        <RevealGroup className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Grille 2×2 en cartes PAYSAGE : animation à gauche, texte à droite.
+            Contrainte du site : chaque section doit tenir sur un écran. Avec
+            les vignettes empilées au-dessus du texte, la section faisait 1,6
+            écran ; en les posant à côté, la hauteur de carte est dictée par le
+            texte seul et la section repasse sous la barre — sans rien couper
+            du contenu éditable et en gardant les vignettes nettement plus
+            grandes qu'en 4 colonnes. En mobile, la carte se replie à la
+            verticale (animation en haut, pleine largeur). */}
+        <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2">
           {formulas.map((formula, i) => (
             <RevealItem key={formula.type} hover className="h-full">
               <Link
                 href={devisHref}
-                className="card-surface flex h-full flex-col overflow-hidden transition-colors hover:border-accent-cyan/50"
+                className="card-surface flex h-full flex-col overflow-hidden transition-colors hover:border-accent-cyan/50 sm:flex-row"
               >
-                <div className="aspect-[400/220] w-full">
+                {/* 55 % de la carte pour l'animation : elle reste bien plus
+                    large qu'en 4 colonnes, et `self-center` la garde centrée
+                    quand le texte rend la carte plus haute qu'elle. */}
+                <div className="aspect-[400/220] w-full shrink-0 sm:w-1/2 sm:self-center">
                   <ServiceScene type={formula.type} />
                 </div>
-                <div className="flex flex-1 flex-col border-t border-border p-5">
-                  {/* Index de formule en mono teal de marque : repère éditorial. */}
-                  <span className="font-mono text-xs text-brand-teal">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="mt-3 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-muted">
-                    {formula.tagline}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold tracking-display">
+                <div className="flex flex-1 flex-col border-t border-border p-5 sm:border-l sm:border-t-0">
+                  {/* La carte étant large, l'index et la sur-titre tiennent
+                      sur une seule ligne : le bloc de texte reste compact et
+                      laisse la vedette à l'animation. */}
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs text-brand-teal">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span aria-hidden="true" className="h-px w-5 bg-border" />
+                    <p className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-muted">
+                      {formula.tagline}
+                    </p>
+                  </div>
+                  <h3 className="mt-2.5 text-lg font-semibold tracking-display">
                     {formula.label}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">
+                  {/* Interlignage resserré : la colonne de texte est étroite,
+                      chaque ligne gagnée compte pour tenir sur un écran. */}
+                  <p className="mt-2.5 text-[0.8125rem] leading-[1.5] text-muted">
                     {formula.description}
                   </p>
                   {/* Exemple détaché par un filet, en bas de carte. */}
-                  <p className="mt-auto border-t border-border pt-4 text-xs leading-relaxed text-muted">
+                  <p className="mt-auto border-t border-border pt-3 text-xs leading-[1.45] text-muted">
                     {formula.examples}
                   </p>
                 </div>

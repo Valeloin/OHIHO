@@ -235,6 +235,364 @@ body {
   animation-iteration-count: infinite;
 }
 
+/* ---------- Frise de la méthode ----------
+   Le trait de la frise se remplit de gauche à droite et les 4 jalons
+   s'allument l'un après l'autre, au moment où le remplissage les atteint.
+   Cycle de 16,8 s = la moitié de celui de la vitrine, pour que les deux
+   animations du site restent en rapport harmonique.
+
+   Comme pour la gerbe d'étincelles, le retour à zéro se fait TOUJOURS à
+   opacité 0 : sans cela le trait se rembobinerait de droite à gauche sous
+   les yeux du visiteur. */
+@keyframes frise-fill {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  72% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  90% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  96% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+  96.5% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+}
+.frise-fill {
+  transform-origin: left center;
+  animation: frise-fill 16.8s linear infinite;
+}
+
+/* Version verticale, pour la frise repliée en colonne sous `lg`. */
+@keyframes frise-fill-y {
+  0% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  72% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  90% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  96% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+  96.5% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+}
+.frise-fill-y {
+  transform-origin: center top;
+  animation: frise-fill-y 16.8s linear infinite;
+}
+
+/* Jalons : chacun s'allume quand le remplissage passe sur lui (les colonnes
+   commencent à 0, 25, 50 et 75 % de la largeur, soit 0, 18, 36 et 54 % du
+   temps de remplissage), puis tous s'éteignent ensemble à la fin du cycle. */
+.frise-dot-1,
+.frise-dot-2,
+.frise-dot-3,
+.frise-dot-4 {
+  animation-duration: 16.8s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+.frise-dot-1 {
+  animation-name: frise-dot-1;
+}
+.frise-dot-2 {
+  animation-name: frise-dot-2;
+}
+.frise-dot-3 {
+  animation-name: frise-dot-3;
+}
+.frise-dot-4 {
+  animation-name: frise-dot-4;
+}
+@keyframes frise-dot-1 {
+  0%,
+  1% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+  4%,
+  94% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgb(var(--brand-emerald) / 0.85);
+  }
+  97%,
+  100% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+}
+@keyframes frise-dot-2 {
+  0%,
+  18% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+  21%,
+  94% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgb(var(--brand-emerald) / 0.85);
+  }
+  97%,
+  100% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+}
+@keyframes frise-dot-3 {
+  0%,
+  36% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+  39%,
+  94% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgb(var(--brand-emerald) / 0.85);
+  }
+  97%,
+  100% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+}
+@keyframes frise-dot-4 {
+  0%,
+  54% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+  57%,
+  94% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgb(var(--brand-emerald) / 0.85);
+  }
+  97%,
+  100% {
+    opacity: 0.3;
+    box-shadow: none;
+  }
+}
+
+/* Réaction de l'étape au passage de la frise : le numéro grossit d'un coup
+   et son texte se déhanche brièvement. Les deux se déclenchent au moment où
+   le remplissage atteint le jalon (0, 18, 36 et 54 % du cycle de 16,8 s),
+   puis plus rien : ce sont des à-coups ponctuels, pas des boucles — le
+   mouvement continu et ondulatoire est proscrit sur ce site.
+   Le grossissement reste contenu (1 → 1.09) pour ne pas faire sauter la
+   mise en page. */
+.frise-num-1,
+.frise-num-2,
+.frise-num-3,
+.frise-num-4,
+.frise-txt-1,
+.frise-txt-2,
+.frise-txt-3,
+.frise-txt-4 {
+  animation-duration: 16.8s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+/* Le numéro est un <span> : il lui faut inline-block pour accepter une
+   transformation. Le bloc de texte, lui, reste un bloc — le passer en
+   inline-block le ferait se rétracter sur son contenu. */
+.frise-num-1,
+.frise-num-2,
+.frise-num-3,
+.frise-num-4 {
+  display: inline-block;
+}
+.frise-num-1 {
+  animation-name: frise-num-1;
+}
+.frise-num-2 {
+  animation-name: frise-num-2;
+}
+.frise-num-3 {
+  animation-name: frise-num-3;
+}
+.frise-num-4 {
+  animation-name: frise-num-4;
+}
+.frise-txt-1 {
+  animation-name: frise-txt-1;
+}
+.frise-txt-2 {
+  animation-name: frise-txt-2;
+}
+.frise-txt-3 {
+  animation-name: frise-txt-3;
+}
+.frise-txt-4 {
+  animation-name: frise-txt-4;
+}
+
+@keyframes frise-num-1 {
+  0% {
+    transform: scale(1);
+  }
+  2% {
+    transform: scale(1.09);
+  }
+  5%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes frise-num-2 {
+  0%,
+  18% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.09);
+  }
+  23%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes frise-num-3 {
+  0%,
+  36% {
+    transform: scale(1);
+  }
+  38% {
+    transform: scale(1.09);
+  }
+  41%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes frise-num-4 {
+  0%,
+  54% {
+    transform: scale(1);
+  }
+  56% {
+    transform: scale(1.09);
+  }
+  59%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Déhanchement : quatre allers-retours de 3 px qui s'amortissent. */
+@keyframes frise-txt-1 {
+  0% {
+    transform: translateX(0);
+  }
+  1% {
+    transform: translateX(-3px);
+  }
+  2% {
+    transform: translateX(3px);
+  }
+  3% {
+    transform: translateX(-2px);
+  }
+  4% {
+    transform: translateX(1px);
+  }
+  5%,
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes frise-txt-2 {
+  0%,
+  18% {
+    transform: translateX(0);
+  }
+  19% {
+    transform: translateX(-3px);
+  }
+  20% {
+    transform: translateX(3px);
+  }
+  21% {
+    transform: translateX(-2px);
+  }
+  22% {
+    transform: translateX(1px);
+  }
+  23%,
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes frise-txt-3 {
+  0%,
+  36% {
+    transform: translateX(0);
+  }
+  37% {
+    transform: translateX(-3px);
+  }
+  38% {
+    transform: translateX(3px);
+  }
+  39% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(1px);
+  }
+  41%,
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes frise-txt-4 {
+  0%,
+  54% {
+    transform: translateX(0);
+  }
+  55% {
+    transform: translateX(-3px);
+  }
+  56% {
+    transform: translateX(3px);
+  }
+  57% {
+    transform: translateX(-2px);
+  }
+  58% {
+    transform: translateX(1px);
+  }
+  59%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
 /* Respect du réglage « réduire les animations » du visiteur. Les apparitions
    au scroll sont gérées côté JS (framer-motion lit la même préférence). */
 @media (prefers-reduced-motion: reduce) {

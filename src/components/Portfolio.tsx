@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ProjectVisual from "@/components/portfolio/ProjectVisual";
+import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
@@ -16,7 +16,9 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
       className="relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-28 sm:py-32">
+      {/* Rythme resserré : comme Services, cette section porte beaucoup de
+          contenu (3 cartes + encart) et doit tenir sur un écran. */}
+      <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-16">
         {/* En-tête éditorial : libellé mono, titre large à gauche, filet. */}
         <Reveal>
           <span className="kicker">{data.kicker}</span>
@@ -27,56 +29,89 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
             {data.subtitle}
           </p>
         </Reveal>
-        <div className="mt-12 h-px rule-fade" />
+        <div className="mt-8 h-px rule-fade" />
 
-        {/* 3 colonnes dès 768px : les cartes restent alignées horizontalement
-            au maximum (une carte seule pleine largeur devient géante). */}
-        <RevealGroup className="mt-12 grid gap-6 md:grid-cols-3">
+        {/* Les réalisations se lisent d'abord par leur MARQUE : une grande
+            tuile portant le favicon du site, cliquable vers le site en ligne.
+            Les favicons sont servies depuis /public — aucun appel externe
+            depuis le navigateur du visiteur.
+            Les projets à venir gardent une tuile en pointillés, non cliquable
+            et sans icône : on n'invente pas de favicon pour un site qui
+            n'existe pas. */}
+        <RevealGroup className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
           {PROJECTS.map((project) => {
             const isExternal = project.href?.startsWith("http");
+            const enLigne = Boolean(project.href);
+
             const content = (
               <>
-                <div className="aspect-[400/260] w-full overflow-hidden border-b border-border">
-                  <ProjectVisual
-                    href={project.href}
-                    accent={project.accent}
-                    title={project.title}
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-teal">
-                    {project.category}
-                  </p>
-                  <h3 className="mt-3 text-lg font-semibold tracking-display">
-                    {project.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {project.description}
-                  </p>
-                  {/* mt-auto : le lien reste collé en bas quelle que soit la
-                      longueur du texte, les cartes étant à hauteur égale. */}
-                  {project.href ? (
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-medium text-accent-cyan">
-                      Voir le site
-                      <span aria-hidden="true">→</span>
+                {/* Tuile d'icône en grand format, carrée. */}
+                <div className="flex items-center gap-4">
+                  {project.icon ? (
+                    <span
+                      className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl"
+                      style={{ background: project.iconBg }}
+                    >
+                      <Image
+                        src={project.icon}
+                        alt=""
+                        width={80}
+                        height={80}
+                        className="h-20 w-20"
+                      />
                     </span>
                   ) : (
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-medium text-muted">
-                      Bientôt en ligne
+                    /* Emplacement à venir : pointillés, aucune icône. */
+                    <span
+                      aria-hidden="true"
+                      className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-dashed border-border text-2xl text-muted/50"
+                    >
+                      ·
                     </span>
                   )}
+                  <div className="min-w-0">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-teal">
+                      {project.category}
+                    </p>
+                    <h3 className="mt-2 truncate text-lg font-semibold tracking-display">
+                      {project.title}
+                    </h3>
+                  </div>
                 </div>
+
+                <p className="mt-5 text-sm leading-relaxed text-muted">
+                  {project.description}
+                </p>
+
+                {/* mt-auto : l'action reste collée en bas, les tuiles étant
+                    à hauteur égale sur la rangée. */}
+                {enLigne ? (
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-accent-cyan">
+                    Voir le site
+                    <span aria-hidden="true">→</span>
+                  </span>
+                ) : (
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-muted">
+                    {project.note ?? "Bientôt en ligne"}
+                  </span>
+                )}
               </>
             );
 
-            // h-full + flex-col : les trois cartes s'alignent sur la hauteur
-            // de la rangée (la plus grande), quel que soit leur volume de texte.
-            // Survol : le filet passe au teal interactif (l'élévation vient de RevealItem).
-            const cardClass =
-              "card-dark group flex h-full flex-col overflow-hidden transition-colors hover:border-accent-cyan/50";
+            // Trois états distincts, et non deux : un projet peut être bien
+            // réel (donc avec son icône) sans être encore accessible en
+            // ligne. Seules les tuiles SANS icône sont de vrais emplacements
+            // vides, et elles seules prennent les pointillés et l'atténuation.
+            const base =
+              "card-dark group flex h-full flex-col p-6 transition-colors";
+            const cardClass = enLigne
+              ? `${base} hover:border-accent-cyan/50`
+              : project.icon
+                ? base
+                : `${base} border-dashed opacity-70`;
 
             return (
-              <RevealItem key={project.title} hover className="h-full">
+              <RevealItem key={project.title} hover={enLigne} className="h-full">
                 {project.href ? (
                   <Link
                     href={project.href}
@@ -97,7 +132,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
         <Reveal>
           {/* Encart de fin en carte : texte à gauche, bouton à droite ;
               empilé sous sm. */}
-          <div className="card-surface mt-20 flex flex-col items-start gap-6 p-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="card-surface mt-8 flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-xl text-sm leading-relaxed text-muted">
               {data.ctaText}
             </p>
