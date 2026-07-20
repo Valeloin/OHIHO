@@ -137,7 +137,9 @@ export default function Hero({
 
             {/* Puces de progression, CLIQUABLES : elles suivent la scène en
                 automatique, et permettent de la choisir à la main. */}
-            <div className="mb-5 flex justify-center gap-2">
+            {/* Marge réduite : les boutons portent désormais eux-mêmes leur
+                rembourrage vertical pour la cible tactile. */}
+            <div className="mb-1 flex justify-center gap-1">
               {formulaLabels.map((label, i) => {
                 const n = i + 1;
                 return (
@@ -147,7 +149,10 @@ export default function Hero({
                     onClick={() => setScene(scene === n ? null : n)}
                     aria-label={`Voir la vignette ${label}`}
                     aria-pressed={scene === n}
-                    className="group rounded-full py-2 focus-visible:outline-none"
+                    /* `px-2 py-4` : le trait ne fait que 4 px de haut, c'est
+                       le bouton autour qui doit offrir la cible tactile.
+                       Elle passe de 32 × 20 à 48 × 44. */
+                    className="group flex items-center rounded-full px-2 py-5 focus-visible:outline-none"
                   >
                     <span className="relative block h-1 w-8 overflow-hidden rounded-full bg-border transition-colors group-hover:bg-border/60 group-focus-visible:ring-2 group-focus-visible:ring-accent-cyan/60">
                       <span
@@ -171,7 +176,12 @@ export default function Hero({
             commun les tient ensemble tout en les laissant respirer, séparés
             par la seule gouttière de la grille. */}
         <motion.div variants={ITEM} className="card-surface mt-14 px-6 py-6 sm:px-8">
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+          {/* UNE colonne sous `sm`, et non deux. À 375 px de large, deux
+              colonnes ne laissaient que 73 px au texte : les descriptions
+              tombaient sur 6 à 10 lignes et le mot-clé « Interface web »
+              débordait de sa cellule. Sur toute la largeur, chacune tient
+              sur deux lignes. */}
+          <dl className="grid grid-cols-1 gap-x-6 gap-y-6 min-[420px]:grid-cols-2 sm:grid-cols-4 sm:gap-y-8">
             {data.stats.map((item, i) => (
               // Le pictogramme passe À GAUCHE du texte plutôt qu'au-dessus :
               // empilé, il laissait une bande vide en haut de chaque colonne

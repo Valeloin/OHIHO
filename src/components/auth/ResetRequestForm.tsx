@@ -4,9 +4,8 @@ import { useFormState, useFormStatus } from "react-dom";
 import { requestPasswordReset } from "@/app/connexion/mot-de-passe-oublie/actions";
 
 // Même patron de champ / libellé que les autres formulaires connectés.
-const FIELD =
-  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
-const LABEL = "font-mono text-[11px] uppercase tracking-[0.16em] text-muted";
+const FIELD = "field";
+const LABEL = "field-label";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -26,7 +25,7 @@ export default function ResetRequestForm() {
 
   if (state?.success) {
     return (
-      <div className="card-surface p-8">
+      <div className="card-surface p-6 sm:p-8">
         <h3 className="text-lg font-semibold tracking-display">
           Vérifiez votre boîte mail
         </h3>
@@ -45,7 +44,7 @@ export default function ResetRequestForm() {
   }
 
   return (
-    <form action={formAction} className="card-surface p-8">
+    <form action={formAction} className="card-surface p-6 sm:p-8">
       <div>
         <label htmlFor="email" className={LABEL}>
           Email
@@ -72,7 +71,7 @@ export default function ResetRequestForm() {
       </div>
 
       <p className="mt-5 text-center text-sm text-muted">
-        <a href="/connexion" className="text-accent-cyan hover:underline">
+        <a href="/connexion" className="inline-flex min-h-[44px] items-center text-accent-cyan hover:underline">
           Retour à la connexion
         </a>
       </p>

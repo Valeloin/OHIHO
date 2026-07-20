@@ -73,7 +73,13 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                     <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-teal">
                       {project.category}
                     </p>
-                    <h3 className="mt-2 truncate text-lg font-semibold tracking-display">
+                    {/* `truncate` seulement à partir de `sm` : en une seule
+                        colonne, la tuile est assez large pour laisser le
+                        titre passer à la ligne, et un nom coupé par une
+                        ellipse sur mobile se lit mal. L'ellipse ne sert que
+                        dans les grilles à 2 et 3 colonnes, où les tuiles
+                        doivent rester de même hauteur. */}
+                    <h3 className="mt-2 text-lg font-semibold tracking-display sm:truncate">
                       {project.title}
                     </h3>
                   </div>
@@ -111,7 +117,17 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                 : `${base} border-dashed opacity-70`;
 
             return (
-              <RevealItem key={project.title} hover={enLigne} className="h-full">
+              // `min-w-0` : une cellule de grille refuse par défaut de
+              // descendre sous la largeur minimale de son contenu. Le titre
+              // étant en `truncate` (donc insécable), la tuile réclamait
+              // 301 px et débordait de sa colonne de 272 sur un écran de
+              // 320. Avec `min-w-0`, elle se plie à sa colonne et c'est
+              // l'ellipse du titre qui absorbe le manque.
+              <RevealItem
+                key={project.title}
+                hover={enLigne}
+                className="h-full min-w-0"
+              >
                 {project.href ? (
                   <Link
                     href={project.href}

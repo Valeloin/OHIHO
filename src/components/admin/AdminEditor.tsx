@@ -57,10 +57,9 @@ function Field({
   onChange: (v: string) => void;
   textarea?: boolean;
 }) {
-  // Champ rectangulaire à coins arrondis (rounded-xl = --radius), filet 1px,
-  // focus souligné par le teal interactif.
-  const cls =
-    "mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
+  // Champ commun à tout le site (voir `.field` dans globals.css) : il passe
+  // notamment à 16 px sur mobile pour ne pas déclencher le zoom de Safari iOS.
+  const cls = "field";
   return (
     <div>
       <label className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
@@ -133,7 +132,7 @@ function ColorField({
         value={valid ? value : defaultValue}
         onChange={(e) => onChange(e.target.value)}
         aria-label={`${label} · sélecteur`}
-        className="h-10 w-10 shrink-0 cursor-pointer rounded-xl border border-border bg-background p-1"
+        className="h-12 w-12 shrink-0 cursor-pointer rounded-xl border border-border bg-background p-1"
       />
       <div className="min-w-0 flex-1">
         <label className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
@@ -145,9 +144,7 @@ function ColorField({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           spellCheck={false}
-          className={`mt-2 w-full rounded-xl border bg-background px-3 py-2 font-mono text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25 ${
-            valid ? "border-border" : "border-red-400"
-          }`}
+          className={`field font-mono ${valid ? "" : "!border-red-400"}`}
         />
       </div>
       <button
@@ -310,7 +307,9 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
       {/* Menu des sections : colonne fixe à gauche sur grand écran,
           rangée déroulante au-dessus du contenu sur mobile. */}
       <nav
-        className="sticky top-[57px] z-30 -mx-6 mb-6 flex gap-2 overflow-x-auto border-b border-border bg-background px-6 py-3
+        /* `top` calé sur la hauteur RÉELLE du bandeau (--header-h), et non sur
+           un 57 px codé en dur qui laissait la rangée passer sous le header. */
+        className="sticky top-[var(--header-h)] z-30 -mx-6 mb-6 flex gap-2 overflow-x-auto border-b border-border bg-background px-6 py-3
           lg:top-24 lg:z-auto lg:m-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0"
       >
         {MENU.map((item) => (

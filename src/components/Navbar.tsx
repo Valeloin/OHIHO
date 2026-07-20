@@ -124,7 +124,14 @@ export default function Navbar() {
           : "bg-[var(--header-bg)]"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      {/* Hauteur FIXE plutôt qu'un rembourrage vertical : le bandeau mesure
+          ainsi 77 px partout (76 + le filet du bas), quel que soit l'élément
+          le plus haut de la rangée — le bouton de menu à 44 px sur mobile,
+          les pilules de compte à 44 px sur desktop, l'emblème à 40 px. Avec
+          `py-4`, chaque changement de hauteur d'un bouton décalait le
+          bandeau et désaccordait `--header-h`, dont dépend le calage de la
+          barre d'onglets de /admin. */}
+      <nav className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2 group">
           <Image
             /* SVG et non PNG : le PNG date de l'anneau argenté, le SVG porte
@@ -154,12 +161,17 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={handleNavClick}
-              className="group relative py-1 font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)] focus-visible:text-[var(--header-fg)]"
+              /* `min-h-[44px]` : ces liens apparaissent dès `md`, donc sur
+                 les tablettes, qui sont tactiles. Avec `py-1` ils ne
+                 faisaient que 24 px de haut. Le filet de survol est calé sur
+                 `bottom-3` pour rester collé au texte malgré la boîte
+                 devenue plus haute. */
+              className="group relative flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)] focus-visible:text-[var(--header-fg)]"
             >
               {link.label}
               <span
                 aria-hidden="true"
-                className="rule-brand absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                className="rule-brand absolute bottom-3 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
               />
             </Link>
           ))}
@@ -170,14 +182,14 @@ export default function Navbar() {
             <>
               <Link
                 href="/portail"
-                className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                className="flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
               >
                 Bonjour,{" "}
                 <span className="text-accent-cyan">{firstName}</span>
               </Link>
               <Link
                 href="/portail/profil"
-                className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                className="flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
               >
                 Mon profil
               </Link>
@@ -192,7 +204,7 @@ export default function Navbar() {
               <form action={signOut}>
                 <button
                   type="submit"
-                  className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                  className="flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
                 >
                   Déconnexion
                 </button>
@@ -212,8 +224,11 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3 md:hidden">
           <button
-            aria-label="Ouvrir le menu"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--header-border)] transition-colors hover:border-accent-cyan/60"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={open}
+            /* 44 px et non 36 : c'est la cible tactile minimale recommandée,
+               et c'est le seul bouton du bandeau sur mobile. */
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--header-border)] transition-colors hover:border-accent-cyan/60"
             onClick={() => setOpen((v) => !v)}
           >
             <span className="relative block h-3 w-4">
@@ -237,33 +252,37 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Sections directement accessibles dans le header — mobile & tablette (sous md).
-          Défilement horizontal si l'écran est trop étroit pour tout afficher. */}
-      <div className="border-t border-[var(--header-border)] md:hidden">
-        <div className="flex items-center gap-6 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={handleNavClick}
-              className="shrink-0 whitespace-nowrap font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* Tiroir mobile : même langage que le bandeau — filets, mono, boutons en pilule. */}
+      {/* Tiroir mobile. Il porte MAINTENANT les liens de section en plus des
+          liens de compte. Auparavant les sections vivaient dans une seconde
+          rangée à défilement horizontal, collée sous le bandeau :
+          « Réalisations » en dépassait de 50 px sur un écran de 375, on ne
+          pouvait donc pas la lire sans faire glisser une bande qui ne
+          s'annonçait pas comme glissante. Cette rangée portait aussi le
+          header à 114 px de haut sur mobile, contre 73 ailleurs.
+          Chaque entrée fait au moins 48 px de haut et toute la largeur : la
+          cible tactile recommandée est de 44 px, les anciens liens en
+          faisaient 16. */}
       {open && (
-        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
-          <div className="flex flex-col gap-4">
+        <div className="border-t border-[var(--header-border)] bg-background md:hidden">
+          <div className="mx-auto max-w-7xl px-6 pb-4 pt-1">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={handleNavClick}
+                className="flex min-h-[48px] items-center border-b border-border/60 font-mono text-[13px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <div className="mt-4 flex flex-col gap-2">
             {firstName ? (
               <>
                 <Link
                   href="/portail"
                   onClick={() => setOpen(false)}
-                  className="font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:text-foreground"
+                  className="flex min-h-[48px] items-center font-mono text-[13px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
                 >
                   Bonjour,{" "}
                   <span className="text-accent-cyan">{firstName}</span>
@@ -271,7 +290,7 @@ export default function Navbar() {
                 <Link
                   href="/portail/profil"
                   onClick={() => setOpen(false)}
-                  className="font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:text-foreground"
+                  className="flex min-h-[48px] items-center font-mono text-[13px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
                 >
                   Mon profil
                 </Link>
@@ -279,7 +298,7 @@ export default function Navbar() {
                   <Link
                     href="/admin"
                     onClick={() => setOpen(false)}
-                    className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan"
+                    className="flex min-h-[48px] items-center font-mono text-[13px] uppercase tracking-[0.16em] text-accent-cyan"
                   >
                     Outil dev
                   </Link>
@@ -287,7 +306,7 @@ export default function Navbar() {
                 <form action={signOut}>
                   <button
                     type="submit"
-                    className="font-mono text-xs uppercase tracking-[0.14em] text-muted transition-colors hover:text-foreground"
+                    className="flex min-h-[48px] items-center font-mono text-[13px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
                   >
                     Déconnexion
                   </button>
@@ -298,19 +317,20 @@ export default function Navbar() {
                 <Link
                   href="/connexion"
                   onClick={() => setOpen(false)}
-                  className="btn-outline px-5 py-2 text-center text-sm"
+                  className="btn-outline px-5 py-3.5 text-center text-sm"
                 >
                   Connexion
                 </Link>
                 <Link
                   href="/inscription"
                   onClick={() => setOpen(false)}
-                  className="btn-accent px-5 py-2 text-center text-sm"
+                  className="btn-accent px-5 py-3.5 text-center text-sm"
                 >
                   S&apos;inscrire
                 </Link>
               </>
             )}
+            </div>
           </div>
         </div>
       )}

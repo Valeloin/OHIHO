@@ -17,11 +17,8 @@ const COMPANY_SIZES = [
   "Plus de 200 employés",
 ];
 
-// Style commun des champs — DA « Banderole » : aplat nuit bleu-teal, filet
-// d'1px, coins arrondis (rounded-xl = --radius), focus signalé par le teal.
-// Les champs restent rectangulaires ; la pilule est réservée aux boutons.
-const FIELD =
-  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
+// Style commun des champs, défini une seule fois dans globals.css (.field).
+const FIELD = "field";
 
 function Label({
   htmlFor,
@@ -37,7 +34,7 @@ function Label({
     // libellés et les chiffres, le sans-serif le texte courant.
     <label
       htmlFor={htmlFor}
-      className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted"
+      className="field-label"
     >
       {children}
       {optional && (
@@ -66,7 +63,7 @@ export default function SignupForm() {
   const [state, formAction] = useFormState(signUp, null);
 
   return (
-    <form action={formAction} className="card-surface p-8 sm:p-10">
+    <form action={formAction} className="card-surface p-6 sm:p-10">
       {/* L'essentiel : 4 champs seulement */}
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
@@ -125,7 +122,7 @@ export default function SignupForm() {
         <p className="font-mono text-xs uppercase tracking-[0.16em] text-accent-cyan">
           Votre projet{" "}
           <span className="normal-case tracking-normal text-muted">
-            — tout est facultatif
+            (tout est facultatif)
           </span>
         </p>
         <p className="mt-1 text-xs text-muted">
@@ -217,7 +214,7 @@ export default function SignupForm() {
 
       <p className="mt-5 text-center text-sm text-muted">
         Déjà un compte ?{" "}
-        <a href="/connexion" className="text-accent-cyan hover:underline">
+        <a href="/connexion" className="inline-flex min-h-[44px] items-center text-accent-cyan hover:underline">
           Se connecter
         </a>
       </p>

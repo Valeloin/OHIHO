@@ -27,7 +27,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
             <div className="mt-8 space-y-4 text-sm">
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-emerald shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
-                <a href={`mailto:${data.email}`} className="hover:underline">
+                <a href={`mailto:${data.email}`} className="inline-flex min-h-[44px] items-center hover:underline">
                   {data.email}
                 </a>
               </div>
@@ -63,7 +63,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
                 Déjà un compte ?{" "}
                 <Link
                   href="/connexion"
-                  className="text-accent-cyan hover:underline"
+                  className="inline-flex min-h-[44px] items-center text-accent-cyan hover:underline"
                 >
                   Se connecter
                 </Link>

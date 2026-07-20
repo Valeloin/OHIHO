@@ -16,7 +16,9 @@ let baseBehavior = "";
 export function animateScrollTo(
   target: number,
   onTick?: () => void,
-  duration = 280
+  duration = 280,
+  // Appelé une fois l'animation terminée. Sert au recalage de `scrollToId`.
+  onDone?: () => void
 ) {
   const el = document.documentElement;
 
@@ -34,6 +36,9 @@ export function animateScrollTo(
   const distance = target - start;
   if (Math.abs(distance) < 2) {
     el.style.scrollBehavior = baseBehavior;
+    // Déjà à destination : le recalage doit tout de même avoir sa chance, la
+    // disposition ayant pu bouger depuis le calcul de la cible.
+    onDone?.();
     return;
   }
 
@@ -48,6 +53,7 @@ export function animateScrollTo(
       if (activeTimer !== null) window.clearInterval(activeTimer);
       activeTimer = null;
       el.style.scrollBehavior = baseBehavior;
+      onDone?.();
     }
   }, 16);
 }
@@ -72,6 +78,18 @@ export function sectionScrollTarget(section: HTMLElement): number {
 export function scrollToId(id: string): boolean {
   const section = document.getElementById(id);
   if (!section) return false;
-  animateScrollTo(sectionScrollTarget(section));
+
+  animateScrollTo(sectionScrollTarget(section), undefined, 280, () => {
+    // Recalage après coup. La cible est calculée AVANT le défilement, sur une
+    // page qui n'a pas encore sa disposition finale : les blocs de la section
+    // visée sont encore décalés de 20 px par leur animation d'apparition, et
+    // sur mobile le tiroir du menu est encore ouvert au moment du clic. Le
+    // titre arrivait ainsi 24 px trop haut, c'est-à-dire quatre pixels
+    // DERRIÈRE le bandeau.
+    // On remesure une fois la disposition stabilisée, et on ne rejoue une
+    // animation que si l'écart se voit.
+    const corrige = sectionScrollTarget(section);
+    if (Math.abs(corrige - window.scrollY) > 4) animateScrollTo(corrige, undefined, 160);
+  });
   return true;
 }

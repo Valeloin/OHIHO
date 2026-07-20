@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function PortailSitesPage() {
   return (
-    <div className="card-surface p-8">
+    <div className="card-surface p-6 sm:p-8">
       <p className="text-sm leading-relaxed text-muted">
         Les sites et applications que nous développons pour vous apparaîtront
         ici une fois livrés, avec un accès direct.

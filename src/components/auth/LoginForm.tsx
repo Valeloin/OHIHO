@@ -6,11 +6,10 @@ import { signIn } from "@/app/connexion/actions";
 // Même patron de champ que SignupForm : aplat nuit, filet d'1px, coins arrondis
 // (rounded-xl = --radius). Les champs restent rectangulaires : seuls les
 // boutons et les puces passent en pilule.
-const FIELD =
-  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
+const FIELD = "field";
 
 // Libellé mono capitales, commun à tous les formulaires connectés.
-const LABEL = "font-mono text-[11px] uppercase tracking-[0.16em] text-muted";
+const LABEL = "field-label";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -29,7 +28,7 @@ export default function LoginForm({ next }: { next?: string }) {
   const [state, formAction] = useFormState(signIn, null);
 
   return (
-    <form action={formAction} className="card-surface p-8">
+    <form action={formAction} className="card-surface p-6 sm:p-8">
       {next && <input type="hidden" name="next" value={next} />}
       <div className="grid gap-5">
         <div>
@@ -69,7 +68,7 @@ export default function LoginForm({ next }: { next?: string }) {
       <div className="mt-4 text-right">
         <a
           href="/connexion/mot-de-passe-oublie"
-          className="text-xs text-muted hover:text-accent-cyan hover:underline"
+          className="inline-flex min-h-[44px] items-center text-xs text-muted hover:text-accent-cyan hover:underline"
         >
           Mot de passe oublié ?
         </a>
@@ -81,7 +80,7 @@ export default function LoginForm({ next }: { next?: string }) {
 
       <p className="mt-5 text-center text-sm text-muted">
         Pas encore de compte ?{" "}
-        <a href="/inscription" className="text-accent-cyan hover:underline">
+        <a href="/inscription" className="inline-flex min-h-[44px] items-center text-accent-cyan hover:underline">
           Créer un compte
         </a>
       </p>

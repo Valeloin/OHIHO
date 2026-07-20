@@ -31,11 +31,11 @@ export default function Footer({ data }: { data: FooterContent }) {
             <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
               Navigation
             </h3>
-            <ul className="mt-5 space-y-3 text-sm text-foreground/80">
+            <ul className="mt-3 space-y-1 text-sm text-foreground/80">
               <li>
                 <Link
                   href="/#services"
-                  className="transition-colors hover:text-accent-cyan"
+                  className="inline-flex min-h-[44px] items-center transition-colors hover:text-accent-cyan"
                 >
                   Services
                 </Link>
@@ -43,7 +43,7 @@ export default function Footer({ data }: { data: FooterContent }) {
               <li>
                 <Link
                   href="/#expertise"
-                  className="transition-colors hover:text-accent-cyan"
+                  className="inline-flex min-h-[44px] items-center transition-colors hover:text-accent-cyan"
                 >
                   Expertise
                 </Link>
@@ -51,7 +51,7 @@ export default function Footer({ data }: { data: FooterContent }) {
               <li>
                 <Link
                   href="/#portfolio"
-                  className="transition-colors hover:text-accent-cyan"
+                  className="inline-flex min-h-[44px] items-center transition-colors hover:text-accent-cyan"
                 >
                   Réalisations
                 </Link>
@@ -59,7 +59,7 @@ export default function Footer({ data }: { data: FooterContent }) {
               <li>
                 <Link
                   href="/#contact"
-                  className="transition-colors hover:text-accent-cyan"
+                  className="inline-flex min-h-[44px] items-center transition-colors hover:text-accent-cyan"
                 >
                   Contact
                 </Link>
@@ -71,11 +71,11 @@ export default function Footer({ data }: { data: FooterContent }) {
             <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
               Contact
             </h3>
-            <ul className="mt-5 space-y-3 text-sm text-foreground/80">
+            <ul className="mt-3 space-y-1 text-sm text-foreground/80">
               <li>
                 <a
                   href="mailto:contact@ohiho.fr"
-                  className="transition-colors hover:text-accent-cyan"
+                  className="inline-flex min-h-[44px] items-center transition-colors hover:text-accent-cyan"
                 >
                   contact@ohiho.fr
                 </a>

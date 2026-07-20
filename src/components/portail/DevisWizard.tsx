@@ -14,9 +14,8 @@ type Status = "idle" | "submitting" | "error";
 const STEPS = ["Formule", "Détails", "Récapitulatif"] as const;
 
 // Mêmes patrons de champ / libellé que les autres formulaires connectés.
-const FIELD =
-  "mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50 focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25";
-const LABEL = "font-mono text-[11px] uppercase tracking-[0.16em] text-muted";
+const FIELD = "field";
+const LABEL = "field-label";
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
 

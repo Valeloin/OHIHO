@@ -33,6 +33,12 @@
   --header-fg: #eef4fc;
   --header-muted: #9fb2cc;
   --header-border: rgba(238, 244, 252, 0.1);
+  /* Hauteur du bandeau : rangée de 76 px + le filet du bas. Elle est la même
+     à toutes les tailles depuis que la rangée de liens à défilement
+     horizontal du mobile a été remplacée par le tiroir. Tout ce qui se cale
+     sous le header (barre d'onglets de /admin) lit cette variable plutôt que
+     de recopier un nombre. */
+  --header-h: 77px;
 
   /* Trio de marque, repris tel quel du logo (public/logo-mark.svg).
      Déclaré en CANAUX RGB (et non en hex) pour que Tailwind puisse appliquer
@@ -107,6 +113,18 @@ body {
   }
 
   /* Bouton principal : pilule au dégradé de marque, comme la banderole. */
+  /* Hauteur tactile plancher, commune aux deux pilules. Plusieurs boutons
+     étaient rembourrés en `py-2` ou `py-2.5`, ce qui les laissait à 38-40 px :
+     sous les 44 px recommandés, on les rate au doigt. Le `inline-flex` sert
+     à centrer le libellé une fois la hauteur forcée. */
+  .btn-accent,
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+  }
+
   .btn-accent {
     background-image: linear-gradient(
       100deg,
@@ -177,6 +195,58 @@ body {
     border-radius: var(--radius);
     box-shadow: var(--card-shadow);
     color: var(--foreground);
+  }
+
+  /* Champ de saisie, commun à TOUS les formulaires (connexion, inscription,
+     mot de passe, profil, devis, admin). La chaîne de classes était recopiée
+     à l'identique dans sept fichiers ; une seule source évite qu'ils
+     divergent.
+
+     ⚠️ 16 px sur mobile, et pas 14 : sous 16 px, Safari iOS zoome
+     automatiquement sur le champ au moment où on le touche, puis laisse la
+     page zoomée — c'est ce qui donnait l'impression que les formulaires
+     « sautaient » au premier appui. Le 14 px d'origine ne revient qu'à
+     partir de la tablette, où le zoom ne se déclenche pas.
+
+     La hauteur minimale de 48 px vaut aussi pour la cible tactile. */
+  .field {
+    margin-top: 0.5rem;
+    width: 100%;
+    min-height: 48px;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+    background: var(--background);
+    padding: 0.75rem 1rem;
+    font-size: 16px;
+    color: var(--foreground);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  /* `--muted` est un hex, il ne peut pas prendre de modificateur d'opacité :
+     on passe donc par `opacity` plutôt que par une couleur semi-transparente. */
+  .field::placeholder {
+    color: var(--muted);
+    opacity: 0.55;
+  }
+  .field:focus {
+    border-color: rgb(var(--accent));
+    box-shadow: 0 0 0 1px rgb(var(--accent) / 0.25);
+  }
+  @media (min-width: 640px) {
+    .field {
+      font-size: 0.875rem;
+      min-height: 46px;
+    }
+  }
+
+  /* Libellé de champ, mono capitales espacées. Même motif : la constante
+     LABEL était recopiée dans six fichiers. */
+  .field-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
   }
 
   /* Filet de séparation qui s'estompe : règle éditoriale entre blocs. */
