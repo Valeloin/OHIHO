@@ -65,8 +65,13 @@ export default function Services({
                     animation passe à droite. Les quatre animations se
                     rejoignent donc au centre de la grille. En mobile, tout se
                     réempile, animation d'abord. */}
+                {/* `items-start` et non `items-center` : centré, le bloc de
+                    texte se plaçait selon SA propre hauteur, donc les titres
+                    de deux cartes voisines ne tombaient jamais au même
+                    niveau. Calés en haut, ils s'alignent d'une carte à
+                    l'autre puisque les animations ont toutes la même taille. */}
                 <div
-                  className={`flex flex-1 flex-col gap-5 sm:items-center ${
+                  className={`flex flex-1 flex-col gap-5 sm:items-start ${
                     i % 2 === 0 ? "sm:flex-row-reverse" : "sm:flex-row"
                   }`}
                 >
@@ -81,7 +86,12 @@ export default function Services({
                       l'animation sur les cartes 02 et 04, sans rapport avec
                       le texte qu'il annonce. */}
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-baseline gap-3">
+                    {/* Hauteur réservée à DEUX lignes : certains sur-titres
+                        tiennent sur une ligne, d'autres sur deux, et le titre
+                        d'en dessous se retrouvait décalé d'un cran d'une
+                        carte à l'autre. En réservant la place, tous les
+                        titres tombent au même niveau. */}
+                    <div className="flex min-h-[2.1rem] items-baseline gap-3">
                       <span className="font-mono text-sm text-brand-teal">
                         {String(i + 1).padStart(2, "0")}
                       </span>
@@ -89,7 +99,11 @@ export default function Services({
                         aria-hidden="true"
                         className="h-px w-5 shrink-0 translate-y-[-0.3em] bg-border"
                       />
-                      <p className="min-w-0 truncate font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-muted">
+                      {/* Ni `truncate` ni filet séparateur : la colonne fait
+                          ~240 px et les sur-titres longs (« UN SITE VITRINE
+                          MULTI-PAGES ») s'y faisaient couper. Corps et
+                          interlettrage réduits pour qu'ils tiennent. */}
+                      <p className="min-w-0 font-mono text-[0.625rem] uppercase leading-tight tracking-[0.1em] text-muted">
                         {formula.tagline}
                       </p>
                     </div>
@@ -102,11 +116,6 @@ export default function Services({
                   </div>
                 </div>
 
-                {/* L'exemple ferme la carte, sur une seule ligne et SANS filet
-                    au-dessus : ces barres claires hachaient la grille. */}
-                <p className="mt-3 truncate text-xs text-muted/80">
-                  {formula.examples}
-                </p>
               </Link>
             </RevealItem>
           ))}
