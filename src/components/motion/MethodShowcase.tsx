@@ -219,7 +219,7 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         viewBox="-96 0 416 210"
         aria-hidden="true"
         focusable="false"
-        className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:rotateY(-17deg)_rotateX(7deg)]"
+        className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:rotateY(-22deg)_rotateX(9deg)]"
       >
       {/* ---- Téléphone, posé devant et à gauche du portable ----
            Il joue la MÊME étape, réduite à l'essentiel : c'est le reflet
@@ -270,19 +270,27 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         ))}
       </g>
 
-      {/* Socle du portable */}
+      {/* Socle, dessiné EN PERSPECTIVE : l'arête avant (6 → 314) est plus
+          large que l'arête arrière (24 → 296), donc le plan fuit vers le
+          fond. Il était dessiné à l'envers — bord proche plus court que
+          bord lointain — ce qui l'aplatissait complètement. */}
       <path
-        d="M14 166h292l-8 12H22z"
-        fill="#071522"
+        d="M24 160h272l18 22H6z"
+        fill="#0a1c2e"
         stroke={RAIL}
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      <path d="M140 172h40" stroke={RAIL} strokeWidth="2" strokeLinecap="round" />
+      {/* Encoche d'ouverture, elle aussi en perspective. */}
+      <path
+        d="M136 172h48l3 5h-54z"
+        fill={RAIL}
+        opacity="0.55"
+      />
       <path d="M30 158h260" stroke={RAIL} strokeWidth="2" />
       {/* Liseré de marque sur la tranche : rappel discret du logo. */}
         <path
-          d="M120 166h80"
+          d="M118 165h84"
           stroke={TEAL}
           strokeWidth="2"
           strokeLinecap="round"
