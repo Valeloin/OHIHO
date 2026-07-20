@@ -72,9 +72,14 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           {/* Le rail est INVISIBLE : seul le trait déjà parcouru se voit.
               Le chemin à venir ne se devine pas, la progression se lit
               d'autant mieux. */}
+          {/* ⚠️ `opacity-0` et non `hidden` : `display:none` ARRÊTE les
+              animations CSS et les fait repartir de zéro au retour. Comme la
+              carte de suivi, elle, reste affichée en permanence, franchir le
+              seuil `lg` désynchronisait la frise de la carte. L'élément est
+              absolu : invisible, il n'occupe de toute façon aucune place. */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 hidden h-px lg:block"
+            className="absolute inset-x-0 top-0 h-px opacity-0 lg:opacity-100"
           >
             <div className="frise-fill rule-brand h-full w-full" />
           </div>
@@ -90,7 +95,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               sa colonne, comme le numéro qui lui correspond. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 hidden grid-cols-4 gap-x-10 lg:grid"
+            className="pointer-events-none absolute inset-x-0 top-0 grid grid-cols-4 gap-x-10 opacity-0 lg:opacity-100"
           >
             {data.steps.map((_, i) => (
               <div key={i} className="relative">
@@ -153,9 +158,8 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               </g>
             </g>
 
-            {/* Emblème : disque nuit cerclé du dégradé de marque + trident.
-                Toujours présent, en retrait tant que la frise n'est pas
-                arrivée jusqu'à lui. */}
+            {/* Emblème : disque nuit cerclé du dégradé de marque. Toujours
+                présent, en retrait tant que la frise n'est pas arrivée. */}
             <g className="frise-final">
               <circle
                 cx="40"
@@ -165,9 +169,24 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                 stroke="url(#frise-ring)"
                 strokeWidth="2.5"
               />
-              <rect x="34.9" y="35.5" width="2.2" height="9" rx="1.1" fill="#38bdf8" />
-              <rect x="38.9" y="33.5" width="2.2" height="13" rx="1.1" fill="#22d3c4" />
-              <rect x="42.9" y="35.5" width="2.2" height="9" rx="1.1" fill="#34d399" />
+              {/* Le trident, visible tant que la méthode est en cours. */}
+              <g className="frise-trident">
+                <rect x="34.9" y="35.5" width="2.2" height="9" rx="1.1" fill="#38bdf8" />
+                <rect x="38.9" y="33.5" width="2.2" height="13" rx="1.1" fill="#22d3c4" />
+                <rect x="42.9" y="35.5" width="2.2" height="9" rx="1.1" fill="#34d399" />
+              </g>
+              {/* …et la coche qui le remplace à l'arrivée : le trident
+                  s'efface, la validation apparaît. Même langage que
+                  l'interstitiel de la vitrine du hero. */}
+              <path
+                className="frise-check"
+                d="M34.5 40.2l3.8 3.8 7.2 -7.2"
+                stroke="#34d399"
+                strokeWidth="2.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
             </g>
           </svg>
 
@@ -176,7 +195,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               {/* Rail + remplissage, en mobile / tablette */}
               <div
                 aria-hidden="true"
-                className="absolute left-0 top-0 h-full w-px lg:hidden"
+                className="absolute left-0 top-0 h-full w-px opacity-100 lg:opacity-0"
               >
                 <div className="frise-fill-y rule-brand-y h-full w-full" />
               </div>
@@ -186,7 +205,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                   rendus hors des blocs (voir la rangée dédiée plus haut). */}
               <div
                 aria-hidden="true"
-                className="absolute left-0 top-[5px] -translate-x-1/2 lg:hidden"
+                className="absolute left-0 top-[5px] -translate-x-1/2 opacity-100 lg:opacity-0"
               >
                 <span
                   className={`frise-dot-${i + 1} block h-[11px] w-[11px] rounded-full bg-brand-emerald`}
