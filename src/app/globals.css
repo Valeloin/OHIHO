@@ -1180,6 +1180,240 @@ body {
   animation-name: hs-cursor;
 }
 
+/* ---------- Vitrine du hero : sélection manuelle ----------
+   Par défaut la vitrine tourne toute seule, en CSS pur. Dès que le visiteur
+   clique une puce, le conteneur reçoit `pv-manual` + `data-scene` : la
+   rotation s'arrête et seule la scène choisie reste affichée.
+   On ne coupe QUE les horloges de rotation et l'interstitiel — les
+   animations INTERNES des scènes (barres, blocs, curseurs) continuent de
+   jouer, sinon la vignette choisie serait figée. */
+.pv-manual .pv-scene-1,
+.pv-manual .pv-scene-2,
+.pv-manual .pv-scene-3,
+.pv-manual .pv-scene-4,
+.pv-manual .pv-title-1,
+.pv-manual .pv-title-2,
+.pv-manual .pv-title-3,
+.pv-manual .pv-title-4,
+.pv-manual .pv-trans,
+.pv-manual .pv-spin-vis,
+.pv-manual .pv-ok,
+.pv-manual .pv-burst,
+.pv-manual .pv-rotate {
+  animation: none;
+}
+/* Tout est masqué, la sélection rallume ce qu'il faut. */
+.pv-manual .pv-scene-1,
+.pv-manual .pv-scene-2,
+.pv-manual .pv-scene-3,
+.pv-manual .pv-scene-4,
+.pv-manual .pv-title-1,
+.pv-manual .pv-title-2,
+.pv-manual .pv-title-3,
+.pv-manual .pv-title-4,
+.pv-manual .pv-trans,
+.pv-manual .pv-spin-vis,
+.pv-manual .pv-ok,
+.pv-manual .pv-burst {
+  opacity: 0;
+}
+.pv-manual[data-scene="1"] .pv-scene-1,
+.pv-manual[data-scene="1"] .pv-title-1,
+.pv-manual[data-scene="2"] .pv-scene-2,
+.pv-manual[data-scene="2"] .pv-title-2,
+.pv-manual[data-scene="3"] .pv-scene-3,
+.pv-manual[data-scene="3"] .pv-title-3,
+.pv-manual[data-scene="4"] .pv-scene-4,
+.pv-manual[data-scene="4"] .pv-title-4 {
+  opacity: 1;
+}
+
+/* ---------- Écran de la section Méthode ----------
+   L'ordinateur montre une scène par étape, calée sur l'horloge de la frise
+   (16,8 s). La VISIBILITÉ des scènes réutilise telles quelles les classes
+   `frise-desc-*` : même fenêtre que la description de la carte, donc
+   synchronisation garantie par construction plutôt que recopiée.
+   Ci-dessous, seules les animations INTERNES de chaque scène, calées pour
+   se jouer entièrement dans la fenêtre de leur étape. */
+.mv {
+  animation-duration: 16.8s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+/* 01 — Échange initial : les bulles de conversation arrivent (2,4 → 17,5 %) */
+@keyframes mv-bubble-1 {
+  0%,
+  4% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  7%,
+  17% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  18%,
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@keyframes mv-bubble-2 {
+  0%,
+  8% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  11%,
+  17% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  18%,
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@keyframes mv-bubble-3 {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  15%,
+  17% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  18%,
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+.mv-bubble-1 {
+  animation-name: mv-bubble-1;
+}
+.mv-bubble-2 {
+  animation-name: mv-bubble-2;
+}
+.mv-bubble-3 {
+  animation-name: mv-bubble-3;
+}
+
+/* 02 — Maquette & devis : la maquette se trace, le montant s'inscrit
+   (21 → 36,2 %) */
+@keyframes mv-draw {
+  0%,
+  22% {
+    stroke-dashoffset: 1;
+  }
+  30%,
+  36% {
+    stroke-dashoffset: 0;
+  }
+  37%,
+  100% {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes mv-amount {
+  0%,
+  30% {
+    transform: scaleX(0);
+  }
+  34%,
+  36% {
+    transform: scaleX(1);
+  }
+  37%,
+  100% {
+    transform: scaleX(0);
+  }
+}
+.mv-draw {
+  stroke-dasharray: 1;
+  animation-name: mv-draw;
+}
+.mv-amount {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation-name: mv-amount;
+}
+
+/* 03 — Développement : les lignes de code s'écrivent (39,7 → 54,8 %) */
+/* Fenêtre resserrée (44 → 52 %) pour absorber l'échelonnement des lignes :
+   chaque ligne porte un léger délai NÉGATIF, qui avance sa fenêtre. Avec un
+   départ à 41 % et des décalages allant jusqu'à -2,4 s, la dernière ligne
+   finissait de s'écrire avant même que la scène ne soit affichée. */
+@keyframes mv-code {
+  0%,
+  44% {
+    transform: scaleX(0);
+  }
+  48%,
+  54% {
+    transform: scaleX(1);
+  }
+  55%,
+  100% {
+    transform: scaleX(0);
+  }
+}
+.mv-code {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation-name: mv-code;
+}
+
+/* 04 — Mise en ligne & suivi : la jauge se remplit, la coche valide
+   (58,3 → 94 %) */
+@keyframes mv-deploy {
+  0%,
+  60% {
+    transform: scaleX(0);
+  }
+  72%,
+  94% {
+    transform: scaleX(1);
+  }
+  95%,
+  100% {
+    transform: scaleX(0);
+  }
+}
+@keyframes mv-done {
+  0%,
+  72% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  74% {
+    opacity: 1;
+  }
+  80%,
+  94% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  95%,
+  100% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+}
+.mv-deploy {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation-name: mv-deploy;
+}
+.mv-done {
+  stroke-dasharray: 1;
+  animation-name: mv-done;
+}
+
 /* Respect du réglage « réduire les animations » du visiteur. Les apparitions
    au scroll sont gérées côté JS (framer-motion lit la même préférence). */
 @media (prefers-reduced-motion: reduce) {

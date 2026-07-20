@@ -2,6 +2,7 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import MethodShowcase from "@/components/motion/MethodShowcase";
 import type { MethodContent } from "@/lib/content/types";
 
 export default function HowItWorks({ data }: { data: MethodContent }) {
@@ -24,40 +25,36 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
             </h2>
           </Reveal>
 
+          {/* Un écran d'ordinateur qui joue une scène par étape, sur
+              l'horloge de la frise. Il remplace la liste des étapes : celle-ci
+              répétait des titres déjà écrits juste en dessous. */}
           <Reveal delay={0.15}>
-            <div aria-hidden="true" className="card-surface w-full p-6">
-              {/* Libellé calculé sur les données : rien n'est écrit en dur,
-                  si une étape est ajoutée dans l'admin le compte suit. */}
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                {data.steps.length} étapes
-              </p>
-              <ul className="mt-4 space-y-3.5">
+            <div aria-hidden="true" className="w-full">
+              {/* Titre de l'étape en cours, au-dessus de l'écran. */}
+              <div className="relative mb-3 h-6">
                 {data.steps.map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <span
-                      className={`frise-dot-${i + 1} h-2 w-2 shrink-0 rounded-full bg-brand-emerald`}
-                    />
-                    <span className="truncate text-sm text-muted">
-                      {item.title}
-                    </span>
-                  </li>
+                  <span
+                    key={i}
+                    className={`frise-desc-${i + 1} absolute inset-0 flex items-center justify-center font-mono text-[11px] uppercase tracking-[0.18em] text-brand-teal`}
+                  >
+                    {item.title}
+                  </span>
                 ))}
-              </ul>
+              </div>
 
-              {/* Description de l'étape en cours. Les quatre sont empilées et
-                  se relaient sur l'horloge de la frise ; la hauteur est fixée
-                  pour que la carte ne saute pas d'une étape à l'autre. */}
-              <div className="mt-5 border-t border-border pt-4">
-                <div className="relative h-[4.5rem]">
-                  {data.steps.map((item, i) => (
-                    <p
-                      key={i}
-                      className={`frise-desc-${i + 1} absolute inset-0 text-[0.8125rem] leading-[1.45] text-muted`}
-                    >
-                      {item.description}
-                    </p>
-                  ))}
-                </div>
+              <MethodShowcase steps={data.steps.length} />
+
+              {/* Description de l'étape en cours, sous l'écran. Hauteur fixée
+                  pour que le bloc ne saute pas d'une étape à l'autre. */}
+              <div className="relative mt-3 h-[3.5rem]">
+                {data.steps.map((item, i) => (
+                  <p
+                    key={i}
+                    className={`frise-desc-${i + 1} absolute inset-0 text-center text-[0.8125rem] leading-[1.45] text-muted`}
+                  >
+                    {item.description}
+                  </p>
+                ))}
               </div>
             </div>
           </Reveal>

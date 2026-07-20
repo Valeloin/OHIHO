@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
@@ -42,6 +42,10 @@ export default function Hero({
   formulaLabels: string[];
   showcase: ReactNode;
 }) {
+  // `null` = la vitrine tourne toute seule. Un numéro = le visiteur a choisi
+  // sa scène ; recliquer la même puce rend la main à la rotation.
+  const [scene, setScene] = useState<number | null>(null);
+
   return (
     <section className="relative overflow-hidden">
       <AnimatedGlow variant="hero" />
@@ -109,17 +113,18 @@ export default function Hero({
             </motion.div>
           </div>
 
-          {/* Vitrine tournante. Purement décorative : le contenu qu'elle
-              illustre est déjà écrit en toutes lettres dans la section
-              Services, d'où l'aria-hidden. */}
+          {/* Vitrine. Elle tourne seule tant que le visiteur n'a rien
+              choisi ; cliquer une puce fige la scène correspondante. La
+              rotation reste du CSS pur, `pv-manual` ne fait que la
+              neutraliser — voir globals.css. */}
           <motion.div
             variants={ITEM}
-            aria-hidden="true"
-            className="order-3 lg:order-none"
+            className={`order-3 lg:order-none ${scene ? "pv-manual" : ""}`}
+            data-scene={scene ?? undefined}
           >
             {/* Libellé de la formule en cours : les 4 se relaient en
                 fondu sur l'horloge des scènes (pv-title-1..4). */}
-            <div className="relative mb-3 h-7">
+            <div aria-hidden="true" className="relative mb-3 h-7">
               {formulaLabels.map((label, i) => (
                 <span
                   key={label}
@@ -130,21 +135,33 @@ export default function Hero({
               ))}
             </div>
 
-            {/* Puces de progression : le segment actif suit la scène. */}
+            {/* Puces de progression, CLIQUABLES : elles suivent la scène en
+                automatique, et permettent de la choisir à la main. */}
             <div className="mb-5 flex justify-center gap-2">
-              {[1, 2, 3, 4].map((n) => (
-                <span
-                  key={n}
-                  className="relative h-1 w-8 overflow-hidden rounded-full bg-border"
-                >
-                  <span
-                    className={`pv-scene-${n} absolute inset-0 rounded-full bg-brand-teal`}
-                  />
-                </span>
-              ))}
+              {formulaLabels.map((label, i) => {
+                const n = i + 1;
+                return (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={() => setScene(scene === n ? null : n)}
+                    aria-label={`Voir la vignette ${label}`}
+                    aria-pressed={scene === n}
+                    className="group rounded-full py-2 focus-visible:outline-none"
+                  >
+                    <span className="relative block h-1 w-8 overflow-hidden rounded-full bg-border transition-colors group-hover:bg-border/60 group-focus-visible:ring-2 group-focus-visible:ring-accent-cyan/60">
+                      <span
+                        className={`pv-scene-${n} absolute inset-0 rounded-full bg-brand-teal`}
+                      />
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
-            <div className="card-surface p-2">{showcase}</div>
+            <div aria-hidden="true" className="card-surface p-2">
+              {showcase}
+            </div>
           </motion.div>
         </div>
 
@@ -157,23 +174,14 @@ export default function Hero({
             rangée : sur deux colonnes ce sont les éléments impairs, sur
             quatre le premier seulement. */}
         <motion.div variants={ITEM} className="mt-14">
-          <div aria-hidden="true" className="rule-fade h-px" />
-          <dl className="grid grid-cols-2 sm:grid-cols-4">
+          <dl className="grid grid-cols-2 gap-y-8 sm:grid-cols-4">
             {data.stats.map((item, i) => (
               <div
                 key={item.label}
-                // Les classes sont calculées PAR INDICE et non par variantes
-                // `first:`/`odd:` : la première cellule est les deux à la
-                // fois, et l'ordre dans lequel Tailwind les écrit décidait
-                // du gagnant — elle héritait donc d'un filet à gauche alors
-                // qu'elle ouvre la rangée.
-                className={[
-                  "px-5 py-7",
-                  i % 2 === 0 ? "border-l-0 pl-0" : "border-l border-border",
-                  i === 0
-                    ? "sm:border-l-0 sm:pl-0"
-                    : "sm:border-l sm:border-border sm:pl-5",
-                ].join(" ")}
+                // Ni filet horizontal au-dessus, ni séparateurs verticaux :
+                // les quatre arguments se distinguent par leur seul
+                // espacement. La gouttière de la grille suffit.
+                className="pr-5"
               >
                 <div className="flex items-center gap-3">
                   <StatGlyph index={i} />
