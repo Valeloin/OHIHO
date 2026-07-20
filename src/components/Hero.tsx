@@ -64,7 +64,15 @@ export default function Hero({
         initial="hidden"
         animate="visible"
       >
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_minmax(0,27rem)]">
+        {/* Gouttière de LIGNE nulle sous `lg`. À partir de `lg` la colonne de
+            texte est un bloc : ses enfants s'espacent par leurs seules marges
+            (mt-8, mt-10) et la gouttière de 48 px ne sert qu'entre les deux
+            COLONNES. Sous `lg`, `contents` dissout la colonne et chaque bloc
+            devient une rangée : la gouttière s'ajoutait alors à sa marge, ce
+            qui creusait 88 px entre le sous-titre et les boutons au lieu de
+            40. C'est le grand vide visible sur les écrans larges de
+            téléphone (pliables, tablettes), entre 640 et 1024 px. */}
+        <div className="grid items-center gap-x-12 gap-y-0 lg:gap-y-12 lg:grid-cols-[1fr_minmax(0,27rem)]">
           {/* En mobile, `contents` dissout cette colonne : ses enfants
               deviennent des cellules de la grille, ce qui permet de glisser
               la vitrine entre le titre et le sous-titre (order-3) — sinon
@@ -119,7 +127,11 @@ export default function Hero({
               neutraliser — voir globals.css. */}
           <motion.div
             variants={ITEM}
-            className={`order-3 lg:order-none ${scene ? "pv-manual" : ""}`}
+            /* `mt-8` sous `lg` : la gouttière de ligne étant à zéro, c'est
+               cette marge qui sépare la vitrine du titre au-dessus. À partir
+               de `lg` la vitrine est une COLONNE, elle n'a plus rien à
+               séparer verticalement. */
+            className={`order-3 mt-8 lg:order-none lg:mt-0 ${scene ? "pv-manual" : ""}`}
             data-scene={scene ?? undefined}
           >
             {/* Libellé de la formule en cours : les 4 se relaient en
@@ -176,12 +188,16 @@ export default function Hero({
             commun les tient ensemble tout en les laissant respirer, séparés
             par la seule gouttière de la grille. */}
         <motion.div variants={ITEM} className="card-surface mt-14 px-6 py-6 sm:px-8">
-          {/* UNE colonne sous `sm`, et non deux. À 375 px de large, deux
-              colonnes ne laissaient que 73 px au texte : les descriptions
-              tombaient sur 6 à 10 lignes et le mot-clé « Interface web »
-              débordait de sa cellule. Sur toute la largeur, chacune tient
-              sur deux lignes. */}
-          <dl className="grid grid-cols-1 gap-x-6 gap-y-6 min-[420px]:grid-cols-2 sm:grid-cols-4 sm:gap-y-8">
+          {/* 1 colonne, puis 2, puis 4 seulement à partir de `lg`.
+              Chaque cellule porte un pictogramme À CÔTÉ du texte : à quatre
+              de front, il faut donc beaucoup de largeur. À `sm` (640 px) il
+              ne restait que 76 px de texte par colonne — « Interface web »
+              tenait sur 10 lignes et son mot-clé se coupait en deux. C'est
+              ce qu'on voit sur un téléphone pliable ou une tablette, entre
+              640 et 1024 px. À 1024 pile, quatre colonnes ne donnent encore
+              que 156 px et cinq lignes : le passage à quatre n'a lieu qu'à
+              `xl` (1280 px), où chaque texte dispose de 220 px. */}
+          <dl className="grid grid-cols-1 gap-x-6 gap-y-6 min-[420px]:grid-cols-2 sm:gap-y-8 xl:grid-cols-4">
             {data.stats.map((item, i) => (
               // Le pictogramme passe À GAUCHE du texte plutôt qu'au-dessus :
               // empilé, il laissait une bande vide en haut de chaque colonne
