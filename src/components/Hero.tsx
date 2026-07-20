@@ -47,7 +47,11 @@ export default function Hero({
       <Fireflies />
 
       <motion.div
-        className="relative mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-center px-6 pb-24 pt-28 sm:pt-32"
+        // L'en-tête est déjà haut de ~73 px et occupe sa place dans le flux :
+        // un padding de 128 px par-dessus creusait 134 px de vide avant le
+        // premier mot. Réduit à 56 px, il reste une respiration franche sans
+        // trou, et le hero repasse sous la barre d'un écran.
+        className="relative mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-center px-6 pb-20 pt-10 sm:pt-14"
         variants={CONTAINER}
         initial="hidden"
         animate="visible"
