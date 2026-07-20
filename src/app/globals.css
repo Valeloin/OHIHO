@@ -32,6 +32,10 @@
   --header-bg: #071522;
   --header-fg: #eef4fc;
   --header-muted: #9fb2cc;
+  /* Gris du bandeau relevé : #9fb2cc affichait pourtant un contraste de
+     8,5:1, très au-dessus du seuil. Ce n'est donc pas le contraste qui
+     gênait mais la LISIBILITÉ du réglage typographique — voir .nav-link. */
+  --header-link: #c8d6ea;
   --header-border: rgba(238, 244, 252, 0.1);
   /* Hauteur du bandeau : rangée de 76 px + le filet du bas. Elle est la même
      à toutes les tailles depuis que la rangée de liens à défilement
@@ -75,6 +79,30 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Lien du bandeau. Le réglage d'origine — 12 px, mono, capitales, 1,68 px
+     d'interlettrage, graisse 400 — était illisible alors même que son
+     contraste atteignait 8,5:1 (le seuil AAA est à 7). Ce n'est pas la
+     couleur qui gênait : c'est qu'aux petites tailles, des CAPITALES en
+     chasse fixe très espacées se lisent lettre à lettre au lieu de se lire
+     d'un bloc. Le problème saute d'autant plus aux yeux une fois connecté,
+     où le bandeau porte sept entrées au lieu de quatre.
+     Trois correctifs qui se cumulent : un point de plus, un interlettrage
+     presque divisé par deux, et une demi-graisse en plus. Les capitales et
+     le mono restent : ils font partie de la DA. */
+  .nav-link {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--header-link);
+    transition: color 0.2s;
+  }
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: var(--header-fg);
   }
 
   /* Libellé de section, calqué sur « ● WEB & DESIGN » de la banderole :

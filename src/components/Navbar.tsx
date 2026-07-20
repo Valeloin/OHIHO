@@ -166,7 +166,7 @@ export default function Navbar() {
                  faisaient que 24 px de haut. Le filet de survol est calé sur
                  `bottom-3` pour rester collé au texte malgré la boîte
                  devenue plus haute. */
-              className="group relative flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)] focus-visible:text-[var(--header-fg)]"
+              className="group relative flex min-h-[44px] items-center nav-link"
             >
               {link.label}
               <span
@@ -182,14 +182,14 @@ export default function Navbar() {
             <>
               <Link
                 href="/portail"
-                className="flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                className="flex min-h-[44px] items-center nav-link"
               >
                 Bonjour,{" "}
                 <span className="text-accent-cyan">{firstName}</span>
               </Link>
               <Link
                 href="/portail/profil"
-                className="flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                className="flex min-h-[44px] items-center nav-link"
               >
                 Mon profil
               </Link>
@@ -204,7 +204,7 @@ export default function Navbar() {
               <form action={signOut}>
                 <button
                   type="submit"
-                  className="flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.14em] text-[var(--header-muted)] transition-colors hover:text-[var(--header-fg)]"
+                  className="flex min-h-[44px] items-center nav-link"
                 >
                   Déconnexion
                 </button>
@@ -270,7 +270,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={handleNavClick}
-                className="flex min-h-[48px] items-center border-b border-border/60 font-mono text-[13px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
+                className="flex min-h-[48px] items-center border-b border-border/60 nav-link"
               >
                 {link.label}
               </Link>
@@ -282,7 +282,7 @@ export default function Navbar() {
                 <Link
                   href="/portail"
                   onClick={() => setOpen(false)}
-                  className="flex min-h-[48px] items-center font-mono text-[13px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
+                  className="flex min-h-[48px] items-center nav-link"
                 >
                   Bonjour,{" "}
                   <span className="text-accent-cyan">{firstName}</span>
@@ -290,7 +290,7 @@ export default function Navbar() {
                 <Link
                   href="/portail/profil"
                   onClick={() => setOpen(false)}
-                  className="flex min-h-[48px] items-center font-mono text-[13px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
+                  className="flex min-h-[48px] items-center nav-link"
                 >
                   Mon profil
                 </Link>
@@ -298,7 +298,7 @@ export default function Navbar() {
                   <Link
                     href="/admin"
                     onClick={() => setOpen(false)}
-                    className="flex min-h-[48px] items-center font-mono text-[13px] uppercase tracking-[0.16em] text-accent-cyan"
+                    className="flex min-h-[48px] items-center nav-link !text-accent-cyan"
                   >
                     Outil dev
                   </Link>
@@ -306,7 +306,7 @@ export default function Navbar() {
                 <form action={signOut}>
                   <button
                     type="submit"
-                    className="flex min-h-[48px] items-center font-mono text-[13px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
+                    className="flex min-h-[48px] items-center nav-link"
                   >
                     Déconnexion
                   </button>
