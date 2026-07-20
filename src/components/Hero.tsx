@@ -187,7 +187,7 @@ export default function Hero({
             sans aucun cadre, le bloc flottait sans structure. Un cadre
             commun les tient ensemble tout en les laissant respirer, séparés
             par la seule gouttière de la grille. */}
-        <motion.div variants={ITEM} className="card-surface mt-14 px-6 py-6 sm:px-8">
+        <motion.div variants={ITEM} className="card-surface mt-10 px-5 py-6 sm:px-7">
           {/* 1 colonne, puis 2, puis 4 seulement à partir de `lg`.
               Chaque cellule porte un pictogramme À CÔTÉ du texte : à quatre
               de front, il faut donc beaucoup de largeur. À `sm` (640 px) il
@@ -199,26 +199,42 @@ export default function Hero({
               `xl` (1280 px), où chaque texte dispose de 220 px. */}
           <dl className="grid grid-cols-1 gap-x-6 gap-y-6 min-[420px]:grid-cols-2 sm:gap-y-8 xl:grid-cols-4">
             {data.stats.map((item, i) => (
-              // Le pictogramme passe À GAUCHE du texte plutôt qu'au-dessus :
-              // empilé, il laissait une bande vide en haut de chaque colonne
-              // et c'est ce qui donnait à la carte son air désert. Ici il
-              // occupe la largeur perdue, et le bloc est plus dense.
-              <div key={item.label} className="flex gap-3.5">
+              // Filet vertical entre les colonnes : sans lui, quatre petits
+              // blocs de texte flottaient dans un grand cadre vide. Il donne
+              // au bloc la rythmique éditoriale du reste du site.
+              //
+              // ⚠️ Les classes sont calculées depuis l'INDICE et non écrites
+              // avec les variantes `first:` / `odd:` : le nombre de colonnes
+              // change trois fois (1, puis 2, puis 4), une même cellule est
+              // donc tantôt en tête de rangée, tantôt non. Les variantes
+              // Tailwind ne savent pas exprimer ça et se contredisent d'un
+              // palier à l'autre — piège déjà rencontré sur cette grille.
+              //   · cellule 0 : jamais de filet, elle ouvre toujours sa rangée
+              //   · cellules 1 et 3 : deuxièmes de rangée dès deux colonnes
+              //   · cellule 2 : deuxième seulement à quatre colonnes (xl),
+              //     à deux colonnes elle ouvre la seconde rangée
+              <div
+                key={item.label}
+                className={`flex gap-3 ${
+                  i === 0
+                    ? ""
+                    : i === 2
+                      ? "xl:border-l xl:border-border xl:pl-6"
+                      : "min-[420px]:border-l min-[420px]:border-border min-[420px]:pl-6"
+                }`}
+              >
                 <div className="shrink-0">
                   <StatGlyph index={i} />
                 </div>
                 <div className="min-w-0">
-                  <span className="font-mono text-[11px] tracking-[0.14em] text-brand-teal">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   {/* `value` porte le mot-clé court, `label` la phrase qui
                       l'explique : c'est donc le mot-clé qui fait office de
                       terme (dt) et la phrase de définition (dd). Elle reste en
                       casse normale : en capitales espacées, illisible. */}
-                  <dt className="mt-1 text-lg font-semibold tracking-display">
+                  <dt className="text-lg font-semibold leading-tight tracking-display">
                     {item.value}
                   </dt>
-                  <dd className="mt-1.5 text-[0.8125rem] leading-[1.5] text-muted">
+                  <dd className="mt-2 text-[0.8125rem] leading-[1.5] text-muted">
                     {item.label}
                   </dd>
                 </div>
