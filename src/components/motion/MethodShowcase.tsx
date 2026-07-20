@@ -323,10 +323,17 @@ export default function MethodShowcase({ steps }: { steps: number }) {
       <circle cx="44" cy="17" r="2.5" fill={RAIL} />
       <circle cx="53" cy="17" r="2.5" fill={RAIL} />
       <circle cx="62" cy="17" r="2.5" fill={RAIL} />
-      {/* Favicon de l'onglet : l'emblème OHIHO, comme sur un vrai navigateur.
-          Placé après les trois pastilles, suivi de la barre d'adresse. */}
-      <Emblem cx={80} cy={17} r={6} />
-      <rect x="92" y="13.5" width="64" height="7" rx="3.5" fill={RAIL} opacity="0.7" />
+      <rect x="74" y="13.5" width="82" height="7" rx="3.5" fill={RAIL} opacity="0.7" />
+
+      {/* Emblème du site affiché à l'écran, en haut à gauche de la zone de
+          contenu. Il était d'abord posé en favicon dans la barre d'onglet,
+          au rayon 6 : à cette taille les trois barres tombaient sous le
+          pixel et l'anneau prenait toute la place — l'ensemble se lisait
+          comme une cible, pas comme le logo.
+          Ici il a le même rayon que celui du téléphone (11 contre 10), donc
+          la même lisibilité. La place existe : les quatre scènes commencent
+          toutes à x = 62 et y = 58 au plus haut, cet angle est libre. */}
+      <Emblem cx={48} cy={44} r={11} />
 
       {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte la
           fenêtre d'affichage de son étape (frise-desc-N). */}
