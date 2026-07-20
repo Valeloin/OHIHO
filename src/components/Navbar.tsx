@@ -8,16 +8,17 @@ import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/supabase/actions";
 import { scrollToId } from "@/lib/scroll";
 
-// Ordre aligné sur le déroulé de la page : les huit sections y sont, dans
+// Ordre aligné sur le déroulé de la page : toutes les sections y sont, dans
 // l'ordre où le visiteur les rencontre en défilant. Le bandeau n'en listait
-// que quatre, si bien que la Méthode, le Suivi, BugTrack et le Contact
-// n'étaient atteignables qu'en faisant défiler à l'aveugle.
+// que quatre, si bien que la Méthode, BugTrack et le Contact n'étaient
+// atteignables qu'en faisant défiler à l'aveugle.
+// « Suivi » a disparu d'ici en même temps que sa section, fusionnée dans
+// BugTrack : le lien pointerait vers un id qui n'existe plus.
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
   { href: "/#methode", label: "Méthode" },
   { href: "/#expertise", label: "Expertise" },
   { href: "/#a-propos", label: "À propos" },
-  { href: "/#suivi", label: "Suivi" },
   { href: "/#bugtrack", label: "BugTrack" },
   { href: "/#portfolio", label: "Réalisations" },
   { href: "/#contact", label: "Contact" },

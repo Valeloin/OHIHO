@@ -6,7 +6,6 @@ import Portfolio from "@/components/Portfolio";
 import HowItWorks from "@/components/HowItWorks";
 import Expertise from "@/components/Expertise";
 import WhyUs from "@/components/WhyUs";
-import Suivi from "@/components/Suivi";
 import BugTrack from "@/components/BugTrack";
 import ContactSection from "@/components/ContactSection";
 import ScrollNav from "@/components/ScrollNav";
@@ -48,12 +47,11 @@ export default async function Home() {
       <Expertise data={content.expertise} />
       <WhyUs data={content.whyUs} />
       {/* Prolonge « Pourquoi OHIHO » : la promesse d'accompagnement, montrée
-          concrètement par l'espace de suivi livré avec chaque site. */}
-      <Suivi />
-      {/* Puis l'outil qui rend cette promesse tenable, nommé et vendable.
-          « Suivi » annonce l'accompagnement, « BugTrack » montre par quoi il
-          passe — voir l'avertissement en tête de BugTrack.tsx sur le
-          recouvrement entre les deux. */}
+          concrètement par l'outil livré avec chaque site.
+          Il y avait ici deux sections, « Suivi » puis « BugTrack », qui
+          décrivaient le même mécanisme de tickets — l'une sans nommer
+          l'outil, l'autre sans dire qu'il est livré avec le site. Elles ont
+          été fusionnées dans BugTrack, et Suivi.tsx supprimé. */}
       <BugTrack />
       <Portfolio data={content.portfolio} />
       <ContactSection data={content.contact} />
