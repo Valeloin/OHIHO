@@ -364,19 +364,36 @@ export default function MethodShowcase({ steps }: { steps: number }) {
   const visiblesTel = SCENES_TEL.slice(0, Math.min(steps, SCENES_TEL.length));
 
   return (
-    // Vue de trois-quarts plutôt que de face. La perspective est portée par
-    // le parent et la rotation par le SVG : c'est ce couple qui donne la
-    // profondeur, une rotation seule aplatirait l'objet.
+    // Vue inclinée plutôt que de face. L'inclinaison est portée par le SVG
+    // seul (voir son `transform`) : le `perspective:1100px` qui était ici
+    // n'a plus lieu d'être, c'est justement la division perspective qu'on
+    // cherche à éviter.
     // Les animations internes ne sont pas affectées — leurs transformations
     // se composent avec celle-ci au lieu de l'écraser.
-    <div className="[perspective:1100px]">
+    <div>
       <svg
         // Hauteur resserrée à 198 : sans le socle, le dessin s'arrête au bas
         // du téléphone (y = 192) et laissait sinon une bande morte.
         viewBox="-96 0 416 198"
         aria-hidden="true"
         focusable="false"
-        className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:rotateY(-22deg)_rotateX(9deg)]"
+        /* PROJECTION OBLIQUE (2D) et non plus perspective 3D.
+           Le réglage précédent était `perspective:1100px` +
+           `rotateY(-22deg) rotateX(9deg)`. Il produisait un défaut visible :
+           sous une projection PERSPECTIVE, des droites parallèles ne restent
+           pas parallèles, elles fuient vers un point de fuite. Mesuré à
+           l'écran, le bord haut du cadre tombait à -2,31° tandis qu'une barre
+           de contenu, plus basse, se redressait à -0,85°. Le cadre penchait
+           donc presque trois fois plus que ce qu'il contenait : l'appareil
+           avait l'air de biais, son écran avait l'air plat.
+           `skewY` est une transformation AFFINE : elle envoie (x, y) sur
+           (x, y + x·tan a). Toute horizontale prend exactement le même angle,
+           quelle que soit sa position, et les verticales restent verticales.
+           Le cadre et son contenu partagent donc rigoureusement la même
+           inclinaison — c'est garanti par construction, pas par réglage.
+           Le `scaleX` raccourcit légèrement la largeur pour suggérer le
+           raccourci d'un objet vu de trois quarts. */
+        className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:skewY(-6deg)_scaleX(0.97)]"
       >
       <defs>
         {/* Trio de marque, repris du logo : bleu ciel → teal → vert. */}
