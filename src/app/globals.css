@@ -235,28 +235,51 @@ body {
    exactement ce qu'il faut éviter ici.
    La dérive vit sur `transform`, le scintillement sur `opacity` : les deux
    animations tournent en parallèle sans se marcher dessus. */
+/* Trajet CIRCULAIRE parcouru à vitesse constante : huit points régulièrement
+   espacés sur le cercle, chaque segment couvrant la même distance dans le
+   même temps. Associé à `linear`, le déplacement est parfaitement uniforme —
+   ni accélération, ni ralenti, ni temps d'arrêt aux extrémités.
+   Le cercle se referme sur lui-même, donc aucun retour en arrière visible à
+   la fin du cycle. */
 @keyframes firefly-drift {
-  0%,
+  0% {
+    transform: translate(var(--fly-drift, 6px), 0);
+  }
+  12.5% {
+    transform: translate(
+      calc(var(--fly-drift, 6px) * 0.707),
+      calc(var(--fly-drift, 6px) * 0.707)
+    );
+  }
+  25% {
+    transform: translate(0, var(--fly-drift, 6px));
+  }
+  37.5% {
+    transform: translate(
+      calc(var(--fly-drift, 6px) * -0.707),
+      calc(var(--fly-drift, 6px) * 0.707)
+    );
+  }
+  50% {
+    transform: translate(calc(var(--fly-drift, 6px) * -1), 0);
+  }
+  62.5% {
+    transform: translate(
+      calc(var(--fly-drift, 6px) * -0.707),
+      calc(var(--fly-drift, 6px) * -0.707)
+    );
+  }
+  75% {
+    transform: translate(0, calc(var(--fly-drift, 6px) * -1));
+  }
+  87.5% {
+    transform: translate(
+      calc(var(--fly-drift, 6px) * 0.707),
+      calc(var(--fly-drift, 6px) * -0.707)
+    );
+  }
   100% {
-    transform: translate(0, 0);
-  }
-  22% {
-    transform: translate(
-      calc(var(--fly-drift, 6px) * 0.55),
-      calc(var(--fly-drift, 6px) * -0.45)
-    );
-  }
-  48% {
-    transform: translate(
-      var(--fly-drift, 6px),
-      calc(var(--fly-drift, 6px) * 0.25)
-    );
-  }
-  74% {
-    transform: translate(
-      calc(var(--fly-drift, 6px) * 0.3),
-      calc(var(--fly-drift, 6px) * 0.6)
-    );
+    transform: translate(var(--fly-drift, 6px), 0);
   }
 }
 
@@ -264,7 +287,9 @@ body {
   background: rgb(var(--brand-emerald));
   box-shadow: 0 0 var(--fly-halo, 6px) rgb(var(--brand-emerald) / 0.5);
   animation-name: firefly-glow, firefly-drift;
-  animation-timing-function: ease-in-out;
+  /* Une fonction par animation : le scintillement respire (ease-in-out),
+     la dérive avance à vitesse constante (linear). */
+  animation-timing-function: ease-in-out, linear;
   animation-iteration-count: infinite;
 }
 

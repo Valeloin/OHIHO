@@ -52,12 +52,16 @@ export default function Fireflies({ className = "" }: { className?: string }) {
         // l'hydratation). Les trois suites ont des pas premiers entre eux
         // avec le nombre de lucioles : deux voisines ne retombent jamais sur
         // la même combinaison, et aucune vague d'ensemble ne se forme.
-        // L'amplitude a été augmentée en même temps que la vitesse : à 4-9 px
-        // sur un cycle court, le déplacement se lisait comme un frémissement
-        // sur place plutôt que comme un vol.
-        const driftDuration = 6 + ((i * 7) % 8); // 6 → 13 s
-        const driftDelay = -((i * 5) % 17); // départ déjà entamé
-        const driftAmp = 9 + (i % 5) * 2.75; // 9 → 20 px
+        // Mouvement UNIFORME : même période et même rayon pour toutes, donc
+        // exactement la même vitesse. Faire varier l'un ou l'autre suffisait
+        // à créer un écart de vitesse du simple au double d'une luciole à
+        // l'autre (mesuré : 5,7 à 10 px/s).
+        const driftDuration = 10; // identique pour toutes
+        const driftAmp = 15; // rayon identique pour toutes
+        // Seule la PHASE change : chaque luciole démarre à un autre point de
+        // son cercle. Le pas de 1,7 s ne divise pas la période de 10 s, donc
+        // les dix-huit ne se regroupent jamais au même endroit du trajet.
+        const driftDelay = -(((i * 17) % 100) / 10);
 
         return (
           <span
