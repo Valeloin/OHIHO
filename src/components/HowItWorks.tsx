@@ -79,6 +79,30 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
             <div className="frise-fill rule-brand h-full w-full" />
           </div>
 
+          {/* Jalons du desktop, posés DIRECTEMENT sur le rail et non dans les
+              blocs d'étape. C'est structurel : les blocs sont animés à
+              l'apparition (translation verticale échelonnée), le rail ne
+              l'est pas — un jalon placé dedans se retrouvait décalé de
+              20 px sous le trait, et les quatre ne bougeaient même pas
+              ensemble à cause du décalage entre eux.
+              Cette rangée reprend la MÊME grille (4 colonnes, même
+              gouttière) : chaque jalon tombe donc exactement au départ de
+              sa colonne, comme le numéro qui lui correspond. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 hidden grid-cols-4 gap-x-10 lg:grid"
+          >
+            {data.steps.map((_, i) => (
+              <div key={i} className="relative">
+                <div className="absolute left-0 top-0 -translate-y-1/2">
+                  <span
+                    className={`frise-dot-${i + 1} block h-[11px] w-[11px] rounded-full bg-brand-emerald`}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* Arrivée : quand le remplissage atteint le bout, l'emblème OHIHO
               se pose dans son cercle et une gerbe jaillit — la méthode est
               menée à son terme. Desktop uniquement, comme le rail. */}
@@ -156,11 +180,18 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               >
                 <div className="frise-fill-y rule-brand-y h-full w-full" />
               </div>
-              {/* Jalon : il s'allume quand le remplissage l'atteint */}
+              {/* Jalon de la version MOBILE uniquement. Ici il peut rester
+                  dans le bloc animé : le rail vertical y est aussi, les deux
+                  se déplacent donc ensemble. En desktop, les jalons sont
+                  rendus hors des blocs (voir la rangée dédiée plus haut). */}
               <div
                 aria-hidden="true"
-                className={`frise-dot-${i + 1} absolute left-0 top-[5px] h-[11px] w-[11px] -translate-x-1/2 rounded-full bg-brand-emerald lg:top-0 lg:translate-x-0 lg:-translate-y-1/2`}
-              />
+                className="absolute left-0 top-[5px] -translate-x-1/2 lg:hidden"
+              >
+                <span
+                  className={`frise-dot-${i + 1} block h-[11px] w-[11px] rounded-full bg-brand-emerald`}
+                />
+              </div>
 
               {/* Au passage de la frise : le numéro grossit d'un coup, le
                   texte se déhanche. Déclenché par les mêmes horloges que le

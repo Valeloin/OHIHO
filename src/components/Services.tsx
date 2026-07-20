@@ -56,7 +56,7 @@ export default function Services({
             posée à même le fond de la page avec son seul cadre de navigateur,
             et le texte se tient à côté, sans cloison. La séparation se fait
             par le vide, plus par des bordures. */}
-        <RevealGroup className="mt-6 grid gap-x-12 gap-y-6 lg:grid-cols-2">
+        <RevealGroup className="mt-5 grid gap-x-12 gap-y-5 lg:grid-cols-2">
           {formulas.map((formula, i) => (
             <RevealItem key={formula.type} hover className="h-full">
               {/* Trois bandes empilées, chacune sur TOUTE la largeur de la
@@ -86,8 +86,18 @@ export default function Services({
                   {formula.label}
                 </h3>
 
-                {/* Bande 2 — l'animation et sa description, côte à côte */}
-                <div className="mt-3 flex flex-1 flex-col gap-5 sm:flex-row sm:items-center">
+                {/* Bande 2 — l'animation et sa description, côte à côte.
+                    Les cartes de la colonne de GAUCHE (indices pairs) sont
+                    inversées : leur animation passe à droite. Résultat, les
+                    quatre animations se rejoignent au centre de la grille au
+                    lieu d'être toutes plaquées à gauche, et la page respire
+                    par ses bords. En mobile, tout se réempile normalement,
+                    animation d'abord. */}
+                <div
+                  className={`mt-3 flex flex-1 flex-col gap-5 sm:items-center ${
+                    i % 2 === 0 ? "sm:flex-row-reverse" : "sm:flex-row"
+                  }`}
+                >
                   <div className="aspect-[400/220] w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-border transition duration-300 group-hover:ring-accent-cyan/60 sm:w-[56%]">
                     <ServiceScene type={formula.type} />
                   </div>
