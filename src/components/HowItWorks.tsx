@@ -77,11 +77,14 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               carte de suivi, elle, reste affichée en permanence, franchir le
               seuil `lg` désynchronisait la frise de la carte. L'élément est
               absolu : invisible, il n'occupe de toute façon aucune place. */}
+          {/* Trait de 2 px et non 1 : à un pixel, le fil était si fin devant
+              des jalons de 11 px que les deux ne se lisaient pas comme un
+              même objet. */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-px opacity-0 lg:opacity-100"
+            className="absolute inset-x-0 top-0 h-0.5 -translate-y-1/2 opacity-0 lg:opacity-100"
           >
-            <div className="frise-fill rule-brand h-full w-full" />
+            <div className="frise-fill rule-brand h-full w-full rounded-full" />
           </div>
 
           {/* Jalons du desktop, posés DIRECTEMENT sur le rail et non dans les
@@ -99,9 +102,18 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           >
             {data.steps.map((_, i) => (
               <div key={i} className="relative">
-                <div className="absolute left-0 top-0 -translate-y-1/2">
+                {/* Le jalon est cerné d'un anneau de la couleur du FOND :
+                    le trait passe donc derrière lui sans le traverser, et le
+                    jalon se lit comme un nœud SUR la ligne plutôt que comme
+                    une bille posée à côté. */}
+                {/* ⚠️ L'anneau est porté par l'ENVELOPPE, pas par le jalon :
+                    `ring-*` passe par `box-shadow`, or les keyframes du jalon
+                    definissent déjà `box-shadow` pour son halo — l'animation
+                    l'emporte et l'anneau disparaissait. Même piège que le
+                    `transform` écrasé plus tôt. */}
+                <div className="absolute left-0 top-0 -translate-y-1/2 rounded-full bg-background p-1">
                   <span
-                    className={`frise-dot-${i + 1} block h-[11px] w-[11px] rounded-full bg-brand-emerald`}
+                    className={`frise-dot-${i + 1} block h-[9px] w-[9px] rounded-full bg-brand-emerald`}
                   />
                 </div>
               </div>
@@ -190,9 +202,9 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               {/* Rail + remplissage, en mobile / tablette */}
               <div
                 aria-hidden="true"
-                className="absolute left-0 top-0 h-full w-px opacity-100 lg:opacity-0"
+                className="absolute left-0 top-0 h-full w-0.5 -translate-x-1/2 opacity-100 lg:opacity-0"
               >
-                <div className="frise-fill-y rule-brand-y h-full w-full" />
+                <div className="frise-fill-y rule-brand-y h-full w-full rounded-full" />
               </div>
               {/* Jalon de la version MOBILE uniquement. Ici il peut rester
                   dans le bloc animé : le rail vertical y est aussi, les deux
@@ -200,10 +212,10 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                   rendus hors des blocs (voir la rangée dédiée plus haut). */}
               <div
                 aria-hidden="true"
-                className="absolute left-0 top-[5px] -translate-x-1/2 opacity-100 lg:opacity-0"
+                className="absolute left-0 top-[1px] -translate-x-1/2 rounded-full bg-background p-1 opacity-100 lg:opacity-0"
               >
                 <span
-                  className={`frise-dot-${i + 1} block h-[11px] w-[11px] rounded-full bg-brand-emerald`}
+                  className={`frise-dot-${i + 1} block h-[9px] w-[9px] rounded-full bg-brand-emerald`}
                 />
               </div>
 
