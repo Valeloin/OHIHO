@@ -11,7 +11,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
     // de `bg-surface`, les lucioles s'effaçaient presque.
     <section className="relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-24">
+      <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-24">
         {/* En-tête sur deux colonnes : le titre à gauche, et à droite une
             carte qui récapitule le déroulé. Elle donne à la section la
             hauteur des autres et sert de légende à la frise — ses jalons
@@ -169,23 +169,18 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                 stroke="url(#frise-ring)"
                 strokeWidth="2.5"
               />
-              {/* Le trident, visible tant que la méthode est en cours. */}
-              <g className="frise-trident">
-                <rect x="34.9" y="35.5" width="2.2" height="9" rx="1.1" fill="#38bdf8" />
-                <rect x="38.9" y="33.5" width="2.2" height="13" rx="1.1" fill="#22d3c4" />
-                <rect x="42.9" y="35.5" width="2.2" height="9" rx="1.1" fill="#34d399" />
-              </g>
-              {/* …et la coche qui le remplace à l'arrivée : le trident
-                  s'efface, la validation apparaît. Même langage que
-                  l'interstitiel de la vitrine du hero. */}
+              {/* Plus d'emblème : le point d'arrivée est une VALIDATION. Le
+                  cercle attend, vide, et la coche s'y trace d'un trait quand
+                  le remplissage l'atteint. */}
               <path
                 className="frise-check"
                 d="M34.5 40.2l3.8 3.8 7.2 -7.2"
                 stroke="#34d399"
-                strokeWidth="2.6"
+                strokeWidth="2.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 fill="none"
+                pathLength={1}
               />
             </g>
           </svg>

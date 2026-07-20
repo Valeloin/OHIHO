@@ -6,7 +6,7 @@ export default function Expertise({ data }: { data: ExpertiseContent }) {
   return (
     <section id="expertise" className="relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-28 sm:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 py-28 sm:py-32">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
           {/* Colonne éditoriale : libellé, titre, filet, prose */}
           <Reveal>

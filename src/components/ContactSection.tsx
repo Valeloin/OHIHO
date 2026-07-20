@@ -10,7 +10,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
       className="relative overflow-hidden border-t border-border bg-surface"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-28 sm:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 py-28 sm:py-32">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <Reveal>
             {/* En-tête éditorial : libellé mono, titre large aligné à gauche. */}

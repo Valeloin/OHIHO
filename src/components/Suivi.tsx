@@ -36,7 +36,7 @@ export default function Suivi() {
       className="relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-14 sm:py-16">
+      <div className="relative mx-auto max-w-7xl px-6 py-14 sm:py-16">
         <Reveal>
           <span className="kicker">Après la mise en ligne</span>
           <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">

@@ -124,7 +124,7 @@ export default function Navbar() {
           : "bg-[var(--header-bg)]"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2 group">
           <Image
             /* SVG et non PNG : le PNG date de l'anneau argenté, le SVG porte

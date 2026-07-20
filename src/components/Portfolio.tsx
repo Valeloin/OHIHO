@@ -18,7 +18,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
       <SectionBackdrop />
       {/* Rythme resserré : comme Services, cette section porte beaucoup de
           contenu (3 cartes + encart) et doit tenir sur un écran. */}
-      <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-16">
+      <div className="relative mx-auto max-w-7xl px-6 py-12 sm:py-16">
         {/* En-tête éditorial : libellé mono, titre large à gauche, filet. */}
         <Reveal>
           <span className="kicker">{data.kicker}</span>

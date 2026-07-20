@@ -8,7 +8,7 @@ export default function WhyUs({ data }: { data: WhyUsContent }) {
   return (
     <section id="a-propos" className="relative overflow-hidden border-t border-border bg-surface">
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-16 sm:py-20">
+      <div className="relative mx-auto max-w-7xl px-6 py-16 sm:py-20">
         <Reveal>
           <span className="kicker">{data.kicker}</span>
           <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">

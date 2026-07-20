@@ -54,7 +54,7 @@ export default function Hero({
         // de 290 px au-dessus du premier mot sur un grand écran.
         // La règle du site est qu'une section TIENNE sur un écran, pas
         // qu'elle le remplisse.
-        className="relative mx-auto flex max-w-6xl flex-col px-6 pb-20 pt-10 sm:pt-14"
+        className="relative mx-auto flex max-w-7xl flex-col px-6 pb-20 pt-10 sm:pt-14"
         variants={CONTAINER}
         initial="hidden"
         animate="visible"

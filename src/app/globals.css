@@ -767,26 +767,10 @@ body {
   animation: frise-burst 16.8s ease-out infinite;
 }
 
-/* Validation à l'arrivée : le trident cède la place à la coche, exactement
-   comme l'interstitiel de la vitrine du hero. Les deux se croisent sur la
-   même fenêtre que la gerbe, à 73 % du cycle. */
-@keyframes frise-trident {
-  0%,
-  71% {
-    opacity: 1;
-  }
-  73%,
-  95% {
-    opacity: 0;
-  }
-  97%,
-  100% {
-    opacity: 1;
-  }
-}
-.frise-trident {
-  animation: frise-trident 16.8s ease-out infinite;
-}
+/* Validation à l'arrivée : la coche SE TRACE, d'un seul geste, quand le
+   remplissage atteint le cercle. Le tracé est normalisé par `pathLength="1"`
+   sur le path, donc le décalage se pilote de 1 (rien de tracé) à 0 (tracé
+   complet) sans avoir à mesurer la longueur réelle du chemin. */
 
 /* La coche couvre TOUTE la durée pendant laquelle la frise est complète
    (le remplissage arrive à 72 % et tient jusqu'à 96 %) : dès que le trait
@@ -796,27 +780,28 @@ body {
 @keyframes frise-check {
   0%,
   71% {
+    stroke-dashoffset: 1;
     opacity: 0;
-    transform: scale(0.5);
   }
-  74% {
+  72% {
+    stroke-dashoffset: 1;
     opacity: 1;
-    transform: scale(1.12);
   }
-  78%,
+  /* Le trait se dessine ici, en un peu moins d'une demi-seconde. */
+  77%,
   95% {
+    stroke-dashoffset: 0;
     opacity: 1;
-    transform: scale(1);
   }
   97%,
   100% {
+    stroke-dashoffset: 1;
     opacity: 0;
-    transform: scale(0.5);
   }
 }
 .frise-check {
-  transform-box: fill-box;
-  transform-origin: center;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
   animation: frise-check 16.8s ease-out infinite;
 }
 

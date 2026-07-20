@@ -9,7 +9,7 @@ export default function Footer({ data }: { data: FooterContent }) {
   // séparé du contenu par un simple filet 1px en haut.
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto max-w-6xl px-6 py-14">
+      <div className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center group">
