@@ -230,22 +230,32 @@ function EnLigne() {
         strokeLinejoin="round"
       />
 
-      {/* Le suivi qui prend le relais : une enveloppe et deux notifications.
-          `mv-follow` les fait arriver à 80 %, soit APRÈS le remplissage de la
-          jauge (60-72 %) et le tracé de la coche (72-80 %). */}
+      {/* Le suivi qui prend le relais, dit par la seule enveloppe.
+          `mv-follow` la fait arriver après le remplissage de la jauge et le
+          tracé de la coche.
+          Elle est CENTRÉE sous le logo (son milieu tombe à x = 160 en
+          absolu, l'axe de la dalle) : elle était calée à gauche quand deux
+          barres de notification l'accompagnaient à droite, et se retrouvait
+          seule dans un coin depuis leur retrait.
+          ⚠️ Sa position verticale est CONTRAINTE des deux côtés. En la
+          recentrant elle est entrée dans l'axe de la gerbe, qui descend
+          jusqu'à y = 130 au plus fort ; et la dalle s'arrête à 158. Elle
+          occupe donc 132-152, les vingt seules unités disponibles — d'où sa
+          hauteur ramenée de 24 à 20. Toute remontée la ferait chevaucher la
+          gerbe, toute descente la ferait sortir de l'écran. */}
       <g className="mv mv-follow" style={{ animationDelay: "0.35s" }}>
         <rect
-          x="24"
-          y="92"
+          x="105"
+          y="102"
           width="34"
-          height="24"
+          height="20"
           rx="4"
           fill="none"
           stroke={SKY}
           strokeWidth="2"
         />
         <path
-          d="M24 96l17 12 17 -12"
+          d="M105 105l17 10 17 -10"
           fill="none"
           stroke={SKY}
           strokeWidth="2"
@@ -253,26 +263,11 @@ function EnLigne() {
           strokeLinejoin="round"
         />
       </g>
-      <rect
-        className="mv mv-follow"
-        x="68"
-        y="96"
-        width="88"
-        height="6"
-        rx="3"
-        fill={RAIL}
-        style={{ animationDelay: "0.5s" }}
-      />
-      <rect
-        className="mv mv-follow"
-        x="68"
-        y="108"
-        width="62"
-        height="6"
-        rx="3"
-        fill={RAIL}
-        style={{ animationDelay: "0.65s" }}
-      />
+      {/* Il y avait ici deux barres de notification à droite de l'enveloppe.
+          Elles montaient jusqu'à y = 126 en absolu, or la gerbe qui jaillit
+          du logo descend jusqu'à 128 : les deux se chevauchaient au moment
+          précis où la gerbe part. L'enveloppe seule dit déjà « suivi par
+          email », les barres n'ajoutaient rien qu'une collision. */}
     </g>
   );
 }
