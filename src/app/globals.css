@@ -741,21 +741,25 @@ body {
    distance de l'emblème et ne font que s'écarter. Auparavant elle montait
    depuis scale(0.3), et pendant sa croissance les rayons traversaient le
    cercle — c'est ce qui donnait l'impression qu'ils le touchaient. */
+/* ⚠️ Rien ne démarre avant 72 % : c'est l'instant EXACT où le remplissage
+   atteint 1, donc où le trait touche le cercle. La gerbe partait à 70,5 %,
+   quand le remplissage n'était encore qu'à 0,972 — le trait était à une
+   trentaine de pixels du cercle et l'explosion avait déjà commencé. */
 @keyframes frise-burst {
   0%,
-  70.5% {
+  72% {
     opacity: 0;
     transform: scale(1);
   }
-  73.5% {
+  74.5% {
     opacity: 0.95;
     transform: scale(1.06);
   }
-  77.5% {
+  78.5% {
     opacity: 0;
     transform: scale(1.4);
   }
-  78%,
+  79%,
   100% {
     opacity: 0;
     transform: scale(1);
@@ -779,16 +783,16 @@ body {
    pleine — on tombait sur cet état d'un instant à l'autre. */
 @keyframes frise-check {
   0%,
-  71% {
+  72% {
     stroke-dashoffset: 1;
     opacity: 0;
   }
-  72% {
+  73% {
     stroke-dashoffset: 1;
     opacity: 1;
   }
   /* Le trait se dessine ici, en un peu moins d'une demi-seconde. */
-  77%,
+  78%,
   95% {
     stroke-dashoffset: 0;
     opacity: 1;

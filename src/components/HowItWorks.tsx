@@ -17,7 +17,9 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
             carte qui récapitule le déroulé. Elle donne à la section la
             hauteur des autres et sert de légende à la frise — ses jalons
             s'allument sur la MÊME horloge que le trait qui se remplit. */}
-        <div className="grid gap-10 lg:grid-cols-[1fr_22rem] lg:items-center">
+        {/* Colonne de droite élargie : elle porte désormais le portable ET le
+            téléphone posé devant lui. */}
+        <div className="grid gap-10 lg:grid-cols-[1fr_30rem] lg:items-center">
           <Reveal>
             <span className="kicker">{data.kicker}</span>
             <h2 className="mt-6 max-w-2xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">

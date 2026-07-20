@@ -119,12 +119,94 @@ function EnLigne() {
   );
 }
 
+/* Échos sur le téléphone : la même étape, réduite à l'essentiel. Le
+   téléphone n'est pas une seconde histoire mais le reflet mobile de la
+   même — d'où des formes volontairement plus pauvres. */
+function TelEchange() {
+  return (
+    <g>
+      <g className="mv mv-bubble-1">
+        <rect x="8" y="14" width="36" height="9" rx="4.5" fill={RAIL} />
+      </g>
+      <g className="mv mv-bubble-2">
+        <rect x="18" y="29" width="30" height="9" rx="4.5" fill={TEAL} opacity="0.85" />
+      </g>
+      <g className="mv mv-bubble-3">
+        <rect x="8" y="44" width="40" height="9" rx="4.5" fill={RAIL} />
+      </g>
+    </g>
+  );
+}
+function TelMaquette() {
+  return (
+    <g>
+      <rect
+        className="mv mv-draw"
+        x="8"
+        y="12"
+        width="40"
+        height="30"
+        rx="4"
+        pathLength={1}
+        fill="none"
+        stroke={SKY}
+        strokeWidth="2"
+      />
+      <rect className="mv mv-amount" x="8" y="50" width="40" height="7" rx="3.5" fill={EMERALD} />
+    </g>
+  );
+}
+function TelDeveloppement() {
+  const l = [
+    { y: 14, w: 42, x: 8, delay: "0s" },
+    { y: 26, w: 30, x: 14, delay: "-0.2s" },
+    { y: 38, w: 38, x: 14, delay: "-0.4s" },
+  ];
+  return (
+    <g>
+      {l.map((x) => (
+        <rect
+          key={x.y}
+          className="mv mv-code"
+          x={x.x}
+          y={x.y}
+          width={x.w}
+          height="6"
+          rx="3"
+          fill={x.y === 26 ? TEAL : RAIL}
+          style={{ animationDelay: x.delay }}
+        />
+      ))}
+    </g>
+  );
+}
+function TelEnLigne() {
+  return (
+    <g>
+      <rect x="8" y="26" width="44" height="8" rx="4" fill={RAIL} />
+      <rect className="mv mv-deploy" x="8" y="26" width="44" height="8" rx="4" fill={EMERALD} />
+      <path
+        className="mv mv-done"
+        d="M20 46l6 6 12 -12"
+        pathLength={1}
+        fill="none"
+        stroke={EMERALD}
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </g>
+  );
+}
+
 const SCENES = [Echange, Maquette, Developpement, EnLigne];
+const SCENES_TEL = [TelEchange, TelMaquette, TelDeveloppement, TelEnLigne];
 
 export default function MethodShowcase({ steps }: { steps: number }) {
   // On ne rend que les scènes dont l'étape existe : si l'admin passe de 4 à
   // 3 étapes, la 4e ne s'affiche pas dans le vide.
   const visibles = SCENES.slice(0, Math.min(steps, SCENES.length));
+  const visiblesTel = SCENES_TEL.slice(0, Math.min(steps, SCENES_TEL.length));
 
   return (
     // Vue de trois-quarts plutôt que de face. La perspective est portée par
@@ -134,12 +216,34 @@ export default function MethodShowcase({ steps }: { steps: number }) {
     // se composent avec celle-ci au lieu de l'écraser.
     <div className="[perspective:1100px]">
       <svg
-        viewBox="0 0 320 200"
+        viewBox="-96 0 416 210"
         aria-hidden="true"
         focusable="false"
         className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:rotateY(-17deg)_rotateX(7deg)]"
       >
-      {/* Écran */}
+      {/* ---- Téléphone, posé devant et à gauche du portable ----
+           Il joue la MÊME étape, réduite à l'essentiel : c'est le reflet
+           mobile du même projet, pas une seconde histoire. */}
+      <rect
+        x="-88"
+        y="60"
+        width="74"
+        height="132"
+        rx="12"
+        fill="#071522"
+        stroke={RAIL}
+        strokeWidth="2"
+      />
+      <path d="M-64 70h26" stroke={RAIL} strokeWidth="3" strokeLinecap="round" />
+      <g transform="translate(-84 82)">
+        {visiblesTel.map((Scene, i) => (
+          <g key={i} className={`frise-desc-${i + 1}`}>
+            <Scene />
+          </g>
+        ))}
+      </g>
+
+      {/* ---- Portable ---- */}
       <rect
         x="30"
         y="8"

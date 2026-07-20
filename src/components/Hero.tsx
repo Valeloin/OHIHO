@@ -170,32 +170,32 @@ export default function Hero({
             sans aucun cadre, le bloc flottait sans structure. Un cadre
             commun les tient ensemble tout en les laissant respirer, séparés
             par la seule gouttière de la grille. */}
-        <motion.div variants={ITEM} className="card-surface mt-14 p-6 sm:p-8">
-          <dl className="grid grid-cols-2 gap-y-8 sm:grid-cols-4">
+        <motion.div variants={ITEM} className="card-surface mt-14 px-6 py-6 sm:px-8">
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
             {data.stats.map((item, i) => (
-              <div
-                key={item.label}
-                // Ni filet horizontal au-dessus, ni séparateurs verticaux :
-                // les quatre arguments se distinguent par leur seul
-                // espacement. La gouttière de la grille suffit.
-                className="pr-5"
-              >
-                <div className="flex items-center gap-3">
+              // Le pictogramme passe À GAUCHE du texte plutôt qu'au-dessus :
+              // empilé, il laissait une bande vide en haut de chaque colonne
+              // et c'est ce qui donnait à la carte son air désert. Ici il
+              // occupe la largeur perdue, et le bloc est plus dense.
+              <div key={item.label} className="flex gap-3.5">
+                <div className="shrink-0">
                   <StatGlyph index={i} />
-                  <span className="font-mono text-xs text-brand-teal">
+                </div>
+                <div className="min-w-0">
+                  <span className="font-mono text-[11px] tracking-[0.14em] text-brand-teal">
                     {String(i + 1).padStart(2, "0")}
                   </span>
+                  {/* `value` porte le mot-clé court, `label` la phrase qui
+                      l'explique : c'est donc le mot-clé qui fait office de
+                      terme (dt) et la phrase de définition (dd). Elle reste en
+                      casse normale : en capitales espacées, illisible. */}
+                  <dt className="mt-1 text-lg font-semibold tracking-display">
+                    {item.value}
+                  </dt>
+                  <dd className="mt-1.5 text-[0.8125rem] leading-[1.5] text-muted">
+                    {item.label}
+                  </dd>
                 </div>
-                {/* `value` porte le mot-clé court, `label` la phrase qui
-                    l'explique : c'est donc le mot-clé qui fait office de terme
-                    (dt) et la phrase de définition (dd). Elle reste en casse
-                    normale : en capitales espacées elle serait illisible. */}
-                <dt className="mt-4 text-xl font-semibold tracking-display sm:text-2xl">
-                  {item.value}
-                </dt>
-                <dd className="mt-2 text-sm leading-relaxed text-muted">
-                  {item.label}
-                </dd>
               </div>
             ))}
           </dl>
