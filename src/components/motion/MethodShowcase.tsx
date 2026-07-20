@@ -127,12 +127,18 @@ export default function MethodShowcase({ steps }: { steps: number }) {
   const visibles = SCENES.slice(0, Math.min(steps, SCENES.length));
 
   return (
-    <svg
-      viewBox="0 0 320 200"
-      aria-hidden="true"
-      focusable="false"
-      className="h-auto w-full"
-    >
+    // Vue de trois-quarts plutôt que de face. La perspective est portée par
+    // le parent et la rotation par le SVG : c'est ce couple qui donne la
+    // profondeur, une rotation seule aplatirait l'objet.
+    // Les animations internes ne sont pas affectées — leurs transformations
+    // se composent avec celle-ci au lieu de l'écraser.
+    <div className="[perspective:1100px]">
+      <svg
+        viewBox="0 0 320 200"
+        aria-hidden="true"
+        focusable="false"
+        className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:rotateY(-17deg)_rotateX(7deg)]"
+      >
       {/* Écran */}
       <rect
         x="30"
@@ -171,7 +177,14 @@ export default function MethodShowcase({ steps }: { steps: number }) {
       <path d="M140 172h40" stroke={RAIL} strokeWidth="2" strokeLinecap="round" />
       <path d="M30 158h260" stroke={RAIL} strokeWidth="2" />
       {/* Liseré de marque sur la tranche : rappel discret du logo. */}
-      <path d="M120 166h80" stroke={TEAL} strokeWidth="2" strokeLinecap="round" opacity="0.5" />
-    </svg>
+        <path
+          d="M120 166h80"
+          stroke={TEAL}
+          strokeWidth="2"
+          strokeLinecap="round"
+          opacity="0.5"
+        />
+      </svg>
+    </div>
   );
 }
