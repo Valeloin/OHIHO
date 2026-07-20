@@ -362,6 +362,57 @@ export default function MethodShowcase({ steps }: { steps: number }) {
           <stop offset="0.5" stopColor={TEAL} />
           <stop offset="1" stopColor={EMERALD} />
         </linearGradient>
+
+        {/* DALLE ALLUMÉE. Les deux écrans étaient remplis de #071522 quand la
+            page, elle, est à #091a29 : deux valeurs presque identiques. Rien
+            ne disait donc qu'il y avait une surface, et le contenu semblait
+            flotter à côté de l'appareil plutôt que s'afficher dessus.
+            Ce dégradé éclaire la dalle par le haut-gauche, comme un écran
+            allumé dans une pièce sombre. */}
+        <linearGradient
+          id="mv-screen"
+          x1="0"
+          y1="0"
+          x2="0.7"
+          y2="1"
+          gradientUnits="objectBoundingBox"
+        >
+          {/* L'aplat d'origine (#071522) affichait un contraste de 1,05 avec
+              le fond de page : autant dire aucun. Ce dégradé va de 1,55 dans
+              l'angle éclairé à 1,01 dans l'angle opposé — la dalle se lit
+              franchement sans jamais devenir un rectangle clair posé sur la
+              page, ce qui trahirait autant que l'inverse. */}
+          <stop offset="0" stopColor="#1d3f5f" />
+          <stop offset="0.55" stopColor="#102941" />
+          <stop offset="1" stopColor="#0a1b2c" />
+        </linearGradient>
+
+        {/* Reflet de verre : une bande claire en diagonale, posée PAR-DESSUS
+            le contenu. C'est elle qui vend la dalle — sans reflet, un aplat
+            reste un aplat. Très faible : elle doit se deviner, pas se voir. */}
+        <linearGradient
+          id="mv-glare"
+          x1="0"
+          y1="0"
+          x2="0.9"
+          y2="1"
+          gradientUnits="objectBoundingBox"
+        >
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0.09" />
+          <stop offset="0.4" stopColor="#ffffff" stopOpacity="0.02" />
+          <stop offset="0.75" stopColor="#ffffff" stopOpacity="0" />
+        </linearGradient>
+
+        {/* Détourages : le contenu ne peut PLUS déborder de sa dalle, quelle
+            que soit la scène. Sans eux, il suffit qu'une animation dépasse de
+            quelques unités pour que le dessin sorte de l'écran et trahisse
+            que ce n'en est pas un. */}
+        <clipPath id="mv-clip-tel">
+          <rect x="-88" y="60" width="74" height="132" rx="12" />
+        </clipPath>
+        <clipPath id="mv-clip-portable">
+          <rect x="30" y="26" width="260" height="132" rx="10" />
+        </clipPath>
       </defs>
 
       {/* ---- Téléphone, posé devant et à gauche du portable ----
@@ -373,35 +424,51 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         width="74"
         height="132"
         rx="12"
-        fill="#071522"
+        fill="url(#mv-screen)"
         stroke={RAIL}
         strokeWidth="2"
       />
       <path d="M-64 70h26" stroke={RAIL} strokeWidth="3" strokeLinecap="round" />
-      {/* Emblème CENTRÉ dans l'écran du téléphone, DERRIÈRE la scène : il est
-          dessiné avant elle, donc la scène passe par-dessus. Voir mv-brand. */}
-      <g className="mv-brand">
-        <Emblem cx={-51} cy={146} r={18} />
-      </g>
-      <g transform="translate(-84 82)">
-        {visiblesTel.map((Scene, i) => (
-          <g key={i} className={`frise-desc-${i + 1}`}>
-            <Scene />
-          </g>
-        ))}
+      {/* Tout le contenu de l'écran est détouré par la dalle. */}
+      <g clipPath="url(#mv-clip-tel)">
+        {/* Emblème CENTRÉ dans l'écran, DERRIÈRE la scène : il est dessiné
+            avant elle, donc la scène passe par-dessus. Voir mv-brand. */}
+        <g className="mv-brand">
+          <Emblem cx={-51} cy={146} r={18} />
+        </g>
+        <g transform="translate(-84 82)">
+          {visiblesTel.map((Scene, i) => (
+            <g key={i} className={`frise-desc-${i + 1}`}>
+              <Scene />
+            </g>
+          ))}
+        </g>
+        {/* Reflet, PAR-DESSUS le contenu : c'est ce qui place définitivement
+            l'animation derrière une vitre. */}
+        <rect
+          x="-88"
+          y="60"
+          width="74"
+          height="132"
+          rx="12"
+          fill="url(#mv-glare)"
+        />
       </g>
 
-      {/* ---- Portable ---- */}
+      {/* ---- Portable ----
+           Le châssis reste sombre, c'est du plastique ; seule la DALLE, sous
+           la barre de fenêtre, est allumée. */}
       <rect
         x="30"
         y="8"
         width="260"
         height="150"
         rx="10"
-        fill="#071522"
+        fill="#0a1b2c"
         stroke={RAIL}
         strokeWidth="2"
       />
+      <rect x="30" y="26" width="260" height="132" fill="url(#mv-screen)" />
       {/* Barre de fenêtre */}
       <path d="M30 26h260" stroke={RAIL} strokeWidth="2" />
       <circle cx="44" cy="17" r="2.5" fill={RAIL} />
@@ -409,24 +476,28 @@ export default function MethodShowcase({ steps }: { steps: number }) {
       <circle cx="62" cy="17" r="2.5" fill={RAIL} />
       <rect x="74" y="13.5" width="82" height="7" rx="3.5" fill={RAIL} opacity="0.7" />
 
-      {/* Emblème CENTRÉ dans la zone d'écran (x 30-290, barre de fenêtre
-          jusqu'à 26 : le centre tombe à 160/92), et dessiné AVANT les scènes
-          pour passer derrière elles. Il a d'abord été un favicon dans la
-          barre d'onglet, puis une vignette en haut à gauche : dans les deux
-          cas c'était une décoration posée à côté de l'animation. Ici il en
-          fait partie — voir mv-brand. */}
-      <g className="mv-brand">
-        <Emblem cx={160} cy={90} r={25} />
-      </g>
+      <g clipPath="url(#mv-clip-portable)">
+        {/* Emblème CENTRÉ dans la zone d'écran (x 30-290, barre de fenêtre
+            jusqu'à 26 : le centre tombe à 160/92), et dessiné AVANT les
+            scènes pour passer derrière elles. Il a d'abord été un favicon
+            dans la barre d'onglet, puis une vignette en haut à gauche : dans
+            les deux cas c'était une décoration posée à côté de l'animation.
+            Ici il en fait partie — voir mv-brand. */}
+        <g className="mv-brand">
+          <Emblem cx={160} cy={90} r={25} />
+        </g>
 
-      {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte la
-          fenêtre d'affichage de son étape (frise-desc-N). */}
-      <g transform="translate(38 30)">
-        {visibles.map((Scene, i) => (
-          <g key={i} className={`frise-desc-${i + 1}`}>
-            <Scene />
-          </g>
-        ))}
+        {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte la
+            fenêtre d'affichage de son étape (frise-desc-N). */}
+        <g transform="translate(38 30)">
+          {visibles.map((Scene, i) => (
+            <g key={i} className={`frise-desc-${i + 1}`}>
+              <Scene />
+            </g>
+          ))}
+        </g>
+
+        <rect x="30" y="26" width="260" height="132" fill="url(#mv-glare)" />
       </g>
 
       {/* Pas de socle : l'écran flotte seul. Le pied dessiné en perspective
