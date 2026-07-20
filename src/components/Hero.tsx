@@ -165,15 +165,12 @@ export default function Hero({
           </motion.div>
         </div>
 
-        {/* Rangée de chiffres SANS cartes. Les boîtes (aplat, filet, arrondi,
-            ombre) alourdissaient le bas du hero et enfermaient chaque
-            argument. Ici les quatre reposent à même le fond, séparés par un
-            simple filet vertical — le même parti pris que la section
-            Services, où retirer la boîte avait résolu le problème.
-            Le filet est posé À GAUCHE de chaque colonne sauf en début de
-            rangée : sur deux colonnes ce sont les éléments impairs, sur
-            quatre le premier seulement. */}
-        <motion.div variants={ITEM} className="mt-14">
+        {/* UNE SEULE carte autour des quatre arguments, et non quatre boîtes.
+            Individuellement encadrés, ils alourdissaient le bas du hero ;
+            sans aucun cadre, le bloc flottait sans structure. Un cadre
+            commun les tient ensemble tout en les laissant respirer, séparés
+            par la seule gouttière de la grille. */}
+        <motion.div variants={ITEM} className="card-surface mt-14 p-6 sm:p-8">
           <dl className="grid grid-cols-2 gap-y-8 sm:grid-cols-4">
             {data.stats.map((item, i) => (
               <div
