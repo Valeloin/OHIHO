@@ -52,9 +52,12 @@ export default function Fireflies({ className = "" }: { className?: string }) {
         // l'hydratation). Les trois suites ont des pas premiers entre eux
         // avec le nombre de lucioles : deux voisines ne retombent jamais sur
         // la même combinaison, et aucune vague d'ensemble ne se forme.
-        const driftDuration = 19 + ((i * 7) % 16); // 19 → 34 s
+        // L'amplitude a été augmentée en même temps que la vitesse : à 4-9 px
+        // sur un cycle court, le déplacement se lisait comme un frémissement
+        // sur place plutôt que comme un vol.
+        const driftDuration = 6 + ((i * 7) % 8); // 6 → 13 s
         const driftDelay = -((i * 5) % 17); // départ déjà entamé
-        const driftAmp = 4 + (i % 5) * 1.25; // 4 → 9 px
+        const driftAmp = 9 + (i % 5) * 2.75; // 9 → 20 px
 
         return (
           <span
