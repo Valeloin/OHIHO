@@ -137,11 +137,11 @@ export default function Navbar() {
             priority
             className="h-10 w-10"
           />
-          <span className="text-xl font-semibold tracking-display">
-            <span className="text-[var(--header-fg)]">OH</span>
-            {/* Le « I » en teal, exactement comme le wordmark de la banderole. */}
-            <span className="text-brand-teal">I</span>
-            <span className="text-[var(--header-fg)]">HO</span>
+          {/* Wordmark entièrement blanc. Le « I » était en teal (repris de la
+              banderole) ; l'emblème à gauche porte déjà le trio de marque,
+              c'est lui qui apporte la couleur. */}
+          <span className="text-xl font-semibold tracking-display text-[var(--header-fg)]">
+            OHIHO
           </span>
         </Link>
 
