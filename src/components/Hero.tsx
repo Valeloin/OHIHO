@@ -47,11 +47,14 @@ export default function Hero({
       <Fireflies />
 
       <motion.div
-        // L'en-tête est déjà haut de ~73 px et occupe sa place dans le flux :
-        // un padding de 128 px par-dessus creusait 134 px de vide avant le
-        // premier mot. Réduit à 56 px, il reste une respiration franche sans
-        // trou, et le hero repasse sous la barre d'un écran.
-        className="relative mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-center px-6 pb-20 pt-10 sm:pt-14"
+        // Ni hauteur imposée ni centrage vertical : le hero fait exactement la
+        // taille de son contenu. Avec `min-h-[88vh]` + `justify-center`, sur
+        // un écran haut la section était étirée à 88 % de la fenêtre et son
+        // contenu, centré dedans, creusait du vide en haut ET en bas — près
+        // de 290 px au-dessus du premier mot sur un grand écran.
+        // La règle du site est qu'une section TIENNE sur un écran, pas
+        // qu'elle le remplisse.
+        className="relative mx-auto flex max-w-6xl flex-col px-6 pb-20 pt-10 sm:pt-14"
         variants={CONTAINER}
         initial="hidden"
         animate="visible"
