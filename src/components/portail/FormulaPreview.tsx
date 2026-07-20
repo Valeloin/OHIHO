@@ -288,7 +288,7 @@ export default function FormulaPreview({
       xmlns="http://www.w3.org/2000/svg"
       className="h-full w-full"
       role="img"
-      aria-label={`Aperçu — ${type}`}
+      aria-label={`Aperçu ${type}`}
     >
       {/* Arrondi doux : la maquette s'inscrit dans son cadre arrondi. */}
       <rect width="400" height="220" rx="10" fill={p.screen} />

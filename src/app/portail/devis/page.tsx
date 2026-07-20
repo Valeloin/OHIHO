@@ -6,7 +6,7 @@ import { getContent } from "@/lib/content";
 import { formulaLabel, statusLabel } from "@/lib/quotes";
 
 export const metadata: Metadata = {
-  title: "Mes devis — OHIHO",
+  title: "Mes devis · OHIHO",
 };
 
 // Statuts en PILULES, comme les puces de la banderole : les neutres nuit

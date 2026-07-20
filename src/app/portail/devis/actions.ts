@@ -75,7 +75,7 @@ export async function submitQuoteRequest(
   try {
     const { quotes } = await getContent();
     await sendMail({
-      subject: `Nouveau pré-devis ${data.reference} — ${formulaLabel(projectType, quotes)}`,
+      subject: `Nouveau pré-devis ${data.reference} · ${formulaLabel(projectType, quotes)}`,
       replyTo: user.email,
       text: [
         `Référence : ${data.reference}`,

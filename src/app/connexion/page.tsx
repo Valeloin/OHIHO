@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import LoginForm from "@/components/auth/LoginForm";
 
 export const metadata: Metadata = {
-  title: "Connexion — OHIHO",
+  title: "Connexion · OHIHO",
   description: "Connectez-vous à votre espace client OHIHO pour suivre l'avancement de vos projets web.",
 };
 

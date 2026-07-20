@@ -42,8 +42,8 @@ const MENU: { id: SectionId; label: string }[] = [
   { id: "whyUs", label: "Pourquoi OHIHO" },
   { id: "contact", label: "Votre projet" },
   { id: "footer", label: "Footer" },
-  { id: "quotesFormulas", label: "Devis — formules" },
-  { id: "quotesForm", label: "Devis — formulaire" },
+  { id: "quotesFormulas", label: "Devis · formules" },
+  { id: "quotesForm", label: "Devis · formulaire" },
 ];
 
 function Field({
@@ -132,13 +132,13 @@ function ColorField({
         type="color"
         value={valid ? value : defaultValue}
         onChange={(e) => onChange(e.target.value)}
-        aria-label={`${label} — sélecteur`}
+        aria-label={`${label} · sélecteur`}
         className="h-10 w-10 shrink-0 cursor-pointer rounded-xl border border-border bg-background p-1"
       />
       <div className="min-w-0 flex-1">
         <label className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
           {label}
-          {hint && <span className="normal-case tracking-normal opacity-70"> — {hint}</span>}
+          {hint && <span className="normal-case tracking-normal opacity-70"> · {hint}</span>}
         </label>
         <input
           type="text"
@@ -385,12 +385,12 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             />
             <div className="grid gap-5 sm:grid-cols-2">
               <Field
-                label="Titre — début"
+                label="Titre · début"
                 value={hero.titleLead}
                 onChange={(v) => set("hero", { titleLead: v })}
               />
               <Field
-                label="Titre — partie au dégradé de marque"
+                label="Titre · partie au dégradé de marque"
                 value={hero.titleAccent}
                 onChange={(v) => set("hero", { titleAccent: v })}
               />
@@ -427,7 +427,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                         setItem("hero", "stats", i, { value: e.target.value })
                       }
                       placeholder="Valeur (ex. Sur mesure)"
-                      aria-label={`Carte ${i + 1} — valeur`}
+                      aria-label={`Carte ${i + 1} · valeur`}
                       className="rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25"
                     />
                     <input
@@ -437,7 +437,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                         setItem("hero", "stats", i, { label: e.target.value })
                       }
                       placeholder="Libellé (ex. Approche)"
-                      aria-label={`Carte ${i + 1} — libellé`}
+                      aria-label={`Carte ${i + 1} · libellé`}
                       className="rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/25"
                     />
                   </div>
@@ -486,7 +486,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
         {active === "services" && (
           <Section
             title="Nos services"
-            hint="L'en-tête de la section. Les 4 cartes reprennent automatiquement les formules du devis — modifiez-les dans « Devis — formules »."
+            hint="L'en-tête de la section. Les 4 cartes reprennent automatiquement les formules du devis · modifiez-les dans « Devis · formules »."
           >
             <Field
               label="Petit titre (kicker)"
@@ -695,7 +695,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
 
         {active === "quotesFormulas" && (
           <Section
-            title="Devis — les 4 formules"
+            title="Devis · les 4 formules"
             hint="Les cartes proposées à l'étape 1 de la demande de devis. Le nom de la formule apparaît aussi dans « Mes devis » et dans l'email de pré-devis."
           >
             {FORMULA_KEYS.map((key) => {
@@ -741,7 +741,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
 
         {active === "quotesForm" && (
           <Section
-            title="Devis — formulaire et suivi"
+            title="Devis · formulaire et suivi"
             hint="Les textes et couleurs de l'assistant de demande de devis, et la page « Mes devis »."
           >
             <div className="rounded-xl border border-border bg-surface-2/40 p-4">
@@ -786,7 +786,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                   }
                 />
                 <ColorField
-                  label="Maquettes — fond d'écran"
+                  label="Maquettes · fond d'écran"
                   value={quotes.colors.previewScreen}
                   defaultValue={defaultContent.quotes.colors.previewScreen}
                   onChange={(v) =>
@@ -796,7 +796,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                   }
                 />
                 <ColorField
-                  label="Maquettes — blocs de contenu"
+                  label="Maquettes · blocs de contenu"
                   value={quotes.colors.previewBlocks}
                   defaultValue={defaultContent.quotes.colors.previewBlocks}
                   onChange={(v) =>
@@ -806,7 +806,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                   }
                 />
                 <ColorField
-                  label="Maquettes — éléments animés"
+                  label="Maquettes · éléments animés"
                   value={quotes.colors.previewAccent}
                   defaultValue={defaultContent.quotes.colors.previewAccent}
                   onChange={(v) =>

@@ -292,7 +292,7 @@ export default function DevisWizard({
                 onChange={(e) => setBudget(e.target.value)}
                 className={FIELD}
               >
-                <option value="">— À préciser —</option>
+                <option value="">À préciser</option>
                 {quotes.budgets.map((b) => (
                   <option key={b} value={b}>
                     {b}
@@ -311,7 +311,7 @@ export default function DevisWizard({
                 onChange={(e) => setTimeline(e.target.value)}
                 className={FIELD}
               >
-                <option value="">— À préciser —</option>
+                <option value="">À préciser</option>
                 {quotes.timelines.map((t) => (
                   <option key={t} value={t}>
                     {t}
@@ -380,12 +380,12 @@ export default function DevisWizard({
 
           <dl className="card-surface mt-6 divide-y divide-border">
             <RecapRow label="Formule" value={selectedFormula.label} />
-            <RecapRow label="Entreprise" value={company || "—"} />
-            <RecapRow label="Budget" value={budget || "—"} />
-            <RecapRow label="Délai" value={timeline || "—"} />
+            <RecapRow label="Entreprise" value={company || "Non précisé"} />
+            <RecapRow label="Budget" value={budget || "Non précisé"} />
+            <RecapRow label="Délai" value={timeline || "Non précisé"} />
             <RecapRow
               label="Options"
-              value={options.length ? options.join(", ") : "—"}
+              value={options.length ? options.join(", ") : "Non précisé"}
             />
             <RecapRow label="Description" value={description} />
           </dl>

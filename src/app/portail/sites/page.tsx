@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Mes sites & outils — OHIHO",
+  title: "Mes sites & outils · OHIHO",
 };
 
 export default function PortailSitesPage() {

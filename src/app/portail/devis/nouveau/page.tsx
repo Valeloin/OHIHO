@@ -4,7 +4,7 @@ import { getContent } from "@/lib/content";
 import DevisWizard from "@/components/portail/DevisWizard";
 
 export const metadata: Metadata = {
-  title: "Demander un devis — OHIHO",
+  title: "Demander un devis · OHIHO",
 };
 
 export default async function NouveauDevisPage() {

@@ -38,7 +38,7 @@ export default async function PortailLayout({
               </h1>
               <p className="mt-3 text-sm text-muted">
                 Connecté avec {user?.email}
-                {profile?.company ? ` — ${profile.company}` : ""}.
+                {profile?.company ? ` · ${profile.company}` : ""}.
               </p>
             </div>
 

@@ -16,7 +16,7 @@ export const defaultContent: SiteContent = {
     titleLead: "Site web et application web",
     titleAccent: "sur mesure",
     subtitle:
-      "De l'idée au déploiement, nous concevons et développons votre site ou application — sur mesure, avec un accompagnement dans la durée.",
+      "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée.",
     ctaPrimary: "Demander un devis",
     ctaSecondary: "Voir nos réalisations",
     stats: [
@@ -38,7 +38,7 @@ export const defaultContent: SiteContent = {
     kicker: "Nos services",
     title: "De l'idée au site en ligne",
     subtitle:
-      "Conception, développement et suivi dans la durée — pour un site vitrine ou une application web sur mesure, pour les entreprises comme pour les particuliers.",
+      "Conception, développement et suivi dans la durée, pour un site vitrine ou une application web sur mesure, pour les entreprises comme pour les particuliers.",
   },
   method: {
     kicker: "Méthode",
@@ -47,7 +47,7 @@ export const defaultContent: SiteContent = {
       {
         title: "Échange initial",
         description:
-          "Un échange pour comprendre votre projet, vos objectifs et votre budget — sans engagement.",
+          "Un échange pour comprendre votre projet, vos objectifs et votre budget, sans engagement.",
       },
       {
         title: "Maquette & devis",
@@ -70,7 +70,7 @@ export const defaultContent: SiteContent = {
     kicker: "Notre approche",
     title: "Un travail soigné, une communication claire, du début à la fin",
     paragraph1:
-      "Chaque projet est développé avec une stack moderne et un code pensé pour durer — pas de solution générique, pas de boîte noire. Vous savez toujours où en est votre projet.",
+      "Chaque projet est développé avec une stack moderne et un code pensé pour durer. Pas de solution générique, pas de boîte noire. Vous savez toujours où en est votre projet.",
     paragraph2:
       "Une fois votre site ou application en ligne, l'accompagnement continue : les demandes d'évolution ou de correction se font simplement par email, jusqu'à leur résolution.",
     panelTitle: "Ce qu'on couvre",
@@ -127,7 +127,7 @@ export const defaultContent: SiteContent = {
   quotes: {
     step1Title: "Quel type de projet ?",
     step1Subtitle:
-      "Choisissez la formule la plus proche de votre besoin — on affinera ensemble.",
+      "Choisissez la formule la plus proche de votre besoin, on affinera ensemble.",
     step2Subtitle: "Quelques précisions pour préparer un devis au plus juste.",
     // Couleurs du formulaire de devis. Tant qu'une valeur = défaut, la couleur
     // globale du thème s'applique.

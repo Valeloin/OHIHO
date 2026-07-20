@@ -19,7 +19,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
-  title: "OHIHO — Création de sites web & applications sur mesure",
+  title: "OHIHO · Création de sites web & applications sur mesure",
   description:
     "OHIHO conçoit et développe des sites web et applications sur mesure, pour entreprises et particuliers, de l'idée à la mise en ligne et au-delà.",
   keywords: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "OHIHO",
   ],
   openGraph: {
-    title: "OHIHO — Création de sites web & applications sur mesure",
+    title: "OHIHO · Création de sites web & applications sur mesure",
     description:
       "Des sites et applications web sur mesure, de l'idée à la mise en ligne.",
     type: "website",
@@ -41,14 +41,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "OHIHO — Création de sites web & applications sur mesure",
+    title: "OHIHO · Création de sites web & applications sur mesure",
     description:
       "Des sites et applications web sur mesure, de l'idée à la mise en ligne.",
     images: ["/logo.svg"],
   },
   // Le SVG est déclaré en premier : les navigateurs modernes le préfèrent et
   // il porte l'anneau au dégradé de marque. Les PNG restent en repli pour les
-  // navigateurs sans support SVG — ils datent de l'anneau argenté et sont
+  // navigateurs sans support SVG : ils datent de l'anneau argenté et sont
   // encore à régénérer.
   icons: {
     icon: [

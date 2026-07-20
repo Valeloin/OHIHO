@@ -20,7 +20,7 @@ const POINTS = [
   {
     titre: "Vous savez toujours où ça en est",
     texte:
-      "Reçue, en cours d'analyse, corrigée : le statut est visible à tout moment, et les échanges restent attachés à la demande — pas éparpillés dans une boîte mail.",
+      "Reçue, en cours d'analyse, corrigée : le statut est visible à tout moment, et les échanges restent attachés à la demande, pas éparpillés dans une boîte mail.",
   },
   {
     titre: "Rien ne reste en plan",
@@ -45,7 +45,7 @@ export default function Suivi() {
           <p className="mt-3 max-w-2xl leading-relaxed text-muted">
             La mise en ligne n&apos;est pas la fin du projet. Chaque site livré
             s&apos;accompagne d&apos;un espace dédié où vos demandes sont
-            enregistrées, suivies et traitées — sans relance de votre part.
+            enregistrées, suivies et traitées, sans relance de votre part.
           </p>
         </Reveal>
         <div className="mt-5 h-px rule-fade" />

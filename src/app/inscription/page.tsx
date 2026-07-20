@@ -3,7 +3,7 @@ import SignupForm from "@/components/auth/SignupForm";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
 
 export const metadata: Metadata = {
-  title: "Créer un compte — OHIHO",
+  title: "Créer un compte · OHIHO",
   description:
     "Créez votre compte OHIHO pour suivre vos projets web et demander un devis.",
 };
@@ -36,7 +36,7 @@ export default function InscriptionPage() {
               Créer votre compte
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Une minute suffit — seuls votre nom, votre email et un mot de
+              Une minute suffit · seuls votre nom, votre email et un mot de
               passe sont nécessaires.
             </p>
 

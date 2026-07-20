@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ResetRequestForm from "@/components/auth/ResetRequestForm";
 
 export const metadata: Metadata = {
-  title: "Mot de passe oublié — OHIHO",
+  title: "Mot de passe oublié · OHIHO",
   description: "Réinitialisez le mot de passe de votre espace client OHIHO.",
 };
 

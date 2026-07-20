@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import NewPasswordForm from "@/components/auth/NewPasswordForm";
 
 export const metadata: Metadata = {
-  title: "Nouveau mot de passe — OHIHO",
+  title: "Nouveau mot de passe · OHIHO",
 };
 
 export default function NouveauMotDePassePage() {

@@ -22,7 +22,7 @@ export async function sendMail({ subject, text, to, replyTo }: SendMailInput) {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO } = process.env;
 
   if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
-    throw new EmailConfigError("Variables SMTP manquantes — email non envoyé.");
+    throw new EmailConfigError("Variables SMTP manquantes, email non envoyé.");
   }
 
   const transporter = nodemailer.createTransport({

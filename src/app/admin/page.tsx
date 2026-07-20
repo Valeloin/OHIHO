@@ -10,7 +10,7 @@ import AdminEditor from "@/components/admin/AdminEditor";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Espace admin — OHIHO",
+  title: "Espace admin · OHIHO",
   robots: { index: false, follow: false },
 };
 
@@ -18,7 +18,7 @@ export default async function AdminPage() {
   if (!isSupabaseConfigured()) {
     return (
       <main className="mx-auto max-w-2xl px-6 py-20">
-        <h1 className="text-2xl font-semibold">Espace admin — à activer</h1>
+        <h1 className="text-2xl font-semibold">Espace admin · à activer</h1>
         <p className="mt-4 text-muted">
           Supabase n&apos;est pas configuré : la connexion admin et l&apos;édition
           du contenu sont désactivées pour l&apos;instant.
