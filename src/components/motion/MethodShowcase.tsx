@@ -364,10 +364,13 @@ export default function MethodShowcase({ steps }: { steps: number }) {
   const visiblesTel = SCENES_TEL.slice(0, Math.min(steps, SCENES_TEL.length));
 
   return (
-    // Vue inclinée plutôt que de face. L'inclinaison est portée par le SVG
-    // seul (voir son `transform`) : le `perspective:1100px` qui était ici
-    // n'a plus lieu d'être, c'est justement la division perspective qu'on
-    // cherche à éviter.
+    // ⚠️ AUCUNE `perspective` sur ce parent, et c'est délibéré.
+    // Sans ancêtre en perspective, CSS projette les rotations 3D en
+    // ORTHOGRAPHIQUE : pas de division par la profondeur, donc pas de point
+    // de fuite. La transformation reste affine, les droites parallèles le
+    // restent, et le contenu prend exactement le même angle que le châssis
+    // qui l'affiche. Le raccourci existe quand même — il vient du cosinus de
+    // la rotation, pas de la convergence.
     // Les animations internes ne sont pas affectées — leurs transformations
     // se composent avec celle-ci au lieu de l'écraser.
     <div>
@@ -377,23 +380,37 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         viewBox="-96 0 416 198"
         aria-hidden="true"
         focusable="false"
-        /* PROJECTION OBLIQUE (2D) et non plus perspective 3D.
-           Le réglage précédent était `perspective:1100px` +
-           `rotateY(-22deg) rotateX(9deg)`. Il produisait un défaut visible :
-           sous une projection PERSPECTIVE, des droites parallèles ne restent
-           pas parallèles, elles fuient vers un point de fuite. Mesuré à
-           l'écran, le bord haut du cadre tombait à -2,31° tandis qu'une barre
-           de contenu, plus basse, se redressait à -0,85°. Le cadre penchait
-           donc presque trois fois plus que ce qu'il contenait : l'appareil
-           avait l'air de biais, son écran avait l'air plat.
-           `skewY` est une transformation AFFINE : elle envoie (x, y) sur
-           (x, y + x·tan a). Toute horizontale prend exactement le même angle,
-           quelle que soit sa position, et les verticales restent verticales.
-           Le cadre et son contenu partagent donc rigoureusement la même
-           inclinaison — c'est garanti par construction, pas par réglage.
-           Le `scaleX` raccourcit légèrement la largeur pour suggérer le
-           raccourci d'un objet vu de trois quarts. */
-        className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:skewY(-6deg)_scaleX(0.97)]"
+        /* VUE DE TROIS QUARTS. Deux appareils tournés vers le spectateur, dont
+           les dalles affichent les scènes : le contenu est DANS le SVG, il
+           subit donc la même transformation que les châssis et se trouve
+           forcément sur le même plan qu'eux.
+
+           ⚠️ Deux réglages ont été essayés et rejetés avant celui-ci :
+           1. `perspective:1100px` + `rotateY(-22deg) rotateX(9deg)`. Trop
+              timide : le bord haut du châssis tombait à -2,31° mais une barre
+              de contenu, plus basse dans le plan, se redressait à -0,85°. Sur
+              des barres courtes, cet écart se lit comme du contenu plat posé
+              sur un cadre incliné.
+           2. `skewY(-6deg)`, une projection affine. Elle donnait bien le même
+              angle partout, mais un cisaillement n'est pas une vue de trois
+              quarts : les appareils penchaient comme de l'italique au lieu de
+              tourner dans l'espace.
+
+           3. Perspective raccourcie à 620 px pour marquer le trois-quarts.
+              Elle l'a marqué, mais elle a AGGRAVÉ l'écart : -6,15° pour le
+              châssis contre -2,26° pour le contenu. Plus la perspective est
+              forte, plus les parallèles divergent.
+
+           Le réglage retenu garde ces deux rotations mais SUPPRIME la
+           perspective du parent. CSS bascule alors en projection
+           orthographique : la transformation redevient affine, donc tous les
+           angles sont égaux, et l'objet tourne quand même dans l'espace. Le
+           raccourci horizontal vient du cosinus de la rotation (cos 30° ≈
+           0,87), pas d'une convergence.
+           C'est le seul des quatre réglages qui satisfait les deux exigences
+           à la fois : une vraie vue de trois quarts, et un contenu rigoureu-
+           sement dans le plan de l'écran qui l'affiche. */
+        className="h-auto w-full origin-center drop-shadow-[0_22px_38px_rgba(0,0,0,0.5)] [transform:rotateY(-30deg)_rotateX(8deg)]"
       >
       <defs>
         {/* Trio de marque, repris du logo : bleu ciel → teal → vert. */}
