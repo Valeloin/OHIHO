@@ -155,9 +155,9 @@ export const defaultContent: SiteContent = {
     formulas: {
       landing: {
         label: "Landing page",
-        tagline: "Une page unique, efficace",
+        tagline: "Une page, un objectif",
         description:
-          "Une seule page pensée pour présenter une offre précise et transformer vos visiteurs en contacts. Idéale pour un lancement, une campagne ou une activité qui tient sur une page.",
+          "Une seule page, un seul objectif : que le visiteur vous contacte. Pour un lancement, une campagne, ou une activité qui tient en une page.",
         examples:
           "Ex. : lancement de produit, page de réservation, mise en avant d'une offre.",
         options: [
@@ -169,9 +169,9 @@ export const defaultContent: SiteContent = {
       },
       intermediaire: {
         label: "Site intermédiaire",
-        tagline: "Un site vitrine multi-pages",
+        tagline: "Plusieurs pages",
         description:
-          "Un site complet de plusieurs pages (accueil, services, à propos, contact…) pour présenter votre activité dans le détail et inspirer confiance.",
+          "Accueil, services, à propos, contact. De quoi dérouler votre activité en détail, et donner envie de vous faire confiance.",
         examples:
           "Ex. : artisan, cabinet, salle de sport, restaurant, association.",
         options: [
@@ -185,9 +185,9 @@ export const defaultContent: SiteContent = {
       },
       refonte: {
         label: "Refonte de site",
-        tagline: "Moderniser un site existant",
+        tagline: "Un site à rafraîchir",
         description:
-          "Reprendre votre site actuel pour le moderniser : nouveau design, meilleure performance, adapté au mobile et au référencement, sans repartir de zéro.",
+          "Votre site existe déjà mais il a vieilli. On garde vos contenus, on refait le design, la vitesse et le mobile.",
         examples:
           "Ex. : site vieillissant, lent, non responsive, ou à rafraîchir.",
         options: [
@@ -199,9 +199,9 @@ export const defaultContent: SiteContent = {
       },
       application: {
         label: "Application web",
-        tagline: "Un outil sur mesure",
+        tagline: "Sur mesure",
         description:
-          "Une application web développée pour votre besoin précis : espace client, tableau de bord, réservation, outil métier interne. Comptes utilisateurs et logique adaptée à votre activité.",
+          "Espace client, réservation, tableau de bord, outil interne. Un logiciel écrit pour votre métier, avec ses comptes et ses règles.",
         examples:
           "Ex. : espace client, gestion de réservations, tableau de bord, outil interne.",
         options: [

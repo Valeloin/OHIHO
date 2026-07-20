@@ -110,7 +110,21 @@ export default function Services({
                     <h3 className="mt-1.5 text-2xl font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
                       {formula.label}
                     </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-muted">
+                    {/* Blanc et non gris bleuté : ces quatre descriptions sont
+                        l'argumentaire commercial de la page, pas une légende.
+                        En `text-muted` elles reculaient au même plan que les
+                        sur-titres, alors qu'elles portent l'essentiel. Le
+                        contraste passe de 8,2 à 15,9.
+                        ⚠️ Ne pas écrire `text-foreground/80` en espérant les
+                        adoucir : `--foreground` est un HEX, il n'accepte pas
+                        les modificateurs d'opacité de Tailwind, qui sont alors
+                        ignorés en silence. C'est le même piège que sur les
+                        couleurs de marque, résolu là-bas en déclarant les
+                        variables en canaux RGB. Pour nuancer ici, il faudrait
+                        soit faire de même, soit passer par `opacity-*`. La
+                        hiérarchie avec le titre tient de toute façon à la
+                        taille et à la graisse, pas à la couleur. */}
+                    <p className="mt-2.5 text-sm leading-relaxed text-foreground">
                       {formula.description}
                     </p>
                   </div>
