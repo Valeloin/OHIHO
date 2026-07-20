@@ -814,17 +814,29 @@ body {
    validation à la fin ne surprenait plus personne. Il n'apparaît maintenant
    qu'à 72 %, l'instant EXACT où le trait touche le cercle — la même borne
    que la gerbe et la coche. */
+/* ⚠️ L'ARRIVÉE DOIT SE LIRE COMME UN SEUL GESTE, pas comme trois animations
+   qui se succèdent. Le trait touche le cercle à 72 % : c'est le choc, et
+   tout ce qui en découle doit partir de cet instant précis.
+   Le réglage précédent étalait l'apparition du cercle sur 8 % (1,3 s), si
+   bien que la coche commençait à s'écrire à l'intérieur d'un cercle encore
+   translucide et que la gerbe avait fini avant lui. Trois courbes
+   différentes, trois objets distincts à l'œil.
+   Séquence tenue maintenant :
+     72 %      le trait touche
+     72-73,5 % le cercle encaisse le choc, en même temps que la gerbe
+     73,5-75,5 % il se stabilise
+     74-79 %   la coche s'écrit dans un cercle DÉJÀ plein */
 @keyframes frise-final {
   0%,
   72% {
     opacity: 0;
     transform: scale(0.6);
   }
-  77% {
+  73.5% {
     opacity: 1;
     transform: scale(1.08);
   }
-  81%,
+  75.5%,
   93% {
     opacity: 1;
     transform: scale(1);
@@ -885,18 +897,23 @@ body {
    touche l'emblème, la validation est affichée et elle y reste. Avant, elle
    s'effaçait à 93 % et le trident revenait alors que la frise était encore
    pleine — on tombait sur cet état d'un instant à l'autre. */
+/* La coche n'entre qu'à 74 %, c'est-à-dire APRÈS que le cercle a fini
+   d'encaisser le choc et qu'il est redevenu opaque. Elle s'écrivait
+   auparavant dès 73 %, à l'intérieur d'un cercle encore à demi transparent
+   et encore en train de grossir : on voyait deux objets se chevaucher au
+   lieu d'un seul qui se valide. */
 @keyframes frise-check {
   0%,
-  72% {
+  73.5% {
     stroke-dashoffset: 1;
     opacity: 0;
   }
-  73% {
+  74% {
     stroke-dashoffset: 1;
     opacity: 1;
   }
   /* Le trait se dessine ici, en un peu moins d'une demi-seconde. */
-  78%,
+  79%,
   95% {
     stroke-dashoffset: 0;
     opacity: 1;
