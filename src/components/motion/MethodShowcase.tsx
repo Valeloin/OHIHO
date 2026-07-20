@@ -1,5 +1,5 @@
 // Écran d'ordinateur de la section Méthode : une scène par étape, qui défile
-// sur l'horloge de la frise (16,8 s).
+// sur l'horloge de la frise (13,44 s).
 //
 // La VISIBILITÉ des scènes réutilise les classes `frise-desc-*` — celles qui
 // pilotent déjà la description de la carte. La synchronisation avec la frise

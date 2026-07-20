@@ -394,8 +394,15 @@ body {
 /* ---------- Frise de la méthode ----------
    Le trait de la frise se remplit de gauche à droite et les 4 jalons
    s'allument l'un après l'autre, au moment où le remplissage les atteint.
-   Cycle de 16,8 s = la moitié de celui de la vitrine, pour que les deux
-   animations du site restent en rapport harmonique.
+   Cycle de 13,44 s. Il était de 16,8 s, soit la moitié exacte de celui de
+   la vitrine du hero (33,6 s), pour que les deux animations du site restent
+   en rapport harmonique. Il a été raccourci de 20 % parce que la gerbe
+   d'arrivée, reportée en fin de cycle, se faisait trop attendre : elle
+   arrivait à 15,5 s, elle arrive maintenant à 11,6.
+   ⚠️ Le rapport avec la vitrine est donc ROMPU (13,44 × 2 = 26,88, pas
+   33,6). Pour le rétablir il faudrait passer la vitrine à 26,88 s — ce qui
+   accélérerait aussi la rotation des quatre formules du hero. Les deux
+   sections n'étant jamais à l'écran en même temps, l'écart ne se voit pas.
 
    Comme pour la gerbe d'étincelles, le retour à zéro se fait TOUJOURS à
    opacité 0 : sans cela le trait se rembobinerait de droite à gauche sous
@@ -411,11 +418,11 @@ body {
     transform: scaleX(1);
     opacity: 1;
   }
-  96% {
+  92% {
     transform: scaleX(1);
     opacity: 1;
   }
-  99% {
+  96% {
     transform: scaleX(1);
     opacity: 0;
   }
@@ -430,7 +437,7 @@ body {
 }
 .frise-fill {
   transform-origin: left center;
-  animation: frise-fill 16.8s linear infinite;
+  animation: frise-fill 13.44s linear infinite;
 }
 
 /* Version verticale, pour la frise repliée en colonne sous `lg`. */
@@ -462,7 +469,7 @@ body {
 }
 .frise-fill-y {
   transform-origin: center top;
-  animation: frise-fill-y 16.8s linear infinite;
+  animation: frise-fill-y 13.44s linear infinite;
 }
 
 /* Jalons : chacun s'allume quand le remplissage passe VRAIMENT sur lui.
@@ -477,7 +484,7 @@ body {
 .frise-dot-2,
 .frise-dot-3,
 .frise-dot-4 {
-  animation-duration: 16.8s;
+  animation-duration: 13.44s;
   animation-timing-function: ease-out;
   animation-iteration-count: infinite;
 }
@@ -575,7 +582,7 @@ body {
 
 /* Réaction de l'étape au passage de la frise : le numéro grossit d'un coup
    et son texte se déhanche brièvement. Les deux se déclenchent au moment où
-   le remplissage atteint le jalon (0, 18, 36 et 54 % du cycle de 16,8 s),
+   le remplissage atteint le jalon (0, 18, 36 et 54 % du cycle de 13,44 s),
    puis plus rien : ce sont des à-coups ponctuels, pas des boucles — le
    mouvement continu et ondulatoire est proscrit sur ce site.
    Le grossissement reste contenu (1 → 1.09) pour ne pas faire sauter la
@@ -588,7 +595,7 @@ body {
 .frise-txt-2,
 .frise-txt-3,
 .frise-txt-4 {
-  animation-duration: 16.8s;
+  animation-duration: 13.44s;
   animation-timing-function: ease-out;
   animation-iteration-count: infinite;
 }
@@ -841,11 +848,11 @@ body {
   /* Tenu jusqu'à 96 % : la gerbe part à 92 %, elle doit jaillir d'un
      emblème encore plein et non d'un emblème en train de s'effacer. */
   75.5%,
-  96% {
+  92% {
     opacity: 1;
     transform: scale(1);
   }
-  99%,
+  96%,
   100% {
     opacity: 0;
     transform: scale(0.6);
@@ -854,7 +861,7 @@ body {
 .frise-final {
   transform-box: fill-box;
   transform-origin: center;
-  animation: frise-final 16.8s ease-out infinite;
+  animation: frise-final 13.44s ease-out infinite;
 }
 
 /* La gerbe ne descend JAMAIS sous scale(1) : les rayons partent déjà à
@@ -875,19 +882,19 @@ body {
    notification est posée, la coche est écrite, le trait est entier. */
 @keyframes frise-burst {
   0%,
-  92% {
+  84% {
     opacity: 0;
     transform: scale(1);
   }
-  94% {
+  86.5% {
     opacity: 0.95;
     transform: scale(1.06);
   }
-  97.5% {
+  91% {
     opacity: 0;
     transform: scale(1.4);
   }
-  98%,
+  91.5%,
   100% {
     opacity: 0;
     transform: scale(1);
@@ -896,7 +903,7 @@ body {
 .frise-burst {
   transform-box: fill-box;
   transform-origin: center;
-  animation: frise-burst 16.8s ease-out infinite;
+  animation: frise-burst 13.44s ease-out infinite;
 }
 
 /* Validation à l'arrivée : la coche SE TRACE, d'un seul geste, quand le
@@ -928,11 +935,11 @@ body {
   /* Tenu jusqu'à 96 %, comme le cercle : la gerbe part à 92 % et la coche
      doit encore être là quand elle jaillit. */
   79%,
-  96% {
+  92% {
     stroke-dashoffset: 0;
     opacity: 1;
   }
-  99%,
+  96%,
   100% {
     stroke-dashoffset: 1;
     opacity: 0;
@@ -941,7 +948,7 @@ body {
 .frise-check {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: frise-check 16.8s ease-out infinite;
+  animation: frise-check 13.44s ease-out infinite;
 }
 
 /* Description de l'étape en cours, dans la carte de suivi : les quatre se
@@ -951,7 +958,7 @@ body {
 .frise-desc-2,
 .frise-desc-3,
 .frise-desc-4 {
-  animation-duration: 16.8s;
+  animation-duration: 13.44s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
@@ -1369,13 +1376,13 @@ body {
 
 /* ---------- Écran de la section Méthode ----------
    L'ordinateur montre une scène par étape, calée sur l'horloge de la frise
-   (16,8 s). La VISIBILITÉ des scènes réutilise telles quelles les classes
+   (13,44 s). La VISIBILITÉ des scènes réutilise telles quelles les classes
    `frise-desc-*` : même fenêtre que la description de la carte, donc
    synchronisation garantie par construction plutôt que recopiée.
    Ci-dessous, seules les animations INTERNES de chaque scène, calées pour
    se jouer entièrement dans la fenêtre de leur étape. */
 .mv {
-  animation-duration: 16.8s;
+  animation-duration: 13.44s;
   animation-timing-function: ease-out;
   animation-iteration-count: infinite;
 }
@@ -1416,7 +1423,7 @@ body {
      et l'emblème partirait en diagonale au lieu de respirer sur place. */
   transform-box: fill-box;
   transform-origin: center;
-  animation: mv-brand 16.8s ease-out infinite;
+  animation: mv-brand 13.44s ease-out infinite;
 }
 
 /* 01 — Échange initial : les bulles de conversation arrivent (2,4 → 17,5 %) */
@@ -1571,12 +1578,14 @@ body {
    de l'étape 3. Il ne se jouerait jamais pendant l'étape 4. */
 @keyframes mv-follow {
   0%,
-  80% {
+  78% {
     opacity: 0;
     transform: translateY(5px);
   }
-  85%,
-  93% {
+  /* Posé dès 82 % (et non 85) : c'est le dernier mouvement du cycle, et
+     c'est lui qui retardait la gerbe. */
+  82%,
+  92% {
     opacity: 1;
     transform: translateY(0);
   }
