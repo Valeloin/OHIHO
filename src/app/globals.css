@@ -1349,32 +1349,35 @@ body {
   animation-iteration-count: infinite;
 }
 
-/* Emblème de marque au CENTRE de chaque écran, derrière la scène en cours.
-   Il n'est pas un ornement posé dans un coin : il fait partie du récit. Tant
-   que le projet se construit (étapes 1 à 3) il n'est qu'une filigrane à
-   peine posée ; à l'étape 4, quand le site est mis en ligne, il vient au
-   premier plan — c'est l'identité du site qui existe enfin.
-   La montée est calée sur 72 %, la borne où le trait de la frise touche son
-   cercle d'arrivée : les deux validations se produisent au même instant. */
+/* Emblème de marque au CENTRE de chaque écran, à l'étape 4 UNIQUEMENT.
+   Il a d'abord été posé en filigrane à 0,12 pendant les étapes 1 à 3 :
+   l'intention était qu'il habille le fond, le résultat était qu'il salissait
+   tout. À cette opacité un anneau et trois barres ne se lisent pas comme une
+   marque, ils se lisent comme une tache — et les bulles de conversation qui
+   passaient par-dessus achevaient de brouiller les deux.
+   Il ne se montre donc plus qu'au moment où il a un sens : à 74 %, quand la
+   jauge de déploiement est pleine (60-72 %) et que la coche vient d'être
+   tracée. Le site est en ligne, son identité apparaît. Les trois premières
+   étapes retrouvent un fond propre. */
 @keyframes mv-brand {
   0%,
-  66% {
-    opacity: 0.12;
-    transform: scale(0.94);
+  70% {
+    opacity: 0;
+    transform: scale(0.7);
   }
-  72% {
-    opacity: 0.9;
+  76% {
+    opacity: 1;
     transform: scale(1.06);
   }
-  76%,
+  80%,
   92% {
-    opacity: 0.72;
+    opacity: 1;
     transform: scale(1);
   }
   96%,
   100% {
-    opacity: 0.12;
-    transform: scale(0.94);
+    opacity: 0;
+    transform: scale(0.7);
   }
 }
 .mv-brand {

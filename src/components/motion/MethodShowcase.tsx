@@ -166,15 +166,19 @@ function Developpement() {
    Seul le déploiement était dessiné, et la seconde moitié de la phrase — la
    plus engageante commercialement — restait muette. La jauge se remplit et
    se valide comme avant, mais elle remonte pour laisser place à une
-   enveloppe : le suivi qui prend le relais une fois le site en ligne. */
+   enveloppe : le suivi qui prend le relais une fois le site en ligne.
+   La scène est composée en HAUT et en BAS de l'écran, jamais au milieu :
+   la bande centrale (y 65 à 115 en absolu) est réservée à l'emblème, qui
+   apparaît entre les deux moments. Déplacer un élément dans cette bande le
+   ferait chevaucher le logo. */
 function EnLigne() {
   return (
     <g>
-      <rect x="24" y="34" width="150" height="10" rx="5" fill={RAIL} />
+      <rect x="24" y="6" width="150" height="10" rx="5" fill={RAIL} />
       <rect
         className="mv mv-deploy"
         x="24"
-        y="34"
+        y="6"
         width="150"
         height="10"
         rx="5"
@@ -182,7 +186,7 @@ function EnLigne() {
       />
       <path
         className="mv mv-done"
-        d="M190 39l7 7 14 -14"
+        d="M190 11l7 7 14 -14"
         pathLength={1}
         fill="none"
         stroke={EMERALD}
@@ -197,7 +201,7 @@ function EnLigne() {
       <g className="mv mv-follow" style={{ animationDelay: "0.35s" }}>
         <rect
           x="24"
-          y="66"
+          y="92"
           width="34"
           height="24"
           rx="4"
@@ -206,7 +210,7 @@ function EnLigne() {
           strokeWidth="2"
         />
         <path
-          d="M24 70l17 12 17 -12"
+          d="M24 96l17 12 17 -12"
           fill="none"
           stroke={SKY}
           strokeWidth="2"
@@ -217,7 +221,7 @@ function EnLigne() {
       <rect
         className="mv mv-follow"
         x="68"
-        y="70"
+        y="96"
         width="88"
         height="6"
         rx="3"
@@ -227,7 +231,7 @@ function EnLigne() {
       <rect
         className="mv mv-follow"
         x="68"
-        y="82"
+        y="108"
         width="62"
         height="6"
         rx="3"
@@ -299,14 +303,16 @@ function TelDeveloppement() {
     </g>
   );
 }
+/* Comme sur le portable, la scène 4 du téléphone laisse le bas de l'écran
+   libre : c'est là que l'emblème vient se poser une fois le site en ligne. */
 function TelEnLigne() {
   return (
     <g>
-      <rect x="8" y="26" width="44" height="8" rx="4" fill={RAIL} />
-      <rect className="mv mv-deploy" x="8" y="26" width="44" height="8" rx="4" fill={EMERALD} />
+      <rect x="8" y="4" width="44" height="8" rx="4" fill={RAIL} />
+      <rect className="mv mv-deploy" x="8" y="4" width="44" height="8" rx="4" fill={EMERALD} />
       <path
         className="mv mv-done"
-        d="M20 46l6 6 12 -12"
+        d="M20 22l6 6 12 -12"
         pathLength={1}
         fill="none"
         stroke={EMERALD}
@@ -375,7 +381,7 @@ export default function MethodShowcase({ steps }: { steps: number }) {
       {/* Emblème CENTRÉ dans l'écran du téléphone, DERRIÈRE la scène : il est
           dessiné avant elle, donc la scène passe par-dessus. Voir mv-brand. */}
       <g className="mv-brand">
-        <Emblem cx={-51} cy={126} r={22} />
+        <Emblem cx={-51} cy={146} r={18} />
       </g>
       <g transform="translate(-84 82)">
         {visiblesTel.map((Scene, i) => (
@@ -410,7 +416,7 @@ export default function MethodShowcase({ steps }: { steps: number }) {
           cas c'était une décoration posée à côté de l'animation. Ici il en
           fait partie — voir mv-brand. */}
       <g className="mv-brand">
-        <Emblem cx={160} cy={92} r={34} />
+        <Emblem cx={160} cy={90} r={25} />
       </g>
 
       {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte la
