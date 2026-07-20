@@ -12,6 +12,47 @@ const SKY = "#38bdf8";
 const TEAL = "#22d3c4";
 const EMERALD = "#34d399";
 
+/* Emblème OHIHO, redessiné à la demande plutôt qu'importé : le fichier
+   public/logo-mark.svg porte ses propres `id` de dégradé, et l'inclure deux
+   fois dans la même page ferait doublon. Ici tout est exprimé en fraction du
+   rayon voulu, à partir du dessin d'origine (boîte de 100 unités, anneau de
+   rayon 46,5, trois barres centrées sur 50/50) : les proportions tiennent
+   donc aussi bien à 6 unités qu'à 10.
+   Il est posé DANS les écrans, il subit donc la perspective du SVG comme le
+   reste — c'est bien le logo du site en train d'être construit qui s'affiche
+   à l'écran, pas une pastille collée par-dessus. */
+function Emblem({ cx, cy, r }: { cx: number; cy: number; r: number }) {
+  const k = r / 46.5;
+  const bar = (x: number, y: number, h: number, fill: string) => (
+    <rect
+      key={x}
+      x={cx + (x - 50) * k}
+      y={cy + (y - 50) * k}
+      width={8 * k}
+      height={h * k}
+      rx={4 * k}
+      fill={fill}
+    />
+  );
+  return (
+    <g>
+      <circle
+        cx={cx}
+        cy={cy}
+        r={r}
+        fill="#0a1524"
+        stroke="url(#mv-ring)"
+        /* Plancher à 1 : à cette taille, 5 × k tomberait sous le demi-pixel
+           et l'anneau disparaîtrait. */
+        strokeWidth={Math.max(1, 5 * k)}
+      />
+      {bar(30, 28, 44, SKY)}
+      {bar(46, 21, 58, TEAL)}
+      {bar(62, 28, 44, EMERALD)}
+    </g>
+  );
+}
+
 /* 01 — Échange initial : la conversation s'installe. */
 function Echange() {
   return (
@@ -223,6 +264,22 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         focusable="false"
         className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:rotateY(-22deg)_rotateX(9deg)]"
       >
+      <defs>
+        {/* Trio de marque, repris du logo : bleu ciel → teal → vert. */}
+        <linearGradient
+          id="mv-ring"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="1"
+          gradientUnits="objectBoundingBox"
+        >
+          <stop offset="0" stopColor={SKY} />
+          <stop offset="0.5" stopColor={TEAL} />
+          <stop offset="1" stopColor={EMERALD} />
+        </linearGradient>
+      </defs>
+
       {/* ---- Téléphone, posé devant et à gauche du portable ----
            Il joue la MÊME étape, réduite à l'essentiel : c'est le reflet
            mobile du même projet, pas une seconde histoire. */}
@@ -237,6 +294,11 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         strokeWidth="2"
       />
       <path d="M-64 70h26" stroke={RAIL} strokeWidth="3" strokeLinecap="round" />
+      {/* L'emblème en pied de l'écran du téléphone : les scènes s'arrêtent à
+          y ≈ 139, la zone est libre. Plus grand que le favicon du portable
+          (10 contre 6) parce qu'ici il tient lieu de signature de la page,
+          pas d'icône d'onglet. */}
+      <Emblem cx={-51} cy={168} r={10} />
       <g transform="translate(-84 82)">
         {visiblesTel.map((Scene, i) => (
           <g key={i} className={`frise-desc-${i + 1}`}>
@@ -261,6 +323,10 @@ export default function MethodShowcase({ steps }: { steps: number }) {
       <circle cx="44" cy="17" r="2.5" fill={RAIL} />
       <circle cx="53" cy="17" r="2.5" fill={RAIL} />
       <circle cx="62" cy="17" r="2.5" fill={RAIL} />
+      {/* Favicon de l'onglet : l'emblème OHIHO, comme sur un vrai navigateur.
+          Placé après les trois pastilles, suivi de la barre d'adresse. */}
+      <Emblem cx={80} cy={17} r={6} />
+      <rect x="92" y="13.5" width="64" height="7" rx="3.5" fill={RAIL} opacity="0.7" />
 
       {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte la
           fenêtre d'affichage de son étape (frise-desc-N). */}
