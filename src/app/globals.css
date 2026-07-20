@@ -400,6 +400,8 @@ body {
    Comme pour la gerbe d'étincelles, le retour à zéro se fait TOUJOURS à
    opacité 0 : sans cela le trait se rembobinerait de droite à gauche sous
    les yeux du visiteur. */
+/* Le trait reste en place jusqu'à 96 % (et non 90) : la gerbe est reportée
+   à la toute fin du cycle, elle doit jaillir d'une frise encore entière. */
 @keyframes frise-fill {
   0% {
     transform: scaleX(0);
@@ -409,15 +411,15 @@ body {
     transform: scaleX(1);
     opacity: 1;
   }
-  90% {
+  96% {
     transform: scaleX(1);
     opacity: 1;
   }
-  96% {
+  99% {
     transform: scaleX(1);
     opacity: 0;
   }
-  96.5% {
+  99.5% {
     transform: scaleX(0);
     opacity: 0;
   }
@@ -836,12 +838,14 @@ body {
     opacity: 1;
     transform: scale(1.08);
   }
+  /* Tenu jusqu'à 96 % : la gerbe part à 92 %, elle doit jaillir d'un
+     emblème encore plein et non d'un emblème en train de s'effacer. */
   75.5%,
-  93% {
+  96% {
     opacity: 1;
     transform: scale(1);
   }
-  97%,
+  99%,
   100% {
     opacity: 0;
     transform: scale(0.6);
@@ -861,21 +865,29 @@ body {
    atteint 1, donc où le trait touche le cercle. La gerbe partait à 70,5 %,
    quand le remplissage n'était encore qu'à 0,972 — le trait était à une
    trentaine de pixels du cercle et l'explosion avait déjà commencé. */
+/* ⚠️ La gerbe est le POINT FINAL du cycle, pas la fête de l'arrivée du
+   trait. Elle partait à 72 %, en même temps que le cercle : elle célébrait
+   donc la fin de la frise alors que l'écran, lui, jouait encore toute
+   l'étape 4 (déploiement jusqu'à 72 %, coche jusqu'à 79 %, puis le suivi par
+   email jusqu'à 93 %). On voyait un feu d'artifice au milieu d'une
+   animation en cours.
+   Elle ne part plus qu'à 92 %, quand TOUT est retombé : la dernière
+   notification est posée, la coche est écrite, le trait est entier. */
 @keyframes frise-burst {
   0%,
-  72% {
+  92% {
     opacity: 0;
     transform: scale(1);
   }
-  74.5% {
+  94% {
     opacity: 0.95;
     transform: scale(1.06);
   }
-  78.5% {
+  97.5% {
     opacity: 0;
     transform: scale(1.4);
   }
-  79%,
+  98%,
   100% {
     opacity: 0;
     transform: scale(1);
@@ -913,12 +925,14 @@ body {
     opacity: 1;
   }
   /* Le trait se dessine ici, en un peu moins d'une demi-seconde. */
+  /* Tenu jusqu'à 96 %, comme le cercle : la gerbe part à 92 % et la coche
+     doit encore être là quand elle jaillit. */
   79%,
-  95% {
+  96% {
     stroke-dashoffset: 0;
     opacity: 1;
   }
-  97%,
+  99%,
   100% {
     stroke-dashoffset: 1;
     opacity: 0;

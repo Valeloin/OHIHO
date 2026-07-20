@@ -218,6 +218,32 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                 />
               </div>
 
+              {/* Filet VERTICAL le long de l'étape dont la scène joue en ce
+                  moment sur l'écran, au-dessus. Sans lui, rien ne reliait les
+                  deux à l'œil : une fois la frise passée, les quatre étapes
+                  s'affichaient à l'identique et rien ne disait laquelle était
+                  illustrée.
+                  Il emprunte la classe `frise-desc-N`, celle qui pilote déjà
+                  l'affichage de la scène correspondante : le lien est garanti
+                  PAR CONSTRUCTION, il n'y a pas un second jeu d'horaires à
+                  tenir aligné à la main.
+                  Il est posé dans la GOUTTIÈRE (-left-4), pas dans le bloc :
+                  le texte garde ainsi son alignement exact avec le jalon de
+                  la frise qui le surplombe.
+                  ⚠️ `opacity-0` et non `hidden` en dessous de `lg` : en
+                  mobile le rail vertical de la frise occupe déjà cette place,
+                  mais `display:none` ARRÊTERAIT l'animation et la ferait
+                  repartir de zéro au retour, désynchronisant ce filet de
+                  toutes les autres pièces de l'horloge. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -left-4 top-10 bottom-0 w-0.5 opacity-0 lg:opacity-100"
+              >
+                <div
+                  className={`frise-desc-${i + 1} rule-brand-y h-full w-full rounded-full`}
+                />
+              </div>
+
               {/* Au passage de la frise : le numéro grossit d'un coup, le
                   texte se déhanche. Déclenché par les mêmes horloges que le
                   jalon, donc parfaitement synchrone. */}
@@ -231,26 +257,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                   {item.title}
                 </h3>
 
-                {/* Trait de marque sous le titre de l'étape DONT LA SCÈNE
-                    JOUE en ce moment sur l'écran, au-dessus. Sans lui, rien
-                    ne reliait les deux à l'œil : une fois la frise passée,
-                    les quatre étapes s'affichaient à l'identique et rien ne
-                    disait laquelle était en train d'être illustrée.
-                    Il emprunte la classe `frise-desc-N` — celle qui pilote
-                    déjà l'affichage de la scène correspondante. Le lien est
-                    donc garanti PAR CONSTRUCTION : il n'y a pas un second
-                    jeu d'horaires à tenir aligné à la main, et changer le
-                    rythme des scènes déplacera le trait avec elles.
-                    La hauteur est réservée en permanence (`h-0.5` sur
-                    l'enveloppe) pour que le texte en dessous ne saute pas
-                    quand le trait apparaît. */}
-                <div aria-hidden="true" className="mt-2 h-0.5">
-                  <div
-                    className={`frise-desc-${i + 1} rule-brand h-full w-10 rounded-full`}
-                  />
-                </div>
-
-                <p className="mt-2.5 text-sm leading-relaxed text-muted">
+                <p className="mt-3 text-sm leading-relaxed text-muted">
                   {item.description}
                 </p>
               </div>
