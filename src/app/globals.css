@@ -227,10 +227,43 @@ body {
     box-shadow: 0 0 var(--fly-halo, 6px) rgb(var(--brand-emerald) / 0.85);
   }
 }
+/* Dérive « au gré du vent » : un lent va-et-vient de quelques pixels, jamais
+   le même d'une luciole à l'autre. Le tracé n'est pas un aller-retour
+   symétrique mais une boucle molle (droite, haut, bas, retour), et surtout
+   chaque luciole a SA période et SA amplitude (--fly-drift) : sans ça les
+   dix-huit oscilleraient en cadence et l'ensemble ferait une vague — c'est
+   exactement ce qu'il faut éviter ici.
+   La dérive vit sur `transform`, le scintillement sur `opacity` : les deux
+   animations tournent en parallèle sans se marcher dessus. */
+@keyframes firefly-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  22% {
+    transform: translate(
+      calc(var(--fly-drift, 6px) * 0.55),
+      calc(var(--fly-drift, 6px) * -0.45)
+    );
+  }
+  48% {
+    transform: translate(
+      var(--fly-drift, 6px),
+      calc(var(--fly-drift, 6px) * 0.25)
+    );
+  }
+  74% {
+    transform: translate(
+      calc(var(--fly-drift, 6px) * 0.3),
+      calc(var(--fly-drift, 6px) * 0.6)
+    );
+  }
+}
+
 .firefly {
   background: rgb(var(--brand-emerald));
   box-shadow: 0 0 var(--fly-halo, 6px) rgb(var(--brand-emerald) / 0.5);
-  animation-name: firefly-glow;
+  animation-name: firefly-glow, firefly-drift;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }

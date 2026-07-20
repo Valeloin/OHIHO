@@ -46,27 +46,42 @@ export default function Fireflies({ className = "" }: { className?: string }) {
       aria-hidden="true"
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
     >
-      {FIREFLIES.map((fly, i) => (
-        <span
-          key={i}
-          className="firefly absolute rounded-full"
-          style={{
-            left: fly.left,
-            top: fly.top,
-            width: fly.size,
-            height: fly.size,
-            // Opacité de base : c'est elle qui subsiste si le visiteur a
-            // désactivé les animations, donc elle doit rester visible.
-            opacity: 0.45,
-            animationDuration: `${fly.duration}s`,
-            animationDelay: `${fly.delay}s`,
-            // Sommet du clignotement, lu par les keyframes `firefly-glow`.
-            ["--fly-peak" as string]: fly.peak,
-            // Le halo grandit avec la luciole pour garder un rendu homogène.
-            ["--fly-halo" as string]: `${fly.size * 2.5}px`,
-          }}
-        />
-      ))}
+      {FIREFLIES.map((fly, i) => {
+        // Dérive : période, décalage et amplitude DÉRIVÉS DE L'INDICE, donc
+        // stables entre le serveur et le client (un Math.random casserait
+        // l'hydratation). Les trois suites ont des pas premiers entre eux
+        // avec le nombre de lucioles : deux voisines ne retombent jamais sur
+        // la même combinaison, et aucune vague d'ensemble ne se forme.
+        const driftDuration = 19 + ((i * 7) % 16); // 19 → 34 s
+        const driftDelay = -((i * 5) % 17); // départ déjà entamé
+        const driftAmp = 4 + (i % 5) * 1.25; // 4 → 9 px
+
+        return (
+          <span
+            key={i}
+            className="firefly absolute rounded-full"
+            style={{
+              left: fly.left,
+              top: fly.top,
+              width: fly.size,
+              height: fly.size,
+              // Opacité de base : c'est elle qui subsiste si le visiteur a
+              // désactivé les animations, donc elle doit rester visible.
+              opacity: 0.45,
+              // Deux animations en parallèle : scintillement, puis dérive.
+              // L'ordre suit celui de `animation-name` dans globals.css.
+              animationDuration: `${fly.duration}s, ${driftDuration}s`,
+              animationDelay: `${fly.delay}s, ${driftDelay}s`,
+              // Sommet du clignotement, lu par les keyframes `firefly-glow`.
+              ["--fly-peak" as string]: fly.peak,
+              // Le halo grandit avec la luciole pour garder un rendu homogène.
+              ["--fly-halo" as string]: `${fly.size * 2.5}px`,
+              // Amplitude de la dérive, lue par `firefly-drift`.
+              ["--fly-drift" as string]: `${driftAmp}px`,
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
