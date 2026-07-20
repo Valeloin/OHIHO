@@ -30,67 +30,77 @@ export default function Services({
       <SectionBackdrop />
       {/* Rythme vertical resserré par rapport aux autres sections : c'est la
           plus chargée du site (4 cartes), et elle doit tenir sur un écran. */}
-      <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-16">
+      {/* Conteneur plus large que les autres sections (7xl) : à 6xl, chaque
+          cellule tombait à ~540 px et la colonne de texte devenait si étroite
+          que le sur-titre se brisait sur trois lignes. */}
+      <div className="relative mx-auto max-w-7xl px-6 py-7 sm:py-8">
         {/* En-tête au patron commun : libellé mono + filet, titre à chasse
             serrée aligné à gauche, sous-titre à largeur de lecture. */}
         <Reveal>
           <span className="kicker">{data.kicker}</span>
-          <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">
             {data.title}
           </h2>
-          <p className="mt-4 max-w-2xl leading-relaxed text-muted">
+          <p className="mt-3 max-w-2xl leading-relaxed text-muted">
             {data.subtitle}
           </p>
         </Reveal>
-        <div className="mt-8 h-px rule-fade" />
+        <div className="mt-5 h-px rule-fade" />
 
-        {/* Grille 2×2 en cartes PAYSAGE : animation à gauche, texte à droite.
-            Contrainte du site : chaque section doit tenir sur un écran. Avec
-            les vignettes empilées au-dessus du texte, la section faisait 1,6
-            écran ; en les posant à côté, la hauteur de carte est dictée par le
-            texte seul et la section repasse sous la barre — sans rien couper
-            du contenu éditable et en gardant les vignettes nettement plus
-            grandes qu'en 4 colonnes. En mobile, la carte se replie à la
-            verticale (animation en haut, pleine largeur). */}
-        <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2">
+        {/* PLUS DE CARTE. L'ancienne version enfermait chaque formule dans un
+            panneau `card-surface` (#102436) contre lequel l'animation posait
+            son propre fond d'écran (#071522) : deux sombres différents collés
+            l'un à l'autre, séparés par un filet dur — c'est ce bicolore qui
+            rendait la grille lourde.
+            Ici l'animation n'est plus « dans » une boîte : elle est l'objet,
+            posée à même le fond de la page avec son seul cadre de navigateur,
+            et le texte se tient à côté, sans cloison. La séparation se fait
+            par le vide, plus par des bordures. */}
+        <RevealGroup className="mt-6 grid gap-x-12 gap-y-6 lg:grid-cols-2">
           {formulas.map((formula, i) => (
             <RevealItem key={formula.type} hover className="h-full">
+              {/* Trois bandes empilées, chacune sur TOUTE la largeur de la
+                  cellule : le titre chapeaute l'animation ET sa description,
+                  puis l'exemple les referme sur une seule ligne. Auparavant
+                  titre et exemple étaient enfermés dans la colonne de texte :
+                  ils se brisaient sur deux lignes et ne s'alignaient avec
+                  rien. */}
               <Link
                 href={devisHref}
-                className="card-surface flex h-full flex-col overflow-hidden transition-colors hover:border-accent-cyan/50 sm:flex-row"
+                className="group flex h-full flex-col"
               >
-                {/* 55 % de la carte pour l'animation : elle reste bien plus
-                    large qu'en 4 colonnes, et `self-center` la garde centrée
-                    quand le texte rend la carte plus haute qu'elle. */}
-                <div className="aspect-[400/220] w-full shrink-0 sm:w-1/2 sm:self-center">
-                  <ServiceScene type={formula.type} />
+                {/* Bande 1 — le titre, sur toute la largeur */}
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-sm text-brand-teal">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="h-px w-5 shrink-0 translate-y-[-0.3em] bg-border"
+                  />
+                  <p className="min-w-0 truncate font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-muted">
+                    {formula.tagline}
+                  </p>
                 </div>
-                <div className="flex flex-1 flex-col border-t border-border p-5 sm:border-l sm:border-t-0">
-                  {/* La carte étant large, l'index et la sur-titre tiennent
-                      sur une seule ligne : le bloc de texte reste compact et
-                      laisse la vedette à l'animation. */}
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs text-brand-teal">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span aria-hidden="true" className="h-px w-5 bg-border" />
-                    <p className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-muted">
-                      {formula.tagline}
-                    </p>
+                <h3 className="mt-1.5 text-2xl font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
+                  {formula.label}
+                </h3>
+
+                {/* Bande 2 — l'animation et sa description, côte à côte */}
+                <div className="mt-3 flex flex-1 flex-col gap-5 sm:flex-row sm:items-center">
+                  <div className="aspect-[400/220] w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-border transition duration-300 group-hover:ring-accent-cyan/60 sm:w-[56%]">
+                    <ServiceScene type={formula.type} />
                   </div>
-                  <h3 className="mt-2.5 text-lg font-semibold tracking-display">
-                    {formula.label}
-                  </h3>
-                  {/* Interlignage resserré : la colonne de texte est étroite,
-                      chaque ligne gagnée compte pour tenir sur un écran. */}
-                  <p className="mt-2.5 text-[0.8125rem] leading-[1.5] text-muted">
+                  <p className="min-w-0 flex-1 text-sm leading-relaxed text-muted">
                     {formula.description}
                   </p>
-                  {/* Exemple détaché par un filet, en bas de carte. */}
-                  <p className="mt-auto border-t border-border pt-3 text-xs leading-[1.45] text-muted">
-                    {formula.examples}
-                  </p>
                 </div>
+
+                {/* Bande 3 — l'exemple, sur une seule ligne. `truncate` le
+                    coupe proprement plutôt que de le laisser se replier. */}
+                <p className="mt-3 truncate border-t border-border/60 pt-2.5 text-xs text-muted/80">
+                  {formula.examples}
+                </p>
               </Link>
             </RevealItem>
           ))}

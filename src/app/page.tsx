@@ -6,6 +6,7 @@ import Portfolio from "@/components/Portfolio";
 import HowItWorks from "@/components/HowItWorks";
 import Expertise from "@/components/Expertise";
 import WhyUs from "@/components/WhyUs";
+import Suivi from "@/components/Suivi";
 import ContactSection from "@/components/ContactSection";
 import ScrollNav from "@/components/ScrollNav";
 import { getContent } from "@/lib/content";
@@ -45,6 +46,9 @@ export default async function Home() {
       <HowItWorks data={content.method} />
       <Expertise data={content.expertise} />
       <WhyUs data={content.whyUs} />
+      {/* Prolonge « Pourquoi OHIHO » : la promesse d'accompagnement, montrée
+          concrètement par l'espace de suivi livré avec chaque site. */}
+      <Suivi />
       <Portfolio data={content.portfolio} />
       <ContactSection data={content.contact} />
       <ScrollNav />

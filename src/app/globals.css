@@ -307,9 +307,14 @@ body {
   animation: frise-fill-y 16.8s linear infinite;
 }
 
-/* Jalons : chacun s'allume quand le remplissage passe sur lui (les colonnes
-   commencent à 0, 25, 50 et 75 % de la largeur, soit 0, 18, 36 et 54 % du
-   temps de remplissage), puis tous s'éteignent ensemble à la fin du cycle. */
+/* Jalons : chacun s'allume quand le remplissage passe VRAIMENT sur lui.
+   ⚠️ Les jalons ne sont pas à 0/25/50/75 % du rail : les gouttières de la
+   grille (gap-x-10) les repoussent à 0,5 / 26,4 / 52,3 / 78,2 %. Comme le
+   remplissage occupe les 72 premiers pour cent du cycle, les instants justes
+   sont 0,4 / 19 / 37,7 / 56,3 % — et non 0/18/36/54, qui allumaient les
+   jalons jusqu'à 0,4 s AVANT que le trait ne les atteigne.
+   L'état éteint est un gris-bleu franc, et non l'émeraude en transparence :
+   sans ce contraste, on ne lisait pas la progression. */
 .frise-dot-1,
 .frise-dot-2,
 .frise-dot-3,
@@ -331,71 +336,82 @@ body {
   animation-name: frise-dot-4;
 }
 @keyframes frise-dot-1 {
-  0%,
-  1% {
-    opacity: 0.3;
+  0% {
+    background-color: #26415c;
     box-shadow: none;
+    transform: scale(0.8);
   }
-  4%,
+  2.4%,
   94% {
-    opacity: 1;
-    box-shadow: 0 0 10px rgb(var(--brand-emerald) / 0.85);
+    background-color: rgb(var(--brand-emerald));
+    box-shadow: 0 0 12px rgb(var(--brand-emerald) / 0.9);
+    transform: scale(1);
   }
   97%,
   100% {
-    opacity: 0.3;
+    background-color: #26415c;
     box-shadow: none;
+    transform: scale(0.8);
   }
 }
 @keyframes frise-dot-2 {
   0%,
-  18% {
-    opacity: 0.3;
+  19% {
+    background-color: #26415c;
     box-shadow: none;
+    transform: scale(0.8);
   }
   21%,
   94% {
-    opacity: 1;
-    box-shadow: 0 0 10px rgb(var(--brand-emerald) / 0.85);
+    background-color: rgb(var(--brand-emerald));
+    box-shadow: 0 0 12px rgb(var(--brand-emerald) / 0.9);
+    transform: scale(1);
   }
   97%,
   100% {
-    opacity: 0.3;
+    background-color: #26415c;
     box-shadow: none;
+    transform: scale(0.8);
   }
 }
 @keyframes frise-dot-3 {
   0%,
-  36% {
-    opacity: 0.3;
+  37.7% {
+    background-color: #26415c;
     box-shadow: none;
+    transform: scale(0.8);
   }
-  39%,
+  39.7%,
   94% {
-    opacity: 1;
-    box-shadow: 0 0 10px rgb(var(--brand-emerald) / 0.85);
+    background-color: rgb(var(--brand-emerald));
+    box-shadow: 0 0 12px rgb(var(--brand-emerald) / 0.9);
+    transform: scale(1);
   }
   97%,
   100% {
-    opacity: 0.3;
+    background-color: #26415c;
     box-shadow: none;
+    transform: scale(0.8);
   }
 }
 @keyframes frise-dot-4 {
   0%,
-  54% {
-    opacity: 0.3;
+  56.3% {
+    background-color: #26415c;
     box-shadow: none;
+    transform: scale(0.8);
   }
-  57%,
+  58.3%,
   94% {
-    opacity: 1;
-    box-shadow: 0 0 10px rgb(var(--brand-emerald) / 0.85);
+    background-color: rgb(var(--brand-emerald));
+    box-shadow: 0 0 12px rgb(var(--brand-emerald) / 0.9);
+    transform: scale(1);
   }
   97%,
   100% {
-    opacity: 0.3;
+    background-color: #26415c;
     box-shadow: none;
+    transform: scale(0.8);
   }
 }
 
@@ -452,55 +468,90 @@ body {
   animation-name: frise-txt-4;
 }
 
+/* Le numéro reste en retrait (désaturé) tant que la frise ne l'a pas atteint,
+   puis il bondit et prend ses couleurs de marque. C'est ce qui fait qu'on lit
+   la progression sur toute la zone, et pas seulement sur le trait. */
 @keyframes frise-num-1 {
   0% {
     transform: scale(1);
+    filter: grayscale(1) opacity(0.4);
   }
-  2% {
+  2.4% {
     transform: scale(1.09);
+    filter: none;
   }
-  5%,
+  5.4%,
+  94% {
+    transform: scale(1);
+    filter: none;
+  }
+  97%,
   100% {
     transform: scale(1);
+    filter: grayscale(1) opacity(0.4);
   }
 }
 @keyframes frise-num-2 {
   0%,
-  18% {
+  19% {
     transform: scale(1);
+    filter: grayscale(1) opacity(0.4);
   }
-  20% {
+  21% {
     transform: scale(1.09);
+    filter: none;
   }
-  23%,
+  24%,
+  94% {
+    transform: scale(1);
+    filter: none;
+  }
+  97%,
   100% {
     transform: scale(1);
+    filter: grayscale(1) opacity(0.4);
   }
 }
 @keyframes frise-num-3 {
   0%,
-  36% {
+  37.7% {
     transform: scale(1);
+    filter: grayscale(1) opacity(0.4);
   }
-  38% {
+  39.7% {
     transform: scale(1.09);
+    filter: none;
   }
-  41%,
+  42.7%,
+  94% {
+    transform: scale(1);
+    filter: none;
+  }
+  97%,
   100% {
     transform: scale(1);
+    filter: grayscale(1) opacity(0.4);
   }
 }
 @keyframes frise-num-4 {
   0%,
-  54% {
+  56.3% {
     transform: scale(1);
+    filter: grayscale(1) opacity(0.4);
   }
-  56% {
+  58.3% {
     transform: scale(1.09);
+    filter: none;
   }
-  59%,
+  61.3%,
+  94% {
+    transform: scale(1);
+    filter: none;
+  }
+  97%,
   100% {
     transform: scale(1);
+    filter: grayscale(1) opacity(0.4);
   }
 }
 
@@ -528,68 +579,364 @@ body {
 }
 @keyframes frise-txt-2 {
   0%,
-  18% {
+  19% {
     transform: translateX(0);
   }
-  19% {
+  20% {
     transform: translateX(-3px);
   }
-  20% {
+  21% {
     transform: translateX(3px);
   }
-  21% {
+  22% {
     transform: translateX(-2px);
   }
-  22% {
+  23% {
     transform: translateX(1px);
   }
-  23%,
+  24%,
   100% {
     transform: translateX(0);
   }
 }
 @keyframes frise-txt-3 {
   0%,
-  36% {
+  37.7% {
     transform: translateX(0);
   }
-  37% {
+  38.7% {
     transform: translateX(-3px);
   }
-  38% {
+  39.7% {
     transform: translateX(3px);
   }
-  39% {
+  40.7% {
     transform: translateX(-2px);
   }
-  40% {
+  41.7% {
     transform: translateX(1px);
   }
-  41%,
+  42.7%,
   100% {
     transform: translateX(0);
   }
 }
 @keyframes frise-txt-4 {
   0%,
-  54% {
+  56.3% {
     transform: translateX(0);
   }
-  55% {
+  57.3% {
     transform: translateX(-3px);
   }
-  56% {
+  58.3% {
     transform: translateX(3px);
   }
-  57% {
+  59.3% {
     transform: translateX(-2px);
   }
-  58% {
+  60.3% {
     transform: translateX(1px);
   }
-  59%,
+  61.3%,
   100% {
     transform: translateX(0);
+  }
+}
+
+/* Arrivée de la frise : quand le remplissage atteint le bout (72 % du cycle),
+   l'emblème OHIHO apparaît dans son cercle et une gerbe d'étincelles jaillit
+   — la méthode est arrivée à son terme. Tout s'efface avec la remise à zéro.
+   La gerbe ne fait que S'OUVRIR (0.3 → 1 → 1.8) et son retour au centre se
+   fait à opacité 0 : jamais de rayons qui foncent vers le cercle. */
+/* L'emblème est TOUJOURS en place, dès le début du cycle : il matérialise le
+   point d'arrivée. Il est simplement en retrait tant que la frise ne l'a pas
+   atteint, puis s'allume d'un coup quand le remplissage arrive sur lui. */
+@keyframes frise-final {
+  0%,
+  70% {
+    opacity: 0.7;
+    transform: scale(0.94);
+  }
+  74% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  78%,
+  93% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  97%,
+  100% {
+    opacity: 0.7;
+    transform: scale(0.94);
+  }
+}
+.frise-final {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: frise-final 16.8s ease-out infinite;
+}
+
+/* La gerbe ne descend JAMAIS sous scale(1) : les rayons partent déjà à
+   distance de l'emblème et ne font que s'écarter. Auparavant elle montait
+   depuis scale(0.3), et pendant sa croissance les rayons traversaient le
+   cercle — c'est ce qui donnait l'impression qu'ils le touchaient. */
+@keyframes frise-burst {
+  0%,
+  70.5% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  73.5% {
+    opacity: 0.95;
+    transform: scale(1.06);
+  }
+  77.5% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+  78%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+.frise-burst {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: frise-burst 16.8s ease-out infinite;
+}
+
+/* Description de l'étape en cours, dans la carte de suivi : les quatre se
+   relaient sur l'horloge de la frise. C'est du contenu réel (les descriptions
+   éditées dans l'admin), pas du texte de remplissage. */
+.frise-desc-1,
+.frise-desc-2,
+.frise-desc-3,
+.frise-desc-4 {
+  animation-duration: 16.8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.frise-desc-1 {
+  animation-name: frise-desc-1;
+}
+.frise-desc-2 {
+  animation-name: frise-desc-2;
+}
+.frise-desc-3 {
+  animation-name: frise-desc-3;
+}
+.frise-desc-4 {
+  animation-name: frise-desc-4;
+}
+@keyframes frise-desc-1 {
+  0% {
+    opacity: 0;
+  }
+  2.4%,
+  17.5% {
+    opacity: 1;
+  }
+  19%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes frise-desc-2 {
+  0%,
+  19% {
+    opacity: 0;
+  }
+  21%,
+  36.2% {
+    opacity: 1;
+  }
+  37.7%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes frise-desc-3 {
+  0%,
+  37.7% {
+    opacity: 0;
+  }
+  39.7%,
+  54.8% {
+    opacity: 1;
+  }
+  56.3%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes frise-desc-4 {
+  0%,
+  56.3% {
+    opacity: 0;
+  }
+  58.3%,
+  94% {
+    opacity: 1;
+  }
+  96%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Espace tickets (section « Pourquoi OHIHO ») ----------
+   Trois demandes ouvertes se règlent l'une après l'autre, puis le cycle
+   repart. Cycle de 8,4 s : l'unité de base des animations du site.
+   Comme partout ici, les remises à zéro se font à opacité 0. */
+.bt-chip-1,
+.bt-chip-2,
+.bt-chip-3,
+.bt-check-1,
+.bt-check-2,
+.bt-check-3,
+.bt-fill {
+  animation-duration: 8.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.bt-chip-1 {
+  animation-name: bt-chip-1;
+}
+.bt-chip-2 {
+  animation-name: bt-chip-2;
+}
+.bt-chip-3 {
+  animation-name: bt-chip-3;
+}
+.bt-check-1 {
+  animation-name: bt-check-1;
+}
+.bt-check-2 {
+  animation-name: bt-check-2;
+}
+.bt-check-3 {
+  animation-name: bt-check-3;
+}
+.bt-fill {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation-name: bt-fill;
+  animation-timing-function: linear;
+}
+
+@keyframes bt-chip-1 {
+  0%,
+  24% {
+    opacity: 1;
+  }
+  27%,
+  96% {
+    opacity: 0;
+  }
+  99%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes bt-chip-2 {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  52%,
+  96% {
+    opacity: 0;
+  }
+  99%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes bt-chip-3 {
+  0%,
+  74% {
+    opacity: 1;
+  }
+  77%,
+  96% {
+    opacity: 0;
+  }
+  99%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes bt-check-1 {
+  0%,
+  25% {
+    opacity: 0;
+  }
+  28%,
+  94% {
+    opacity: 1;
+  }
+  96%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes bt-check-2 {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  53%,
+  94% {
+    opacity: 1;
+  }
+  96%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes bt-check-3 {
+  0%,
+  75% {
+    opacity: 0;
+  }
+  78%,
+  94% {
+    opacity: 1;
+  }
+  96%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes bt-fill {
+  0% {
+    transform: scaleX(0.02);
+  }
+  27% {
+    transform: scaleX(0.34);
+  }
+  52% {
+    transform: scaleX(0.67);
+  }
+  78%,
+  94% {
+    transform: scaleX(1);
+  }
+  96% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+  96.5% {
+    opacity: 0;
+    transform: scaleX(0.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(0.02);
   }
 }
 
