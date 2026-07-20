@@ -148,22 +148,34 @@ export default function Hero({
           </motion.div>
         </div>
 
-        {/* Rangée de chiffres. Chaque carte porte un pictogramme ANIMÉ qui
-            illustre son propos, un index mono et un filet au dégradé de
-            marque en tête — le simple point vert ne disait rien du contenu.
-            Le filet s'allume au survol, comme les cartes de Services. */}
-        <motion.div variants={ITEM} className="mt-16">
-          <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {/* Rangée de chiffres SANS cartes. Les boîtes (aplat, filet, arrondi,
+            ombre) alourdissaient le bas du hero et enfermaient chaque
+            argument. Ici les quatre reposent à même le fond, séparés par un
+            simple filet vertical — le même parti pris que la section
+            Services, où retirer la boîte avait résolu le problème.
+            Le filet est posé À GAUCHE de chaque colonne sauf en début de
+            rangée : sur deux colonnes ce sont les éléments impairs, sur
+            quatre le premier seulement. */}
+        <motion.div variants={ITEM} className="mt-14">
+          <div aria-hidden="true" className="rule-fade h-px" />
+          <dl className="grid grid-cols-2 sm:grid-cols-4">
             {data.stats.map((item, i) => (
               <div
                 key={item.label}
-                className="card-surface group relative overflow-hidden p-5 transition-colors hover:border-accent-cyan/50"
+                // Les classes sont calculées PAR INDICE et non par variantes
+                // `first:`/`odd:` : la première cellule est les deux à la
+                // fois, et l'ordre dans lequel Tailwind les écrit décidait
+                // du gagnant — elle héritait donc d'un filet à gauche alors
+                // qu'elle ouvre la rangée.
+                className={[
+                  "px-5 py-7",
+                  i % 2 === 0 ? "border-l-0 pl-0" : "border-l border-border",
+                  i === 0
+                    ? "sm:border-l-0 sm:pl-0"
+                    : "sm:border-l sm:border-border sm:pl-5",
+                ].join(" ")}
               >
-                <span
-                  aria-hidden="true"
-                  className="rule-brand absolute inset-x-0 top-0 h-px opacity-40 transition-opacity duration-300 group-hover:opacity-100"
-                />
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-3">
                   <StatGlyph index={i} />
                   <span className="font-mono text-xs text-brand-teal">
                     {String(i + 1).padStart(2, "0")}
@@ -172,7 +184,7 @@ export default function Hero({
                 {/* `value` porte le mot-clé court, `label` la phrase qui
                     l'explique : c'est donc le mot-clé qui fait office de terme
                     (dt) et la phrase de définition (dd). Elle reste en casse
-                    normale — en capitales espacées elle serait illisible. */}
+                    normale : en capitales espacées elle serait illisible. */}
                 <dt className="mt-4 text-xl font-semibold tracking-display sm:text-2xl">
                   {item.value}
                 </dt>
