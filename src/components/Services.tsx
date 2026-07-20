@@ -59,56 +59,52 @@ export default function Services({
         <RevealGroup className="mt-5 grid gap-x-12 gap-y-5 lg:grid-cols-2">
           {formulas.map((formula, i) => (
             <RevealItem key={formula.type} hover className="h-full">
-              {/* Trois bandes empilées, chacune sur TOUTE la largeur de la
-                  cellule : le titre chapeaute l'animation ET sa description,
-                  puis l'exemple les referme sur une seule ligne. Auparavant
-                  titre et exemple étaient enfermés dans la colonne de texte :
-                  ils se brisaient sur deux lignes et ne s'alignaient avec
-                  rien. */}
-              <Link
-                href={devisHref}
-                className="group flex h-full flex-col"
-              >
-                {/* Bande 1 — le titre, sur toute la largeur */}
-                <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-sm text-brand-teal">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="h-px w-5 shrink-0 translate-y-[-0.3em] bg-border"
-                  />
-                  <p className="min-w-0 truncate font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-muted">
-                    {formula.tagline}
-                  </p>
-                </div>
-                <h3 className="mt-1.5 text-2xl font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
-                  {formula.label}
-                </h3>
-
-                {/* Bande 2 — l'animation et sa description, côte à côte.
-                    Les cartes de la colonne de GAUCHE (indices pairs) sont
-                    inversées : leur animation passe à droite. Résultat, les
-                    quatre animations se rejoignent au centre de la grille au
-                    lieu d'être toutes plaquées à gauche, et la page respire
-                    par ses bords. En mobile, tout se réempile normalement,
-                    animation d'abord. */}
+              <Link href={devisHref} className="group flex h-full flex-col">
+                {/* L'animation et son texte, côte à côte. Les cartes de la
+                    colonne de GAUCHE (indices pairs) sont inversées : leur
+                    animation passe à droite. Les quatre animations se
+                    rejoignent donc au centre de la grille. En mobile, tout se
+                    réempile, animation d'abord. */}
                 <div
-                  className={`mt-3 flex flex-1 flex-col gap-5 sm:items-center ${
+                  className={`flex flex-1 flex-col gap-5 sm:items-center ${
                     i % 2 === 0 ? "sm:flex-row-reverse" : "sm:flex-row"
                   }`}
                 >
                   <div className="aspect-[400/220] w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-border transition duration-300 group-hover:ring-accent-cyan/60 sm:w-[56%]">
                     <ServiceScene type={formula.type} />
                   </div>
-                  <p className="min-w-0 flex-1 text-sm leading-relaxed text-muted">
-                    {formula.description}
-                  </p>
+
+                  {/* Le titre vit DANS la colonne de texte, au-dessus de sa
+                      description. Il suit donc l'inversion : à gauche quand
+                      l'animation est à droite, à droite quand elle est à
+                      gauche. En pleine largeur il se retrouvait au-dessus de
+                      l'animation sur les cartes 02 et 04, sans rapport avec
+                      le texte qu'il annonce. */}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-mono text-sm text-brand-teal">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="h-px w-5 shrink-0 translate-y-[-0.3em] bg-border"
+                      />
+                      <p className="min-w-0 truncate font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-muted">
+                        {formula.tagline}
+                      </p>
+                    </div>
+                    <h3 className="mt-1.5 text-2xl font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
+                      {formula.label}
+                    </h3>
+                    <p className="mt-2.5 text-sm leading-relaxed text-muted">
+                      {formula.description}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Bande 3 — l'exemple, sur une seule ligne. `truncate` le
-                    coupe proprement plutôt que de le laisser se replier. */}
-                <p className="mt-3 truncate border-t border-border/60 pt-2.5 text-xs text-muted/80">
+                {/* L'exemple ferme la carte, sur une seule ligne et SANS filet
+                    au-dessus : ces barres claires hachaient la grille. */}
+                <p className="mt-3 truncate text-xs text-muted/80">
                   {formula.examples}
                 </p>
               </Link>

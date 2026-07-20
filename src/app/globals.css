@@ -750,8 +750,8 @@ body {
   71% {
     opacity: 1;
   }
-  74%,
-  93% {
+  73%,
+  95% {
     opacity: 0;
   }
   97%,
@@ -763,18 +763,23 @@ body {
   animation: frise-trident 16.8s ease-out infinite;
 }
 
+/* La coche couvre TOUTE la durée pendant laquelle la frise est complète
+   (le remplissage arrive à 72 % et tient jusqu'à 96 %) : dès que le trait
+   touche l'emblème, la validation est affichée et elle y reste. Avant, elle
+   s'effaçait à 93 % et le trident revenait alors que la frise était encore
+   pleine — on tombait sur cet état d'un instant à l'autre. */
 @keyframes frise-check {
   0%,
   71% {
     opacity: 0;
     transform: scale(0.5);
   }
-  75% {
+  74% {
     opacity: 1;
     transform: scale(1.12);
   }
-  79%,
-  93% {
+  78%,
+  95% {
     opacity: 1;
     transform: scale(1);
   }
