@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
 import Fireflies from "@/components/motion/Fireflies";
+import StatGlyph from "@/components/motion/StatGlyph";
 import type { HeroContent } from "@/lib/content/types";
 
 const CONTAINER: Variants = {
@@ -147,25 +148,35 @@ export default function Hero({
           </motion.div>
         </div>
 
-        {/* Rangée de chiffres, sous les deux colonnes : quatre cartes posées
-            sur le fond nuit (aplat, filet, arrondi, ombre douce). */}
+        {/* Rangée de chiffres. Chaque carte porte un pictogramme ANIMÉ qui
+            illustre son propos, un index mono et un filet au dégradé de
+            marque en tête — le simple point vert ne disait rien du contenu.
+            Le filet s'allume au survol, comme les cartes de Services. */}
         <motion.div variants={ITEM} className="mt-16">
           <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {data.stats.map((item) => (
-              <div key={item.label} className="card-surface p-5">
-                {/* Point vert lumineux, repris des pilules de la banderole. */}
+            {data.stats.map((item, i) => (
+              <div
+                key={item.label}
+                className="card-surface group relative overflow-hidden p-5 transition-colors hover:border-accent-cyan/50"
+              >
                 <span
                   aria-hidden="true"
-                  className="mb-4 block h-2 w-2 rounded-full bg-brand-emerald shadow-[0_0_8px_rgba(52,211,153,0.8)]"
+                  className="rule-brand absolute inset-x-0 top-0 h-px opacity-40 transition-opacity duration-300 group-hover:opacity-100"
                 />
+                <div className="flex items-start justify-between gap-3">
+                  <StatGlyph index={i} />
+                  <span className="font-mono text-xs text-brand-teal">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
                 {/* `value` porte le mot-clé court, `label` la phrase qui
                     l'explique : c'est donc le mot-clé qui fait office de terme
                     (dt) et la phrase de définition (dd). Elle reste en casse
                     normale — en capitales espacées elle serait illisible. */}
-                <dt className="text-xl font-semibold tracking-display sm:text-2xl">
+                <dt className="mt-4 text-xl font-semibold tracking-display sm:text-2xl">
                   {item.value}
                 </dt>
-                <dd className="mt-3 text-sm leading-relaxed text-muted">
+                <dd className="mt-2 text-sm leading-relaxed text-muted">
                   {item.label}
                 </dd>
               </div>

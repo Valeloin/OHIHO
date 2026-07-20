@@ -1036,6 +1036,150 @@ body {
   }
 }
 
+/* ---------- Pictogrammes des chiffres du hero ----------
+   Chaque carte porte un petit dessin animé qui illustre son propos. Horloge
+   commune de 8,4 s (la moitié de celle de la frise, le quart de celle de la
+   vitrine) : les trois animations du site restent en rapport harmonique.
+   Le décalage entre cartes vient d'un `animation-delay` posé en inline. */
+.hs {
+  animation-duration: 8.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* 01 — Sur mesure : les curseurs se règlent. */
+@keyframes hs-knob-a {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  40%,
+  70% {
+    transform: translateX(9px);
+  }
+}
+@keyframes hs-knob-b {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  45%,
+  75% {
+    transform: translateX(-7px);
+  }
+}
+.hs-knob-a {
+  animation-name: hs-knob-a;
+}
+.hs-knob-b {
+  animation-name: hs-knob-b;
+}
+
+/* 02 — De A à Z : un point parcourt le trajet, la coche valide l'arrivée. */
+@keyframes hs-travel {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  55% {
+    transform: translateX(20px);
+    opacity: 1;
+  }
+  62%,
+  100% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+@keyframes hs-arrive {
+  0%,
+  55% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  58% {
+    opacity: 1;
+  }
+  66%,
+  92% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  96%,
+  100% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+}
+.hs-travel {
+  animation-name: hs-travel;
+}
+.hs-arrive {
+  stroke-dasharray: 1;
+  animation-name: hs-arrive;
+}
+
+/* 03 — Moderne : les barres de l'emblème montent, chacune à son rythme. */
+@keyframes hs-bar {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.hs-bar {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation-name: hs-bar;
+}
+
+/* 04 — Interface web : l'interrupteur bascule, le curseur vient le cliquer. */
+@keyframes hs-switch {
+  0%,
+  35% {
+    transform: translateX(0);
+  }
+  45%,
+  85% {
+    transform: translateX(10px);
+  }
+  95%,
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes hs-cursor {
+  0%,
+  15% {
+    transform: translate(6px, 6px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  38%,
+  48% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  60%,
+  100% {
+    transform: translate(6px, 6px);
+    opacity: 0;
+  }
+}
+.hs-switch {
+  animation-name: hs-switch;
+}
+.hs-cursor {
+  animation-name: hs-cursor;
+}
+
 /* Respect du réglage « réduire les animations » du visiteur. Les apparitions
    au scroll sont gérées côté JS (framer-motion lit la même préférence). */
 @media (prefers-reduced-motion: reduce) {
