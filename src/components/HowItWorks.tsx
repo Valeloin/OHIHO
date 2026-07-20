@@ -10,7 +10,10 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
     // Fond par défaut (et non `bg-surface`) : le halo teal et les lucioles
     // se lisent alors exactement comme sur le hero. Sur le panneau plus clair
     // de `bg-surface`, les lucioles s'effaçaient presque.
-    <section className="relative overflow-hidden border-t border-border">
+    <section
+      id="methode"
+      className="relative overflow-hidden border-t border-border"
+    >
       <SectionBackdrop />
       <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-24">
         {/* En-tête sur deux colonnes : le titre à gauche, et à droite une

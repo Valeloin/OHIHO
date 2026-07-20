@@ -8,12 +8,19 @@ import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/lib/supabase/actions";
 import { scrollToId } from "@/lib/scroll";
 
-// Ordre aligné sur le déroulé de la page.
+// Ordre aligné sur le déroulé de la page : les huit sections y sont, dans
+// l'ordre où le visiteur les rencontre en défilant. Le bandeau n'en listait
+// que quatre, si bien que la Méthode, le Suivi, BugTrack et le Contact
+// n'étaient atteignables qu'en faisant défiler à l'aveugle.
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
+  { href: "/#methode", label: "Méthode" },
   { href: "/#expertise", label: "Expertise" },
   { href: "/#a-propos", label: "À propos" },
+  { href: "/#suivi", label: "Suivi" },
+  { href: "/#bugtrack", label: "BugTrack" },
   { href: "/#portfolio", label: "Réalisations" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -155,7 +162,13 @@ export default function Navbar() {
         {/* Libellés de nav : mono, capitales espacées. L'état actif/survolé est
             marqué par un filet au DÉGRADÉ DE MARQUE sous le lien (bleu ciel →
             teal → émeraude), pas par une pastille. */}
-        <div className="hidden items-center gap-6 md:flex lg:gap-8">
+        {/* Gouttière resserrée à 16 px (elle était à 24, puis 32 dès `lg`) :
+            le bandeau porte maintenant huit liens au lieu de quatre, et une
+            fois connecté le bloc de compte occupe près de 490 px. À l'ancien
+            écartement l'ensemble réclamait 1386 px pour 1232 disponibles —
+            la largeur utile est plafonnée par `max-w-7xl`, elle ne grandit
+            donc pas avec l'écran. */}
+        <div className="hidden items-center gap-4 md:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -187,12 +200,11 @@ export default function Navbar() {
                 Bonjour,{" "}
                 <span className="text-accent-cyan">{firstName}</span>
               </Link>
-              <Link
-                href="/portail/profil"
-                className="flex min-h-[44px] items-center nav-link"
-              >
-                Mon profil
-              </Link>
+              {/* « Mon profil » ne figure plus dans le bandeau du desktop : il
+                  faisait doublon avec l'onglet du même nom déjà présent dans
+                  le portail, où le salut ci-dessus mène. C'est la centaine de
+                  pixels qui manquait pour loger les huit sections. Le lien
+                  reste dans le tiroir mobile, où la place ne manque pas. */}
               {isAdmin && (
                 <Link
                   href="/admin"
