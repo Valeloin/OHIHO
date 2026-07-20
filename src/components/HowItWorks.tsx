@@ -230,7 +230,27 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                 <h3 className="mt-4 text-lg font-semibold tracking-display">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">
+
+                {/* Trait de marque sous le titre de l'étape DONT LA SCÈNE
+                    JOUE en ce moment sur l'écran, au-dessus. Sans lui, rien
+                    ne reliait les deux à l'œil : une fois la frise passée,
+                    les quatre étapes s'affichaient à l'identique et rien ne
+                    disait laquelle était en train d'être illustrée.
+                    Il emprunte la classe `frise-desc-N` — celle qui pilote
+                    déjà l'affichage de la scène correspondante. Le lien est
+                    donc garanti PAR CONSTRUCTION : il n'y a pas un second
+                    jeu d'horaires à tenir aligné à la main, et changer le
+                    rythme des scènes déplacera le trait avec elles.
+                    La hauteur est réservée en permanence (`h-0.5` sur
+                    l'enveloppe) pour que le texte en dessous ne saute pas
+                    quand le trait apparaît. */}
+                <div aria-hidden="true" className="mt-2 h-0.5">
+                  <div
+                    className={`frise-desc-${i + 1} rule-brand h-full w-10 rounded-full`}
+                  />
+                </div>
+
+                <p className="mt-2.5 text-sm leading-relaxed text-muted">
                   {item.description}
                 </p>
               </div>
