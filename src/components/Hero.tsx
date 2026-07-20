@@ -176,8 +176,60 @@ export default function Hero({
               })}
             </div>
 
-            <div aria-hidden="true" className="card-surface p-2">
-              {showcase}
+            {/* SOURCE DE LUMIÈRE DERRIÈRE LA VITRINE.
+                La carte se détachait à peine du fond nuit : elle avait l'air
+                posée sur la page plutôt qu'éclairée. Trois nappes floutées,
+                aux trois couleurs de marque, débordent du cadre et donnent
+                l'impression qu'une lampe est allumée derrière lui.
+
+                ⚠️ DEUX PIÈGES, tous deux vérifiés au calcul plutôt qu'à l'œil.
+
+                1. Les dégradés doivent porter jusqu'à 100 % du rayon. Un
+                   premier jet les arrêtait à 70 %, or la carte couvre 84 % du
+                   halo : toute la partie lumineuse se retrouvait cachée
+                   derrière elle et le halo était rigoureusement invisible.
+                2. Les nappes doivent DÉBORDER du cadre — c'est ce débord qui
+                   fait la lumière. Contenues, elles ne seraient qu'un fond de
+                   carte.
+
+                `-z-10` les place sous la vitrine ; le parent est `relative`
+                pour qu'elles s'ancrent sur lui et non sur la section.
+                Pour régler l'intensité, il n'y a que les trois alphas à
+                toucher. */}
+            <div className="relative">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-14 -z-10"
+              >
+                {/* Nappe centrale teal : le cœur de la source. */}
+                <div
+                  className="absolute inset-0 rounded-full blur-3xl"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at center, rgba(34,211,196,0.34) 0%, rgba(34,211,196,0.16) 55%, rgba(34,211,196,0) 100%)",
+                  }}
+                />
+                {/* Bleu ciel en haut à gauche, vert émeraude en bas à droite :
+                    le trio de marque se retrouve, dans le sens du dégradé. */}
+                <div
+                  className="absolute -left-8 -top-8 h-4/5 w-4/5 rounded-full blur-3xl"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(56,189,248,0.26) 0%, rgba(56,189,248,0) 100%)",
+                  }}
+                />
+                <div
+                  className="absolute -bottom-8 -right-8 h-4/5 w-4/5 rounded-full blur-3xl"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(52,211,153,0.26) 0%, rgba(52,211,153,0) 100%)",
+                  }}
+                />
+              </div>
+
+              <div aria-hidden="true" className="card-surface p-2">
+                {showcase}
+              </div>
             </div>
           </motion.div>
         </div>
