@@ -608,6 +608,16 @@ body {
 .frise-num-4 {
   display: inline-block;
 }
+
+/* Le grossissement du texte part du bord GAUCHE, pas du centre : il suit
+   ainsi le sens de progression de la frise. Centré, le bloc déborderait des
+   deux côtés à chaque passage et mordrait sur la colonne voisine. */
+.frise-txt-1,
+.frise-txt-2,
+.frise-txt-3,
+.frise-txt-4 {
+  transform-origin: left center;
+}
 .frise-num-1 {
   animation-name: frise-num-1;
 }
@@ -720,92 +730,68 @@ body {
   }
 }
 
-/* Déhanchement : quatre allers-retours de 3 px qui s'amortissent. */
+/* GROSSISSEMENT au passage de la frise, et non plus déhanchement.
+   Le réglage précédent était quatre allers-retours latéraux de 3 px qui
+   s'amortissaient : un tremblement, qui ne racontait rien de la frise et
+   n'avait aucun rapport avec le reste de la section — tout le reste y grandit
+   ou se remplit, rien n'y tremble.
+   Le texte grandit maintenant de 5 % puis revient, exactement comme le numéro
+   qui le surplombe (frise-num-*, déjà un grossissement). Les deux pièces d'un
+   même bloc réagissent donc de la même façon au passage du trait.
+   ⚠️ L'origine est à GAUCHE (voir la règle .frise-txt-*) : le texte grandit
+   dans le sens de progression de la frise. Centré, il déborderait des deux
+   côtés et empiéterait sur la colonne voisine.
+   Les instants de déclenchement sont inchangés — 0, 19, 37,7 et 56,3 % —
+   ce sont ceux où le remplissage atteint réellement chaque jalon. */
 @keyframes frise-txt-1 {
   0% {
-    transform: translateX(0);
+    transform: scale(1);
   }
-  1% {
-    transform: translateX(-3px);
-  }
-  2% {
-    transform: translateX(3px);
-  }
-  3% {
-    transform: translateX(-2px);
-  }
-  4% {
-    transform: translateX(1px);
+  1.5% {
+    transform: scale(1.05);
   }
   5%,
   100% {
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
 @keyframes frise-txt-2 {
   0%,
   19% {
-    transform: translateX(0);
+    transform: scale(1);
   }
-  20% {
-    transform: translateX(-3px);
-  }
-  21% {
-    transform: translateX(3px);
-  }
-  22% {
-    transform: translateX(-2px);
-  }
-  23% {
-    transform: translateX(1px);
+  20.5% {
+    transform: scale(1.05);
   }
   24%,
   100% {
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
 @keyframes frise-txt-3 {
   0%,
   37.7% {
-    transform: translateX(0);
+    transform: scale(1);
   }
-  38.7% {
-    transform: translateX(-3px);
-  }
-  39.7% {
-    transform: translateX(3px);
-  }
-  40.7% {
-    transform: translateX(-2px);
-  }
-  41.7% {
-    transform: translateX(1px);
+  39.2% {
+    transform: scale(1.05);
   }
   42.7%,
   100% {
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
 @keyframes frise-txt-4 {
   0%,
   56.3% {
-    transform: translateX(0);
+    transform: scale(1);
   }
-  57.3% {
-    transform: translateX(-3px);
-  }
-  58.3% {
-    transform: translateX(3px);
-  }
-  59.3% {
-    transform: translateX(-2px);
-  }
-  60.3% {
-    transform: translateX(1px);
+  57.8% {
+    transform: scale(1.05);
   }
   61.3%,
   100% {
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
 
