@@ -216,7 +216,9 @@ export default function MethodShowcase({ steps }: { steps: number }) {
     // se composent avec celle-ci au lieu de l'écraser.
     <div className="[perspective:1100px]">
       <svg
-        viewBox="-96 0 416 210"
+        // Hauteur resserrée à 198 : sans le socle, le dessin s'arrête au bas
+        // du téléphone (y = 192) et laissait sinon une bande morte.
+        viewBox="-96 0 416 198"
         aria-hidden="true"
         focusable="false"
         className="h-auto w-full origin-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.45)] [transform:rotateY(-22deg)_rotateX(9deg)]"
@@ -270,32 +272,9 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         ))}
       </g>
 
-      {/* Socle, dessiné EN PERSPECTIVE : l'arête avant (6 → 314) est plus
-          large que l'arête arrière (24 → 296), donc le plan fuit vers le
-          fond. Il était dessiné à l'envers — bord proche plus court que
-          bord lointain — ce qui l'aplatissait complètement. */}
-      <path
-        d="M24 160h272l18 22H6z"
-        fill="#0a1c2e"
-        stroke={RAIL}
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      {/* Encoche d'ouverture, elle aussi en perspective. */}
-      <path
-        d="M136 172h48l3 5h-54z"
-        fill={RAIL}
-        opacity="0.55"
-      />
-      <path d="M30 158h260" stroke={RAIL} strokeWidth="2" />
-      {/* Liseré de marque sur la tranche : rappel discret du logo. */}
-        <path
-          d="M118 165h84"
-          stroke={TEAL}
-          strokeWidth="2"
-          strokeLinecap="round"
-          opacity="0.5"
-        />
+      {/* Pas de socle : l'écran flotte seul. Le pied dessiné en perspective
+          alourdissait l'ensemble sans rien apporter, l'objet se lit très bien
+          comme un simple écran posé à côté du téléphone. */}
       </svg>
     </div>
   );
