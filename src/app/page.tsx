@@ -7,6 +7,7 @@ import HowItWorks from "@/components/HowItWorks";
 import Expertise from "@/components/Expertise";
 import WhyUs from "@/components/WhyUs";
 import Suivi from "@/components/Suivi";
+import BugTrack from "@/components/BugTrack";
 import ContactSection from "@/components/ContactSection";
 import ScrollNav from "@/components/ScrollNav";
 import { getContent } from "@/lib/content";
@@ -49,6 +50,11 @@ export default async function Home() {
       {/* Prolonge « Pourquoi OHIHO » : la promesse d'accompagnement, montrée
           concrètement par l'espace de suivi livré avec chaque site. */}
       <Suivi />
+      {/* Puis l'outil qui rend cette promesse tenable, nommé et vendable.
+          « Suivi » annonce l'accompagnement, « BugTrack » montre par quoi il
+          passe — voir l'avertissement en tête de BugTrack.tsx sur le
+          recouvrement entre les deux. */}
+      <BugTrack />
       <Portfolio data={content.portfolio} />
       <ContactSection data={content.contact} />
       <ScrollNav />

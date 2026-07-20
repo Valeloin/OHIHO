@@ -101,16 +101,26 @@ function Maquette() {
   );
 }
 
-/* 03 — Développement : les lignes s'écrivent les unes après les autres. */
+/* 03 — Développement. Le texte promet deux choses : « votre site prend
+   forme » ET « des points d'étape réguliers pour suivre l'avancement ».
+   Seule la première était dessinée. Les lignes de code s'écrivent toujours à
+   gauche, et une colonne de jalons cochés s'ajoute à droite : ce sont les
+   points d'étape, qui se valident au fil de l'écriture. */
 function Developpement() {
   // Décalages courts (0 à -0,4 s) : ils échelonnent l'écriture des lignes
   // tout en gardant chaque fenêtre à l'intérieur de celle de la scène.
   const lignes = [
-    { y: 32, w: 120, x: 24, fill: RAIL, delay: "0s" },
-    { y: 48, w: 90, x: 38, fill: TEAL, delay: "-0.1s" },
-    { y: 64, w: 140, x: 38, fill: RAIL, delay: "-0.2s" },
-    { y: 80, w: 70, x: 52, fill: SKY, delay: "-0.3s" },
-    { y: 96, w: 110, x: 24, fill: RAIL, delay: "-0.4s" },
+    { y: 32, w: 92, x: 24, fill: RAIL, delay: "0s" },
+    { y: 48, w: 68, x: 38, fill: TEAL, delay: "-0.1s" },
+    { y: 64, w: 104, x: 38, fill: RAIL, delay: "-0.2s" },
+    { y: 80, w: 54, x: 52, fill: SKY, delay: "-0.3s" },
+    { y: 96, w: 84, x: 24, fill: RAIL, delay: "-0.4s" },
+  ];
+  // Trois jalons, cochés dans le même ordre que l'écriture des lignes.
+  const jalons = [
+    { y: 36, delay: "-0.1s" },
+    { y: 60, delay: "-0.25s" },
+    { y: 84, delay: "-0.4s" },
   ];
   return (
     <g>
@@ -127,19 +137,44 @@ function Developpement() {
           style={{ animationDelay: l.delay }}
         />
       ))}
+
+      {/* Colonne des points d'étape, séparée du code par un filet vertical. */}
+      <path d="M152 28v80" stroke={RAIL} strokeWidth="1.5" opacity="0.6" />
+      {jalons.map((j) => (
+        <g key={j.y}>
+          <rect x="168" y={j.y} width="48" height="6" rx="3" fill={RAIL} />
+          <path
+            className="mv mv-code"
+            d={`M${164} ${j.y + 3}l3 3 5 -6`}
+            transform="translate(-8 0)"
+            pathLength={1}
+            fill="none"
+            stroke={EMERALD}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ animationDelay: j.delay }}
+          />
+        </g>
+      ))}
     </g>
   );
 }
 
-/* 04 — Mise en ligne & suivi : la jauge se remplit, la coche valide. */
+/* 04 — Mise en ligne & suivi. Le texte annonce « déploiement, PUIS
+   accompagnement dans la durée pour les évolutions et le suivi par email ».
+   Seul le déploiement était dessiné, et la seconde moitié de la phrase — la
+   plus engageante commercialement — restait muette. La jauge se remplit et
+   se valide comme avant, mais elle remonte pour laisser place à une
+   enveloppe : le suivi qui prend le relais une fois le site en ligne. */
 function EnLigne() {
   return (
     <g>
-      <rect x="24" y="58" width="150" height="10" rx="5" fill={RAIL} />
+      <rect x="24" y="34" width="150" height="10" rx="5" fill={RAIL} />
       <rect
         className="mv mv-deploy"
         x="24"
-        y="58"
+        y="34"
         width="150"
         height="10"
         rx="5"
@@ -147,7 +182,7 @@ function EnLigne() {
       />
       <path
         className="mv mv-done"
-        d="M190 63l7 7 14 -14"
+        d="M190 39l7 7 14 -14"
         pathLength={1}
         fill="none"
         stroke={EMERALD}
@@ -155,7 +190,50 @@ function EnLigne() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <rect x="24" y="86" width="94" height="6" rx="3" fill={RAIL} />
+
+      {/* Le suivi qui prend le relais : une enveloppe et deux notifications.
+          `mv-follow` les fait arriver à 80 %, soit APRÈS le remplissage de la
+          jauge (60-72 %) et le tracé de la coche (72-80 %). */}
+      <g className="mv mv-follow" style={{ animationDelay: "0.35s" }}>
+        <rect
+          x="24"
+          y="66"
+          width="34"
+          height="24"
+          rx="4"
+          fill="none"
+          stroke={SKY}
+          strokeWidth="2"
+        />
+        <path
+          d="M24 70l17 12 17 -12"
+          fill="none"
+          stroke={SKY}
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <rect
+        className="mv mv-follow"
+        x="68"
+        y="70"
+        width="88"
+        height="6"
+        rx="3"
+        fill={RAIL}
+        style={{ animationDelay: "0.5s" }}
+      />
+      <rect
+        className="mv mv-follow"
+        x="68"
+        y="82"
+        width="62"
+        height="6"
+        rx="3"
+        fill={RAIL}
+        style={{ animationDelay: "0.65s" }}
+      />
     </g>
   );
 }
@@ -294,11 +372,11 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         strokeWidth="2"
       />
       <path d="M-64 70h26" stroke={RAIL} strokeWidth="3" strokeLinecap="round" />
-      {/* L'emblème en pied de l'écran du téléphone : les scènes s'arrêtent à
-          y ≈ 139, la zone est libre. Plus grand que le favicon du portable
-          (10 contre 6) parce qu'ici il tient lieu de signature de la page,
-          pas d'icône d'onglet. */}
-      <Emblem cx={-51} cy={168} r={10} />
+      {/* Emblème CENTRÉ dans l'écran du téléphone, DERRIÈRE la scène : il est
+          dessiné avant elle, donc la scène passe par-dessus. Voir mv-brand. */}
+      <g className="mv-brand">
+        <Emblem cx={-51} cy={126} r={22} />
+      </g>
       <g transform="translate(-84 82)">
         {visiblesTel.map((Scene, i) => (
           <g key={i} className={`frise-desc-${i + 1}`}>
@@ -325,15 +403,15 @@ export default function MethodShowcase({ steps }: { steps: number }) {
       <circle cx="62" cy="17" r="2.5" fill={RAIL} />
       <rect x="74" y="13.5" width="82" height="7" rx="3.5" fill={RAIL} opacity="0.7" />
 
-      {/* Emblème du site affiché à l'écran, en haut à gauche de la zone de
-          contenu. Il était d'abord posé en favicon dans la barre d'onglet,
-          au rayon 6 : à cette taille les trois barres tombaient sous le
-          pixel et l'anneau prenait toute la place — l'ensemble se lisait
-          comme une cible, pas comme le logo.
-          Ici il a le même rayon que celui du téléphone (11 contre 10), donc
-          la même lisibilité. La place existe : les quatre scènes commencent
-          toutes à x = 62 et y = 58 au plus haut, cet angle est libre. */}
-      <Emblem cx={48} cy={44} r={11} />
+      {/* Emblème CENTRÉ dans la zone d'écran (x 30-290, barre de fenêtre
+          jusqu'à 26 : le centre tombe à 160/92), et dessiné AVANT les scènes
+          pour passer derrière elles. Il a d'abord été un favicon dans la
+          barre d'onglet, puis une vignette en haut à gauche : dans les deux
+          cas c'était une décoration posée à côté de l'animation. Ici il en
+          fait partie — voir mv-brand. */}
+      <g className="mv-brand">
+        <Emblem cx={160} cy={92} r={34} />
+      </g>
 
       {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte la
           fenêtre d'affichage de son étape (frise-desc-N). */}

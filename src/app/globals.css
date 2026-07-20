@@ -780,25 +780,31 @@ body {
 /* L'emblème est TOUJOURS en place, dès le début du cycle : il matérialise le
    point d'arrivée. Il est simplement en retrait tant que la frise ne l'a pas
    atteint, puis s'allume d'un coup quand le remplissage arrive sur lui. */
+/* L'emblème d'arrivée reste INVISIBLE tant que le remplissage ne l'a pas
+   atteint. Il était auparavant posé à `opacity: 0.7` dès la première image :
+   le point d'arrivée était donc annoncé pendant tout le parcours, et la
+   validation à la fin ne surprenait plus personne. Il n'apparaît maintenant
+   qu'à 72 %, l'instant EXACT où le trait touche le cercle — la même borne
+   que la gerbe et la coche. */
 @keyframes frise-final {
   0%,
-  70% {
-    opacity: 0.7;
-    transform: scale(0.94);
+  72% {
+    opacity: 0;
+    transform: scale(0.6);
   }
-  74% {
+  77% {
     opacity: 1;
-    transform: scale(1.06);
+    transform: scale(1.08);
   }
-  78%,
+  81%,
   93% {
     opacity: 1;
     transform: scale(1);
   }
   97%,
   100% {
-    opacity: 0.7;
-    transform: scale(0.94);
+    opacity: 0;
+    transform: scale(0.6);
   }
 }
 .frise-final {
@@ -1315,6 +1321,42 @@ body {
   animation-iteration-count: infinite;
 }
 
+/* Emblème de marque au CENTRE de chaque écran, derrière la scène en cours.
+   Il n'est pas un ornement posé dans un coin : il fait partie du récit. Tant
+   que le projet se construit (étapes 1 à 3) il n'est qu'une filigrane à
+   peine posée ; à l'étape 4, quand le site est mis en ligne, il vient au
+   premier plan — c'est l'identité du site qui existe enfin.
+   La montée est calée sur 72 %, la borne où le trait de la frise touche son
+   cercle d'arrivée : les deux validations se produisent au même instant. */
+@keyframes mv-brand {
+  0%,
+  66% {
+    opacity: 0.12;
+    transform: scale(0.94);
+  }
+  72% {
+    opacity: 0.9;
+    transform: scale(1.06);
+  }
+  76%,
+  92% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  96%,
+  100% {
+    opacity: 0.12;
+    transform: scale(0.94);
+  }
+}
+.mv-brand {
+  /* `fill-box` : sans lui, l'origine du `scale` serait le coin du SVG entier
+     et l'emblème partirait en diagonale au lieu de respirer sur place. */
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mv-brand 16.8s ease-out infinite;
+}
+
 /* 01 — Échange initial : les bulles de conversation arrivent (2,4 → 17,5 %) */
 @keyframes mv-bubble-1 {
   0%,
@@ -1458,6 +1500,36 @@ body {
     transform: scaleX(0);
   }
 }
+/* Le SUIVI de l'étape 4 : l'enveloppe et ses notifications. Elles arrivent
+   à 80 %, c'est-à-dire APRÈS que la jauge de déploiement s'est remplie
+   (60 → 72 %) et que la coche a fini de se tracer (72 → 80 %). L'ordre
+   raconte la phrase dans le bon sens : déploiement, PUIS accompagnement.
+   Elles s'effacent à 94 %, avec le reste de l'étape.
+   ⚠️ Ne pas réutiliser `mv-code` ici : il est calé sur 44-55 %, la fenêtre
+   de l'étape 3. Il ne se jouerait jamais pendant l'étape 4. */
+@keyframes mv-follow {
+  0%,
+  80% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  85%,
+  93% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  95%,
+  100% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+.mv-follow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-name: mv-follow;
+}
+
 @keyframes mv-done {
   0%,
   72% {
