@@ -53,6 +53,41 @@ function Emblem({ cx, cy, r }: { cx: number; cy: number; r: number }) {
   );
 }
 
+/* Gerbe d'étincelles AUTOUR de l'emblème, à l'intérieur de l'écran. Elle
+   part juste après que le logo s'est posé : le site est en ligne, on fête.
+   Étant dessinée dans le SVG, elle subit la même perspective que la dalle et
+   que le reste du contenu — c'est tout l'intérêt de la mettre là plutôt que
+   de la superposer en HTML par-dessus l'appareil.
+   Les huit rayons sont décalés de 22,5° (la moitié de l'écart entre deux)
+   pour qu'aucun ne tombe à l'horizontale ni à la verticale : alignés sur les
+   axes, ils se confondraient avec les barres du trident et les bords de la
+   dalle. Même précaution que sur la gerbe de la frise.
+   Ils partent à r + 5 et s'arrêtent à r + 13 : ils ne touchent jamais
+   l'anneau, ils rayonnent depuis sa périphérie. */
+function Spark({ cx, cy, r }: { cx: number; cy: number; r: number }) {
+  const interieur = r + 5;
+  const exterieur = r + 13;
+  const couleurs = [SKY, TEAL, EMERALD];
+  return (
+    <g className="mv-spark" strokeWidth="2" strokeLinecap="round" fill="none">
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
+        const rad = ((angle + 22.5) * Math.PI) / 180;
+        const x1 = (cx + Math.cos(rad) * interieur).toFixed(2);
+        const y1 = (cy + Math.sin(rad) * interieur).toFixed(2);
+        const x2 = (cx + Math.cos(rad) * exterieur).toFixed(2);
+        const y2 = (cy + Math.sin(rad) * exterieur).toFixed(2);
+        return (
+          <path
+            key={angle}
+            d={`M${x1} ${y1}L${x2} ${y2}`}
+            stroke={couleurs[i % 3]}
+          />
+        );
+      })}
+    </g>
+  );
+}
+
 /* 01 — Échange initial : la conversation s'installe. */
 function Echange() {
   return (
@@ -436,6 +471,7 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         <g className="mv-brand">
           <Emblem cx={-51} cy={146} r={18} />
         </g>
+        <Spark cx={-51} cy={146} r={18} />
         <g transform="translate(-84 82)">
           {visiblesTel.map((Scene, i) => (
             <g key={i} className={`frise-desc-${i + 1}`}>
@@ -486,6 +522,7 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         <g className="mv-brand">
           <Emblem cx={160} cy={90} r={25} />
         </g>
+        <Spark cx={160} cy={90} r={25} />
 
         {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte la
             fenêtre d'affichage de son étape (frise-desc-N). */}

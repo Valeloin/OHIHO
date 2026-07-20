@@ -1418,6 +1418,42 @@ body {
     transform: scale(0.7);
   }
 }
+/* Gerbe DANS l'écran, autour de l'emblème. Elle part à 81 %, c'est-à-dire
+   une fois que le logo s'est posé et stabilisé (il monte de 70 à 76 % et se
+   fige à 80 %) : d'abord le logo, ENSUITE la fête. Elle se referme à 88 %,
+   avant que l'étape ne s'efface.
+   Elle ne descend jamais sous scale(1) : les rayons partent déjà à distance
+   de l'anneau et ne font que s'en écarter. En partant d'un scale inférieur
+   ils sembleraient converger vers le logo au lieu d'en jaillir — c'est le
+   piège dans lequel la gerbe de la frise était tombée. */
+@keyframes mv-spark {
+  0%,
+  81% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  83.5% {
+    opacity: 0.95;
+    transform: scale(1.06);
+  }
+  88% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+  88.5%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+.mv-spark {
+  /* `fill-box` : sans lui l'origine du `scale` serait le coin du SVG entier
+     et la gerbe partirait en diagonale au lieu de rayonner sur place. */
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mv-spark 13.44s ease-out infinite;
+}
+
 .mv-brand {
   /* `fill-box` : sans lui, l'origine du `scale` serait le coin du SVG entier
      et l'emblème partirait en diagonale au lieu de respirer sur place. */
