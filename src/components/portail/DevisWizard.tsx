@@ -228,30 +228,47 @@ export default function DevisWizard({
             {formulas.map((f) => {
               const active = f.type === type;
               return (
-                <button
+                // Comme les cartes du hero et des Réalisations, la formule
+                // porte le DÉGRADÉ DE MARQUE. Variante propre au devis : il
+                // court à l'HORIZONTALE (bleu ciel → teal → émeraude de gauche
+                // à droite) et non en diagonale. Le liseré est plein sur la
+                // formule CHOISIE, discret sur les autres — il remplace ainsi
+                // l'ancienne bordure teal qui marquait la sélection, et se
+                // renforce au survol.
+                <div
                   key={f.type}
-                  type="button"
-                  onClick={() => chooseType(f.type)}
-                  className={`card-surface p-6 text-left transition-colors ${
+                  className={`group h-full rounded-2xl bg-gradient-to-r p-px shadow-[var(--card-shadow)] transition-all duration-300 ${
                     active
-                      ? "border-accent-cyan"
-                      : "hover:border-accent-cyan/40"
+                      ? "from-brand-sky via-brand-teal to-brand-emerald"
+                      : "from-brand-sky/35 via-brand-teal/25 to-brand-emerald/35 hover:from-brand-sky/70 hover:via-brand-teal/55 hover:to-brand-emerald/70"
                   }`}
                 >
-                  <div className="mb-4 aspect-[400/220] overflow-hidden rounded-xl border border-border">
-                    <FormulaPreview type={f.type} colors={previewColors} />
-                  </div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-cyan">
-                    {f.tagline}
-                  </p>
-                  <h3 className="mt-2 font-semibold tracking-display">
-                    {f.label}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {f.description}
-                  </p>
-                  <p className="mt-3 text-xs italic text-muted">{f.examples}</p>
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => chooseType(f.type)}
+                    className="relative flex h-full w-full flex-col overflow-hidden rounded-[15px] p-6 text-left"
+                    style={{
+                      background:
+                        "linear-gradient(120deg, rgba(56,189,248,0.12) 0%, rgba(34,211,196,0.04) 50%, rgba(52,211,153,0.14) 100%), #102436",
+                    }}
+                  >
+                    <div className="mb-4 aspect-[400/220] overflow-hidden rounded-xl border border-border">
+                      <FormulaPreview type={f.type} colors={previewColors} />
+                    </div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-cyan">
+                      {f.tagline}
+                    </p>
+                    <h3 className="mt-2 font-semibold tracking-display">
+                      {f.label}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
+                      {f.description}
+                    </p>
+                    <p className="mt-3 text-xs italic text-muted">
+                      {f.examples}
+                    </p>
+                  </button>
+                </div>
               );
             })}
           </div>
