@@ -234,65 +234,43 @@ export default function Hero({
           </motion.div>
         </div>
 
-        {/* UNE SEULE carte autour des quatre arguments, et non quatre boîtes.
-            Individuellement encadrés, ils alourdissaient le bas du hero ;
-            sans aucun cadre, le bloc flottait sans structure. Un cadre
-            commun les tient ensemble tout en les laissant respirer, séparés
-            par la seule gouttière de la grille. */}
-        <motion.div variants={ITEM} className="card-surface mt-10 px-5 py-6 sm:px-7">
-          {/* 1 colonne, puis 2, puis 4 seulement à partir de `lg`.
-              Chaque cellule porte un pictogramme À CÔTÉ du texte : à quatre
-              de front, il faut donc beaucoup de largeur. À `sm` (640 px) il
-              ne restait que 76 px de texte par colonne — « Interface web »
-              tenait sur 10 lignes et son mot-clé se coupait en deux. C'est
-              ce qu'on voit sur un téléphone pliable ou une tablette, entre
-              640 et 1024 px. À 1024 pile, quatre colonnes ne donnent encore
-              que 156 px et cinq lignes : le passage à quatre n'a lieu qu'à
-              `xl` (1280 px), où chaque texte dispose de 220 px. */}
-          <dl className="grid grid-cols-1 gap-x-6 gap-y-6 min-[420px]:grid-cols-2 sm:gap-y-8 xl:grid-cols-4">
-            {data.stats.map((item, i) => (
-              // Filet vertical entre les colonnes : sans lui, quatre petits
-              // blocs de texte flottaient dans un grand cadre vide. Il donne
-              // au bloc la rythmique éditoriale du reste du site.
-              //
-              // ⚠️ Les classes sont calculées depuis l'INDICE et non écrites
-              // avec les variantes `first:` / `odd:` : le nombre de colonnes
-              // change trois fois (1, puis 2, puis 4), une même cellule est
-              // donc tantôt en tête de rangée, tantôt non. Les variantes
-              // Tailwind ne savent pas exprimer ça et se contredisent d'un
-              // palier à l'autre — piège déjà rencontré sur cette grille.
-              //   · cellule 0 : jamais de filet, elle ouvre toujours sa rangée
-              //   · cellules 1 et 3 : deuxièmes de rangée dès deux colonnes
-              //   · cellule 2 : deuxième seulement à quatre colonnes (xl),
-              //     à deux colonnes elle ouvre la seconde rangée
-              <div
-                key={item.label}
-                className={`flex gap-3 ${
-                  i === 0
-                    ? ""
-                    : i === 2
-                      ? "xl:border-l xl:border-border xl:pl-6"
-                      : "min-[420px]:border-l min-[420px]:border-border min-[420px]:pl-6"
-                }`}
-              >
-                <div className="shrink-0">
-                  <StatGlyph index={i} />
-                </div>
-                <div className="min-w-0">
-                  {/* `value` porte le mot-clé court, `label` la phrase qui
-                      l'explique : c'est donc le mot-clé qui fait office de
-                      terme (dt) et la phrase de définition (dd). Elle reste en
-                      casse normale : en capitales espacées, illisible. */}
-                  <dt className="text-lg font-semibold leading-tight tracking-display">
-                    {item.value}
-                  </dt>
-                  <dd className="mt-2 text-[0.8125rem] leading-[1.5] text-muted">
-                    {item.label}
-                  </dd>
-                </div>
-              </div>
-            ))}
-          </dl>
+        {/* Les quatre arguments, désormais en CARTES individuelles plutôt
+            qu'en colonnes séparées de filets dans un cadre commun. Le cadre
+            unique laissait quatre pictogrammes nus flotter dans du vide, avec
+            des filets pour seule structure — c'est ce que Valentin trouvait
+            « moche ». Chaque argument est maintenant une petite carte à part
+            entière : son pictogramme dans une tuile teintée de marque, son
+            titre, sa phrase. Le bloc se lit comme une rangée de features,
+            plus comme un tableau. */}
+        <motion.div
+          variants={ITEM}
+          className="mt-10 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 xl:grid-cols-4"
+        >
+          {data.stats.map((item, i) => (
+            <div
+              key={item.label}
+              className="group card-surface flex flex-col p-5 transition-colors hover:border-brand-teal/40"
+            >
+              {/* Pictogramme dans une TUILE teintée de marque, cerclée d'un
+                  filet interne. Nu, le trait de 40 px flottait sur du vide ;
+                  la tuile en fait une vraie pastille d'icône, et sa teinte
+                  ramène la couleur de marque dans chaque carte. */}
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-teal/10 ring-1 ring-inset ring-brand-teal/20 transition-colors group-hover:bg-brand-teal/15">
+                <StatGlyph index={i} className="h-7 w-7" />
+              </span>
+              {/* `value` porte le mot-clé court (titre), `label` la phrase qui
+                  l'explique. Les tuiles ayant toutes la même hauteur, les
+                  titres tombent d'office à la même ligne d'une carte à
+                  l'autre ; les descriptions, elles, coulent librement en
+                  dessous. */}
+              <h3 className="mt-5 text-lg font-semibold leading-tight tracking-display">
+                {item.value}
+              </h3>
+              <p className="mt-2 text-[0.8125rem] leading-[1.5] text-muted">
+                {item.label}
+              </p>
+            </div>
+          ))}
         </motion.div>
       </motion.div>
     </section>

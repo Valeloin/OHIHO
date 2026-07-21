@@ -91,14 +91,20 @@ function Interface() {
 
 const GLYPHS = [Sliders, Parcours, Barres, Interface];
 
-export default function StatGlyph({ index }: { index: number }) {
+export default function StatGlyph({
+  index,
+  className = "h-10 w-10",
+}: {
+  index: number;
+  className?: string;
+}) {
   const Glyph = GLYPHS[index % GLYPHS.length];
   return (
     <svg
       viewBox="0 0 40 40"
       aria-hidden="true"
       focusable="false"
-      className="h-10 w-10"
+      className={className}
     >
       <Glyph />
     </svg>
