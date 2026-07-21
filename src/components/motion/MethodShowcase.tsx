@@ -494,9 +494,40 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         />
       </g>
 
-      {/* ---- Portable ----
+      {/* ---- Écran de bureau ----
            Le châssis reste sombre, c'est du plastique ; seule la DALLE, sous
            la barre de fenêtre, est allumée. */}
+
+      {/* PIED DE L'ÉCRAN (col + piètement), même style que le moniteur de
+           Mailys Solutions demandé en référence. Dessiné AVANT le châssis pour
+           que le bas de celui-ci recouvre le haut du col (jointure nette).
+           Tracé DANS le plan de l'écran : un disque de socle sous-entendrait
+           un sol horizontal absent de cette vue inclinée — d'où un piètement
+           plat, évasé, qui se plie à la même inclinaison que l'écran (c'est
+           justement l'orthographie retenue qui rend ça propre, là où l'ancien
+           socle en perspective était de travers). Couleurs nuit d'OHIHO, pas
+           celles rouges de Mailys. */}
+      <g>
+        {/* Col central, centré sous l'écran (x 160). */}
+        <path
+          d="M153 157 h14 l4 13 h-22 z"
+          fill="#0e2135"
+          stroke={RAIL}
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        {/* Piètement : barre évasée, arêtes adoucies. */}
+        <path
+          d="M126 169 h68 q6 0 8 5 l2 4 q1 3 -3 3 h-82 q-4 0 -3 -3 l2 -4 q2 -5 8 -5 z"
+          fill="#12273d"
+          stroke={RAIL}
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        {/* Arête supérieure éclairée du piètement. */}
+        <path d="M128 170 h64" stroke="#2c4a68" strokeWidth="1.5" strokeLinecap="round" />
+      </g>
+
       <rect
         x="30"
         y="8"
@@ -554,9 +585,10 @@ export default function MethodShowcase({ steps }: { steps: number }) {
         <rect x="30" y="26" width="260" height="132" fill="url(#mv-glare)" />
       </g>
 
-      {/* Pas de socle : l'écran flotte seul. Le pied dessiné en perspective
-          alourdissait l'ensemble sans rien apporter, l'objet se lit très bien
-          comme un simple écran posé à côté du téléphone. */}
+      {/* Le pied du moniteur est dessiné plus haut, AVANT le châssis (voir le
+          bloc « PIED DE L'ÉCRAN »). L'ancien socle en perspective avait été
+          retiré ; celui-ci, plat et en projection orthographique, se pose
+          proprement — c'est la référence Mailys demandée par Valentin. */}
       </svg>
     </div>
   );
