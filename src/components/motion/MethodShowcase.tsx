@@ -495,6 +495,14 @@ export default function MethodShowcase({ steps }: { steps: number }) {
       <path d="M-64 70h26" stroke={RAIL} strokeWidth="3" strokeLinecap="round" />
       {/* Tout le contenu de l'écran est détouré par la dalle. */}
       <g clipPath="url(#mv-clip-tel)">
+        {/* CHROME PERMANENT du téléphone, comme sur le portable. En-tête en
+            haut (titre + pastille de statut), au-dessus des scènes qui
+            démarrent à y = 86 ; barre d'accueil arrondie en bas, sous
+            l'emblème (qui s'arrête à y = 164). Statique, hors des étapes. */}
+        <rect x="-76" y="76" width="30" height="6" rx="3" fill={RAIL} opacity="0.8" />
+        <circle cx="-22" cy="79" r="3" fill={RAIL} />
+        <rect x="-62" y="184" width="24" height="3" rx="1.5" fill={RAIL} />
+
         {/* Emblème CENTRÉ dans l'écran, DERRIÈRE la scène : il est dessiné
             avant elle, donc la scène passe par-dessus. Voir mv-brand. */}
         <g className="mv-brand">
@@ -542,6 +550,21 @@ export default function MethodShowcase({ steps }: { steps: number }) {
       <rect x="74" y="13.5" width="82" height="7" rx="3.5" fill={RAIL} opacity="0.7" />
 
       <g clipPath="url(#mv-clip-portable)">
+        {/* CHROME D'APPLICATION, permanent et hors des étapes. La colonne
+            gauche (x 30-58) restait vide quelle que soit la scène — toutes
+            démarrent à x = 62. Une barre latérale l'occupe : l'écran se lit
+            désormais comme une vraie interface, pas comme un aplat où
+            flottent quelques barres. La première icône est en teal (page
+            active), les autres en gris ; une pastille de profil ferme le bas.
+            Rien ici n'est animé : le chrome ne doit pas voler la vedette à la
+            scène, il l'encadre. */}
+        <path d="M58 26v132" stroke={RAIL} strokeWidth="1.5" opacity="0.5" />
+        <rect x="38" y="42" width="12" height="12" rx="3" fill={TEAL} opacity="0.9" />
+        <rect x="38" y="62" width="12" height="12" rx="3" fill={RAIL} />
+        <rect x="38" y="82" width="12" height="12" rx="3" fill={RAIL} />
+        <rect x="38" y="102" width="12" height="12" rx="3" fill={RAIL} />
+        <circle cx="44" cy="144" r="7" fill={RAIL} />
+
         {/* Emblème CENTRÉ dans la zone d'écran (x 30-290, barre de fenêtre
             jusqu'à 26 : le centre tombe à 160/92), et dessiné AVANT les
             scènes pour passer derrière elles. Il a d'abord été un favicon
