@@ -35,7 +35,11 @@
   /* Gris du bandeau relevé : #9fb2cc affichait pourtant un contraste de
      8,5:1, très au-dessus du seuil. Ce n'est donc pas le contraste qui
      gênait mais la LISIBILITÉ du réglage typographique — voir .nav-link. */
-  --header-link: #c8d6ea;
+  /* Liens du bandeau en BLANC plein, comme le wordmark : ils étaient en gris
+     bleuté (#c8d6ea, contraste 12,5), Valentin les veut bien visibles. Au
+     survol, ils restent blancs — c'est le filet de marque sous le lien qui
+     signale l'interaction. */
+  --header-link: #eef4fc;
   --header-border: rgba(238, 244, 252, 0.1);
   /* Hauteur du bandeau : rangée de 76 px + le filet du bas. Elle est la même
      à toutes les tailles depuis que la rangée de liens à défilement
