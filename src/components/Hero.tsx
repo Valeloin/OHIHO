@@ -247,28 +247,43 @@ export default function Hero({
           className="mt-10 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 xl:grid-cols-4"
         >
           {data.stats.map((item, i) => (
+            // BORDURE AU DÉGRADÉ DE MARQUE (bleu ciel → teal → émeraude, le
+            // trio du logo). C'est ce dégradé qui « colore » la carte, tout
+            // en respectant le fond nuit du site : l'enveloppe porte le
+            // dégradé, la carte intérieure reste sombre et posée dessus, si
+            // bien que seul le liseré d'1 px se teinte. Il s'intensifie au
+            // survol. `p-px` = l'épaisseur du liseré.
             <div
               key={item.label}
-              className="group card-surface flex flex-col p-5 transition-colors hover:border-brand-teal/40"
+              className="group rounded-2xl bg-gradient-to-br from-brand-sky/60 via-brand-teal/50 to-brand-emerald/60 p-px shadow-[var(--card-shadow)] transition-all duration-300 hover:from-brand-sky hover:via-brand-teal hover:to-brand-emerald"
             >
-              {/* Pictogramme dans une TUILE teintée de marque, cerclée d'un
-                  filet interne. Nu, le trait de 40 px flottait sur du vide ;
-                  la tuile en fait une vraie pastille d'icône, et sa teinte
-                  ramène la couleur de marque dans chaque carte. */}
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-teal/10 ring-1 ring-inset ring-brand-teal/20 transition-colors group-hover:bg-brand-teal/15">
-                <StatGlyph index={i} className="h-7 w-7" />
-              </span>
-              {/* `value` porte le mot-clé court (titre), `label` la phrase qui
-                  l'explique. Les tuiles ayant toutes la même hauteur, les
-                  titres tombent d'office à la même ligne d'une carte à
-                  l'autre ; les descriptions, elles, coulent librement en
-                  dessous. */}
-              <h3 className="mt-5 text-lg font-semibold leading-tight tracking-display">
-                {item.value}
-              </h3>
-              <p className="mt-2 text-[0.8125rem] leading-[1.5] text-muted">
-                {item.label}
-              </p>
+              <div className="relative flex h-full flex-col overflow-hidden rounded-[15px] bg-surface p-5">
+                {/* Halo du même dégradé dans l'angle haut-droit : il prolonge
+                    le liseré vers l'intérieur pour que la couleur ne soit pas
+                    qu'au bord. Dilué et flouté, derrière le contenu. */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full blur-2xl opacity-60 transition-opacity duration-300 group-hover:opacity-90"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(56,189,248,0.35) 0%, rgba(34,211,196,0.30) 50%, rgba(52,211,153,0.26) 100%)",
+                  }}
+                />
+
+                {/* Pictogramme dans une TUILE teintée de marque, cerclée d'un
+                    filet interne. */}
+                <span className="relative inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-teal/10 ring-1 ring-inset ring-brand-teal/20 transition-colors group-hover:bg-brand-teal/15">
+                  <StatGlyph index={i} className="h-7 w-7" />
+                </span>
+                {/* `value` porte le mot-clé court (titre), `label` la phrase
+                    qui l'explique. */}
+                <h3 className="relative mt-5 text-lg font-semibold leading-tight tracking-display">
+                  {item.value}
+                </h3>
+                <p className="relative mt-2 text-[0.8125rem] leading-[1.5] text-muted">
+                  {item.label}
+                </p>
+              </div>
             </div>
           ))}
         </motion.div>
