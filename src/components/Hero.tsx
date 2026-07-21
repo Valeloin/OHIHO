@@ -257,16 +257,29 @@ export default function Hero({
               key={item.label}
               className="group rounded-2xl bg-gradient-to-br from-brand-sky/60 via-brand-teal/50 to-brand-emerald/60 p-px shadow-[var(--card-shadow)] transition-all duration-300 hover:from-brand-sky hover:via-brand-teal hover:to-brand-emerald"
             >
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[15px] bg-surface p-5">
-                {/* Halo du même dégradé dans l'angle haut-droit : il prolonge
-                    le liseré vers l'intérieur pour que la couleur ne soit pas
-                    qu'au bord. Dilué et flouté, derrière le contenu. */}
+              {/* Le FOND de la carte est lui-même un dégradé de marque
+                  (cyan → teal → émeraude), et non plus un aplat sombre : la
+                  couleur traverse toute la carte, en diagonale, du coin
+                  haut-gauche au coin bas-droite. Les alphas restent bas (~0,12)
+                  et le dégradé est posé SUR le nuit du site (#102436), donc la
+                  carte se teinte sans jamais devenir claire — le texte reste
+                  lisible. Le dégradé s'intensifie au survol (voir la classe
+                  `group-hover` sur le second calque). */}
+              <div
+                className="relative flex h-full flex-col overflow-hidden rounded-[15px] p-5"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(56,189,248,0.14) 0%, rgba(34,211,196,0.05) 48%, rgba(52,211,153,0.16) 100%), #102436",
+                }}
+              >
+                {/* Renfort au survol : un second calque du même dégradé, plus
+                    dense, qui apparaît en fondu. */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full blur-2xl opacity-60 transition-opacity duration-300 group-hover:opacity-90"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   style={{
                     background:
-                      "linear-gradient(135deg, rgba(56,189,248,0.35) 0%, rgba(34,211,196,0.30) 50%, rgba(52,211,153,0.26) 100%)",
+                      "linear-gradient(135deg, rgba(56,189,248,0.14) 0%, rgba(34,211,196,0.06) 48%, rgba(52,211,153,0.16) 100%)",
                   }}
                 />
 
