@@ -108,13 +108,23 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
             // réel (donc avec son icône) sans être encore accessible en
             // ligne. Seules les tuiles SANS icône sont de vrais emplacements
             // vides, et elles seules prennent les pointillés et l'atténuation.
-            const base =
-              "card-dark group flex h-full flex-col p-6 transition-colors";
-            const cardClass = enLigne
-              ? `${base} hover:border-accent-cyan/50`
-              : project.icon
-                ? base
-                : `${base} border-dashed opacity-70`;
+            // Un vrai projet (avec icône) prend le DÉGRADÉ DE MARQUE, comme
+            // les cartes du hero mais dans l'ORDRE INVERSE — émeraude → teal
+            // → bleu ciel au lieu de bleu → teal → émeraude : même palette,
+            // sens de lecture opposé, pour que les deux jeux de cartes se
+            // répondent sans se copier. Seuls les emplacements vides (sans
+            // icône) gardent la carte sombre à pointillés.
+            const hasGradient = Boolean(project.icon);
+
+            // Carte intérieure : fond nuit `card-dark` (#071522) teinté du
+            // dégradé de marque, coins arrondis, sans bordure (c'est
+            // l'enveloppe qui la porte).
+            const innerClass =
+              "relative flex h-full flex-col overflow-hidden rounded-[15px] p-6";
+            const innerStyle = {
+              background:
+                "linear-gradient(135deg, rgba(52,211,153,0.16) 0%, rgba(34,211,196,0.05) 48%, rgba(56,189,248,0.16) 100%), #071522",
+            };
 
             return (
               // `min-w-0` : une cellule de grille refuse par défaut de
@@ -128,17 +138,32 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                 hover={enLigne}
                 className="h-full min-w-0"
               >
-                {project.href ? (
-                  <Link
-                    href={project.href}
-                    className={cardClass}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
-                  >
-                    {content}
-                  </Link>
+                {hasGradient ? (
+                  // Enveloppe au dégradé = la bordure ; `p-px` en fait le
+                  // liseré. Elle s'intensifie au survol.
+                  <div className="group h-full rounded-2xl bg-gradient-to-br from-brand-emerald/55 via-brand-teal/45 to-brand-sky/55 p-px shadow-[var(--card-shadow)] transition-all duration-300 hover:from-brand-emerald hover:via-brand-teal hover:to-brand-sky">
+                    {project.href ? (
+                      <Link
+                        href={project.href}
+                        className={innerClass}
+                        style={innerStyle}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                      >
+                        {content}
+                      </Link>
+                    ) : (
+                      <div className={innerClass} style={innerStyle}>
+                        {content}
+                      </div>
+                    )}
+                  </div>
                 ) : (
-                  <div className={cardClass}>{content}</div>
+                  // Emplacement vide : pas de dégradé, carte sombre à
+                  // pointillés, atténuée.
+                  <div className="card-dark group flex h-full flex-col border-dashed p-6 opacity-70">
+                    {content}
+                  </div>
                 )}
               </RevealItem>
             );
