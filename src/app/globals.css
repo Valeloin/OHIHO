@@ -850,47 +850,8 @@ body {
   animation: frise-final 13.44s ease-out infinite;
 }
 
-/* La gerbe ne descend JAMAIS sous scale(1) : les rayons partent déjà à
-   distance de l'emblème et ne font que s'écarter. Auparavant elle montait
-   depuis scale(0.3), et pendant sa croissance les rayons traversaient le
-   cercle — c'est ce qui donnait l'impression qu'ils le touchaient. */
-/* ⚠️ Rien ne démarre avant 72 % : c'est l'instant EXACT où le remplissage
-   atteint 1, donc où le trait touche le cercle. La gerbe partait à 70,5 %,
-   quand le remplissage n'était encore qu'à 0,972 — le trait était à une
-   trentaine de pixels du cercle et l'explosion avait déjà commencé. */
-/* ⚠️ La gerbe est le POINT FINAL du cycle, pas la fête de l'arrivée du
-   trait. Elle partait à 72 %, en même temps que le cercle : elle célébrait
-   donc la fin de la frise alors que l'écran, lui, jouait encore toute
-   l'étape 4 (déploiement jusqu'à 72 %, coche jusqu'à 79 %, puis le suivi par
-   email jusqu'à 93 %). On voyait un feu d'artifice au milieu d'une
-   animation en cours.
-   Elle ne part plus qu'à 92 %, quand TOUT est retombé : la dernière
-   notification est posée, la coche est écrite, le trait est entier. */
-@keyframes frise-burst {
-  0%,
-  84% {
-    opacity: 0;
-    transform: scale(1);
-  }
-  86.5% {
-    opacity: 0.95;
-    transform: scale(1.06);
-  }
-  91% {
-    opacity: 0;
-    transform: scale(1.4);
-  }
-  91.5%,
-  100% {
-    opacity: 0;
-    transform: scale(1);
-  }
-}
-.frise-burst {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: frise-burst 13.44s ease-out infinite;
-}
+/* La gerbe d'étincelles de la frise a été retirée à la demande : le grand
+   cercle de validation qui se pose suffit à marquer l'arrivée. */
 
 /* Validation à l'arrivée : la coche SE TRACE, d'un seul geste, quand le
    remplissage atteint le cercle. Le tracé est normalisé par `pathLength="1"`
@@ -1404,42 +1365,9 @@ body {
     transform: scale(0.7);
   }
 }
-/* Gerbe DANS l'écran, autour de l'emblème. Elle part à 81 %, c'est-à-dire
-   une fois que le logo s'est posé et stabilisé (il monte de 70 à 76 % et se
-   fige à 80 %) : d'abord le logo, ENSUITE la fête. Elle se referme à 88 %,
-   avant que l'étape ne s'efface.
-   Elle ne descend jamais sous scale(1) : les rayons partent déjà à distance
-   de l'anneau et ne font que s'en écarter. En partant d'un scale inférieur
-   ils sembleraient converger vers le logo au lieu d'en jaillir — c'est le
-   piège dans lequel la gerbe de la frise était tombée. */
-@keyframes mv-spark {
-  0%,
-  81% {
-    opacity: 0;
-    transform: scale(1);
-  }
-  83.5% {
-    opacity: 0.95;
-    transform: scale(1.06);
-  }
-  88% {
-    opacity: 0;
-    transform: scale(1.35);
-  }
-  88.5%,
-  100% {
-    opacity: 0;
-    transform: scale(1);
-  }
-}
-.mv-spark {
-  /* `fill-box` : sans lui l'origine du `scale` serait le coin du SVG entier
-     et la gerbe partirait en diagonale au lieu de rayonner sur place. */
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: mv-spark 13.44s ease-out infinite;
-}
-
+/* La gerbe d'étincelles autour de l'emblème dans les écrans a été retirée :
+   ses rayons chevauchaient l'enveloppe du suivi. L'emblème qui apparaît
+   suffit à marquer la mise en ligne. */
 .mv-brand {
   /* `fill-box` : sans lui, l'origine du `scale` serait le coin du SVG entier
      et l'emblème partirait en diagonale au lieu de respirer sur place. */

@@ -122,15 +122,16 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
             ))}
           </div>
 
-          {/* Arrivée : quand le remplissage atteint le bout, l'emblème OHIHO
-              se pose dans son cercle et une gerbe jaillit — la méthode est
-              menée à son terme. Desktop uniquement, comme le rail. */}
-          {/* Le viewBox est large (80) pour que les rayons, en s'écartant
-              jusqu'à scale(1.4), ne soient pas rognés par le bord du SVG. */}
+          {/* Arrivée : quand le remplissage atteint le bout, un GRAND cercle
+              de validation se pose et la coche s'y trace. La gerbe d'étincelles
+              a été retirée à la demande. Desktop uniquement, comme le rail. */}
+          {/* Cercle nettement agrandi (r 24 dans un viewBox de 80, rendu
+              96 px) : sans la gerbe autour, il peut occuper tout le cadre et
+              devenir le vrai point d'orgue de la frise. */}
           <svg
             aria-hidden="true"
             viewBox="0 0 80 80"
-            className="absolute right-0 top-0 hidden h-16 w-16 -translate-y-1/2 translate-x-1/2 lg:block"
+            className="absolute right-0 top-0 hidden h-24 w-24 -translate-y-1/2 translate-x-1/2 lg:block"
           >
             <defs>
               <linearGradient
@@ -147,50 +148,25 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               </linearGradient>
             </defs>
 
-            {/* Gerbe : 8 rayons qui partent à 19 unités du centre, alors que
-                l'emblème s'arrête à 14,25 — ils ne le touchent jamais.
-                L'ensemble est pivoté de 22,5° (moitié de l'écart entre deux
-                rayons) : sans cela deux rayons tombaient exactement à
-                l'horizontale et se confondaient avec le trait de la frise.
-                La rotation est portée par un groupe EXTÉRIEUR, car le groupe
-                animé a déjà sa propre transformation CSS. */}
-            <g transform="rotate(22.5 40 40)">
-              <g
-                className="frise-burst"
-                strokeWidth="2"
-                strokeLinecap="round"
-                fill="none"
-              >
-                <path d="M59 40h8" stroke="#22d3c4" />
-                <path d="M53.4 53.4l5.7 5.7" stroke="#34d399" />
-                <path d="M40 59v8" stroke="#38bdf8" />
-                <path d="M26.6 53.4l-5.7 5.7" stroke="#22d3c4" />
-                <path d="M21 40h-8" stroke="#34d399" />
-                <path d="M26.6 26.6l-5.7-5.7" stroke="#38bdf8" />
-                <path d="M40 21v-8" stroke="#22d3c4" />
-                <path d="M53.4 26.6l5.7-5.7" stroke="#34d399" />
-              </g>
-            </g>
-
-            {/* Emblème : disque nuit cerclé du dégradé de marque. Toujours
-                présent, en retrait tant que la frise n'est pas arrivée. */}
+            {/* Disque nuit cerclé du dégradé de marque. Toujours présent, en
+                retrait tant que la frise n'est pas arrivée. */}
             <g className="frise-final">
               <circle
                 cx="40"
                 cy="40"
-                r="13"
+                r="24"
                 fill="#071522"
                 stroke="url(#frise-ring)"
-                strokeWidth="2.5"
+                strokeWidth="3.5"
               />
-              {/* Plus d'emblème : le point d'arrivée est une VALIDATION. Le
-                  cercle attend, vide, et la coche s'y trace d'un trait quand
-                  le remplissage l'atteint. */}
+              {/* Le point d'arrivée est une VALIDATION : le cercle attend, vide,
+                  et la coche s'y trace d'un trait quand le remplissage
+                  l'atteint. Agrandie avec le cercle. */}
               <path
                 className="frise-check"
-                d="M34.5 40.2l3.8 3.8 7.2 -7.2"
+                d="M30 40.5l6.5 6.5 13 -13"
                 stroke="#34d399"
-                strokeWidth="2.8"
+                strokeWidth="4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 fill="none"

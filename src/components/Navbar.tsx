@@ -170,6 +170,14 @@ export default function Navbar() {
             la largeur utile est plafonnée par `max-w-7xl`, elle ne grandit
             donc pas avec l'écran. */}
         <div className="hidden items-center gap-4 md:flex">
+          {/* Filet vertical léger qui sépare le logo de la navigation. Court
+              (24 px) et à la couleur du filet du bandeau (blanc à 10 %), il
+              structure la rangée en trois zones sans l'alourdir. La gouttière
+              `gap-4` du conteneur l'espace comme un lien de plus. */}
+          <span
+            aria-hidden="true"
+            className="h-6 w-px bg-[var(--header-border)]"
+          />
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -192,6 +200,11 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-4 md:flex lg:gap-5">
+          {/* Second filet : entre la navigation et la zone de compte. */}
+          <span
+            aria-hidden="true"
+            className="h-6 w-px bg-[var(--header-border)]"
+          />
           {firstName ? (
             <>
               <Link

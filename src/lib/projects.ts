@@ -55,7 +55,11 @@ export const PROJECTS: Project[] = [
     href: "https://mailys-solutions.vercel.app",
     // Logo recadré pour l'affichage en grand format (voir le fichier).
     icon: "/realisations/mailys-solutions.svg",
-    iconBg: "#ffffff",
+    // Fond TRANSPARENT et non blanc : le logo Mailys est fait de tracés
+    // colorés sans aplat, la tuile blanche jurait sur le fond nuit du site
+    // là où les deux autres portent leur couleur de marque. `transparent`
+    // laisse la tuile prendre le fond de la carte, le logo s'y pose seul.
+    iconBg: "transparent",
     accent: "emerald",
   },
 ];
