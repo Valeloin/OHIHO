@@ -119,6 +119,11 @@
   resize: vertical;
 }
 
+/* Bloc-composant : conteneur d'un composant fonctionnel embarqué. */
+.sd-composant {
+  display: block;
+}
+
 .sd-groupe {
   display: block;
 }

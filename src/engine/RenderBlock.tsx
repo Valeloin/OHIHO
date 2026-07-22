@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { Block } from "./types";
 import { animationsEnCss } from "./animations";
+import { COMPOSANTS } from "./composants";
 
 // Rendu d'un bloc en vrai HTML, côté serveur (bon pour le SEO).
 // Les défauts visuels sont dans engine.css ; le `style` du bloc n'ajoute que les
@@ -60,6 +61,17 @@ export function RenderBlock({ block }: { block: Block }) {
           {enfants}
         </section>
       );
+    case "composant": {
+      // Bloc-composant : on POSE un vrai composant fonctionnel d'OHIHO dans un
+      // conteneur stylable (l'extension édite le conteneur, pas l'intérieur).
+      const nom = String(content.composant ?? "");
+      const Comp = COMPOSANTS[nom];
+      return (
+        <div className={`sd-composant${anime}`} style={style} {...dataAttrs} data-sd-composant={nom}>
+          {Comp ? <Comp /> : <span style={{ color: "#f87171", fontSize: "0.85rem" }}>Composant inconnu : « {nom} »</span>}
+        </div>
+      );
+    }
     case "titre": {
       const niveau = Math.min(Math.max(Number(content.niveau ?? 2), 1), 6);
       const Tag = `h${niveau}` as React.ElementType;

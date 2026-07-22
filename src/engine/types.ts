@@ -15,7 +15,8 @@ export type BlockType =
   | "interrupteur"
   | "icone"
   | "champ"
-  | "zonetexte";
+  | "zonetexte"
+  | "composant";
 
 /** Une animation = une entrée du catalogue + ses réglages. */
 export interface Animation {
