@@ -78,7 +78,7 @@ export default async function RootLayout({
   const customThemeCss = themeCss(content.theme);
 
   return (
-    <html lang="fr">
+    <html lang="fr" data-simple-dev="1.0.0">
       {/* Pas de <head> manuel (source d'erreurs d'hydratation dans l'App
           Router) : le style du thème est rendu en tête de body, les
           navigateurs l'appliquent à l'identique. Jamais de chaîne vide ici
