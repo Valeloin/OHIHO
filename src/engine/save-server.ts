@@ -167,7 +167,7 @@ export async function lireSnapshot(id: string): Promise<unknown> {
 export async function commitPush(message: string) {
   if (SUR_GITHUB) return { committed: true, pushed: true, note: "via API GitHub" };
   let committed = false;
-  let pushed = false;
+  const pushed = false; // phase de test : pas de push automatique
   let note = "";
   try {
     await pexec("git add content", { cwd: RACINE });
