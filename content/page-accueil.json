@@ -2,392 +2,6 @@
   "page": "accueil",
   "blocks": [
     {
-      "id": "hdr",
-      "type": "header",
-      "css": {
-        "backgroundImage": "initial",
-        "backgroundPositionX": "initial",
-        "backgroundPositionY": "initial",
-        "backgroundSize": "initial",
-        "backgroundRepeat": "initial",
-        "backgroundAttachment": "initial",
-        "backgroundOrigin": "initial",
-        "backgroundClip": "initial",
-        "backgroundColor": "rgb(7, 21, 34)",
-        "borderBottomWidth": "1px",
-        "borderBottomStyle": "solid",
-        "borderBottomColor": "rgba(238, 244, 252, 0.1)",
-        "position": "sticky",
-        "top": "0px",
-        "zIndex": "50"
-      },
-      "children": [
-        {
-          "id": "hdr_bar",
-          "type": "groupe",
-          "css": {
-            "maxWidth": "1280px",
-            "marginTop": "0px",
-            "marginRight": "auto",
-            "marginBottom": "0px",
-            "marginLeft": "auto",
-            "paddingTop": "1rem",
-            "paddingRight": "1.5rem",
-            "paddingBottom": "1rem",
-            "paddingLeft": "1.5rem",
-            "display": "flex",
-            "justifyContent": "space-between",
-            "alignItems": "center",
-            "rowGap": "1rem",
-            "columnGap": "1rem"
-          },
-          "children": [
-            {
-              "id": "hdr_logo",
-              "type": "groupe",
-              "css": {
-                "display": "flex",
-                "alignItems": "center",
-                "rowGap": "0.5rem",
-                "columnGap": "0.5rem"
-              },
-              "children": [
-                {
-                  "id": "logo_img",
-                  "type": "image",
-                  "css": {
-                    "width": "40px",
-                    "height": "40px"
-                  },
-                  "content": {
-                    "src": "/logo-mark.svg",
-                    "alt": "OHIHO"
-                  }
-                },
-                {
-                  "id": "logo_txt",
-                  "type": "titre",
-                  "css": {
-                    "fontSize": "20px",
-                    "fontWeight": "600",
-                    "letterSpacing": "-0.03em"
-                  },
-                  "content": {
-                    "texte": "OHIHO",
-                    "niveau": 1
-                  }
-                }
-              ]
-            },
-            {
-              "id": "hdr_nav",
-              "type": "groupe",
-              "css": {
-                "display": "flex",
-                "alignItems": "center",
-                "rowGap": "16px",
-                "columnGap": "16px",
-                "flexWrap": "wrap"
-              },
-              "children": [
-                {
-                  "id": "nav_services",
-                  "type": "bouton",
-                  "css": {
-                    "backgroundPositionX": "initial",
-                    "backgroundPositionY": "initial",
-                    "backgroundSize": "initial",
-                    "backgroundRepeat": "initial",
-                    "backgroundAttachment": "initial",
-                    "backgroundOrigin": "initial",
-                    "backgroundClip": "initial",
-                    "backgroundColor": "initial",
-                    "backgroundImage": "none",
-                    "boxShadow": "none",
-                    "color": "rgb(238, 244, 252)",
-                    "paddingTop": "0px",
-                    "paddingRight": "0px",
-                    "paddingBottom": "0px",
-                    "paddingLeft": "0px",
-                    "minHeight": "auto",
-                    "borderTopLeftRadius": "0px",
-                    "borderTopRightRadius": "0px",
-                    "borderBottomRightRadius": "0px",
-                    "borderBottomLeftRadius": "0px",
-                    "fontFamily": "ui-monospace, monospace",
-                    "fontSize": "13px",
-                    "fontWeight": "500",
-                    "textTransform": "uppercase",
-                    "letterSpacing": "0.08em"
-                  },
-                  "content": {
-                    "texte": "Services",
-                    "lien": "#"
-                  }
-                },
-                {
-                  "id": "nav_methode",
-                  "type": "bouton",
-                  "css": {
-                    "backgroundPositionX": "initial",
-                    "backgroundPositionY": "initial",
-                    "backgroundSize": "initial",
-                    "backgroundRepeat": "initial",
-                    "backgroundAttachment": "initial",
-                    "backgroundOrigin": "initial",
-                    "backgroundClip": "initial",
-                    "backgroundColor": "initial",
-                    "backgroundImage": "none",
-                    "boxShadow": "none",
-                    "color": "rgb(238, 244, 252)",
-                    "paddingTop": "0px",
-                    "paddingRight": "0px",
-                    "paddingBottom": "0px",
-                    "paddingLeft": "0px",
-                    "minHeight": "auto",
-                    "borderTopLeftRadius": "0px",
-                    "borderTopRightRadius": "0px",
-                    "borderBottomRightRadius": "0px",
-                    "borderBottomLeftRadius": "0px",
-                    "fontFamily": "ui-monospace, monospace",
-                    "fontSize": "13px",
-                    "fontWeight": "500",
-                    "textTransform": "uppercase",
-                    "letterSpacing": "0.08em"
-                  },
-                  "content": {
-                    "texte": "Méthode",
-                    "lien": "#"
-                  }
-                },
-                {
-                  "id": "nav_expertise",
-                  "type": "bouton",
-                  "css": {
-                    "backgroundPositionX": "initial",
-                    "backgroundPositionY": "initial",
-                    "backgroundSize": "initial",
-                    "backgroundRepeat": "initial",
-                    "backgroundAttachment": "initial",
-                    "backgroundOrigin": "initial",
-                    "backgroundClip": "initial",
-                    "backgroundColor": "initial",
-                    "backgroundImage": "none",
-                    "boxShadow": "none",
-                    "color": "rgb(238, 244, 252)",
-                    "paddingTop": "0px",
-                    "paddingRight": "0px",
-                    "paddingBottom": "0px",
-                    "paddingLeft": "0px",
-                    "minHeight": "auto",
-                    "borderTopLeftRadius": "0px",
-                    "borderTopRightRadius": "0px",
-                    "borderBottomRightRadius": "0px",
-                    "borderBottomLeftRadius": "0px",
-                    "fontFamily": "ui-monospace, monospace",
-                    "fontSize": "13px",
-                    "fontWeight": "500",
-                    "textTransform": "uppercase",
-                    "letterSpacing": "0.08em"
-                  },
-                  "content": {
-                    "texte": "Expertise",
-                    "lien": "#"
-                  }
-                },
-                {
-                  "id": "nav_apropos",
-                  "type": "bouton",
-                  "css": {
-                    "backgroundPositionX": "initial",
-                    "backgroundPositionY": "initial",
-                    "backgroundSize": "initial",
-                    "backgroundRepeat": "initial",
-                    "backgroundAttachment": "initial",
-                    "backgroundOrigin": "initial",
-                    "backgroundClip": "initial",
-                    "backgroundColor": "initial",
-                    "backgroundImage": "none",
-                    "boxShadow": "none",
-                    "color": "rgb(238, 244, 252)",
-                    "paddingTop": "0px",
-                    "paddingRight": "0px",
-                    "paddingBottom": "0px",
-                    "paddingLeft": "0px",
-                    "minHeight": "auto",
-                    "borderTopLeftRadius": "0px",
-                    "borderTopRightRadius": "0px",
-                    "borderBottomRightRadius": "0px",
-                    "borderBottomLeftRadius": "0px",
-                    "fontFamily": "ui-monospace, monospace",
-                    "fontSize": "13px",
-                    "fontWeight": "500",
-                    "textTransform": "uppercase",
-                    "letterSpacing": "0.08em"
-                  },
-                  "content": {
-                    "texte": "À propos",
-                    "lien": "#"
-                  }
-                },
-                {
-                  "id": "nav_bugtrack",
-                  "type": "bouton",
-                  "css": {
-                    "backgroundPositionX": "initial",
-                    "backgroundPositionY": "initial",
-                    "backgroundSize": "initial",
-                    "backgroundRepeat": "initial",
-                    "backgroundAttachment": "initial",
-                    "backgroundOrigin": "initial",
-                    "backgroundClip": "initial",
-                    "backgroundColor": "initial",
-                    "backgroundImage": "none",
-                    "boxShadow": "none",
-                    "color": "rgb(238, 244, 252)",
-                    "paddingTop": "0px",
-                    "paddingRight": "0px",
-                    "paddingBottom": "0px",
-                    "paddingLeft": "0px",
-                    "minHeight": "auto",
-                    "borderTopLeftRadius": "0px",
-                    "borderTopRightRadius": "0px",
-                    "borderBottomRightRadius": "0px",
-                    "borderBottomLeftRadius": "0px",
-                    "fontFamily": "ui-monospace, monospace",
-                    "fontSize": "13px",
-                    "fontWeight": "500",
-                    "textTransform": "uppercase",
-                    "letterSpacing": "0.08em"
-                  },
-                  "content": {
-                    "texte": "BugTrack",
-                    "lien": "#"
-                  }
-                },
-                {
-                  "id": "nav_realisations",
-                  "type": "bouton",
-                  "css": {
-                    "backgroundPositionX": "initial",
-                    "backgroundPositionY": "initial",
-                    "backgroundSize": "initial",
-                    "backgroundRepeat": "initial",
-                    "backgroundAttachment": "initial",
-                    "backgroundOrigin": "initial",
-                    "backgroundClip": "initial",
-                    "backgroundColor": "initial",
-                    "backgroundImage": "none",
-                    "boxShadow": "none",
-                    "color": "rgb(238, 244, 252)",
-                    "paddingTop": "0px",
-                    "paddingRight": "0px",
-                    "paddingBottom": "0px",
-                    "paddingLeft": "0px",
-                    "minHeight": "auto",
-                    "borderTopLeftRadius": "0px",
-                    "borderTopRightRadius": "0px",
-                    "borderBottomRightRadius": "0px",
-                    "borderBottomLeftRadius": "0px",
-                    "fontFamily": "ui-monospace, monospace",
-                    "fontSize": "13px",
-                    "fontWeight": "500",
-                    "textTransform": "uppercase",
-                    "letterSpacing": "0.08em"
-                  },
-                  "content": {
-                    "texte": "Réalisations",
-                    "lien": "#"
-                  }
-                },
-                {
-                  "id": "nav_contact",
-                  "type": "bouton",
-                  "css": {
-                    "backgroundPositionX": "initial",
-                    "backgroundPositionY": "initial",
-                    "backgroundSize": "initial",
-                    "backgroundRepeat": "initial",
-                    "backgroundAttachment": "initial",
-                    "backgroundOrigin": "initial",
-                    "backgroundClip": "initial",
-                    "backgroundColor": "initial",
-                    "backgroundImage": "none",
-                    "boxShadow": "none",
-                    "color": "rgb(238, 244, 252)",
-                    "paddingTop": "0px",
-                    "paddingRight": "0px",
-                    "paddingBottom": "0px",
-                    "paddingLeft": "0px",
-                    "minHeight": "auto",
-                    "borderTopLeftRadius": "0px",
-                    "borderTopRightRadius": "0px",
-                    "borderBottomRightRadius": "0px",
-                    "borderBottomLeftRadius": "0px",
-                    "fontFamily": "ui-monospace, monospace",
-                    "fontSize": "13px",
-                    "fontWeight": "500",
-                    "textTransform": "uppercase",
-                    "letterSpacing": "0.08em"
-                  },
-                  "content": {
-                    "texte": "Contact",
-                    "lien": "#"
-                  }
-                },
-                {
-                  "id": "nav_connexion",
-                  "type": "bouton",
-                  "css": {
-                    "backgroundImage": "initial",
-                    "backgroundPositionX": "initial",
-                    "backgroundPositionY": "initial",
-                    "backgroundSize": "initial",
-                    "backgroundRepeat": "initial",
-                    "backgroundAttachment": "initial",
-                    "backgroundOrigin": "initial",
-                    "backgroundClip": "initial",
-                    "backgroundColor": "rgba(9, 26, 41, 0.6)",
-                    "color": "rgb(238, 244, 252)",
-                    "borderTopWidth": "1px",
-                    "borderRightWidth": "1px",
-                    "borderBottomWidth": "1px",
-                    "borderLeftWidth": "1px",
-                    "borderTopStyle": "solid",
-                    "borderRightStyle": "solid",
-                    "borderBottomStyle": "solid",
-                    "borderLeftStyle": "solid",
-                    "borderTopColor": "rgb(35, 64, 92)",
-                    "borderRightColor": "rgb(35, 64, 92)",
-                    "borderBottomColor": "rgb(35, 64, 92)",
-                    "borderLeftColor": "rgb(35, 64, 92)",
-                    "borderImageSource": "none",
-                    "borderImageSlice": "100%",
-                    "borderImageWidth": "1",
-                    "borderImageOutset": "0",
-                    "borderImageRepeat": "stretch",
-                    "boxShadow": "none"
-                  },
-                  "content": {
-                    "texte": "Connexion",
-                    "lien": "#"
-                  }
-                },
-                {
-                  "id": "nav_inscription",
-                  "type": "bouton",
-                  "content": {
-                    "texte": "S'inscrire",
-                    "lien": "#"
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "hero",
       "type": "section",
       "css": {
@@ -463,8 +77,10 @@
             "alignItems": "baseline",
             "rowGap": "0.5rem",
             "columnGap": "0.5rem",
-            "maxWidth": "46rem",
-            "marginBottom": "2rem"
+            "maxWidth": "none",
+            "marginBottom": "2rem",
+            "width": "735px",
+            "height": "129px"
           },
           "children": [
             {
@@ -479,7 +95,10 @@
                 "marginTop": "0px",
                 "marginRight": "0px",
                 "marginBottom": "0px",
-                "marginLeft": "0px"
+                "marginLeft": "0px",
+                "maxWidth": "none",
+                "width": "701px",
+                "height": "61px"
               },
               "content": {
                 "texte": "Site web et application web",
@@ -500,7 +119,10 @@
                 "marginLeft": "0px",
                 "backgroundImage": "linear-gradient(100deg, rgb(56, 189, 248) 0%, rgb(34, 211, 196) 50%, rgb(52, 211, 153) 100%)",
                 "backgroundClip": "text",
-                "color": "transparent"
+                "color": "transparent",
+                "maxWidth": "none",
+                "width": "291px",
+                "height": "61px"
               },
               "content": {
                 "texte": "sur mesure"
@@ -519,14 +141,7 @@
             "marginBottom": "2.5rem"
           },
           "content": {
-            "texte": "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée."
-          }
-        },
-        {
-          "id": "composant__cmrw5yi2x1",
-          "type": "composant",
-          "content": {
-            "composant": "scene-hero"
+            "texte": "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avecd  un accompagnement dans la durée."
           }
         },
         {
@@ -1700,10 +1315,7 @@
             }
           ]
         }
-      ],
-      "content": {
-        "ancre": "services"
-      }
+      ]
     },
     {
       "id": "method",
@@ -2159,10 +1771,7 @@
             }
           ]
         }
-      ],
-      "content": {
-        "ancre": "methode"
-      }
+      ]
     },
     {
       "id": "expertise",
@@ -2572,10 +2181,7 @@
             }
           ]
         }
-      ],
-      "content": {
-        "ancre": "expertise"
-      }
+      ]
     },
     {
       "id": "whyus",
@@ -2967,10 +2573,7 @@
             }
           ]
         }
-      ],
-      "content": {
-        "ancre": "a-propos"
-      }
+      ]
     },
     {
       "id": "bugtrack",
@@ -3370,10 +2973,7 @@
             }
           ]
         }
-      ],
-      "content": {
-        "ancre": "bugtrack"
-      }
+      ]
     },
     {
       "id": "portfolio",
@@ -4046,10 +3646,7 @@
             }
           ]
         }
-      ],
-      "content": {
-        "ancre": "portfolio"
-      }
+      ]
     },
     {
       "id": "contact",
@@ -4424,406 +4021,8 @@
             }
           ]
         }
-      ],
-      "content": {
-        "ancre": "contact"
-      }
-    },
-    {
-      "id": "ftr",
-      "type": "footer",
-      "css": {
-        "borderTopWidth": "1px",
-        "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)",
-        "backgroundImage": "initial",
-        "backgroundPositionX": "initial",
-        "backgroundPositionY": "initial",
-        "backgroundSize": "initial",
-        "backgroundRepeat": "initial",
-        "backgroundAttachment": "initial",
-        "backgroundOrigin": "initial",
-        "backgroundClip": "initial",
-        "backgroundColor": "rgb(9, 26, 41)"
-      },
-      "children": [
-        {
-          "id": "ftr_inner",
-          "type": "groupe",
-          "css": {
-            "maxWidth": "1280px",
-            "marginTop": "0px",
-            "marginRight": "auto",
-            "marginBottom": "0px",
-            "marginLeft": "auto",
-            "paddingTop": "3.5rem",
-            "paddingRight": "1.5rem",
-            "paddingBottom": "3.5rem",
-            "paddingLeft": "1.5rem"
-          },
-          "children": [
-            {
-              "id": "ftr_cols",
-              "type": "groupe",
-              "css": {
-                "display": "grid",
-                "gridTemplateColumns": "2fr 1fr 1fr",
-                "rowGap": "2.5rem",
-                "columnGap": "2.5rem"
-              },
-              "children": [
-                {
-                  "id": "ftr_brand",
-                  "type": "groupe",
-                  "children": [
-                    {
-                      "id": "ftr_logo",
-                      "type": "image",
-                      "css": {
-                        "width": "40px",
-                        "height": "40px"
-                      },
-                      "content": {
-                        "src": "/logo-mark.svg",
-                        "alt": "OHIHO"
-                      }
-                    },
-                    {
-                      "id": "ftr_tagline",
-                      "type": "texte",
-                      "css": {
-                        "maxWidth": "24rem",
-                        "fontSize": "0.875rem",
-                        "lineHeight": "1.6",
-                        "color": "rgb(159, 178, 204)",
-                        "marginTop": "1rem"
-                      },
-                      "content": {
-                        "texte": "OHIHO conçoit et développe des sites et applications web sur mesure, pour entreprises et particuliers, pensés pour durer."
-                      }
-                    }
-                  ]
-                },
-                {
-                  "id": "ftr_nav",
-                  "type": "groupe",
-                  "children": [
-                    {
-                      "id": "ftr_nav_t",
-                      "type": "titre",
-                      "css": {
-                        "fontFamily": "ui-monospace, monospace",
-                        "fontSize": "0.75rem",
-                        "textTransform": "uppercase",
-                        "letterSpacing": "0.18em",
-                        "color": "rgb(159, 178, 204)",
-                        "marginTop": "0px",
-                        "marginRight": "0px",
-                        "marginBottom": "0px",
-                        "marginLeft": "0px"
-                      },
-                      "content": {
-                        "texte": "Navigation",
-                        "niveau": 3
-                      }
-                    },
-                    {
-                      "id": "ftr_nav_l",
-                      "type": "groupe",
-                      "css": {
-                        "display": "flex",
-                        "flexDirection": "column",
-                        "rowGap": "0.25rem",
-                        "columnGap": "0.25rem",
-                        "marginTop": "0.75rem",
-                        "alignItems": "flex-start"
-                      },
-                      "children": [
-                        {
-                          "id": "ftr_l1",
-                          "type": "bouton",
-                          "css": {
-                            "backgroundPositionX": "initial",
-                            "backgroundPositionY": "initial",
-                            "backgroundSize": "initial",
-                            "backgroundRepeat": "initial",
-                            "backgroundAttachment": "initial",
-                            "backgroundOrigin": "initial",
-                            "backgroundClip": "initial",
-                            "backgroundColor": "initial",
-                            "backgroundImage": "none",
-                            "boxShadow": "none",
-                            "color": "rgb(205, 214, 230)",
-                            "paddingTop": "0px",
-                            "paddingRight": "0px",
-                            "paddingBottom": "0px",
-                            "paddingLeft": "0px",
-                            "minHeight": "auto",
-                            "borderTopLeftRadius": "0px",
-                            "borderTopRightRadius": "0px",
-                            "borderBottomRightRadius": "0px",
-                            "borderBottomLeftRadius": "0px",
-                            "fontSize": "0.875rem",
-                            "fontWeight": "400",
-                            "textAlign": "left"
-                          },
-                          "content": {
-                            "texte": "Services",
-                            "lien": "#"
-                          }
-                        },
-                        {
-                          "id": "ftr_l2",
-                          "type": "bouton",
-                          "css": {
-                            "backgroundPositionX": "initial",
-                            "backgroundPositionY": "initial",
-                            "backgroundSize": "initial",
-                            "backgroundRepeat": "initial",
-                            "backgroundAttachment": "initial",
-                            "backgroundOrigin": "initial",
-                            "backgroundClip": "initial",
-                            "backgroundColor": "initial",
-                            "backgroundImage": "none",
-                            "boxShadow": "none",
-                            "color": "rgb(205, 214, 230)",
-                            "paddingTop": "0px",
-                            "paddingRight": "0px",
-                            "paddingBottom": "0px",
-                            "paddingLeft": "0px",
-                            "minHeight": "auto",
-                            "borderTopLeftRadius": "0px",
-                            "borderTopRightRadius": "0px",
-                            "borderBottomRightRadius": "0px",
-                            "borderBottomLeftRadius": "0px",
-                            "fontSize": "0.875rem",
-                            "fontWeight": "400",
-                            "textAlign": "left"
-                          },
-                          "content": {
-                            "texte": "Expertise",
-                            "lien": "#"
-                          }
-                        },
-                        {
-                          "id": "ftr_l3",
-                          "type": "bouton",
-                          "css": {
-                            "backgroundPositionX": "initial",
-                            "backgroundPositionY": "initial",
-                            "backgroundSize": "initial",
-                            "backgroundRepeat": "initial",
-                            "backgroundAttachment": "initial",
-                            "backgroundOrigin": "initial",
-                            "backgroundClip": "initial",
-                            "backgroundColor": "initial",
-                            "backgroundImage": "none",
-                            "boxShadow": "none",
-                            "color": "rgb(205, 214, 230)",
-                            "paddingTop": "0px",
-                            "paddingRight": "0px",
-                            "paddingBottom": "0px",
-                            "paddingLeft": "0px",
-                            "minHeight": "auto",
-                            "borderTopLeftRadius": "0px",
-                            "borderTopRightRadius": "0px",
-                            "borderBottomRightRadius": "0px",
-                            "borderBottomLeftRadius": "0px",
-                            "fontSize": "0.875rem",
-                            "fontWeight": "400",
-                            "textAlign": "left"
-                          },
-                          "content": {
-                            "texte": "Réalisations",
-                            "lien": "#"
-                          }
-                        },
-                        {
-                          "id": "ftr_l4",
-                          "type": "bouton",
-                          "css": {
-                            "backgroundPositionX": "initial",
-                            "backgroundPositionY": "initial",
-                            "backgroundSize": "initial",
-                            "backgroundRepeat": "initial",
-                            "backgroundAttachment": "initial",
-                            "backgroundOrigin": "initial",
-                            "backgroundClip": "initial",
-                            "backgroundColor": "initial",
-                            "backgroundImage": "none",
-                            "boxShadow": "none",
-                            "color": "rgb(205, 214, 230)",
-                            "paddingTop": "0px",
-                            "paddingRight": "0px",
-                            "paddingBottom": "0px",
-                            "paddingLeft": "0px",
-                            "minHeight": "auto",
-                            "borderTopLeftRadius": "0px",
-                            "borderTopRightRadius": "0px",
-                            "borderBottomRightRadius": "0px",
-                            "borderBottomLeftRadius": "0px",
-                            "fontSize": "0.875rem",
-                            "fontWeight": "400",
-                            "textAlign": "left"
-                          },
-                          "content": {
-                            "texte": "Contact",
-                            "lien": "#"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "id": "ftr_contact",
-                  "type": "groupe",
-                  "children": [
-                    {
-                      "id": "ftr_contact_t",
-                      "type": "titre",
-                      "css": {
-                        "fontFamily": "ui-monospace, monospace",
-                        "fontSize": "0.75rem",
-                        "textTransform": "uppercase",
-                        "letterSpacing": "0.18em",
-                        "color": "rgb(159, 178, 204)",
-                        "marginTop": "0px",
-                        "marginRight": "0px",
-                        "marginBottom": "0px",
-                        "marginLeft": "0px"
-                      },
-                      "content": {
-                        "texte": "Contact",
-                        "niveau": 3
-                      }
-                    },
-                    {
-                      "id": "ftr_contact_l",
-                      "type": "groupe",
-                      "css": {
-                        "display": "flex",
-                        "flexDirection": "column",
-                        "rowGap": "0.4rem",
-                        "columnGap": "0.4rem",
-                        "marginTop": "0.75rem"
-                      },
-                      "children": [
-                        {
-                          "id": "ftr_email",
-                          "type": "texte",
-                          "css": {
-                            "marginTop": "0px",
-                            "marginRight": "0px",
-                            "marginBottom": "0px",
-                            "marginLeft": "0px",
-                            "fontSize": "0.875rem",
-                            "color": "rgb(238, 244, 252)"
-                          },
-                          "content": {
-                            "texte": "contact@ohiho.fr"
-                          }
-                        },
-                        {
-                          "id": "ftr_c1",
-                          "type": "texte",
-                          "css": {
-                            "marginTop": "0px",
-                            "marginRight": "0px",
-                            "marginBottom": "0px",
-                            "marginLeft": "0px",
-                            "fontSize": "0.875rem",
-                            "color": "rgb(159, 178, 204)"
-                          },
-                          "content": {
-                            "texte": "Développement web sur mesure"
-                          }
-                        },
-                        {
-                          "id": "ftr_c2",
-                          "type": "texte",
-                          "css": {
-                            "marginTop": "0px",
-                            "marginRight": "0px",
-                            "marginBottom": "0px",
-                            "marginLeft": "0px",
-                            "fontSize": "0.875rem",
-                            "color": "rgb(159, 178, 204)"
-                          },
-                          "content": {
-                            "texte": "Réponse sous 24h ouvrées"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "ftr_bottom",
-              "type": "groupe",
-              "css": {
-                "display": "flex",
-                "justifyContent": "space-between",
-                "flexWrap": "wrap",
-                "rowGap": "1rem",
-                "columnGap": "1rem",
-                "marginTop": "3rem",
-                "paddingTop": "1.5rem",
-                "borderTopWidth": "1px",
-                "borderTopStyle": "solid",
-                "borderTopColor": "rgb(35, 64, 92)",
-                "fontFamily": "ui-monospace, monospace",
-                "fontSize": "0.75rem",
-                "color": "rgb(159, 178, 204)"
-              },
-              "children": [
-                {
-                  "id": "ftr_copy",
-                  "type": "texte",
-                  "css": {
-                    "marginTop": "0px",
-                    "marginRight": "0px",
-                    "marginBottom": "0px",
-                    "marginLeft": "0px"
-                  },
-                  "content": {
-                    "texte": "© 2026 OHIHO. Tous droits réservés."
-                  }
-                },
-                {
-                  "id": "ftr_by",
-                  "type": "texte",
-                  "css": {
-                    "marginTop": "0px",
-                    "marginRight": "0px",
-                    "marginBottom": "0px",
-                    "marginLeft": "0px"
-                  },
-                  "content": {
-                    "texte": "Réalisé par OHIHO"
-                  }
-                },
-                {
-                  "id": "ftr_note",
-                  "type": "texte",
-                  "css": {
-                    "marginTop": "0px",
-                    "marginRight": "0px",
-                    "marginBottom": "0px",
-                    "marginLeft": "0px"
-                  },
-                  "content": {
-                    "texte": "Création de sites web & applications"
-                  }
-                }
-              ]
-            }
-          ]
-        }
       ]
     }
   ],
-  "updatedAt": "2026-07-22T14:14:25.639Z"
+  "updatedAt": "2026-07-22T18:49:17.582Z"
 }
