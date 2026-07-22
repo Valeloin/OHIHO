@@ -69,20 +69,6 @@
           ]
         },
         {
-          "id": "hero_sub",
-          "type": "texte",
-          "css": {
-            "maxWidth": "36rem",
-            "fontSize": "1.125rem",
-            "lineHeight": "1.7",
-            "color": "rgb(159, 178, 204)",
-            "marginBottom": "2.5rem"
-          },
-          "content": {
-            "texte": "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée."
-          }
-        },
-        {
           "id": "hero_title",
           "type": "groupe",
           "css": {
@@ -91,12 +77,29 @@
             "alignItems": "baseline",
             "rowGap": "0.5rem",
             "columnGap": "0.5rem",
-            "maxWidth": "none",
-            "marginBottom": "2rem",
-            "width": "748px",
-            "height": "215px"
+            "maxWidth": "46rem",
+            "marginBottom": "2rem"
           },
           "children": [
+            {
+              "id": "hero_title_lead",
+              "type": "titre",
+              "css": {
+                "fontSize": "3.5rem",
+                "fontWeight": "600",
+                "lineHeight": "1.05",
+                "letterSpacing": "-0.03em",
+                "color": "rgb(238, 244, 252)",
+                "marginTop": "0px",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px"
+              },
+              "content": {
+                "texte": "Site web et application web",
+                "niveau": 1
+              }
+            },
             {
               "id": "hero_title_accent",
               "type": "texte",
@@ -111,36 +114,27 @@
                 "marginLeft": "0px",
                 "backgroundImage": "linear-gradient(100deg, rgb(56, 189, 248) 0%, rgb(34, 211, 196) 50%, rgb(52, 211, 153) 100%)",
                 "backgroundClip": "text",
-                "color": "transparent",
-                "maxWidth": "none",
-                "width": "307px",
-                "height": "61px"
+                "color": "transparent"
               },
               "content": {
                 "texte": "sur mesure"
               }
-            },
-            {
-              "id": "hero_title_lead",
-              "type": "titre",
-              "css": {
-                "fontSize": "3.5rem",
-                "fontWeight": "600",
-                "lineHeight": "1.05",
-                "letterSpacing": "-0.03em",
-                "color": "rgb(238, 244, 252)",
-                "marginTop": "0px",
-                "marginRight": "0px",
-                "marginBottom": "0px",
-                "marginLeft": "0px",
-                "height": "61px"
-              },
-              "content": {
-                "texte": "Site web et application web",
-                "niveau": 1
-              }
             }
           ]
+        },
+        {
+          "id": "hero_sub",
+          "type": "texte",
+          "css": {
+            "maxWidth": "36rem",
+            "fontSize": "1.125rem",
+            "lineHeight": "1.7",
+            "color": "rgb(159, 178, 204)",
+            "marginBottom": "2.5rem"
+          },
+          "content": {
+            "texte": "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée."
+          }
         },
         {
           "id": "hero_ctas",
@@ -214,8 +208,7 @@
             "display": "grid",
             "gridTemplateColumns": "repeat(4, 1fr)",
             "rowGap": "1rem",
-            "columnGap": "1rem",
-            "height": "183.391px"
+            "columnGap": "1rem"
           },
           "children": [
             {
@@ -786,9 +779,7 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(7, 21, 34)",
-                    "maxWidth": "none",
-                    "width": "350px"
+                    "backgroundColor": "rgb(7, 21, 34)"
                   }
                 },
                 {
@@ -1780,9 +1771,7 @@
       "css": {
         "borderTopWidth": "1px",
         "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)",
-        "maxWidth": "1282px",
-        "width": "1282px"
+        "borderTopColor": "rgb(35, 64, 92)"
       },
       "children": [
         {
@@ -2582,16 +2571,9 @@
       "id": "bugtrack",
       "type": "section",
       "css": {
-        "borderTopWidth": "0.947778px",
+        "borderTopWidth": "1px",
         "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)",
-        "fontSize": "15.1437px",
-        "paddingTop": "45.4312px",
-        "paddingRight": "22.7156px",
-        "paddingBottom": "45.4312px",
-        "paddingLeft": "22.7156px",
-        "maxWidth": "860px",
-        "width": "860px"
+        "borderTopColor": "rgb(35, 64, 92)"
       },
       "children": [
         {
@@ -2603,11 +2585,10 @@
             "marginRight": "auto",
             "marginBottom": "0px",
             "marginLeft": "auto",
-            "paddingTop": "53.0031px",
-            "paddingRight": "22.7156px",
-            "paddingBottom": "53.0031px",
-            "paddingLeft": "22.7156px",
-            "fontSize": "15.1437px"
+            "paddingTop": "3.5rem",
+            "paddingRight": "1.5rem",
+            "paddingBottom": "3.5rem",
+            "paddingLeft": "1.5rem"
           },
           "children": [
             {
@@ -2616,18 +2597,17 @@
               "css": {
                 "display": "inline-flex",
                 "alignItems": "center",
-                "rowGap": "9.08623px",
-                "columnGap": "9.08623px",
-                "marginBottom": "1rem",
-                "fontSize": "15.1437px"
+                "rowGap": "0.6rem",
+                "columnGap": "0.6rem",
+                "marginBottom": "1rem"
               },
               "children": [
                 {
                   "id": "bt_k_dot",
                   "type": "forme",
                   "css": {
-                    "width": "5.68667px",
-                    "height": "5.68667px",
+                    "width": "0.4rem",
+                    "height": "0.4rem",
                     "backgroundImage": "initial",
                     "backgroundPositionX": "initial",
                     "backgroundPositionY": "initial",
@@ -2637,12 +2617,7 @@
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
                     "backgroundColor": "rgb(52, 211, 153)",
-                    "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px",
-                    "fontSize": "15.1437px",
-                    "borderTopLeftRadius": "47.3242px",
-                    "borderTopRightRadius": "47.3242px",
-                    "borderBottomRightRadius": "47.3242px",
-                    "borderBottomLeftRadius": "47.3242px"
+                    "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
                   },
                   "style": {
                     "forme": "cercle"
@@ -2657,7 +2632,7 @@
                     "marginBottom": "0px",
                     "marginLeft": "0px",
                     "fontFamily": "ui-monospace, monospace",
-                    "fontSize": "10.4113px",
+                    "fontSize": "0.6875rem",
                     "letterSpacing": "0.2em",
                     "textTransform": "uppercase",
                     "color": "rgb(34, 211, 196)"
@@ -2672,7 +2647,7 @@
               "id": "bt_title",
               "type": "titre",
               "css": {
-                "fontSize": "34.0734px",
+                "fontSize": "2.25rem",
                 "fontWeight": "600",
                 "letterSpacing": "-0.03em",
                 "maxWidth": "48rem",
@@ -2693,24 +2668,23 @@
               "css": {
                 "display": "grid",
                 "gridTemplateColumns": "1fr 1fr",
-                "rowGap": "18.9297px",
-                "columnGap": "18.9297px",
-                "marginTop": "2rem",
-                "fontSize": "15.1437px"
+                "rowGap": "1.25rem",
+                "columnGap": "1.25rem",
+                "marginTop": "2rem"
               },
               "children": [
                 {
                   "id": "bt1",
                   "type": "groupe",
                   "css": {
-                    "paddingTop": "18.9297px",
-                    "paddingRight": "18.9297px",
-                    "paddingBottom": "18.9297px",
-                    "paddingLeft": "18.9297px",
-                    "borderTopWidth": "0.947778px",
-                    "borderRightWidth": "0.947778px",
-                    "borderBottomWidth": "0.947778px",
-                    "borderLeftWidth": "0.947778px",
+                    "paddingTop": "1.25rem",
+                    "paddingRight": "1.25rem",
+                    "paddingBottom": "1.25rem",
+                    "paddingLeft": "1.25rem",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
                     "borderTopStyle": "solid",
                     "borderRightStyle": "solid",
                     "borderBottomStyle": "solid",
@@ -2724,10 +2698,10 @@
                     "borderImageWidth": "1",
                     "borderImageOutset": "0",
                     "borderImageRepeat": "stretch",
-                    "borderTopLeftRadius": "13.2508px",
-                    "borderTopRightRadius": "13.2508px",
-                    "borderBottomRightRadius": "13.2508px",
-                    "borderBottomLeftRadius": "13.2508px",
+                    "borderTopLeftRadius": "14px",
+                    "borderTopRightRadius": "14px",
+                    "borderBottomRightRadius": "14px",
+                    "borderBottomLeftRadius": "14px",
                     "backgroundImage": "initial",
                     "backgroundPositionX": "initial",
                     "backgroundPositionY": "initial",
@@ -2736,15 +2710,14 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(13, 30, 48)",
-                    "fontSize": "15.1437px"
+                    "backgroundColor": "rgb(13, 30, 48)"
                   },
                   "children": [
                     {
                       "id": "bt1_t",
                       "type": "titre",
                       "css": {
-                        "fontSize": "14.3865px",
+                        "fontSize": "0.95rem",
                         "fontWeight": "600",
                         "marginTop": "0px",
                         "marginRight": "0px",
@@ -2761,7 +2734,7 @@
                       "id": "bt1_d",
                       "type": "texte",
                       "css": {
-                        "fontSize": "12.8721px",
+                        "fontSize": "0.85rem",
                         "lineHeight": "1.55",
                         "color": "rgb(159, 178, 204)",
                         "marginTop": "0.4rem"
@@ -2776,14 +2749,14 @@
                   "id": "bt2",
                   "type": "groupe",
                   "css": {
-                    "paddingTop": "18.9297px",
-                    "paddingRight": "18.9297px",
-                    "paddingBottom": "18.9297px",
-                    "paddingLeft": "18.9297px",
-                    "borderTopWidth": "0.947778px",
-                    "borderRightWidth": "0.947778px",
-                    "borderBottomWidth": "0.947778px",
-                    "borderLeftWidth": "0.947778px",
+                    "paddingTop": "1.25rem",
+                    "paddingRight": "1.25rem",
+                    "paddingBottom": "1.25rem",
+                    "paddingLeft": "1.25rem",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
                     "borderTopStyle": "solid",
                     "borderRightStyle": "solid",
                     "borderBottomStyle": "solid",
@@ -2797,10 +2770,10 @@
                     "borderImageWidth": "1",
                     "borderImageOutset": "0",
                     "borderImageRepeat": "stretch",
-                    "borderTopLeftRadius": "13.2508px",
-                    "borderTopRightRadius": "13.2508px",
-                    "borderBottomRightRadius": "13.2508px",
-                    "borderBottomLeftRadius": "13.2508px",
+                    "borderTopLeftRadius": "14px",
+                    "borderTopRightRadius": "14px",
+                    "borderBottomRightRadius": "14px",
+                    "borderBottomLeftRadius": "14px",
                     "backgroundImage": "initial",
                     "backgroundPositionX": "initial",
                     "backgroundPositionY": "initial",
@@ -2809,15 +2782,14 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(13, 30, 48)",
-                    "fontSize": "15.1437px"
+                    "backgroundColor": "rgb(13, 30, 48)"
                   },
                   "children": [
                     {
                       "id": "bt2_t",
                       "type": "titre",
                       "css": {
-                        "fontSize": "14.3865px",
+                        "fontSize": "0.95rem",
                         "fontWeight": "600",
                         "marginTop": "0px",
                         "marginRight": "0px",
@@ -2834,7 +2806,7 @@
                       "id": "bt2_d",
                       "type": "texte",
                       "css": {
-                        "fontSize": "12.8721px",
+                        "fontSize": "0.85rem",
                         "lineHeight": "1.55",
                         "color": "rgb(159, 178, 204)",
                         "marginTop": "0.4rem"
@@ -2849,14 +2821,14 @@
                   "id": "bt3",
                   "type": "groupe",
                   "css": {
-                    "paddingTop": "18.9297px",
-                    "paddingRight": "18.9297px",
-                    "paddingBottom": "18.9297px",
-                    "paddingLeft": "18.9297px",
-                    "borderTopWidth": "0.947778px",
-                    "borderRightWidth": "0.947778px",
-                    "borderBottomWidth": "0.947778px",
-                    "borderLeftWidth": "0.947778px",
+                    "paddingTop": "1.25rem",
+                    "paddingRight": "1.25rem",
+                    "paddingBottom": "1.25rem",
+                    "paddingLeft": "1.25rem",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
                     "borderTopStyle": "solid",
                     "borderRightStyle": "solid",
                     "borderBottomStyle": "solid",
@@ -2870,10 +2842,10 @@
                     "borderImageWidth": "1",
                     "borderImageOutset": "0",
                     "borderImageRepeat": "stretch",
-                    "borderTopLeftRadius": "13.2508px",
-                    "borderTopRightRadius": "13.2508px",
-                    "borderBottomRightRadius": "13.2508px",
-                    "borderBottomLeftRadius": "13.2508px",
+                    "borderTopLeftRadius": "14px",
+                    "borderTopRightRadius": "14px",
+                    "borderBottomRightRadius": "14px",
+                    "borderBottomLeftRadius": "14px",
                     "backgroundImage": "initial",
                     "backgroundPositionX": "initial",
                     "backgroundPositionY": "initial",
@@ -2882,15 +2854,14 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(13, 30, 48)",
-                    "fontSize": "15.1437px"
+                    "backgroundColor": "rgb(13, 30, 48)"
                   },
                   "children": [
                     {
                       "id": "bt3_t",
                       "type": "titre",
                       "css": {
-                        "fontSize": "14.3865px",
+                        "fontSize": "0.95rem",
                         "fontWeight": "600",
                         "marginTop": "0px",
                         "marginRight": "0px",
@@ -2907,7 +2878,7 @@
                       "id": "bt3_d",
                       "type": "texte",
                       "css": {
-                        "fontSize": "12.8721px",
+                        "fontSize": "0.85rem",
                         "lineHeight": "1.55",
                         "color": "rgb(159, 178, 204)",
                         "marginTop": "0.4rem"
@@ -2922,14 +2893,14 @@
                   "id": "bt4",
                   "type": "groupe",
                   "css": {
-                    "paddingTop": "18.9297px",
-                    "paddingRight": "18.9297px",
-                    "paddingBottom": "18.9297px",
-                    "paddingLeft": "18.9297px",
-                    "borderTopWidth": "0.947778px",
-                    "borderRightWidth": "0.947778px",
-                    "borderBottomWidth": "0.947778px",
-                    "borderLeftWidth": "0.947778px",
+                    "paddingTop": "1.25rem",
+                    "paddingRight": "1.25rem",
+                    "paddingBottom": "1.25rem",
+                    "paddingLeft": "1.25rem",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
                     "borderTopStyle": "solid",
                     "borderRightStyle": "solid",
                     "borderBottomStyle": "solid",
@@ -2943,10 +2914,10 @@
                     "borderImageWidth": "1",
                     "borderImageOutset": "0",
                     "borderImageRepeat": "stretch",
-                    "borderTopLeftRadius": "13.2508px",
-                    "borderTopRightRadius": "13.2508px",
-                    "borderBottomRightRadius": "13.2508px",
-                    "borderBottomLeftRadius": "13.2508px",
+                    "borderTopLeftRadius": "14px",
+                    "borderTopRightRadius": "14px",
+                    "borderBottomRightRadius": "14px",
+                    "borderBottomLeftRadius": "14px",
                     "backgroundImage": "initial",
                     "backgroundPositionX": "initial",
                     "backgroundPositionY": "initial",
@@ -2955,15 +2926,14 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(13, 30, 48)",
-                    "fontSize": "15.1437px"
+                    "backgroundColor": "rgb(13, 30, 48)"
                   },
                   "children": [
                     {
                       "id": "bt4_t",
                       "type": "titre",
                       "css": {
-                        "fontSize": "14.3865px",
+                        "fontSize": "0.95rem",
                         "fontWeight": "600",
                         "marginTop": "0px",
                         "marginRight": "0px",
@@ -2980,7 +2950,7 @@
                       "id": "bt4_d",
                       "type": "texte",
                       "css": {
-                        "fontSize": "12.8721px",
+                        "fontSize": "0.85rem",
                         "lineHeight": "1.55",
                         "color": "rgb(159, 178, 204)",
                         "marginTop": "0.4rem"
@@ -3692,7 +3662,7 @@
           "id": "contact_inner",
           "type": "groupe",
           "css": {
-            "maxWidth": "none",
+            "maxWidth": "1280px",
             "marginTop": "0px",
             "marginRight": "auto",
             "marginBottom": "0px",
@@ -3701,12 +3671,11 @@
             "paddingRight": "1.5rem",
             "paddingBottom": "5rem",
             "paddingLeft": "1.5rem",
-            "display": "flex",
+            "display": "grid",
             "gridTemplateColumns": "0.9fr 1.1fr",
             "rowGap": "3rem",
             "columnGap": "3rem",
-            "alignItems": "center",
-            "width": "851px"
+            "alignItems": "center"
           },
           "children": [
             {
@@ -4047,5 +4016,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-07-22T19:03:09.909Z"
+  "updatedAt": "2026-07-22T19:06:54.340Z"
 }
