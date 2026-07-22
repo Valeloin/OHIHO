@@ -1,0 +1,4829 @@
+{
+  "page": "accueil",
+  "blocks": [
+    {
+      "id": "hdr",
+      "type": "header",
+      "css": {
+        "backgroundImage": "initial",
+        "backgroundPositionX": "initial",
+        "backgroundPositionY": "initial",
+        "backgroundSize": "initial",
+        "backgroundRepeat": "initial",
+        "backgroundAttachment": "initial",
+        "backgroundOrigin": "initial",
+        "backgroundClip": "initial",
+        "backgroundColor": "rgb(7, 21, 34)",
+        "borderBottomWidth": "1px",
+        "borderBottomStyle": "solid",
+        "borderBottomColor": "rgba(238, 244, 252, 0.1)",
+        "position": "sticky",
+        "top": "0px",
+        "zIndex": "50"
+      },
+      "children": [
+        {
+          "id": "hdr_bar",
+          "type": "groupe",
+          "css": {
+            "maxWidth": "1280px",
+            "marginTop": "0px",
+            "marginRight": "auto",
+            "marginBottom": "0px",
+            "marginLeft": "auto",
+            "paddingTop": "1rem",
+            "paddingRight": "1.5rem",
+            "paddingBottom": "1rem",
+            "paddingLeft": "1.5rem",
+            "display": "flex",
+            "justifyContent": "space-between",
+            "alignItems": "center",
+            "rowGap": "1rem",
+            "columnGap": "1rem"
+          },
+          "children": [
+            {
+              "id": "hdr_logo",
+              "type": "groupe",
+              "css": {
+                "display": "flex",
+                "alignItems": "center",
+                "rowGap": "0.5rem",
+                "columnGap": "0.5rem"
+              },
+              "children": [
+                {
+                  "id": "logo_img",
+                  "type": "image",
+                  "css": {
+                    "width": "40px",
+                    "height": "40px"
+                  },
+                  "content": {
+                    "src": "/logo-mark.svg",
+                    "alt": "OHIHO"
+                  }
+                },
+                {
+                  "id": "logo_txt",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "20px",
+                    "fontWeight": "600",
+                    "letterSpacing": "-0.03em"
+                  },
+                  "content": {
+                    "texte": "OHIHO",
+                    "niveau": 1
+                  }
+                }
+              ]
+            },
+            {
+              "id": "hdr_nav",
+              "type": "groupe",
+              "css": {
+                "display": "flex",
+                "alignItems": "center",
+                "rowGap": "16px",
+                "columnGap": "16px",
+                "flexWrap": "wrap"
+              },
+              "children": [
+                {
+                  "id": "nav_services",
+                  "type": "bouton",
+                  "css": {
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial",
+                    "backgroundImage": "none",
+                    "boxShadow": "none",
+                    "color": "rgb(238, 244, 252)",
+                    "paddingTop": "0px",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0px",
+                    "paddingLeft": "0px",
+                    "minHeight": "auto",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderBottomLeftRadius": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "13px",
+                    "fontWeight": "500",
+                    "textTransform": "uppercase",
+                    "letterSpacing": "0.08em"
+                  },
+                  "content": {
+                    "texte": "Services",
+                    "lien": "#"
+                  }
+                },
+                {
+                  "id": "nav_methode",
+                  "type": "bouton",
+                  "css": {
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial",
+                    "backgroundImage": "none",
+                    "boxShadow": "none",
+                    "color": "rgb(238, 244, 252)",
+                    "paddingTop": "0px",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0px",
+                    "paddingLeft": "0px",
+                    "minHeight": "auto",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderBottomLeftRadius": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "13px",
+                    "fontWeight": "500",
+                    "textTransform": "uppercase",
+                    "letterSpacing": "0.08em"
+                  },
+                  "content": {
+                    "texte": "Méthode",
+                    "lien": "#"
+                  }
+                },
+                {
+                  "id": "nav_expertise",
+                  "type": "bouton",
+                  "css": {
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial",
+                    "backgroundImage": "none",
+                    "boxShadow": "none",
+                    "color": "rgb(238, 244, 252)",
+                    "paddingTop": "0px",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0px",
+                    "paddingLeft": "0px",
+                    "minHeight": "auto",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderBottomLeftRadius": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "13px",
+                    "fontWeight": "500",
+                    "textTransform": "uppercase",
+                    "letterSpacing": "0.08em"
+                  },
+                  "content": {
+                    "texte": "Expertise",
+                    "lien": "#"
+                  }
+                },
+                {
+                  "id": "nav_apropos",
+                  "type": "bouton",
+                  "css": {
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial",
+                    "backgroundImage": "none",
+                    "boxShadow": "none",
+                    "color": "rgb(238, 244, 252)",
+                    "paddingTop": "0px",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0px",
+                    "paddingLeft": "0px",
+                    "minHeight": "auto",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderBottomLeftRadius": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "13px",
+                    "fontWeight": "500",
+                    "textTransform": "uppercase",
+                    "letterSpacing": "0.08em"
+                  },
+                  "content": {
+                    "texte": "À propos",
+                    "lien": "#"
+                  }
+                },
+                {
+                  "id": "nav_bugtrack",
+                  "type": "bouton",
+                  "css": {
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial",
+                    "backgroundImage": "none",
+                    "boxShadow": "none",
+                    "color": "rgb(238, 244, 252)",
+                    "paddingTop": "0px",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0px",
+                    "paddingLeft": "0px",
+                    "minHeight": "auto",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderBottomLeftRadius": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "13px",
+                    "fontWeight": "500",
+                    "textTransform": "uppercase",
+                    "letterSpacing": "0.08em"
+                  },
+                  "content": {
+                    "texte": "BugTrack",
+                    "lien": "#"
+                  }
+                },
+                {
+                  "id": "nav_realisations",
+                  "type": "bouton",
+                  "css": {
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial",
+                    "backgroundImage": "none",
+                    "boxShadow": "none",
+                    "color": "rgb(238, 244, 252)",
+                    "paddingTop": "0px",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0px",
+                    "paddingLeft": "0px",
+                    "minHeight": "auto",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderBottomLeftRadius": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "13px",
+                    "fontWeight": "500",
+                    "textTransform": "uppercase",
+                    "letterSpacing": "0.08em"
+                  },
+                  "content": {
+                    "texte": "Réalisations",
+                    "lien": "#"
+                  }
+                },
+                {
+                  "id": "nav_contact",
+                  "type": "bouton",
+                  "css": {
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial",
+                    "backgroundImage": "none",
+                    "boxShadow": "none",
+                    "color": "rgb(238, 244, 252)",
+                    "paddingTop": "0px",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0px",
+                    "paddingLeft": "0px",
+                    "minHeight": "auto",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderBottomLeftRadius": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "13px",
+                    "fontWeight": "500",
+                    "textTransform": "uppercase",
+                    "letterSpacing": "0.08em"
+                  },
+                  "content": {
+                    "texte": "Contact",
+                    "lien": "#"
+                  }
+                },
+                {
+                  "id": "nav_connexion",
+                  "type": "bouton",
+                  "css": {
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgba(9, 26, 41, 0.6)",
+                    "color": "rgb(238, 244, 252)",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "boxShadow": "none"
+                  },
+                  "content": {
+                    "texte": "Connexion",
+                    "lien": "#"
+                  }
+                },
+                {
+                  "id": "nav_inscription",
+                  "type": "bouton",
+                  "content": {
+                    "texte": "S'inscrire",
+                    "lien": "#"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "type": "section",
+      "css": {
+        "maxWidth": "1280px",
+        "marginTop": "0px",
+        "marginRight": "auto",
+        "marginBottom": "0px",
+        "marginLeft": "auto",
+        "paddingTop": "2.5rem",
+        "paddingRight": "1.5rem",
+        "paddingBottom": "5rem",
+        "paddingLeft": "1.5rem"
+      },
+      "children": [
+        {
+          "id": "hero_kicker",
+          "type": "groupe",
+          "css": {
+            "display": "inline-flex",
+            "alignItems": "center",
+            "rowGap": "0.6rem",
+            "columnGap": "0.6rem",
+            "marginBottom": "2rem"
+          },
+          "children": [
+            {
+              "id": "hero_dot",
+              "type": "forme",
+              "css": {
+                "width": "0.4rem",
+                "height": "0.4rem",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(52, 211, 153)",
+                "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
+              },
+              "style": {
+                "forme": "cercle"
+              }
+            },
+            {
+              "id": "hero_kicker_t",
+              "type": "texte",
+              "css": {
+                "marginTop": "0px",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px",
+                "fontFamily": "ui-monospace, monospace",
+                "fontSize": "0.6875rem",
+                "letterSpacing": "0.2em",
+                "textTransform": "uppercase",
+                "color": "rgb(34, 211, 196)"
+              },
+              "content": {
+                "texte": "Développement web & applications sur mesure"
+              }
+            }
+          ]
+        },
+        {
+          "id": "hero_title",
+          "type": "groupe",
+          "css": {
+            "display": "flex",
+            "flexWrap": "wrap",
+            "alignItems": "baseline",
+            "rowGap": "0.5rem",
+            "columnGap": "0.5rem",
+            "maxWidth": "46rem",
+            "marginBottom": "2rem"
+          },
+          "children": [
+            {
+              "id": "hero_title_lead",
+              "type": "titre",
+              "css": {
+                "fontSize": "3.5rem",
+                "fontWeight": "600",
+                "lineHeight": "1.05",
+                "letterSpacing": "-0.03em",
+                "color": "rgb(238, 244, 252)",
+                "marginTop": "0px",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px"
+              },
+              "content": {
+                "texte": "Site web et application web",
+                "niveau": 1
+              }
+            },
+            {
+              "id": "hero_title_accent",
+              "type": "texte",
+              "css": {
+                "fontSize": "3.5rem",
+                "fontWeight": "600",
+                "lineHeight": "1.05",
+                "letterSpacing": "-0.03em",
+                "marginTop": "0px",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px",
+                "backgroundImage": "linear-gradient(100deg, rgb(56, 189, 248) 0%, rgb(34, 211, 196) 50%, rgb(52, 211, 153) 100%)",
+                "backgroundClip": "text",
+                "color": "transparent"
+              },
+              "content": {
+                "texte": "sur mesure"
+              }
+            }
+          ]
+        },
+        {
+          "id": "hero_sub",
+          "type": "texte",
+          "css": {
+            "maxWidth": "36rem",
+            "fontSize": "1.125rem",
+            "lineHeight": "1.7",
+            "color": "rgb(159, 178, 204)",
+            "marginBottom": "2.5rem"
+          },
+          "content": {
+            "texte": "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée."
+          }
+        },
+        {
+          "id": "composant__cmrw5yi2x1",
+          "type": "composant",
+          "content": {
+            "composant": "scene-hero"
+          }
+        },
+        {
+          "id": "hero_ctas",
+          "type": "groupe",
+          "css": {
+            "display": "flex",
+            "rowGap": "0.75rem",
+            "columnGap": "0.75rem",
+            "flexWrap": "wrap",
+            "marginBottom": "2.5rem"
+          },
+          "children": [
+            {
+              "id": "hero_cta1",
+              "type": "bouton",
+              "css": {
+                "paddingTop": "0.85rem",
+                "paddingRight": "1.75rem",
+                "paddingBottom": "0.85rem",
+                "paddingLeft": "1.75rem"
+              },
+              "content": {
+                "texte": "Demander un devis",
+                "lien": "/portail/devis/nouveau"
+              }
+            },
+            {
+              "id": "hero_cta2",
+              "type": "bouton",
+              "css": {
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgba(9, 26, 41, 0.6)",
+                "color": "rgb(238, 244, 252)",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "boxShadow": "none"
+              },
+              "content": {
+                "texte": "Voir nos réalisations",
+                "lien": "/#portfolio"
+              }
+            }
+          ]
+        },
+        {
+          "id": "hero_stats",
+          "type": "groupe",
+          "css": {
+            "display": "grid",
+            "gridTemplateColumns": "repeat(4, 1fr)",
+            "rowGap": "1rem",
+            "columnGap": "1rem"
+          },
+          "children": [
+            {
+              "id": "stat_1",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.25rem",
+                "paddingRight": "1.25rem",
+                "paddingBottom": "1.25rem",
+                "paddingLeft": "1.25rem",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "backgroundImage": "linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(34, 211, 196, 0.05) 48%, rgba(52, 211, 153, 0.16) 100%), initial",
+                "backgroundPositionX": "initial, initial",
+                "backgroundPositionY": "initial, initial",
+                "backgroundSize": "initial, initial",
+                "backgroundRepeat": "initial, initial",
+                "backgroundAttachment": "initial, initial",
+                "backgroundOrigin": "initial, initial",
+                "backgroundClip": "initial, initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "stat_1_tile",
+                  "type": "forme",
+                  "css": {
+                    "width": "48px",
+                    "height": "48px",
+                    "borderTopLeftRadius": "12px",
+                    "borderTopRightRadius": "12px",
+                    "borderBottomRightRadius": "12px",
+                    "borderBottomLeftRadius": "12px",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgba(34, 211, 196, 0.12)",
+                    "marginBottom": "1rem"
+                  },
+                  "style": {
+                    "forme": "carre"
+                  }
+                },
+                {
+                  "id": "stat_1_v",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Sur mesure",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "stat_1_l",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.8125rem",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Approche"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "stat_2",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.25rem",
+                "paddingRight": "1.25rem",
+                "paddingBottom": "1.25rem",
+                "paddingLeft": "1.25rem",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "backgroundImage": "linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(34, 211, 196, 0.05) 48%, rgba(52, 211, 153, 0.16) 100%), initial",
+                "backgroundPositionX": "initial, initial",
+                "backgroundPositionY": "initial, initial",
+                "backgroundSize": "initial, initial",
+                "backgroundRepeat": "initial, initial",
+                "backgroundAttachment": "initial, initial",
+                "backgroundOrigin": "initial, initial",
+                "backgroundClip": "initial, initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "stat_2_tile",
+                  "type": "forme",
+                  "css": {
+                    "width": "48px",
+                    "height": "48px",
+                    "borderTopLeftRadius": "12px",
+                    "borderTopRightRadius": "12px",
+                    "borderBottomRightRadius": "12px",
+                    "borderBottomLeftRadius": "12px",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgba(34, 211, 196, 0.12)",
+                    "marginBottom": "1rem"
+                  },
+                  "style": {
+                    "forme": "carre"
+                  }
+                },
+                {
+                  "id": "stat_2_v",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "De A à Z",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "stat_2_l",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.8125rem",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Accompagnement"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "stat_3",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.25rem",
+                "paddingRight": "1.25rem",
+                "paddingBottom": "1.25rem",
+                "paddingLeft": "1.25rem",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "backgroundImage": "linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(34, 211, 196, 0.05) 48%, rgba(52, 211, 153, 0.16) 100%), initial",
+                "backgroundPositionX": "initial, initial",
+                "backgroundPositionY": "initial, initial",
+                "backgroundSize": "initial, initial",
+                "backgroundRepeat": "initial, initial",
+                "backgroundAttachment": "initial, initial",
+                "backgroundOrigin": "initial, initial",
+                "backgroundClip": "initial, initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "stat_3_tile",
+                  "type": "forme",
+                  "css": {
+                    "width": "48px",
+                    "height": "48px",
+                    "borderTopLeftRadius": "12px",
+                    "borderTopRightRadius": "12px",
+                    "borderBottomRightRadius": "12px",
+                    "borderBottomLeftRadius": "12px",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgba(34, 211, 196, 0.12)",
+                    "marginBottom": "1rem"
+                  },
+                  "style": {
+                    "forme": "carre"
+                  }
+                },
+                {
+                  "id": "stat_3_v",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Moderne",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "stat_3_l",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.8125rem",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Stack"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "stat_4",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.25rem",
+                "paddingRight": "1.25rem",
+                "paddingBottom": "1.25rem",
+                "paddingLeft": "1.25rem",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "backgroundImage": "linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(34, 211, 196, 0.05) 48%, rgba(52, 211, 153, 0.16) 100%), initial",
+                "backgroundPositionX": "initial, initial",
+                "backgroundPositionY": "initial, initial",
+                "backgroundSize": "initial, initial",
+                "backgroundRepeat": "initial, initial",
+                "backgroundAttachment": "initial, initial",
+                "backgroundOrigin": "initial, initial",
+                "backgroundClip": "initial, initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "stat_4_tile",
+                  "type": "forme",
+                  "css": {
+                    "width": "48px",
+                    "height": "48px",
+                    "borderTopLeftRadius": "12px",
+                    "borderTopRightRadius": "12px",
+                    "borderBottomRightRadius": "12px",
+                    "borderBottomLeftRadius": "12px",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgba(34, 211, 196, 0.12)",
+                    "marginBottom": "1rem"
+                  },
+                  "style": {
+                    "forme": "carre"
+                  }
+                },
+                {
+                  "id": "stat_4_v",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Sur devis",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "stat_4_l",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.8125rem",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Délai"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "serv",
+      "type": "section",
+      "css": {
+        "maxWidth": "1280px",
+        "marginTop": "0px",
+        "marginRight": "auto",
+        "marginBottom": "0px",
+        "marginLeft": "auto",
+        "paddingTop": "3rem",
+        "paddingRight": "1.5rem",
+        "paddingBottom": "3rem",
+        "paddingLeft": "1.5rem",
+        "borderTopWidth": "1px",
+        "borderTopStyle": "solid",
+        "borderTopColor": "rgb(35, 64, 92)"
+      },
+      "children": [
+        {
+          "id": "serv_kicker",
+          "type": "groupe",
+          "css": {
+            "display": "inline-flex",
+            "alignItems": "center",
+            "rowGap": "0.6rem",
+            "columnGap": "0.6rem",
+            "marginBottom": "1rem"
+          },
+          "children": [
+            {
+              "id": "serv_dot",
+              "type": "forme",
+              "css": {
+                "width": "0.4rem",
+                "height": "0.4rem",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(52, 211, 153)",
+                "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
+              },
+              "style": {
+                "forme": "cercle"
+              }
+            },
+            {
+              "id": "serv_kicker_t",
+              "type": "texte",
+              "css": {
+                "marginTop": "0px",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px",
+                "fontFamily": "ui-monospace, monospace",
+                "fontSize": "0.6875rem",
+                "letterSpacing": "0.2em",
+                "textTransform": "uppercase",
+                "color": "rgb(34, 211, 196)"
+              },
+              "content": {
+                "texte": "Nos services"
+              }
+            }
+          ]
+        },
+        {
+          "id": "serv_title",
+          "type": "titre",
+          "css": {
+            "fontSize": "2.25rem",
+            "fontWeight": "600",
+            "letterSpacing": "-0.03em",
+            "maxWidth": "48rem",
+            "marginTop": "0px",
+            "marginRight": "0px",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "color": "rgb(238, 244, 252)"
+          },
+          "content": {
+            "texte": "De l'idée au site en ligne",
+            "niveau": 2
+          }
+        },
+        {
+          "id": "serv_sub",
+          "type": "texte",
+          "css": {
+            "maxWidth": "42rem",
+            "lineHeight": "1.6",
+            "color": "rgb(159, 178, 204)",
+            "marginTop": "0.75rem"
+          },
+          "content": {
+            "texte": "Conception, développement et suivi dans la durée, pour un site vitrine ou une application web sur mesure, pour les entreprises comme pour les particuliers."
+          }
+        },
+        {
+          "id": "serv_rule",
+          "type": "groupe",
+          "css": {
+            "height": "1px",
+            "marginTop": "1.25rem",
+            "marginBottom": "1.5rem",
+            "backgroundImage": "linear-gradient(to right, rgb(35, 64, 92), rgb(35, 64, 92) 30%, transparent)",
+            "backgroundPositionX": "initial",
+            "backgroundPositionY": "initial",
+            "backgroundSize": "initial",
+            "backgroundRepeat": "initial",
+            "backgroundAttachment": "initial",
+            "backgroundOrigin": "initial",
+            "backgroundClip": "initial",
+            "backgroundColor": "initial"
+          }
+        },
+        {
+          "id": "serv_grid",
+          "type": "groupe",
+          "css": {
+            "display": "grid",
+            "gridTemplateColumns": "repeat(2, 1fr)",
+            "rowGap": "1.5rem",
+            "columnGap": "3rem"
+          },
+          "children": [
+            {
+              "id": "f1",
+              "type": "groupe",
+              "css": {
+                "display": "flex",
+                "rowGap": "1.25rem",
+                "columnGap": "1.25rem",
+                "alignItems": "flex-start",
+                "flexWrap": "wrap",
+                "flexDirection": "row-reverse"
+              },
+              "children": [
+                {
+                  "id": "f1_scene",
+                  "type": "groupe",
+                  "css": {
+                    "flexGrow": "0",
+                    "flexShrink": "0",
+                    "flexBasis": "56%",
+                    "minWidth": "280px",
+                    "aspectRatio": "400 / 220",
+                    "borderTopLeftRadius": "12px",
+                    "borderTopRightRadius": "12px",
+                    "borderBottomRightRadius": "12px",
+                    "borderBottomLeftRadius": "12px",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(7, 21, 34)"
+                  }
+                },
+                {
+                  "id": "f1_txt",
+                  "type": "groupe",
+                  "css": {
+                    "flexGrow": "1",
+                    "flexShrink": "1",
+                    "flexBasis": "0%",
+                    "minWidth": "200px"
+                  },
+                  "children": [
+                    {
+                      "id": "f1_head",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "baseline",
+                        "rowGap": "0.75rem",
+                        "columnGap": "0.75rem",
+                        "minHeight": "2.1rem"
+                      },
+                      "children": [
+                        {
+                          "id": "f1_num",
+                          "type": "texte",
+                          "css": {
+                            "fontFamily": "ui-monospace, monospace",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(34, 211, 196)",
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px"
+                          },
+                          "content": {
+                            "texte": "01"
+                          }
+                        },
+                        {
+                          "id": "f1_tag",
+                          "type": "texte",
+                          "css": {
+                            "fontFamily": "ui-monospace, monospace",
+                            "fontSize": "0.625rem",
+                            "textTransform": "uppercase",
+                            "letterSpacing": "0.1em",
+                            "color": "rgb(159, 178, 204)",
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px"
+                          },
+                          "content": {
+                            "texte": "Une page, un objectif"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "f1_label",
+                      "type": "titre",
+                      "css": {
+                        "fontSize": "1.5rem",
+                        "fontWeight": "600",
+                        "marginTop": "0.375rem",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Landing page",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "f1_desc",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.875rem",
+                        "lineHeight": "1.6",
+                        "color": "rgb(238, 244, 252)",
+                        "marginTop": "0.625rem"
+                      },
+                      "content": {
+                        "texte": "Une seule page, un seul objectif : que le visiteur vous contacte. Pour un lancement, une campagne, ou une activité qui tient en une page."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "f2",
+              "type": "groupe",
+              "css": {
+                "display": "flex",
+                "rowGap": "1.25rem",
+                "columnGap": "1.25rem",
+                "alignItems": "flex-start",
+                "flexWrap": "wrap",
+                "flexDirection": "row"
+              },
+              "children": [
+                {
+                  "id": "f2_scene",
+                  "type": "groupe",
+                  "css": {
+                    "flexGrow": "0",
+                    "flexShrink": "0",
+                    "flexBasis": "56%",
+                    "minWidth": "280px",
+                    "aspectRatio": "400 / 220",
+                    "borderTopLeftRadius": "12px",
+                    "borderTopRightRadius": "12px",
+                    "borderBottomRightRadius": "12px",
+                    "borderBottomLeftRadius": "12px",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(7, 21, 34)"
+                  }
+                },
+                {
+                  "id": "f2_txt",
+                  "type": "groupe",
+                  "css": {
+                    "flexGrow": "1",
+                    "flexShrink": "1",
+                    "flexBasis": "0%",
+                    "minWidth": "200px"
+                  },
+                  "children": [
+                    {
+                      "id": "f2_head",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "baseline",
+                        "rowGap": "0.75rem",
+                        "columnGap": "0.75rem",
+                        "minHeight": "2.1rem"
+                      },
+                      "children": [
+                        {
+                          "id": "f2_num",
+                          "type": "texte",
+                          "css": {
+                            "fontFamily": "ui-monospace, monospace",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(34, 211, 196)",
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px"
+                          },
+                          "content": {
+                            "texte": "02"
+                          }
+                        },
+                        {
+                          "id": "f2_tag",
+                          "type": "texte",
+                          "css": {
+                            "fontFamily": "ui-monospace, monospace",
+                            "fontSize": "0.625rem",
+                            "textTransform": "uppercase",
+                            "letterSpacing": "0.1em",
+                            "color": "rgb(159, 178, 204)",
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px"
+                          },
+                          "content": {
+                            "texte": "Plusieurs pages"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "f2_label",
+                      "type": "titre",
+                      "css": {
+                        "fontSize": "1.5rem",
+                        "fontWeight": "600",
+                        "marginTop": "0.375rem",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Site intermédiaire",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "f2_desc",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.875rem",
+                        "lineHeight": "1.6",
+                        "color": "rgb(238, 244, 252)",
+                        "marginTop": "0.625rem"
+                      },
+                      "content": {
+                        "texte": "Accueil, services, à propos, contact. De quoi dérouler votre activité en détail, et donner envie de vous faire confiance."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "f3",
+              "type": "groupe",
+              "css": {
+                "display": "flex",
+                "rowGap": "1.25rem",
+                "columnGap": "1.25rem",
+                "alignItems": "flex-start",
+                "flexWrap": "wrap",
+                "flexDirection": "row-reverse"
+              },
+              "children": [
+                {
+                  "id": "f3_scene",
+                  "type": "groupe",
+                  "css": {
+                    "flexGrow": "0",
+                    "flexShrink": "0",
+                    "flexBasis": "56%",
+                    "minWidth": "280px",
+                    "aspectRatio": "400 / 220",
+                    "borderTopLeftRadius": "12px",
+                    "borderTopRightRadius": "12px",
+                    "borderBottomRightRadius": "12px",
+                    "borderBottomLeftRadius": "12px",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(7, 21, 34)"
+                  }
+                },
+                {
+                  "id": "f3_txt",
+                  "type": "groupe",
+                  "css": {
+                    "flexGrow": "1",
+                    "flexShrink": "1",
+                    "flexBasis": "0%",
+                    "minWidth": "200px"
+                  },
+                  "children": [
+                    {
+                      "id": "f3_head",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "baseline",
+                        "rowGap": "0.75rem",
+                        "columnGap": "0.75rem",
+                        "minHeight": "2.1rem"
+                      },
+                      "children": [
+                        {
+                          "id": "f3_num",
+                          "type": "texte",
+                          "css": {
+                            "fontFamily": "ui-monospace, monospace",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(34, 211, 196)",
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px"
+                          },
+                          "content": {
+                            "texte": "03"
+                          }
+                        },
+                        {
+                          "id": "f3_tag",
+                          "type": "texte",
+                          "css": {
+                            "fontFamily": "ui-monospace, monospace",
+                            "fontSize": "0.625rem",
+                            "textTransform": "uppercase",
+                            "letterSpacing": "0.1em",
+                            "color": "rgb(159, 178, 204)",
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px"
+                          },
+                          "content": {
+                            "texte": "Un site à rafraîchir"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "f3_label",
+                      "type": "titre",
+                      "css": {
+                        "fontSize": "1.5rem",
+                        "fontWeight": "600",
+                        "marginTop": "0.375rem",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Refonte de site",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "f3_desc",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.875rem",
+                        "lineHeight": "1.6",
+                        "color": "rgb(238, 244, 252)",
+                        "marginTop": "0.625rem"
+                      },
+                      "content": {
+                        "texte": "Votre site existe déjà mais il a vieilli. On garde vos contenus, on refait le design, la vitesse et le mobile."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "f4",
+              "type": "groupe",
+              "css": {
+                "display": "flex",
+                "rowGap": "1.25rem",
+                "columnGap": "1.25rem",
+                "alignItems": "flex-start",
+                "flexWrap": "wrap",
+                "flexDirection": "row"
+              },
+              "children": [
+                {
+                  "id": "f4_scene",
+                  "type": "groupe",
+                  "css": {
+                    "flexGrow": "0",
+                    "flexShrink": "0",
+                    "flexBasis": "56%",
+                    "minWidth": "280px",
+                    "aspectRatio": "400 / 220",
+                    "borderTopLeftRadius": "12px",
+                    "borderTopRightRadius": "12px",
+                    "borderBottomRightRadius": "12px",
+                    "borderBottomLeftRadius": "12px",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(7, 21, 34)"
+                  }
+                },
+                {
+                  "id": "f4_txt",
+                  "type": "groupe",
+                  "css": {
+                    "flexGrow": "1",
+                    "flexShrink": "1",
+                    "flexBasis": "0%",
+                    "minWidth": "200px"
+                  },
+                  "children": [
+                    {
+                      "id": "f4_head",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "baseline",
+                        "rowGap": "0.75rem",
+                        "columnGap": "0.75rem",
+                        "minHeight": "2.1rem"
+                      },
+                      "children": [
+                        {
+                          "id": "f4_num",
+                          "type": "texte",
+                          "css": {
+                            "fontFamily": "ui-monospace, monospace",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(34, 211, 196)",
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px"
+                          },
+                          "content": {
+                            "texte": "04"
+                          }
+                        },
+                        {
+                          "id": "f4_tag",
+                          "type": "texte",
+                          "css": {
+                            "fontFamily": "ui-monospace, monospace",
+                            "fontSize": "0.625rem",
+                            "textTransform": "uppercase",
+                            "letterSpacing": "0.1em",
+                            "color": "rgb(159, 178, 204)",
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px"
+                          },
+                          "content": {
+                            "texte": "Sur mesure"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "f4_label",
+                      "type": "titre",
+                      "css": {
+                        "fontSize": "1.5rem",
+                        "fontWeight": "600",
+                        "marginTop": "0.375rem",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Application web",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "f4_desc",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.875rem",
+                        "lineHeight": "1.6",
+                        "color": "rgb(238, 244, 252)",
+                        "marginTop": "0.625rem"
+                      },
+                      "content": {
+                        "texte": "Espace client, réservation, tableau de bord, outil interne. Un logiciel écrit pour votre métier, avec ses comptes et ses règles."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "content": {
+        "ancre": "services"
+      }
+    },
+    {
+      "id": "method",
+      "type": "section",
+      "css": {
+        "maxWidth": "1280px",
+        "marginTop": "0px",
+        "marginRight": "auto",
+        "marginBottom": "0px",
+        "marginLeft": "auto",
+        "paddingTop": "3rem",
+        "paddingRight": "1.5rem",
+        "paddingBottom": "3rem",
+        "paddingLeft": "1.5rem",
+        "borderTopWidth": "1px",
+        "borderTopStyle": "solid",
+        "borderTopColor": "rgb(35, 64, 92)"
+      },
+      "children": [
+        {
+          "id": "method_k",
+          "type": "groupe",
+          "css": {
+            "display": "inline-flex",
+            "alignItems": "center",
+            "rowGap": "0.6rem",
+            "columnGap": "0.6rem",
+            "marginBottom": "1rem"
+          },
+          "children": [
+            {
+              "id": "method_k_dot",
+              "type": "forme",
+              "css": {
+                "width": "0.4rem",
+                "height": "0.4rem",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(52, 211, 153)",
+                "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
+              },
+              "style": {
+                "forme": "cercle"
+              }
+            },
+            {
+              "id": "method_k_t",
+              "type": "texte",
+              "css": {
+                "marginTop": "0px",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px",
+                "fontFamily": "ui-monospace, monospace",
+                "fontSize": "0.6875rem",
+                "letterSpacing": "0.2em",
+                "textTransform": "uppercase",
+                "color": "rgb(34, 211, 196)"
+              },
+              "content": {
+                "texte": "Méthode"
+              }
+            }
+          ]
+        },
+        {
+          "id": "method_title",
+          "type": "titre",
+          "css": {
+            "fontSize": "2.25rem",
+            "fontWeight": "600",
+            "letterSpacing": "-0.03em",
+            "maxWidth": "48rem",
+            "marginTop": "0px",
+            "marginRight": "0px",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "color": "rgb(238, 244, 252)"
+          },
+          "content": {
+            "texte": "Comment nous travaillons ensemble",
+            "niveau": 2
+          }
+        },
+        {
+          "id": "method_grid",
+          "type": "groupe",
+          "css": {
+            "display": "grid",
+            "gridTemplateColumns": "repeat(4, 1fr)",
+            "rowGap": "1.25rem",
+            "columnGap": "1.25rem",
+            "marginTop": "2rem"
+          },
+          "children": [
+            {
+              "id": "m1",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "m1_num",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "0.875rem",
+                    "color": "rgb(34, 211, 196)"
+                  },
+                  "content": {
+                    "texte": "01"
+                  }
+                },
+                {
+                  "id": "m1_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0.5rem",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Échange initial",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "m1_d",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Un échange pour comprendre votre projet, vos objectifs et votre budget, sans engagement."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "m2",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "m2_num",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "0.875rem",
+                    "color": "rgb(34, 211, 196)"
+                  },
+                  "content": {
+                    "texte": "02"
+                  }
+                },
+                {
+                  "id": "m2_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0.5rem",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Maquette & devis",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "m2_d",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Une proposition claire, avec maquette visuelle et devis détaillé, avant de commencer le développement."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "m3",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "m3_num",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "0.875rem",
+                    "color": "rgb(34, 211, 196)"
+                  },
+                  "content": {
+                    "texte": "03"
+                  }
+                },
+                {
+                  "id": "m3_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0.5rem",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Développement",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "m3_d",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Votre site ou application prend forme, avec des points d'étape réguliers pour suivre l'avancement."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "m4",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "m4_num",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "0.875rem",
+                    "color": "rgb(34, 211, 196)"
+                  },
+                  "content": {
+                    "texte": "04"
+                  }
+                },
+                {
+                  "id": "m4_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0.5rem",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Mise en ligne & suivi",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "m4_d",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Déploiement, puis accompagnement dans la durée pour les évolutions et le suivi par email."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "content": {
+        "ancre": "methode"
+      }
+    },
+    {
+      "id": "expertise",
+      "type": "section",
+      "css": {
+        "borderTopWidth": "1px",
+        "borderTopStyle": "solid",
+        "borderTopColor": "rgb(35, 64, 92)"
+      },
+      "children": [
+        {
+          "id": "exp_inner",
+          "type": "groupe",
+          "css": {
+            "maxWidth": "1280px",
+            "marginTop": "0px",
+            "marginRight": "auto",
+            "marginBottom": "0px",
+            "marginLeft": "auto",
+            "paddingTop": "3.5rem",
+            "paddingRight": "1.5rem",
+            "paddingBottom": "3.5rem",
+            "paddingLeft": "1.5rem",
+            "display": "grid",
+            "gridTemplateColumns": "1.1fr 0.9fr",
+            "rowGap": "3rem",
+            "columnGap": "3rem",
+            "alignItems": "start"
+          },
+          "children": [
+            {
+              "id": "exp_left",
+              "type": "groupe",
+              "children": [
+                {
+                  "id": "exp_k",
+                  "type": "groupe",
+                  "css": {
+                    "display": "inline-flex",
+                    "alignItems": "center",
+                    "rowGap": "0.6rem",
+                    "columnGap": "0.6rem",
+                    "marginBottom": "1rem"
+                  },
+                  "children": [
+                    {
+                      "id": "exp_k_dot",
+                      "type": "forme",
+                      "css": {
+                        "width": "0.4rem",
+                        "height": "0.4rem",
+                        "backgroundImage": "initial",
+                        "backgroundPositionX": "initial",
+                        "backgroundPositionY": "initial",
+                        "backgroundSize": "initial",
+                        "backgroundRepeat": "initial",
+                        "backgroundAttachment": "initial",
+                        "backgroundOrigin": "initial",
+                        "backgroundClip": "initial",
+                        "backgroundColor": "rgb(52, 211, 153)",
+                        "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
+                      },
+                      "style": {
+                        "forme": "cercle"
+                      }
+                    },
+                    {
+                      "id": "exp_k_t",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "fontFamily": "ui-monospace, monospace",
+                        "fontSize": "0.6875rem",
+                        "letterSpacing": "0.2em",
+                        "textTransform": "uppercase",
+                        "color": "rgb(34, 211, 196)"
+                      },
+                      "content": {
+                        "texte": "Notre approche"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "exp_title",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "2rem",
+                    "fontWeight": "600",
+                    "letterSpacing": "-0.03em",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Un travail soigné, une communication claire, du début à la fin",
+                    "niveau": 2
+                  }
+                },
+                {
+                  "id": "exp_p1",
+                  "type": "texte",
+                  "css": {
+                    "lineHeight": "1.7",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "1.5rem"
+                  },
+                  "content": {
+                    "texte": "Chaque projet est développé avec une stack moderne et un code pensé pour durer. Pas de solution générique, pas de boîte noire. Vous savez toujours où en est votre projet."
+                  }
+                },
+                {
+                  "id": "exp_p2",
+                  "type": "texte",
+                  "css": {
+                    "lineHeight": "1.7",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "1rem"
+                  },
+                  "content": {
+                    "texte": "Une fois votre site ou application en ligne, l'accompagnement continue : les demandes d'évolution ou de correction se font simplement par email, jusqu'à leur résolution."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "exp_panel",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.75rem",
+                "paddingRight": "1.75rem",
+                "paddingBottom": "1.75rem",
+                "paddingLeft": "1.75rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "18px",
+                "borderTopRightRadius": "18px",
+                "borderBottomRightRadius": "18px",
+                "borderBottomLeftRadius": "18px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "exp_panel_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "0.75rem",
+                    "fontFamily": "ui-monospace, monospace",
+                    "textTransform": "uppercase",
+                    "letterSpacing": "0.15em",
+                    "color": "rgb(34, 211, 196)",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "1rem",
+                    "marginLeft": "0px"
+                  },
+                  "content": {
+                    "texte": "Ce qu'on couvre",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "cov1",
+                  "type": "groupe",
+                  "css": {
+                    "display": "flex",
+                    "alignItems": "center",
+                    "rowGap": "0.7rem",
+                    "columnGap": "0.7rem",
+                    "paddingTop": "0.55rem",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0.55rem",
+                    "paddingLeft": "0px"
+                  },
+                  "children": [
+                    {
+                      "id": "cov1_d",
+                      "type": "forme",
+                      "css": {
+                        "width": "0.4rem",
+                        "height": "0.4rem",
+                        "backgroundImage": "initial",
+                        "backgroundPositionX": "initial",
+                        "backgroundPositionY": "initial",
+                        "backgroundSize": "initial",
+                        "backgroundRepeat": "initial",
+                        "backgroundAttachment": "initial",
+                        "backgroundOrigin": "initial",
+                        "backgroundClip": "initial",
+                        "backgroundColor": "rgb(34, 211, 196)",
+                        "flexGrow": "0",
+                        "flexShrink": "0",
+                        "flexBasis": "auto"
+                      },
+                      "style": {
+                        "forme": "cercle"
+                      }
+                    },
+                    {
+                      "id": "cov1_t",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "fontSize": "0.9rem",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Sites vitrines"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cov2",
+                  "type": "groupe",
+                  "css": {
+                    "display": "flex",
+                    "alignItems": "center",
+                    "rowGap": "0.7rem",
+                    "columnGap": "0.7rem",
+                    "paddingTop": "0.55rem",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0.55rem",
+                    "paddingLeft": "0px"
+                  },
+                  "children": [
+                    {
+                      "id": "cov2_d",
+                      "type": "forme",
+                      "css": {
+                        "width": "0.4rem",
+                        "height": "0.4rem",
+                        "backgroundImage": "initial",
+                        "backgroundPositionX": "initial",
+                        "backgroundPositionY": "initial",
+                        "backgroundSize": "initial",
+                        "backgroundRepeat": "initial",
+                        "backgroundAttachment": "initial",
+                        "backgroundOrigin": "initial",
+                        "backgroundClip": "initial",
+                        "backgroundColor": "rgb(34, 211, 196)",
+                        "flexGrow": "0",
+                        "flexShrink": "0",
+                        "flexBasis": "auto"
+                      },
+                      "style": {
+                        "forme": "cercle"
+                      }
+                    },
+                    {
+                      "id": "cov2_t",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "fontSize": "0.9rem",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Applications web sur mesure"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cov3",
+                  "type": "groupe",
+                  "css": {
+                    "display": "flex",
+                    "alignItems": "center",
+                    "rowGap": "0.7rem",
+                    "columnGap": "0.7rem",
+                    "paddingTop": "0.55rem",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0.55rem",
+                    "paddingLeft": "0px"
+                  },
+                  "children": [
+                    {
+                      "id": "cov3_d",
+                      "type": "forme",
+                      "css": {
+                        "width": "0.4rem",
+                        "height": "0.4rem",
+                        "backgroundImage": "initial",
+                        "backgroundPositionX": "initial",
+                        "backgroundPositionY": "initial",
+                        "backgroundSize": "initial",
+                        "backgroundRepeat": "initial",
+                        "backgroundAttachment": "initial",
+                        "backgroundOrigin": "initial",
+                        "backgroundClip": "initial",
+                        "backgroundColor": "rgb(34, 211, 196)",
+                        "flexGrow": "0",
+                        "flexShrink": "0",
+                        "flexBasis": "auto"
+                      },
+                      "style": {
+                        "forme": "cercle"
+                      }
+                    },
+                    {
+                      "id": "cov3_t",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "fontSize": "0.9rem",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Refonte de sites existants"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cov4",
+                  "type": "groupe",
+                  "css": {
+                    "display": "flex",
+                    "alignItems": "center",
+                    "rowGap": "0.7rem",
+                    "columnGap": "0.7rem",
+                    "paddingTop": "0.55rem",
+                    "paddingRight": "0px",
+                    "paddingBottom": "0.55rem",
+                    "paddingLeft": "0px"
+                  },
+                  "children": [
+                    {
+                      "id": "cov4_d",
+                      "type": "forme",
+                      "css": {
+                        "width": "0.4rem",
+                        "height": "0.4rem",
+                        "backgroundImage": "initial",
+                        "backgroundPositionX": "initial",
+                        "backgroundPositionY": "initial",
+                        "backgroundSize": "initial",
+                        "backgroundRepeat": "initial",
+                        "backgroundAttachment": "initial",
+                        "backgroundOrigin": "initial",
+                        "backgroundClip": "initial",
+                        "backgroundColor": "rgb(34, 211, 196)",
+                        "flexGrow": "0",
+                        "flexShrink": "0",
+                        "flexBasis": "auto"
+                      },
+                      "style": {
+                        "forme": "cercle"
+                      }
+                    },
+                    {
+                      "id": "cov4_t",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "fontSize": "0.9rem",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Maintenance & évolutions"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "content": {
+        "ancre": "expertise"
+      }
+    },
+    {
+      "id": "whyus",
+      "type": "section",
+      "css": {
+        "maxWidth": "1280px",
+        "marginTop": "0px",
+        "marginRight": "auto",
+        "marginBottom": "0px",
+        "marginLeft": "auto",
+        "paddingTop": "3.5rem",
+        "paddingRight": "1.5rem",
+        "paddingBottom": "3.5rem",
+        "paddingLeft": "1.5rem",
+        "borderTopWidth": "1px",
+        "borderTopStyle": "solid",
+        "borderTopColor": "rgb(35, 64, 92)"
+      },
+      "children": [
+        {
+          "id": "why_k",
+          "type": "groupe",
+          "css": {
+            "display": "inline-flex",
+            "alignItems": "center",
+            "rowGap": "0.6rem",
+            "columnGap": "0.6rem",
+            "marginBottom": "1rem"
+          },
+          "children": [
+            {
+              "id": "why_k_dot",
+              "type": "forme",
+              "css": {
+                "width": "0.4rem",
+                "height": "0.4rem",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(52, 211, 153)",
+                "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
+              },
+              "style": {
+                "forme": "cercle"
+              }
+            },
+            {
+              "id": "why_k_t",
+              "type": "texte",
+              "css": {
+                "marginTop": "0px",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px",
+                "fontFamily": "ui-monospace, monospace",
+                "fontSize": "0.6875rem",
+                "letterSpacing": "0.2em",
+                "textTransform": "uppercase",
+                "color": "rgb(34, 211, 196)"
+              },
+              "content": {
+                "texte": "Pourquoi OHIHO"
+              }
+            }
+          ]
+        },
+        {
+          "id": "why_title",
+          "type": "titre",
+          "css": {
+            "fontSize": "2.25rem",
+            "fontWeight": "600",
+            "letterSpacing": "-0.03em",
+            "maxWidth": "48rem",
+            "marginTop": "0px",
+            "marginRight": "0px",
+            "marginBottom": "0px",
+            "marginLeft": "0px",
+            "color": "rgb(238, 244, 252)"
+          },
+          "content": {
+            "texte": "Un accompagnement qui continue après la mise en ligne",
+            "niveau": 2
+          }
+        },
+        {
+          "id": "why_grid",
+          "type": "groupe",
+          "css": {
+            "display": "grid",
+            "gridTemplateColumns": "repeat(2, 1fr)",
+            "rowGap": "1.25rem",
+            "columnGap": "1.25rem",
+            "marginTop": "2rem"
+          },
+          "children": [
+            {
+              "id": "v1",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "v1_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Un travail soigné & durable",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "v1_d",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Une stack moderne et un code lisible, pensés pour évoluer avec votre projet, pas contre lui."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "v2",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "v2_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Communication claire",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "v2_d",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Pas de jargon technique. Vous comprenez toujours où en est votre projet et pourquoi."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "v3",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "v3_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Livraison dans les délais",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "v3_d",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Un devis clair en amont, et des points d'étape réguliers pour suivre l'avancement sans surprise."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "v4",
+              "type": "groupe",
+              "css": {
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)"
+              },
+              "children": [
+                {
+                  "id": "v4_t",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Accompagnement dans la durée",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "v4_d",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.5rem"
+                  },
+                  "content": {
+                    "texte": "Après la mise en ligne, nous restons disponibles pour les évolutions et corrections, par email."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "content": {
+        "ancre": "a-propos"
+      }
+    },
+    {
+      "id": "bugtrack",
+      "type": "section",
+      "css": {
+        "borderTopWidth": "1px",
+        "borderTopStyle": "solid",
+        "borderTopColor": "rgb(35, 64, 92)"
+      },
+      "children": [
+        {
+          "id": "bt_inner",
+          "type": "groupe",
+          "css": {
+            "maxWidth": "1280px",
+            "marginTop": "0px",
+            "marginRight": "auto",
+            "marginBottom": "0px",
+            "marginLeft": "auto",
+            "paddingTop": "3.5rem",
+            "paddingRight": "1.5rem",
+            "paddingBottom": "3.5rem",
+            "paddingLeft": "1.5rem"
+          },
+          "children": [
+            {
+              "id": "bt_k",
+              "type": "groupe",
+              "css": {
+                "display": "inline-flex",
+                "alignItems": "center",
+                "rowGap": "0.6rem",
+                "columnGap": "0.6rem",
+                "marginBottom": "1rem"
+              },
+              "children": [
+                {
+                  "id": "bt_k_dot",
+                  "type": "forme",
+                  "css": {
+                    "width": "0.4rem",
+                    "height": "0.4rem",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(52, 211, 153)",
+                    "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
+                  },
+                  "style": {
+                    "forme": "cercle"
+                  }
+                },
+                {
+                  "id": "bt_k_t",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "0.6875rem",
+                    "letterSpacing": "0.2em",
+                    "textTransform": "uppercase",
+                    "color": "rgb(34, 211, 196)"
+                  },
+                  "content": {
+                    "texte": "Notre outil"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "bt_title",
+              "type": "titre",
+              "css": {
+                "fontSize": "2.25rem",
+                "fontWeight": "600",
+                "letterSpacing": "-0.03em",
+                "maxWidth": "48rem",
+                "marginTop": "0px",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px",
+                "color": "rgb(238, 244, 252)"
+              },
+              "content": {
+                "texte": "BugTrack, le suivi que nous branchons sur votre site",
+                "niveau": 2
+              }
+            },
+            {
+              "id": "bt_grid",
+              "type": "groupe",
+              "css": {
+                "display": "grid",
+                "gridTemplateColumns": "1fr 1fr",
+                "rowGap": "1.25rem",
+                "columnGap": "1.25rem",
+                "marginTop": "2rem"
+              },
+              "children": [
+                {
+                  "id": "bt1",
+                  "type": "groupe",
+                  "css": {
+                    "paddingTop": "1.25rem",
+                    "paddingRight": "1.25rem",
+                    "paddingBottom": "1.25rem",
+                    "paddingLeft": "1.25rem",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "borderTopLeftRadius": "14px",
+                    "borderTopRightRadius": "14px",
+                    "borderBottomRightRadius": "14px",
+                    "borderBottomLeftRadius": "14px",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(13, 30, 48)"
+                  },
+                  "children": [
+                    {
+                      "id": "bt1_t",
+                      "type": "titre",
+                      "css": {
+                        "fontSize": "0.95rem",
+                        "fontWeight": "600",
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Vous signalez, rien ne se perd",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "bt1_d",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.85rem",
+                        "lineHeight": "1.55",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "0.4rem"
+                      },
+                      "content": {
+                        "texte": "Une anomalie ou une demande d'évolution se dépose dans votre espace plutôt que dans un email qui se perd. Chaque demande a sa référence, sa priorité et son état."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "bt2",
+                  "type": "groupe",
+                  "css": {
+                    "paddingTop": "1.25rem",
+                    "paddingRight": "1.25rem",
+                    "paddingBottom": "1.25rem",
+                    "paddingLeft": "1.25rem",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "borderTopLeftRadius": "14px",
+                    "borderTopRightRadius": "14px",
+                    "borderBottomRightRadius": "14px",
+                    "borderBottomLeftRadius": "14px",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(13, 30, 48)"
+                  },
+                  "children": [
+                    {
+                      "id": "bt2_t",
+                      "type": "titre",
+                      "css": {
+                        "fontSize": "0.95rem",
+                        "fontWeight": "600",
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Vous savez toujours où ça en est",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "bt2_d",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.85rem",
+                        "lineHeight": "1.55",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "0.4rem"
+                      },
+                      "content": {
+                        "texte": "Reçue, en cours d'analyse, corrigée : le statut est visible à tout moment, et les échanges restent attachés à la demande plutôt qu'éparpillés dans une boîte mail."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "bt3",
+                  "type": "groupe",
+                  "css": {
+                    "paddingTop": "1.25rem",
+                    "paddingRight": "1.25rem",
+                    "paddingBottom": "1.25rem",
+                    "paddingLeft": "1.25rem",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "borderTopLeftRadius": "14px",
+                    "borderTopRightRadius": "14px",
+                    "borderBottomRightRadius": "14px",
+                    "borderBottomLeftRadius": "14px",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(13, 30, 48)"
+                  },
+                  "children": [
+                    {
+                      "id": "bt3_t",
+                      "type": "titre",
+                      "css": {
+                        "fontSize": "0.95rem",
+                        "fontWeight": "600",
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Rien ne dort indéfiniment",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "bt3_d",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.85rem",
+                        "lineHeight": "1.55",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "0.4rem"
+                      },
+                      "content": {
+                        "texte": "Vous êtes prévenu par email à chaque avancée, et les demandes restées sans réponse remontent puis se clôturent d'elles-mêmes plutôt que d'encombrer la liste."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "bt4",
+                  "type": "groupe",
+                  "css": {
+                    "paddingTop": "1.25rem",
+                    "paddingRight": "1.25rem",
+                    "paddingBottom": "1.25rem",
+                    "paddingLeft": "1.25rem",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "borderTopLeftRadius": "14px",
+                    "borderTopRightRadius": "14px",
+                    "borderBottomRightRadius": "14px",
+                    "borderBottomLeftRadius": "14px",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(13, 30, 48)"
+                  },
+                  "children": [
+                    {
+                      "id": "bt4_t",
+                      "type": "titre",
+                      "css": {
+                        "fontSize": "0.95rem",
+                        "fontWeight": "600",
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "color": "rgb(238, 244, 252)"
+                      },
+                      "content": {
+                        "texte": "Un espace par client",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "bt4_d",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.85rem",
+                        "lineHeight": "1.55",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "0.4rem"
+                      },
+                      "content": {
+                        "texte": "Chaque compte ne voit que ses propres demandes. L'outil sert plusieurs projets sans que les clients se croisent."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "content": {
+        "ancre": "bugtrack"
+      }
+    },
+    {
+      "id": "portfolio",
+      "type": "section",
+      "css": {
+        "borderTopWidth": "1px",
+        "borderTopStyle": "solid",
+        "borderTopColor": "rgb(35, 64, 92)"
+      },
+      "children": [
+        {
+          "id": "pf_inner",
+          "type": "groupe",
+          "css": {
+            "maxWidth": "1280px",
+            "marginTop": "0px",
+            "marginRight": "auto",
+            "marginBottom": "0px",
+            "marginLeft": "auto",
+            "paddingTop": "3.5rem",
+            "paddingRight": "1.5rem",
+            "paddingBottom": "3.5rem",
+            "paddingLeft": "1.5rem"
+          },
+          "children": [
+            {
+              "id": "pf_kicker",
+              "type": "groupe",
+              "css": {
+                "display": "inline-flex",
+                "alignItems": "center",
+                "rowGap": "0.6rem",
+                "columnGap": "0.6rem"
+              },
+              "children": [
+                {
+                  "id": "pf_dot",
+                  "type": "forme",
+                  "css": {
+                    "width": "0.4rem",
+                    "height": "0.4rem",
+                    "backgroundImage": "initial",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "rgb(52, 211, 153)",
+                    "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
+                  },
+                  "style": {
+                    "forme": "cercle"
+                  }
+                },
+                {
+                  "id": "pf_kicker_t",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "fontFamily": "ui-monospace, monospace",
+                    "fontSize": "0.6875rem",
+                    "letterSpacing": "0.2em",
+                    "textTransform": "uppercase",
+                    "color": "rgb(34, 211, 196)"
+                  },
+                  "content": {
+                    "texte": "Réalisations"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "pf_title",
+              "type": "titre",
+              "css": {
+                "fontSize": "2.25rem",
+                "fontWeight": "600",
+                "letterSpacing": "-0.03em",
+                "maxWidth": "48rem",
+                "marginTop": "1.5rem",
+                "marginRight": "0px",
+                "marginBottom": "0px",
+                "marginLeft": "0px",
+                "color": "rgb(238, 244, 252)"
+              },
+              "content": {
+                "texte": "Des projets concrets, en ligne",
+                "niveau": 2
+              }
+            },
+            {
+              "id": "pf_sub",
+              "type": "texte",
+              "css": {
+                "maxWidth": "42rem",
+                "lineHeight": "1.6",
+                "color": "rgb(159, 178, 204)",
+                "marginTop": "1.25rem"
+              },
+              "content": {
+                "texte": "Cadance Coaching est un projet réel, livré et utilisé par un client. Un aperçu de ce que nous pouvons construire pour vous."
+              }
+            },
+            {
+              "id": "pf_rule",
+              "type": "groupe",
+              "css": {
+                "height": "1px",
+                "marginTop": "1.5rem",
+                "marginBottom": "2rem",
+                "backgroundImage": "linear-gradient(to right, rgb(35, 64, 92), rgb(35, 64, 92) 30%, transparent)",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "initial"
+              }
+            },
+            {
+              "id": "pf_grid",
+              "type": "groupe",
+              "css": {
+                "display": "grid",
+                "gridTemplateColumns": "repeat(3, 1fr)",
+                "rowGap": "1.25rem",
+                "columnGap": "1.25rem"
+              },
+              "children": [
+                {
+                  "id": "proj1",
+                  "type": "groupe",
+                  "css": {
+                    "paddingTop": "1.5rem",
+                    "paddingRight": "1.5rem",
+                    "paddingBottom": "1.5rem",
+                    "paddingLeft": "1.5rem",
+                    "borderTopLeftRadius": "16px",
+                    "borderTopRightRadius": "16px",
+                    "borderBottomRightRadius": "16px",
+                    "borderBottomLeftRadius": "16px",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "backgroundImage": "linear-gradient(135deg, rgba(52, 211, 153, 0.16) 0%, rgba(34, 211, 196, 0.05) 48%, rgba(56, 189, 248, 0.16) 100%), initial",
+                    "backgroundPositionX": "initial, initial",
+                    "backgroundPositionY": "initial, initial",
+                    "backgroundSize": "initial, initial",
+                    "backgroundRepeat": "initial, initial",
+                    "backgroundAttachment": "initial, initial",
+                    "backgroundOrigin": "initial, initial",
+                    "backgroundClip": "initial, initial",
+                    "backgroundColor": "rgb(7, 21, 34)",
+                    "display": "flex",
+                    "flexDirection": "column"
+                  },
+                  "children": [
+                    {
+                      "id": "proj1_head",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "center",
+                        "rowGap": "1rem",
+                        "columnGap": "1rem"
+                      },
+                      "children": [
+                        {
+                          "id": "proj1_icon",
+                          "type": "image",
+                          "css": {
+                            "width": "80px",
+                            "height": "80px",
+                            "borderTopLeftRadius": "16px",
+                            "borderTopRightRadius": "16px",
+                            "borderBottomRightRadius": "16px",
+                            "borderBottomLeftRadius": "16px",
+                            "backgroundImage": "initial",
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "rgb(225, 29, 42)",
+                            "flexGrow": "0",
+                            "flexShrink": "0",
+                            "flexBasis": "auto"
+                          },
+                          "content": {
+                            "src": "/realisations/cadance-coaching.svg",
+                            "alt": ""
+                          }
+                        },
+                        {
+                          "id": "proj1_meta",
+                          "type": "groupe",
+                          "children": [
+                            {
+                              "id": "proj1_cat",
+                              "type": "texte",
+                              "css": {
+                                "marginTop": "0px",
+                                "marginRight": "0px",
+                                "marginBottom": "0px",
+                                "marginLeft": "0px",
+                                "fontFamily": "ui-monospace, monospace",
+                                "fontSize": "11px",
+                                "textTransform": "uppercase",
+                                "letterSpacing": "0.18em",
+                                "color": "rgb(34, 211, 196)"
+                              },
+                              "content": {
+                                "texte": "Site vitrine"
+                              }
+                            },
+                            {
+                              "id": "proj1_title",
+                              "type": "titre",
+                              "css": {
+                                "fontSize": "1.125rem",
+                                "fontWeight": "600",
+                                "marginTop": "0.5rem",
+                                "marginRight": "0px",
+                                "marginBottom": "0px",
+                                "marginLeft": "0px",
+                                "color": "rgb(238, 244, 252)"
+                              },
+                              "content": {
+                                "texte": "Cadance Coaching",
+                                "niveau": 3
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "proj1_desc",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.875rem",
+                        "lineHeight": "1.6",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "1.25rem"
+                      },
+                      "content": {
+                        "texte": "Site vitrine pour une salle de sport, avec un espace admin permettant au client de modifier lui-même les textes, la galerie, le planning des cours et les tarifs, sans toucher au code."
+                      }
+                    },
+                    {
+                      "id": "proj1_action",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "1.25rem",
+                        "fontSize": "0.875rem",
+                        "fontWeight": "500",
+                        "color": "rgb(34, 211, 196)"
+                      },
+                      "content": {
+                        "texte": "Voir le site →"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "proj2",
+                  "type": "groupe",
+                  "css": {
+                    "paddingTop": "1.5rem",
+                    "paddingRight": "1.5rem",
+                    "paddingBottom": "1.5rem",
+                    "paddingLeft": "1.5rem",
+                    "borderTopLeftRadius": "16px",
+                    "borderTopRightRadius": "16px",
+                    "borderBottomRightRadius": "16px",
+                    "borderBottomLeftRadius": "16px",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "backgroundImage": "linear-gradient(135deg, rgba(52, 211, 153, 0.16) 0%, rgba(34, 211, 196, 0.05) 48%, rgba(56, 189, 248, 0.16) 100%), initial",
+                    "backgroundPositionX": "initial, initial",
+                    "backgroundPositionY": "initial, initial",
+                    "backgroundSize": "initial, initial",
+                    "backgroundRepeat": "initial, initial",
+                    "backgroundAttachment": "initial, initial",
+                    "backgroundOrigin": "initial, initial",
+                    "backgroundClip": "initial, initial",
+                    "backgroundColor": "rgb(7, 21, 34)",
+                    "display": "flex",
+                    "flexDirection": "column"
+                  },
+                  "children": [
+                    {
+                      "id": "proj2_head",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "center",
+                        "rowGap": "1rem",
+                        "columnGap": "1rem"
+                      },
+                      "children": [
+                        {
+                          "id": "proj2_icon",
+                          "type": "image",
+                          "css": {
+                            "width": "80px",
+                            "height": "80px",
+                            "borderTopLeftRadius": "16px",
+                            "borderTopRightRadius": "16px",
+                            "borderBottomRightRadius": "16px",
+                            "borderBottomLeftRadius": "16px",
+                            "backgroundImage": "initial",
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "transparent",
+                            "flexGrow": "0",
+                            "flexShrink": "0",
+                            "flexBasis": "auto"
+                          },
+                          "content": {
+                            "src": "/realisations/bugtrack.svg",
+                            "alt": ""
+                          }
+                        },
+                        {
+                          "id": "proj2_meta",
+                          "type": "groupe",
+                          "children": [
+                            {
+                              "id": "proj2_cat",
+                              "type": "texte",
+                              "css": {
+                                "marginTop": "0px",
+                                "marginRight": "0px",
+                                "marginBottom": "0px",
+                                "marginLeft": "0px",
+                                "fontFamily": "ui-monospace, monospace",
+                                "fontSize": "11px",
+                                "textTransform": "uppercase",
+                                "letterSpacing": "0.18em",
+                                "color": "rgb(34, 211, 196)"
+                              },
+                              "content": {
+                                "texte": "Application web"
+                              }
+                            },
+                            {
+                              "id": "proj2_title",
+                              "type": "titre",
+                              "css": {
+                                "fontSize": "1.125rem",
+                                "fontWeight": "600",
+                                "marginTop": "0.5rem",
+                                "marginRight": "0px",
+                                "marginBottom": "0px",
+                                "marginLeft": "0px",
+                                "color": "rgb(238, 244, 252)"
+                              },
+                              "content": {
+                                "texte": "BugTrack",
+                                "niveau": 3
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "proj2_desc",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.875rem",
+                        "lineHeight": "1.6",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "1.25rem"
+                      },
+                      "content": {
+                        "texte": "Outil de suivi des demandes et des anomalies : création de tickets, priorités, statuts, fil de discussion avec le client et notifications par email. Les tickets sans réponse se clôturent automatiquement."
+                      }
+                    },
+                    {
+                      "id": "proj2_action",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "1.25rem",
+                        "fontSize": "0.875rem",
+                        "fontWeight": "500",
+                        "color": "rgb(159, 178, 204)"
+                      },
+                      "content": {
+                        "texte": "Accès privé"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "proj3",
+                  "type": "groupe",
+                  "css": {
+                    "paddingTop": "1.5rem",
+                    "paddingRight": "1.5rem",
+                    "paddingBottom": "1.5rem",
+                    "paddingLeft": "1.5rem",
+                    "borderTopLeftRadius": "16px",
+                    "borderTopRightRadius": "16px",
+                    "borderBottomRightRadius": "16px",
+                    "borderBottomLeftRadius": "16px",
+                    "borderTopWidth": "1px",
+                    "borderRightWidth": "1px",
+                    "borderBottomWidth": "1px",
+                    "borderLeftWidth": "1px",
+                    "borderTopStyle": "solid",
+                    "borderRightStyle": "solid",
+                    "borderBottomStyle": "solid",
+                    "borderLeftStyle": "solid",
+                    "borderTopColor": "rgb(35, 64, 92)",
+                    "borderRightColor": "rgb(35, 64, 92)",
+                    "borderBottomColor": "rgb(35, 64, 92)",
+                    "borderLeftColor": "rgb(35, 64, 92)",
+                    "borderImageSource": "none",
+                    "borderImageSlice": "100%",
+                    "borderImageWidth": "1",
+                    "borderImageOutset": "0",
+                    "borderImageRepeat": "stretch",
+                    "backgroundImage": "linear-gradient(135deg, rgba(52, 211, 153, 0.16) 0%, rgba(34, 211, 196, 0.05) 48%, rgba(56, 189, 248, 0.16) 100%), initial",
+                    "backgroundPositionX": "initial, initial",
+                    "backgroundPositionY": "initial, initial",
+                    "backgroundSize": "initial, initial",
+                    "backgroundRepeat": "initial, initial",
+                    "backgroundAttachment": "initial, initial",
+                    "backgroundOrigin": "initial, initial",
+                    "backgroundClip": "initial, initial",
+                    "backgroundColor": "rgb(7, 21, 34)",
+                    "display": "flex",
+                    "flexDirection": "column"
+                  },
+                  "children": [
+                    {
+                      "id": "proj3_head",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "center",
+                        "rowGap": "1rem",
+                        "columnGap": "1rem"
+                      },
+                      "children": [
+                        {
+                          "id": "proj3_icon",
+                          "type": "image",
+                          "css": {
+                            "width": "80px",
+                            "height": "80px",
+                            "borderTopLeftRadius": "16px",
+                            "borderTopRightRadius": "16px",
+                            "borderBottomRightRadius": "16px",
+                            "borderBottomLeftRadius": "16px",
+                            "backgroundImage": "initial",
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "transparent",
+                            "flexGrow": "0",
+                            "flexShrink": "0",
+                            "flexBasis": "auto"
+                          },
+                          "content": {
+                            "src": "/realisations/mailys-solutions.svg",
+                            "alt": ""
+                          }
+                        },
+                        {
+                          "id": "proj3_meta",
+                          "type": "groupe",
+                          "children": [
+                            {
+                              "id": "proj3_cat",
+                              "type": "texte",
+                              "css": {
+                                "marginTop": "0px",
+                                "marginRight": "0px",
+                                "marginBottom": "0px",
+                                "marginLeft": "0px",
+                                "fontFamily": "ui-monospace, monospace",
+                                "fontSize": "11px",
+                                "textTransform": "uppercase",
+                                "letterSpacing": "0.18em",
+                                "color": "rgb(34, 211, 196)"
+                              },
+                              "content": {
+                                "texte": "Site vitrine & back-office"
+                              }
+                            },
+                            {
+                              "id": "proj3_title",
+                              "type": "titre",
+                              "css": {
+                                "fontSize": "1.125rem",
+                                "fontWeight": "600",
+                                "marginTop": "0.5rem",
+                                "marginRight": "0px",
+                                "marginBottom": "0px",
+                                "marginLeft": "0px",
+                                "color": "rgb(238, 244, 252)"
+                              },
+                              "content": {
+                                "texte": "Mailys Solutions",
+                                "niveau": 3
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "proj3_desc",
+                      "type": "texte",
+                      "css": {
+                        "fontSize": "0.875rem",
+                        "lineHeight": "1.6",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "1.25rem"
+                      },
+                      "content": {
+                        "texte": "Site d'un éditeur d'applications métier, construit pour le référencement : une page par requête, données structurées, blog. Un back-office complet permet de tout modifier sans toucher au code."
+                      }
+                    },
+                    {
+                      "id": "proj3_action",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "1.25rem",
+                        "fontSize": "0.875rem",
+                        "fontWeight": "500",
+                        "color": "rgb(34, 211, 196)"
+                      },
+                      "content": {
+                        "texte": "Voir le site →"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "pf_cta",
+              "type": "groupe",
+              "css": {
+                "marginTop": "2rem",
+                "paddingTop": "1.5rem",
+                "paddingRight": "1.5rem",
+                "paddingBottom": "1.5rem",
+                "paddingLeft": "1.5rem",
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "display": "flex",
+                "justifyContent": "space-between",
+                "alignItems": "center",
+                "rowGap": "1.25rem",
+                "columnGap": "1.25rem",
+                "flexWrap": "wrap"
+              },
+              "children": [
+                {
+                  "id": "pf_cta_t",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "maxWidth": "36rem",
+                    "fontSize": "0.875rem",
+                    "color": "rgb(159, 178, 204)"
+                  },
+                  "content": {
+                    "texte": "Vous avez un projet de site ou d'application en tête ?"
+                  }
+                },
+                {
+                  "id": "pf_cta_b",
+                  "type": "bouton",
+                  "css": {
+                    "paddingTop": "0.75rem",
+                    "paddingRight": "1.5rem",
+                    "paddingBottom": "0.75rem",
+                    "paddingLeft": "1.5rem"
+                  },
+                  "content": {
+                    "texte": "Demander un devis",
+                    "lien": "/portail/devis/nouveau"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "content": {
+        "ancre": "portfolio"
+      }
+    },
+    {
+      "id": "contact",
+      "type": "section",
+      "css": {
+        "borderTopWidth": "1px",
+        "borderTopStyle": "solid",
+        "borderTopColor": "rgb(35, 64, 92)",
+        "backgroundImage": "initial",
+        "backgroundPositionX": "initial",
+        "backgroundPositionY": "initial",
+        "backgroundSize": "initial",
+        "backgroundRepeat": "initial",
+        "backgroundAttachment": "initial",
+        "backgroundOrigin": "initial",
+        "backgroundClip": "initial",
+        "backgroundColor": "rgb(16, 36, 54)"
+      },
+      "children": [
+        {
+          "id": "contact_inner",
+          "type": "groupe",
+          "css": {
+            "maxWidth": "1280px",
+            "marginTop": "0px",
+            "marginRight": "auto",
+            "marginBottom": "0px",
+            "marginLeft": "auto",
+            "paddingTop": "5rem",
+            "paddingRight": "1.5rem",
+            "paddingBottom": "5rem",
+            "paddingLeft": "1.5rem",
+            "display": "grid",
+            "gridTemplateColumns": "0.9fr 1.1fr",
+            "rowGap": "3rem",
+            "columnGap": "3rem",
+            "alignItems": "center"
+          },
+          "children": [
+            {
+              "id": "contact_left",
+              "type": "groupe",
+              "children": [
+                {
+                  "id": "contact_kicker",
+                  "type": "groupe",
+                  "css": {
+                    "display": "inline-flex",
+                    "alignItems": "center",
+                    "rowGap": "0.6rem",
+                    "columnGap": "0.6rem"
+                  },
+                  "children": [
+                    {
+                      "id": "contact_dot",
+                      "type": "forme",
+                      "css": {
+                        "width": "0.4rem",
+                        "height": "0.4rem",
+                        "backgroundImage": "initial",
+                        "backgroundPositionX": "initial",
+                        "backgroundPositionY": "initial",
+                        "backgroundSize": "initial",
+                        "backgroundRepeat": "initial",
+                        "backgroundAttachment": "initial",
+                        "backgroundOrigin": "initial",
+                        "backgroundClip": "initial",
+                        "backgroundColor": "rgb(52, 211, 153)",
+                        "boxShadow": "rgba(52, 211, 153, 0.7) 0px 0px 8px"
+                      },
+                      "style": {
+                        "forme": "cercle"
+                      }
+                    },
+                    {
+                      "id": "contact_kicker_t",
+                      "type": "texte",
+                      "css": {
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px",
+                        "fontFamily": "ui-monospace, monospace",
+                        "fontSize": "0.6875rem",
+                        "letterSpacing": "0.2em",
+                        "textTransform": "uppercase",
+                        "color": "rgb(34, 211, 196)"
+                      },
+                      "content": {
+                        "texte": "Votre projet"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "contact_title",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "2.75rem",
+                    "fontWeight": "600",
+                    "letterSpacing": "-0.03em",
+                    "lineHeight": "1.1",
+                    "maxWidth": "44rem",
+                    "marginTop": "1.5rem",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Prêt à lancer votre site ou application ?",
+                    "niveau": 2
+                  }
+                },
+                {
+                  "id": "contact_sub",
+                  "type": "texte",
+                  "css": {
+                    "maxWidth": "42rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "1.25rem"
+                  },
+                  "content": {
+                    "texte": "Créez votre compte en une minute, puis décrivez votre besoin via une demande de devis guidée. Nous revenons vers vous rapidement pour en discuter."
+                  }
+                },
+                {
+                  "id": "contact_rule",
+                  "type": "groupe",
+                  "css": {
+                    "height": "1px",
+                    "marginTop": "3rem",
+                    "backgroundImage": "linear-gradient(to right, rgb(35, 64, 92), rgb(35, 64, 92) 30%, transparent)",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial"
+                  }
+                },
+                {
+                  "id": "contact_points",
+                  "type": "groupe",
+                  "css": {
+                    "display": "flex",
+                    "flexDirection": "column",
+                    "rowGap": "1rem",
+                    "columnGap": "1rem",
+                    "marginTop": "2rem"
+                  },
+                  "children": [
+                    {
+                      "id": "cp1",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "center",
+                        "rowGap": "0.75rem",
+                        "columnGap": "0.75rem"
+                      },
+                      "children": [
+                        {
+                          "id": "cp1_dot",
+                          "type": "forme",
+                          "css": {
+                            "width": "0.375rem",
+                            "height": "0.375rem",
+                            "backgroundImage": "initial",
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "rgb(52, 211, 153)",
+                            "boxShadow": "rgba(52, 211, 153, 0.8) 0px 0px 10px"
+                          },
+                          "style": {
+                            "forme": "cercle"
+                          }
+                        },
+                        {
+                          "id": "cp1_t",
+                          "type": "texte",
+                          "css": {
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(238, 244, 252)"
+                          },
+                          "content": {
+                            "texte": "contact@ohiho.fr"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cp2",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "alignItems": "center",
+                        "rowGap": "0.75rem",
+                        "columnGap": "0.75rem"
+                      },
+                      "children": [
+                        {
+                          "id": "cp2_dot",
+                          "type": "forme",
+                          "css": {
+                            "width": "0.375rem",
+                            "height": "0.375rem",
+                            "backgroundImage": "initial",
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "rgb(52, 211, 153)",
+                            "boxShadow": "rgba(52, 211, 153, 0.8) 0px 0px 10px"
+                          },
+                          "style": {
+                            "forme": "cercle"
+                          }
+                        },
+                        {
+                          "id": "cp2_t",
+                          "type": "texte",
+                          "css": {
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(159, 178, 204)"
+                          },
+                          "content": {
+                            "texte": "Réponse sous 24h ouvrées"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "contact_card",
+              "type": "groupe",
+              "css": {
+                "backgroundImage": "initial",
+                "backgroundPositionX": "initial",
+                "backgroundPositionY": "initial",
+                "backgroundSize": "initial",
+                "backgroundRepeat": "initial",
+                "backgroundAttachment": "initial",
+                "backgroundOrigin": "initial",
+                "backgroundClip": "initial",
+                "backgroundColor": "rgb(16, 36, 54)",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderImageSource": "none",
+                "borderImageSlice": "100%",
+                "borderImageWidth": "1",
+                "borderImageOutset": "0",
+                "borderImageRepeat": "stretch",
+                "borderTopLeftRadius": "16px",
+                "borderTopRightRadius": "16px",
+                "borderBottomRightRadius": "16px",
+                "borderBottomLeftRadius": "16px",
+                "boxShadow": "rgba(0, 0, 0, 0.35) 0px 1px 2px, rgba(0, 0, 0, 0.7) 0px 18px 40px -24px",
+                "paddingTop": "2rem",
+                "paddingRight": "2rem",
+                "paddingBottom": "2rem",
+                "paddingLeft": "2rem"
+              },
+              "children": [
+                {
+                  "id": "cc_title",
+                  "type": "titre",
+                  "css": {
+                    "fontSize": "1.125rem",
+                    "fontWeight": "600",
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px",
+                    "color": "rgb(238, 244, 252)"
+                  },
+                  "content": {
+                    "texte": "Demander un devis",
+                    "niveau": 3
+                  }
+                },
+                {
+                  "id": "cc_text",
+                  "type": "texte",
+                  "css": {
+                    "fontSize": "0.875rem",
+                    "lineHeight": "1.6",
+                    "color": "rgb(159, 178, 204)",
+                    "marginTop": "0.75rem"
+                  },
+                  "content": {
+                    "texte": "Depuis votre espace client, choisissez une formule (landing page, site vitrine, application, refonte) et recevez une proposition adaptée."
+                  }
+                },
+                {
+                  "id": "cc_rule",
+                  "type": "groupe",
+                  "css": {
+                    "height": "1px",
+                    "marginTop": "2rem",
+                    "backgroundImage": "linear-gradient(to right, rgb(35, 64, 92), rgb(35, 64, 92) 30%, transparent)",
+                    "backgroundPositionX": "initial",
+                    "backgroundPositionY": "initial",
+                    "backgroundSize": "initial",
+                    "backgroundRepeat": "initial",
+                    "backgroundAttachment": "initial",
+                    "backgroundOrigin": "initial",
+                    "backgroundClip": "initial",
+                    "backgroundColor": "initial"
+                  }
+                },
+                {
+                  "id": "cc_cta",
+                  "type": "bouton",
+                  "css": {
+                    "marginTop": "2rem",
+                    "paddingTop": "0.75rem",
+                    "paddingRight": "2rem",
+                    "paddingBottom": "0.75rem",
+                    "paddingLeft": "2rem"
+                  },
+                  "content": {
+                    "texte": "Demander un devis",
+                    "lien": "/inscription"
+                  }
+                },
+                {
+                  "id": "cc_login",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "1.5rem",
+                    "fontSize": "0.875rem",
+                    "color": "rgb(159, 178, 204)"
+                  },
+                  "content": {
+                    "texte": "Déjà un compte ? Se connecter"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "content": {
+        "ancre": "contact"
+      }
+    },
+    {
+      "id": "ftr",
+      "type": "footer",
+      "css": {
+        "borderTopWidth": "1px",
+        "borderTopStyle": "solid",
+        "borderTopColor": "rgb(35, 64, 92)",
+        "backgroundImage": "initial",
+        "backgroundPositionX": "initial",
+        "backgroundPositionY": "initial",
+        "backgroundSize": "initial",
+        "backgroundRepeat": "initial",
+        "backgroundAttachment": "initial",
+        "backgroundOrigin": "initial",
+        "backgroundClip": "initial",
+        "backgroundColor": "rgb(9, 26, 41)"
+      },
+      "children": [
+        {
+          "id": "ftr_inner",
+          "type": "groupe",
+          "css": {
+            "maxWidth": "1280px",
+            "marginTop": "0px",
+            "marginRight": "auto",
+            "marginBottom": "0px",
+            "marginLeft": "auto",
+            "paddingTop": "3.5rem",
+            "paddingRight": "1.5rem",
+            "paddingBottom": "3.5rem",
+            "paddingLeft": "1.5rem"
+          },
+          "children": [
+            {
+              "id": "ftr_cols",
+              "type": "groupe",
+              "css": {
+                "display": "grid",
+                "gridTemplateColumns": "2fr 1fr 1fr",
+                "rowGap": "2.5rem",
+                "columnGap": "2.5rem"
+              },
+              "children": [
+                {
+                  "id": "ftr_brand",
+                  "type": "groupe",
+                  "children": [
+                    {
+                      "id": "ftr_logo",
+                      "type": "image",
+                      "css": {
+                        "width": "40px",
+                        "height": "40px"
+                      },
+                      "content": {
+                        "src": "/logo-mark.svg",
+                        "alt": "OHIHO"
+                      }
+                    },
+                    {
+                      "id": "ftr_tagline",
+                      "type": "texte",
+                      "css": {
+                        "maxWidth": "24rem",
+                        "fontSize": "0.875rem",
+                        "lineHeight": "1.6",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "1rem"
+                      },
+                      "content": {
+                        "texte": "OHIHO conçoit et développe des sites et applications web sur mesure, pour entreprises et particuliers, pensés pour durer."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ftr_nav",
+                  "type": "groupe",
+                  "children": [
+                    {
+                      "id": "ftr_nav_t",
+                      "type": "titre",
+                      "css": {
+                        "fontFamily": "ui-monospace, monospace",
+                        "fontSize": "0.75rem",
+                        "textTransform": "uppercase",
+                        "letterSpacing": "0.18em",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px"
+                      },
+                      "content": {
+                        "texte": "Navigation",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "ftr_nav_l",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "rowGap": "0.25rem",
+                        "columnGap": "0.25rem",
+                        "marginTop": "0.75rem",
+                        "alignItems": "flex-start"
+                      },
+                      "children": [
+                        {
+                          "id": "ftr_l1",
+                          "type": "bouton",
+                          "css": {
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "initial",
+                            "backgroundImage": "none",
+                            "boxShadow": "none",
+                            "color": "rgb(205, 214, 230)",
+                            "paddingTop": "0px",
+                            "paddingRight": "0px",
+                            "paddingBottom": "0px",
+                            "paddingLeft": "0px",
+                            "minHeight": "auto",
+                            "borderTopLeftRadius": "0px",
+                            "borderTopRightRadius": "0px",
+                            "borderBottomRightRadius": "0px",
+                            "borderBottomLeftRadius": "0px",
+                            "fontSize": "0.875rem",
+                            "fontWeight": "400",
+                            "textAlign": "left"
+                          },
+                          "content": {
+                            "texte": "Services",
+                            "lien": "#"
+                          }
+                        },
+                        {
+                          "id": "ftr_l2",
+                          "type": "bouton",
+                          "css": {
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "initial",
+                            "backgroundImage": "none",
+                            "boxShadow": "none",
+                            "color": "rgb(205, 214, 230)",
+                            "paddingTop": "0px",
+                            "paddingRight": "0px",
+                            "paddingBottom": "0px",
+                            "paddingLeft": "0px",
+                            "minHeight": "auto",
+                            "borderTopLeftRadius": "0px",
+                            "borderTopRightRadius": "0px",
+                            "borderBottomRightRadius": "0px",
+                            "borderBottomLeftRadius": "0px",
+                            "fontSize": "0.875rem",
+                            "fontWeight": "400",
+                            "textAlign": "left"
+                          },
+                          "content": {
+                            "texte": "Expertise",
+                            "lien": "#"
+                          }
+                        },
+                        {
+                          "id": "ftr_l3",
+                          "type": "bouton",
+                          "css": {
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "initial",
+                            "backgroundImage": "none",
+                            "boxShadow": "none",
+                            "color": "rgb(205, 214, 230)",
+                            "paddingTop": "0px",
+                            "paddingRight": "0px",
+                            "paddingBottom": "0px",
+                            "paddingLeft": "0px",
+                            "minHeight": "auto",
+                            "borderTopLeftRadius": "0px",
+                            "borderTopRightRadius": "0px",
+                            "borderBottomRightRadius": "0px",
+                            "borderBottomLeftRadius": "0px",
+                            "fontSize": "0.875rem",
+                            "fontWeight": "400",
+                            "textAlign": "left"
+                          },
+                          "content": {
+                            "texte": "Réalisations",
+                            "lien": "#"
+                          }
+                        },
+                        {
+                          "id": "ftr_l4",
+                          "type": "bouton",
+                          "css": {
+                            "backgroundPositionX": "initial",
+                            "backgroundPositionY": "initial",
+                            "backgroundSize": "initial",
+                            "backgroundRepeat": "initial",
+                            "backgroundAttachment": "initial",
+                            "backgroundOrigin": "initial",
+                            "backgroundClip": "initial",
+                            "backgroundColor": "initial",
+                            "backgroundImage": "none",
+                            "boxShadow": "none",
+                            "color": "rgb(205, 214, 230)",
+                            "paddingTop": "0px",
+                            "paddingRight": "0px",
+                            "paddingBottom": "0px",
+                            "paddingLeft": "0px",
+                            "minHeight": "auto",
+                            "borderTopLeftRadius": "0px",
+                            "borderTopRightRadius": "0px",
+                            "borderBottomRightRadius": "0px",
+                            "borderBottomLeftRadius": "0px",
+                            "fontSize": "0.875rem",
+                            "fontWeight": "400",
+                            "textAlign": "left"
+                          },
+                          "content": {
+                            "texte": "Contact",
+                            "lien": "#"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "ftr_contact",
+                  "type": "groupe",
+                  "children": [
+                    {
+                      "id": "ftr_contact_t",
+                      "type": "titre",
+                      "css": {
+                        "fontFamily": "ui-monospace, monospace",
+                        "fontSize": "0.75rem",
+                        "textTransform": "uppercase",
+                        "letterSpacing": "0.18em",
+                        "color": "rgb(159, 178, 204)",
+                        "marginTop": "0px",
+                        "marginRight": "0px",
+                        "marginBottom": "0px",
+                        "marginLeft": "0px"
+                      },
+                      "content": {
+                        "texte": "Contact",
+                        "niveau": 3
+                      }
+                    },
+                    {
+                      "id": "ftr_contact_l",
+                      "type": "groupe",
+                      "css": {
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "rowGap": "0.4rem",
+                        "columnGap": "0.4rem",
+                        "marginTop": "0.75rem"
+                      },
+                      "children": [
+                        {
+                          "id": "ftr_email",
+                          "type": "texte",
+                          "css": {
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(238, 244, 252)"
+                          },
+                          "content": {
+                            "texte": "contact@ohiho.fr"
+                          }
+                        },
+                        {
+                          "id": "ftr_c1",
+                          "type": "texte",
+                          "css": {
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(159, 178, 204)"
+                          },
+                          "content": {
+                            "texte": "Développement web sur mesure"
+                          }
+                        },
+                        {
+                          "id": "ftr_c2",
+                          "type": "texte",
+                          "css": {
+                            "marginTop": "0px",
+                            "marginRight": "0px",
+                            "marginBottom": "0px",
+                            "marginLeft": "0px",
+                            "fontSize": "0.875rem",
+                            "color": "rgb(159, 178, 204)"
+                          },
+                          "content": {
+                            "texte": "Réponse sous 24h ouvrées"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ftr_bottom",
+              "type": "groupe",
+              "css": {
+                "display": "flex",
+                "justifyContent": "space-between",
+                "flexWrap": "wrap",
+                "rowGap": "1rem",
+                "columnGap": "1rem",
+                "marginTop": "3rem",
+                "paddingTop": "1.5rem",
+                "borderTopWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "fontFamily": "ui-monospace, monospace",
+                "fontSize": "0.75rem",
+                "color": "rgb(159, 178, 204)"
+              },
+              "children": [
+                {
+                  "id": "ftr_copy",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px"
+                  },
+                  "content": {
+                    "texte": "© 2026 OHIHO. Tous droits réservés."
+                  }
+                },
+                {
+                  "id": "ftr_by",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px"
+                  },
+                  "content": {
+                    "texte": "Réalisé par OHIHO"
+                  }
+                },
+                {
+                  "id": "ftr_note",
+                  "type": "texte",
+                  "css": {
+                    "marginTop": "0px",
+                    "marginRight": "0px",
+                    "marginBottom": "0px",
+                    "marginLeft": "0px"
+                  },
+                  "content": {
+                    "texte": "Création de sites web & applications"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "updatedAt": "2026-07-22T14:14:25.639Z"
+}

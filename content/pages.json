@@ -1,0 +1,12 @@
+[
+  {
+    "slug": "accueil",
+    "titre": "Accueil",
+    "description": ""
+  },
+  {
+    "slug": "services",
+    "titre": "Services",
+    "description": "Nos services"
+  }
+]

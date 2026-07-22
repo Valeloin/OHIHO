@@ -1,0 +1,59 @@
+{
+  "id": "1784728995606",
+  "nom": null,
+  "date": "2026-07-22T14:03:15.605Z",
+  "blocks": [
+    {
+      "id": "test_sec",
+      "type": "section",
+      "css": {
+        "maxWidth": "1280px",
+        "marginTop": "0px",
+        "marginRight": "auto",
+        "marginBottom": "0px",
+        "marginLeft": "auto",
+        "paddingTop": "4rem",
+        "paddingRight": "1.5rem",
+        "paddingBottom": "4rem",
+        "paddingLeft": "1.5rem"
+      },
+      "children": [
+        {
+          "id": "composant__cmrw5emy51",
+          "type": "composant",
+          "content": {
+            "composant": "connexion"
+          }
+        },
+        {
+          "id": "test_h",
+          "type": "titre",
+          "css": {
+            "fontSize": "2.5rem",
+            "fontWeight": "600",
+            "color": "rgb(238, 244, 252)",
+            "marginTop": "0px",
+            "marginRight": "0px",
+            "marginBottom": "0px",
+            "marginLeft": "0px"
+          },
+          "content": {
+            "texte": "test",
+            "niveau": 1
+          }
+        },
+        {
+          "id": "test_p",
+          "type": "texte",
+          "css": {
+            "color": "rgb(159, 178, 204)",
+            "marginTop": "1rem"
+          },
+          "content": {
+            "texte": "Nouvelle page — ajoute tes blocs depuis la palette."
+          }
+        }
+      ]
+    }
+  ]
+}
