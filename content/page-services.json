@@ -1,0 +1,41 @@
+{
+  "page": "services",
+  "blocks": [
+    {
+      "id": "services_sec",
+      "type": "section",
+      "css": {
+        "maxWidth": "1280px",
+        "margin": "0 auto",
+        "padding": "4rem 1.5rem"
+      },
+      "children": [
+        {
+          "id": "services_h",
+          "type": "titre",
+          "content": {
+            "niveau": 1,
+            "texte": "Services"
+          },
+          "css": {
+            "fontSize": "2.5rem",
+            "fontWeight": "600",
+            "color": "#eef4fc",
+            "margin": "0"
+          }
+        },
+        {
+          "id": "services_p",
+          "type": "texte",
+          "content": {
+            "texte": "Nouvelle page — ajoute tes blocs depuis la palette."
+          },
+          "css": {
+            "color": "#9fb2cc",
+            "marginTop": "1rem"
+          }
+        }
+      ]
+    }
+  ]
+}
