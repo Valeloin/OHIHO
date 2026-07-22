@@ -55,12 +55,16 @@ export function RenderBlock({ block }: { block: Block }) {
   } as const;
 
   switch (block.type) {
-    case "section":
+    case "section": {
+      // Ancre HTML (id="services"…) : permet aux liens de menu "#services" de
+      // faire défiler jusqu'à cette section, comme sur le vrai site OHIHO.
+      const ancre = String(content.ancre ?? "").trim() || undefined;
       return (
-        <section className="sd-section" style={style} {...dataAttrs}>
+        <section id={ancre} className="sd-section" style={style} {...dataAttrs}>
           {enfants}
         </section>
       );
+    }
     case "composant": {
       // Bloc-composant : on POSE un vrai composant fonctionnel d'OHIHO dans un
       // conteneur stylable (l'extension édite le conteneur, pas l'intérieur).

@@ -32,11 +32,11 @@ function lienNav(id: string, label: string): Block {
 }
 
 // Bouton secondaire OHIHO : pilule cernée d'un filet, fond nuit translucide.
-function boutonOutline(id: string, label: string): Block {
+function boutonOutline(id: string, label: string, lien: string = "#"): Block {
   return {
     id,
     type: "bouton",
-    content: { texte: label, lien: "#" },
+    content: { texte: label, lien },
     css: {
       backgroundImage: "none",
       background: "rgba(9,26,41,0.6)",
@@ -335,8 +335,8 @@ export const pageDemo: Page = {
           type: "groupe",
           css: { display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "2.5rem" },
           children: [
-            { id: "hero_cta1", type: "bouton", content: { texte: "Demander un devis", lien: "#" }, css: { padding: "0.85rem 1.75rem" } },
-            boutonOutline("hero_cta2", "Voir nos réalisations"),
+            { id: "hero_cta1", type: "bouton", content: { texte: "Demander un devis", lien: "/portail/devis/nouveau" }, css: { padding: "0.85rem 1.75rem" } },
+            boutonOutline("hero_cta2", "Voir nos réalisations", "/#portfolio"),
           ],
         },
         // 4 arguments
@@ -358,6 +358,7 @@ export const pageDemo: Page = {
     {
       id: "serv",
       type: "section",
+      content: { ancre: "services" },
       verrou: true,
       css: { maxWidth: "1280px", margin: "0 auto", padding: "3rem 1.5rem", borderTop: "1px solid #23405c" },
       children: [
@@ -391,6 +392,7 @@ export const pageDemo: Page = {
     {
       id: "method",
       type: "section",
+      content: { ancre: "methode" },
       verrou: true,
       css: { maxWidth: "1280px", margin: "0 auto", padding: "3rem 1.5rem", borderTop: "1px solid #23405c" },
       children: [
@@ -414,6 +416,7 @@ export const pageDemo: Page = {
     {
       id: "expertise",
       type: "section",
+      content: { ancre: "expertise" },
       verrou: true,
       css: { borderTop: "1px solid #23405c" },
       children: [
@@ -453,6 +456,7 @@ export const pageDemo: Page = {
     {
       id: "whyus",
       type: "section",
+      content: { ancre: "a-propos" },
       verrou: true,
       css: { maxWidth: "1280px", margin: "0 auto", padding: "3.5rem 1.5rem", borderTop: "1px solid #23405c" },
       children: [
@@ -476,6 +480,7 @@ export const pageDemo: Page = {
     {
       id: "bugtrack",
       type: "section",
+      content: { ancre: "bugtrack" },
       verrou: true,
       css: { borderTop: "1px solid #23405c" },
       children: [
@@ -506,6 +511,7 @@ export const pageDemo: Page = {
     {
       id: "portfolio",
       type: "section",
+      content: { ancre: "portfolio" },
       verrou: true,
       css: { borderTop: "1px solid #23405c" },
       children: [
@@ -542,7 +548,7 @@ export const pageDemo: Page = {
               css: { marginTop: "2rem", padding: "1.5rem", background: "#102436", border: "1px solid #23405c", borderRadius: "16px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1.25rem", flexWrap: "wrap" },
               children: [
                 { id: "pf_cta_t", type: "texte", content: { texte: "Vous avez un projet de site ou d'application en tête ?" }, css: { margin: "0", maxWidth: "36rem", fontSize: "0.875rem", color: "#9fb2cc" } },
-                { id: "pf_cta_b", type: "bouton", content: { texte: "Demander un devis", lien: "#" }, css: { padding: "0.75rem 1.5rem" } },
+                { id: "pf_cta_b", type: "bouton", content: { texte: "Demander un devis", lien: "/portail/devis/nouveau" }, css: { padding: "0.75rem 1.5rem" } },
               ],
             },
           ],
@@ -554,6 +560,7 @@ export const pageDemo: Page = {
     {
       id: "contact",
       type: "section",
+      content: { ancre: "contact" },
       verrou: true,
       css: { borderTop: "1px solid #23405c", background: "#102436" },
       children: [
@@ -603,7 +610,7 @@ export const pageDemo: Page = {
                 { id: "cc_title", type: "titre", content: { niveau: 3, texte: "Demander un devis" }, css: { fontSize: "1.125rem", fontWeight: "600", margin: "0", color: "#eef4fc" } },
                 { id: "cc_text", type: "texte", content: { texte: "Depuis votre espace client, choisissez une formule (landing page, site vitrine, application, refonte) et recevez une proposition adaptée." }, css: { fontSize: "0.875rem", lineHeight: "1.6", color: "#9fb2cc", marginTop: "0.75rem" } },
                 { id: "cc_rule", type: "groupe", css: { height: "1px", marginTop: "2rem", background: "linear-gradient(to right, #23405c, #23405c 30%, transparent)" }, children: [] },
-                { id: "cc_cta", type: "bouton", content: { texte: "Demander un devis", lien: "#" }, css: { marginTop: "2rem", padding: "0.75rem 2rem" } },
+                { id: "cc_cta", type: "bouton", content: { texte: "Demander un devis", lien: "/inscription" }, css: { marginTop: "2rem", padding: "0.75rem 2rem" } },
                 { id: "cc_login", type: "texte", content: { texte: "Déjà un compte ? Se connecter" }, css: { marginTop: "1.5rem", fontSize: "0.875rem", color: "#9fb2cc" } },
               ],
             },

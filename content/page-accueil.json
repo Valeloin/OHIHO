@@ -551,7 +551,7 @@
               },
               "content": {
                 "texte": "Demander un devis",
-                "lien": "#"
+                "lien": "/portail/devis/nouveau"
               }
             },
             {
@@ -589,7 +589,7 @@
               },
               "content": {
                 "texte": "Voir nos réalisations",
-                "lien": "#"
+                "lien": "/#portfolio"
               }
             }
           ]
@@ -1700,7 +1700,10 @@
             }
           ]
         }
-      ]
+      ],
+      "content": {
+        "ancre": "services"
+      }
     },
     {
       "id": "method",
@@ -2156,7 +2159,10 @@
             }
           ]
         }
-      ]
+      ],
+      "content": {
+        "ancre": "methode"
+      }
     },
     {
       "id": "expertise",
@@ -2566,7 +2572,10 @@
             }
           ]
         }
-      ]
+      ],
+      "content": {
+        "ancre": "expertise"
+      }
     },
     {
       "id": "whyus",
@@ -2958,7 +2967,10 @@
             }
           ]
         }
-      ]
+      ],
+      "content": {
+        "ancre": "a-propos"
+      }
     },
     {
       "id": "bugtrack",
@@ -3358,7 +3370,10 @@
             }
           ]
         }
-      ]
+      ],
+      "content": {
+        "ancre": "bugtrack"
+      }
     },
     {
       "id": "portfolio",
@@ -4024,14 +4039,17 @@
                   },
                   "content": {
                     "texte": "Demander un devis",
-                    "lien": "#"
+                    "lien": "/portail/devis/nouveau"
                   }
                 }
               ]
             }
           ]
         }
-      ]
+      ],
+      "content": {
+        "ancre": "portfolio"
+      }
     },
     {
       "id": "contact",
@@ -4387,7 +4405,7 @@
                   },
                   "content": {
                     "texte": "Demander un devis",
-                    "lien": "#"
+                    "lien": "/inscription"
                   }
                 },
                 {
@@ -4406,7 +4424,10 @@
             }
           ]
         }
-      ]
+      ],
+      "content": {
+        "ancre": "contact"
+      }
     },
     {
       "id": "ftr",

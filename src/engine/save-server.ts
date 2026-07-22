@@ -16,8 +16,8 @@ const MAX_AUTO = 10; // on garde les 10 derniers snapshots automatiques
 // Sur VERCEL : un jeton GitHub est fourni → le disque est en lecture seule, donc
 // on envoie le contenu directement à GitHub par son API (ça fait un commit).
 const GH_TOKEN = process.env.GITHUB_TOKEN;
-const GH_REPO = process.env.GITHUB_REPO || "Valeloin/simple-dev";
-const GH_BRANCH = process.env.GITHUB_BRANCH || "master";
+const GH_REPO = process.env.GITHUB_REPO || "Valeloin/OHIHO";
+const GH_BRANCH = process.env.GITHUB_BRANCH || "main";
 const SUR_GITHUB = !!GH_TOKEN;
 
 const CHEMIN_CONTENU = "content/demo.json"; // chemin du fichier DANS le dépôt
