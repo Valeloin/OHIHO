@@ -1,61 +1,20 @@
-import Hero from "@/components/Hero";
-import HeroShowcase from "@/components/motion/HeroShowcase";
-import { formulasFrom } from "@/lib/quotes";
-import Services from "@/components/Services";
-import Portfolio from "@/components/Portfolio";
-import HowItWorks from "@/components/HowItWorks";
-import Expertise from "@/components/Expertise";
-import WhyUs from "@/components/WhyUs";
-import BugTrack from "@/components/BugTrack";
-import ContactSection from "@/components/ContactSection";
-import ScrollNav from "@/components/ScrollNav";
-import { getContent } from "@/lib/content";
-import { createClient } from "@/lib/supabase/server";
-import { isSupabaseConfigured } from "@/lib/supabase/config";
+// Page d'accueil OHIHO — vitrine rendue par le moteur Simple Dev.
+// Le menu et le pied de page réels viennent de layout.tsx (Navbar/Footer) : on
+// masque ici les blocs header/footer du moteur pour n'avoir qu'UN SEUL menu.
+import "@/engine/engine.css";
+import { RenderPage } from "@/engine/RenderBlock";
+import { getContent } from "@/engine/getContent";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const content = await getContent();
-
-  // Les cartes de services mènent au devis si le visiteur est connecté,
-  // sinon à l'inscription.
-  let loggedIn = false;
-  if (isSupabaseConfigured()) {
-    const supabase = createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    loggedIn = !!user;
-  }
-  const devisHref = loggedIn ? "/portail/devis/nouveau" : "/inscription";
+  // "accueil" a toujours un contenu (filet anti-bug de getContent), mais son
+  // type reste nullable pour les autres pages : on part d'un tableau vide au pire.
+  const blocks = (await getContent()) ?? [];
+  const contenu = blocks.filter((b) => b.type !== "header" && b.type !== "footer");
   return (
-    <main>
-      {/* La vitrine est passée en prop (et non importée par Hero) : Hero est
-          un composant client, un import y embarquerait tout le SVG des scènes
-          dans le bundle. Les libellés suivent l'ordre de PROJECT_TYPES, qui
-          est aussi celui des scènes de la vitrine. */}
-      <Hero
-        data={content.hero}
-        formulaLabels={formulasFrom(content.quotes).map((f) => f.label)}
-        showcase={<HeroShowcase />}
-      />
-      <Services
-        data={content.services}
-        quotes={content.quotes}
-        devisHref={devisHref}
-      />
-      <HowItWorks data={content.method} />
-      <Expertise data={content.expertise} />
-      <WhyUs data={content.whyUs} />
-      {/* Prolonge « Pourquoi OHIHO » : la promesse d'accompagnement, montrée
-          concrètement par l'outil livré avec chaque site.
-          Il y avait ici deux sections, « Suivi » puis « BugTrack », qui
-          décrivaient le même mécanisme de tickets — l'une sans nommer
-          l'outil, l'autre sans dire qu'il est livré avec le site. Elles ont
-          été fusionnées dans BugTrack, et Suivi.tsx supprimé. */}
-      <BugTrack />
-      <Portfolio data={content.portfolio} />
-      <ContactSection data={content.contact} />
-      <ScrollNav />
+    <main data-sd-page="accueil">
+      <RenderPage blocks={contenu} />
     </main>
   );
 }
