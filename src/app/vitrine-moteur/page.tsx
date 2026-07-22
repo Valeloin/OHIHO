@@ -1,12 +1,19 @@
 // Page de TEST : la vitrine rendue par le moteur Simple Dev, à l'intérieur du
-// projet OHIHO. Sert à vérifier l'intégration du moteur avant de brancher la
-// vraie page d'accueil. Route jetable (branche de test).
+// projet OHIHO. Éditable via l'extension ; les enregistrements sont relus ici
+// par getContent() (fichier content/demo.json, sinon défauts). Route jetable.
 import "@/engine/engine.css";
 import { RenderPage } from "@/engine/RenderBlock";
-import { pageDemo } from "@/engine/defaults";
+import { getContent } from "@/engine/getContent";
 
 export const dynamic = "force-dynamic";
 
-export default function VitrineMoteur() {
-  return <RenderPage blocks={pageDemo.blocks} />;
+export default async function VitrineMoteur() {
+  const blocks = await getContent();
+  // Le <main> est requis par l'extension Simple Dev (sélection / annulation /
+  // sérialisation lisent `document.querySelector("main")`).
+  return (
+    <main>
+      <RenderPage blocks={blocks} />
+    </main>
+  );
 }

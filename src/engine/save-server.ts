@@ -171,8 +171,9 @@ export async function commitPush(message: string) {
     await pexec("git add content", { cwd: RACINE });
     await pexec('git commit -m "' + message.replace(/"/g, "'") + '"', { cwd: RACINE });
     committed = true;
-    await pexec("git push origin master", { cwd: RACINE });
-    pushed = true;
+    // Phase de test dans OHIHO : on enregistre en LOCAL sur la branche courante,
+    // sans push automatique (la branche sera poussée à la main quand ce sera prêt).
+    note = "enregistré (branche de test, local)";
   } catch (e) {
     const msg = String((e as { stderr?: string }).stderr || e);
     note = /nothing to commit/i.test(msg) ? "aucun changement" : msg.slice(0, 300);
