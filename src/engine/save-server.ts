@@ -75,15 +75,17 @@ async function supprimerGitHub(chemin: string, message: string) {
   if (!r.ok) throw new Error("GitHub (suppression) " + r.status + " : " + (await r.text()).slice(0, 200));
 }
 
-// ---- Écriture du contenu courant (ce que le site affiche) -------------------
-export async function ecrireContenu(blocks: unknown, horodatage: string, message?: string) {
-  const texte = JSON.stringify({ page: "demo", blocks, updatedAt: horodatage }, null, 2);
+// ---- Écriture du contenu d'une PAGE (content/page-<slug>.json) ---------------
+export async function ecrireContenu(blocks: unknown, horodatage: string, message?: string, slug: string = "accueil") {
+  const nom = slug || "accueil";
+  const chemin = "content/page-" + nom + ".json";
+  const texte = JSON.stringify({ page: nom, blocks, updatedAt: horodatage }, null, 2);
   if (SUR_GITHUB) {
-    await ecrireGitHub(CHEMIN_CONTENU, texte, message || "Enregistrement graphique " + horodatage);
+    await ecrireGitHub(chemin, texte, message || "Enregistrement graphique " + horodatage);
     return;
   }
   await mkdir(DIR_CONTENU, { recursive: true });
-  await writeFile(FICHIER, texte, "utf8");
+  await writeFile(path.join(DIR_CONTENU, "page-" + nom + ".json"), texte, "utf8");
 }
 
 // Supprime le contenu → le site retombe sur les défauts du code (reset total).
