@@ -7,6 +7,16 @@ import DevisWizard from "@/components/portail/DevisWizard";
 import ProfileForm from "@/components/portail/ProfileForm";
 import { createClient } from "@/lib/supabase/server";
 import { getContent } from "@/lib/content";
+import HeroShowcase from "@/components/motion/HeroShowcase";
+import MethodShowcase from "@/components/motion/MethodShowcase";
+import TicketScene from "@/components/motion/TicketScene";
+import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import { SceneDigitalisation, SceneMaintenance, SceneRefonte, SceneApplication } from "@/components/motion/ServiceScene";
+
+// La frise Méthode attend le nombre d'étapes (4 dans OHIHO).
+function SceneMethode() {
+  return <MethodShowcase steps={4} />;
+}
 
 // Message affiché quand un composant réservé à l'espace client est posé sur une
 // page publique et que le visiteur n'est pas connecté.
@@ -61,6 +71,15 @@ export const COMPOSANTS: Record<string, ComponentType> = {
   "nouveau-mot-de-passe": NewPasswordForm as ComponentType,
   devis: DevisEmbarque as unknown as ComponentType,
   profil: ProfilEmbarque as unknown as ComponentType,
+  // Scènes animées signature d'OHIHO (les @keyframes vivent dans globals.css).
+  "scene-hero": HeroShowcase as ComponentType,
+  "scene-methode": SceneMethode as ComponentType,
+  "scene-bugtrack": TicketScene as ComponentType,
+  "fond-anime": SectionBackdrop as ComponentType,
+  "scene-maintenance": SceneMaintenance as ComponentType,
+  "scene-digitalisation": SceneDigitalisation as ComponentType,
+  "scene-refonte": SceneRefonte as ComponentType,
+  "scene-application": SceneApplication as ComponentType,
 };
 
 // Libellés pour l'interface (panneau / palette de l'extension).
@@ -71,4 +90,12 @@ export const COMPOSANTS_LISTE: { nom: string; label: string }[] = [
   { nom: "nouveau-mot-de-passe", label: "Nouveau mot de passe" },
   { nom: "devis", label: "Demande de devis" },
   { nom: "profil", label: "Profil client" },
+  { nom: "scene-hero", label: "🎬 Scène — héro" },
+  { nom: "scene-methode", label: "🎬 Scène — méthode" },
+  { nom: "scene-bugtrack", label: "🎬 Scène — BugTrack" },
+  { nom: "fond-anime", label: "🎬 Fond animé" },
+  { nom: "scene-maintenance", label: "🎬 Scène — maintenance" },
+  { nom: "scene-digitalisation", label: "🎬 Scène — digitalisation" },
+  { nom: "scene-refonte", label: "🎬 Scène — refonte" },
+  { nom: "scene-application", label: "🎬 Scène — application" },
 ];
