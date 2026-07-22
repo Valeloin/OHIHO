@@ -149,7 +149,7 @@ export function RenderBlock({ block }: { block: Block }) {
       );
     case "groupe":
       return (
-        <div className={`sd-groupe${anime}`} style={style} {...dataAttrs}>
+        <div className={`sd-groupe${anime}`} style={style} {...dataAttrs} data-sd-nom={content.nom ? String(content.nom) : undefined}>
           {enfants}
         </div>
       );
