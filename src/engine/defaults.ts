@@ -171,6 +171,68 @@ function carteProjet(
   };
 }
 
+// En-tête de section : pastille verte + intitulé mono en majuscules.
+function kicker(id: string, texte: string): Block {
+  return {
+    id,
+    type: "groupe",
+    css: { display: "inline-flex", alignItems: "center", gap: "0.6rem", marginBottom: "1rem" },
+    children: [
+      { id: id + "_dot", type: "forme", style: { forme: "cercle" }, css: { width: "0.4rem", height: "0.4rem", background: "#34d399", boxShadow: "0 0 8px rgba(52,211,153,0.7)" } },
+      { id: id + "_t", type: "texte", content: { texte }, css: { margin: "0", fontFamily: "ui-monospace, monospace", fontSize: "0.6875rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#22d3c4" } },
+    ],
+  };
+}
+
+// Une étape de la Méthode (numéro + titre + description).
+function etapeMethode(id: string, num: string, titre: string, desc: string): Block {
+  return {
+    id, type: "groupe",
+    css: { padding: "1.5rem", border: "1px solid #23405c", borderRadius: "16px", background: "#102436" },
+    children: [
+      { id: id + "_num", type: "texte", content: { texte: num }, css: { margin: "0", fontFamily: "ui-monospace, monospace", fontSize: "0.875rem", color: "#22d3c4" } },
+      { id: id + "_t", type: "titre", content: { niveau: 3, texte: titre }, css: { fontSize: "1.125rem", fontWeight: "600", margin: "0.5rem 0 0", color: "#eef4fc" } },
+      { id: id + "_d", type: "texte", content: { texte: desc }, css: { fontSize: "0.875rem", lineHeight: "1.6", color: "#9fb2cc", marginTop: "0.5rem" } },
+    ],
+  };
+}
+
+// Une valeur « Pourquoi OHIHO » (titre + description).
+function carteValeur(id: string, titre: string, desc: string): Block {
+  return {
+    id, type: "groupe",
+    css: { padding: "1.5rem", border: "1px solid #23405c", borderRadius: "16px", background: "#102436" },
+    children: [
+      { id: id + "_t", type: "titre", content: { niveau: 3, texte: titre }, css: { fontSize: "1rem", fontWeight: "600", margin: "0", color: "#eef4fc" } },
+      { id: id + "_d", type: "texte", content: { texte: desc }, css: { fontSize: "0.875rem", lineHeight: "1.6", color: "#9fb2cc", marginTop: "0.5rem" } },
+    ],
+  };
+}
+
+// Un point fort BugTrack (titre + description).
+function pointBug(id: string, titre: string, desc: string): Block {
+  return {
+    id, type: "groupe",
+    css: { padding: "1.25rem", border: "1px solid #23405c", borderRadius: "14px", background: "#0d1e30" },
+    children: [
+      { id: id + "_t", type: "titre", content: { niveau: 3, texte: titre }, css: { fontSize: "0.95rem", fontWeight: "600", margin: "0", color: "#eef4fc" } },
+      { id: id + "_d", type: "texte", content: { texte: desc }, css: { fontSize: "0.85rem", lineHeight: "1.55", color: "#9fb2cc", marginTop: "0.4rem" } },
+    ],
+  };
+}
+
+// Une ligne « Ce qu'on couvre » (pastille + libellé).
+function covLine(id: string, texte: string): Block {
+  return {
+    id, type: "groupe",
+    css: { display: "flex", alignItems: "center", gap: "0.7rem", padding: "0.55rem 0" },
+    children: [
+      { id: id + "_d", type: "forme", style: { forme: "cercle" }, css: { width: "0.4rem", height: "0.4rem", background: "#22d3c4", flex: "none" } },
+      { id: id + "_t", type: "texte", content: { texte }, css: { margin: "0", fontSize: "0.9rem", color: "#eef4fc" } },
+    ],
+  };
+}
+
 export const pageDemo: Page = {
   id: "demo",
   titre: "Mon site",
@@ -320,6 +382,121 @@ export const pageDemo: Page = {
             carteFormule("f2", "02", "Site intermédiaire", "Plusieurs pages", "Accueil, services, à propos, contact. De quoi dérouler votre activité en détail, et donner envie de vous faire confiance.", false),
             carteFormule("f3", "03", "Refonte de site", "Un site à rafraîchir", "Votre site existe déjà mais il a vieilli. On garde vos contenus, on refait le design, la vitesse et le mobile.", true),
             carteFormule("f4", "04", "Application web", "Sur mesure", "Espace client, réservation, tableau de bord, outil interne. Un logiciel écrit pour votre métier, avec ses comptes et ses règles.", false),
+          ],
+        },
+      ],
+    },
+
+    // --- MÉTHODE : Comment nous travaillons ensemble (4 étapes) ---
+    {
+      id: "method",
+      type: "section",
+      verrou: true,
+      css: { maxWidth: "1280px", margin: "0 auto", padding: "3rem 1.5rem", borderTop: "1px solid #23405c" },
+      children: [
+        kicker("method_k", "Méthode"),
+        { id: "method_title", type: "titre", content: { niveau: 2, texte: "Comment nous travaillons ensemble" }, css: { fontSize: "2.25rem", fontWeight: "600", letterSpacing: "-0.03em", maxWidth: "48rem", margin: "0", color: "#eef4fc" } },
+        {
+          id: "method_grid",
+          type: "groupe",
+          css: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.25rem", marginTop: "2rem" },
+          children: [
+            etapeMethode("m1", "01", "Échange initial", "Un échange pour comprendre votre projet, vos objectifs et votre budget, sans engagement."),
+            etapeMethode("m2", "02", "Maquette & devis", "Une proposition claire, avec maquette visuelle et devis détaillé, avant de commencer le développement."),
+            etapeMethode("m3", "03", "Développement", "Votre site ou application prend forme, avec des points d'étape réguliers pour suivre l'avancement."),
+            etapeMethode("m4", "04", "Mise en ligne & suivi", "Déploiement, puis accompagnement dans la durée pour les évolutions et le suivi par email."),
+          ],
+        },
+      ],
+    },
+
+    // --- EXPERTISE : Notre approche (2 paragraphes + panneau « Ce qu'on couvre ») ---
+    {
+      id: "expertise",
+      type: "section",
+      verrou: true,
+      css: { borderTop: "1px solid #23405c" },
+      children: [
+        {
+          id: "exp_inner",
+          type: "groupe",
+          css: { maxWidth: "1280px", margin: "0 auto", padding: "3.5rem 1.5rem", display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "3rem", alignItems: "start" },
+          children: [
+            {
+              id: "exp_left",
+              type: "groupe",
+              children: [
+                kicker("exp_k", "Notre approche"),
+                { id: "exp_title", type: "titre", content: { niveau: 2, texte: "Un travail soigné, une communication claire, du début à la fin" }, css: { fontSize: "2rem", fontWeight: "600", letterSpacing: "-0.03em", margin: "0", color: "#eef4fc" } },
+                { id: "exp_p1", type: "texte", content: { texte: "Chaque projet est développé avec une stack moderne et un code pensé pour durer. Pas de solution générique, pas de boîte noire. Vous savez toujours où en est votre projet." }, css: { lineHeight: "1.7", color: "#9fb2cc", marginTop: "1.5rem" } },
+                { id: "exp_p2", type: "texte", content: { texte: "Une fois votre site ou application en ligne, l'accompagnement continue : les demandes d'évolution ou de correction se font simplement par email, jusqu'à leur résolution." }, css: { lineHeight: "1.7", color: "#9fb2cc", marginTop: "1rem" } },
+              ],
+            },
+            {
+              id: "exp_panel",
+              type: "groupe",
+              css: { padding: "1.75rem", border: "1px solid #23405c", borderRadius: "18px", background: "#102436" },
+              children: [
+                { id: "exp_panel_t", type: "titre", content: { niveau: 3, texte: "Ce qu'on couvre" }, css: { fontSize: "0.75rem", fontFamily: "ui-monospace, monospace", textTransform: "uppercase", letterSpacing: "0.15em", color: "#22d3c4", margin: "0 0 1rem" } },
+                covLine("cov1", "Sites vitrines"),
+                covLine("cov2", "Applications web sur mesure"),
+                covLine("cov3", "Refonte de sites existants"),
+                covLine("cov4", "Maintenance & évolutions"),
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    // --- POURQUOI OHIHO : 4 valeurs ---
+    {
+      id: "whyus",
+      type: "section",
+      verrou: true,
+      css: { maxWidth: "1280px", margin: "0 auto", padding: "3.5rem 1.5rem", borderTop: "1px solid #23405c" },
+      children: [
+        kicker("why_k", "Pourquoi OHIHO"),
+        { id: "why_title", type: "titre", content: { niveau: 2, texte: "Un accompagnement qui continue après la mise en ligne" }, css: { fontSize: "2.25rem", fontWeight: "600", letterSpacing: "-0.03em", maxWidth: "48rem", margin: "0", color: "#eef4fc" } },
+        {
+          id: "why_grid",
+          type: "groupe",
+          css: { display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.25rem", marginTop: "2rem" },
+          children: [
+            carteValeur("v1", "Un travail soigné & durable", "Une stack moderne et un code lisible, pensés pour évoluer avec votre projet, pas contre lui."),
+            carteValeur("v2", "Communication claire", "Pas de jargon technique. Vous comprenez toujours où en est votre projet et pourquoi."),
+            carteValeur("v3", "Livraison dans les délais", "Un devis clair en amont, et des points d'étape réguliers pour suivre l'avancement sans surprise."),
+            carteValeur("v4", "Accompagnement dans la durée", "Après la mise en ligne, nous restons disponibles pour les évolutions et corrections, par email."),
+          ],
+        },
+      ],
+    },
+
+    // --- BUGTRACK : notre outil de suivi (chapeau + 4 points) ---
+    {
+      id: "bugtrack",
+      type: "section",
+      verrou: true,
+      css: { borderTop: "1px solid #23405c" },
+      children: [
+        {
+          id: "bt_inner",
+          type: "groupe",
+          css: { maxWidth: "1280px", margin: "0 auto", padding: "3.5rem 1.5rem" },
+          children: [
+            kicker("bt_k", "Notre outil"),
+            { id: "bt_title", type: "titre", content: { niveau: 2, texte: "BugTrack, le suivi que nous branchons sur votre site" }, css: { fontSize: "2.25rem", fontWeight: "600", letterSpacing: "-0.03em", maxWidth: "48rem", margin: "0", color: "#eef4fc" } },
+            {
+              id: "bt_grid",
+              type: "groupe",
+              css: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem", marginTop: "2rem" },
+              children: [
+                pointBug("bt1", "Vous signalez, rien ne se perd", "Une anomalie ou une demande d'évolution se dépose dans votre espace plutôt que dans un email qui se perd. Chaque demande a sa référence, sa priorité et son état."),
+                pointBug("bt2", "Vous savez toujours où ça en est", "Reçue, en cours d'analyse, corrigée : le statut est visible à tout moment, et les échanges restent attachés à la demande plutôt qu'éparpillés dans une boîte mail."),
+                pointBug("bt3", "Rien ne dort indéfiniment", "Vous êtes prévenu par email à chaque avancée, et les demandes restées sans réponse remontent puis se clôturent d'elles-mêmes plutôt que d'encombrer la liste."),
+                pointBug("bt4", "Un espace par client", "Chaque compte ne voit que ses propres demandes. L'outil sert plusieurs projets sans que les clients se croisent."),
+              ],
+            },
           ],
         },
       ],
