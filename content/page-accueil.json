@@ -96,7 +96,7 @@
                 "marginLeft": "0px"
               },
               "content": {
-                "texte": "Site web et application web",
+                "texte": "test Site web et application web",
                 "niveau": 1
               }
             },
@@ -134,13 +134,6 @@
           },
           "content": {
             "texte": "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée."
-          }
-        },
-        {
-          "id": "composant__cmrw5yi2x1",
-          "type": "composant",
-          "content": {
-            "composant": "scene-hero"
           }
         },
         {
@@ -4206,5 +4199,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-07-22T19:06:54.340Z"
+  "updatedAt": "2026-07-23T21:10:00.277Z"
 }
