@@ -137,6 +137,13 @@
           }
         },
         {
+          "id": "composant__cmrw5yi2x1",
+          "type": "composant",
+          "content": {
+            "composant": "scene-hero"
+          }
+        },
+        {
           "id": "hero_ctas",
           "type": "groupe",
           "css": {
