@@ -621,9 +621,23 @@
         "paddingLeft": "1.5rem",
         "borderTopWidth": "1px",
         "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)"
+        "borderTopColor": "rgb(35, 64, 92)",
+        "position": "relative",
+        "overflow": "hidden"
       },
       "children": [
+        {
+          "id": "serv_backdrop",
+          "type": "composant",
+          "css": {
+            "position": "absolute",
+            "inset": "0px",
+            "pointerEvents": "none"
+          },
+          "content": {
+            "composant": "fond-anime"
+          }
+        },
         {
           "id": "serv_kicker",
           "type": "groupe",
@@ -786,8 +800,18 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(7, 21, 34)"
-                  }
+                    "backgroundColor": "rgb(7, 21, 34)",
+                    "overflow": "hidden"
+                  },
+                  "children": [
+                    {
+                      "id": "f1_scene_comp",
+                      "type": "composant",
+                      "content": {
+                        "composant": "scene-maintenance"
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": "f1_txt",
@@ -930,8 +954,18 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(7, 21, 34)"
-                  }
+                    "backgroundColor": "rgb(7, 21, 34)",
+                    "overflow": "hidden"
+                  },
+                  "children": [
+                    {
+                      "id": "f2_scene_comp",
+                      "type": "composant",
+                      "content": {
+                        "composant": "scene-digitalisation"
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": "f2_txt",
@@ -1074,8 +1108,18 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(7, 21, 34)"
-                  }
+                    "backgroundColor": "rgb(7, 21, 34)",
+                    "overflow": "hidden"
+                  },
+                  "children": [
+                    {
+                      "id": "f3_scene_comp",
+                      "type": "composant",
+                      "content": {
+                        "composant": "scene-refonte"
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": "f3_txt",
@@ -1218,8 +1262,18 @@
                     "backgroundAttachment": "initial",
                     "backgroundOrigin": "initial",
                     "backgroundClip": "initial",
-                    "backgroundColor": "rgb(7, 21, 34)"
-                  }
+                    "backgroundColor": "rgb(7, 21, 34)",
+                    "overflow": "hidden"
+                  },
+                  "children": [
+                    {
+                      "id": "f4_scene_comp",
+                      "type": "composant",
+                      "content": {
+                        "composant": "scene-application"
+                      }
+                    }
+                  ]
                 },
                 {
                   "id": "f4_txt",
@@ -1331,9 +1385,23 @@
         "paddingLeft": "1.5rem",
         "borderTopWidth": "1px",
         "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)"
+        "borderTopColor": "rgb(35, 64, 92)",
+        "position": "relative",
+        "overflow": "hidden"
       },
       "children": [
+        {
+          "id": "method_backdrop",
+          "type": "composant",
+          "css": {
+            "position": "absolute",
+            "inset": "0px",
+            "pointerEvents": "none"
+          },
+          "content": {
+            "composant": "fond-anime"
+          }
+        },
         {
           "id": "method_k",
           "type": "groupe",
@@ -1403,6 +1471,20 @@
           "content": {
             "texte": "Comment nous travaillons ensemble",
             "niveau": 2
+          }
+        },
+        {
+          "id": "method_scene",
+          "type": "composant",
+          "css": {
+            "maxWidth": "28rem",
+            "marginTop": "2rem",
+            "marginRight": "auto",
+            "marginBottom": "0px",
+            "marginLeft": "auto"
+          },
+          "content": {
+            "composant": "scene-methode"
           }
         },
         {
@@ -1778,9 +1860,23 @@
       "css": {
         "borderTopWidth": "1px",
         "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)"
+        "borderTopColor": "rgb(35, 64, 92)",
+        "position": "relative",
+        "overflow": "hidden"
       },
       "children": [
+        {
+          "id": "expertise_backdrop",
+          "type": "composant",
+          "css": {
+            "position": "absolute",
+            "inset": "0px",
+            "pointerEvents": "none"
+          },
+          "content": {
+            "composant": "fond-anime"
+          }
+        },
         {
           "id": "exp_inner",
           "type": "groupe",
@@ -2197,9 +2293,23 @@
         "paddingLeft": "1.5rem",
         "borderTopWidth": "1px",
         "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)"
+        "borderTopColor": "rgb(35, 64, 92)",
+        "position": "relative",
+        "overflow": "hidden"
       },
       "children": [
+        {
+          "id": "whyus_backdrop",
+          "type": "composant",
+          "css": {
+            "position": "absolute",
+            "inset": "0px",
+            "pointerEvents": "none"
+          },
+          "content": {
+            "composant": "fond-anime"
+          }
+        },
         {
           "id": "why_k",
           "type": "groupe",
@@ -2580,9 +2690,23 @@
       "css": {
         "borderTopWidth": "1px",
         "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)"
+        "borderTopColor": "rgb(35, 64, 92)",
+        "position": "relative",
+        "overflow": "hidden"
       },
       "children": [
+        {
+          "id": "bugtrack_backdrop",
+          "type": "composant",
+          "css": {
+            "position": "absolute",
+            "inset": "0px",
+            "pointerEvents": "none"
+          },
+          "content": {
+            "composant": "fond-anime"
+          }
+        },
         {
           "id": "bt_inner",
           "type": "groupe",
@@ -2667,6 +2791,37 @@
               "content": {
                 "texte": "BugTrack, le suivi que nous branchons sur votre site",
                 "niveau": 2
+              }
+            },
+            {
+              "id": "bt_scene",
+              "type": "composant",
+              "css": {
+                "maxWidth": "30rem",
+                "marginTop": "2rem",
+                "marginRight": "auto",
+                "marginBottom": "0px",
+                "marginLeft": "auto",
+                "overflow": "hidden",
+                "borderTopWidth": "1px",
+                "borderRightWidth": "1px",
+                "borderBottomWidth": "1px",
+                "borderLeftWidth": "1px",
+                "borderTopStyle": "solid",
+                "borderRightStyle": "solid",
+                "borderBottomStyle": "solid",
+                "borderLeftStyle": "solid",
+                "borderTopColor": "rgb(35, 64, 92)",
+                "borderRightColor": "rgb(35, 64, 92)",
+                "borderBottomColor": "rgb(35, 64, 92)",
+                "borderLeftColor": "rgb(35, 64, 92)",
+                "borderTopLeftRadius": "12px",
+                "borderTopRightRadius": "12px",
+                "borderBottomRightRadius": "12px",
+                "borderBottomLeftRadius": "12px"
+              },
+              "content": {
+                "composant": "scene-bugtrack"
               }
             },
             {
@@ -2980,9 +3135,23 @@
       "css": {
         "borderTopWidth": "1px",
         "borderTopStyle": "solid",
-        "borderTopColor": "rgb(35, 64, 92)"
+        "borderTopColor": "rgb(35, 64, 92)",
+        "position": "relative",
+        "overflow": "hidden"
       },
       "children": [
+        {
+          "id": "portfolio_backdrop",
+          "type": "composant",
+          "css": {
+            "position": "absolute",
+            "inset": "0px",
+            "pointerEvents": "none"
+          },
+          "content": {
+            "composant": "fond-anime"
+          }
+        },
         {
           "id": "pf_inner",
           "type": "groupe",
@@ -3662,9 +3831,23 @@
         "backgroundAttachment": "initial",
         "backgroundOrigin": "initial",
         "backgroundClip": "initial",
-        "backgroundColor": "rgb(16, 36, 54)"
+        "backgroundColor": "rgb(16, 36, 54)",
+        "position": "relative",
+        "overflow": "hidden"
       },
       "children": [
+        {
+          "id": "contact_backdrop",
+          "type": "composant",
+          "css": {
+            "position": "absolute",
+            "inset": "0px",
+            "pointerEvents": "none"
+          },
+          "content": {
+            "composant": "fond-anime"
+          }
+        },
         {
           "id": "contact_inner",
           "type": "groupe",

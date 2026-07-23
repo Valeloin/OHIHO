@@ -11,11 +11,26 @@ import HeroShowcase from "@/components/motion/HeroShowcase";
 import MethodShowcase from "@/components/motion/MethodShowcase";
 import TicketScene from "@/components/motion/TicketScene";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
-import { SceneDigitalisation, SceneMaintenance, SceneRefonte, SceneApplication } from "@/components/motion/ServiceScene";
+import ServiceScene from "@/components/motion/ServiceScene";
 
 // La frise Méthode attend le nombre d'étapes (4 dans OHIHO).
 function SceneMethode() {
   return <MethodShowcase steps={4} />;
+}
+
+// Les 4 vignettes de formules attendent un `type` : ServiceScene fournit déjà
+// la fenêtre (svg + fond + barre de navigateur), on ne fixe que la formule.
+function SceneMaintenance() {
+  return <ServiceScene type="landing" />;
+}
+function SceneDigitalisation() {
+  return <ServiceScene type="intermediaire" />;
+}
+function SceneRefonte() {
+  return <ServiceScene type="refonte" />;
+}
+function SceneApplication() {
+  return <ServiceScene type="application" />;
 }
 
 // Message affiché quand un composant réservé à l'espace client est posé sur une
