@@ -96,7 +96,7 @@
                 "marginLeft": "0px"
               },
               "content": {
-                "texte": "Site web et application web",
+                "texte": "test Site web et application web",
                 "niveau": 1
               }
             },
@@ -134,13 +134,6 @@
           },
           "content": {
             "texte": "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée."
-          }
-        },
-        {
-          "id": "composant__cmry086an1",
-          "type": "composant",
-          "content": {
-            "composant": "fond-anime"
           }
         },
         {
@@ -4023,5 +4016,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-07-23T21:09:43.860Z"
+  "updatedAt": "2026-07-23T21:10:00.277Z"
 }
