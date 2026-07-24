@@ -3,9 +3,14 @@ import { writeFile, mkdir, unlink } from "fs/promises";
 import path from "path";
 import { listerPages, type PageInfo } from "@/engine/pages";
 import { codeAdminOk, commitPush } from "@/engine/save-server";
+import { corsHeaders, preflight } from "@/engine/cors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+export async function OPTIONS(req: Request) {
+  return preflight(req);
+}
 
 const DIR = path.join(process.cwd(), "content");
 const INDEX = path.join(DIR, "pages.json");
@@ -28,24 +33,25 @@ async function ecrireIndex(pages: PageInfo[]) {
 
 type Corps = { slug?: string; titre?: string; description?: string };
 
-export async function GET() {
-  return NextResponse.json({ ok: true, pages: await listerPages() });
+export async function GET(req: Request) {
+  return NextResponse.json({ ok: true, pages: await listerPages() }, { headers: corsHeaders(req) });
 }
 
 export async function POST(req: Request) {
-  if (!codeAdminOk(req)) return NextResponse.json({ ok: false, error: "code admin requis" }, { status: 401 });
+  const headers = corsHeaders(req);
+  if (!codeAdminOk(req)) return NextResponse.json({ ok: false, error: "code admin requis" }, { status: 401, headers });
   let body: Corps;
   try {
     body = (await req.json()) as Corps;
   } catch {
-    return NextResponse.json({ ok: false, error: "JSON invalide" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "JSON invalide" }, { status: 400, headers });
   }
   const titre = (body.titre || "").trim() || "Nouvelle page";
   const slug = nettoyerSlug(body.slug || titre);
-  if (!slug) return NextResponse.json({ ok: false, error: "nom de page invalide" }, { status: 400 });
+  if (!slug) return NextResponse.json({ ok: false, error: "nom de page invalide" }, { status: 400, headers });
   const pages = await listerPages();
   if (pages.some((p) => p.slug === slug)) {
-    return NextResponse.json({ ok: false, error: "cette page existe déjà" }, { status: 409 });
+    return NextResponse.json({ ok: false, error: "cette page existe déjà" }, { status: 409, headers });
   }
   pages.push({ slug, titre, description: (body.description || "").trim() });
   await ecrireIndex(pages);
@@ -68,20 +74,21 @@ export async function POST(req: Request) {
   await mkdir(DIR, { recursive: true });
   await writeFile(path.join(DIR, "page-" + slug + ".json"), JSON.stringify(starter, null, 2), "utf8");
   await commitPush("Nouvelle page : " + slug);
-  return NextResponse.json({ ok: true, slug, titre });
+  return NextResponse.json({ ok: true, slug, titre }, { headers });
 }
 
 export async function DELETE(req: Request) {
-  if (!codeAdminOk(req)) return NextResponse.json({ ok: false, error: "code admin requis" }, { status: 401 });
+  const headers = corsHeaders(req);
+  if (!codeAdminOk(req)) return NextResponse.json({ ok: false, error: "code admin requis" }, { status: 401, headers });
   let body: Corps;
   try {
     body = (await req.json()) as Corps;
   } catch {
-    return NextResponse.json({ ok: false, error: "JSON invalide" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "JSON invalide" }, { status: 400, headers });
   }
   const slug = nettoyerSlug(body.slug || "");
   if (!slug || slug === "accueil") {
-    return NextResponse.json({ ok: false, error: "page non supprimable" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "page non supprimable" }, { status: 400, headers });
   }
   const pages = (await listerPages()).filter((p) => p.slug !== slug);
   await ecrireIndex(pages);
@@ -91,5 +98,5 @@ export async function DELETE(req: Request) {
     /* déjà absent */
   }
   await commitPush("Suppression page : " + slug);
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true }, { headers });
 }

@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
 import { codeAdminOk } from "@/engine/save-server";
+import { corsHeaders, preflight } from "@/engine/cors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+export async function OPTIONS(req: Request) {
+  return preflight(req);
+}
 
 // Modèle : Haiku suffit largement pour de la génération de JSON structuré, et
 // coûte beaucoup moins cher qu'un modèle plus gros pour cette tâche.
@@ -45,22 +50,23 @@ function estBlocValide(v: unknown): v is { id: string; type: string } {
 }
 
 export async function POST(req: Request) {
+  const headers = corsHeaders(req);
   if (!codeAdminOk(req)) {
-    return NextResponse.json({ ok: false, error: "code admin requis" }, { status: 401 });
+    return NextResponse.json({ ok: false, error: "code admin requis" }, { status: 401, headers });
   }
   const cle = process.env.ANTHROPIC_API_KEY;
   if (!cle) {
-    return NextResponse.json({ ok: false, error: "ANTHROPIC_API_KEY non configurée sur le serveur" }, { status: 500 });
+    return NextResponse.json({ ok: false, error: "ANTHROPIC_API_KEY non configurée sur le serveur" }, { status: 500, headers });
   }
   let body: unknown;
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "corps JSON invalide" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "corps JSON invalide" }, { status: 400, headers });
   }
   const { description } = body as { description?: string };
   if (!description || !description.trim()) {
-    return NextResponse.json({ ok: false, error: "description manquante" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "description manquante" }, { status: 400, headers });
   }
 
   try {
@@ -80,16 +86,16 @@ export async function POST(req: Request) {
     });
     if (!r.ok) {
       const detail = await r.text();
-      return NextResponse.json({ ok: false, error: "API Claude " + r.status + " : " + detail.slice(0, 300) }, { status: 502 });
+      return NextResponse.json({ ok: false, error: "API Claude " + r.status + " : " + detail.slice(0, 300) }, { status: 502, headers });
     }
     const data = (await r.json()) as { content?: { type: string; text?: string }[] };
     const texte = (data.content || []).find((b) => b.type === "text")?.text || "";
     const section = extraireJson(texte);
     if (!estBlocValide(section)) {
-      return NextResponse.json({ ok: false, error: "réponse de l'IA mal formée" }, { status: 502 });
+      return NextResponse.json({ ok: false, error: "réponse de l'IA mal formée" }, { status: 502, headers });
     }
-    return NextResponse.json({ ok: true, section });
+    return NextResponse.json({ ok: true, section }, { headers });
   } catch (e) {
-    return NextResponse.json({ ok: false, error: "génération impossible : " + String(e) }, { status: 500 });
+    return NextResponse.json({ ok: false, error: "génération impossible : " + String(e) }, { status: 500, headers });
   }
 }
