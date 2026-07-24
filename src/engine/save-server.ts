@@ -2,8 +2,24 @@ import { readFile, writeFile, mkdir, readdir, unlink } from "fs/promises";
 import path from "path";
 import { exec } from "child_process";
 import { promisify } from "util";
+import type { Block } from "./types";
 
 const pexec = promisify(exec);
+
+// Recense les blocs-composants (scènes animées, formulaires...) d'un arbre,
+// par id → nom. Sert à vérifier qu'un enregistrement n'en fait pas disparaître.
+export function collecterComposants(blocks: unknown, out = new Map<string, string>()): Map<string, string> {
+  if (!Array.isArray(blocks)) return out;
+  for (const b of blocks as Block[]) {
+    if (!b || typeof b !== "object") continue;
+    if (b.type === "composant") {
+      const nom = String((b.content as Record<string, unknown> | undefined)?.composant ?? "");
+      if (nom) out.set(b.id, nom);
+    }
+    if (Array.isArray(b.children)) collecterComposants(b.children, out);
+  }
+  return out;
+}
 
 const RACINE = process.cwd();
 const DIR_CONTENU = path.join(RACINE, "content");
