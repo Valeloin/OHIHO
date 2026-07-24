@@ -4,8 +4,8 @@ import type { Block } from "./types";
 import { pageDemo } from "./defaults";
 
 const GH_TOKEN = process.env.GITHUB_TOKEN;
-const GH_REPO = process.env.GITHUB_REPO || "Valeloin/simple-dev";
-const GH_BRANCH = process.env.GITHUB_BRANCH || "master";
+const GH_REPO = process.env.GITHUB_REPO || "Valeloin/OHIHO";
+const GH_BRANCH = process.env.GITHUB_BRANCH || "main";
 
 // Extrait les blocs d'un JSON de contenu, ou null si vide/cassé.
 function blocsDepuisTexte(raw: string): Block[] | null {
