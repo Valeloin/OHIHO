@@ -45,6 +45,15 @@ export interface Block {
   // Exceptions appliquées sur MOBILE (≤ 767px), via une règle @media. Ne touchent
   // jamais la version ordinateur.
   mobile?: Record<string, string>;
+  // Fond avancé (vidéo OU image avec flou/luminosité), en COUCHE séparée derrière
+  // les enfants — pour ne pas flouter/assombrir le contenu lui-même. Uniquement
+  // rendu sur les blocs conteneurs (section/groupe/animation/header/footer).
+  fond?: {
+    video?: string; // URL vidéo (boucle, muette) — prioritaire sur `image`
+    image?: string; // URL image (si pas de vidéo)
+    flou?: number; // px
+    luminosite?: number; // % (100 = normal)
+  };
   // Bloc verrouillé : structure native de la page, insupprimable dans l'extension.
   verrou?: boolean;
   children?: Block[];

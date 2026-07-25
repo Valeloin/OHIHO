@@ -128,6 +128,21 @@
   display: block;
 }
 
+/* Couche de fond avancée (vidéo ou image + flou/luminosité), toujours derrière
+   les enfants du bloc (voir RenderBlock : `fond`). */
+.sd-fond-couche {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* Une forme (ex: le point d'une scène animée) */
 .sd-forme {
   display: inline-block;
