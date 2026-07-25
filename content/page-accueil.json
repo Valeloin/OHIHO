@@ -17,6 +17,18 @@
       },
       "children": [
         {
+          "id": "fond_global",
+          "type": "composant",
+          "css": {
+            "position": "fixed",
+            "inset": "0px",
+            "pointerEvents": "none"
+          },
+          "content": {
+            "composant": "fond-anime"
+          }
+        },
+        {
           "id": "hero_kicker",
           "type": "groupe",
           "css": {
@@ -626,18 +638,6 @@
         "overflow": "hidden"
       },
       "children": [
-        {
-          "id": "serv_backdrop",
-          "type": "composant",
-          "css": {
-            "position": "absolute",
-            "inset": "0px",
-            "pointerEvents": "none"
-          },
-          "content": {
-            "composant": "fond-anime"
-          }
-        },
         {
           "id": "serv_kicker",
           "type": "groupe",
@@ -1391,18 +1391,6 @@
       },
       "children": [
         {
-          "id": "method_backdrop",
-          "type": "composant",
-          "css": {
-            "position": "absolute",
-            "inset": "0px",
-            "pointerEvents": "none"
-          },
-          "content": {
-            "composant": "fond-anime"
-          }
-        },
-        {
           "id": "method_k",
           "type": "groupe",
           "css": {
@@ -1871,18 +1859,6 @@
       },
       "children": [
         {
-          "id": "expertise_backdrop",
-          "type": "composant",
-          "css": {
-            "position": "absolute",
-            "inset": "0px",
-            "pointerEvents": "none"
-          },
-          "content": {
-            "composant": "fond-anime"
-          }
-        },
-        {
           "id": "exp_inner",
           "type": "groupe",
           "css": {
@@ -2304,18 +2280,6 @@
       },
       "children": [
         {
-          "id": "whyus_backdrop",
-          "type": "composant",
-          "css": {
-            "position": "absolute",
-            "inset": "0px",
-            "pointerEvents": "none"
-          },
-          "content": {
-            "composant": "fond-anime"
-          }
-        },
-        {
           "id": "why_k",
           "type": "groupe",
           "css": {
@@ -2705,18 +2669,6 @@
         "overflow": "hidden"
       },
       "children": [
-        {
-          "id": "bugtrack_backdrop",
-          "type": "composant",
-          "css": {
-            "position": "absolute",
-            "inset": "0px",
-            "pointerEvents": "none"
-          },
-          "content": {
-            "composant": "fond-anime"
-          }
-        },
         {
           "id": "bt_inner",
           "type": "groupe",
@@ -3155,18 +3107,6 @@
         "overflow": "hidden"
       },
       "children": [
-        {
-          "id": "portfolio_backdrop",
-          "type": "composant",
-          "css": {
-            "position": "absolute",
-            "inset": "0px",
-            "pointerEvents": "none"
-          },
-          "content": {
-            "composant": "fond-anime"
-          }
-        },
         {
           "id": "pf_inner",
           "type": "groupe",
@@ -3856,18 +3796,6 @@
         "overflow": "hidden"
       },
       "children": [
-        {
-          "id": "contact_backdrop",
-          "type": "composant",
-          "css": {
-            "position": "absolute",
-            "inset": "0px",
-            "pointerEvents": "none"
-          },
-          "content": {
-            "composant": "fond-anime"
-          }
-        },
         {
           "id": "contact_inner",
           "type": "groupe",
