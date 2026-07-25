@@ -52,25 +52,7 @@ export function RenderBlock({ block }: { block: Block }) {
     "data-sd-lock": block.verrou ? "1" : undefined,
     "data-sd-hover": block.hover && Object.keys(block.hover).length ? JSON.stringify(block.hover) : undefined,
     "data-sd-mobile": block.mobile && Object.keys(block.mobile).length ? JSON.stringify(block.mobile) : undefined,
-    "data-sd-fond": block.fond && Object.keys(block.fond).length ? JSON.stringify(block.fond) : undefined,
   } as const;
-
-  // Fond avancé (vidéo/image + flou/luminosité) : une couche derrière les
-  // enfants (z-index négatif) pour que l'effet ne touche jamais le contenu.
-  const fond = block.fond;
-  let fondCouche: React.ReactNode = null;
-  if (fond && (fond.video || fond.image)) {
-    const filtres: string[] = [];
-    if (fond.flou) filtres.push(`blur(${fond.flou}px)`);
-    if (fond.luminosite !== undefined && fond.luminosite !== 100) filtres.push(`brightness(${fond.luminosite}%)`);
-    const filter = filtres.length ? filtres.join(" ") : undefined;
-    fondCouche = fond.video ? (
-      <video className="sd-fond-couche" src={fond.video} autoPlay loop muted playsInline style={{ filter }} />
-    ) : (
-      <div className="sd-fond-couche" style={{ backgroundImage: `url("${fond.image}")`, filter }} />
-    );
-    if (!style.position) style.position = "relative";
-  }
 
   switch (block.type) {
     case "section": {
@@ -79,7 +61,6 @@ export function RenderBlock({ block }: { block: Block }) {
       const ancre = String(content.ancre ?? "").trim() || undefined;
       return (
         <section id={ancre} className="sd-section" style={style} {...dataAttrs}>
-          {fondCouche}
           {enfants}
         </section>
       );
@@ -169,7 +150,6 @@ export function RenderBlock({ block }: { block: Block }) {
     case "groupe":
       return (
         <div className={`sd-groupe${anime}`} style={style} {...dataAttrs} data-sd-nom={content.nom ? String(content.nom) : undefined}>
-          {fondCouche}
           {enfants}
         </div>
       );
@@ -178,7 +158,6 @@ export function RenderBlock({ block }: { block: Block }) {
       // dedans sans pousser le reste de la page (transforms = pas de reflow).
       return (
         <div className="sd-scene sd-anim" style={style} {...dataAttrs}>
-          {fondCouche}
           {enfants}
         </div>
       );
@@ -192,14 +171,12 @@ export function RenderBlock({ block }: { block: Block }) {
     case "header":
       return (
         <header className="sd-header" style={style} {...dataAttrs}>
-          {fondCouche}
           {enfants}
         </header>
       );
     case "footer":
       return (
         <footer className="sd-footer" style={style} {...dataAttrs}>
-          {fondCouche}
           {enfants}
         </footer>
       );
