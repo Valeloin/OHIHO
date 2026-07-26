@@ -2,10 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { updatePassword } from "@/app/nouveau-mot-de-passe/actions";
-
-// Même patron de champ / libellé que les autres formulaires connectés.
-const FIELD = "field";
-const LABEL = "field-label";
+import PasswordField from "./PasswordField";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -26,36 +23,20 @@ export default function NewPasswordForm() {
   return (
     <form action={formAction} className="card-surface p-6 sm:p-8">
       <div className="grid gap-5">
-        <div>
-          <label htmlFor="password" className={LABEL}>
-            Nouveau mot de passe
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            required
-            minLength={8}
-            autoComplete="new-password"
-            className={FIELD}
-            placeholder="8 caractères minimum"
-          />
-        </div>
-        <div>
-          <label htmlFor="confirm" className={LABEL}>
-            Confirmer le mot de passe
-          </label>
-          <input
-            id="confirm"
-            name="confirm"
-            type="password"
-            required
-            minLength={8}
-            autoComplete="new-password"
-            className={FIELD}
-            placeholder="Retapez le mot de passe"
-          />
-        </div>
+        <PasswordField
+          id="password"
+          name="password"
+          label="Nouveau mot de passe"
+          autoComplete="new-password"
+          placeholder="8 caractères minimum"
+        />
+        <PasswordField
+          id="confirm"
+          name="confirm"
+          label="Confirmer le mot de passe"
+          autoComplete="new-password"
+          placeholder="Retapez le mot de passe"
+        />
       </div>
 
       {state?.error && (
