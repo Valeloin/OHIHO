@@ -33,9 +33,6 @@ drop table if exists ticket_messages;
 drop table if exists tickets;
 drop table if exists quote_requests;
 
--- Plus aucun trigger ne l'utilise une fois les deux tables ci-dessus parties.
-drop function if exists public.set_updated_at();
-
 drop type if exists ticket_status;
 drop type if exists ticket_priority;
 drop type if exists ticket_category;
@@ -48,6 +45,16 @@ drop type if exists quote_status;
 
 do $$ begin
   create type user_role as enum ('client', 'technician', 'admin');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type project_status as enum ('nouveau', 'en_cours', 'en_revision', 'livre');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type invoice_status as enum ('brouillon', 'envoyee', 'payee');
 exception when duplicate_object then null;
 end $$;
 
@@ -88,6 +95,39 @@ create table if not exists public.site_content (
   data jsonb not null,
   updated_at timestamptz not null default now()
 );
+
+-- Suivi de projet client : statut + liste d'étapes (jsonb, pas de table à
+-- part — très peu d'étapes par projet, pas besoin de plus).
+create table if not exists public.projects (
+  id uuid primary key default gen_random_uuid(),
+  client_id uuid not null references auth.users(id) on delete cascade,
+  name text not null,
+  status project_status not null default 'nouveau',
+  steps jsonb not null default '[]'::jsonb,
+  notes text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+-- Facturation manuelle (pas de passerelle de paiement) : Valentin crée et
+-- met à jour le statut lui-même. Le statut "en retard" n'est pas stocké,
+-- il se déduit de due_date à l'affichage.
+create table if not exists public.invoices (
+  id uuid primary key default gen_random_uuid(),
+  client_id uuid not null references auth.users(id) on delete cascade,
+  project_id uuid references public.projects(id) on delete set null,
+  number text not null,
+  description text not null,
+  amount_cents integer not null check (amount_cents >= 0),
+  status invoice_status not null default 'brouillon',
+  issue_date date not null default current_date,
+  due_date date,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists projects_client_id_idx on public.projects(client_id);
+create index if not exists invoices_client_id_idx on public.invoices(client_id);
 
 -- ============================================================
 -- 3) FONCTIONS
@@ -165,6 +205,17 @@ $$;
 
 grant execute on function public.update_own_profile(text, text, text, text, text) to authenticated;
 
+-- Rafraîchit updated_at à chaque modification (projects, invoices).
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
 -- ============================================================
 -- 4) TRIGGERS
 -- ============================================================
@@ -173,6 +224,16 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
+
+drop trigger if exists projects_set_updated_at on public.projects;
+create trigger projects_set_updated_at
+  before update on public.projects
+  for each row execute function public.set_updated_at();
+
+drop trigger if exists invoices_set_updated_at on public.invoices;
+create trigger invoices_set_updated_at
+  before update on public.invoices
+  for each row execute function public.set_updated_at();
 
 -- ============================================================
 -- 5) ROW LEVEL SECURITY
@@ -199,6 +260,33 @@ create policy site_content_write
   to authenticated
   using (public.current_role() = 'admin')
   with check (public.current_role() = 'admin');
+
+alter table public.projects enable row level security;
+alter table public.invoices enable row level security;
+
+drop policy if exists projects_select on public.projects;
+create policy projects_select on public.projects
+  for select
+  using (client_id = auth.uid() or public.current_role() in ('technician', 'admin'));
+
+drop policy if exists projects_staff_write on public.projects;
+create policy projects_staff_write on public.projects
+  for all
+  to authenticated
+  using (public.current_role() in ('technician', 'admin'))
+  with check (public.current_role() in ('technician', 'admin'));
+
+drop policy if exists invoices_select on public.invoices;
+create policy invoices_select on public.invoices
+  for select
+  using (client_id = auth.uid() or public.current_role() in ('technician', 'admin'));
+
+drop policy if exists invoices_staff_write on public.invoices;
+create policy invoices_staff_write on public.invoices
+  for all
+  to authenticated
+  using (public.current_role() in ('technician', 'admin'))
+  with check (public.current_role() in ('technician', 'admin'));
 
 -- ============================================================
 -- Pour donner les droits admin à un compte (remplacer l'email) :
