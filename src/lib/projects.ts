@@ -19,7 +19,6 @@ export type Project = {
    * laisser croire qu'il n'existe pas encore.
    */
   note?: string;
-  accent: "red" | "violet" | "emerald" | "cyan";
 };
 
 export const PROJECTS: Project[] = [
@@ -33,7 +32,6 @@ export const PROJECTS: Project[] = [
     // elle reste nette en grand format, là où un favicon 32 px baverait.
     icon: "/realisations/cadance-coaching.svg",
     iconBg: "#E11D2A",
-    accent: "red",
   },
   {
     title: "BugTrack",
@@ -45,7 +43,6 @@ export const PROJECTS: Project[] = [
     // Outil livré et en service, mais réservé aux comptes : pas de vitrine
     // publique à montrer, d'où l'absence de lien.
     note: "Accès privé",
-    accent: "violet",
   },
   {
     title: "Mailys Solutions",
@@ -60,6 +57,5 @@ export const PROJECTS: Project[] = [
     // là où les deux autres portent leur couleur de marque. `transparent`
     // laisse la tuile prendre le fond de la carte, le logo s'y pose seul.
     iconBg: "transparent",
-    accent: "emerald",
   },
 ];

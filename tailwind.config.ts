@@ -21,10 +21,6 @@ const config: Config = {
         accent: {
           DEFAULT: "rgb(var(--accent) / <alpha-value>)",
           cyan: "rgb(var(--accent) / <alpha-value>)",
-          // Noms hérités des DA précédentes, conservés le temps que les
-          // derniers usages soient nettoyés.
-          violet: "rgb(var(--accent) / <alpha-value>)",
-          emerald: "rgb(var(--brand-emerald) / <alpha-value>)",
         },
         brand: {
           sky: "rgb(var(--brand-sky) / <alpha-value>)",
