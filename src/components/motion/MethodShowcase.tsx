@@ -1,5 +1,9 @@
-// Écran d'ordinateur de la section Méthode : une scène par étape, qui défile
-// sur l'horloge de la frise (13,44 s).
+// Écran de la section Méthode : une scène par étape, qui défile sur
+// l'horloge de la frise (13,44 s).
+//
+// Même fenêtre de navigateur plate que les vignettes Services (Chrome +
+// couleurs --pv-*) plutôt que l'ancien duo portable/téléphone en 3D : plus
+// cohérent avec le reste du site, et plus simple à lire.
 //
 // La VISIBILITÉ des scènes réutilise les classes `frise-desc-*` — celles qui
 // pilotent déjà la description de la carte. La synchronisation avec la frise
@@ -7,20 +11,17 @@
 // tenir alignés à la main.
 //
 // Pur CSS, aucun JavaScript : le composant reste un server component.
-const RAIL = "#23405c";
-const SKY = "#38bdf8";
-const TEAL = "#22d3c4";
-const EMERALD = "#34d399";
+import { Chrome } from "@/components/motion/ServiceScene";
+
+const SCREEN = "var(--pv-screen, #071522)";
+const BLOCKS = "var(--pv-blocks, #23405c)";
+const ACCENT = "var(--pv-accent, #22d3c4)";
+const SKY = "rgb(var(--brand-sky))";
+const EMERALD = "rgb(var(--brand-emerald))";
 
 /* Emblème OHIHO, redessiné à la demande plutôt qu'importé : le fichier
    public/logo-mark.svg porte ses propres `id` de dégradé, et l'inclure deux
-   fois dans la même page ferait doublon. Ici tout est exprimé en fraction du
-   rayon voulu, à partir du dessin d'origine (boîte de 100 unités, anneau de
-   rayon 46,5, trois barres centrées sur 50/50) : les proportions tiennent
-   donc aussi bien à 6 unités qu'à 10.
-   Il est posé DANS les écrans, il subit donc la perspective du SVG comme le
-   reste — c'est bien le logo du site en train d'être construit qui s'affiche
-   à l'écran, pas une pastille collée par-dessus. */
+   fois dans la même page ferait doublon. */
 function Emblem({ cx, cy, r }: { cx: number; cy: number; r: number }) {
   const k = r / 46.5;
   const bar = (x: number, y: number, h: number, fill: string) => (
@@ -36,41 +37,26 @@ function Emblem({ cx, cy, r }: { cx: number; cy: number; r: number }) {
   );
   return (
     <g>
-      <circle
-        cx={cx}
-        cy={cy}
-        r={r}
-        fill="#0a1524"
-        stroke="url(#mv-ring)"
-        /* Plancher à 1 : à cette taille, 5 × k tomberait sous le demi-pixel
-           et l'anneau disparaîtrait. */
-        strokeWidth={Math.max(1, 5 * k)}
-      />
+      <circle cx={cx} cy={cy} r={r} fill={SCREEN} stroke="url(#mv-ring)" strokeWidth={Math.max(1, 5 * k)} />
       {bar(30, 28, 44, SKY)}
-      {bar(46, 21, 58, TEAL)}
+      {bar(46, 21, 58, ACCENT)}
       {bar(62, 28, 44, EMERALD)}
     </g>
   );
 }
-
-/* La gerbe d'étincelles autour de l'emblème a été RETIRÉE : ses rayons
-   descendaient jusqu'à r + 13 et venaient chevaucher l'enveloppe du suivi
-   dans l'écran du portable, ce que Valentin trouvait moche. Comme la gerbe
-   de la frise (retirée en même temps), le feu d'artifice ne manque pas au
-   récit : l'emblème qui apparaît suffit à marquer la mise en ligne. */
 
 /* 01 — Échange initial : la conversation s'installe. */
 function Echange() {
   return (
     <g>
       <g className="mv mv-bubble-1">
-        <rect x="24" y="34" width="96" height="18" rx="9" fill={RAIL} />
+        <rect x="24" y="34" width="112" height="20" rx="10" fill={BLOCKS} />
       </g>
       <g className="mv mv-bubble-2">
-        <rect x="112" y="58" width="80" height="18" rx="9" fill={TEAL} opacity="0.85" />
+        <rect x="132" y="60" width="94" height="20" rx="10" fill={ACCENT} fillOpacity="0.85" />
       </g>
       <g className="mv mv-bubble-3">
-        <rect x="24" y="82" width="110" height="18" rx="9" fill={RAIL} />
+        <rect x="24" y="86" width="128" height="20" rx="10" fill={BLOCKS} />
       </g>
     </g>
   );
@@ -84,49 +70,38 @@ function Maquette() {
         className="mv mv-draw"
         x="24"
         y="28"
-        width="120"
-        height="72"
-        rx="6"
+        width="140"
+        height="84"
+        rx="8"
         pathLength={1}
         fill="none"
         stroke={SKY}
         strokeWidth="2"
       />
-      <rect x="158" y="34" width="58" height="6" rx="3" fill={RAIL} />
-      <rect x="158" y="48" width="42" height="6" rx="3" fill={RAIL} />
-      <rect
-        className="mv mv-amount"
-        x="158"
-        y="70"
-        width="58"
-        height="10"
-        rx="5"
-        fill={EMERALD}
-      />
+      <rect x="184" y="36" width="68" height="7" rx="3.5" fill={BLOCKS} />
+      <rect x="184" y="52" width="50" height="7" rx="3.5" fill={BLOCKS} />
+      <rect className="mv mv-amount" x="184" y="80" width="68" height="12" rx="6" fill={EMERALD} />
     </g>
   );
 }
 
 /* 03 — Développement. Le texte promet deux choses : « votre site prend
    forme » ET « des points d'étape réguliers pour suivre l'avancement ».
-   Seule la première était dessinée. Les lignes de code s'écrivent toujours à
-   gauche, et une colonne de jalons cochés s'ajoute à droite : ce sont les
-   points d'étape, qui se valident au fil de l'écriture. */
+   Les lignes de code s'écrivent à gauche, une colonne de jalons cochés
+   s'ajoute à droite : ce sont les points d'étape, qui se valident au fil de
+   l'écriture. */
 function Developpement() {
-  // Décalages courts (0 à -0,4 s) : ils échelonnent l'écriture des lignes
-  // tout en gardant chaque fenêtre à l'intérieur de celle de la scène.
   const lignes = [
-    { y: 32, w: 92, x: 24, fill: RAIL, delay: "0s" },
-    { y: 48, w: 68, x: 38, fill: TEAL, delay: "-0.1s" },
-    { y: 64, w: 104, x: 38, fill: RAIL, delay: "-0.2s" },
-    { y: 80, w: 54, x: 52, fill: SKY, delay: "-0.3s" },
-    { y: 96, w: 84, x: 24, fill: RAIL, delay: "-0.4s" },
+    { y: 32, w: 106, x: 24, fill: BLOCKS, delay: "0s" },
+    { y: 50, w: 78, x: 42, fill: ACCENT, delay: "-0.1s" },
+    { y: 68, w: 120, x: 42, fill: BLOCKS, delay: "-0.2s" },
+    { y: 86, w: 62, x: 60, fill: SKY, delay: "-0.3s" },
+    { y: 104, w: 96, x: 24, fill: BLOCKS, delay: "-0.4s" },
   ];
-  // Trois jalons, cochés dans le même ordre que l'écriture des lignes.
   const jalons = [
-    { y: 36, delay: "-0.1s" },
-    { y: 60, delay: "-0.25s" },
-    { y: 84, delay: "-0.4s" },
+    { y: 38, delay: "-0.1s" },
+    { y: 66, delay: "-0.25s" },
+    { y: 94, delay: "-0.4s" },
   ];
   return (
     <g>
@@ -137,26 +112,24 @@ function Developpement() {
           x={l.x}
           y={l.y}
           width={l.w}
-          height="7"
-          rx="3.5"
+          height="8"
+          rx="4"
           fill={l.fill}
           style={{ animationDelay: l.delay }}
         />
       ))}
-
-      {/* Colonne des points d'étape, séparée du code par un filet vertical. */}
-      <path d="M152 28v80" stroke={RAIL} strokeWidth="1.5" opacity="0.6" />
+      <path d="M198 28v88" stroke={BLOCKS} strokeWidth="1.5" opacity="0.6" />
       {jalons.map((j) => (
         <g key={j.y}>
-          <rect x="168" y={j.y} width="48" height="6" rx="3" fill={RAIL} />
+          <rect x="216" y={j.y} width="60" height="7" rx="3.5" fill={BLOCKS} />
           <path
             className="mv mv-code"
-            d={`M${164} ${j.y + 3}l3 3 5 -6`}
-            transform="translate(-8 0)"
+            d={`M${212} ${j.y + 3.5}l4 4 6 -7`}
+            transform="translate(-10 0)"
             pathLength={1}
             fill="none"
             stroke={EMERALD}
-            strokeWidth="2"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
             style={{ animationDelay: j.delay }}
@@ -167,429 +140,79 @@ function Developpement() {
   );
 }
 
-/* 04 — Mise en ligne & suivi. Le texte annonce « déploiement, PUIS
-   accompagnement dans la durée pour les évolutions et le suivi par email ».
-   Seul le déploiement était dessiné, et la seconde moitié de la phrase — la
-   plus engageante commercialement — restait muette. La jauge se remplit et
-   se valide comme avant, mais elle remonte pour laisser place à une
-   enveloppe : le suivi qui prend le relais une fois le site en ligne.
-   La scène est composée en HAUT et en BAS de l'écran, jamais au milieu :
-   la bande centrale (y 65 à 115 en absolu) est réservée à l'emblème, qui
-   apparaît entre les deux moments. Déplacer un élément dans cette bande le
-   ferait chevaucher le logo. */
+/* 04 — Mise en ligne & suivi. La jauge se remplit et se valide, puis une
+   enveloppe arrive : le suivi qui prend le relais une fois le site en
+   ligne. La bande centrale reste libre pour l'emblème, qui apparaît entre
+   les deux moments. */
 function EnLigne() {
   return (
     <g>
-      <rect x="24" y="6" width="150" height="10" rx="5" fill={RAIL} />
-      <rect
-        className="mv mv-deploy"
-        x="24"
-        y="6"
-        width="150"
-        height="10"
-        rx="5"
-        fill={EMERALD}
-      />
+      <rect x="24" y="10" width="180" height="12" rx="6" fill={BLOCKS} />
+      <rect className="mv mv-deploy" x="24" y="10" width="180" height="12" rx="6" fill={EMERALD} />
       <path
         className="mv mv-done"
-        d="M190 11l7 7 14 -14"
+        d="M228 17l8 8 16 -16"
         pathLength={1}
         fill="none"
         stroke={EMERALD}
-        strokeWidth="3"
+        strokeWidth="3.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-
-      {/* Le suivi qui prend le relais, dit par la seule enveloppe.
-          `mv-follow` la fait arriver après le remplissage de la jauge et le
-          tracé de la coche.
-          Elle est CENTRÉE sous le logo (son milieu tombe à x = 160 en
-          absolu, l'axe de la dalle) : elle était calée à gauche quand deux
-          barres de notification l'accompagnaient à droite, et se retrouvait
-          seule dans un coin depuis leur retrait.
-          Elle occupe l'absolu y 132-152, sous l'emblème (qui s'arrête à
-          y 115) et au-dessus du bas de la dalle (158). */}
       <g className="mv mv-follow" style={{ animationDelay: "0.35s" }}>
-        <rect
-          x="105"
-          y="102"
-          width="34"
-          height="20"
-          rx="4"
-          fill="none"
-          stroke={SKY}
-          strokeWidth="2"
-        />
-        <path
-          d="M105 105l17 10 17 -10"
-          fill="none"
-          stroke={SKY}
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <rect x="152" y="132" width="40" height="24" rx="5" fill="none" stroke={SKY} strokeWidth="2.5" />
+        <path d="M152 136l20 12 20 -12" fill="none" stroke={SKY} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       </g>
-      {/* Il y avait ici deux barres de notification à droite de l'enveloppe.
-          Elles montaient jusqu'à y = 126 en absolu, or la gerbe qui jaillit
-          du logo descend jusqu'à 128 : les deux se chevauchaient au moment
-          précis où la gerbe part. L'enveloppe seule dit déjà « suivi par
-          email », les barres n'ajoutaient rien qu'une collision. */}
-    </g>
-  );
-}
-
-/* Échos sur le téléphone : la même étape, réduite à l'essentiel. Le
-   téléphone n'est pas une seconde histoire mais le reflet mobile de la
-   même — d'où des formes volontairement plus pauvres. */
-function TelEchange() {
-  return (
-    <g>
-      <g className="mv mv-bubble-1">
-        <rect x="8" y="14" width="36" height="9" rx="4.5" fill={RAIL} />
-      </g>
-      <g className="mv mv-bubble-2">
-        <rect x="18" y="29" width="30" height="9" rx="4.5" fill={TEAL} opacity="0.85" />
-      </g>
-      <g className="mv mv-bubble-3">
-        <rect x="8" y="44" width="40" height="9" rx="4.5" fill={RAIL} />
-      </g>
-    </g>
-  );
-}
-function TelMaquette() {
-  return (
-    <g>
-      <rect
-        className="mv mv-draw"
-        x="8"
-        y="12"
-        width="40"
-        height="30"
-        rx="4"
-        pathLength={1}
-        fill="none"
-        stroke={SKY}
-        strokeWidth="2"
-      />
-      <rect className="mv mv-amount" x="8" y="50" width="40" height="7" rx="3.5" fill={EMERALD} />
-    </g>
-  );
-}
-function TelDeveloppement() {
-  const l = [
-    { y: 14, w: 42, x: 8, delay: "0s" },
-    { y: 26, w: 30, x: 14, delay: "-0.2s" },
-    { y: 38, w: 38, x: 14, delay: "-0.4s" },
-  ];
-  return (
-    <g>
-      {l.map((x) => (
-        <rect
-          key={x.y}
-          className="mv mv-code"
-          x={x.x}
-          y={x.y}
-          width={x.w}
-          height="6"
-          rx="3"
-          fill={x.y === 26 ? TEAL : RAIL}
-          style={{ animationDelay: x.delay }}
-        />
-      ))}
-    </g>
-  );
-}
-/* Comme sur le portable, la scène 4 du téléphone laisse le bas de l'écran
-   libre : c'est là que l'emblème vient se poser une fois le site en ligne. */
-function TelEnLigne() {
-  return (
-    <g>
-      <rect x="8" y="4" width="44" height="8" rx="4" fill={RAIL} />
-      <rect className="mv mv-deploy" x="8" y="4" width="44" height="8" rx="4" fill={EMERALD} />
-      <path
-        className="mv mv-done"
-        d="M20 22l6 6 12 -12"
-        pathLength={1}
-        fill="none"
-        stroke={EMERALD}
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
     </g>
   );
 }
 
 const SCENES = [Echange, Maquette, Developpement, EnLigne];
-const SCENES_TEL = [TelEchange, TelMaquette, TelDeveloppement, TelEnLigne];
 
 export default function MethodShowcase({ steps }: { steps: number }) {
   // On ne rend que les scènes dont l'étape existe : si l'admin passe de 4 à
   // 3 étapes, la 4e ne s'affiche pas dans le vide.
   const visibles = SCENES.slice(0, Math.min(steps, SCENES.length));
-  const visiblesTel = SCENES_TEL.slice(0, Math.min(steps, SCENES_TEL.length));
 
   return (
-    // ⚠️ AUCUNE `perspective` sur ce parent, et c'est délibéré.
-    // Sans ancêtre en perspective, CSS projette les rotations 3D en
-    // ORTHOGRAPHIQUE : pas de division par la profondeur, donc pas de point
-    // de fuite. La transformation reste affine, les droites parallèles le
-    // restent, et le contenu prend exactement le même angle que le châssis
-    // qui l'affiche. Le raccourci existe quand même — il vient du cosinus de
-    // la rotation, pas de la convergence.
-    // Les animations internes ne sont pas affectées — leurs transformations
-    // se composent avec celle-ci au lieu de l'écraser.
-    <div>
-      <svg
-        // Hauteur resserrée à 198 : sans le socle, le dessin s'arrête au bas
-        // du téléphone (y = 192) et laissait sinon une bande morte.
-        viewBox="-96 0 416 198"
-        aria-hidden="true"
-        focusable="false"
-        /* VUE DE TROIS QUARTS. Deux appareils tournés vers le spectateur, dont
-           les dalles affichent les scènes : le contenu est DANS le SVG, il
-           subit donc la même transformation que les châssis et se trouve
-           forcément sur le même plan qu'eux.
-
-           ⚠️ Deux réglages ont été essayés et rejetés avant celui-ci :
-           1. `perspective:1100px` + `rotateY(-22deg) rotateX(9deg)`. Trop
-              timide : le bord haut du châssis tombait à -2,31° mais une barre
-              de contenu, plus basse dans le plan, se redressait à -0,85°. Sur
-              des barres courtes, cet écart se lit comme du contenu plat posé
-              sur un cadre incliné.
-           2. `skewY(-6deg)`, une projection affine. Elle donnait bien le même
-              angle partout, mais un cisaillement n'est pas une vue de trois
-              quarts : les appareils penchaient comme de l'italique au lieu de
-              tourner dans l'espace.
-
-           3. Perspective raccourcie à 620 px pour marquer le trois-quarts.
-              Elle l'a marqué, mais elle a AGGRAVÉ l'écart : -6,15° pour le
-              châssis contre -2,26° pour le contenu. Plus la perspective est
-              forte, plus les parallèles divergent.
-
-           Le réglage retenu garde ces deux rotations mais SUPPRIME la
-           perspective du parent. CSS bascule alors en projection
-           orthographique : la transformation redevient affine, donc tous les
-           angles sont égaux, et l'objet tourne quand même dans l'espace. Le
-           raccourci horizontal vient du cosinus de la rotation (cos 30° ≈
-           0,87), pas d'une convergence.
-           C'est le seul des quatre réglages qui satisfait les deux exigences
-           à la fois : une vraie vue de trois quarts, et un contenu rigoureu-
-           sement dans le plan de l'écran qui l'affiche. */
-        className="h-auto w-full origin-center drop-shadow-[0_22px_38px_rgba(0,0,0,0.5)] [transform:rotateY(-30deg)_rotateX(8deg)]"
-      >
+    <svg
+      viewBox="0 0 400 220"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-auto w-full rounded-xl"
+      aria-hidden="true"
+      focusable="false"
+    >
       <defs>
-        {/* Trio de marque, repris du logo : bleu ciel → teal → vert. */}
-        <linearGradient
-          id="mv-ring"
-          x1="0"
-          y1="0"
-          x2="1"
-          y2="1"
-          gradientUnits="objectBoundingBox"
-        >
+        <linearGradient id="mv-ring" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor={SKY} />
-          <stop offset="0.5" stopColor={TEAL} />
+          <stop offset="0.5" stopColor={ACCENT} />
           <stop offset="1" stopColor={EMERALD} />
         </linearGradient>
-
-        {/* DALLE ALLUMÉE. Les deux écrans étaient remplis de #071522 quand la
-            page, elle, est à #091a29 : deux valeurs presque identiques. Rien
-            ne disait donc qu'il y avait une surface, et le contenu semblait
-            flotter à côté de l'appareil plutôt que s'afficher dessus.
-            Ce dégradé éclaire la dalle par le haut-gauche, comme un écran
-            allumé dans une pièce sombre. */}
-        <linearGradient
-          id="mv-screen"
-          x1="0"
-          y1="0"
-          x2="0.7"
-          y2="1"
-          gradientUnits="objectBoundingBox"
-        >
-          {/* L'aplat d'origine (#071522) affichait un contraste de 1,05 avec
-              le fond de page : autant dire aucun. Ce dégradé va de 1,55 dans
-              l'angle éclairé à 1,01 dans l'angle opposé — la dalle se lit
-              franchement sans jamais devenir un rectangle clair posé sur la
-              page, ce qui trahirait autant que l'inverse. */}
-          <stop offset="0" stopColor="#1d3f5f" />
-          <stop offset="0.55" stopColor="#102941" />
-          <stop offset="1" stopColor="#0a1b2c" />
-        </linearGradient>
-
-        {/* Reflet de verre : une bande claire en diagonale, posée PAR-DESSUS
-            le contenu. C'est elle qui vend la dalle — sans reflet, un aplat
-            reste un aplat. Très faible : elle doit se deviner, pas se voir. */}
-        <linearGradient
-          id="mv-glare"
-          x1="0"
-          y1="0"
-          x2="0.9"
-          y2="1"
-          gradientUnits="objectBoundingBox"
-        >
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.09" />
-          <stop offset="0.4" stopColor="#ffffff" stopOpacity="0.02" />
-          <stop offset="0.75" stopColor="#ffffff" stopOpacity="0" />
-        </linearGradient>
-
-        {/* Détourages : le contenu ne peut PLUS déborder de sa dalle, quelle
-            que soit la scène. Sans eux, il suffit qu'une animation dépasse de
-            quelques unités pour que le dessin sorte de l'écran et trahisse
-            que ce n'en est pas un. */}
-        <clipPath id="mv-clip-tel">
-          <rect x="-88" y="60" width="74" height="132" rx="12" />
-        </clipPath>
-        <clipPath id="mv-clip-portable">
-          <rect x="30" y="26" width="260" height="132" rx="10" />
+        <clipPath id="mv-clip">
+          <rect x="0" y="26" width="400" height="194" />
         </clipPath>
       </defs>
 
-      {/* ---- Téléphone, posé devant et à gauche du portable ----
-           Il joue la MÊME étape, réduite à l'essentiel : c'est le reflet
-           mobile du même projet, pas une seconde histoire. */}
-      <rect
-        x="-88"
-        y="60"
-        width="74"
-        height="132"
-        rx="12"
-        fill="url(#mv-screen)"
-        stroke={RAIL}
-        strokeWidth="2"
-      />
-      <path d="M-64 70h26" stroke={RAIL} strokeWidth="3" strokeLinecap="round" />
-      {/* Tout le contenu de l'écran est détouré par la dalle. */}
-      <g clipPath="url(#mv-clip-tel)">
-        {/* CHROME PERMANENT du téléphone, comme sur le portable. En-tête en
-            haut (titre + pastille de statut), au-dessus des scènes qui
-            démarrent à y = 86 ; barre d'accueil arrondie en bas, sous
-            l'emblème (qui s'arrête à y = 164). Statique, hors des étapes. */}
-        <rect x="-76" y="76" width="30" height="6" rx="3" fill={RAIL} opacity="0.8" />
-        <circle cx="-22" cy="79" r="3" fill={RAIL} />
-        <rect x="-62" y="184" width="24" height="3" rx="1.5" fill={RAIL} />
+      <rect width="400" height="220" fill={SCREEN} />
+      <Chrome />
 
-        {/* Emblème CENTRÉ dans l'écran, DERRIÈRE la scène : il est dessiné
-            avant elle, donc la scène passe par-dessus. Voir mv-brand. */}
+      <g clipPath="url(#mv-clip)">
+        {/* Emblème CENTRÉ dans la zone d'écran, dessiné AVANT les scènes
+            pour passer derrière elles. */}
         <g className="mv-brand">
-          <Emblem cx={-51} cy={146} r={18} />
-        </g>
-        <g transform="translate(-84 82)">
-          {visiblesTel.map((Scene, i) => (
-            <g key={i} className={`frise-desc-${i + 1}`}>
-              <Scene />
-            </g>
-          ))}
-        </g>
-        {/* Reflet, PAR-DESSUS le contenu : c'est ce qui place définitivement
-            l'animation derrière une vitre. */}
-        <rect
-          x="-88"
-          y="60"
-          width="74"
-          height="132"
-          rx="12"
-          fill="url(#mv-glare)"
-        />
-      </g>
-
-      {/* ---- Écran de bureau ----
-           Le châssis reste sombre, c'est du plastique ; seule la DALLE, sous
-           la barre de fenêtre, est allumée. */}
-
-      {/* PIED DE L'ÉCRAN (col + piètement), même style que le moniteur de
-           Mailys Solutions demandé en référence. Dessiné AVANT le châssis pour
-           que le bas de celui-ci recouvre le haut du col (jointure nette).
-           Tracé DANS le plan de l'écran : un disque de socle sous-entendrait
-           un sol horizontal absent de cette vue inclinée — d'où un piètement
-           plat, évasé, qui se plie à la même inclinaison que l'écran (c'est
-           justement l'orthographie retenue qui rend ça propre, là où l'ancien
-           socle en perspective était de travers). Couleurs nuit d'OHIHO, pas
-           celles rouges de Mailys. */}
-      <g>
-        {/* Col central, centré sous l'écran (x 160). */}
-        <path
-          d="M153 157 h14 l4 13 h-22 z"
-          fill="#0e2135"
-          stroke={RAIL}
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-        {/* Piètement : barre évasée, arêtes adoucies. */}
-        <path
-          d="M126 169 h68 q6 0 8 5 l2 4 q1 3 -3 3 h-82 q-4 0 -3 -3 l2 -4 q2 -5 8 -5 z"
-          fill="#12273d"
-          stroke={RAIL}
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-        {/* Arête supérieure éclairée du piètement. */}
-        <path d="M128 170 h64" stroke="#2c4a68" strokeWidth="1.5" strokeLinecap="round" />
-      </g>
-
-      <rect
-        x="30"
-        y="8"
-        width="260"
-        height="150"
-        rx="10"
-        fill="#0a1b2c"
-        stroke={RAIL}
-        strokeWidth="2"
-      />
-      <rect x="30" y="26" width="260" height="132" fill="url(#mv-screen)" />
-      {/* Barre de fenêtre */}
-      <path d="M30 26h260" stroke={RAIL} strokeWidth="2" />
-      <circle cx="44" cy="17" r="2.5" fill={RAIL} />
-      <circle cx="53" cy="17" r="2.5" fill={RAIL} />
-      <circle cx="62" cy="17" r="2.5" fill={RAIL} />
-      <rect x="74" y="13.5" width="82" height="7" rx="3.5" fill={RAIL} opacity="0.7" />
-
-      <g clipPath="url(#mv-clip-portable)">
-        {/* CHROME D'APPLICATION, permanent et hors des étapes. La colonne
-            gauche (x 30-58) restait vide quelle que soit la scène — toutes
-            démarrent à x = 62. Une barre latérale l'occupe : l'écran se lit
-            désormais comme une vraie interface, pas comme un aplat où
-            flottent quelques barres. La première icône est en teal (page
-            active), les autres en gris ; une pastille de profil ferme le bas.
-            Rien ici n'est animé : le chrome ne doit pas voler la vedette à la
-            scène, il l'encadre. */}
-        <path d="M58 26v132" stroke={RAIL} strokeWidth="1.5" opacity="0.5" />
-        <rect x="38" y="42" width="12" height="12" rx="3" fill={TEAL} opacity="0.9" />
-        <rect x="38" y="62" width="12" height="12" rx="3" fill={RAIL} />
-        <rect x="38" y="82" width="12" height="12" rx="3" fill={RAIL} />
-        <rect x="38" y="102" width="12" height="12" rx="3" fill={RAIL} />
-        <circle cx="44" cy="144" r="7" fill={RAIL} />
-
-        {/* Emblème CENTRÉ dans la zone d'écran (x 30-290, barre de fenêtre
-            jusqu'à 26 : le centre tombe à 160/92), et dessiné AVANT les
-            scènes pour passer derrière elles. Il a d'abord été un favicon
-            dans la barre d'onglet, puis une vignette en haut à gauche : dans
-            les deux cas c'était une décoration posée à côté de l'animation.
-            Ici il en fait partie — voir mv-brand. */}
-        <g className="mv-brand">
-          <Emblem cx={160} cy={90} r={25} />
+          <Emblem cx={200} cy={122} r={30} />
         </g>
 
-        {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte la
-            fenêtre d'affichage de son étape (frise-desc-N). */}
-        <g transform="translate(38 30)">
+        {/* Les scènes, décalées sous la barre de fenêtre. Chacune emprunte
+            la fenêtre d'affichage de son étape (frise-desc-N). */}
+        <g transform="translate(0 12)">
           {visibles.map((Scene, i) => (
             <g key={i} className={`frise-desc-${i + 1}`}>
               <Scene />
             </g>
           ))}
         </g>
-
-        <rect x="30" y="26" width="260" height="132" fill="url(#mv-glare)" />
       </g>
-
-      {/* Le pied du moniteur est dessiné plus haut, AVANT le châssis (voir le
-          bloc « PIED DE L'ÉCRAN »). L'ancien socle en perspective avait été
-          retiré ; celui-ci, plat et en projection orthographique, se pose
-          proprement — c'est la référence Mailys demandée par Valentin. */}
-      </svg>
-    </div>
+    </svg>
   );
 }
