@@ -59,7 +59,7 @@ export default function Hero({
         // de 290 px au-dessus du premier mot sur un grand écran.
         // La règle du site est qu'une section TIENNE sur un écran, pas
         // qu'elle le remplisse.
-        className="relative mx-auto flex max-w-6xl flex-col px-6 pb-20 pt-10 sm:pt-14"
+        className="relative mx-auto flex max-w-6xl flex-col px-6 pb-12 pt-8 sm:pt-10"
         variants={CONTAINER}
         initial="hidden"
         animate="visible"
@@ -87,7 +87,7 @@ export default function Hero({
 
             <motion.h1
               variants={ITEM}
-              className="order-2 mt-8 text-balance text-4xl font-semibold leading-[1.05] tracking-display sm:text-6xl"
+              className="order-2 mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-display sm:text-5xl"
             >
               {/* Première ligne en blanc, seconde au dégradé de marque
                   (bleu → teal → vert), comme sur la banderole. STATIQUE. */}
@@ -97,14 +97,14 @@ export default function Hero({
 
             <motion.p
               variants={ITEM}
-              className="order-4 mt-8 max-w-xl text-lg leading-relaxed text-muted"
+              className="order-4 mt-5 max-w-xl text-lg leading-relaxed text-muted"
             >
               {data.subtitle}
             </motion.p>
 
             <motion.div
               variants={ITEM}
-              className="order-5 mt-10 flex flex-col gap-3 sm:flex-row"
+              className="order-5 mt-7 flex flex-col gap-3 sm:flex-row"
             >
               <Link
                 href="/inscription"
@@ -244,7 +244,7 @@ export default function Hero({
             plus comme un tableau. */}
         <motion.div
           variants={ITEM}
-          className="mt-10 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 xl:grid-cols-4"
+          className="mt-8 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 xl:grid-cols-4"
         >
           {data.stats.map((item, i) => (
             // BORDURE AU DÉGRADÉ DE MARQUE (bleu ciel → teal → émeraude, le
@@ -266,7 +266,7 @@ export default function Hero({
                   lisible. Le dégradé s'intensifie au survol (voir la classe
                   `group-hover` sur le second calque). */}
               <div
-                className="relative flex h-full flex-col overflow-hidden rounded-[15px] p-5"
+                className="relative flex h-full flex-col overflow-hidden rounded-[15px] p-4"
                 style={{
                   background:
                     "linear-gradient(135deg, rgba(56,189,248,0.14) 0%, rgba(34,211,196,0.05) 48%, rgba(52,211,153,0.16) 100%), #102436",
