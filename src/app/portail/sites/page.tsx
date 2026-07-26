@@ -14,10 +14,10 @@ export default function PortailSitesPage() {
         ici une fois livrés, avec un accès direct.
       </p>
       <Link
-        href="/inscription"
+        href="mailto:contact@ohiho.fr"
         className="btn-accent mt-6 inline-flex px-6 py-2.5 text-sm font-semibold"
       >
-        Créer un compte
+        Décrivez votre projet
       </Link>
     </div>
   );
