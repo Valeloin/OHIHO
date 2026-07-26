@@ -70,7 +70,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
         {/* Frise : un rail sombre porte tout le tracé, et le dégradé de marque
             s'y remplit de gauche à droite. Chaque jalon s'allume au passage
             du remplissage. En mobile, la frise passe à la verticale. */}
-        <RevealGroup className="relative mt-10 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="relative mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Le rail est INVISIBLE : seul le trait déjà parcouru se voit.
               Le chemin à venir ne se devine pas, la progression se lit
               d'autant mieux. */}
@@ -176,7 +176,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           </svg>
 
           {data.steps.map((item, i) => (
-            <RevealItem key={i} className="relative pl-6 lg:pl-0 lg:pt-10">
+            <RevealItem key={i} className="relative pl-6 lg:pl-0 lg:pt-7">
               {/* Rail + remplissage, en mobile / tablette */}
               <div
                 aria-hidden="true"
