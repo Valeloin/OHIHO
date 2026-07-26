@@ -211,12 +211,12 @@ export default function Navbar() {
                 href="/portail"
                 className="flex min-h-[44px] items-center nav-link"
               >
-                Bonjour,{" "}
-                <span className="text-accent-cyan">{firstName}</span>
+                Espace client{" "}
+                <span className="text-accent-cyan">({firstName})</span>
               </Link>
               {/* « Mon profil » ne figure plus dans le bandeau du desktop : il
                   faisait doublon avec l'onglet du même nom déjà présent dans
-                  le portail, où le salut ci-dessus mène. C'est la centaine de
+                  le portail, où le lien ci-dessus mène. C'est la centaine de
                   pixels qui manquait pour loger les huit sections. Le lien
                   reste dans le tiroir mobile, où la place ne manque pas. */}
               {isAdmin && (
@@ -310,15 +310,8 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className="flex min-h-[48px] items-center nav-link"
                 >
-                  Bonjour,{" "}
-                  <span className="text-accent-cyan">{firstName}</span>
-                </Link>
-                <Link
-                  href="/portail/profil"
-                  onClick={() => setOpen(false)}
-                  className="flex min-h-[48px] items-center nav-link"
-                >
-                  Mon profil
+                  Espace client{" "}
+                  <span className="text-accent-cyan">({firstName})</span>
                 </Link>
                 {isAdmin && (
                   <Link
