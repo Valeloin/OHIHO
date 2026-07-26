@@ -20,7 +20,11 @@
 
 drop policy if exists storage_ticket_attachments_select on storage.objects;
 drop policy if exists storage_ticket_attachments_insert on storage.objects;
-delete from storage.buckets where id = 'ticket-attachments';
+-- Supabase bloque la suppression directe de storage.buckets par SQL brut
+-- (trigger de protection storage.protect_delete()) : le bucket
+-- "ticket-attachments" doit être supprimé à la main si besoin, via
+-- Dashboard → Storage → (menu du bucket) → Delete bucket. Inoffensif de le
+-- laisser : plus aucun code n'y écrit ni n'y lit.
 
 -- DROP TABLE entraîne automatiquement ses triggers/policies/index : pas
 -- besoin de les retirer un par un avant.
