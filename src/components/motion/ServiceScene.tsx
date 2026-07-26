@@ -10,7 +10,7 @@
 // Ces scènes sont DÉCORATIVES (aria-hidden) : le texte qui les
 // accompagne porte le sens.
 //
-// Correspondance formule → scène (l'API reste celle des devis) :
+// Correspondance formule → scène :
 //   landing       → SceneMaintenance    (l'erreur est corrigée)
 //   intermediaire → SceneDigitalisation (les tâches se cochent)
 //   refonte       → SceneRefonte        (avant / après)
@@ -18,19 +18,15 @@
 //
 // Couleurs : les trois couleurs de base sont lues dans des
 // variables CSS avec repli, pour qu'un parent puisse les
-// surcharger en style inline (même patron que quoteStyleVars
-// dans DevisWizard, alimenté par les couleurs de l'admin) :
+// surcharger en style inline :
 //   --pv-screen  fond d'écran de la maquette
 //   --pv-blocks  aplats, cartes, barre du navigateur
 //   --pv-accent  accent de la maquette
 // Le trio de marque (ciel / teal / émeraude) reste fixe : c'est
 // l'identité du logo, elle n'est pas éditable.
-//
-// NB : ce fichier ne remplace pas FormulaPreview (portail + admin),
-// qui garde son aperçu live des couleurs du CMS.
 // ============================================================
 
-import type { QuoteProjectType } from "@/lib/supabase/types";
+import type { ServiceType } from "@/lib/content/types";
 
 /* --- Palette ------------------------------------------------
    SCREEN / BLOCKS / ACCENT sont pilotables ; LINE et BRIGHT sont
@@ -498,7 +494,7 @@ export function SceneApplication() {
 }
 
 /* --- Aiguillage : la scène correspondant à une formule --- */
-export function Scene({ type }: { type: QuoteProjectType }) {
+export function Scene({ type }: { type: ServiceType }) {
   if (type === "landing") return <SceneMaintenance />;
   if (type === "intermediaire") return <SceneDigitalisation />;
   if (type === "refonte") return <SceneRefonte />;
@@ -510,7 +506,7 @@ export function Scene({ type }: { type: QuoteProjectType }) {
 // deux autres gardent la barre d'adresse neutre.
 // Refonte : l'URL bascule avec la scène (ancien site → nouveau).
 const CHROME_PROPS: Record<
-  QuoteProjectType,
+  ServiceType,
   { url?: string; urlSwap?: [string, string] }
 > = {
   landing: {},
@@ -520,7 +516,7 @@ const CHROME_PROPS: Record<
 };
 
 /* --- Vignette autonome : une scène dans sa fenêtre --- */
-export default function ServiceScene({ type }: { type: QuoteProjectType }) {
+export default function ServiceScene({ type }: { type: ServiceType }) {
   return (
     <svg
       viewBox="0 0 400 220"

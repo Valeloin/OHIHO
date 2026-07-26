@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import type { SiteContent, QuoteFormulaContent } from "@/lib/content/types";
+import type { SiteContent, ServiceOfferContent } from "@/lib/content/types";
 import { saveContent } from "@/lib/content/actions";
 import { defaultContent } from "@/lib/content/defaults";
-import FormulaPreview from "@/components/portail/FormulaPreview";
 
 type Status = "idle" | "saving" | "saved" | "error";
 
@@ -20,12 +19,10 @@ type SectionId =
   | "expertise"
   | "whyUs"
   | "contact"
-  | "footer"
-  | "quotesFormulas"
-  | "quotesForm";
+  | "footer";
 
-// Clés techniques des 4 formules de devis (ordre d'affichage).
-const FORMULA_KEYS = [
+// Clés techniques des 4 offres de services (ordre d'affichage).
+const OFFER_KEYS = [
   "landing",
   "intermediaire",
   "refonte",
@@ -42,8 +39,6 @@ const MENU: { id: SectionId; label: string }[] = [
   { id: "whyUs", label: "Pourquoi OHIHO" },
   { id: "contact", label: "Votre projet" },
   { id: "footer", label: "Footer" },
-  { id: "quotesFormulas", label: "Devis · formules" },
-  { id: "quotesForm", label: "Devis · formulaire" },
 ];
 
 function Field({
@@ -216,18 +211,18 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
     });
   }
 
-  // Patch d'une des 4 formules de devis.
-  function setFormula(
-    key: (typeof FORMULA_KEYS)[number],
-    patch: Partial<QuoteFormulaContent>
+  // Patch d'une des 4 offres de services.
+  function setOffer(
+    key: (typeof OFFER_KEYS)[number],
+    patch: Partial<ServiceOfferContent>
   ) {
     setContent((c) => ({
       ...c,
-      quotes: {
-        ...c.quotes,
-        formulas: {
-          ...c.quotes.formulas,
-          [key]: { ...c.quotes.formulas[key], ...patch },
+      services: {
+        ...c.services,
+        offers: {
+          ...c.services.offers,
+          [key]: { ...c.services.offers[key], ...patch },
         },
       },
     }));
@@ -251,36 +246,6 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
         ...content.expertise,
         coverage: cleanList(content.expertise.coverage),
       },
-      quotes: {
-        ...content.quotes,
-        colors: (() => {
-          const qc = { ...content.quotes.colors };
-          (Object.keys(qc) as (keyof typeof qc)[]).forEach((k) => {
-            if (!HEX.test(qc[k])) qc[k] = defaultContent.quotes.colors[k];
-          });
-          return qc;
-        })(),
-        budgets: cleanList(content.quotes.budgets),
-        timelines: cleanList(content.quotes.timelines),
-        formulas: {
-          landing: {
-            ...content.quotes.formulas.landing,
-            options: cleanList(content.quotes.formulas.landing.options),
-          },
-          intermediaire: {
-            ...content.quotes.formulas.intermediaire,
-            options: cleanList(content.quotes.formulas.intermediaire.options),
-          },
-          refonte: {
-            ...content.quotes.formulas.refonte,
-            options: cleanList(content.quotes.formulas.refonte.options),
-          },
-          application: {
-            ...content.quotes.formulas.application,
-            options: cleanList(content.quotes.formulas.application.options),
-          },
-        },
-      },
     };
     try {
       const result = await saveContent(cleaned);
@@ -298,7 +263,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
     }
   }
 
-  const { theme, hero, portfolio, services, method, expertise, whyUs, contact, footer, quotes } =
+  const { theme, hero, portfolio, services, method, expertise, whyUs, contact, footer } =
     content;
   const dTheme = defaultContent.theme;
 
@@ -449,7 +414,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
         {active === "portfolio" && (
           <Section
             title="Réalisations"
-            hint="L'en-tête de la section et l'encart devis en bas. Les cartes projets restent gérées dans le code."
+            hint="L'en-tête de la section et l'encart d'inscription en bas. Les cartes projets restent gérées dans le code."
           >
             <Field
               label="Petit titre (kicker)"
@@ -469,12 +434,12 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             />
             <div className="grid gap-5 sm:grid-cols-2">
               <Field
-                label="Phrase de l'encart devis"
+                label="Phrase de l'encart"
                 value={portfolio.ctaText}
                 onChange={(v) => set("portfolio", { ctaText: v })}
               />
               <Field
-                label="Bouton de l'encart devis"
+                label="Bouton de l'encart"
                 value={portfolio.ctaButton}
                 onChange={(v) => set("portfolio", { ctaButton: v })}
               />
@@ -485,7 +450,7 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
         {active === "services" && (
           <Section
             title="Nos services"
-            hint="L'en-tête de la section. Les 4 cartes reprennent automatiquement les formules du devis · modifiez-les dans « Devis · formules »."
+            hint="L'en-tête de la section, puis les 4 cartes (mêmes vignettes animées, textes indépendants)."
           >
             <Field
               label="Petit titre (kicker)"
@@ -503,13 +468,34 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               onChange={(v) => set("services", { subtitle: v })}
               textarea
             />
-            <button
-              type="button"
-              onClick={() => openSection("quotesFormulas")}
-              className="btn-outline w-fit px-4 py-2 font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan"
-            >
-              Modifier les 4 formules →
-            </button>
+            {OFFER_KEYS.map((key) => {
+              const offer = services.offers[key];
+              return (
+                <div key={key} className="rounded-xl border border-border bg-surface-2/40 p-4">
+                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">{offer.label}</p>
+                  <div className="mt-3 grid gap-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Field
+                        label="Nom de l'offre"
+                        value={offer.label}
+                        onChange={(v) => setOffer(key, { label: v })}
+                      />
+                      <Field
+                        label="Accroche (petit titre en accent)"
+                        value={offer.tagline}
+                        onChange={(v) => setOffer(key, { tagline: v })}
+                      />
+                    </div>
+                    <Field
+                      label="Description"
+                      value={offer.description}
+                      onChange={(v) => setOffer(key, { description: v })}
+                      textarea
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </Section>
         )}
 
@@ -657,18 +643,18 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
               <Field
-                label="Titre de la carte devis"
+                label="Titre de la carte d'inscription"
                 value={contact.cardTitle}
                 onChange={(v) => set("contact", { cardTitle: v })}
               />
               <Field
-                label="Bouton de la carte devis"
+                label="Bouton de la carte d'inscription"
                 value={contact.cardCta}
                 onChange={(v) => set("contact", { cardCta: v })}
               />
             </div>
             <Field
-              label="Texte de la carte devis"
+              label="Texte de la carte d'inscription"
               value={contact.cardText}
               onChange={(v) => set("contact", { cardText: v })}
               textarea
@@ -689,244 +675,6 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               value={footer.bottomNote}
               onChange={(v) => set("footer", { bottomNote: v })}
             />
-          </Section>
-        )}
-
-        {active === "quotesFormulas" && (
-          <Section
-            title="Devis · les 4 formules"
-            hint="Les cartes proposées à l'étape 1 de la demande de devis. Le nom de la formule apparaît aussi dans « Mes devis » et dans l'email de pré-devis."
-          >
-            {FORMULA_KEYS.map((key) => {
-              const f = quotes.formulas[key];
-              return (
-                <div key={key} className="rounded-xl border border-border bg-surface-2/40 p-4">
-                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">{f.label}</p>
-                  <div className="mt-3 grid gap-4">
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Field
-                        label="Nom de la formule"
-                        value={f.label}
-                        onChange={(v) => setFormula(key, { label: v })}
-                      />
-                      <Field
-                        label="Accroche (petit titre en accent)"
-                        value={f.tagline}
-                        onChange={(v) => setFormula(key, { tagline: v })}
-                      />
-                    </div>
-                    <Field
-                      label="Description"
-                      value={f.description}
-                      onChange={(v) => setFormula(key, { description: v })}
-                      textarea
-                    />
-                    <Field
-                      label="Exemples (ligne en italique)"
-                      value={f.examples}
-                      onChange={(v) => setFormula(key, { examples: v })}
-                    />
-                    <ListField
-                      label="Options à cocher"
-                      value={f.options}
-                      onChange={(v) => setFormula(key, { options: v })}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </Section>
-        )}
-
-        {active === "quotesForm" && (
-          <Section
-            title="Devis · formulaire et suivi"
-            hint="Les textes et couleurs de l'assistant de demande de devis, et la page « Mes devis »."
-          >
-            <div className="rounded-xl border border-border bg-surface-2/40 p-4">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">
-                Couleurs du formulaire (les deux étapes + récapitulatif)
-              </p>
-              <div className="mt-3 grid gap-4">
-                <ColorField
-                  label="Fond des cartes"
-                  hint="cartes de formule et récapitulatif"
-                  value={quotes.colors.cardBg}
-                  defaultValue={defaultContent.quotes.colors.cardBg}
-                  onChange={(v) =>
-                    set("quotes", { colors: { ...quotes.colors, cardBg: v } })
-                  }
-                />
-                <ColorField
-                  label="Textes principaux"
-                  hint="titres"
-                  value={quotes.colors.text}
-                  defaultValue={defaultContent.quotes.colors.text}
-                  onChange={(v) =>
-                    set("quotes", { colors: { ...quotes.colors, text: v } })
-                  }
-                />
-                <ColorField
-                  label="Textes secondaires"
-                  hint="descriptions, libellés des champs"
-                  value={quotes.colors.textMuted}
-                  defaultValue={defaultContent.quotes.colors.textMuted}
-                  onChange={(v) =>
-                    set("quotes", { colors: { ...quotes.colors, textMuted: v } })
-                  }
-                />
-                <ColorField
-                  label="Couleur d'accent"
-                  hint="accroche, carte sélectionnée, options cochées"
-                  value={quotes.colors.accent}
-                  defaultValue={defaultContent.quotes.colors.accent}
-                  onChange={(v) =>
-                    set("quotes", { colors: { ...quotes.colors, accent: v } })
-                  }
-                />
-                <ColorField
-                  label="Maquettes · fond d'écran"
-                  value={quotes.colors.previewScreen}
-                  defaultValue={defaultContent.quotes.colors.previewScreen}
-                  onChange={(v) =>
-                    set("quotes", {
-                      colors: { ...quotes.colors, previewScreen: v },
-                    })
-                  }
-                />
-                <ColorField
-                  label="Maquettes · blocs de contenu"
-                  value={quotes.colors.previewBlocks}
-                  defaultValue={defaultContent.quotes.colors.previewBlocks}
-                  onChange={(v) =>
-                    set("quotes", {
-                      colors: { ...quotes.colors, previewBlocks: v },
-                    })
-                  }
-                />
-                <ColorField
-                  label="Maquettes · éléments animés"
-                  value={quotes.colors.previewAccent}
-                  defaultValue={defaultContent.quotes.colors.previewAccent}
-                  onChange={(v) =>
-                    set("quotes", {
-                      colors: { ...quotes.colors, previewAccent: v },
-                    })
-                  }
-                />
-                {/* Aperçu en direct de la maquette avec les couleurs choisies */}
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
-                    Aperçu en direct
-                  </p>
-                  <div className="mt-2 max-w-sm overflow-hidden rounded-xl border border-border">
-                    <FormulaPreview
-                      type="application"
-                      colors={{
-                        screen: quotes.colors.previewScreen,
-                        blocks: quotes.colors.previewBlocks,
-                        accent: quotes.colors.previewAccent,
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <Field
-              label="Titre de l'étape 1"
-              value={quotes.step1Title}
-              onChange={(v) => set("quotes", { step1Title: v })}
-            />
-            <Field
-              label="Sous-titre de l'étape 1"
-              value={quotes.step1Subtitle}
-              onChange={(v) => set("quotes", { step1Subtitle: v })}
-            />
-            <Field
-              label="Sous-titre de l'étape 2 (détails)"
-              value={quotes.step2Subtitle}
-              onChange={(v) => set("quotes", { step2Subtitle: v })}
-            />
-            <div className="grid gap-5 sm:grid-cols-2">
-              <ListField
-                label="Choix de budget"
-                value={quotes.budgets}
-                onChange={(v) => set("quotes", { budgets: v })}
-              />
-              <ListField
-                label="Choix de délai"
-                value={quotes.timelines}
-                onChange={(v) => set("quotes", { timelines: v })}
-              />
-            </div>
-            <div className="rounded-xl border border-border bg-surface-2/40 p-4">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">
-                Page « Mes devis »
-              </p>
-              <div className="mt-3 grid gap-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Field
-                    label="Titre"
-                    value={quotes.listTitle}
-                    onChange={(v) => set("quotes", { listTitle: v })}
-                  />
-                  <Field
-                    label="Sous-titre"
-                    value={quotes.listSubtitle}
-                    onChange={(v) => set("quotes", { listSubtitle: v })}
-                  />
-                </div>
-                <Field
-                  label="Message quand il n'y a aucun devis"
-                  value={quotes.emptyText}
-                  onChange={(v) => set("quotes", { emptyText: v })}
-                  textarea
-                />
-              </div>
-            </div>
-            <div className="rounded-xl border border-border bg-surface-2/40 p-4">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-accent-cyan">
-                Libellés des statuts
-              </p>
-              <div className="mt-3 grid gap-4 sm:grid-cols-2">
-                <Field
-                  label="Demande reçue"
-                  value={quotes.statusLabels.received}
-                  onChange={(v) =>
-                    set("quotes", {
-                      statusLabels: { ...quotes.statusLabels, received: v },
-                    })
-                  }
-                />
-                <Field
-                  label="En cours d'étude"
-                  value={quotes.statusLabels.in_review}
-                  onChange={(v) =>
-                    set("quotes", {
-                      statusLabels: { ...quotes.statusLabels, in_review: v },
-                    })
-                  }
-                />
-                <Field
-                  label="Devis envoyé"
-                  value={quotes.statusLabels.quoted}
-                  onChange={(v) =>
-                    set("quotes", {
-                      statusLabels: { ...quotes.statusLabels, quoted: v },
-                    })
-                  }
-                />
-                <Field
-                  label="Clôturé"
-                  value={quotes.statusLabels.closed}
-                  onChange={(v) =>
-                    set("quotes", {
-                      statusLabels: { ...quotes.statusLabels, closed: v },
-                    })
-                  }
-                />
-              </div>
-            </div>
           </Section>
         )}
       </div>

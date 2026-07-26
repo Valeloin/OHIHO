@@ -1631,7 +1631,7 @@ html.hide-scrollbar::-webkit-scrollbar {
    VITRINE ANIMÉE DES FORMULES (pur CSS, zéro JS)
    Portée depuis les vignettes du site Mailys, elles-mêmes nées
    des maquettes d'OHIHO — remises aux couleurs de la DA
-   « Banderole » (thème sombre) et aux 4 formules de devis.
+   « Banderole » (thème sombre) et aux 4 offres de services.
 
    TIMELINE MAÎTRESSE — cycle histoire : 8,4 s / vitrine : 33,6 s.
    Chaque histoire (en % de 8,4 s) :
@@ -1651,8 +1651,8 @@ html.hide-scrollbar::-webkit-scrollbar {
    - rythme lent, horloges verrouillées entre elles.
 
    Couleurs : trois variables pilotables par un parent en style
-   inline (même patron que quoteStyleVars de DevisWizard) —
-   --pv-screen (fond d'écran), --pv-blocks (aplats), --pv-accent.
+   inline — --pv-screen (fond d'écran), --pv-blocks (aplats),
+   --pv-accent.
    Le trio de marque (sky / teal / emerald) reste fixe.
 
    Sans animation (prefers-reduced-motion) : rien n'est déclaré,

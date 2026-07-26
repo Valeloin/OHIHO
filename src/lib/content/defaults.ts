@@ -17,13 +17,13 @@ export const defaultContent: SiteContent = {
     titleAccent: "sur mesure",
     subtitle:
       "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée.",
-    ctaPrimary: "Demander un devis",
+    ctaPrimary: "Créer mon compte",
     ctaSecondary: "Voir nos réalisations",
     stats: [
       { value: "Sur mesure", label: "Approche" },
       { value: "De A à Z", label: "Accompagnement" },
       { value: "Moderne", label: "Stack" },
-      { value: "Sur devis", label: "Délai" },
+      { value: "Sur mesure", label: "Délai" },
     ],
   },
   portfolio: {
@@ -32,13 +32,39 @@ export const defaultContent: SiteContent = {
     subtitle:
       "Cadance Coaching est un projet réel, livré et utilisé par un client. Un aperçu de ce que nous pouvons construire pour vous.",
     ctaText: "Vous avez un projet de site ou d'application en tête ?",
-    ctaButton: "Demander un devis",
+    ctaButton: "Créer mon compte",
   },
   services: {
     kicker: "Nos services",
     title: "De l'idée au site en ligne",
     subtitle:
       "Conception, développement et suivi dans la durée, pour un site vitrine ou une application web sur mesure, pour les entreprises comme pour les particuliers.",
+    offers: {
+      landing: {
+        label: "Landing page",
+        tagline: "Une page, un objectif",
+        description:
+          "Une seule page, un seul objectif : que le visiteur vous contacte. Pour un lancement, une campagne, ou une activité qui tient en une page.",
+      },
+      intermediaire: {
+        label: "Site intermédiaire",
+        tagline: "Plusieurs pages",
+        description:
+          "Accueil, services, à propos, contact. De quoi dérouler votre activité en détail, et donner envie de vous faire confiance.",
+      },
+      refonte: {
+        label: "Refonte de site",
+        tagline: "Un site à rafraîchir",
+        description:
+          "Votre site existe déjà mais il a vieilli. On garde vos contenus, on refait le design, la vitesse et le mobile.",
+      },
+      application: {
+        label: "Application web",
+        tagline: "Sur mesure",
+        description:
+          "Espace client, réservation, tableau de bord, outil interne. Un logiciel écrit pour votre métier, avec ses comptes et ses règles.",
+      },
+    },
   },
   method: {
     kicker: "Méthode",
@@ -111,117 +137,17 @@ export const defaultContent: SiteContent = {
     kicker: "Votre projet",
     title: "Prêt à lancer votre site ou application ?",
     subtitle:
-      "Créez votre compte en une minute, puis décrivez votre besoin via une demande de devis guidée. Nous revenons vers vous rapidement pour en discuter.",
+      "Créez votre compte en une minute, puis décrivez-nous votre besoin par email. Nous revenons vers vous rapidement pour en discuter.",
     email: "contact@ohiho.fr",
     responseNote: "Réponse sous 24h ouvrées",
-    cardTitle: "Demander un devis",
+    cardTitle: "Créer mon compte",
     cardText:
-      "Depuis votre espace client, choisissez une formule (landing page, site vitrine, application, refonte) et recevez une proposition adaptée.",
-    cardCta: "Demander un devis",
+      "Créez votre espace client pour suivre vos projets, puis écrivez-nous pour nous parler du vôtre : landing page, site vitrine, application, refonte.",
+    cardCta: "Créer mon compte",
   },
   footer: {
     tagline:
       "OHIHO conçoit et développe des sites et applications web sur mesure, pour entreprises et particuliers, pensés pour durer.",
     bottomNote: "Création de sites web & applications",
-  },
-  quotes: {
-    step1Title: "Quel type de projet ?",
-    step1Subtitle:
-      "Choisissez la formule la plus proche de votre besoin, on affinera ensemble.",
-    step2Subtitle: "Quelques précisions pour préparer un devis au plus juste.",
-    // Couleurs du formulaire de devis. Tant qu'une valeur = défaut, la couleur
-    // globale du thème s'applique.
-    colors: {
-      cardBg: "#102436",
-      text: "#eef4fc",
-      textMuted: "#9fb2cc",
-      accent: "#22d3c4",
-      previewScreen: "#071522",
-      previewBlocks: "#23405c",
-      previewAccent: "#22d3c4",
-    },
-    budgets: [
-      "Moins de 1 000 €",
-      "1 000 – 3 000 €",
-      "3 000 – 6 000 €",
-      "Plus de 6 000 €",
-      "Je ne sais pas encore",
-    ],
-    timelines: [
-      "Urgent (moins d'un mois)",
-      "1 à 3 mois",
-      "Flexible / pas de date précise",
-    ],
-    formulas: {
-      landing: {
-        label: "Landing page",
-        tagline: "Une page, un objectif",
-        description:
-          "Une seule page, un seul objectif : que le visiteur vous contacte. Pour un lancement, une campagne, ou une activité qui tient en une page.",
-        examples:
-          "Ex. : lancement de produit, page de réservation, mise en avant d'une offre.",
-        options: [
-          "Formulaire de contact",
-          "Prise de rendez-vous",
-          "Nom de domaine",
-          "Rédaction des textes",
-        ],
-      },
-      intermediaire: {
-        label: "Site intermédiaire",
-        tagline: "Plusieurs pages",
-        description:
-          "Accueil, services, à propos, contact. De quoi dérouler votre activité en détail, et donner envie de vous faire confiance.",
-        examples:
-          "Ex. : artisan, cabinet, salle de sport, restaurant, association.",
-        options: [
-          "Formulaire de contact",
-          "Galerie / photos",
-          "Blog / actualités",
-          "Multilingue",
-          "Nom de domaine",
-          "Rédaction des textes",
-        ],
-      },
-      refonte: {
-        label: "Refonte de site",
-        tagline: "Un site à rafraîchir",
-        description:
-          "Votre site existe déjà mais il a vieilli. On garde vos contenus, on refait le design, la vitesse et le mobile.",
-        examples:
-          "Ex. : site vieillissant, lent, non responsive, ou à rafraîchir.",
-        options: [
-          "Reprise du contenu existant",
-          "Nouveau design",
-          "Optimisation référencement (SEO)",
-          "Migration d'hébergement",
-        ],
-      },
-      application: {
-        label: "Application web",
-        tagline: "Sur mesure",
-        description:
-          "Espace client, réservation, tableau de bord, outil interne. Un logiciel écrit pour votre métier, avec ses comptes et ses règles.",
-        examples:
-          "Ex. : espace client, gestion de réservations, tableau de bord, outil interne.",
-        options: [
-          "Comptes / espace client",
-          "Tableau de bord",
-          "Paiement en ligne",
-          "Espace administrateur",
-          "Notifications email",
-        ],
-      },
-    },
-    listTitle: "Mes demandes de devis",
-    listSubtitle: "Suivez l'avancement de vos demandes ici.",
-    emptyText:
-      "Vous n'avez pas encore de demande de devis. Lancez-vous en quelques minutes.",
-    statusLabels: {
-      received: "Reçu",
-      in_review: "En cours d'étude",
-      quoted: "Devis envoyé",
-      closed: "Clôturé",
-    },
   },
 };

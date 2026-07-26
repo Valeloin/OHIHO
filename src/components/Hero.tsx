@@ -32,7 +32,7 @@ const ITEM: Variants = {
 //
 // `formulaLabels` accompagne la vitrine : les libellés se relaient sur la
 // MÊME horloge CSS que les scènes (classes pv-title-*), l'ordre doit donc
-// suivre celui de PROJECT_TYPES.
+// suivre celui de SERVICE_TYPES (voir Services.tsx).
 export default function Hero({
   data,
   formulaLabels,
@@ -107,7 +107,7 @@ export default function Hero({
               className="order-5 mt-10 flex flex-col gap-3 sm:flex-row"
             >
               <Link
-                href="/portail/devis/nouveau"
+                href="/inscription"
                 className="btn-accent px-7 py-3.5 text-center text-sm"
               >
                 {data.ctaPrimary}

@@ -27,16 +27,25 @@ export type PortfolioContent = {
   kicker: string;
   title: string;
   subtitle: string;
-  ctaText: string; // phrase au-dessus du bouton devis en bas de section
+  ctaText: string; // phrase au-dessus du bouton en bas de section
   ctaButton: string;
 };
 
-// L'en-tête seulement : les 4 cartes de la section reprennent les formules
-// du parcours de devis (voir QuotesContent.formulas).
+// Les 4 types de projets proposés (mêmes clés que les scènes animées de
+// ServiceScene.tsx, l'ordre d'affichage suit SERVICE_TYPES dans Services.tsx).
+export type ServiceType = "landing" | "intermediaire" | "refonte" | "application";
+
+export type ServiceOfferContent = {
+  label: string;
+  tagline: string;
+  description: string;
+};
+
 export type ServicesContent = {
   kicker: string;
   title: string;
   subtitle: string;
+  offers: Record<ServiceType, ServiceOfferContent>;
 };
 
 export type MethodStep = {
@@ -86,51 +95,6 @@ export type FooterContent = {
   bottomNote: string;
 };
 
-export type QuoteFormulaContent = {
-  label: string;
-  tagline: string;
-  description: string;
-  examples: string;
-  /** Options / fonctionnalités proposées à cocher pour cette formule. */
-  options: string[];
-};
-
-export type QuoteColorsContent = {
-  cardBg: string; // fond des cartes du formulaire (formules, récapitulatif)
-  text: string; // textes principaux (titres) dans le formulaire
-  textMuted: string; // textes secondaires (descriptions, libellés)
-  accent: string; // accents : accroche, carte sélectionnée, options cochées
-  previewScreen: string; // maquettes animées : fond d'écran
-  previewBlocks: string; // maquettes animées : blocs de contenu
-  previewAccent: string; // maquettes animées : éléments colorés/animés
-};
-
-export type QuotesContent = {
-  // Assistant de demande de devis
-  step1Title: string;
-  step1Subtitle: string;
-  step2Subtitle: string;
-  colors: QuoteColorsContent;
-  budgets: string[];
-  timelines: string[];
-  formulas: {
-    landing: QuoteFormulaContent;
-    intermediaire: QuoteFormulaContent;
-    refonte: QuoteFormulaContent;
-    application: QuoteFormulaContent;
-  };
-  // Page « Mes devis »
-  listTitle: string;
-  listSubtitle: string;
-  emptyText: string;
-  statusLabels: {
-    received: string;
-    in_review: string;
-    quoted: string;
-    closed: string;
-  };
-};
-
 export type SiteContent = {
   theme: ThemeContent;
   hero: HeroContent;
@@ -141,5 +105,4 @@ export type SiteContent = {
   whyUs: WhyUsContent;
   contact: ContactContent;
   footer: FooterContent;
-  quotes: QuotesContent;
 };

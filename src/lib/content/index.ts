@@ -6,7 +6,7 @@ import {
   CONTENT_ROW_ID,
 } from "@/lib/supabase/config";
 import { defaultContent } from "./defaults";
-import type { SiteContent, ThemeContent, QuoteColorsContent } from "./types";
+import type { SiteContent, ThemeContent } from "./types";
 
 // Valeurs par défaut des ANCIENS thèmes (thème clair, puis navy/bleu d'avant
 // la DA bleu → vert du 2026-07-16). Un enregistrement fait à ces époques a
@@ -19,17 +19,6 @@ const LEGACY_THEME_DEFAULTS: Partial<Record<keyof ThemeContent, string[]>> = {
   darkBackground: ["#0f1b2e", "#0d1b2e", "#0b0b0d", "#0a1512"],
   darkSurface: ["#182a44", "#14273e", "#131316", "#101f1a"],
 };
-
-const LEGACY_QUOTE_COLORS: Partial<Record<keyof QuoteColorsContent, string[]>> =
-  {
-    cardBg: ["#ffffff", "#182a44", "#14273e", "#131316", "#101f1a"],
-    text: ["#152238", "#e8eef6", "#f2efe9", "#e9f1ed"],
-    textMuted: ["#5c6a80", "#9fb0c8", "#a09d97", "#91a79e"],
-    accent: ["#2f9fe4", "#3faaf0", "#34d399"],
-    previewScreen: ["#0e1526", "#0a1524", "#08080a", "#071310"],
-    previewBlocks: ["#26314a", "#223a55", "#2b2b32", "#244037"],
-    previewAccent: ["#2f9fe4", "#34d399"],
-  };
 
 function normalizeLegacy<T extends Record<string, unknown>>(
   merged: T,
@@ -56,16 +45,6 @@ function normalizeTheme(stored: Partial<ThemeContent> | undefined): ThemeContent
   );
 }
 
-function normalizeQuoteColors(
-  stored: Partial<QuoteColorsContent> | undefined
-): QuoteColorsContent {
-  return normalizeLegacy(
-    { ...defaultContent.quotes.colors, ...stored },
-    defaultContent.quotes.colors,
-    LEGACY_QUOTE_COLORS
-  );
-}
-
 // Fusionne le contenu enregistré par-dessus les valeurs par défaut, section par
 // section, pour qu'un champ manquant ne casse jamais l'affichage.
 function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
@@ -74,39 +53,33 @@ function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
     theme: normalizeTheme(stored.theme),
     hero: { ...defaultContent.hero, ...stored.hero },
     portfolio: { ...defaultContent.portfolio, ...stored.portfolio },
-    services: { ...defaultContent.services, ...stored.services },
+    services: {
+      ...defaultContent.services,
+      ...stored.services,
+      offers: {
+        landing: {
+          ...defaultContent.services.offers.landing,
+          ...stored.services?.offers?.landing,
+        },
+        intermediaire: {
+          ...defaultContent.services.offers.intermediaire,
+          ...stored.services?.offers?.intermediaire,
+        },
+        refonte: {
+          ...defaultContent.services.offers.refonte,
+          ...stored.services?.offers?.refonte,
+        },
+        application: {
+          ...defaultContent.services.offers.application,
+          ...stored.services?.offers?.application,
+        },
+      },
+    },
     method: { ...defaultContent.method, ...stored.method },
     expertise: { ...defaultContent.expertise, ...stored.expertise },
     whyUs: { ...defaultContent.whyUs, ...stored.whyUs },
     contact: { ...defaultContent.contact, ...stored.contact },
     footer: { ...defaultContent.footer, ...stored.footer },
-    quotes: {
-      ...defaultContent.quotes,
-      ...stored.quotes,
-      colors: normalizeQuoteColors(stored.quotes?.colors),
-      formulas: {
-        landing: {
-          ...defaultContent.quotes.formulas.landing,
-          ...stored.quotes?.formulas?.landing,
-        },
-        intermediaire: {
-          ...defaultContent.quotes.formulas.intermediaire,
-          ...stored.quotes?.formulas?.intermediaire,
-        },
-        refonte: {
-          ...defaultContent.quotes.formulas.refonte,
-          ...stored.quotes?.formulas?.refonte,
-        },
-        application: {
-          ...defaultContent.quotes.formulas.application,
-          ...stored.quotes?.formulas?.application,
-        },
-      },
-      statusLabels: {
-        ...defaultContent.quotes.statusLabels,
-        ...stored.quotes?.statusLabels,
-      },
-    },
   };
 }
 

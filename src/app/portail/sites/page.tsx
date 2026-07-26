@@ -13,10 +13,10 @@ export default function PortailSitesPage() {
         ici une fois livrés, avec un accès direct.
       </p>
       <Link
-        href="/portail/devis/nouveau"
+        href="/inscription"
         className="btn-accent mt-6 inline-flex px-6 py-2.5 text-sm font-semibold"
       >
-        Demander un devis
+        Créer un compte
       </Link>
     </div>
   );

@@ -157,7 +157,7 @@ export default function BugTrack() {
 
           <div className="mt-7">
             <Link
-              href="/portail/devis/nouveau"
+              href="/inscription"
               className="btn-accent px-6 py-3 text-sm"
             >
               Démarrer un projet

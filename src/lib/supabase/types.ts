@@ -1,13 +1,5 @@
 export type UserRole = "client" | "technician" | "admin";
 
-export type QuoteProjectType =
-  | "landing"
-  | "intermediaire"
-  | "refonte"
-  | "application";
-
-export type QuoteStatus = "received" | "in_review" | "quoted" | "closed";
-
 export type Profile = {
   id: string;
   email: string;
@@ -24,22 +16,6 @@ export type Profile = {
   created_at: string;
 };
 
-export type QuoteRequest = {
-  id: string;
-  request_number: number;
-  reference: string;
-  created_by: string;
-  project_type: QuoteProjectType;
-  company: string | null;
-  budget_range: string | null;
-  timeline: string | null;
-  description: string;
-  options: string[];
-  status: QuoteStatus;
-  created_at: string;
-  updated_at: string;
-};
-
 export type Database = {
   public: {
     Tables: {
@@ -47,21 +23,6 @@ export type Database = {
         Row: Profile;
         Insert: Partial<Profile> & { id: string; email: string };
         Update: Partial<Profile>;
-        Relationships: [];
-      };
-      quote_requests: {
-        Row: QuoteRequest;
-        Insert: {
-          created_by: string;
-          project_type: QuoteProjectType;
-          description: string;
-          company?: string | null;
-          budget_range?: string | null;
-          timeline?: string | null;
-          options?: string[];
-          status?: QuoteStatus;
-        };
-        Update: Partial<QuoteRequest>;
         Relationships: [];
       };
       site_content: {

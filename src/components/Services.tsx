@@ -3,27 +3,25 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
-// Les vignettes du site public utilisent les scènes en CSS pur (plus abouties
-// et sans JavaScript). `FormulaPreview`, piloté par les 3 couleurs éditables
-// du CMS, reste en service dans le tunnel de devis et l'aperçu de l'admin.
 import ServiceScene from "@/components/motion/ServiceScene";
-import { formulasFrom } from "@/lib/quotes";
-import type { ServicesContent, QuotesContent } from "@/lib/content/types";
+import type { ServicesContent, ServiceType } from "@/lib/content/types";
 
-// Les cartes reprennent les 4 formules du parcours de devis (mêmes vignettes
-// animées, mêmes textes — édités dans l'admin sous « Devis — formules ») :
-// ce que le site vend = ce que le devis propose. Chaque carte mène au
-// parcours de devis (ou à l'inscription si le visiteur n'est pas connecté).
-export default function Services({
-  data,
-  quotes,
-  devisHref,
-}: {
-  data: ServicesContent;
-  quotes: QuotesContent;
-  devisHref: string;
-}) {
-  const formulas = formulasFrom(quotes);
+// Ordre d'affichage des 4 offres — doit suivre celui des scènes animées de
+// ServiceScene.tsx.
+const SERVICE_TYPES: ServiceType[] = [
+  "landing",
+  "intermediaire",
+  "refonte",
+  "application",
+];
+
+// Les 4 cartes viennent du contenu éditable (voir l'admin, section « Nos
+// services »). Chaque carte mène à la création de compte.
+export default function Services({ data }: { data: ServicesContent }) {
+  const formulas = SERVICE_TYPES.map((type) => ({
+    type,
+    ...data.offers[type],
+  }));
 
   return (
     <section id="services" className="relative overflow-hidden border-t border-border">
@@ -59,7 +57,7 @@ export default function Services({
         <RevealGroup className="mt-5 grid gap-x-12 gap-y-5 lg:grid-cols-2">
           {formulas.map((formula, i) => (
             <RevealItem key={formula.type} hover className="h-full">
-              <Link href={devisHref} className="group flex h-full flex-col">
+              <Link href="/inscription" className="group flex h-full flex-col">
                 {/* L'animation et son texte, côte à côte. Les cartes de la
                     colonne de GAUCHE (indices pairs) sont inversées : leur
                     animation passe à droite. Les quatre animations se

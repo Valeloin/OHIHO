@@ -5,17 +5,17 @@ import AnimatedGlow from "@/components/motion/AnimatedGlow";
 export const metadata: Metadata = {
   title: "Créer un compte · OHIHO",
   description:
-    "Créez votre compte OHIHO pour suivre vos projets web et demander un devis.",
+    "Créez votre compte OHIHO pour suivre vos projets web et échanger avec notre équipe.",
 };
 
 const BENEFITS = [
   {
-    title: "Devis 100 % en ligne",
-    text: "Décrivez votre projet en 3 minutes, nous revenons vers vous sous 24 h ouvrées.",
+    title: "Un projet sur mesure",
+    text: "Décrivez votre projet par email, nous revenons vers vous sous 24 h ouvrées.",
   },
   {
-    title: "Suivi de vos demandes",
-    text: "Retrouvez toutes vos demandes et leur avancement dans votre espace client.",
+    title: "Vos sites & outils",
+    text: "Retrouvez vos sites et applications livrés, avec un accès direct depuis votre espace.",
   },
   {
     title: "Un interlocuteur unique",
