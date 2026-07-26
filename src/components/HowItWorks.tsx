@@ -15,7 +15,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
       className="relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-24">
+      <div className="relative mx-auto max-w-6xl px-6 py-14 sm:py-16">
         {/* En-tête sur deux colonnes : le titre à gauche, et à droite une
             carte qui récapitule le déroulé. Elle donne à la section la
             hauteur des autres et sert de légende à la frise — ses jalons
@@ -65,12 +65,12 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           </Reveal>
         </div>
 
-        <div className="mt-10 h-px rule-fade" />
+        <div className="mt-8 h-px rule-fade" />
 
         {/* Frise : un rail sombre porte tout le tracé, et le dégradé de marque
             s'y remplit de gauche à droite. Chaque jalon s'allume au passage
             du remplissage. En mobile, la frise passe à la verticale. */}
-        <RevealGroup className="relative mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="relative mt-10 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
           {/* Le rail est INVISIBLE : seul le trait déjà parcouru se voit.
               Le chemin à venir ne se devine pas, la progression se lit
               d'autant mieux. */}

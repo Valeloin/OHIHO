@@ -50,10 +50,10 @@ export default function BugTrack() {
           les autres (chapeau, carte produit, vignette animée, quatre
           capacités), les 8 px de rembourrage supplémentaire suffisaient à la
           faire dépasser d'un écran. */}
-      <div className="relative mx-auto max-w-6xl px-6 py-12">
+      <div className="relative mx-auto max-w-6xl px-6 py-9">
         <Reveal>
           <span className="kicker">Notre outil</span>
-          <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">
+          <h2 className="mt-3 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">
             BugTrack, le suivi que nous branchons sur votre site
           </h2>
           {/* La promesse vient de l'ancienne section « Suivi » : c'est elle qui
@@ -71,9 +71,9 @@ export default function BugTrack() {
             utilisateurs y accèdent depuis leur compte, sans rien installer.
           </p>
         </Reveal>
-        <div className="mt-5 h-px rule-fade" />
+        <div className="mt-4 h-px rule-fade" />
 
-        <div className="mt-8 grid items-center gap-8 lg:grid-cols-[19rem_1fr]">
+        <div className="mt-6 grid items-center gap-8 lg:grid-cols-[19rem_1fr]">
           <Reveal>
             <div className="card-dark p-6">
               {/* EMPLACEMENT RÉSERVÉ AU LOGO BUGTRACK.
@@ -136,7 +136,7 @@ export default function BugTrack() {
         </div>
 
         <Reveal delay={0.2}>
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <ul className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {CAPACITES.map((c, i) => (
               <li key={i} className="flex gap-3.5">
                 <span
@@ -155,7 +155,7 @@ export default function BugTrack() {
             ))}
           </ul>
 
-          <div className="mt-7">
+          <div className="mt-5">
             <Link
               href="/inscription"
               className="btn-accent px-6 py-3 text-sm"
