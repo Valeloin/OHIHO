@@ -11,10 +11,16 @@
 // accompagne porte le sens.
 //
 // Correspondance formule → scène :
-//   landing       → SceneMaintenance    (l'erreur est corrigée)
-//   intermediaire → SceneDigitalisation (les tâches se cochent)
-//   refonte       → SceneRefonte        (avant / après)
-//   application   → SceneApplication    (tableau de bord)
+//   landing       → SceneLanding    (un bouton d'appel à l'action qui respire)
+//   intermediaire → SceneSitePages  (menu de 4 pages, on y navigue)
+//   refonte       → SceneRefonte    (avant / après)
+//   application   → SceneApplication (tableau de bord)
+//
+// SceneMaintenance et SceneDigitalisation (plus bas) ne sont plus
+// utilisées comme scène de formule depuis le 2026-07-26 (elles ne
+// représentaient pas ce que leur nom promettait) mais restent définies :
+// animations abouties, réutilisables ailleurs (ex. une future section
+// maintenance/suivi).
 //
 // Couleurs : les trois couleurs de base sont lues dans des
 // variables CSS avec repli, pour qu'un parent puisse les
@@ -376,6 +382,91 @@ export function SceneRefonte() {
 }
 
 /* ============================================================
+   1b. LANDING — une page, un objectif.
+   Titre + texte, puis UN SEUL bouton d'appel à l'action qui respire
+   (halo pulsé), suivi d'une confirmation qui s'y accroche : le
+   visiteur a agi, la page a rempli son unique rôle.
+   ============================================================ */
+export function SceneLanding() {
+  return (
+    <>
+      <rect x="100" y="46" width="200" height="16" rx="4" fill={BRIGHT} fillOpacity="0.85" />
+      <rect x="80" y="72" width="240" height="8" rx="4" fill={LINE} fillOpacity="0.32" />
+      <rect x="115" y="86" width="170" height="8" rx="4" fill={LINE} fillOpacity="0.28" />
+      {/* Halo qui respire derrière le bouton — seul élément animé de la
+          page, pour que l'œil n'ait qu'un seul endroit où se poser. */}
+      <circle className="pv-dot" cx="200" cy="132" r="44" fill={ACCENT} fillOpacity="0.16" />
+      <rect x="150" y="114" width="100" height="34" rx="17" fill={ACCENT} />
+      <rect x="170" y="127" width="60" height="8" rx="4" fill={SCREEN} fillOpacity="0.9" />
+      {/* Confirmation : le visiteur a agi, c'est tout l'objectif de la page. */}
+      <g className="pv-pop-1">
+        <circle cx="200" cy="182" r="11" fill={EMERALD} fillOpacity="0.18" />
+        <path d="M195 182l3.5 3.5 7 -7" stroke={EMERALD} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <rect x="218" y="177" width="86" height="10" rx="5" fill={LINE} fillOpacity="0.3" />
+      </g>
+    </>
+  );
+}
+
+/* ============================================================
+   2b. SITE INTERMÉDIAIRE — plusieurs pages, on y navigue.
+   Un menu de 4 pages ; l'onglet actif bascule et le contenu change
+   avec lui (accueil → services), sur la même horloge que les autres
+   scènes.
+   ============================================================ */
+export function SceneSitePages() {
+  const NAV = ["Accueil", "Services", "À propos", "Contact"];
+  const navPill = (i: number, active: boolean) => (
+    <g key={i}>
+      <rect
+        x={24 + i * 90}
+        y="40"
+        width="78"
+        height="20"
+        rx="10"
+        fill={active ? ACCENT : BLOCKS}
+        fillOpacity={active ? 0.85 : 0.5}
+      />
+      <rect x={24 + i * 90 + 12} y="47" width={NAV[i].length * 4.2} height="6" rx="3" fill={active ? SCREEN : LINE} fillOpacity={active ? 0.85 : 0.4} />
+    </g>
+  );
+  return (
+    <>
+      {/* Menu — deux états (page 1 active / page 2 active) qui se relaient. */}
+      <g className="pv-old">{[0, 1, 2, 3].map((i) => navPill(i, i === 0))}</g>
+      <g className="pv-new">{[0, 1, 2, 3].map((i) => navPill(i, i === 1))}</g>
+
+      {/* Contenu « Accueil » : un bandeau + une accroche. */}
+      <g className="pv-old">
+        <rect x="24" y="80" width="352" height="70" rx="8" fill={BLOCKS} fillOpacity="0.35" />
+        <rect x="40" y="96" width="180" height="12" rx="6" fill={BRIGHT} fillOpacity="0.6" />
+        <rect x="40" y="116" width="240" height="7" rx="3.5" fill={LINE} fillOpacity="0.3" />
+        <rect x="40" y="130" width="140" height="7" rx="3.5" fill={LINE} fillOpacity="0.28" />
+        <rect x="24" y="162" width="110" height="40" rx="8" fill={BLOCKS} fillOpacity="0.3" />
+        <rect x="142" y="162" width="110" height="40" rx="8" fill={BLOCKS} fillOpacity="0.3" />
+        <rect x="260" y="162" width="116" height="40" rx="8" fill={BLOCKS} fillOpacity="0.3" />
+      </g>
+
+      {/* Contenu « Services » : une grille de prestations. */}
+      <g className="pv-new">
+        {[0, 1, 2, 3].map((i) => {
+          const x = 24 + (i % 2) * 182;
+          const y = 80 + Math.floor(i / 2) * 62;
+          return (
+            <g key={i}>
+              <rect x={x} y={y} width="170" height="52" rx="8" fill={BLOCKS} fillOpacity="0.32" />
+              <circle cx={x + 22} cy={y + 26} r="9" fill={i % 2 === 0 ? SKY : EMERALD} fillOpacity="0.7" />
+              <rect x={x + 42} y={y + 15} width="110" height="8" rx="4" fill={BRIGHT} fillOpacity="0.55" />
+              <rect x={x + 42} y={y + 31} width="80" height="6" rx="3" fill={LINE} fillOpacity="0.3" />
+            </g>
+          );
+        })}
+      </g>
+    </>
+  );
+}
+
+/* ============================================================
    4. APPLICATION — l'outil métier sur mesure.
    Le menu change d'onglet et le contenu bascule : tuiles de
    chiffres + barres vivantes → les sommets apparaissent un à un
@@ -495,8 +586,8 @@ export function SceneApplication() {
 
 /* --- Aiguillage : la scène correspondant à une formule --- */
 export function Scene({ type }: { type: ServiceType }) {
-  if (type === "landing") return <SceneMaintenance />;
-  if (type === "intermediaire") return <SceneDigitalisation />;
+  if (type === "landing") return <SceneLanding />;
+  if (type === "intermediaire") return <SceneSitePages />;
   if (type === "refonte") return <SceneRefonte />;
   return <SceneApplication />;
 }

@@ -1,7 +1,7 @@
 import {
   Chrome,
-  SceneDigitalisation,
-  SceneMaintenance,
+  SceneLanding,
+  SceneSitePages,
   SceneRefonte,
   SceneApplication,
 } from "@/components/motion/ServiceScene";
@@ -39,10 +39,10 @@ export default function HeroShowcase() {
           application), car les libellés `pv-title-*` et les puces de
           progression sont branchés dessus côté Hero. */}
       <g className="pv-scene-1">
-        <SceneMaintenance />
+        <SceneLanding />
       </g>
       <g className="pv-scene-2">
-        <SceneDigitalisation />
+        <SceneSitePages />
       </g>
       <g className="pv-scene-3">
         <SceneRefonte />
