@@ -393,16 +393,19 @@ export function SceneLanding() {
       <rect x="100" y="46" width="200" height="16" rx="4" fill={BRIGHT} fillOpacity="0.85" />
       <rect x="80" y="72" width="240" height="8" rx="4" fill={LINE} fillOpacity="0.32" />
       <rect x="115" y="86" width="170" height="8" rx="4" fill={LINE} fillOpacity="0.28" />
-      {/* Halo qui respire derrière le bouton — seul élément animé de la
-          page, pour que l'œil n'ait qu'un seul endroit où se poser. */}
-      <circle className="pv-dot" cx="200" cy="132" r="44" fill={ACCENT} fillOpacity="0.16" />
-      <rect x="150" y="114" width="100" height="34" rx="17" fill={ACCENT} />
-      <rect x="170" y="127" width="60" height="8" rx="4" fill={SCREEN} fillOpacity="0.9" />
+      {/* Bouton unique, net et STATIQUE : c'est l'unique objectif de la
+          page, il n'a pas besoin d'un halo pour se faire remarquer — un
+          grand cercle flou derrière lui aurait fondu en un blob. */}
+      <rect x="150" y="112" width="100" height="34" rx="17" fill={ACCENT} />
+      <rect x="170" y="125" width="60" height="8" rx="4" fill={SCREEN} fillOpacity="0.9" />
+      {/* Seul élément animé : un simple repère qui respire à l'angle du
+          bouton, jamais plus gros qu'un point. */}
+      <circle className="pv-dot" cx="242" cy="119" r="5" fill={EMERALD} />
       {/* Confirmation : le visiteur a agi, c'est tout l'objectif de la page. */}
       <g className="pv-pop-1">
-        <circle cx="200" cy="182" r="11" fill={EMERALD} fillOpacity="0.18" />
-        <path d="M195 182l3.5 3.5 7 -7" stroke={EMERALD} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        <rect x="218" y="177" width="86" height="10" rx="5" fill={LINE} fillOpacity="0.3" />
+        <circle cx="200" cy="178" r="11" fill={EMERALD} fillOpacity="0.18" />
+        <path d="M195 178l3.5 3.5 7 -7" stroke={EMERALD} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <rect x="218" y="173" width="86" height="10" rx="5" fill={LINE} fillOpacity="0.3" />
       </g>
     </>
   );
