@@ -4,19 +4,28 @@ import { z } from "zod";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-const signUpSchema = z.object({
-  firstName: z.string().trim().min(1, "Le prénom est requis."),
-  lastName: z.string().trim().min(1, "Le nom est requis."),
-  company: z.string().trim().optional(),
-  email: z.string().trim().email("Adresse email invalide."),
-  password: z
-    .string()
-    .min(8, "Le mot de passe doit contenir au moins 8 caractères."),
-  phone: z.string().trim().optional(),
-  companySize: z.string().trim().optional(),
-  need: z.string().trim().optional(),
-  message: z.string().trim().optional(),
-});
+const signUpSchema = z
+  .object({
+    firstName: z.string().trim().min(1, "Le prénom est requis."),
+    lastName: z.string().trim().min(1, "Le nom est requis."),
+    company: z.string().trim().optional(),
+    email: z.string().trim().email("Adresse email invalide."),
+    password: z
+      .string()
+      .min(8, "Le mot de passe doit contenir au moins 8 caractères.")
+      .regex(/[a-z]/, "Le mot de passe doit contenir au moins une minuscule.")
+      .regex(/[A-Z]/, "Le mot de passe doit contenir au moins une majuscule.")
+      .regex(/[0-9]/, "Le mot de passe doit contenir au moins un chiffre."),
+    confirmPassword: z.string(),
+    phone: z.string().trim().optional(),
+    companySize: z.string().trim().optional(),
+    need: z.string().trim().optional(),
+    message: z.string().trim().optional(),
+  })
+  .refine((d) => d.password === d.confirmPassword, {
+    message: "Les deux mots de passe ne correspondent pas.",
+    path: ["confirmPassword"],
+  });
 
 export async function signUp(
   _prevState: { error: string } | null,
@@ -28,6 +37,7 @@ export async function signUp(
     company: formData.get("company"),
     email: formData.get("email"),
     password: formData.get("password"),
+    confirmPassword: formData.get("confirmPassword"),
     phone: formData.get("phone"),
     companySize: formData.get("companySize"),
     need: formData.get("need"),
