@@ -54,7 +54,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                     >
                       <Image
                         src={project.icon}
-                        alt=""
+                        alt={`Logo ${project.title}`}
                         width={80}
                         height={80}
                         className="h-20 w-20"

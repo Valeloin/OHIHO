@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     "refonte site web",
     "OHIHO",
   ],
+  alternates: {
+    canonical: "https://ohiho.fr",
+  },
   openGraph: {
     title: "OHIHO · Création de sites web & applications sur mesure",
     description:
@@ -37,14 +40,27 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: "https://ohiho.fr",
-    images: ["/logo.svg"],
+    siteName: "OHIHO",
+    // PNG et non SVG : la plupart des réseaux sociaux (Facebook, LinkedIn,
+    // X) n'affichent pas les images SVG en partage — la carte apparaissait
+    // sans image. logo_horizontal_dark.png (1192×360) reste le meilleur
+    // visuel disponible en attendant une vraie image dédiée au partage
+    // (1200×630, texte + logo).
+    images: [
+      {
+        url: "/logo_horizontal_dark.png",
+        width: 1192,
+        height: 360,
+        alt: "OHIHO",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "OHIHO · Création de sites web & applications sur mesure",
     description:
       "Des sites et applications web sur mesure, de l'idée à la mise en ligne.",
-    images: ["/logo.svg"],
+    images: ["/logo_horizontal_dark.png"],
   },
   // Le SVG est déclaré en premier : les navigateurs modernes le préfèrent et
   // il porte l'anneau au dégradé de marque. Les PNG restent en repli pour les
@@ -64,6 +80,19 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#091a29",
+};
+
+// Donnée structurée (schema.org) : permet aux moteurs de recherche de
+// comprendre OHIHO comme une entreprise plutôt qu'une simple page.
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "OHIHO",
+  url: "https://ohiho.fr",
+  logo: "https://ohiho.fr/logo-mark.png",
+  description:
+    "OHIHO conçoit et développe des sites web et applications sur mesure, pour entreprises et particuliers, de l'idée à la mise en ligne et au-delà.",
+  email: "contact@ohiho.fr",
 };
 
 export default async function RootLayout({
@@ -86,6 +115,10 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+        />
         {customThemeCss ? (
           <style dangerouslySetInnerHTML={{ __html: customThemeCss }} />
         ) : null}
