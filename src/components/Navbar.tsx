@@ -139,7 +139,7 @@ export default function Navbar() {
           `py-4`, chaque changement de hauteur d'un bouton décalait le
           bandeau et désaccordait `--header-h`, dont dépend le calage de la
           barre d'onglets de /admin. */}
-      <nav className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6">
+      <nav className="mx-auto flex h-[76px] max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2 group">
           <Image
             /* SVG et non PNG : le PNG date de l'anneau argenté, le SVG porte
@@ -167,7 +167,7 @@ export default function Navbar() {
             le bandeau porte maintenant huit liens au lieu de quatre, et une
             fois connecté le bloc de compte occupe près de 490 px. À l'ancien
             écartement l'ensemble réclamait 1386 px pour 1232 disponibles —
-            la largeur utile est plafonnée par `max-w-7xl`, elle ne grandit
+            la largeur utile est plafonnée par `max-w-6xl`, elle ne grandit
             donc pas avec l'écran. */}
         <div className="hidden items-center gap-4 md:flex">
           {/* Filet vertical léger qui sépare le logo de la navigation. Court
@@ -290,7 +290,7 @@ export default function Navbar() {
           faisaient 16. */}
       {open && (
         <div className="border-t border-[var(--header-border)] bg-background md:hidden">
-          <div className="mx-auto max-w-7xl px-6 pb-4 pt-1">
+          <div className="mx-auto max-w-6xl px-6 pb-4 pt-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

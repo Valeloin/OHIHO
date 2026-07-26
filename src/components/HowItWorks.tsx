@@ -15,7 +15,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
       className="relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-24">
+      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-24">
         {/* En-tête sur deux colonnes : le titre à gauche, et à droite une
             carte qui récapitule le déroulé. Elle donne à la section la
             hauteur des autres et sert de légende à la frise — ses jalons
