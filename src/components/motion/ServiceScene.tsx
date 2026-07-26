@@ -11,7 +11,7 @@
 // accompagne porte le sens.
 //
 // Correspondance formule → scène :
-//   landing       → SceneLanding    (un bouton d'appel à l'action qui respire)
+//   landing       → SceneLanding    (une page vitrine : en-tête + visuel + 3 points clés)
 //   intermediaire → SceneSitePages  (menu de 4 pages, on y navigue)
 //   refonte       → SceneRefonte    (avant / après)
 //   application   → SceneApplication (tableau de bord)
@@ -382,47 +382,52 @@ export function SceneRefonte() {
 }
 
 /* ============================================================
-   1b. LANDING — une page, un objectif.
-   On y voit d'abord le haut (titre, texte), la page défile UNE FOIS
-   (comme un visiteur qui parcourt), puis se stabilise sur le seul
-   bouton d'appel à l'action et sa confirmation. Le défilement dit
-   « une seule page qu'on parcourt », par opposition à la bascule
-   entre pages de SceneSitePages.
+   1b. LANDING — une page vitrine complète, de haut en bas.
+   Pas de défilement ni de forme isolée (les deux versions
+   précédentes ont été rejetées pour ça) : la scène montre d'un
+   coup d'œil ce qu'EST une landing page — un en-tête (titre,
+   texte, bouton d'appel à l'action) à côté d'un visuel, puis trois
+   points clés en dessous. Composition STATIQUE et dense, à la
+   hauteur des trois autres scènes ; seule une légère mise à
+   l'échelle d'apparition (pv-in-*, déjà utilisée par SceneRefonte)
+   fait vivre l'ensemble, sans halo ni grande forme translucide.
    ============================================================ */
 export function SceneLanding() {
+  const features = [
+    { x: 24, color: SKY },
+    { x: 148, color: ACCENT },
+    { x: 272, color: EMERALD },
+  ];
   return (
     <>
-      <defs>
-        <clipPath id="ohv-landing-clip">
-          <rect x="0" y="26" width="400" height="194" />
-        </clipPath>
-      </defs>
-      <g clipPath="url(#ohv-landing-clip)">
-        <g className="pv-scroll">
-          <rect x="100" y="46" width="200" height="16" rx="4" fill={BRIGHT} fillOpacity="0.85" />
-          <rect x="80" y="72" width="240" height="8" rx="4" fill={LINE} fillOpacity="0.32" />
-          <rect x="115" y="86" width="170" height="8" rx="4" fill={LINE} fillOpacity="0.28" />
-          {/* Bloc « visuel » de la page, entre le texte et le bouton. */}
-          <rect x="50" y="106" width="300" height="56" rx="8" fill={BLOCKS} fillOpacity="0.3" />
-          {/* Bouton unique, net et STATIQUE : c'est l'unique objectif de la
-              page, il n'a pas besoin d'un halo pour se faire remarquer — un
-              grand cercle flou derrière lui aurait fondu en un blob. */}
-          <rect x="150" y="222" width="100" height="34" rx="17" fill={ACCENT} />
-          <rect x="170" y="235" width="60" height="8" rx="4" fill={SCREEN} fillOpacity="0.9" />
-          {/* Seul élément qui respire en continu : un simple repère à
-              l'angle du bouton, jamais plus gros qu'un point. */}
-          <circle className="pv-dot" cx="242" cy="229" r="5" fill={EMERALD} />
+      {/* En-tête : titre + texte + bouton à gauche, visuel à droite */}
+      <rect x="24" y="40" width="50" height="10" rx="5" fill={ACCENT} fillOpacity="0.18" />
+      <circle className="pv-dot" cx="31" cy="45" r="2.5" fill={ACCENT} />
+      <rect x="24" y="60" width="160" height="14" rx="4" fill={BRIGHT} fillOpacity="0.85" />
+      <rect x="24" y="78" width="120" height="14" rx="4" fill={BRIGHT} fillOpacity="0.85" />
+      <rect x="24" y="100" width="164" height="7" rx="3.5" fill={LINE} fillOpacity="0.3" />
+      <rect x="24" y="112" width="130" height="7" rx="3.5" fill={LINE} fillOpacity="0.26" />
+      <g className="pv-in-1">
+        <rect x="24" y="128" width="88" height="28" rx="14" fill={ACCENT} />
+        <rect x="44" y="138" width="48" height="8" rx="4" fill={SCREEN} fillOpacity="0.9" />
+      </g>
+
+      {/* Visuel de la page (photo/illustration abstraite) */}
+      <g className="pv-in-2">
+        <rect x="210" y="40" width="166" height="110" rx="12" fill={BLOCKS} fillOpacity="0.35" />
+        <circle cx="246" cy="70" r="16" fill={SKY} fillOpacity="0.5" />
+        <rect x="224" y="104" width="130" height="8" rx="4" fill={LINE} fillOpacity="0.25" />
+        <rect x="224" y="116" width="90" height="8" rx="4" fill={LINE} fillOpacity="0.2" />
+      </g>
+
+      {/* Trois points clés, sous la ligne de flottaison */}
+      {features.map((f, i) => (
+        <g key={f.x} className={`pv-in-${3 + i}`}>
+          <circle cx={f.x + 8} cy="176" r="5" fill={f.color} />
+          <rect x={f.x + 22} y="172" width="64" height="7" rx="3.5" fill={BRIGHT} fillOpacity="0.55" />
+          <rect x={f.x + 22} y="184" width="50" height="6" rx="3" fill={LINE} fillOpacity="0.25" />
         </g>
-      </g>
-      {/* Confirmation, hors du défilement (elle ne bouge plus une fois là) :
-          le visiteur a agi, la page a rempli son unique rôle. Apparaît juste
-          après l'arrêt du défilement (pv-pop-2 débute à 22 %, le défilement
-          se termine à 20 %). */}
-      <g className="pv-pop-2">
-        <circle cx="200" cy="178" r="11" fill={EMERALD} fillOpacity="0.18" />
-        <path d="M195 178l3.5 3.5 7 -7" stroke={EMERALD} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        <rect x="218" y="173" width="86" height="10" rx="5" fill={LINE} fillOpacity="0.3" />
-      </g>
+      ))}
     </>
   );
 }
