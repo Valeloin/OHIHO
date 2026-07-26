@@ -244,7 +244,7 @@ export default function Hero({
             plus comme un tableau. */}
         <motion.div
           variants={ITEM}
-          className="mt-8 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 xl:grid-cols-4"
+          className="mt-6 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 xl:grid-cols-4"
         >
           {data.stats.map((item, i) => (
             // BORDURE AU DÉGRADÉ DE MARQUE (bleu ciel → teal → émeraude, le
@@ -266,7 +266,7 @@ export default function Hero({
                   lisible. Le dégradé s'intensifie au survol (voir la classe
                   `group-hover` sur le second calque). */}
               <div
-                className="relative flex h-full flex-col overflow-hidden rounded-[15px] p-4"
+                className="relative flex h-full flex-col overflow-hidden rounded-[15px] p-3"
                 style={{
                   background:
                     "linear-gradient(135deg, rgba(56,189,248,0.14) 0%, rgba(34,211,196,0.05) 48%, rgba(52,211,153,0.16) 100%), #102436",
@@ -285,8 +285,8 @@ export default function Hero({
 
                 {/* Pictogramme dans une TUILE teintée de marque, cerclée d'un
                     filet interne. */}
-                <span className="relative inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-teal/10 ring-1 ring-inset ring-brand-teal/20 transition-colors group-hover:bg-brand-teal/15">
-                  <StatGlyph index={i} className="h-7 w-7" />
+                <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-teal/10 ring-1 ring-inset ring-brand-teal/20 transition-colors group-hover:bg-brand-teal/15">
+                  <StatGlyph index={i} className="h-5 w-5" />
                 </span>
                 {/* `value` porte le mot-clé court (titre), `label` la phrase
                     qui l'explique. Volontairement PAS un h3 : ces cartes sont
@@ -294,10 +294,10 @@ export default function Hero({
                     sections de contenu — un h3 ici sauterait le h2 (la
                     hiérarchie de titres reprend proprement à la section
                     Services). */}
-                <p className="relative mt-5 text-lg font-semibold leading-tight tracking-display">
+                <p className="relative mt-3 text-sm font-semibold leading-tight tracking-display">
                   {item.value}
                 </p>
-                <p className="relative mt-2 text-[0.8125rem] leading-[1.5] text-muted">
+                <p className="relative mt-1.5 text-xs leading-snug text-muted">
                   {item.label}
                 </p>
               </div>
