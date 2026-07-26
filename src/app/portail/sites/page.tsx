@@ -3,6 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Mes sites & outils · OHIHO",
+  robots: { index: false, follow: false },
 };
 
 export default function PortailSitesPage() {

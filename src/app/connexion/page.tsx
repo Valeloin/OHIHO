@@ -4,6 +4,7 @@ import LoginForm from "@/components/auth/LoginForm";
 export const metadata: Metadata = {
   title: "Connexion · OHIHO",
   description: "Connectez-vous à votre espace client OHIHO pour suivre l'avancement de vos projets web.",
+  robots: { index: false, follow: false },
 };
 
 export default function ConnexionPage({

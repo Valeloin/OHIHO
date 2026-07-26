@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Confirmez votre email · OHIHO",
+  robots: { index: false, follow: false },
 };
 
 export default function ConfirmationPage() {

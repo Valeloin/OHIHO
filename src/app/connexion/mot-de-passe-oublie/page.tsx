@@ -4,6 +4,7 @@ import ResetRequestForm from "@/components/auth/ResetRequestForm";
 export const metadata: Metadata = {
   title: "Mot de passe oublié · OHIHO",
   description: "Réinitialisez le mot de passe de votre espace client OHIHO.",
+  robots: { index: false, follow: false },
 };
 
 export default function MotDePasseOubliePage() {

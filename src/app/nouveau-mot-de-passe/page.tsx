@@ -3,6 +3,7 @@ import NewPasswordForm from "@/components/auth/NewPasswordForm";
 
 export const metadata: Metadata = {
   title: "Nouveau mot de passe · OHIHO",
+  robots: { index: false, follow: false },
 };
 
 export default function NouveauMotDePassePage() {

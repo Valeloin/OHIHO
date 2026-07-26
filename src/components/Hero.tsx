@@ -289,10 +289,14 @@ export default function Hero({
                   <StatGlyph index={i} className="h-7 w-7" />
                 </span>
                 {/* `value` porte le mot-clé court (titre), `label` la phrase
-                    qui l'explique. */}
-                <h3 className="relative mt-5 text-lg font-semibold leading-tight tracking-display">
+                    qui l'explique. Volontairement PAS un h3 : ces cartes sont
+                    des mini-statistiques dans le hero, pas de nouvelles
+                    sections de contenu — un h3 ici sauterait le h2 (la
+                    hiérarchie de titres reprend proprement à la section
+                    Services). */}
+                <p className="relative mt-5 text-lg font-semibold leading-tight tracking-display">
                   {item.value}
-                </h3>
+                </p>
                 <p className="relative mt-2 text-[0.8125rem] leading-[1.5] text-muted">
                   {item.label}
                 </p>

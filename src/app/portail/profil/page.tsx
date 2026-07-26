@@ -5,6 +5,7 @@ import ProfileForm from "@/components/portail/ProfileForm";
 
 export const metadata: Metadata = {
   title: "Mon profil · OHIHO",
+  robots: { index: false, follow: false },
 };
 
 export default async function ProfilPage() {
