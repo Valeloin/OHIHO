@@ -383,26 +383,42 @@ export function SceneRefonte() {
 
 /* ============================================================
    1b. LANDING — une page, un objectif.
-   Titre + texte, puis UN SEUL bouton d'appel à l'action qui respire
-   (halo pulsé), suivi d'une confirmation qui s'y accroche : le
-   visiteur a agi, la page a rempli son unique rôle.
+   On y voit d'abord le haut (titre, texte), la page défile UNE FOIS
+   (comme un visiteur qui parcourt), puis se stabilise sur le seul
+   bouton d'appel à l'action et sa confirmation. Le défilement dit
+   « une seule page qu'on parcourt », par opposition à la bascule
+   entre pages de SceneSitePages.
    ============================================================ */
 export function SceneLanding() {
   return (
     <>
-      <rect x="100" y="46" width="200" height="16" rx="4" fill={BRIGHT} fillOpacity="0.85" />
-      <rect x="80" y="72" width="240" height="8" rx="4" fill={LINE} fillOpacity="0.32" />
-      <rect x="115" y="86" width="170" height="8" rx="4" fill={LINE} fillOpacity="0.28" />
-      {/* Bouton unique, net et STATIQUE : c'est l'unique objectif de la
-          page, il n'a pas besoin d'un halo pour se faire remarquer — un
-          grand cercle flou derrière lui aurait fondu en un blob. */}
-      <rect x="150" y="112" width="100" height="34" rx="17" fill={ACCENT} />
-      <rect x="170" y="125" width="60" height="8" rx="4" fill={SCREEN} fillOpacity="0.9" />
-      {/* Seul élément animé : un simple repère qui respire à l'angle du
-          bouton, jamais plus gros qu'un point. */}
-      <circle className="pv-dot" cx="242" cy="119" r="5" fill={EMERALD} />
-      {/* Confirmation : le visiteur a agi, c'est tout l'objectif de la page. */}
-      <g className="pv-pop-1">
+      <defs>
+        <clipPath id="ohv-landing-clip">
+          <rect x="0" y="26" width="400" height="194" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#ohv-landing-clip)">
+        <g className="pv-scroll">
+          <rect x="100" y="46" width="200" height="16" rx="4" fill={BRIGHT} fillOpacity="0.85" />
+          <rect x="80" y="72" width="240" height="8" rx="4" fill={LINE} fillOpacity="0.32" />
+          <rect x="115" y="86" width="170" height="8" rx="4" fill={LINE} fillOpacity="0.28" />
+          {/* Bloc « visuel » de la page, entre le texte et le bouton. */}
+          <rect x="50" y="106" width="300" height="56" rx="8" fill={BLOCKS} fillOpacity="0.3" />
+          {/* Bouton unique, net et STATIQUE : c'est l'unique objectif de la
+              page, il n'a pas besoin d'un halo pour se faire remarquer — un
+              grand cercle flou derrière lui aurait fondu en un blob. */}
+          <rect x="150" y="222" width="100" height="34" rx="17" fill={ACCENT} />
+          <rect x="170" y="235" width="60" height="8" rx="4" fill={SCREEN} fillOpacity="0.9" />
+          {/* Seul élément qui respire en continu : un simple repère à
+              l'angle du bouton, jamais plus gros qu'un point. */}
+          <circle className="pv-dot" cx="242" cy="229" r="5" fill={EMERALD} />
+        </g>
+      </g>
+      {/* Confirmation, hors du défilement (elle ne bouge plus une fois là) :
+          le visiteur a agi, la page a rempli son unique rôle. Apparaît juste
+          après l'arrêt du défilement (pv-pop-2 débute à 22 %, le défilement
+          se termine à 20 %). */}
+      <g className="pv-pop-2">
         <circle cx="200" cy="178" r="11" fill={EMERALD} fillOpacity="0.18" />
         <path d="M195 178l3.5 3.5 7 -7" stroke={EMERALD} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
         <rect x="218" y="173" width="86" height="10" rx="5" fill={LINE} fillOpacity="0.3" />
