@@ -7,7 +7,6 @@ import {
   CONTENT_TABLE,
   CONTENT_ROW_ID,
 } from "@/lib/supabase/config";
-import { defaultContent } from "./defaults";
 import type { SiteContent } from "./types";
 
 type ActionResult = { ok: boolean; error?: string };
@@ -43,9 +42,4 @@ export async function saveContent(content: SiteContent): Promise<ActionResult> {
   revalidatePath("/", "layout");
   revalidatePath("/admin");
   return { ok: true };
-}
-
-// Réinitialise le contenu aux valeurs par défaut.
-export async function resetContent(): Promise<ActionResult> {
-  return saveContent(defaultContent);
 }
