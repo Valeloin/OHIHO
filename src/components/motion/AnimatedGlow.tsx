@@ -36,13 +36,27 @@ const VARIANTS: Record<"hero" | "subtle", Wash[]> = {
       alpha: 0.09,
     },
   ],
-  // Sections intérieures : une seule nappe, très diluée.
+  // Sections intérieures : le même trio de marque que le hero (teal au
+  // centre, touches de ciel et d'émeraude aux extrémités), en plus dilué —
+  // une seule nappe teal isolée ne rendait pas la même impression de halo.
   subtle: [
     {
-      pos: "right-[-8%] top-[8%]",
-      size: "h-[520px] w-[560px]",
+      pos: "right-[-6%] top-[6%]",
+      size: "h-[480px] w-[520px]",
       rgb: TEAL,
-      alpha: 0.06,
+      alpha: 0.09,
+    },
+    {
+      pos: "left-[2%] top-[30%]",
+      size: "h-[280px] w-[280px]",
+      rgb: SKY,
+      alpha: 0.07,
+    },
+    {
+      pos: "right-[4%] bottom-[-4%]",
+      size: "h-[260px] w-[260px]",
+      rgb: EMERALD,
+      alpha: 0.07,
     },
   ],
 };
