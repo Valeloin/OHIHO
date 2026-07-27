@@ -1115,7 +1115,16 @@ body {
     stroke-dashoffset: 0;
     opacity: 1;
   }
-  96%,
+  /* ⚠️ La coche reste DESSINÉE pendant qu'elle s'efface. En laissant
+     `stroke-dashoffset` repartir vers 1 sur cette même fenêtre, le trait se
+     REMBOBINAIT à l'écran, bien visible — c'est ce qui se lisait comme un
+     bug en fin de course. La remise à zéro se fait juste après, à opacité
+     déjà nulle, comme partout ailleurs dans la frise. */
+  96% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  96.5%,
   100% {
     stroke-dashoffset: 1;
     opacity: 0;
@@ -1150,11 +1159,15 @@ body {
 .frise-desc-4 {
   animation-name: frise-desc-4;
 }
+/* ⚠️ La 1re entre vite (1,2 %) et la 4e sort tard (98,5 %) : à 2,4 % / 94 %,
+   l'écran restait complètement VIDE de 96 % à 101 % du cycle, soit ~0,7 s
+   de fenêtre blanche à chaque tour — ça se lisait comme une animation
+   plantée, pas comme une reprise. Le raccord tient maintenant en ~0,2 s. */
 @keyframes frise-desc-1 {
   0% {
     opacity: 0;
   }
-  2.4%,
+  1.2%,
   17.5% {
     opacity: 1;
   }
@@ -1197,10 +1210,10 @@ body {
     opacity: 0;
   }
   58.3%,
-  94% {
+  96% {
     opacity: 1;
   }
-  96%,
+  98.5%,
   100% {
     opacity: 0;
   }
@@ -1212,8 +1225,14 @@ body {
    horloge de 13,44 s — les geler toutes au MÊME instant (délai négatif)
    suffit à obtenir un état cohérent pour l'étape choisie, sans recalculer
    chaque famille à la main : le lien est garanti par construction, comme
-   le reste de la frise. L'instant retenu par étape tombe au milieu de sa
-   fenêtre `frise-desc-N`, jalon déjà allumé et remplissage déjà arrivé. */
+   le reste de la frise.
+
+   ⚠️ L'instant retenu doit tomber dans une fenêtre où TOUTES les familles
+   sont posées, jamais en pleine transition : figer un état intermédiaire
+   donne une pièce à moitié jouée, qui se lit comme un bug. C'est ce qui
+   arrivait à l'étape 4 à 76 %, en plein tracé de la coche (elle restait
+   dessinée à moitié). Elle est donc calée à 86 %, après la fin du tracé
+   (79 %) et avant le début du fondu de sortie (92 %). */
 .frise-manual [class*="frise-"] {
   animation-play-state: paused;
 }
@@ -1227,7 +1246,7 @@ body {
   animation-delay: -6.35s;
 }
 .frise-manual[data-step="4"] [class*="frise-"] {
-  animation-delay: -10.2s;
+  animation-delay: -11.56s;
 }
 
 /* ---------- Espace tickets (section « Pourquoi OHIHO ») ----------
