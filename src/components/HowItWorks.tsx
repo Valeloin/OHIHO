@@ -15,7 +15,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
       className="relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-14 sm:py-16">
+      <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-14">
         {/* En-tête sur deux colonnes : le titre à gauche, et à droite une
             carte qui récapitule le déroulé. Elle donne à la section la
             hauteur des autres et sert de légende à la frise — ses jalons
@@ -65,12 +65,12 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           </Reveal>
         </div>
 
-        <div className="mt-8 h-px rule-fade" />
+        <div className="mt-6 h-px rule-fade" />
 
         {/* Frise : un rail sombre porte tout le tracé, et le dégradé de marque
             s'y remplit de gauche à droite. Chaque jalon s'allume au passage
             du remplissage. En mobile, la frise passe à la verticale. */}
-        <RevealGroup className="relative mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="relative mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Le rail est INVISIBLE : seul le trait déjà parcouru se voit.
               Le chemin à venir ne se devine pas, la progression se lit
               d'autant mieux. */}
@@ -176,7 +176,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           </svg>
 
           {data.steps.map((item, i) => (
-            <RevealItem key={i} className="relative pl-6 lg:pl-0 lg:pt-7">
+            <RevealItem key={i} className="relative pl-6 lg:pl-0 lg:pt-5">
               {/* Rail + remplissage, en mobile / tablette */}
               <div
                 aria-hidden="true"
@@ -216,7 +216,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                   toutes les autres pièces de l'horloge. */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -left-4 top-10 bottom-0 w-0.5 opacity-0 lg:opacity-100"
+                className="pointer-events-none absolute -left-4 top-8 bottom-0 w-0.5 opacity-0 lg:opacity-100"
               >
                 <div
                   className={`frise-desc-${i + 1} rule-brand-y h-full w-full rounded-full`}
@@ -227,16 +227,16 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                   texte se déhanche. Déclenché par les mêmes horloges que le
                   jalon, donc parfaitement synchrone. */}
               <span
-                className={`frise-num-${i + 1} text-gradient font-mono text-3xl font-semibold tracking-display`}
+                className={`frise-num-${i + 1} text-gradient font-mono text-2xl font-semibold tracking-display`}
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className={`frise-txt-${i + 1}`}>
-                <h3 className="mt-4 text-lg font-semibold tracking-display">
+                <h3 className="mt-3 text-lg font-semibold tracking-display">
                   {item.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-relaxed text-muted">
+                <p className="mt-2 text-sm leading-relaxed text-muted">
                   {item.description}
                 </p>
               </div>
