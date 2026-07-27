@@ -5,7 +5,6 @@ import Portfolio from "@/components/Portfolio";
 import HowItWorks from "@/components/HowItWorks";
 import Expertise from "@/components/Expertise";
 import WhyUs from "@/components/WhyUs";
-import BugTrack from "@/components/BugTrack";
 import ContactSection from "@/components/ContactSection";
 import ScrollNav from "@/components/ScrollNav";
 import { getContent } from "@/lib/content";
@@ -30,13 +29,9 @@ export default async function Home() {
       <HowItWorks data={content.method} />
       <Expertise data={content.expertise} />
       <WhyUs data={content.whyUs} />
-      {/* Prolonge « Pourquoi OHIHO » : la promesse d'accompagnement, montrée
-          concrètement par l'outil livré avec chaque site.
-          Il y avait ici deux sections, « Suivi » puis « BugTrack », qui
-          décrivaient le même mécanisme de tickets — l'une sans nommer
-          l'outil, l'autre sans dire qu'il est livré avec le site. Elles ont
-          été fusionnées dans BugTrack, et Suivi.tsx supprimé. */}
-      <BugTrack />
+      {/* BugTrack a sa propre page (/bugtrack) depuis le 2026-07-27, reliée
+          par la tuile « BugTrack » de Réalisations juste en dessous — plus
+          de section dédiée ici sur l'accueil. */}
       <Portfolio data={content.portfolio} />
       <ContactSection data={content.contact} />
       <ScrollNav />

@@ -40,9 +40,9 @@ export const PROJECTS: Project[] = [
       "Outil de suivi des demandes et des anomalies : création de tickets, priorités, statuts, fil de discussion avec le client et notifications par email. Chaque compte dispose de son espace, et les tickets restés sans réponse se clôturent automatiquement.",
     // Icône reprise du projet (D:\BugTrack) : SVG au fond bleu intégré.
     icon: "/realisations/bugtrack.svg",
-    // Outil livré et en service, mais réservé aux comptes : pas de vitrine
-    // publique à montrer, d'où l'absence de lien.
-    note: "Accès privé",
+    // Outil réservé aux comptes clients : pas de vitrine publique à montrer,
+    // mais une page de présentation dédiée sur ohiho.fr depuis le 2026-07-27.
+    href: "/bugtrack",
   },
   {
     title: "Mailys Solutions",

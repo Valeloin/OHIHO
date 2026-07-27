@@ -93,7 +93,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                     à hauteur égale sur la rangée. */}
                 {enLigne ? (
                   <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-accent-cyan">
-                    Voir le site
+                    {isExternal ? "Voir le site" : "En savoir plus"}
                     <span aria-hidden="true">→</span>
                   </span>
                 ) : (
