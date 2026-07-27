@@ -2,6 +2,8 @@ export type UserRole = "client" | "technician" | "admin";
 
 export type ProjectStatus = "nouveau" | "en_cours" | "en_revision" | "livre";
 export type InvoiceStatus = "brouillon" | "envoyee" | "payee";
+export type TicketStatus = "recue" | "en_cours" | "corrigee" | "fermee";
+export type TicketPriority = "basse" | "normale" | "haute" | "urgente";
 
 export type ProjectStep = { label: string; done: boolean };
 
@@ -28,6 +30,24 @@ export type Invoice = {
   due_date: string | null;
   created_at: string;
   updated_at: string;
+};
+
+export type Ticket = {
+  id: string;
+  client_id: string;
+  subject: string;
+  status: TicketStatus;
+  priority: TicketPriority;
+  created_at: string;
+  updated_at: string;
+};
+
+export type TicketMessage = {
+  id: string;
+  ticket_id: string;
+  author_id: string;
+  body: string;
+  created_at: string;
 };
 
 export type Profile = {
@@ -78,6 +98,22 @@ export type Database = {
         Update: Partial<Invoice>;
         Relationships: [];
       };
+      tickets: {
+        Row: Ticket;
+        Insert: Partial<Ticket> & { client_id: string; subject: string };
+        Update: Partial<Ticket>;
+        Relationships: [];
+      };
+      ticket_messages: {
+        Row: TicketMessage;
+        Insert: Partial<TicketMessage> & {
+          ticket_id: string;
+          author_id: string;
+          body: string;
+        };
+        Update: Partial<TicketMessage>;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {
@@ -89,6 +125,10 @@ export type Database = {
           p_address: string | null;
           p_company: string | null;
         };
+        Returns: void;
+      };
+      reopen_ticket_if_closed: {
+        Args: { p_ticket_id: string };
         Returns: void;
       };
     };

@@ -29,12 +29,11 @@ drop policy if exists storage_ticket_attachments_insert on storage.objects;
 -- DROP TABLE entraîne automatiquement ses triggers/policies/index : pas
 -- besoin de les retirer un par un avant.
 drop table if exists ticket_attachments;
-drop table if exists ticket_messages;
-drop table if exists tickets;
 drop table if exists quote_requests;
 
-drop type if exists ticket_status;
-drop type if exists ticket_priority;
+-- ticket_status/ticket_priority sont réutilisés ci-dessous par le vrai
+-- système de tickets (2026-07-27) : ne plus les dropper ici, `drop type`
+-- échouerait dès qu'une colonne les référence.
 drop type if exists ticket_category;
 drop type if exists quote_project_type;
 drop type if exists quote_status;
@@ -55,6 +54,16 @@ end $$;
 
 do $$ begin
   create type invoice_status as enum ('brouillon', 'envoyee', 'payee');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type ticket_status as enum ('recue', 'en_cours', 'corrigee', 'fermee');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type ticket_priority as enum ('basse', 'normale', 'haute', 'urgente');
 exception when duplicate_object then null;
 end $$;
 
@@ -128,6 +137,33 @@ create table if not exists public.invoices (
 
 create index if not exists projects_client_id_idx on public.projects(client_id);
 create index if not exists invoices_client_id_idx on public.invoices(client_id);
+
+-- Tickets support (BugTrack) : contrairement à projects/invoices, alimentés
+-- par le CLIENT lui-même (voir RLS plus bas). Pas de colonne description :
+-- le premier message du fil en tient lieu.
+create table if not exists public.tickets (
+  id uuid primary key default gen_random_uuid(),
+  client_id uuid not null references auth.users(id) on delete cascade,
+  subject text not null,
+  status ticket_status not null default 'recue',
+  priority ticket_priority not null default 'normale',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+-- Pas de client_id ici : la visibilité découle entièrement d'un join vers
+-- tickets en RLS (une seule source de vérité). Fil figé : pas d'update/delete.
+create table if not exists public.ticket_messages (
+  id uuid primary key default gen_random_uuid(),
+  ticket_id uuid not null references public.tickets(id) on delete cascade,
+  author_id uuid not null references auth.users(id) on delete cascade,
+  body text not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists tickets_client_id_idx on public.tickets(client_id);
+create index if not exists tickets_updated_at_idx on public.tickets(updated_at desc);
+create index if not exists ticket_messages_ticket_id_idx on public.ticket_messages(ticket_id);
 
 -- ============================================================
 -- 3) FONCTIONS
@@ -205,13 +241,48 @@ $$;
 
 grant execute on function public.update_own_profile(text, text, text, text, text) to authenticated;
 
--- Rafraîchit updated_at à chaque modification (projects, invoices).
+-- Rafraîchit updated_at à chaque modification (projects, invoices, tickets).
 create or replace function public.set_updated_at()
 returns trigger
 language plpgsql
 as $$
 begin
   new.updated_at = now();
+  return new;
+end;
+$$;
+
+-- Réouvre un ticket fermé quand le client répond. Security definer pour ne
+-- toucher QUE le statut (jamais la priorité), et uniquement depuis 'fermee' :
+-- pas question de laisser le client mettre à jour tickets directement.
+create or replace function public.reopen_ticket_if_closed(p_ticket_id uuid)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  update public.tickets
+  set status = 'recue'
+  where id = p_ticket_id
+    and status = 'fermee'
+    and (client_id = auth.uid() or public.current_role() in ('technician', 'admin'));
+end;
+$$;
+
+grant execute on function public.reopen_ticket_if_closed(uuid) to authenticated;
+
+-- Remonte le ticket parent à chaque nouveau message (tri par activité
+-- récente). Security definer car l'auteur est souvent le client, qui n'a pas
+-- le droit d'UPDATE tickets directement (voir tickets_staff_update).
+create or replace function public.touch_ticket_on_message()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  update public.tickets set updated_at = now() where id = new.ticket_id;
   return new;
 end;
 $$;
@@ -234,6 +305,16 @@ drop trigger if exists invoices_set_updated_at on public.invoices;
 create trigger invoices_set_updated_at
   before update on public.invoices
   for each row execute function public.set_updated_at();
+
+drop trigger if exists tickets_set_updated_at on public.tickets;
+create trigger tickets_set_updated_at
+  before update on public.tickets
+  for each row execute function public.set_updated_at();
+
+drop trigger if exists ticket_messages_touch_ticket on public.ticket_messages;
+create trigger ticket_messages_touch_ticket
+  after insert on public.ticket_messages
+  for each row execute function public.touch_ticket_on_message();
 
 -- ============================================================
 -- 5) ROW LEVEL SECURITY
@@ -287,6 +368,60 @@ create policy invoices_staff_write on public.invoices
   to authenticated
   using (public.current_role() in ('technician', 'admin'))
   with check (public.current_role() in ('technician', 'admin'));
+
+alter table public.tickets enable row level security;
+alter table public.ticket_messages enable row level security;
+
+drop policy if exists tickets_select on public.tickets;
+create policy tickets_select on public.tickets
+  for select
+  using (client_id = auth.uid() or public.current_role() in ('technician', 'admin'));
+
+-- Contrairement à projects/invoices : le client crée ses propres tickets.
+drop policy if exists tickets_insert on public.tickets;
+create policy tickets_insert on public.tickets
+  for insert
+  to authenticated
+  with check (client_id = auth.uid() or public.current_role() in ('technician', 'admin'));
+
+-- Seul le staff change statut/priorité (aucune policy update côté client).
+drop policy if exists tickets_staff_update on public.tickets;
+create policy tickets_staff_update on public.tickets
+  for update
+  to authenticated
+  using (public.current_role() in ('technician', 'admin'))
+  with check (public.current_role() in ('technician', 'admin'));
+
+drop policy if exists tickets_staff_delete on public.tickets;
+create policy tickets_staff_delete on public.tickets
+  for delete
+  to authenticated
+  using (public.current_role() in ('technician', 'admin'));
+
+drop policy if exists ticket_messages_select on public.ticket_messages;
+create policy ticket_messages_select on public.ticket_messages
+  for select
+  using (
+    exists (
+      select 1 from public.tickets t
+      where t.id = ticket_messages.ticket_id
+        and (t.client_id = auth.uid() or public.current_role() in ('technician', 'admin'))
+    )
+  );
+
+-- Fil figé : ajout seulement, jamais d'update/delete côté client ni staff.
+drop policy if exists ticket_messages_insert on public.ticket_messages;
+create policy ticket_messages_insert on public.ticket_messages
+  for insert
+  to authenticated
+  with check (
+    author_id = auth.uid()
+    and exists (
+      select 1 from public.tickets t
+      where t.id = ticket_messages.ticket_id
+        and (t.client_id = auth.uid() or public.current_role() in ('technician', 'admin'))
+    )
+  );
 
 -- ============================================================
 -- Pour donner les droits admin à un compte (remplacer l'email) :

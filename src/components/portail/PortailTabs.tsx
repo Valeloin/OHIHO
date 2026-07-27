@@ -7,6 +7,7 @@ const TABS = [
   { href: "/portail/profil", label: "Mon profil" },
   { href: "/portail/sites", label: "Mon projet" },
   { href: "/portail/facturation", label: "Facturation" },
+  { href: "/portail/tickets", label: "Support" },
 ];
 
 export default function PortailTabs() {
@@ -17,7 +18,7 @@ export default function PortailTabs() {
     // est souligné d'un filet au dégradé de marque (.rule-brand), statique.
     <div className="flex flex-wrap gap-x-7 gap-y-2 border-b border-border">
       {TABS.map((tab) => {
-        const active = pathname === tab.href;
+        const active = pathname === tab.href || pathname.startsWith(`${tab.href}/`);
         return (
           <Link
             key={tab.href}
