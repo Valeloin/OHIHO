@@ -5,6 +5,9 @@ import { requireProfile } from "@/lib/supabase/session";
 import StatusBadge from "@/components/portail/StatusBadge";
 import TicketThread from "@/components/portail/TicketThread";
 import TicketActions from "@/components/portail/TicketActions";
+import PageHeader from "@/components/portail/PageHeader";
+import Panel from "@/components/portail/Panel";
+import DetailGrid from "@/components/portail/DetailGrid";
 import {
   BUGTRACK_STATUS_LABEL,
   BUGTRACK_STATUS_TONE,
@@ -55,33 +58,53 @@ export default async function PortailTicketDetailPage({
     <div>
       <Link
         href="/portail/tickets"
-        className="inline-flex items-center gap-2 text-muted transition-colors hover:text-foreground"
+        className="mb-5 inline-flex items-center gap-2 text-[14px] text-muted transition-colors hover:text-foreground"
       >
         <span aria-hidden="true">←</span> Retour au support
       </Link>
 
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-        <h1 className="portail-title">{ticket.title}</h1>
-        <div className="flex shrink-0 flex-wrap items-center gap-2">
-          <StatusBadge
-            label={BUGTRACK_PRIORITY_LABEL[ticket.priority]}
-            tone={BUGTRACK_PRIORITY_TONE[ticket.priority]}
-          />
+      <PageHeader
+        title={ticket.title}
+        action={
           <StatusBadge
             label={BUGTRACK_STATUS_LABEL[ticket.status]}
             tone={BUGTRACK_STATUS_TONE[ticket.status]}
           />
-        </div>
-      </div>
+        }
+      />
 
-      <p className="mt-2 text-[14px] text-muted">
-        {ticket.number} · ouvert le {formatDate(ticket.created_at)}
-      </p>
+      <div className="grid gap-6">
+        <Panel title="Détails">
+          <DetailGrid
+            items={[
+              { label: "Numéro", value: ticket.number },
+              {
+                label: "Priorité",
+                value: (
+                  <StatusBadge
+                    label={BUGTRACK_PRIORITY_LABEL[ticket.priority]}
+                    tone={BUGTRACK_PRIORITY_TONE[ticket.priority]}
+                  />
+                ),
+              },
+              { label: "Ouvert le", value: formatDate(ticket.created_at) },
+              {
+                label: "Dernière activité",
+                value: formatDate(ticket.updated_at),
+              },
+              {
+                label: "Messages",
+                value: String(sortedMessages.length),
+              },
+            ]}
+          />
+        </Panel>
 
-      <TicketActions ticketId={ticket.id} status={ticket.status} />
+        <TicketActions ticketId={ticket.id} status={ticket.status} />
 
-      <div className="mt-8">
-        <TicketThread ticketId={ticket.id} messages={sortedMessages} />
+        <Panel title="Discussion">
+          <TicketThread ticketId={ticket.id} messages={sortedMessages} />
+        </Panel>
       </div>
     </div>
   );

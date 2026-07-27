@@ -4,6 +4,8 @@ import { requireProfile } from "@/lib/supabase/session";
 import StatusBadge from "@/components/portail/StatusBadge";
 import PageHeader from "@/components/portail/PageHeader";
 import EmptyState from "@/components/portail/EmptyState";
+import Panel from "@/components/portail/Panel";
+import DetailGrid from "@/components/portail/DetailGrid";
 import { PROJECT_STATUS_LABEL, PROJECT_STATUS_TONE } from "@/lib/portail/status";
 import type { Project } from "@/lib/supabase/types";
 
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 function formatDate(value: string | null) {
-  if (!value) return null;
+  if (!value) return "—";
   return new Date(value).toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",
@@ -55,85 +57,89 @@ export default async function PortailSitesPage() {
             const total = project.steps.length;
             const done = project.steps.filter((s) => s.done).length;
             const percent = total > 0 ? Math.round((done / total) * 100) : 0;
-            const updated = formatDate(project.updated_at);
 
             return (
-              <article key={project.id} className="card-surface p-7 sm:p-9">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <h2 className="text-xl font-semibold">{project.name}</h2>
-                  <StatusBadge
-                    label={PROJECT_STATUS_LABEL[project.status]}
-                    tone={PROJECT_STATUS_TONE[project.status]}
+              <div key={project.id} className="grid gap-6">
+                <Panel
+                  title={project.name}
+                  action={
+                    <StatusBadge
+                      label={PROJECT_STATUS_LABEL[project.status]}
+                      tone={PROJECT_STATUS_TONE[project.status]}
+                    />
+                  }
+                >
+                  <DetailGrid
+                    items={[
+                      {
+                        label: "Avancement",
+                        value: (
+                          <div>
+                            <p className="font-medium">
+                              {percent}%
+                              {total > 0 && (
+                                <span className="ml-2 font-normal text-muted">
+                                  {done}/{total} étapes
+                                </span>
+                              )}
+                            </p>
+                            <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+                              <div
+                                className="h-full rounded-full bg-gradient-to-r from-brand-sky via-brand-teal to-brand-emerald"
+                                style={{ width: `${percent}%` }}
+                              />
+                            </div>
+                          </div>
+                        ),
+                      },
+                      {
+                        label: "Démarré le",
+                        value: formatDate(project.created_at),
+                      },
+                      {
+                        label: "Dernière mise à jour",
+                        value: formatDate(project.updated_at),
+                      },
+                    ]}
                   />
-                </div>
 
-                {updated && (
-                  <p className="mt-2 text-[14px] text-muted">
-                    Mis à jour le {updated}
-                  </p>
-                )}
-
-                {project.notes && (
-                  <p className="mt-5 leading-relaxed text-muted">
-                    {project.notes}
-                  </p>
-                )}
+                  {project.notes && (
+                    <p className="mt-7 border-t border-border pt-6 leading-relaxed text-muted">
+                      {project.notes}
+                    </p>
+                  )}
+                </Panel>
 
                 {total > 0 && (
-                  <>
-                    <div className="mt-8">
-                      <div className="flex items-baseline justify-between gap-3">
-                        <p className="font-medium">Avancement</p>
-                        <p className="text-muted">
-                          {done} sur {total} étapes
-                        </p>
-                      </div>
-                      <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-surface-2">
-                        <div
-                          className="h-full rounded-full bg-gradient-to-r from-brand-sky via-brand-teal to-brand-emerald"
-                          style={{ width: `${percent}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Frise verticale : un filet relie les pastilles d'une
-                        étape à l'autre pour se lire comme un parcours. */}
-                    <ol className="mt-8">
-                      {project.steps.map((step, i) => {
-                        const isLast = i === project.steps.length - 1;
-                        return (
-                          <li
-                            key={i}
-                            className="relative flex gap-4 pb-5 last:pb-0"
-                          >
-                            {!isLast && (
-                              <span
-                                aria-hidden="true"
-                                className="absolute left-[5px] top-4 h-full w-px bg-border"
-                              />
-                            )}
-                            <span
-                              aria-hidden="true"
-                              className={`relative z-10 mt-2 h-[11px] w-[11px] shrink-0 rounded-full ${
-                                step.done
-                                  ? "bg-brand-emerald"
-                                  : "border border-border bg-background"
-                              }`}
-                            />
-                            <p
-                              className={
-                                step.done ? "" : "text-muted"
-                              }
-                            >
-                              {step.label}
-                            </p>
-                          </li>
-                        );
-                      })}
+                  <Panel title="Étapes" flush>
+                    <ol className="divide-y divide-border">
+                      {project.steps.map((step, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center gap-4 px-6 py-3.5"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className={`h-2 w-2 shrink-0 rounded-full ${
+                              step.done
+                                ? "bg-brand-emerald"
+                                : "border border-border bg-background"
+                            }`}
+                          />
+                          <span className={step.done ? "" : "text-muted"}>
+                            {step.label}
+                          </span>
+                          {step.done && (
+                            <span className="ml-auto shrink-0 text-[13px] text-muted">
+                              Terminé
+                            </span>
+                          )}
+                        </li>
+                      ))}
                     </ol>
-                  </>
+                  </Panel>
                 )}
-              </article>
+              </div>
             );
           })}
         </div>

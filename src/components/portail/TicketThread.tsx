@@ -37,9 +37,7 @@ export default function TicketThread({
 
   return (
     <div>
-      {/* Fil de discussion : OHIHO à gauche, vous à droite, du plus ancien au
-          plus récent. Pas d'avatar ni de cadre — l'alignement et le fond de
-          la bulle suffisent à dire qui parle. */}
+      {/* OHIHO à gauche, vous à droite, du plus ancien au plus récent. */}
       <div className="flex flex-col gap-6">
         {messages.map((message) => {
           const isStaff = message.author_type === "admin";
@@ -50,9 +48,9 @@ export default function TicketThread({
               className={`flex flex-col ${isStaff ? "items-start" : "items-end"}`}
             >
               <div
-                className={`max-w-[90%] rounded-2xl px-5 py-4 sm:max-w-[80%] ${
+                className={`max-w-[90%] rounded-2xl px-5 py-3.5 sm:max-w-[80%] ${
                   isStaff
-                    ? "rounded-bl-md border border-border bg-surface"
+                    ? "rounded-bl-md border border-border bg-[var(--header-bg)]"
                     : "rounded-br-md bg-surface-2"
                 }`}
               >
@@ -60,7 +58,7 @@ export default function TicketThread({
                   {message.message}
                 </p>
               </div>
-              <p className="mt-2 px-1 text-[13px] text-muted">
+              <p className="mt-1.5 px-1 text-[13px] text-muted">
                 {isStaff ? "OHIHO" : "Vous"} · {formatMoment(message.created_at)}
               </p>
             </div>
@@ -68,31 +66,31 @@ export default function TicketThread({
         })}
       </div>
 
-      <form action={formAction} className="mt-10">
-        <input type="hidden" name="ticketId" value={ticketId} />
-        <label htmlFor="message" className="field-label">
-          Votre réponse
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={4}
-          maxLength={5000}
-          className="field resize-none"
-          placeholder="Écrivez votre message..."
-        />
+      <div className="mt-8 border-t border-border pt-6">
+        <form action={formAction}>
+          <input type="hidden" name="ticketId" value={ticketId} />
+          <label htmlFor="message" className="field-label">
+            Votre réponse
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows={4}
+            maxLength={5000}
+            className="field resize-none"
+            placeholder="Écrivez votre message..."
+          />
 
-        {state?.error && (
-          <p className="mt-3 rounded-xl bg-red-400/10 px-4 py-3 text-red-400">
-            {state.error}
-          </p>
-        )}
+          {state?.error && (
+            <p className="mt-3 text-[14px] text-red-400">{state.error}</p>
+          )}
 
-        <div className="mt-4">
-          <SubmitButton />
-        </div>
-      </form>
+          <div className="mt-4">
+            <SubmitButton />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

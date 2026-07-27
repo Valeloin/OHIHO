@@ -9,7 +9,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="btn-accent px-6 py-3 font-semibold disabled:opacity-50"
+      className="btn-accent px-6 py-2.5 font-semibold disabled:opacity-50"
     >
       {pending ? "Enregistrement..." : "Enregistrer"}
     </button>
@@ -34,11 +34,15 @@ export default function ProfileForm({
   const [state, formAction] = useFormState(updateProfile, null);
 
   return (
-    // Un seul bloc, une seule grille : la coupure « Informations
-    // personnelles » / « Coordonnées » ajoutait deux titres et deux filets
-    // pour six champs qui se remplissent d'une traite.
-    <form action={formAction} className="card-surface p-7 sm:p-9">
-      <div className="grid gap-6 sm:grid-cols-2">
+    // Même anatomie que les panneaux du portail : bandeau de titre, corps,
+    // pied qui porte l'action — le bouton reste au même endroit d'un
+    // formulaire à l'autre.
+    <form action={formAction} className="card-surface overflow-hidden">
+      <div className="border-b border-border px-6 py-3.5">
+        <h2 className="font-medium">Informations</h2>
+      </div>
+
+      <div className="grid gap-6 p-6 sm:grid-cols-2">
         <div>
           <label htmlFor="firstName" className="field-label">
             Prénom
@@ -79,7 +83,7 @@ export default function ProfileForm({
             disabled
             className="field cursor-not-allowed bg-surface-2 text-muted"
           />
-          <p className="mt-2 text-[14px] text-muted">
+          <p className="mt-2 text-[13px] text-muted">
             L&apos;email ne peut pas être modifié ici.
           </p>
         </div>
@@ -126,18 +130,14 @@ export default function ProfileForm({
         </div>
       </div>
 
-      {state?.error && (
-        <p className="mt-6 rounded-xl bg-red-400/10 px-4 py-3 text-red-400">
-          {state.error}
-        </p>
-      )}
-      {state?.success && (
-        <p className="mt-6 rounded-xl bg-brand-emerald/10 px-4 py-3 text-brand-emerald">
-          Profil mis à jour.
-        </p>
-      )}
-
-      <div className="mt-7">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border bg-[var(--header-bg)] px-6 py-4">
+        {state?.error ? (
+          <p className="text-[14px] text-red-400">{state.error}</p>
+        ) : state?.success ? (
+          <p className="text-[14px] text-brand-emerald">Profil mis à jour.</p>
+        ) : (
+          <span />
+        )}
         <SubmitButton />
       </div>
     </form>

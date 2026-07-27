@@ -26,23 +26,21 @@ export default async function ProfilPage() {
 
   return (
     <div>
-      {/* Raccourci vers l'espace admin, réservé au rôle admin (la page /admin
-          revérifie le rôle de son côté). */}
-      {profile?.role === "admin" && (
-        <div className="card-surface mb-8 flex flex-wrap items-center justify-between gap-4 p-6">
-          <p className="text-muted">
-            Modifier les textes et les couleurs du site.
-          </p>
-          <Link
-            href="/admin"
-            className="btn-outline shrink-0 px-5 py-2.5 font-semibold"
-          >
-            Ouvrir l&apos;outil dev
-          </Link>
-        </div>
-      )}
-
-      <PageHeader title="Mon profil" />
+      <PageHeader
+        title="Mon profil"
+        action={
+          // Raccourci vers l'espace admin, réservé au rôle admin (la page
+          // /admin revérifie le rôle de son côté).
+          profile?.role === "admin" ? (
+            <Link
+              href="/admin"
+              className="btn-outline inline-flex px-5 py-2.5 text-[14px] font-semibold"
+            >
+              Outil dev
+            </Link>
+          ) : undefined
+        }
+      />
 
       {/* `items-start` : sans lui la carte d'identité s'étire sur toute la
           hauteur du formulaire et se retrouve à moitié vide. */}

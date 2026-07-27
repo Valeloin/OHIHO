@@ -308,6 +308,16 @@ body {
     color: var(--foreground);
   }
 
+  /* Bandeau qui défile latéralement sans montrer sa barre : la barre native
+     traverse toute la largeur et se lit comme un trait de séparation. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Titre de page du portail : une seule taille, partout la même, pour que
      l'œil sache immédiatement où il est. */
   .portail-title {

@@ -21,7 +21,7 @@ function SubmitButton({ label, pendingLabel }: { label: string; pendingLabel: st
 function CloseForm({ ticketId }: { ticketId: string }) {
   const [state, formAction] = useFormState(closeTicket, null);
   return (
-    <form action={formAction} className="card-surface mt-8 flex flex-wrap items-center justify-between gap-4 p-6">
+    <form action={formAction} className="card-surface flex flex-wrap items-center justify-between gap-4 p-6">
       <p className="text-muted">
         Le correctif a été livré. Confirmez-vous que c&apos;est réglé ?
       </p>
@@ -42,7 +42,7 @@ function ReopenForm({ ticketId }: { ticketId: string }) {
 
   if (!open) {
     return (
-      <div className="card-surface mt-8 flex flex-wrap items-center justify-between gap-4 p-6">
+      <div className="card-surface flex flex-wrap items-center justify-between gap-4 p-6">
         <p className="text-muted">
           Le problème persiste ? Vous pouvez rouvrir ce ticket.
         </p>
@@ -58,7 +58,7 @@ function ReopenForm({ ticketId }: { ticketId: string }) {
   }
 
   return (
-    <form action={formAction} className="card-surface mt-8 p-6">
+    <form action={formAction} className="card-surface p-6">
       <input type="hidden" name="ticketId" value={ticketId} />
       <label htmlFor="reason" className="field-label">
         Pourquoi rouvrir ce ticket ?{" "}

@@ -47,23 +47,29 @@ export default async function PortailLayout({
   const email = user.email ?? "";
 
   return (
-    <main className="portail">
-      <div className="mx-auto max-w-6xl px-6 py-14">
-        <div className="grid gap-10 lg:grid-cols-[15rem_1fr] lg:gap-14">
-          <PortailSidebar
-            name={profile?.full_name || email}
-            email={email}
-            initials={initialsOf(
-              profile?.first_name ?? null,
-              profile?.last_name ?? null,
-              email
-            )}
-            pendingTicketCount={pendingTicketCount}
-          />
+    // Coquille d'application : volet fixe à gauche, zone de travail à droite.
+    // La hauteur minimale retire celle du bandeau du site pour que le volet
+    // touche le bas de l'écran même sur une page courte.
+    <main
+      className="portail flex flex-col lg:flex-row"
+      style={{ minHeight: "calc(100vh - var(--header-h))" }}
+    >
+      <PortailSidebar
+        name={profile?.full_name || email}
+        email={email}
+        initials={initialsOf(
+          profile?.first_name ?? null,
+          profile?.last_name ?? null,
+          email
+        )}
+        pendingTicketCount={pendingTicketCount}
+      />
 
-          {/* `min-w-0` : sans lui, une ligne longue (email, tableau) force la
-              colonne à s'élargir et déborde de la grille. */}
-          <div className="min-w-0">{children}</div>
+      {/* `min-w-0` : sans lui, une ligne longue (email, tableau) force la
+          colonne à s'élargir et déborde de l'écran. */}
+      <div className="min-w-0 flex-1">
+        <div className="mx-auto max-w-5xl px-6 py-8 sm:px-8 sm:py-10">
+          {children}
         </div>
       </div>
     </main>

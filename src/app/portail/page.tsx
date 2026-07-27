@@ -4,6 +4,12 @@ import { requireProfile } from "@/lib/supabase/session";
 import StatusBadge from "@/components/portail/StatusBadge";
 import PageHeader from "@/components/portail/PageHeader";
 import {
+  IconProject,
+  IconInvoice,
+  IconSupport,
+  IconChevron,
+} from "@/components/portail/icons";
+import {
   PROJECT_STATUS_LABEL,
   PROJECT_STATUS_TONE,
   invoiceDisplayStatus,
@@ -18,17 +24,17 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// Une tuile = une phrase et un statut. Rien de plus : la vue d'ensemble sert
-// à décider où aller, pas à tout lire.
-function OverviewTile({
+function Tile({
   href,
   label,
+  Icon,
   headline,
   detail,
   badge,
 }: {
   href: string;
   label: string;
+  Icon: (props: { className?: string }) => JSX.Element;
   headline: string;
   detail?: string;
   badge?: React.ReactNode;
@@ -36,14 +42,20 @@ function OverviewTile({
   return (
     <Link
       href={href}
-      className="card-surface flex h-full flex-col p-6 transition-colors hover:border-accent-cyan/40"
+      className="card-surface group flex h-full flex-col overflow-hidden transition-colors hover:border-accent-cyan/40"
     >
-      <p className="text-[13px] text-muted">{label}</p>
-      <p className="mt-2 text-lg font-semibold leading-snug">{headline}</p>
-      {badge && <div className="mt-4">{badge}</div>}
-      {detail && (
-        <p className="mt-4 line-clamp-2 text-[14px] text-muted">{detail}</p>
-      )}
+      <div className="flex items-center gap-2.5 border-b border-border px-5 py-3">
+        <Icon className="h-[18px] w-[18px] shrink-0 text-muted" />
+        <span className="text-[14px] font-medium">{label}</span>
+        <IconChevron className="ml-auto h-4 w-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5" />
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <p className="text-[17px] font-semibold leading-snug">{headline}</p>
+        {badge && <div className="mt-3">{badge}</div>}
+        {detail && (
+          <p className="mt-3 line-clamp-2 text-[14px] text-muted">{detail}</p>
+        )}
+      </div>
     </Link>
   );
 }
@@ -79,15 +91,14 @@ export default async function PortailDashboardPage() {
   return (
     <div>
       <PageHeader
-        title={
-          profile.first_name ? `Bonjour ${profile.first_name}` : "Bonjour"
-        }
+        title={profile.first_name ? `Bonjour ${profile.first_name}` : "Bonjour"}
       />
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <OverviewTile
+        <Tile
           href="/portail/sites"
           label="Mon projet"
+          Icon={IconProject}
           headline={project ? project.name : "Aucun projet en cours"}
           badge={
             project ? (
@@ -104,9 +115,10 @@ export default async function PortailDashboardPage() {
           }
         />
 
-        <OverviewTile
+        <Tile
           href="/portail/facturation"
           label="Facturation"
+          Icon={IconInvoice}
           headline={
             invoice ? formatCents(invoice.amount_cents) : "Aucune facture"
           }
@@ -121,9 +133,10 @@ export default async function PortailDashboardPage() {
           detail={invoice?.description}
         />
 
-        <OverviewTile
+        <Tile
           href="/portail/tickets"
           label="Support"
+          Icon={IconSupport}
           headline={
             !latestTicket
               ? "Aucun ticket"

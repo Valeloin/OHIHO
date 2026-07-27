@@ -18,7 +18,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="btn-accent px-6 py-3 font-semibold disabled:opacity-50"
+      className="btn-accent px-6 py-2.5 font-semibold disabled:opacity-50"
     >
       {pending ? "Envoi..." : "Créer le ticket"}
     </button>
@@ -29,8 +29,12 @@ export default function NewTicketForm() {
   const [state, formAction] = useFormState(createTicket, null);
 
   return (
-    <form action={formAction} className="card-surface p-7 sm:p-9">
-      <div className="grid gap-6">
+    <form action={formAction} className="card-surface overflow-hidden">
+      <div className="border-b border-border px-6 py-3.5">
+        <h2 className="font-medium">Votre demande</h2>
+      </div>
+
+      <div className="grid gap-6 p-6">
         <div>
           <label htmlFor="title" className="field-label">
             Titre
@@ -62,8 +66,8 @@ export default function NewTicketForm() {
           />
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div>
+        <div className="grid gap-6 sm:grid-cols-3">
+          <div className="sm:col-span-2">
             <label htmlFor="software" className="field-label">
               Page ou module concerné
             </label>
@@ -109,13 +113,12 @@ export default function NewTicketForm() {
         </div>
       </div>
 
-      {state?.error && (
-        <p className="mt-6 rounded-xl bg-red-400/10 px-4 py-3 text-red-400">
-          {state.error}
-        </p>
-      )}
-
-      <div className="mt-7">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border bg-[var(--header-bg)] px-6 py-4">
+        {state?.error ? (
+          <p className="text-[14px] text-red-400">{state.error}</p>
+        ) : (
+          <span />
+        )}
         <SubmitButton />
       </div>
     </form>
