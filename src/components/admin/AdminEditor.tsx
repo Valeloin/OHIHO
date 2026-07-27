@@ -46,11 +46,13 @@ function Field({
   value,
   onChange,
   textarea = false,
+  hint,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   textarea?: boolean;
+  hint?: string;
 }) {
   // Champ commun à tout le site (voir `.field` dans globals.css) : il passe
   // notamment à 16 px sur mobile pour ne pas déclencher le zoom de Safari iOS.
@@ -75,6 +77,7 @@ function Field({
           className={cls}
         />
       )}
+      {hint && <p className="mt-2 text-xs text-muted">{hint}</p>}
     </div>
   );
 }
@@ -641,23 +644,11 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                 onChange={(v) => set("contact", { responseNote: v })}
               />
             </div>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field
-                label="Titre de la carte d'inscription"
-                value={contact.cardTitle}
-                onChange={(v) => set("contact", { cardTitle: v })}
-              />
-              <Field
-                label="Bouton de la carte d'inscription"
-                value={contact.cardCta}
-                onChange={(v) => set("contact", { cardCta: v })}
-              />
-            </div>
             <Field
-              label="Texte de la carte d'inscription"
-              value={contact.cardText}
-              onChange={(v) => set("contact", { cardText: v })}
-              textarea
+              label="Lien LinkedIn (URL complète)"
+              value={contact.linkedinUrl}
+              onChange={(v) => set("contact", { linkedinUrl: v })}
+              hint="Le QR code de la section se régénère automatiquement. Vide = carte LinkedIn masquée."
             />
           </Section>
         )}

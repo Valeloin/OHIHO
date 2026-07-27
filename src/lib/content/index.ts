@@ -6,7 +6,7 @@ import {
   CONTENT_ROW_ID,
 } from "@/lib/supabase/config";
 import { defaultContent } from "./defaults";
-import type { SiteContent, ThemeContent } from "./types";
+import type { ContactContent, SiteContent, ThemeContent } from "./types";
 
 // Valeurs par défaut des ANCIENS thèmes (thème clair, puis navy/bleu d'avant
 // la DA bleu → vert du 2026-07-16). Un enregistrement fait à ces époques a
@@ -19,6 +19,29 @@ const LEGACY_THEME_DEFAULTS: Partial<Record<keyof ThemeContent, string[]>> = {
   darkBackground: ["#0f1b2e", "#0d1b2e", "#0b0b0d", "#0a1512"],
   darkSurface: ["#182a44", "#14273e", "#131316", "#101f1a"],
 };
+
+// Même principe pour la section Contact. Elle a longtemps servi d'appel à
+// l'inscription puis à la demande de devis ; ces deux dispositifs ont été
+// retirés (devis le 2026-07-25, formulaire le 2026-07-27) mais leurs textes
+// restent figés en base depuis un ancien enregistrement de /admin. Ce ne sont
+// plus des choix éditoriaux, juste des restes : on les remplace par les
+// libellés actuels.
+const LEGACY_CONTACT_DEFAULTS: Partial<Record<keyof ContactContent, string[]>> =
+  {
+    kicker: ["votre projet", "démarrer", "demander un devis"],
+    title: [
+      "prêt à lancer votre site ou application ?",
+      "prêt à lancer votre projet ?",
+      "parlons de votre projet",
+    ],
+    subtitle: [
+      "créez votre compte en une minute, puis décrivez votre besoin via une demande de devis guidée. nous revenons vers vous rapidement pour en discuter.",
+      "créez votre compte en une minute, puis décrivez votre besoin via une demande de devis guidée. nous revenons vers vous rapidement pour en parler.",
+    ],
+    // L'adresse générique est remplacée par l'adresse nominative depuis le
+    // 2026-07-27 : c'est Valentin qu'on contacte, pas un service.
+    email: ["contact@ohiho.fr"],
+  };
 
 function normalizeLegacy<T extends Record<string, unknown>>(
   merged: T,
@@ -78,7 +101,11 @@ function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
     method: { ...defaultContent.method, ...stored.method },
     expertise: { ...defaultContent.expertise, ...stored.expertise },
     whyUs: { ...defaultContent.whyUs, ...stored.whyUs },
-    contact: { ...defaultContent.contact, ...stored.contact },
+    contact: normalizeLegacy(
+      { ...defaultContent.contact, ...stored.contact },
+      defaultContent.contact,
+      LEGACY_CONTACT_DEFAULTS
+    ),
     footer: { ...defaultContent.footer, ...stored.footer },
   };
 }

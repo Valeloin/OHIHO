@@ -47,19 +47,16 @@ export default function Hero({
   const [scene, setScene] = useState<number | null>(null);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="section-screen relative overflow-hidden">
       <AnimatedGlow variant="hero" />
       <Fireflies />
 
       <motion.div
-        // Ni hauteur imposée ni centrage vertical : le hero fait exactement la
-        // taille de son contenu. Avec `min-h-[88vh]` + `justify-center`, sur
-        // un écran haut la section était étirée à 88 % de la fenêtre et son
-        // contenu, centré dedans, creusait du vide en haut ET en bas — près
-        // de 290 px au-dessus du premier mot sur un grand écran.
-        // La règle du site est qu'une section TIENNE sur un écran, pas
-        // qu'elle le remplisse.
-        className="relative mx-auto flex max-w-6xl flex-col px-6 pb-12 pt-8 sm:pt-10"
+        // Hauteur d'écran et centrage vertical portés par `.section-screen`,
+        // comme sur toutes les sections d'accueil depuis le 2026-07-27.
+        // Le rembourrage interne reste modeste : il sert de marge minimale
+        // quand le contenu approche la hauteur d'écran, pas de rythme.
+        className="relative mx-auto flex w-full max-w-6xl flex-col px-6 py-10"
         variants={CONTAINER}
         initial="hidden"
         animate="visible"

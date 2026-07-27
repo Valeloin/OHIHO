@@ -137,13 +137,10 @@ export const defaultContent: SiteContent = {
     kicker: "Contact",
     title: "Discutons de votre projet",
     subtitle:
-      "Un site vitrine, une application sur mesure, une refonte ? Décrivez-nous votre besoin, nous revenons vers vous rapidement pour en discuter.",
-    email: "contact@ohiho.fr",
+      "Un site vitrine, une application sur mesure, une refonte ? Écrivez-nous, nous revenons vers vous rapidement.",
+    email: "valentin.condamy@ohiho.fr",
     responseNote: "Réponse sous 24h ouvrées",
-    cardTitle: "Écrivez-nous",
-    cardText:
-      "Quelques mots sur votre projet suffisent pour démarrer l'échange.",
-    cardCta: "Envoyer le message",
+    linkedinUrl: "https://www.linkedin.com/in/valentin-condamy-966656423/",
   },
   footer: {
     tagline:

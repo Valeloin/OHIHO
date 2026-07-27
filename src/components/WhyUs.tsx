@@ -9,9 +9,9 @@ export default function WhyUs({ data }: { data: WhyUsContent }) {
     // Fond par défaut (et non `bg-surface`) : le halo et les lucioles
     // s'y lisent comme sur le hero — sur le panneau plus clair de
     // `bg-surface`, ils s'effaçaient presque.
-    <section id="a-propos" className="relative overflow-hidden border-t border-border">
+    <section id="a-propos" className="section-screen relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-16 sm:py-20">
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-16">
         <Reveal>
           <span className="kicker">{data.kicker}</span>
           <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">

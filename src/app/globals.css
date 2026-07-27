@@ -308,6 +308,23 @@ body {
     color: var(--foreground);
   }
 
+  /* Section d'accueil : une par écran.
+
+     `min-height` et non `height` : si le contenu dépasse (petit portable en
+     paysage, texte agrandi par le navigateur, mobile étroit), la section
+     grandit au lieu de couper. Sur un écran normal elle fait exactement la
+     hauteur utile — l'écran moins le bandeau, qui est fixe et recouvrirait
+     sinon le haut de chaque section.
+
+     Le centrage vertical est porté ici, ce qui permet aux sections de garder
+     un rembourrage interne modeste : il sert de marge minimale quand le
+     contenu approche la hauteur d'écran, pas de rythme vertical. */
+  .section-screen {
+    display: flex;
+    align-items: center;
+    min-height: calc(100svh - var(--header-h));
+  }
+
   /* Bandeau qui défile latéralement sans montrer sa barre : la barre native
      traverse toute la largeur et se lit comme un trait de séparation. */
   .no-scrollbar {

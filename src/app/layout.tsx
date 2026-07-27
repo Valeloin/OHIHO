@@ -92,7 +92,7 @@ const ORGANIZATION_JSON_LD = {
   logo: "https://ohiho.fr/logo-mark.png",
   description:
     "OHIHO conçoit et développe des sites web et applications sur mesure, pour entreprises et particuliers, de l'idée à la mise en ligne et au-delà.",
-  email: "contact@ohiho.fr",
+  email: "valentin.condamy@ohiho.fr",
 };
 
 export default async function RootLayout({

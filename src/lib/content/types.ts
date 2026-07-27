@@ -85,9 +85,8 @@ export type ContactContent = {
   subtitle: string;
   email: string;
   responseNote: string;
-  cardTitle: string;
-  cardText: string;
-  cardCta: string;
+  /** URL complète du profil LinkedIn. Vide = bloc LinkedIn masqué. */
+  linkedinUrl: string;
 };
 
 export type FooterContent = {

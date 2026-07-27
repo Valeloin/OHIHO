@@ -24,14 +24,14 @@ export default function Services({ data }: { data: ServicesContent }) {
   }));
 
   return (
-    <section id="services" className="relative overflow-hidden border-t border-border">
+    <section id="services" className="section-screen relative overflow-hidden border-t border-border">
       <SectionBackdrop />
       {/* Rythme vertical resserré par rapport aux autres sections : c'est la
           plus chargée du site (4 cartes), et elle doit tenir sur un écran. */}
       {/* Conteneur plus large que les autres sections (7xl) : à 6xl, chaque
           cellule tombait à ~540 px et la colonne de texte devenait si étroite
           que le sur-titre se brisait sur trois lignes. */}
-      <div className="relative mx-auto max-w-6xl px-6 py-7 sm:py-8">
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-7 sm:py-8">
         {/* En-tête au patron commun : libellé mono + filet, titre à chasse
             serrée aligné à gauche, sous-titre à largeur de lecture. */}
         <Reveal>

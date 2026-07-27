@@ -13,12 +13,12 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
   return (
     <section
       id="portfolio"
-      className="relative overflow-hidden border-t border-border"
+      className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
       {/* Rythme resserré : comme Services, cette section porte beaucoup de
           contenu (3 cartes + encart) et doit tenir sur un écran. */}
-      <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-16">
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-14">
         {/* En-tête éditorial : libellé mono, titre large à gauche, filet. */}
         <Reveal>
           <span className="kicker">{data.kicker}</span>

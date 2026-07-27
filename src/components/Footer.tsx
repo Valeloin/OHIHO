@@ -74,10 +74,10 @@ export default function Footer({ data }: { data: FooterContent }) {
             <ul className="mt-3 space-y-1 text-sm text-foreground/80">
               <li>
                 <a
-                  href="mailto:contact@ohiho.fr"
+                  href="mailto:valentin.condamy@ohiho.fr"
                   className="inline-flex min-h-[44px] items-center transition-colors hover:text-accent-cyan"
                 >
-                  contact@ohiho.fr
+                  valentin.condamy@ohiho.fr
                 </a>
               </li>
               <li className="text-muted">Développement web sur mesure</li>

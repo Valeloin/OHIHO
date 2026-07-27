@@ -12,10 +12,10 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
     // de `bg-surface`, les lucioles s'effaçaient presque.
     <section
       id="methode"
-      className="relative overflow-hidden border-t border-border"
+      className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-14">
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-14">
         {/* En-tête sur deux colonnes : le titre à gauche, et à droite une
             carte qui récapitule le déroulé. Elle donne à la section la
             hauteur des autres et sert de légende à la frise — ses jalons
