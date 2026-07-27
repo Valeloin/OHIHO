@@ -377,7 +377,13 @@ export default function MethodShowcase({ steps }: { steps: number }) {
            C'est le seul des quatre réglages qui satisfait les deux exigences
            à la fois : une vraie vue de trois quarts, et un contenu rigoureu-
            sement dans le plan de l'écran qui l'affiche. */
-        className="h-auto w-full origin-center drop-shadow-[0_22px_38px_rgba(0,0,0,0.5)] [transform:rotateY(-30deg)_rotateX(8deg)]"
+        /* `mv-turn` fait tourner tout le groupe autour de l'axe VERTICAL, en
+           aller-retour sur l'horloge de la frise (13,44 s) : la vue de
+           trois-quarts s'ouvre puis se referme au fil des quatre étapes.
+           L'amplitude reste entre -34° et -4°, donc toujours face au
+           spectateur — un tour complet montrerait le dos des appareils, en
+           miroir. Sans animation, la classe fige l'angle d'origine. */
+        className="mv-turn h-auto w-full origin-center drop-shadow-[0_22px_38px_rgba(0,0,0,0.5)]"
       >
       <defs>
         {/* Trio de marque, repris du logo : bleu ciel → teal → vert. */}

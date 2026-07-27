@@ -994,6 +994,31 @@ body {
   animation: frise-final 13.44s ease-out infinite;
 }
 
+/* Rotation de la vitrine de la Méthode autour de l'axe VERTICAL, sur
+   l'horloge de la frise. Aller-retour et non tour complet : au-delà de
+   ±90° on verrait le dos des appareils, en miroir.
+   Aucune `perspective` sur l'ancêtre — voir MethodShowcase : CSS projette
+   alors en orthographique, le contenu garde donc exactement l'angle de son
+   châssis à chaque instant du mouvement. */
+@keyframes mv-turn {
+  0%,
+  100% {
+    transform: rotateY(-34deg) rotateX(8deg);
+  }
+  50% {
+    transform: rotateY(-4deg) rotateX(8deg);
+  }
+}
+/* État au repos = l'angle d'origine, celui retenu après quatre essais. */
+.mv-turn {
+  transform: rotateY(-30deg) rotateX(8deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mv-turn {
+    animation: mv-turn 13.44s ease-in-out infinite;
+  }
+}
+
 /* La gerbe d'étincelles de la frise a été retirée à la demande : le grand
    cercle de validation qui se pose suffit à marquer l'arrivée. */
 
@@ -2035,6 +2060,89 @@ html.hide-scrollbar::-webkit-scrollbar {
   }
 }
 
+/* ---------- Landing : une page, un objectif — le visiteur clique.
+
+   Toute la scène tient sur l'horloge commune de 8,4 s. Le halo respire
+   sous le bouton tant qu'il n'est pas pressé (0-38), le curseur entre par
+   le bas (14-38), presse (39-44), l'onde part du point pressé (39-56) et
+   la pilule bascule en confirmation sur pv-old/pv-new, dont le relais
+   tombe précisément à 40-45. Le curseur ressort ensuite (72-100), ce qui
+   ramène la scène à son point de départ sans coupure. ---------- */
+@keyframes pv-cta-glow {
+  0%,
+  38% {
+    opacity: 0.16;
+    transform: scale(1);
+  }
+  19% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+  44%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+@keyframes pv-cursor {
+  0%,
+  14% {
+    opacity: 0;
+    transform: translate(54px, 62px);
+  }
+  22% {
+    opacity: 1;
+  }
+  /* Arrivée sur le bouton, court arrêt, puis la pression : le curseur
+     s'enfonce de 2 px au moment exact du clic. */
+  38%,
+  39% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  41% {
+    transform: translate(0, 2px);
+  }
+  44%,
+  66% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translate(54px, 62px);
+  }
+}
+@keyframes pv-press {
+  0%,
+  38% {
+    transform: scale(1);
+  }
+  41% {
+    transform: scale(0.955);
+  }
+  45%,
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pv-ripple {
+  0%,
+  38% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  41% {
+    opacity: 0.5;
+  }
+  58%,
+  100% {
+    opacity: 0;
+    transform: scale(2.3);
+  }
+}
+
 /* ---------- Cascade d'apparition (45-66), barres (66-74),
      reflet en DERNIER acte (76-84) — tout est fini à 85 % ---------- */
 @keyframes pv-in-1 {
@@ -2665,11 +2773,19 @@ html.hide-scrollbar::-webkit-scrollbar {
 }
 
 /* ---------- Réglages statiques (= état au repos, sans animation) ---------- */
+/* Sans animation, la scène Landing s'arrête sur son état de DÉPART : le
+   bouton d'appel intact, sans curseur, sans onde, halo au repos. C'est
+   pv-old/pv-new qui gère déjà l'état de la pilule. */
 .pv-trans,
 .pv-spin-vis,
 .pv-ok,
+.pv-cursor,
+.pv-ripple,
 .pv-burst {
   opacity: 0;
+}
+.pv-cta-glow {
+  opacity: 0.16;
 }
 .pv-bar,
 .pv-dot,
@@ -2678,6 +2794,9 @@ html.hide-scrollbar::-webkit-scrollbar {
 .pv-spark,
 .pv-fill,
 .pv-scroll,
+.pv-cta-glow,
+.pv-press,
+.pv-ripple,
 .pv-pop-1,
 .pv-pop-2,
 .pv-pop-3,
@@ -2703,6 +2822,9 @@ html.hide-scrollbar::-webkit-scrollbar {
 .pv-ok,
 .pv-burst,
 .pv-rotate,
+.pv-cta-glow,
+.pv-press,
+.pv-ripple,
 .pv-pop-1,
 .pv-pop-2,
 .pv-pop-3,
@@ -2821,6 +2943,18 @@ html.hide-scrollbar::-webkit-scrollbar {
   }
   .pv-spark {
     animation: pv-spark 8.4s ease-in-out infinite;
+  }
+  .pv-cta-glow {
+    animation: pv-cta-glow 8.4s ease-in-out infinite;
+  }
+  .pv-cursor {
+    animation: pv-cursor 8.4s cubic-bezier(0.33, 0, 0.2, 1) infinite;
+  }
+  .pv-press {
+    animation: pv-press 8.4s ease-in-out infinite;
+  }
+  .pv-ripple {
+    animation: pv-ripple 8.4s ease-out infinite;
   }
   .pv-shine {
     animation: pv-shine 8.4s ease-in-out infinite;

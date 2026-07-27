@@ -399,6 +399,13 @@ export function SceneLanding() {
     { x: 148, color: ACCENT },
     { x: 272, color: EMERALD },
   ];
+
+  // Géométrie du bouton, partagée par les deux états, le halo, l'onde et
+  // le curseur : un seul endroit à toucher pour le déplacer.
+  const CTA = { x: 24, y: 128, w: 116, h: 30 };
+  const CTA_CX = CTA.x + CTA.w / 2;
+  const CTA_CY = CTA.y + CTA.h / 2;
+
   return (
     <>
       {/* En-tête : titre + texte à gauche, visuel à droite */}
@@ -409,20 +416,111 @@ export function SceneLanding() {
       <rect x="24" y="100" width="164" height="7" rx="3.5" fill={LINE} fillOpacity="0.3" />
       <rect x="24" y="112" width="130" height="7" rx="3.5" fill={LINE} fillOpacity="0.26" />
 
+      {/* Halo respirant sous le bouton : il attire l'œil AVANT le clic,
+          puis s'éteint une fois la conversion faite. */}
+      <rect
+        className="pv-cta-glow"
+        x={CTA.x - 6}
+        y={CTA.y - 6}
+        width={CTA.w + 12}
+        height={CTA.h + 12}
+        rx={(CTA.h + 12) / 2}
+        fill={ACCENT}
+      />
+
+      {/* Onde de clic : un anneau qui part du point pressé. */}
+      <circle
+        className="pv-ripple"
+        cx={CTA_CX}
+        cy={CTA_CY}
+        r="16"
+        fill="none"
+        stroke={ACCENT}
+        strokeWidth="2"
+      />
+
+      {/* L'appel à l'action, et lui seul : c'est ce qui fait qu'une landing
+          page est une landing page. Deux états qui se relaient sur l'horloge
+          commune (pv-old / pv-new) : la pilule d'appel, puis la confirmation
+          d'envoi une fois le clic passé. */}
+      <g className="pv-press">
+        <g className="pv-old">
+          <rect
+            x={CTA.x}
+            y={CTA.y}
+            width={CTA.w}
+            height={CTA.h}
+            rx={CTA.h / 2}
+            fill={ACCENT}
+          />
+          <rect
+            x={CTA.x + 26}
+            y={CTA_CY - 4}
+            width="64"
+            height="8"
+            rx="4"
+            fill={SCREEN}
+            fillOpacity="0.85"
+          />
+        </g>
+
+        <g className="pv-new">
+          <rect
+            x={CTA.x}
+            y={CTA.y}
+            width={CTA.w}
+            height={CTA.h}
+            rx={CTA.h / 2}
+            fill={EMERALD}
+          />
+          <path
+            d={`M${CTA.x + 28} ${CTA_CY} l6 6 11 -12`}
+            fill="none"
+            stroke={SCREEN}
+            strokeOpacity="0.9"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <rect
+            x={CTA.x + 54}
+            y={CTA_CY - 4}
+            width="38"
+            height="8"
+            rx="4"
+            fill={SCREEN}
+            fillOpacity="0.8"
+          />
+        </g>
+      </g>
+
+      {/* Curseur : il entre par le bas, presse le bouton, repart. C'est lui
+          qui raconte l'objectif unique de la page. */}
+      <g className="pv-cursor">
+        <path
+          d={`M${CTA_CX + 6} ${CTA_CY + 6} l0 17 l4.4 -4.6 l3 6.4 l3.4 -1.6 l-3 -6.3 l6.2 -0.5 z`}
+          fill={BRIGHT}
+          stroke={SCREEN}
+          strokeWidth="1.2"
+          strokeLinejoin="round"
+        />
+      </g>
+
       {/* Visuel de la page (photo/illustration abstraite) */}
       <g className="pv-in-2">
-        <rect x="210" y="40" width="166" height="110" rx="12" fill={BLOCKS} fillOpacity="0.35" />
+        <rect x="210" y="40" width="166" height="118" rx="12" fill={BLOCKS} fillOpacity="0.35" />
         <circle cx="246" cy="70" r="16" fill={SKY} fillOpacity="0.5" />
         <rect x="224" y="104" width="130" height="8" rx="4" fill={LINE} fillOpacity="0.25" />
         <rect x="224" y="116" width="90" height="8" rx="4" fill={LINE} fillOpacity="0.2" />
+        <rect x="224" y="132" width="112" height="8" rx="4" fill={LINE} fillOpacity="0.16" />
       </g>
 
       {/* Trois points clés, sous la ligne de flottaison */}
       {features.map((f, i) => (
         <g key={f.x} className={`pv-in-${3 + i}`}>
-          <circle cx={f.x + 8} cy="176" r="5" fill={f.color} />
-          <rect x={f.x + 22} y="172" width="64" height="7" rx="3.5" fill={BRIGHT} fillOpacity="0.55" />
-          <rect x={f.x + 22} y="184" width="50" height="6" rx="3" fill={LINE} fillOpacity="0.25" />
+          <circle cx={f.x + 8} cy="180" r="5" fill={f.color} />
+          <rect x={f.x + 22} y="176" width="64" height="7" rx="3.5" fill={BRIGHT} fillOpacity="0.55" />
+          <rect x={f.x + 22} y="188" width="50" height="6" rx="3" fill={LINE} fillOpacity="0.25" />
         </g>
       ))}
     </>
