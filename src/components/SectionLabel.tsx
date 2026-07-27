@@ -1,18 +1,16 @@
 import Reveal from "@/components/motion/Reveal";
 
-// Étiquette de section, centrée en haut de l'écran qu'elle occupe.
+// TITRE de la section — c'est bien celui-ci, pas la phrase d'accroche en
+// dessous. Le nom de section (« Nos services », « Méthode », « Contact »)
+// est ce qui dit où l'on est ; la phrase, elle, est un sous-titre.
 //
-// Elle était jusqu'ici collée au-dessus du titre, dans la colonne de gauche :
-// noyée dans le bloc de texte, elle ne disait plus « vous entrez dans une
-// nouvelle section ». Isolée et centrée, elle joue le rôle d'un intertitre —
-// c'est le premier élément que l'œil rencontre quand une flèche amène la
-// section pile dans la fenêtre.
+// Il porte donc le h2, en grand, centré en haut de l'écran que la section
+// occupe : c'est le premier élément que l'œil rencontre quand une flèche
+// amène la section pile dans la fenêtre.
 export default function SectionLabel({ children }: { children: string }) {
   return (
     <Reveal>
-      <div className="mb-8 flex justify-center">
-        <span className="kicker">{children}</span>
-      </div>
+      <h2 className="section-name mb-8">{children}</h2>
     </Reveal>
   );
 }

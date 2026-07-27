@@ -3,7 +3,7 @@ import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import SectionLabel from "@/components/SectionLabel";
-import MethodShowcase from "@/components/motion/MethodShowcase";
+import MethodScenes from "@/components/motion/MethodScenes";
 import type { MethodContent } from "@/lib/content/types";
 
 export default function HowItWorks({ data }: { data: MethodContent }) {
@@ -27,9 +27,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
 
         <div className="grid gap-10 lg:grid-cols-[1fr_30rem] lg:items-center">
           <Reveal>
-            <h2 className="section-title max-w-4xl">
-              {data.title}
-            </h2>
+            <p className="section-lead max-w-4xl">{data.title}</p>
           </Reveal>
 
           {/* Un écran d'ordinateur qui joue une scène par étape, sur
@@ -49,7 +47,12 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                 ))}
               </div>
 
-              <MethodShowcase steps={data.steps.length} />
+              {/* Une scène par étape, dans une fenêtre de navigateur comme
+                  les vignettes de Services — la vitrine 3D des deux appareils
+                  (MethodShowcase) a été remplacée à la demande. */}
+              <div className="overflow-hidden rounded-xl ring-1 ring-border">
+                <MethodScenes steps={data.steps.length} />
+              </div>
 
               {/* Description de l'étape en cours, sous l'écran. Hauteur fixée
                   pour que le bloc ne saute pas d'une étape à l'autre. */}

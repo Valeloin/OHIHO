@@ -24,14 +24,17 @@ export default function Services({ data }: { data: ServicesContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-10">
+      {/* Conteneur plus large que les autres sections (90rem) : c'est lui qui
+          donne leur taille aux quatre vignettes — à 7xl elles tombaient à
+          ~280 px de large et se lisaient comme des timbres. */}
+      <div className="relative mx-auto w-full max-w-[90rem] px-6 py-10">
         <SectionLabel>{data.kicker}</SectionLabel>
 
         <Reveal>
-          <h2 className="section-title max-w-4xl">{data.title}</h2>
+          <p className="section-lead max-w-4xl">{data.title}</p>
         </Reveal>
 
-        <RevealGroup className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula) => (
             <RevealItem key={formula.type} hover className="h-full">
               <Link
@@ -47,9 +50,14 @@ export default function Services({ data }: { data: ServicesContent }) {
                 <h3 className="mt-5 text-xl font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
                   {formula.label}
                 </h3>
-                <p className="mt-1.5 text-sm text-muted">{formula.tagline}</p>
+                {/* La description de la formule (éditable dans /admin), en
+                    quelques lignes sous chaque animation. Bornée à 3 lignes
+                    pour que les quatre colonnes restent à la même hauteur. */}
+                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
+                  {formula.description}
+                </p>
 
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-accent-cyan">
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-medium text-accent-cyan">
                   Découvrir
                   <span
                     aria-hidden="true"

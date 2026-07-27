@@ -70,13 +70,14 @@ export default function ScrollNav() {
       </div>
 
       {/* Flèches de navigation par section — desktop uniquement.
-          Centrées en haut et en bas de l'écran plutôt qu'empilées dans un
-          coin : chacune reste sur l'axe vertical qu'elle dessert (on monte
-          vers le haut de l'écran, on descend vers le bas), au lieu de
-          partager un seul coin éloigné des deux bords. */}
+          Poussées sur le BORD DROIT : centrées sur l'axe du contenu, elles
+          se superposaient aux titres et aux cartes, trop présentes. Sur le
+          bord, elles ne croisent jamais le contenu (les sections sont à
+          max-w-7xl, il reste une gouttière vide sur les grands écrans) et
+          restent là où la barre de défilement les fait déjà chercher. */}
       <div
-        className="fixed left-1/2 z-50 hidden -translate-x-1/2 lg:block"
-        style={{ top: "calc(var(--header-h) + 1.5rem)" }}
+        className="fixed right-5 z-50 hidden lg:block"
+        style={{ top: "calc(var(--header-h) + 1.25rem)" }}
       >
         <ArrowButton
           direction="up"
@@ -85,7 +86,7 @@ export default function ScrollNav() {
           hidden={atTop}
         />
       </div>
-      <div className="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 lg:block">
+      <div className="fixed bottom-5 right-5 z-50 hidden lg:block">
         <ArrowButton
           direction="down"
           label="Section suivante"
@@ -118,8 +119,8 @@ function ArrowButton({
       aria-label={label}
       onClick={onClick}
       disabled={hidden}
-      className={`flex h-11 w-11 items-center justify-center rounded-full border border-border/60 text-muted transition-all duration-300 hover:border-accent-cyan/50 hover:text-accent-cyan hover:opacity-100 ${
-        hidden ? "pointer-events-none opacity-0" : "opacity-40"
+      className={`flex h-9 w-9 items-center justify-center rounded-full border border-border/60 text-muted transition-all duration-300 hover:border-accent-cyan/50 hover:text-accent-cyan hover:opacity-100 ${
+        hidden ? "pointer-events-none opacity-0" : "opacity-25"
       }`}
     >
       <svg
@@ -130,7 +131,7 @@ function ArrowButton({
         strokeWidth="2.2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5"
+        className="h-4 w-4"
       >
         {direction === "up" ? (
           <path d="m18 15-6-6-6 6" />

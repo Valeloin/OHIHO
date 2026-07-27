@@ -15,9 +15,7 @@ export default function WhyUs({ data }: { data: WhyUsContent }) {
       <div className="relative mx-auto w-full max-w-7xl px-6 py-12">
         <SectionLabel>{data.kicker}</SectionLabel>
         <Reveal>
-          <h2 className="section-title max-w-4xl">
-            {data.title}
-          </h2>
+          <p className="section-lead max-w-4xl">{data.title}</p>
         </Reveal>
         <div className="mt-6 h-px rule-fade" />
 

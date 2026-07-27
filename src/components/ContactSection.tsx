@@ -27,10 +27,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
 
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <Reveal>
-            {/* En-tête éditorial : titre large aligné à gauche. */}
-            <h2 className="section-title max-w-4xl">
-              {data.title}
-            </h2>
+            <p className="section-lead max-w-4xl">{data.title}</p>
             <p className="mt-5 max-w-2xl leading-relaxed text-muted">
               {data.subtitle}
             </p>

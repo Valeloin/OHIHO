@@ -392,6 +392,50 @@ body {
      grandit donc avec le reste sans avoir à redoubler l'échelle ici. Le
      `clamp` ne sert plus qu'au téléphone, où cette échelle ne s'applique
      pas. */
+  /* TITRE DE SECTION (H2) — le NOM de la section, pas la phrase d'accroche.
+
+     ⚠️ Trois fois de suite, « agrandis les titres de section » a été compris
+     comme la longue phrase sous le libellé, et trois fois c'était le libellé
+     lui-même qui était visé. Le nom de section est le titre ; la phrase est
+     un sous-titre (`.section-lead`).
+
+     Il garde le mono capitales de la DA — ici la lisibilité ne souffre pas,
+     c'est deux ou trois mots à 44 px, pas un micro-libellé de 11 px. Le
+     point vert de `.kicker` est repris tel quel. */
+  .section-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65em;
+    font-family: var(--font-mono), monospace;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.15;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: center;
+    color: rgb(var(--brand-teal));
+  }
+  .section-name::before {
+    content: "";
+    width: 0.3em;
+    height: 0.3em;
+    flex: none;
+    border-radius: 9999px;
+    background: rgb(var(--brand-emerald));
+    box-shadow: 0 0 12px rgb(52 211 153 / 0.7);
+  }
+
+  /* Phrase d'accroche sous le titre de section. Nettement plus petite que
+     lui : c'est elle qui explique, pas elle qui nomme. */
+  .section-lead {
+    font-size: clamp(1.375rem, 2.4vw, 2rem);
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
   /* Titre du hero (H1) : toujours un cran au-dessus des titres de section,
      c'est lui le repère principal de la page. */
   .hero-title {

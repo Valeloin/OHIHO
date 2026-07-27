@@ -239,62 +239,32 @@ export default function Hero({
             entière : son pictogramme dans une tuile teintée de marque, son
             titre, sa phrase. Le bloc se lit comme une rangée de features,
             plus comme un tableau. */}
+        {/* Repris à plat, sans cadre ni dégradé : la version en cartes
+            (bordure au dégradé de marque, fond teinté, tuile d'icône) a été
+            jugée trop grosse et « moche ». Ici, juste une pastille d'icône
+            et deux lignes de texte, sans boîte autour — ça se lit comme
+            une légende à côté de la vitrine, pas comme un second bloc de
+            cartes qui viendrait concurrencer le hero. */}
         <motion.div
           variants={ITEM}
-          className="mt-6 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 xl:grid-cols-4"
+          className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 xl:grid-cols-4"
         >
           {data.stats.map((item, i) => (
-            // BORDURE AU DÉGRADÉ DE MARQUE (bleu ciel → teal → émeraude, le
-            // trio du logo). C'est ce dégradé qui « colore » la carte, tout
-            // en respectant le fond nuit du site : l'enveloppe porte le
-            // dégradé, la carte intérieure reste sombre et posée dessus, si
-            // bien que seul le liseré d'1 px se teinte. Il s'intensifie au
-            // survol. `p-px` = l'épaisseur du liseré.
-            <div
-              key={item.label}
-              className="group rounded-2xl bg-gradient-to-br from-brand-sky/60 via-brand-teal/50 to-brand-emerald/60 p-px shadow-[var(--card-shadow)] transition-all duration-300 hover:from-brand-sky hover:via-brand-teal hover:to-brand-emerald"
-            >
-              {/* Le FOND de la carte est lui-même un dégradé de marque
-                  (cyan → teal → émeraude), et non plus un aplat sombre : la
-                  couleur traverse toute la carte, en diagonale, du coin
-                  haut-gauche au coin bas-droite. Les alphas restent bas (~0,12)
-                  et le dégradé est posé SUR le nuit du site (#102436), donc la
-                  carte se teinte sans jamais devenir claire — le texte reste
-                  lisible. Le dégradé s'intensifie au survol (voir la classe
-                  `group-hover` sur le second calque). */}
-              <div
-                className="relative flex h-full flex-col overflow-hidden rounded-[15px] p-3"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(56,189,248,0.14) 0%, rgba(34,211,196,0.05) 48%, rgba(52,211,153,0.16) 100%), #102436",
-                }}
-              >
-                {/* Renfort au survol : un second calque du même dégradé, plus
-                    dense, qui apparaît en fondu. */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(56,189,248,0.14) 0%, rgba(34,211,196,0.06) 48%, rgba(52,211,153,0.16) 100%)",
-                  }}
-                />
-
-                {/* Pictogramme dans une TUILE teintée de marque, cerclée d'un
-                    filet interne. */}
-                <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-teal/10 ring-1 ring-inset ring-brand-teal/20 transition-colors group-hover:bg-brand-teal/15">
-                  <StatGlyph index={i} className="h-5 w-5" />
-                </span>
-                {/* `value` porte le mot-clé court (titre), `label` la phrase
-                    qui l'explique. Volontairement PAS un h3 : ces cartes sont
-                    des mini-statistiques dans le hero, pas de nouvelles
-                    sections de contenu — un h3 ici sauterait le h2 (la
-                    hiérarchie de titres reprend proprement à la section
-                    Services). */}
-                <p className="relative mt-3 text-sm font-semibold leading-tight tracking-display">
+            <div key={item.label} className="flex items-start gap-2.5">
+              <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-teal/10 text-brand-teal">
+                <StatGlyph index={i} className="h-3.5 w-3.5" />
+              </span>
+              {/* `value` porte le mot-clé court (titre), `label` la phrase
+                  qui l'explique. Volontairement PAS un h3 : ces lignes sont
+                  des mini-statistiques dans le hero, pas de nouvelles
+                  sections de contenu — un h3 ici sauterait le h2 (la
+                  hiérarchie de titres reprend proprement à la section
+                  Services). */}
+              <div className="min-w-0">
+                <p className="text-sm font-semibold leading-tight tracking-display">
                   {item.value}
                 </p>
-                <p className="relative mt-1.5 text-xs leading-snug text-muted">
+                <p className="mt-1 text-xs leading-snug text-muted">
                   {item.label}
                 </p>
               </div>
