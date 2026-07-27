@@ -1,9 +1,4 @@
-import type {
-  InvoiceStatus,
-  ProjectStatus,
-  TicketPriority,
-  TicketStatus,
-} from "@/lib/supabase/types";
+import type { InvoiceStatus, ProjectStatus } from "@/lib/supabase/types";
 
 export type BadgeTone = "muted" | "teal" | "emerald" | "red";
 
@@ -45,31 +40,3 @@ export function invoiceDisplayStatus(
   if (isLate) return { label: "En retard", tone: "red" };
   return { label: INVOICE_STATUS_LABEL[status], tone: INVOICE_STATUS_TONE[status] };
 }
-
-export const TICKET_STATUS_LABEL: Record<TicketStatus, string> = {
-  recue: "Reçue",
-  en_cours: "En cours d'analyse",
-  corrigee: "Corrigée",
-  fermee: "Fermée",
-};
-
-export const TICKET_STATUS_TONE: Record<TicketStatus, BadgeTone> = {
-  recue: "muted",
-  en_cours: "teal",
-  corrigee: "emerald",
-  fermee: "muted",
-};
-
-export const TICKET_PRIORITY_LABEL: Record<TicketPriority, string> = {
-  basse: "Basse",
-  normale: "Normale",
-  haute: "Haute",
-  urgente: "Urgente",
-};
-
-export const TICKET_PRIORITY_TONE: Record<TicketPriority, BadgeTone> = {
-  basse: "muted",
-  normale: "muted",
-  haute: "teal",
-  urgente: "red",
-};

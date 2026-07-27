@@ -4,7 +4,6 @@ import { signOut } from "@/lib/supabase/actions";
 const NAV = [
   { href: "/admin", label: "Contenu du site" },
   { href: "/admin/clients", label: "Clients" },
-  { href: "/admin/tickets", label: "Tickets" },
 ];
 
 export default function AdminHeader({ active }: { active: string }) {
