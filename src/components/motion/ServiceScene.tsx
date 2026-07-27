@@ -383,14 +383,15 @@ export function SceneRefonte() {
 
 /* ============================================================
    1b. LANDING — une page vitrine complète, de haut en bas.
-   Pas de défilement ni de forme isolée (les deux versions
-   précédentes ont été rejetées pour ça) : la scène montre d'un
-   coup d'œil ce qu'EST une landing page — un en-tête (titre,
-   texte, bouton d'appel à l'action) à côté d'un visuel, puis trois
-   points clés en dessous. Composition STATIQUE et dense, à la
-   hauteur des trois autres scènes ; seule une légère mise à
-   l'échelle d'apparition (pv-in-*, déjà utilisée par SceneRefonte)
-   fait vivre l'ensemble, sans halo ni grande forme translucide.
+   Pas de défilement ni de forme isolée (les versions précédentes
+   ont été rejetées pour ça, de même que le bouton d'appel à
+   l'action qui s'y trouvait) : la scène montre d'un coup d'œil
+   ce qu'EST une landing page — un en-tête (titre, texte) à côté
+   d'un visuel, puis trois points clés en dessous. Composition
+   STATIQUE et dense, à la hauteur des trois autres scènes ; seule
+   une légère mise à l'échelle d'apparition (pv-in-*, déjà utilisée
+   par SceneRefonte) fait vivre l'ensemble, sans halo ni grande
+   forme translucide.
    ============================================================ */
 export function SceneLanding() {
   const features = [
@@ -400,17 +401,13 @@ export function SceneLanding() {
   ];
   return (
     <>
-      {/* En-tête : titre + texte + bouton à gauche, visuel à droite */}
+      {/* En-tête : titre + texte à gauche, visuel à droite */}
       <rect x="24" y="40" width="50" height="10" rx="5" fill={ACCENT} fillOpacity="0.18" />
       <circle className="pv-dot" cx="31" cy="45" r="2.5" fill={ACCENT} />
       <rect x="24" y="60" width="160" height="14" rx="4" fill={BRIGHT} fillOpacity="0.85" />
       <rect x="24" y="78" width="120" height="14" rx="4" fill={BRIGHT} fillOpacity="0.85" />
       <rect x="24" y="100" width="164" height="7" rx="3.5" fill={LINE} fillOpacity="0.3" />
       <rect x="24" y="112" width="130" height="7" rx="3.5" fill={LINE} fillOpacity="0.26" />
-      <g className="pv-in-1">
-        <rect x="24" y="128" width="88" height="28" rx="14" fill={ACCENT} />
-        <rect x="44" y="138" width="48" height="8" rx="4" fill={SCREEN} fillOpacity="0.9" />
-      </g>
 
       {/* Visuel de la page (photo/illustration abstraite) */}
       <g className="pv-in-2">
