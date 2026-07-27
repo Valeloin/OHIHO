@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
@@ -7,6 +10,11 @@ import MethodScenes from "@/components/motion/MethodScenes";
 import type { MethodContent } from "@/lib/content/types";
 
 export default function HowItWorks({ data }: { data: MethodContent }) {
+  // `null` = la frise tourne toute seule. Un numéro = le visiteur a choisi
+  // son étape ; recliquer la même puce rend la main à la rotation. Même
+  // patron que la vitrine du hero (pv-manual / data-scene).
+  const [step, setStep] = useState<number | null>(null);
+
   return (
     // Fond par défaut (et non `bg-surface`) : le halo teal et les lucioles
     // se lisent alors exactement comme sur le hero. Sur le panneau plus clair
@@ -16,7 +24,15 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-14">
+      {/* `frise-manual` + `data-step` gèlent TOUTE la frise (scène, jalons,
+          remplissage, numéros) sur l'instant représentatif de l'étape
+          choisie — voir globals.css. Un seul instant suffit pour toutes les
+          familles d'animation puisqu'elles partagent la même horloge de
+          13,44 s : pas besoin de recalculer chaque état à la main. */}
+      <div
+        className={`relative mx-auto w-full max-w-7xl px-6 py-14 ${step ? "frise-manual" : ""}`}
+        data-step={step ?? undefined}
+      >
         {/* En-tête sur deux colonnes : le titre à gauche, et à droite une
             carte qui récapitule le déroulé. Elle donne à la section la
             hauteur des autres et sert de légende à la frise — ses jalons
@@ -34,9 +50,9 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               l'horloge de la frise. Il remplace la liste des étapes : celle-ci
               répétait des titres déjà écrits juste en dessous. */}
           <Reveal delay={0.15}>
-            <div aria-hidden="true" className="w-full">
+            <div className="w-full">
               {/* Titre de l'étape en cours, au-dessus de l'écran. */}
-              <div className="relative mb-3 h-6">
+              <div aria-hidden="true" className="relative mb-3 h-6">
                 {data.steps.map((item, i) => (
                   <span
                     key={i}
@@ -45,6 +61,30 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                     {item.title}
                   </span>
                 ))}
+              </div>
+
+              {/* Puces cliquables, comme la vitrine du hero : on peut
+                  choisir son étape au lieu de subir la rotation. */}
+              <div className="mb-2 flex justify-center gap-1">
+                {data.steps.map((item, i) => {
+                  const n = i + 1;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setStep(step === n ? null : n)}
+                      aria-label={`Voir l'étape ${item.title}`}
+                      aria-pressed={step === n}
+                      className="group flex items-center rounded-full px-2 py-3 focus-visible:outline-none"
+                    >
+                      <span className="relative block h-1 w-8 overflow-hidden rounded-full bg-brand-sky/35 transition-colors group-hover:bg-brand-sky/55 group-focus-visible:ring-2 group-focus-visible:ring-accent-cyan/60">
+                        <span
+                          className={`frise-desc-${n} absolute inset-0 rounded-full bg-brand-teal`}
+                        />
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Une scène par étape, dans une fenêtre de navigateur comme
@@ -113,15 +153,18 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                     le trait passe donc derrière lui sans le traverser, et le
                     jalon se lit comme un nœud SUR la ligne plutôt que comme
                     une bille posée à côté. */}
-                {/* ⚠️ L'anneau est porté par l'ENVELOPPE, pas par le jalon :
-                    `ring-*` passe par `box-shadow`, or les keyframes du jalon
-                    definissent déjà `box-shadow` pour son halo — l'animation
-                    l'emporte et l'anneau disparaissait. Même piège que le
-                    `transform` écrasé plus tôt. */}
+                {/* DEUX COUCHES : la base éteinte est statique, seule la
+                    couche allumée (halo compris) anime son opacité — voir le
+                    commentaire des keyframes frise-dot-* : c'est ce qui garde
+                    les jalons sur la même horloge (compositeur) que le trait
+                    et les scènes. */}
                 <div className="absolute left-0 top-0 -translate-y-1/2 rounded-full bg-background p-1">
-                  <span
-                    className={`frise-dot-${i + 1} block h-[9px] w-[9px] rounded-full bg-brand-emerald`}
-                  />
+                  <span className="relative block h-[9px] w-[9px]">
+                    <span className="absolute inset-0 scale-[0.8] rounded-full bg-[#26415c]" />
+                    <span
+                      className={`frise-dot-${i + 1} absolute inset-0 rounded-full bg-brand-emerald shadow-[0_0_12px_rgba(52,211,153,0.9)]`}
+                    />
+                  </span>
                 </div>
               </div>
             ))}
@@ -136,7 +179,11 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           <svg
             aria-hidden="true"
             viewBox="0 0 80 80"
-            className="absolute right-0 top-0 hidden h-24 w-24 -translate-y-1/2 translate-x-1/2 lg:block"
+            /* Entièrement DANS le conteneur (plus de translate-x-1/2) : à
+               moitié dehors, il se faisait couper par l'overflow-hidden de
+               la section dès que le conteneur approchait du bord de
+               l'écran — on ne voyait qu'un demi-anneau. */
+            className="absolute right-0 top-0 hidden h-24 w-24 -translate-y-1/2 lg:block"
           >
             <defs>
               <linearGradient
@@ -197,9 +244,12 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                 aria-hidden="true"
                 className="absolute left-0 top-[1px] -translate-x-1/2 rounded-full bg-background p-1 opacity-100 lg:opacity-0"
               >
-                <span
-                  className={`frise-dot-${i + 1} block h-[9px] w-[9px] rounded-full bg-brand-emerald`}
-                />
+                <span className="relative block h-[9px] w-[9px]">
+                  <span className="absolute inset-0 scale-[0.8] rounded-full bg-[#26415c]" />
+                  <span
+                    className={`frise-dot-${i + 1} absolute inset-0 rounded-full bg-brand-emerald shadow-[0_0_12px_rgba(52,211,153,0.9)]`}
+                  />
+                </span>
               </div>
 
               {/* Filet VERTICAL le long de l'étape dont la scène joue en ce

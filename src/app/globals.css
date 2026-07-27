@@ -408,7 +408,9 @@ body {
     justify-content: center;
     gap: 0.65em;
     font-family: var(--font-mono), monospace;
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    /* Réglé en trois passes avec Valentin : 2,75rem (trop), 2,25 (trop
+       peu), 2,5 — ne plus y toucher sans demande explicite. */
+    font-size: clamp(1.625rem, 3.3vw, 2.5rem);
     line-height: 1.15;
     font-weight: 500;
     text-transform: uppercase;
@@ -683,7 +685,17 @@ body {
    sont 0,4 / 19 / 37,7 / 56,3 % — et non 0/18/36/54, qui allumaient les
    jalons jusqu'à 0,4 s AVANT que le trait ne les atteigne.
    L'état éteint est un gris-bleu franc, et non l'émeraude en transparence :
-   sans ce contraste, on ne lisait pas la progression. */
+   sans ce contraste, on ne lisait pas la progression.
+
+   ⚠️ OPACITÉ + TRANSFORM UNIQUEMENT, comme toutes les autres pièces de la
+   frise. L'ancienne version animait background-color et box-shadow : ces
+   propriétés tournent sur le fil principal, alors que le trait (transform)
+   et les scènes (opacité) tournent sur le compositeur. Quand l'onglet passe
+   en arrière-plan, le navigateur fige le fil principal mais pas le
+   compositeur — au retour, les jalons étaient en retard de plusieurs
+   étapes sur la scène affichée. Le jalon est donc DEUX couches
+   superposées : la base gris-bleu éteinte, statique, et la couche émeraude
+   allumée (halo compris) dont seule l'opacité varie. */
 .frise-dot-1,
 .frise-dot-2,
 .frise-dot-3,
@@ -706,80 +718,68 @@ body {
 }
 @keyframes frise-dot-1 {
   0% {
-    background-color: #26415c;
-    box-shadow: none;
+    opacity: 0;
     transform: scale(0.8);
   }
   0.8%,
   94% {
-    background-color: rgb(var(--brand-emerald));
-    box-shadow: 0 0 12px rgb(var(--brand-emerald) / 0.9);
+    opacity: 1;
     transform: scale(1);
   }
   97%,
   100% {
-    background-color: #26415c;
-    box-shadow: none;
+    opacity: 0;
     transform: scale(0.8);
   }
 }
 @keyframes frise-dot-2 {
   0%,
   19% {
-    background-color: #26415c;
-    box-shadow: none;
+    opacity: 0;
     transform: scale(0.8);
   }
   19.4%,
   94% {
-    background-color: rgb(var(--brand-emerald));
-    box-shadow: 0 0 12px rgb(var(--brand-emerald) / 0.9);
+    opacity: 1;
     transform: scale(1);
   }
   97%,
   100% {
-    background-color: #26415c;
-    box-shadow: none;
+    opacity: 0;
     transform: scale(0.8);
   }
 }
 @keyframes frise-dot-3 {
   0%,
   37.7% {
-    background-color: #26415c;
-    box-shadow: none;
+    opacity: 0;
     transform: scale(0.8);
   }
   38.1%,
   94% {
-    background-color: rgb(var(--brand-emerald));
-    box-shadow: 0 0 12px rgb(var(--brand-emerald) / 0.9);
+    opacity: 1;
     transform: scale(1);
   }
   97%,
   100% {
-    background-color: #26415c;
-    box-shadow: none;
+    opacity: 0;
     transform: scale(0.8);
   }
 }
 @keyframes frise-dot-4 {
   0%,
   56.3% {
-    background-color: #26415c;
-    box-shadow: none;
+    opacity: 0;
     transform: scale(0.8);
   }
   56.7%,
   94% {
-    background-color: rgb(var(--brand-emerald));
-    box-shadow: 0 0 12px rgb(var(--brand-emerald) / 0.9);
+    opacity: 1;
     transform: scale(1);
   }
   97%,
   100% {
-    background-color: #26415c;
-    box-shadow: none;
+    opacity: 0;
     transform: scale(0.8);
   }
 }
@@ -853,84 +853,84 @@ body {
 @keyframes frise-num-1 {
   0% {
     transform: scale(1);
-    filter: grayscale(1) opacity(0.4);
+    opacity: 0.35;
   }
   2.4% {
     transform: scale(1.09);
-    filter: none;
+    opacity: 1;
   }
   5.4%,
   94% {
     transform: scale(1);
-    filter: none;
+    opacity: 1;
   }
   97%,
   100% {
     transform: scale(1);
-    filter: grayscale(1) opacity(0.4);
+    opacity: 0.35;
   }
 }
 @keyframes frise-num-2 {
   0%,
   19% {
     transform: scale(1);
-    filter: grayscale(1) opacity(0.4);
+    opacity: 0.35;
   }
   21% {
     transform: scale(1.09);
-    filter: none;
+    opacity: 1;
   }
   24%,
   94% {
     transform: scale(1);
-    filter: none;
+    opacity: 1;
   }
   97%,
   100% {
     transform: scale(1);
-    filter: grayscale(1) opacity(0.4);
+    opacity: 0.35;
   }
 }
 @keyframes frise-num-3 {
   0%,
   37.7% {
     transform: scale(1);
-    filter: grayscale(1) opacity(0.4);
+    opacity: 0.35;
   }
   39.7% {
     transform: scale(1.09);
-    filter: none;
+    opacity: 1;
   }
   42.7%,
   94% {
     transform: scale(1);
-    filter: none;
+    opacity: 1;
   }
   97%,
   100% {
     transform: scale(1);
-    filter: grayscale(1) opacity(0.4);
+    opacity: 0.35;
   }
 }
 @keyframes frise-num-4 {
   0%,
   56.3% {
     transform: scale(1);
-    filter: grayscale(1) opacity(0.4);
+    opacity: 0.35;
   }
   58.3% {
     transform: scale(1.09);
-    filter: none;
+    opacity: 1;
   }
   61.3%,
   94% {
     transform: scale(1);
-    filter: none;
+    opacity: 1;
   }
   97%,
   100% {
     transform: scale(1);
-    filter: grayscale(1) opacity(0.4);
+    opacity: 0.35;
   }
 }
 
@@ -1204,6 +1204,30 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+/* ---------- Frise Méthode : sélection manuelle ----------
+   Comme la vitrine du hero (`pv-manual`) : cliquer une puce fige la frise.
+   Toutes les familles (desc, num, txt, dot, fill) tournent sur la MÊME
+   horloge de 13,44 s — les geler toutes au MÊME instant (délai négatif)
+   suffit à obtenir un état cohérent pour l'étape choisie, sans recalculer
+   chaque famille à la main : le lien est garanti par construction, comme
+   le reste de la frise. L'instant retenu par étape tombe au milieu de sa
+   fenêtre `frise-desc-N`, jalon déjà allumé et remplissage déjà arrivé. */
+.frise-manual [class*="frise-"] {
+  animation-play-state: paused;
+}
+.frise-manual[data-step="1"] [class*="frise-"] {
+  animation-delay: -1.34s;
+}
+.frise-manual[data-step="2"] [class*="frise-"] {
+  animation-delay: -3.85s;
+}
+.frise-manual[data-step="3"] [class*="frise-"] {
+  animation-delay: -6.35s;
+}
+.frise-manual[data-step="4"] [class*="frise-"] {
+  animation-delay: -10.2s;
 }
 
 /* ---------- Espace tickets (section « Pourquoi OHIHO ») ----------
