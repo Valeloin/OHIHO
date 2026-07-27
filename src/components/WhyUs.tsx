@@ -12,23 +12,23 @@ export default function WhyUs({ data }: { data: WhyUsContent }) {
     // `bg-surface`, ils s'effaçaient presque.
     <section id="a-propos" className="section-screen relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-16">
+      <div className="relative mx-auto w-full max-w-7xl px-6 py-12">
         <SectionLabel>{data.kicker}</SectionLabel>
         <Reveal>
           <h2 className="section-title max-w-3xl">
             {data.title}
           </h2>
         </Reveal>
-        <div className="mt-8 h-px rule-fade" />
+        <div className="mt-6 h-px rule-fade" />
 
         {/* Quatre cartes 2×2, resserrées : la section respire davantage et
             laisse la place à celle qui suit (l'espace de suivi). */}
-        <RevealGroup className="mt-8 grid gap-4 sm:grid-cols-2">
+        <RevealGroup className="mt-6 grid gap-4 sm:grid-cols-2">
           {data.values.map((value, i) => (
             <RevealItem
               key={i}
               hover
-              className="card-surface h-full p-6 transition-colors hover:border-accent-cyan/50"
+              className="card-surface h-full p-5 transition-colors hover:border-accent-cyan/50"
             >
               <span className="font-mono text-xs tracking-[0.18em] text-brand-teal">
                 {String(i + 1).padStart(2, "0")}

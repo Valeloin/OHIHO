@@ -84,7 +84,7 @@ export default function Hero({
 
             <motion.h1
               variants={ITEM}
-              className="order-2 mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-display sm:text-5xl"
+              className="hero-title order-2 mt-6"
             >
               {/* Première ligne en blanc, seconde au dégradé de marque
                   (bleu → teal → vert), comme sur la banderole. STATIQUE. */}
