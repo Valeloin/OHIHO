@@ -191,25 +191,56 @@ export default function Navbar() {
             aria-hidden="true"
             className="h-6 w-px bg-[var(--header-border)]"
           />
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={handleNavClick}
-              /* `min-h-[44px]` : ces liens apparaissent dès `md`, donc sur
-                 les tablettes, qui sont tactiles. Avec `py-1` ils ne
-                 faisaient que 24 px de haut. Le filet de survol est calé sur
-                 `bottom-3` pour rester collé au texte malgré la boîte
-                 devenue plus haute. */
-              className="group relative flex min-h-[44px] items-center nav-link"
-            >
-              {link.label}
-              <span
-                aria-hidden="true"
-                className="rule-brand absolute bottom-3 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
-              />
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.href === "/#portfolio" ? (
+              // Réalisations porte un menu déroulant vers BugTrack, qui a
+              // quitté le bandeau principal le 2026-07-27 pour devenir une
+              // page dédiée. `group-focus-within` couvre le clavier (Tab
+              // jusqu'au lien du menu) en plus du survol souris.
+              <div key={link.href} className="group relative">
+                <Link
+                  href={link.href}
+                  onClick={handleNavClick}
+                  className="relative flex min-h-[44px] items-center nav-link"
+                >
+                  {link.label}
+                  <span
+                    aria-hidden="true"
+                    className="rule-brand absolute bottom-3 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-200 group-hover:scale-x-100 group-focus-within:scale-x-100"
+                  />
+                </Link>
+                <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <div className="card-dark min-w-[9rem] overflow-hidden p-1.5">
+                    <Link
+                      href="/bugtrack"
+                      onClick={handleNavClick}
+                      className="block rounded-lg px-3 py-2 text-sm text-[var(--header-fg)] transition-colors hover:bg-white/5"
+                    >
+                      BugTrack
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={handleNavClick}
+                /* `min-h-[44px]` : ces liens apparaissent dès `md`, donc sur
+                   les tablettes, qui sont tactiles. Avec `py-1` ils ne
+                   faisaient que 24 px de haut. Le filet de survol est calé sur
+                   `bottom-3` pour rester collé au texte malgré la boîte
+                   devenue plus haute. */
+                className="group relative flex min-h-[44px] items-center nav-link"
+              >
+                {link.label}
+                <span
+                  aria-hidden="true"
+                  className="rule-brand absolute bottom-3 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-200 group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                />
+              </Link>
+            )
+          )}
         </div>
 
         <div className="hidden items-center gap-4 md:flex lg:gap-5">
