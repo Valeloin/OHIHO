@@ -44,6 +44,40 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
         <div className="grid gap-10 lg:grid-cols-[1fr_30rem] lg:items-center">
           <Reveal>
             <p className="section-lead max-w-4xl">{data.title}</p>
+
+            {/* Légende de la scène qui joue à droite. Elle change AVEC elle,
+                sur la même horloge (`frise-desc-*`) : le lien est garanti par
+                construction, comme partout dans la frise.
+                Elle occupe la colonne de gauche, qui restait vide sous le
+                titre, et rapproche le texte de l'image qu'il décrit — cette
+                légende vivait jusqu'ici sous l'écran, en tout petit.
+                Hauteur FIXE : les enfants sont en absolu, sans elle le bloc
+                serait de hauteur nulle ; et une hauteur qui suivrait le texte
+                ferait sauter la mise en page d'une étape à l'autre.
+                `aria-hidden` : les quatre étapes sont déjà énoncées en clair
+                dans la frise juste en dessous, ce bloc n'en est qu'un rappel
+                visuel — sans lui, un lecteur d'écran les entendrait deux fois. */}
+            <div
+              aria-hidden="true"
+              className="relative mt-8 h-[13rem] max-w-xl sm:h-[11rem]"
+            >
+              {data.steps.map((item, i) => (
+                <div
+                  key={i}
+                  className={`frise-desc-${i + 1} absolute inset-0`}
+                >
+                  <span className="text-gradient font-mono text-sm font-semibold tracking-display">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-3 text-2xl font-semibold tracking-display">
+                    {item.title}
+                  </p>
+                  <p className="mt-4 leading-relaxed text-muted">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </Reveal>
 
           {/* Un écran d'ordinateur qui joue une scène par étape, sur
@@ -51,17 +85,8 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               répétait des titres déjà écrits juste en dessous. */}
           <Reveal delay={0.15}>
             <div className="w-full">
-              {/* Titre de l'étape en cours, au-dessus de l'écran. */}
-              <div aria-hidden="true" className="relative mb-3 h-6">
-                {data.steps.map((item, i) => (
-                  <span
-                    key={i}
-                    className={`frise-desc-${i + 1} absolute inset-0 flex items-center justify-center font-mono text-[11px] uppercase tracking-[0.18em] text-brand-teal`}
-                  >
-                    {item.title}
-                  </span>
-                ))}
-              </div>
+              {/* Le titre de l'étape ne se répète plus ici : il est passé dans
+                  la légende de la colonne de gauche, avec sa description. */}
 
               {/* Puces cliquables, comme la vitrine du hero : on peut
                   choisir son étape au lieu de subir la rotation. */}
@@ -93,19 +118,9 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               <div className="overflow-hidden rounded-xl ring-1 ring-border">
                 <MethodScenes steps={data.steps.length} />
               </div>
-
-              {/* Description de l'étape en cours, sous l'écran. Hauteur fixée
-                  pour que le bloc ne saute pas d'une étape à l'autre. */}
-              <div className="relative mt-3 h-[3.5rem]">
-                {data.steps.map((item, i) => (
-                  <p
-                    key={i}
-                    className={`frise-desc-${i + 1} absolute inset-0 text-center text-[0.8125rem] leading-[1.45] text-muted`}
-                  >
-                    {item.description}
-                  </p>
-                ))}
-              </div>
+              {/* La description ne se répète plus sous l'écran : elle est
+                  passée dans la légende de la colonne de gauche, où elle a la
+                  place de se lire en pleine taille au lieu de 13 px centrés. */}
             </div>
           </Reveal>
         </div>
