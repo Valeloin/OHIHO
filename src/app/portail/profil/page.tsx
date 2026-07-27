@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import ProfileForm from "@/components/portail/ProfileForm";
+import ProfileSummary from "@/components/portail/ProfileSummary";
 
 export const metadata: Metadata = {
   title: "Mon profil · OHIHO",
@@ -16,7 +17,9 @@ export default async function ProfilPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("first_name, last_name, phone, address, company, email, role")
+    .select(
+      "first_name, last_name, phone, address, company, email, role, created_at"
+    )
     .eq("id", user!.id)
     .single();
 
@@ -43,14 +46,24 @@ export default async function ProfilPage() {
         </div>
       )}
 
-      <ProfileForm
-        email={profile?.email ?? user?.email ?? ""}
-        firstName={profile?.first_name ?? null}
-        lastName={profile?.last_name ?? null}
-        phone={profile?.phone ?? null}
-        address={profile?.address ?? null}
-        company={profile?.company ?? null}
-      />
+      <div className="grid gap-6 lg:grid-cols-[19rem_1fr]">
+        <ProfileSummary
+          firstName={profile?.first_name ?? null}
+          lastName={profile?.last_name ?? null}
+          email={profile?.email ?? user?.email ?? ""}
+          company={profile?.company ?? null}
+          createdAt={profile?.created_at ?? new Date().toISOString()}
+        />
+
+        <ProfileForm
+          email={profile?.email ?? user?.email ?? ""}
+          firstName={profile?.first_name ?? null}
+          lastName={profile?.last_name ?? null}
+          phone={profile?.phone ?? null}
+          address={profile?.address ?? null}
+          company={profile?.company ?? null}
+        />
+      </div>
     </div>
   );
 }

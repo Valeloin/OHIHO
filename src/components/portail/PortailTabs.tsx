@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const TABS = [
+  { href: "/portail", label: "Vue d'ensemble" },
   { href: "/portail/profil", label: "Mon profil" },
   { href: "/portail/sites", label: "Mon projet" },
   { href: "/portail/facturation", label: "Facturation" },
@@ -22,7 +23,13 @@ export default function PortailTabs({
     // est souligné d'un filet au dégradé de marque (.rule-brand), statique.
     <div className="flex flex-wrap gap-x-7 gap-y-2 border-b border-border">
       {TABS.map((tab) => {
-        const active = pathname === tab.href || pathname.startsWith(`${tab.href}/`);
+        // "/portail" ne prend le préfixe que pour lui-même : sinon il
+        // resterait actif sur toutes les sous-pages, qui commencent toutes
+        // par "/portail/".
+        const active =
+          tab.href === "/portail"
+            ? pathname === "/portail"
+            : pathname === tab.href || pathname.startsWith(`${tab.href}/`);
         const badge =
           tab.href === "/portail/tickets" && pendingTicketCount > 0
             ? pendingTicketCount

@@ -39,7 +39,15 @@ export default function ProfileForm({
 
   return (
     <form action={formAction} className="card-surface p-6 sm:p-8">
-      <div className="grid gap-5 sm:grid-cols-2">
+      <h3 className="text-lg font-semibold tracking-display">
+        Informations personnelles
+      </h3>
+      <p className="mt-1.5 text-sm text-muted">
+        Ces informations nous servent à vous identifier et à vous contacter.
+      </p>
+      <div className="mt-6 h-px rule-fade" />
+
+      <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="firstName" className={LABEL}>
             Prénom
@@ -87,6 +95,14 @@ export default function ProfileForm({
           </p>
         </div>
 
+      </div>
+
+      <h3 className="mt-8 text-lg font-semibold tracking-display">
+        Coordonnées
+      </h3>
+      <div className="mt-6 h-px rule-fade" />
+
+      <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="phone" className={LABEL}>
             Téléphone (optionnel)
