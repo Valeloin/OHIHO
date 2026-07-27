@@ -414,26 +414,47 @@ export function SceneLanding() {
       </defs>
       <g clipPath="url(#ohv-landing-clip)">
         <g className="pv-scroll">
-          <rect x="24" y="86" width="160" height="14" rx="4" fill={BRIGHT} fillOpacity="0.85" />
-          <rect x="24" y="104" width="120" height="14" rx="4" fill={BRIGHT} fillOpacity="0.85" />
-          <rect x="24" y="126" width="164" height="7" rx="3.5" fill={LINE} fillOpacity="0.3" />
-          <rect x="24" y="138" width="130" height="7" rx="3.5" fill={LINE} fillOpacity="0.26" />
+          {/* Premier écran, REMPLI : accroche, titre, sous-titre, bouton
+              d'appel — une landing n'est pas une page vide, c'est une page
+              qui ne parle que d'une seule chose. */}
+          <rect x="24" y="84" width="54" height="10" rx="5" fill={ACCENT} fillOpacity="0.18" />
+          <circle cx="32" cy="89" r="2.5" fill={ACCENT} />
+          <rect x="24" y="102" width="160" height="13" rx="4" fill={BRIGHT} fillOpacity="0.85" />
+          <rect x="24" y="119" width="122" height="13" rx="4" fill={BRIGHT} fillOpacity="0.85" />
+          <rect x="24" y="140" width="164" height="6" rx="3" fill={LINE} fillOpacity="0.32" />
+          <rect x="24" y="150" width="148" height="6" rx="3" fill={LINE} fillOpacity="0.28" />
+          <rect x="24" y="160" width="112" height="6" rx="3" fill={LINE} fillOpacity="0.24" />
+          <rect x="24" y="178" width="88" height="20" rx="10" fill={ACCENT} fillOpacity="0.9" />
+          <rect x="38" y="185" width="60" height="6" rx="3" fill={SCREEN} fillOpacity="0.85" />
 
-          {/* Visuel de la page (photo/illustration abstraite) */}
-          <rect x="210" y="86" width="166" height="86" rx="12" fill={BLOCKS} fillOpacity="0.35" />
-          <circle cx="246" cy="114" r="16" fill={SKY} fillOpacity="0.5" />
-          <rect x="224" y="148" width="130" height="8" rx="4" fill={LINE} fillOpacity="0.25" />
+          {/* Visuel de la page, garni : image, titre, lignes, pastilles */}
+          <rect x="210" y="84" width="166" height="114" rx="12" fill={BLOCKS} fillOpacity="0.35" />
+          <circle cx="244" cy="112" r="15" fill={SKY} fillOpacity="0.5" />
+          <rect x="268" y="102" width="92" height="8" rx="4" fill={BRIGHT} fillOpacity="0.55" />
+          <rect x="268" y="115" width="70" height="6" rx="3" fill={LINE} fillOpacity="0.3" />
+          <rect x="224" y="140" width="136" height="6" rx="3" fill={LINE} fillOpacity="0.3" />
+          <rect x="224" y="151" width="118" height="6" rx="3" fill={LINE} fillOpacity="0.26" />
+          <rect x="224" y="162" width="128" height="6" rx="3" fill={LINE} fillOpacity="0.22" />
+          <rect x="224" y="178" width="52" height="12" rx="6" fill={EMERALD} fillOpacity="0.25" />
+          <rect x="282" y="178" width="52" height="12" rx="6" fill={SKY} fillOpacity="0.2" />
 
-          {/* Trois points clés, plus bas dans la page : hors du premier
-              écran, révélés par le défilement — c'est ce qui montre que
-              la page continue après ce qu'on voit d'abord. */}
+          {/* Sous la ligne de flottaison, révélé par le défilement : trois
+              points clés étoffés puis une bande de témoignage — la page
+              continue, elle n'est pas vide. */}
           {features.map((f) => (
             <g key={f.x}>
               <circle cx={f.x + 8} cy="226" r="5" fill={f.color} />
-              <rect x={f.x + 22} y="222" width="64" height="7" rx="3.5" fill={BRIGHT} fillOpacity="0.55" />
-              <rect x={f.x + 22} y="234" width="50" height="6" rx="3" fill={LINE} fillOpacity="0.25" />
+              <rect x={f.x + 22} y="222" width="72" height="7" rx="3.5" fill={BRIGHT} fillOpacity="0.55" />
+              <rect x={f.x + 22} y="234" width="86" height="5" rx="2.5" fill={LINE} fillOpacity="0.28" />
+              <rect x={f.x + 22} y="243" width="64" height="5" rx="2.5" fill={LINE} fillOpacity="0.22" />
             </g>
           ))}
+
+          <rect x="24" y="264" width="352" height="42" rx="10" fill={BLOCKS} fillOpacity="0.3" />
+          <circle cx="48" cy="285" r="10" fill={ACCENT} fillOpacity="0.4" />
+          <rect x="68" y="276" width="200" height="6" rx="3" fill={BRIGHT} fillOpacity="0.5" />
+          <rect x="68" y="288" width="150" height="5" rx="2.5" fill={LINE} fillOpacity="0.3" />
+          <rect x="300" y="279" width="56" height="14" rx="7" fill={EMERALD} fillOpacity="0.3" />
         </g>
       </g>
     </>
