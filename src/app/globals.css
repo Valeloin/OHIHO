@@ -364,10 +364,18 @@ body {
      est bien plus haut une fois les colonnes empilées, si bien qu'une section
      sur deux dépassait la fenêtre pendant que les plus courtes traînaient du
      vide. La section y reprend donc la hauteur de son contenu, et c'est le
-     rembourrage interne qui donne le rythme. */
+     rembourrage interne qui donne le rythme.
+
+     Plafonné à 900 px : sur un grand ou très haut écran (4K, ultra-wide),
+     le contenu ne peut pas grandir indéfiniment — sa taille est elle-même
+     plafonnée (voir le `clamp` du hero et de `.section-title`) — si bien
+     qu'une section forcée à occuper TOUTE la hauteur y flottait dans un
+     immense vide, centrée entre deux bandes vides. Passé 900 px de hauteur
+     utile, la section reprend donc la taille de son contenu et laisse voir
+     le début de la section suivante plutôt que d'étirer du vide. */
   @media (min-width: 768px) {
     .section-screen {
-      min-height: calc(100svh - var(--header-h));
+      min-height: min(calc(100svh - var(--header-h)), 900px);
     }
   }
 
