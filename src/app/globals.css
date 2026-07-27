@@ -371,10 +371,11 @@ body {
     }
   }
 
-  /* Titre de section d'accueil. Une seule définition pour les sept sections,
-     calée sur la taille du titre du hero (2,25rem → 3rem, comme son
-     sm:text-5xl) : elle montait à 4,5rem, bien plus gros que la première
-     section, ce qui cassait la cohérence plutôt que de la renforcer.
+  /* Titre de section d'accueil (H2). Une seule définition pour les sept
+     sections. Elle est délibérément SOUS la taille du h1 du hero (2,25rem →
+     3rem) : un h2 aussi grand que le h1 efface la hiérarchie SEO au lieu de
+     la signaler — le h1 doit rester visuellement le repère principal de la
+     page, les h2 des sous-titres de section.
 
      La valeur haute est en rem : à partir de la tablette, la taille de base
      du document suit déjà l'écran (voir le `clamp` sur `html`), le titre
@@ -382,7 +383,7 @@ body {
      `clamp` ne sert plus qu'au téléphone, où cette échelle ne s'applique
      pas. */
   .section-title {
-    font-size: clamp(2.25rem, 7.5vw, 3rem);
+    font-size: clamp(1.875rem, 6.5vw, 2.25rem);
     /* 1,08 et non 1,05 : à cette taille, deux lignes qui se touchent presque
        se lisent comme un bloc compact plutôt que comme deux lignes. */
     line-height: 1.08;
