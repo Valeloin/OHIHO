@@ -27,7 +27,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
 
         <div className="grid gap-10 lg:grid-cols-[1fr_30rem] lg:items-center">
           <Reveal>
-            <h2 className="section-title max-w-2xl">
+            <h2 className="section-title max-w-4xl">
               {data.title}
             </h2>
           </Reveal>

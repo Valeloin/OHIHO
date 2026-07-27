@@ -13,7 +13,7 @@ export default function Expertise({ data }: { data: ExpertiseContent }) {
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
           {/* Colonne éditoriale : titre, filet, prose */}
           <Reveal>
-            <h2 className="section-title max-w-xl">
+            <h2 className="section-title max-w-2xl">
               {data.title}
             </h2>
             <div className="mt-10 h-px rule-fade" />

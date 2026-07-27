@@ -28,7 +28,7 @@ export default function Services({ data }: { data: ServicesContent }) {
         <SectionLabel>{data.kicker}</SectionLabel>
 
         <Reveal>
-          <h2 className="section-title max-w-3xl">{data.title}</h2>
+          <h2 className="section-title max-w-4xl">{data.title}</h2>
         </Reveal>
 
         <RevealGroup className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">

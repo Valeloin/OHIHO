@@ -403,7 +403,11 @@ body {
   }
 
   .section-title {
-    font-size: clamp(2.75rem, 8vw, 5rem);
+    /* 4rem et non 5 : à 5rem, un titre de 55 signes tombait sur QUATRE
+       lignes dans sa colonne et mangeait la section entière, poussant les
+       cartes hors de l'écran. La lisibilité vient autant de la largeur de
+       colonne que du corps — d'où `max-w-4xl` sur les h2 plutôt que 3xl. */
+    font-size: clamp(2.25rem, 6.5vw, 4rem);
     /* 1,08 et non 1,05 : à cette taille, deux lignes qui se touchent presque
        se lisent comme un bloc compact plutôt que comme deux lignes. */
     line-height: 1.08;

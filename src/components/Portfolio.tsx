@@ -23,7 +23,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
         <SectionLabel>{data.kicker}</SectionLabel>
         {/* En-tête éditorial : titre large à gauche, filet. */}
         <Reveal>
-          <h2 className="section-title max-w-3xl">
+          <h2 className="section-title max-w-4xl">
             {data.title}
           </h2>
           <p className="mt-5 max-w-2xl leading-relaxed text-muted">
