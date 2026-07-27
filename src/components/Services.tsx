@@ -3,20 +3,15 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import SectionLabel from "@/components/SectionLabel";
 import ServiceScene from "@/components/motion/ServiceScene";
-import type { ServicesContent, ServiceType } from "@/lib/content/types";
+import { SERVICE_TYPES, serviceHref } from "@/lib/services";
+import type { ServicesContent } from "@/lib/content/types";
 
-// Ordre d'affichage des 4 offres — doit suivre celui des scènes animées de
-// ServiceScene.tsx.
-const SERVICE_TYPES: ServiceType[] = [
-  "landing",
-  "intermediaire",
-  "refonte",
-  "application",
-];
-
-// Les 4 cartes viennent du contenu éditable (voir l'admin, section « Nos
-// services »). Chaque carte mène à la création de compte.
+// Vitrine, et non argumentaire : depuis le 2026-07-27 chaque formule a sa
+// page. La section ne garde donc que le visuel, le nom et un bouton — les
+// quatre paragraphes de description qui s'y trouvaient sont partis sur les
+// pages correspondantes, où ils ont la place de se déployer.
 export default function Services({ data }: { data: ServicesContent }) {
   const formulas = SERVICE_TYPES.map((type) => ({
     type,
@@ -24,110 +19,45 @@ export default function Services({ data }: { data: ServicesContent }) {
   }));
 
   return (
-    <section id="services" className="section-screen relative overflow-hidden border-t border-border">
+    <section
+      id="services"
+      className="section-screen relative overflow-hidden border-t border-border"
+    >
       <SectionBackdrop />
-      {/* Rythme vertical resserré par rapport aux autres sections : c'est la
-          plus chargée du site (4 cartes), et elle doit tenir sur un écran. */}
-      {/* Conteneur plus large que les autres sections (7xl) : à 6xl, chaque
-          cellule tombait à ~540 px et la colonne de texte devenait si étroite
-          que le sur-titre se brisait sur trois lignes. */}
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-7 sm:py-8">
-        {/* En-tête au patron commun : libellé mono + filet, titre à chasse
-            serrée aligné à gauche, sous-titre à largeur de lecture. */}
+      <div className="relative mx-auto w-full max-w-7xl px-6 py-10">
+        <SectionLabel>{data.kicker}</SectionLabel>
+
         <Reveal>
-          <span className="kicker">{data.kicker}</span>
-          <h2 className="section-title mt-5 max-w-3xl">
-            {data.title}
-          </h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-muted">
-            {data.subtitle}
-          </p>
+          <h2 className="section-title max-w-3xl">{data.title}</h2>
         </Reveal>
-        <div className="mt-5 h-px rule-fade" />
 
-        {/* PLUS DE CARTE. L'ancienne version enfermait chaque formule dans un
-            panneau `card-surface` (#102436) contre lequel l'animation posait
-            son propre fond d'écran (#071522) : deux sombres différents collés
-            l'un à l'autre, séparés par un filet dur — c'est ce bicolore qui
-            rendait la grille lourde.
-            Ici l'animation n'est plus « dans » une boîte : elle est l'objet,
-            posée à même le fond de la page avec son seul cadre de navigateur,
-            et le texte se tient à côté, sans cloison. La séparation se fait
-            par le vide, plus par des bordures. */}
-        <RevealGroup className="mt-5 grid gap-x-12 gap-y-5 lg:grid-cols-2">
-          {formulas.map((formula, i) => (
+        <RevealGroup className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          {formulas.map((formula) => (
             <RevealItem key={formula.type} hover className="h-full">
-              <Link href="/inscription" className="group flex h-full flex-col">
-                {/* L'animation et son texte, côte à côte. Les cartes de la
-                    colonne de GAUCHE (indices pairs) sont inversées : leur
-                    animation passe à droite. Les quatre animations se
-                    rejoignent donc au centre de la grille. En mobile, tout se
-                    réempile, animation d'abord. */}
-                {/* `items-start` et non `items-center` : centré, le bloc de
-                    texte se plaçait selon SA propre hauteur, donc les titres
-                    de deux cartes voisines ne tombaient jamais au même
-                    niveau. Calés en haut, ils s'alignent d'une carte à
-                    l'autre puisque les animations ont toutes la même taille. */}
-                <div
-                  className={`flex flex-1 flex-col gap-5 sm:items-start ${
-                    i % 2 === 0 ? "sm:flex-row-reverse" : "sm:flex-row"
-                  }`}
-                >
-                  <div className="aspect-[400/220] w-full shrink-0 overflow-hidden rounded-xl ring-1 ring-border transition duration-300 group-hover:ring-accent-cyan/60 sm:w-[56%]">
-                    <ServiceScene type={formula.type} />
-                  </div>
-
-                  {/* Le titre vit DANS la colonne de texte, au-dessus de sa
-                      description. Il suit donc l'inversion : à gauche quand
-                      l'animation est à droite, à droite quand elle est à
-                      gauche. En pleine largeur il se retrouvait au-dessus de
-                      l'animation sur les cartes 02 et 04, sans rapport avec
-                      le texte qu'il annonce. */}
-                  <div className="min-w-0 flex-1">
-                    {/* Hauteur réservée à DEUX lignes : certains sur-titres
-                        tiennent sur une ligne, d'autres sur deux, et le titre
-                        d'en dessous se retrouvait décalé d'un cran d'une
-                        carte à l'autre. En réservant la place, tous les
-                        titres tombent au même niveau. */}
-                    <div className="flex min-h-[2.1rem] items-baseline gap-3">
-                      <span className="font-mono text-sm text-brand-teal">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="h-px w-5 shrink-0 translate-y-[-0.3em] bg-border"
-                      />
-                      {/* Ni `truncate` ni filet séparateur : la colonne fait
-                          ~240 px et les sur-titres longs (« UN SITE VITRINE
-                          MULTI-PAGES ») s'y faisaient couper. Corps et
-                          interlettrage réduits pour qu'ils tiennent. */}
-                      <p className="min-w-0 font-mono text-[0.625rem] uppercase leading-tight tracking-[0.1em] text-muted">
-                        {formula.tagline}
-                      </p>
-                    </div>
-                    <h3 className="mt-1.5 text-2xl font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
-                      {formula.label}
-                    </h3>
-                    {/* Blanc et non gris bleuté : ces quatre descriptions sont
-                        l'argumentaire commercial de la page, pas une légende.
-                        En `text-muted` elles reculaient au même plan que les
-                        sur-titres, alors qu'elles portent l'essentiel. Le
-                        contraste passe de 8,2 à 15,9.
-                        ⚠️ Ne pas écrire `text-foreground/80` en espérant les
-                        adoucir : `--foreground` est un HEX, il n'accepte pas
-                        les modificateurs d'opacité de Tailwind, qui sont alors
-                        ignorés en silence. C'est le même piège que sur les
-                        couleurs de marque, résolu là-bas en déclarant les
-                        variables en canaux RGB. Pour nuancer ici, il faudrait
-                        soit faire de même, soit passer par `opacity-*`. La
-                        hiérarchie avec le titre tient de toute façon à la
-                        taille et à la graisse, pas à la couleur. */}
-                    <p className="mt-2.5 text-sm leading-relaxed text-foreground">
-                      {formula.description}
-                    </p>
-                  </div>
+              <Link
+                href={serviceHref(formula.type)}
+                className="group flex h-full flex-col"
+              >
+                {/* L'animation est l'objet, posée à même le fond avec son seul
+                    cadre de navigateur — pas de carte autour. */}
+                <div className="aspect-[400/240] w-full overflow-hidden rounded-xl ring-1 ring-border transition duration-300 group-hover:ring-accent-cyan/60">
+                  <ServiceScene type={formula.type} />
                 </div>
 
+                <h3 className="mt-5 text-xl font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
+                  {formula.label}
+                </h3>
+                <p className="mt-1.5 text-sm text-muted">{formula.tagline}</p>
+
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-accent-cyan">
+                  Découvrir
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-200 group-hover:translate-x-0.5"
+                  >
+                    →
+                  </span>
+                </span>
               </Link>
             </RevealItem>
           ))}

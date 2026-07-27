@@ -25,7 +25,19 @@ const NAV_LINKS = [
   { href: "/#contact", label: "Contact" },
 ];
 
-export default function Navbar() {
+type NavItem = { href: string; label: string };
+
+export default function Navbar({
+  serviceLinks = [],
+}: {
+  serviceLinks?: NavItem[];
+}) {
+  // Menus déroulants du bandeau, indexés par le lien qui les porte.
+  const DROPDOWNS: Record<string, NavItem[]> = {
+    "/#services": serviceLinks,
+    "/#portfolio": [{ href: "/bugtrack", label: "BugTrack" }],
+  };
+
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState<string | null>(null);
@@ -192,11 +204,11 @@ export default function Navbar() {
             className="h-6 w-px bg-[var(--header-border)]"
           />
           {NAV_LINKS.map((link) =>
-            link.href === "/#portfolio" ? (
-              // Réalisations porte un menu déroulant vers BugTrack, qui a
-              // quitté le bandeau principal le 2026-07-27 pour devenir une
-              // page dédiée. `group-focus-within` couvre le clavier (Tab
-              // jusqu'au lien du menu) en plus du survol souris.
+            DROPDOWNS[link.href]?.length ? (
+              // Menu déroulant : Services vers ses quatre pages de formule,
+              // Réalisations vers BugTrack (page dédiée depuis le
+              // 2026-07-27). `group-focus-within` couvre le clavier (Tab
+              // jusqu'aux liens du menu) en plus du survol souris.
               <div key={link.href} className="group relative">
                 <Link
                   href={link.href}
@@ -210,14 +222,17 @@ export default function Navbar() {
                   />
                 </Link>
                 <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  <div className="card-dark min-w-[9rem] overflow-hidden p-1.5">
-                    <Link
-                      href="/bugtrack"
-                      onClick={handleNavClick}
-                      className="block rounded-lg px-3 py-2 text-sm text-[var(--header-fg)] transition-colors hover:bg-white/5"
-                    >
-                      BugTrack
-                    </Link>
+                  <div className="card-dark min-w-[11rem] overflow-hidden p-1.5">
+                    {DROPDOWNS[link.href].map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={handleNavClick}
+                        className="block whitespace-nowrap rounded-lg px-3 py-2 text-sm text-[var(--header-fg)] transition-colors hover:bg-white/5"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -344,14 +359,27 @@ export default function Navbar() {
         <div className="border-t border-[var(--header-border)] bg-background md:hidden">
           <div className="mx-auto max-w-6xl px-6 pb-4 pt-1">
             {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={handleNavClick}
-                className="flex min-h-[48px] items-center border-b border-border/60 nav-link"
-              >
-                {link.label}
-              </Link>
+              <div key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={handleNavClick}
+                  className="flex min-h-[48px] items-center border-b border-border/60 nav-link"
+                >
+                  {link.label}
+                </Link>
+                {/* Le tiroir n'a pas de survol : les entrées du menu déroulant
+                    y sont dépliées d'office, en retrait. */}
+                {DROPDOWNS[link.href]?.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={handleNavClick}
+                    className="flex min-h-[48px] items-center border-b border-border/60 pl-4 text-sm text-muted"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             ))}
 
             <div className="mt-4 flex flex-col gap-2">

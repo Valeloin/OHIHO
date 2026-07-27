@@ -1,5 +1,6 @@
 import Reveal from "@/components/motion/Reveal";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import SectionLabel from "@/components/SectionLabel";
 import LinkedInQr from "@/components/LinkedInQr";
 import type { ContactContent } from "@/lib/content/types";
 
@@ -21,12 +22,13 @@ export default function ContactSection({ data }: { data: ContactContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-16">
+      <div className="relative mx-auto w-full max-w-7xl px-6 py-16">
+        <SectionLabel>{data.kicker}</SectionLabel>
+
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <Reveal>
-            {/* En-tête éditorial : libellé mono, titre large aligné à gauche. */}
-            <span className="kicker">{data.kicker}</span>
-            <h2 className="section-title mt-5 max-w-3xl">
+            {/* En-tête éditorial : titre large aligné à gauche. */}
+            <h2 className="section-title max-w-3xl">
               {data.title}
             </h2>
             <p className="mt-5 max-w-2xl leading-relaxed text-muted">

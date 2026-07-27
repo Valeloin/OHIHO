@@ -384,10 +384,14 @@ body {
      `clamp` ne sert plus qu'au téléphone, où cette échelle ne s'applique
      pas. */
   .section-title {
-    font-size: clamp(2.125rem, 6.5vw, 3.25rem);
-    line-height: 1.05;
+    font-size: clamp(2.375rem, 7.5vw, 4.5rem);
+    /* 1,08 et non 1,05 : à cette taille, deux lignes qui se touchent presque
+       se lisent comme un bloc compact plutôt que comme deux lignes. */
+    line-height: 1.08;
     font-weight: 600;
-    letter-spacing: -0.03em;
+    /* Chasse un peu moins serrée qu'avant (-0,03) : le resserrement se voit
+       d'autant plus que le corps est gros, et il mangeait les jambages. */
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 

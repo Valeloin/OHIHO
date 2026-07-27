@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getContent } from "@/lib/content";
+import { SERVICE_PAGES } from "@/lib/services";
 import { themeCss } from "@/lib/content/theme-css";
 
 const geistSans = localFont({
@@ -122,7 +123,14 @@ export default async function RootLayout({
         {customThemeCss ? (
           <style dangerouslySetInnerHTML={{ __html: customThemeCss }} />
         ) : null}
-        <Navbar />
+        {/* Les libellés des formules viennent du contenu éditable : le menu
+            déroulant « Services » suit donc un renommage fait depuis /admin. */}
+        <Navbar
+          serviceLinks={SERVICE_PAGES.map((s) => ({
+            href: `/services/${s.slug}`,
+            label: content.services.offers[s.type].label,
+          }))}
+        />
         {children}
         <Footer data={content.footer} />
       </body>

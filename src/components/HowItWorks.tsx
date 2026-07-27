@@ -2,6 +2,7 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import SectionLabel from "@/components/SectionLabel";
 import MethodShowcase from "@/components/motion/MethodShowcase";
 import type { MethodContent } from "@/lib/content/types";
 
@@ -15,17 +16,18 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-14">
+      <div className="relative mx-auto w-full max-w-7xl px-6 py-14">
         {/* En-tête sur deux colonnes : le titre à gauche, et à droite une
             carte qui récapitule le déroulé. Elle donne à la section la
             hauteur des autres et sert de légende à la frise — ses jalons
             s'allument sur la MÊME horloge que le trait qui se remplit. */}
         {/* Colonne de droite élargie : elle porte désormais le portable ET le
             téléphone posé devant lui. */}
+        <SectionLabel>{data.kicker}</SectionLabel>
+
         <div className="grid gap-10 lg:grid-cols-[1fr_30rem] lg:items-center">
           <Reveal>
-            <span className="kicker">{data.kicker}</span>
-            <h2 className="section-title mt-5 max-w-2xl">
+            <h2 className="section-title max-w-2xl">
               {data.title}
             </h2>
           </Reveal>

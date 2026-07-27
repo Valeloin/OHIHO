@@ -1,16 +1,19 @@
 // Défilement fluide maison, partagé entre les flèches de navigation (ScrollNav)
 // et les liens d'ancre du menu (Navbar).
 //
-// Piloté par un timer (setInterval) et non par requestAnimationFrame (throttlé
-// dans certains contextes). On neutralise aussi temporairement
-// `scroll-behavior: smooth` (défini globalement en CSS) via un style inline
-// `auto` : sinon le smooth natif l'emporte et cale sur les pages très animées,
-// empêchant tout défilement programmatique de progresser.
+// Piloté par requestAnimationFrame, callé sur le rythme de rafraîchissement
+// réel de l'écran — un timer (setInterval) tourne sur une horloge murale
+// indépendante du rendu et saccadait visiblement, ses ticks tombant en
+// décalage avec les images effectivement peintes.
+// On neutralise aussi temporairement `scroll-behavior: smooth` (défini
+// globalement en CSS) via un style inline `auto` : sinon le smooth natif
+// l'emporte et cale sur les pages très animées, empêchant tout défilement
+// programmatique de progresser.
 
 // Une seule animation à la fois. Deux clics rapprochés lançaient auparavant deux
-// timers concurrents qui corrompaient la restauration de `scroll-behavior`
+// animations concurrentes qui corrompaient la restauration de `scroll-behavior`
 // (laissant `auto` figé en inline, ce qui désactivait le smooth sur tout le site).
-let activeTimer: number | null = null;
+let activeFrame: number | null = null;
 let baseBehavior = "";
 
 export function animateScrollTo(
@@ -22,11 +25,11 @@ export function animateScrollTo(
 ) {
   const el = document.documentElement;
 
-  if (activeTimer !== null) {
+  if (activeFrame !== null) {
     // Une animation tourne déjà : on l'annule mais on conserve le
     // `baseBehavior` d'origine (ne pas recapturer le "auto" déjà posé).
-    window.clearInterval(activeTimer);
-    activeTimer = null;
+    window.cancelAnimationFrame(activeFrame);
+    activeFrame = null;
   } else {
     baseBehavior = el.style.scrollBehavior;
   }
@@ -45,17 +48,20 @@ export function animateScrollTo(
   const ease = (t: number) =>
     t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   const startTime = performance.now();
-  activeTimer = window.setInterval(() => {
-    const p = Math.min(1, (performance.now() - startTime) / duration);
+
+  const step = (now: number) => {
+    const p = Math.min(1, (now - startTime) / duration);
     window.scrollTo(0, Math.round(start + distance * ease(p)));
     onTick?.();
     if (p >= 1) {
-      if (activeTimer !== null) window.clearInterval(activeTimer);
-      activeTimer = null;
+      activeFrame = null;
       el.style.scrollBehavior = baseBehavior;
       onDone?.();
+    } else {
+      activeFrame = window.requestAnimationFrame(step);
     }
-  }, 16);
+  };
+  activeFrame = window.requestAnimationFrame(step);
 }
 
 // Position de défilement idéale pour arriver sur une section : son BORD HAUT

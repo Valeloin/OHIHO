@@ -8,8 +8,8 @@ import WhyUs from "@/components/WhyUs";
 import ContactSection from "@/components/ContactSection";
 import ScrollNav from "@/components/ScrollNav";
 import { getContent } from "@/lib/content";
+import { SERVICE_TYPES } from "@/lib/services";
 
-const SERVICE_TYPES = ["landing", "intermediaire", "refonte", "application"] as const;
 
 export default async function Home() {
   const content = await getContent();

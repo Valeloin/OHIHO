@@ -4,6 +4,7 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import SectionLabel from "@/components/SectionLabel";
 import { PROJECTS } from "@/lib/projects";
 import type { PortfolioContent } from "@/lib/content/types";
 
@@ -18,18 +19,18 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
       <SectionBackdrop />
       {/* Rythme resserré : comme Services, cette section porte beaucoup de
           contenu (3 cartes + encart) et doit tenir sur un écran. */}
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-12">
-        {/* En-tête éditorial : libellé mono, titre large à gauche, filet. */}
+      <div className="relative mx-auto w-full max-w-7xl px-6 py-10">
+        <SectionLabel>{data.kicker}</SectionLabel>
+        {/* En-tête éditorial : titre large à gauche, filet. */}
         <Reveal>
-          <span className="kicker">{data.kicker}</span>
-          <h2 className="section-title mt-5 max-w-3xl">
+          <h2 className="section-title max-w-3xl">
             {data.title}
           </h2>
           <p className="mt-5 max-w-2xl leading-relaxed text-muted">
             {data.subtitle}
           </p>
         </Reveal>
-        <div className="mt-8 h-px rule-fade" />
+        <div className="mt-6 h-px rule-fade" />
 
         {/* Les réalisations se lisent d'abord par leur MARQUE : une grande
             tuile portant le favicon du site, cliquable vers le site en ligne.
@@ -38,7 +39,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
             Les projets à venir gardent une tuile en pointillés, non cliquable
             et sans icône : on n'invente pas de favicon pour un site qui
             n'existe pas. */}
-        <RevealGroup className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+        <RevealGroup className="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
           {PROJECTS.map((project) => {
             const isExternal = project.href?.startsWith("http");
             const enLigne = Boolean(project.href);
@@ -173,7 +174,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
         <Reveal>
           {/* Encart de fin en carte : texte à gauche, bouton à droite ;
               empilé sous sm. */}
-          <div className="card-surface mt-8 flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="card-surface mt-6 flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-xl text-sm leading-relaxed text-muted">
               {data.ctaText}
             </p>

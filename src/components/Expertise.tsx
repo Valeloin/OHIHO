@@ -1,17 +1,19 @@
 import Reveal from "@/components/motion/Reveal";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import SectionLabel from "@/components/SectionLabel";
 import type { ExpertiseContent } from "@/lib/content/types";
 
 export default function Expertise({ data }: { data: ExpertiseContent }) {
   return (
     <section id="expertise" className="section-screen relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-16">
+      <div className="relative mx-auto w-full max-w-7xl px-6 py-16">
+        <SectionLabel>{data.kicker}</SectionLabel>
+
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">
-          {/* Colonne éditoriale : libellé, titre, filet, prose */}
+          {/* Colonne éditoriale : titre, filet, prose */}
           <Reveal>
-            <span className="kicker">{data.kicker}</span>
-            <h2 className="section-title mt-5 max-w-xl">
+            <h2 className="section-title max-w-xl">
               {data.title}
             </h2>
             <div className="mt-10 h-px rule-fade" />

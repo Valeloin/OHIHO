@@ -2,6 +2,7 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import SectionLabel from "@/components/SectionLabel";
 import type { WhyUsContent } from "@/lib/content/types";
 
 export default function WhyUs({ data }: { data: WhyUsContent }) {
@@ -11,10 +12,10 @@ export default function WhyUs({ data }: { data: WhyUsContent }) {
     // `bg-surface`, ils s'effaçaient presque.
     <section id="a-propos" className="section-screen relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-16">
+      <div className="relative mx-auto w-full max-w-7xl px-6 py-16">
+        <SectionLabel>{data.kicker}</SectionLabel>
         <Reveal>
-          <span className="kicker">{data.kicker}</span>
-          <h2 className="section-title mt-5 max-w-3xl">
+          <h2 className="section-title max-w-3xl">
             {data.title}
           </h2>
         </Reveal>
