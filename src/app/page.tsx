@@ -3,7 +3,6 @@ import HeroShowcase from "@/components/motion/HeroShowcase";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
 import HowItWorks from "@/components/HowItWorks";
-import Expertise from "@/components/Expertise";
 import WhyUs from "@/components/WhyUs";
 import ContactSection from "@/components/ContactSection";
 import ScrollNav from "@/components/ScrollNav";
@@ -27,7 +26,6 @@ export default async function Home() {
       />
       <Services data={content.services} />
       <HowItWorks data={content.method} />
-      <Expertise data={content.expertise} />
       <WhyUs data={content.whyUs} />
       {/* BugTrack a sa propre page (/bugtrack) depuis le 2026-07-27, reliée
           par la tuile « BugTrack » de Réalisations juste en dessous — plus

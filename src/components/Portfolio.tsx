@@ -103,27 +103,11 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
               </>
             );
 
-            // Trois états distincts, et non deux : un projet peut être bien
-            // réel (donc avec son icône) sans être encore accessible en
-            // ligne. Seules les tuiles SANS icône sont de vrais emplacements
-            // vides, et elles seules prennent les pointillés et l'atténuation.
-            // Un vrai projet (avec icône) prend le DÉGRADÉ DE MARQUE, comme
-            // les cartes du hero mais dans l'ORDRE INVERSE — émeraude → teal
-            // → bleu ciel au lieu de bleu → teal → émeraude : même palette,
-            // sens de lecture opposé, pour que les deux jeux de cartes se
-            // répondent sans se copier. Seuls les emplacements vides (sans
-            // icône) gardent la carte sombre à pointillés.
-            const hasGradient = Boolean(project.icon);
-
-            // Carte intérieure : fond nuit `card-dark` (#071522) teinté du
-            // dégradé de marque, coins arrondis, sans bordure (c'est
-            // l'enveloppe qui la porte).
-            const innerClass =
-              "relative flex h-full flex-col overflow-hidden rounded-[15px] p-6";
-            const innerStyle = {
-              background:
-                "linear-gradient(135deg, rgba(52,211,153,0.16) 0%, rgba(34,211,196,0.05) 48%, rgba(56,189,248,0.16) 100%), #071522",
-            };
+            // Carte à plat : un simple filet, sans dégradé ni double
+            // enveloppe (la version en bordure dégradée + fond teinté a été
+            // jugée trop lourde, comme les cartes du hero). Seul le filet
+            // s'éclaircit au survol des projets accessibles ; les
+            // emplacements à venir gardent des pointillés, atténués.
 
             return (
               // `min-w-0` : une cellule de grille refuse par défaut de
@@ -137,30 +121,17 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
                 hover={enLigne}
                 className="h-full min-w-0"
               >
-                {hasGradient ? (
-                  // Enveloppe au dégradé = la bordure ; `p-px` en fait le
-                  // liseré. Elle s'intensifie au survol.
-                  <div className="group h-full rounded-2xl bg-gradient-to-br from-brand-emerald/55 via-brand-teal/45 to-brand-sky/55 p-px shadow-[var(--card-shadow)] transition-all duration-300 hover:from-brand-emerald hover:via-brand-teal hover:to-brand-sky">
-                    {project.href ? (
-                      <Link
-                        href={project.href}
-                        className={innerClass}
-                        style={innerStyle}
-                        target={isExternal ? "_blank" : undefined}
-                        rel={isExternal ? "noopener noreferrer" : undefined}
-                      >
-                        {content}
-                      </Link>
-                    ) : (
-                      <div className={innerClass} style={innerStyle}>
-                        {content}
-                      </div>
-                    )}
-                  </div>
+                {project.href ? (
+                  <Link
+                    href={project.href}
+                    className="group flex h-full flex-col rounded-2xl border border-border p-6 transition-colors hover:border-accent-cyan/50"
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                  >
+                    {content}
+                  </Link>
                 ) : (
-                  // Emplacement vide : pas de dégradé, carte sombre à
-                  // pointillés, atténuée.
-                  <div className="card-dark group flex h-full flex-col border-dashed p-6 opacity-70">
+                  <div className="flex h-full flex-col rounded-2xl border border-dashed border-border p-6 opacity-70">
                     {content}
                   </div>
                 )}
