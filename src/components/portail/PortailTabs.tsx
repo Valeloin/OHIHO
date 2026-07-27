@@ -10,7 +10,11 @@ const TABS = [
   { href: "/portail/tickets", label: "Support" },
 ];
 
-export default function PortailTabs() {
+export default function PortailTabs({
+  pendingTicketCount = 0,
+}: {
+  pendingTicketCount?: number;
+}) {
   const pathname = usePathname();
 
   return (
@@ -19,16 +23,28 @@ export default function PortailTabs() {
     <div className="flex flex-wrap gap-x-7 gap-y-2 border-b border-border">
       {TABS.map((tab) => {
         const active = pathname === tab.href || pathname.startsWith(`${tab.href}/`);
+        const badge =
+          tab.href === "/portail/tickets" && pendingTicketCount > 0
+            ? pendingTicketCount
+            : null;
         return (
           <Link
             key={tab.href}
             href={tab.href}
             aria-current={active ? "page" : undefined}
-            className={`relative -mb-px pb-3 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors ${
+            className={`relative -mb-px flex items-center gap-1.5 pb-3 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors ${
               active ? "text-accent-cyan" : "text-muted hover:text-foreground"
             }`}
           >
             {tab.label}
+            {badge !== null && (
+              <span
+                className="inline-flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-brand-emerald px-1 text-[10px] font-semibold normal-case tracking-normal text-background"
+                aria-label={`${badge} ticket(s) nécessitant une action`}
+              >
+                {badge}
+              </span>
+            )}
             {active && (
               <span
                 aria-hidden="true"

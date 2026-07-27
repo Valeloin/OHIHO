@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/lib/supabase/actions";
 import PortailTabs from "@/components/portail/PortailTabs";
+import { listTickets } from "@/lib/bugtrack";
+import { ticketNeedsAction } from "@/lib/portail/status";
 
 export default async function PortailLayout({
   children,
@@ -21,6 +23,16 @@ export default async function PortailLayout({
     .select("full_name, company")
     .eq("id", user.id)
     .single();
+
+  // Best-effort : un souci BugTrack ne doit jamais empêcher l'accès au
+  // reste de l'espace client, juste faire disparaître le badge.
+  let pendingTicketCount = 0;
+  try {
+    const tickets = await listTickets(user.id);
+    pendingTicketCount = tickets.filter((t) => ticketNeedsAction(t.status)).length;
+  } catch {
+    // silencieux : le badge reste simplement à 0
+  }
 
   return (
     <main>
@@ -54,7 +66,7 @@ export default async function PortailLayout({
         </div>
 
         <div className="mt-8">
-          <PortailTabs />
+          <PortailTabs pendingTicketCount={pendingTicketCount} />
         </div>
 
         <div className="mt-8">{children}</div>
