@@ -47,7 +47,7 @@ function OverviewTile({
 }
 
 export default async function PortailDashboardPage() {
-  const { supabase, user } = await requireProfile();
+  const { supabase, user, profile } = await requireProfile();
 
   const [{ data: projects }, { data: invoices }, tickets] = await Promise.all([
     supabase
@@ -73,7 +73,12 @@ export default async function PortailDashboardPage() {
   return (
     <div>
       <PageHeader
-        title="Vue d'ensemble"
+        kicker="Espace client"
+        title={
+          profile.first_name
+            ? `Bienvenue, ${profile.first_name}`
+            : "Bienvenue"
+        }
         subtitle="Un coup d'œil sur votre projet, votre facturation et vos demandes de support."
       />
 

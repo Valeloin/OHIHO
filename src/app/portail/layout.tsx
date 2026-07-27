@@ -1,10 +1,20 @@
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { signOut } from "@/lib/supabase/actions";
-import PortailTabs from "@/components/portail/PortailTabs";
+import PortailSidebar from "@/components/portail/PortailSidebar";
 import { listTickets } from "@/lib/bugtrack";
 import { ticketNeedsAction } from "@/lib/portail/status";
+
+function initialsOf(
+  firstName: string | null,
+  lastName: string | null,
+  email: string
+) {
+  const first = firstName?.trim()?.[0];
+  const last = lastName?.trim()?.[0];
+  if (first || last) return `${first ?? ""}${last ?? ""}`.toUpperCase();
+  return email[0]?.toUpperCase() ?? "?";
+}
 
 export default async function PortailLayout({
   children,
@@ -20,7 +30,7 @@ export default async function PortailLayout({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, company")
+    .select("first_name, last_name, full_name, company")
     .eq("id", user.id)
     .single();
 
@@ -34,42 +44,28 @@ export default async function PortailLayout({
     // silencieux : le badge reste simplement à 0
   }
 
+  const email = user.email ?? "";
+
   return (
     <main>
-      <div className="mx-auto max-w-5xl px-6 py-16">
-        {/* Panneau profond de la DA « Banderole » : un aplat de nuit plus
-            sombre que le fond, cerné d'un filet d'1px, aux angles adoucis et
-            posé d'une ombre douce. Le point vert du kicker est la seule
-            touche de couleur. */}
-        <div className="card-dark px-6 py-6 sm:px-9 sm:py-8">
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <p className="kicker">Espace client</p>
-              <h1 className="mt-5 text-3xl font-semibold tracking-display text-foreground">
-                Bienvenue{profile?.full_name ? `, ${profile.full_name}` : ""}
-              </h1>
-              <p className="mt-3 text-sm text-muted">
-                Connecté avec {user?.email}
-                {profile?.company ? ` · ${profile.company}` : ""}.
-              </p>
-            </div>
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="grid gap-8 lg:grid-cols-[15.5rem_1fr] lg:gap-10">
+          <PortailSidebar
+            name={profile?.full_name || email}
+            email={email}
+            company={profile?.company ?? null}
+            initials={initialsOf(
+              profile?.first_name ?? null,
+              profile?.last_name ?? null,
+              email
+            )}
+            pendingTicketCount={pendingTicketCount}
+          />
 
-            <form action={signOut}>
-              <button
-                type="submit"
-                className="btn-outline px-5 py-2 font-mono text-[11px] uppercase tracking-[0.16em]"
-              >
-                Se déconnecter
-              </button>
-            </form>
-          </div>
+          {/* `min-w-0` : sans lui, une ligne longue (email, tableau) force la
+              colonne à s'élargir et déborde de la grille. */}
+          <div className="min-w-0">{children}</div>
         </div>
-
-        <div className="mt-8">
-          <PortailTabs pendingTicketCount={pendingTicketCount} />
-        </div>
-
-        <div className="mt-8">{children}</div>
       </div>
     </main>
   );
