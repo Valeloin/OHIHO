@@ -104,7 +104,7 @@ export default function Hero({
               className="order-5 mt-7 flex flex-col gap-3 sm:flex-row"
             >
               <Link
-                href="/inscription"
+                href="/#contact"
                 className="btn-accent px-7 py-3.5 text-center text-sm"
               >
                 {data.ctaPrimary}

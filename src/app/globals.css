@@ -353,6 +353,10 @@ body {
   .section-screen {
     display: flex;
     align-items: center;
+    /* Le bandeau est `sticky` : sans cette marge, un lien d'ancre
+       (« Nous contacter » → #contact) amène le haut de la section tout en
+       haut de la fenêtre, donc derrière le bandeau. */
+    scroll-margin-top: var(--header-h);
   }
 
   /* Le plein écran ne vaut qu'à partir de la tablette. Sur téléphone, un

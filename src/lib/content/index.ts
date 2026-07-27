@@ -6,7 +6,13 @@ import {
   CONTENT_ROW_ID,
 } from "@/lib/supabase/config";
 import { defaultContent } from "./defaults";
-import type { ContactContent, SiteContent, ThemeContent } from "./types";
+import type {
+  ContactContent,
+  HeroContent,
+  PortfolioContent,
+  SiteContent,
+  ThemeContent,
+} from "./types";
 
 // Valeurs par défaut des ANCIENS thèmes (thème clair, puis navy/bleu d'avant
 // la DA bleu → vert du 2026-07-16). Un enregistrement fait à ces époques a
@@ -43,6 +49,29 @@ const LEGACY_CONTACT_DEFAULTS: Partial<Record<keyof ContactContent, string[]>> =
     email: ["contact@ohiho.fr"],
   };
 
+// Les deux boutons principaux du site ont successivement mené au devis
+// (retiré le 2026-07-25) puis à la création de compte (mise en attente le
+// 2026-07-27). Ils mènent désormais à la section Contact. Ces anciens
+// libellés restent figés en base par un enregistrement de /admin : ils ne
+// décrivent plus la destination, on les remplace.
+const LEGACY_CTA_LABELS = [
+  "demander un devis",
+  "demander mon devis",
+  "obtenir un devis",
+  "créer mon compte",
+  "créer un compte",
+];
+
+const LEGACY_HERO_DEFAULTS: Partial<Record<keyof HeroContent, string[]>> = {
+  ctaPrimary: LEGACY_CTA_LABELS,
+};
+
+const LEGACY_PORTFOLIO_DEFAULTS: Partial<
+  Record<keyof PortfolioContent, string[]>
+> = {
+  ctaButton: LEGACY_CTA_LABELS,
+};
+
 function normalizeLegacy<T extends Record<string, unknown>>(
   merged: T,
   defaults: T,
@@ -74,8 +103,16 @@ function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
   if (!stored) return defaultContent;
   return {
     theme: normalizeTheme(stored.theme),
-    hero: { ...defaultContent.hero, ...stored.hero },
-    portfolio: { ...defaultContent.portfolio, ...stored.portfolio },
+    hero: normalizeLegacy(
+      { ...defaultContent.hero, ...stored.hero },
+      defaultContent.hero,
+      LEGACY_HERO_DEFAULTS
+    ),
+    portfolio: normalizeLegacy(
+      { ...defaultContent.portfolio, ...stored.portfolio },
+      defaultContent.portfolio,
+      LEGACY_PORTFOLIO_DEFAULTS
+    ),
     services: {
       ...defaultContent.services,
       ...stored.services,

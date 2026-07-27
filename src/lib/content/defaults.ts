@@ -17,7 +17,7 @@ export const defaultContent: SiteContent = {
     titleAccent: "sur mesure",
     subtitle:
       "De l'idée au déploiement, nous concevons et développons votre site ou application sur mesure, avec un accompagnement dans la durée.",
-    ctaPrimary: "Créer mon compte",
+    ctaPrimary: "Nous contacter",
     ctaSecondary: "Voir nos réalisations",
     stats: [
       { value: "Sur mesure", label: "Approche" },
@@ -32,7 +32,7 @@ export const defaultContent: SiteContent = {
     subtitle:
       "Cadance Coaching est un projet réel, livré et utilisé par un client. Un aperçu de ce que nous pouvons construire pour vous.",
     ctaText: "Vous avez un projet de site ou d'application en tête ?",
-    ctaButton: "Créer mon compte",
+    ctaButton: "Nous contacter",
   },
   services: {
     kicker: "Nos services",

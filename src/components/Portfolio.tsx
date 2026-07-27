@@ -178,7 +178,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
               {data.ctaText}
             </p>
             <Link
-              href="/inscription"
+              href="/#contact"
               className="btn-accent inline-flex shrink-0 px-6 py-3 text-sm"
             >
               {data.ctaButton}
