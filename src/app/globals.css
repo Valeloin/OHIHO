@@ -281,6 +281,42 @@ body {
     color: var(--muted);
   }
 
+  /* ESPACE CLIENT — réglage typographique à part.
+
+     Le portail est un outil qu'on consulte, pas une page qui vend. Les
+     micro-libellés mono en capitales très espacées (11 px, 0,16 em) qui
+     font la DA des pages publiques s'y empilent par dizaines : onglets,
+     libellés de champs, badges de statut, en-têtes de carte. C'est
+     exactement le défaut déjà corrigé sur `.nav-link` — des capitales en
+     chasse fixe très espacées se lisent lettre à lettre — mais démultiplié
+     par le nombre d'occurrences, d'où la fatigue à la lecture.
+
+     Dans `.portail` uniquement, ces libellés repassent en sans, bas de
+     casse, à une taille confortable. Les pages publiques (connexion,
+     inscription, contact, /admin) gardent le réglage d'origine. */
+  .portail {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .portail .field-label {
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--foreground);
+  }
+
+  /* Titre de page du portail : une seule taille, partout la même, pour que
+     l'œil sache immédiatement où il est. */
+  .portail-title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
   /* Filet de séparation qui s'estompe : règle éditoriale entre blocs. */
   .rule-fade {
     background: linear-gradient(

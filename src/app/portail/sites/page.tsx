@@ -34,19 +34,16 @@ export default async function PortailSitesPage() {
 
   return (
     <div>
-      <PageHeader
-        title="Mon projet"
-        subtitle="L'avancement de ce que nous construisons pour vous, étape par étape."
-      />
+      <PageHeader title="Mon projet" />
 
       {projects.length === 0 ? (
         <EmptyState
           title="Aucun projet en cours"
-          description="Dès que nous démarrons un projet ensemble, vous retrouverez ici son avancement détaillé, étape par étape."
+          description="Dès que nous démarrons un projet ensemble, son avancement apparaît ici."
           action={
             <Link
               href="/#contact"
-              className="btn-accent inline-flex px-6 py-2.5 text-sm font-semibold"
+              className="btn-accent inline-flex px-6 py-2.5 font-semibold"
             >
               Décrire mon projet
             </Link>
@@ -61,64 +58,54 @@ export default async function PortailSitesPage() {
             const updated = formatDate(project.updated_at);
 
             return (
-              <article key={project.id} className="card-surface p-6 sm:p-8">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-xl font-semibold tracking-display">
-                      {project.name}
-                    </h2>
-                    {updated && (
-                      <p className="mt-2 text-xs text-muted">
-                        Mis à jour le {updated}
-                      </p>
-                    )}
-                  </div>
+              <article key={project.id} className="card-surface p-7 sm:p-9">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <h2 className="text-xl font-semibold">{project.name}</h2>
                   <StatusBadge
                     label={PROJECT_STATUS_LABEL[project.status]}
                     tone={PROJECT_STATUS_TONE[project.status]}
                   />
                 </div>
 
+                {updated && (
+                  <p className="mt-2 text-[14px] text-muted">
+                    Mis à jour le {updated}
+                  </p>
+                )}
+
                 {project.notes && (
-                  <p className="mt-5 text-sm leading-relaxed text-muted">
+                  <p className="mt-5 leading-relaxed text-muted">
                     {project.notes}
                   </p>
                 )}
 
                 {total > 0 && (
                   <>
-                    {/* Jauge d'avancement : rail sombre, remplissage au
-                        dégradé de marque. */}
-                    <div className="mt-7">
+                    <div className="mt-8">
                       <div className="flex items-baseline justify-between gap-3">
-                        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
-                          Avancement
-                        </p>
-                        <p className="text-sm font-semibold tracking-display">
-                          {percent}%
-                          <span className="ml-2 text-xs font-normal text-muted">
-                            {done}/{total} étapes
-                          </span>
+                        <p className="font-medium">Avancement</p>
+                        <p className="text-muted">
+                          {done} sur {total} étapes
                         </p>
                       </div>
-                      <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+                      <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-surface-2">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-brand-sky via-brand-teal to-brand-emerald transition-[width]"
+                          className="h-full rounded-full bg-gradient-to-r from-brand-sky via-brand-teal to-brand-emerald"
                           style={{ width: `${percent}%` }}
                         />
                       </div>
                     </div>
 
-                    <div className="mt-8 h-px rule-fade" />
-
                     {/* Frise verticale : un filet relie les pastilles d'une
-                        étape à l'autre pour se lire comme un parcours et non
-                        comme une simple liste à puces. */}
-                    <ol className="mt-7 space-y-0">
+                        étape à l'autre pour se lire comme un parcours. */}
+                    <ol className="mt-8">
                       {project.steps.map((step, i) => {
                         const isLast = i === project.steps.length - 1;
                         return (
-                          <li key={i} className="relative flex gap-4 pb-6 last:pb-0">
+                          <li
+                            key={i}
+                            className="relative flex gap-4 pb-5 last:pb-0"
+                          >
                             {!isLast && (
                               <span
                                 aria-hidden="true"
@@ -127,26 +114,19 @@ export default async function PortailSitesPage() {
                             )}
                             <span
                               aria-hidden="true"
-                              className={`relative z-10 mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full ${
+                              className={`relative z-10 mt-2 h-[11px] w-[11px] shrink-0 rounded-full ${
                                 step.done
-                                  ? "bg-brand-emerald shadow-[0_0_10px_rgba(52,211,153,0.8)]"
+                                  ? "bg-brand-emerald"
                                   : "border border-border bg-background"
                               }`}
                             />
-                            <div className="min-w-0">
-                              <p
-                                className={`text-sm ${
-                                  step.done
-                                    ? "font-medium text-foreground"
-                                    : "text-muted"
-                                }`}
-                              >
-                                {step.label}
-                              </p>
-                              <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-                                {step.done ? "Terminé" : "À venir"}
-                              </p>
-                            </div>
+                            <p
+                              className={
+                                step.done ? "" : "text-muted"
+                              }
+                            >
+                              {step.label}
+                            </p>
                           </li>
                         );
                       })}

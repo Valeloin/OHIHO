@@ -28,31 +28,22 @@ export default function ProfileSummary({
   const fullName = [firstName, lastName].filter(Boolean).join(" ");
 
   return (
-    <div className="card-dark flex flex-col items-center p-8 text-center">
-      {/* Avatar au dégradé de marque : mêmes teintes que le reste du site
-          (bleu ciel → teal → émeraude), initiales en blanc au centre. */}
-      <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-sky via-brand-teal to-brand-emerald text-2xl font-semibold tracking-display text-background shadow-[var(--card-shadow)]">
+    <div className="card-surface flex flex-col items-center p-8 text-center">
+      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-sky via-brand-teal to-brand-emerald text-xl font-semibold text-background">
         {initials(firstName, lastName, email)}
       </div>
 
-      <h2 className="mt-5 break-words text-xl font-semibold tracking-display">
+      <h2 className="mt-5 break-words text-lg font-semibold">
         {fullName || email}
       </h2>
-      <p className="mt-1.5 break-all text-sm text-muted">{email}</p>
-
+      <p className="mt-1 break-all text-[14px] text-muted">{email}</p>
       {company && (
-        <span className="pill mt-4 max-w-full break-words px-3 py-1.5 text-[11px]">
-          {company}
-        </span>
+        <p className="mt-1 break-words text-[14px] text-muted">{company}</p>
       )}
 
-      <div className="mt-6 flex w-full items-center justify-center gap-2 border-t border-border pt-5 text-xs text-muted">
-        <span
-          className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-emerald shadow-[0_0_8px_rgba(52,211,153,0.8)]"
-          aria-hidden="true"
-        />
+      <p className="mt-6 text-[14px] text-muted">
         Client depuis {memberSince(createdAt)}
-      </div>
+      </p>
     </div>
   );
 }

@@ -3,17 +3,13 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { updateProfile } from "@/app/portail/profil/actions";
 
-// Même patron de champ / libellé que les formulaires d'authentification.
-const FIELD = "field";
-const LABEL = "field-label";
-
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <button
       type="submit"
       disabled={pending}
-      className="btn-accent px-6 py-3 text-sm font-semibold disabled:opacity-50"
+      className="btn-accent px-6 py-3 font-semibold disabled:opacity-50"
     >
       {pending ? "Enregistrement..." : "Enregistrer"}
     </button>
@@ -38,18 +34,13 @@ export default function ProfileForm({
   const [state, formAction] = useFormState(updateProfile, null);
 
   return (
-    <form action={formAction} className="card-surface p-6 sm:p-8">
-      <h3 className="text-lg font-semibold tracking-display">
-        Informations personnelles
-      </h3>
-      <p className="mt-1.5 text-sm text-muted">
-        Ces informations nous servent à vous identifier et à vous contacter.
-      </p>
-      <div className="mt-6 h-px rule-fade" />
-
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
+    // Un seul bloc, une seule grille : la coupure « Informations
+    // personnelles » / « Coordonnées » ajoutait deux titres et deux filets
+    // pour six champs qui se remplissent d'une traite.
+    <form action={formAction} className="card-surface p-7 sm:p-9">
+      <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="firstName" className={LABEL}>
+          <label htmlFor="firstName" className="field-label">
             Prénom
           </label>
           <input
@@ -59,12 +50,11 @@ export default function ProfileForm({
             required
             autoComplete="given-name"
             defaultValue={firstName ?? ""}
-            className={FIELD}
-            placeholder="Jean"
+            className="field"
           />
         </div>
         <div>
-          <label htmlFor="lastName" className={LABEL}>
+          <label htmlFor="lastName" className="field-label">
             Nom
           </label>
           <input
@@ -74,13 +64,12 @@ export default function ProfileForm({
             required
             autoComplete="family-name"
             defaultValue={lastName ?? ""}
-            className={FIELD}
-            placeholder="Dupont"
+            className="field"
           />
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="email-readonly" className={LABEL}>
+          <label htmlFor="email-readonly" className="field-label">
             Email
           </label>
           <input
@@ -88,24 +77,16 @@ export default function ProfileForm({
             type="email"
             value={email}
             disabled
-            className={`${FIELD} cursor-not-allowed bg-surface-2 text-muted`}
+            className="field cursor-not-allowed bg-surface-2 text-muted"
           />
-          <p className="mt-2 text-xs text-muted">
+          <p className="mt-2 text-[14px] text-muted">
             L&apos;email ne peut pas être modifié ici.
           </p>
         </div>
 
-      </div>
-
-      <h3 className="mt-8 text-lg font-semibold tracking-display">
-        Coordonnées
-      </h3>
-      <div className="mt-6 h-px rule-fade" />
-
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="phone" className={LABEL}>
-            Téléphone (optionnel)
+          <label htmlFor="phone" className="field-label">
+            Téléphone
           </label>
           <input
             id="phone"
@@ -113,13 +94,12 @@ export default function ProfileForm({
             type="tel"
             autoComplete="tel"
             defaultValue={phone ?? ""}
-            className={FIELD}
-            placeholder="06 00 00 00 00"
+            className="field"
           />
         </div>
         <div>
-          <label htmlFor="company" className={LABEL}>
-            Entreprise (optionnel)
+          <label htmlFor="company" className="field-label">
+            Entreprise
           </label>
           <input
             id="company"
@@ -127,14 +107,13 @@ export default function ProfileForm({
             type="text"
             autoComplete="organization"
             defaultValue={company ?? ""}
-            className={FIELD}
-            placeholder="Nom de votre entreprise"
+            className="field"
           />
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="address" className={LABEL}>
-            Adresse (optionnel)
+          <label htmlFor="address" className="field-label">
+            Adresse
           </label>
           <input
             id="address"
@@ -142,24 +121,23 @@ export default function ProfileForm({
             type="text"
             autoComplete="street-address"
             defaultValue={address ?? ""}
-            className={FIELD}
-            placeholder="12 rue de l'Exemple, 75000 Paris"
+            className="field"
           />
         </div>
       </div>
 
       {state?.error && (
-        <p className="mt-4 rounded-xl border-l-2 border-red-400/60 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+        <p className="mt-6 rounded-xl bg-red-400/10 px-4 py-3 text-red-400">
           {state.error}
         </p>
       )}
       {state?.success && (
-        <p className="mt-4 rounded-xl border-l-2 border-accent-cyan bg-accent-cyan/10 px-4 py-3 text-sm text-accent-cyan">
-          Profil mis à jour avec succès.
+        <p className="mt-6 rounded-xl bg-brand-emerald/10 px-4 py-3 text-brand-emerald">
+          Profil mis à jour.
         </p>
       )}
 
-      <div className="mt-6">
+      <div className="mt-7">
         <SubmitButton />
       </div>
     </form>

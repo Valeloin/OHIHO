@@ -10,9 +10,9 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="btn-accent px-5 py-2.5 text-sm font-semibold disabled:opacity-50"
+      className="btn-accent px-5 py-2.5 font-semibold disabled:opacity-50"
     >
-      {pending ? "Envoi..." : "Répondre"}
+      {pending ? "Envoi..." : "Envoyer"}
     </button>
   );
 }
@@ -20,22 +20,10 @@ function SubmitButton() {
 function formatMoment(value: string) {
   return new Date(value).toLocaleString("fr-FR", {
     day: "numeric",
-    month: "short",
+    month: "long",
     hour: "2-digit",
     minute: "2-digit",
   });
-}
-
-function initials(name: string) {
-  return (
-    name
-      .trim()
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((part) => part[0])
-      .join("")
-      .toUpperCase() || "?"
-  );
 }
 
 export default function TicketThread({
@@ -49,61 +37,41 @@ export default function TicketThread({
 
   return (
     <div>
-      {/* Fil de discussion : OHIHO à gauche, le client à droite, comme une
-          messagerie — le plus ancien en haut. */}
-      <div className="flex flex-col gap-5">
+      {/* Fil de discussion : OHIHO à gauche, vous à droite, du plus ancien au
+          plus récent. Pas d'avatar ni de cadre — l'alignement et le fond de
+          la bulle suffisent à dire qui parle. */}
+      <div className="flex flex-col gap-6">
         {messages.map((message) => {
           const isStaff = message.author_type === "admin";
-          const label = isStaff ? "OHIHO" : message.author_name;
 
           return (
             <div
               key={message.id}
-              className={`flex items-end gap-3 ${isStaff ? "" : "flex-row-reverse"}`}
+              className={`flex flex-col ${isStaff ? "items-start" : "items-end"}`}
             >
-              <span
-                aria-hidden="true"
-                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
-                  isStaff
-                    ? "bg-gradient-to-br from-brand-sky via-brand-teal to-brand-emerald text-background"
-                    : "border border-border bg-surface-2 text-muted"
-                }`}
-              >
-                {isStaff ? "OH" : initials(message.author_name)}
-              </span>
-
               <div
-                className={`min-w-0 max-w-[85%] rounded-2xl border px-5 py-4 sm:max-w-[75%] ${
+                className={`max-w-[90%] rounded-2xl px-5 py-4 sm:max-w-[80%] ${
                   isStaff
-                    ? "rounded-bl-md border-accent-cyan/30 bg-surface"
-                    : "rounded-br-md border-border bg-surface-2"
+                    ? "rounded-bl-md border border-border bg-surface"
+                    : "rounded-br-md bg-surface-2"
                 }`}
               >
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <p
-                    className={`font-mono text-[11px] uppercase tracking-[0.16em] ${
-                      isStaff ? "text-accent-cyan" : "text-muted"
-                    }`}
-                  >
-                    {label}
-                  </p>
-                  <p className="text-[11px] text-muted">
-                    {formatMoment(message.created_at)}
-                  </p>
-                </div>
-                <p className="mt-2.5 whitespace-pre-wrap break-words text-sm leading-relaxed">
+                <p className="whitespace-pre-wrap break-words leading-relaxed">
                   {message.message}
                 </p>
               </div>
+              <p className="mt-2 px-1 text-[13px] text-muted">
+                {isStaff ? "OHIHO" : "Vous"} · {formatMoment(message.created_at)}
+              </p>
             </div>
           );
         })}
       </div>
 
-      <form action={formAction} className="card-surface mt-8 p-6">
+      <form action={formAction} className="mt-10">
         <input type="hidden" name="ticketId" value={ticketId} />
         <label htmlFor="message" className="field-label">
-          Répondre
+          Votre réponse
         </label>
         <textarea
           id="message"
@@ -112,11 +80,11 @@ export default function TicketThread({
           rows={4}
           maxLength={5000}
           className="field resize-none"
-          placeholder="Votre message..."
+          placeholder="Écrivez votre message..."
         />
 
         {state?.error && (
-          <p className="mt-3 rounded-xl border-l-2 border-red-400/60 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+          <p className="mt-3 rounded-xl bg-red-400/10 px-4 py-3 text-red-400">
             {state.error}
           </p>
         )}

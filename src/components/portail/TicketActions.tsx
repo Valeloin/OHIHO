@@ -11,7 +11,7 @@ function SubmitButton({ label, pendingLabel }: { label: string; pendingLabel: st
     <button
       type="submit"
       disabled={pending}
-      className="btn-accent px-5 py-2.5 text-sm font-semibold disabled:opacity-50"
+      className="btn-accent px-5 py-2.5 font-semibold disabled:opacity-50"
     >
       {pending ? pendingLabel : label}
     </button>
@@ -21,15 +21,15 @@ function SubmitButton({ label, pendingLabel }: { label: string; pendingLabel: st
 function CloseForm({ ticketId }: { ticketId: string }) {
   const [state, formAction] = useFormState(closeTicket, null);
   return (
-    <form action={formAction} className="card-surface mb-6 flex flex-wrap items-center justify-between gap-3 p-5">
-      <p className="text-sm text-muted">
+    <form action={formAction} className="card-surface mt-8 flex flex-wrap items-center justify-between gap-4 p-6">
+      <p className="text-muted">
         Le correctif a été livré. Confirmez-vous que c&apos;est réglé ?
       </p>
       <input type="hidden" name="ticketId" value={ticketId} />
       <div>
         <SubmitButton label="Clôturer le ticket" pendingLabel="Clôture..." />
         {state?.error && (
-          <p className="mt-2 text-sm text-red-400">{state.error}</p>
+          <p className="mt-2 text-red-400">{state.error}</p>
         )}
       </div>
     </form>
@@ -42,14 +42,14 @@ function ReopenForm({ ticketId }: { ticketId: string }) {
 
   if (!open) {
     return (
-      <div className="card-surface mb-6 flex flex-wrap items-center justify-between gap-3 p-5">
-        <p className="text-sm text-muted">
+      <div className="card-surface mt-8 flex flex-wrap items-center justify-between gap-4 p-6">
+        <p className="text-muted">
           Le problème persiste ? Vous pouvez rouvrir ce ticket.
         </p>
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="btn-outline px-5 py-2.5 text-sm font-semibold"
+          className="btn-outline px-5 py-2.5 font-semibold"
         >
           Réouvrir le ticket
         </button>
@@ -58,13 +58,11 @@ function ReopenForm({ ticketId }: { ticketId: string }) {
   }
 
   return (
-    <form action={formAction} className="card-surface mb-6 p-5">
+    <form action={formAction} className="card-surface mt-8 p-6">
       <input type="hidden" name="ticketId" value={ticketId} />
       <label htmlFor="reason" className="field-label">
         Pourquoi rouvrir ce ticket ?{" "}
-        <span className="normal-case tracking-normal text-muted/70">
-          (facultatif)
-        </span>
+        <span className="font-normal text-muted">(facultatif)</span>
       </label>
       <textarea
         id="reason"
@@ -74,7 +72,7 @@ function ReopenForm({ ticketId }: { ticketId: string }) {
         placeholder="Ex : le problème est revenu après la mise à jour..."
       />
       {state?.error && (
-        <p className="mt-2 text-sm text-red-400">{state.error}</p>
+        <p className="mt-2 text-red-400">{state.error}</p>
       )}
       <div className="mt-4">
         <SubmitButton label="Confirmer la réouverture" pendingLabel="Envoi..." />

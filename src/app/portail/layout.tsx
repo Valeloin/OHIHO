@@ -30,7 +30,7 @@ export default async function PortailLayout({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("first_name, last_name, full_name, company")
+    .select("first_name, last_name, full_name")
     .eq("id", user.id)
     .single();
 
@@ -47,13 +47,12 @@ export default async function PortailLayout({
   const email = user.email ?? "";
 
   return (
-    <main>
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-8 lg:grid-cols-[15.5rem_1fr] lg:gap-10">
+    <main className="portail">
+      <div className="mx-auto max-w-6xl px-6 py-14">
+        <div className="grid gap-10 lg:grid-cols-[15rem_1fr] lg:gap-14">
           <PortailSidebar
             name={profile?.full_name || email}
             email={email}
-            company={profile?.company ?? null}
             initials={initialsOf(
               profile?.first_name ?? null,
               profile?.last_name ?? null,

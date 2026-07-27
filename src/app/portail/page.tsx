@@ -18,30 +18,32 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Une tuile = une phrase et un statut. Rien de plus : la vue d'ensemble sert
+// à décider où aller, pas à tout lire.
 function OverviewTile({
   href,
-  kicker,
-  children,
-  cta = "Voir le détail",
+  label,
+  headline,
+  detail,
+  badge,
 }: {
   href: string;
-  kicker: string;
-  children: React.ReactNode;
-  cta?: string;
+  label: string;
+  headline: string;
+  detail?: string;
+  badge?: React.ReactNode;
 }) {
   return (
     <Link
       href={href}
       className="card-surface flex h-full flex-col p-6 transition-colors hover:border-accent-cyan/40"
     >
-      <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-cyan">
-        {kicker}
-      </p>
-      <div className="mt-4 flex-1">{children}</div>
-      <p className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan">
-        {cta}
-        <span aria-hidden="true">→</span>
-      </p>
+      <p className="text-[13px] text-muted">{label}</p>
+      <p className="mt-2 text-lg font-semibold leading-snug">{headline}</p>
+      {badge && <div className="mt-4">{badge}</div>}
+      {detail && (
+        <p className="mt-4 line-clamp-2 text-[14px] text-muted">{detail}</p>
+      )}
     </Link>
   );
 }
@@ -70,87 +72,67 @@ export default async function PortailDashboardPage() {
   const pendingTickets = tickets.filter((t) => ticketNeedsAction(t.status));
   const latestTicket = tickets[0];
 
+  const invoiceStatus = invoice
+    ? invoiceDisplayStatus(invoice.status, invoice.due_date)
+    : null;
+
   return (
     <div>
       <PageHeader
-        kicker="Espace client"
         title={
-          profile.first_name
-            ? `Bienvenue, ${profile.first_name}`
-            : "Bienvenue"
+          profile.first_name ? `Bonjour ${profile.first_name}` : "Bonjour"
         }
-        subtitle="Un coup d'œil sur votre projet, votre facturation et vos demandes de support."
       />
 
-      <div className="grid gap-5 md:grid-cols-3">
-        <OverviewTile href="/portail/sites" kicker="Mon projet">
-          {project ? (
-            <>
-              <p className="text-lg font-semibold">{project.name}</p>
-              <div className="mt-3">
-                <StatusBadge
-                  label={PROJECT_STATUS_LABEL[project.status]}
-                  tone={PROJECT_STATUS_TONE[project.status]}
-                />
-              </div>
-              {project.steps.length > 0 && (
-                <p className="mt-3 text-xs text-muted">
-                  {project.steps.filter((s) => s.done).length} /{" "}
-                  {project.steps.length} étapes terminées
-                </p>
-              )}
-            </>
-          ) : (
-            <p className="text-sm text-muted">
-              Aucun projet pour le moment.
-            </p>
-          )}
-        </OverviewTile>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <OverviewTile
+          href="/portail/sites"
+          label="Mon projet"
+          headline={project ? project.name : "Aucun projet en cours"}
+          badge={
+            project ? (
+              <StatusBadge
+                label={PROJECT_STATUS_LABEL[project.status]}
+                tone={PROJECT_STATUS_TONE[project.status]}
+              />
+            ) : undefined
+          }
+          detail={
+            project && project.steps.length > 0
+              ? `${project.steps.filter((s) => s.done).length} étapes terminées sur ${project.steps.length}`
+              : undefined
+          }
+        />
 
-        <OverviewTile href="/portail/facturation" kicker="Facturation">
-          {invoice ? (
-            <>
-              <p className="text-lg font-semibold tracking-display">
-                {formatCents(invoice.amount_cents)}
-              </p>
-              <div className="mt-3">
-                {(() => {
-                  const { label, tone } = invoiceDisplayStatus(
-                    invoice.status,
-                    invoice.due_date
-                  );
-                  return <StatusBadge label={label} tone={tone} />;
-                })()}
-              </div>
-              <p className="mt-3 truncate text-xs text-muted">
-                {invoice.description}
-              </p>
-            </>
-          ) : (
-            <p className="text-sm text-muted">
-              Aucune facture pour le moment.
-            </p>
-          )}
-        </OverviewTile>
+        <OverviewTile
+          href="/portail/facturation"
+          label="Facturation"
+          headline={
+            invoice ? formatCents(invoice.amount_cents) : "Aucune facture"
+          }
+          badge={
+            invoiceStatus ? (
+              <StatusBadge
+                label={invoiceStatus.label}
+                tone={invoiceStatus.tone}
+              />
+            ) : undefined
+          }
+          detail={invoice?.description}
+        />
 
-        <OverviewTile href="/portail/tickets" kicker="Support">
-          {latestTicket ? (
-            <>
-              <p className="text-lg font-semibold">
-                {pendingTickets.length > 0
-                  ? `${pendingTickets.length} ticket${pendingTickets.length > 1 ? "s" : ""} à traiter`
-                  : "Tout est à jour"}
-              </p>
-              <p className="mt-3 truncate text-xs text-muted">
-                Dernier ticket : {latestTicket.title}
-              </p>
-            </>
-          ) : (
-            <p className="text-sm text-muted">
-              Aucun ticket pour le moment.
-            </p>
-          )}
-        </OverviewTile>
+        <OverviewTile
+          href="/portail/tickets"
+          label="Support"
+          headline={
+            !latestTicket
+              ? "Aucun ticket"
+              : pendingTickets.length > 0
+                ? `${pendingTickets.length} ticket${pendingTickets.length > 1 ? "s" : ""} attend${pendingTickets.length > 1 ? "ent" : ""} votre réponse`
+                : "Tout est à jour"
+          }
+          detail={latestTicket ? `Dernier : ${latestTicket.title}` : undefined}
+        />
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="btn-accent px-6 py-3 text-sm font-semibold disabled:opacity-50"
+      className="btn-accent px-6 py-3 font-semibold disabled:opacity-50"
     >
       {pending ? "Envoi..." : "Créer le ticket"}
     </button>
@@ -29,88 +29,93 @@ export default function NewTicketForm() {
   const [state, formAction] = useFormState(createTicket, null);
 
   return (
-    <form action={formAction} className="card-surface p-6 sm:p-8">
-      <label htmlFor="title" className="field-label">
-        Titre
-      </label>
-      <input
-        id="title"
-        name="title"
-        type="text"
-        required
-        minLength={5}
-        maxLength={255}
-        className="field"
-        placeholder="Ex : problème de connexion à mon espace"
-      />
-
-      <label htmlFor="description" className="field-label mt-5 block">
-        Description
-      </label>
-      <textarea
-        id="description"
-        name="description"
-        required
-        minLength={10}
-        rows={5}
-        className="field resize-none"
-        placeholder="Expliquez-nous ce qui se passe..."
-      />
-
-      <div className="mt-5 grid gap-5 sm:grid-cols-2">
+    <form action={formAction} className="card-surface p-7 sm:p-9">
+      <div className="grid gap-6">
         <div>
-          <label htmlFor="software" className="field-label">
-            Logiciel / module concerné
+          <label htmlFor="title" className="field-label">
+            Titre
           </label>
           <input
-            id="software"
-            name="software"
+            id="title"
+            name="title"
             type="text"
             required
+            minLength={5}
+            maxLength={255}
             className="field"
-            placeholder="Ex : Espace client"
+            placeholder="Problème de connexion à mon espace"
           />
         </div>
+
+        <div>
+          <label htmlFor="description" className="field-label">
+            Description
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            required
+            minLength={10}
+            rows={6}
+            className="field resize-none"
+            placeholder="Ce qui se passe, à quel moment, et ce que vous attendiez."
+          />
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label htmlFor="software" className="field-label">
+              Page ou module concerné
+            </label>
+            <input
+              id="software"
+              name="software"
+              type="text"
+              required
+              className="field"
+              placeholder="Espace client"
+            />
+          </div>
+          <div>
+            <label htmlFor="priority" className="field-label">
+              Priorité
+            </label>
+            <select
+              id="priority"
+              name="priority"
+              defaultValue="moyen"
+              className="field"
+            >
+              {PRIORITY_OPTIONS.map((value) => (
+                <option key={value} value={value}>
+                  {BUGTRACK_PRIORITY_LABEL[value]}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
         <div>
           <label htmlFor="version" className="field-label">
-            Version{" "}
-            <span className="normal-case tracking-normal text-muted/70">
-              (facultatif)
-            </span>
+            Version <span className="font-normal text-muted">(facultatif)</span>
           </label>
           <input
             id="version"
             name="version"
             type="text"
             className="field"
-            placeholder="Ex : 1.2"
+            placeholder="1.2"
           />
         </div>
       </div>
 
-      <label htmlFor="priority" className="field-label mt-5 block">
-        Priorité
-      </label>
-      <select
-        id="priority"
-        name="priority"
-        defaultValue="moyen"
-        className="field"
-      >
-        {PRIORITY_OPTIONS.map((value) => (
-          <option key={value} value={value}>
-            {BUGTRACK_PRIORITY_LABEL[value]}
-          </option>
-        ))}
-      </select>
-
       {state?.error && (
-        <p className="mt-4 rounded-xl border-l-2 border-red-400/60 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+        <p className="mt-6 rounded-xl bg-red-400/10 px-4 py-3 text-red-400">
           {state.error}
         </p>
       )}
 
-      <div className="mt-5">
+      <div className="mt-7">
         <SubmitButton />
       </div>
     </form>

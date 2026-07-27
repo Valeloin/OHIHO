@@ -55,48 +55,32 @@ export default async function PortailTicketDetailPage({
     <div>
       <Link
         href="/portail/tickets"
-        className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
+        className="inline-flex items-center gap-2 text-muted transition-colors hover:text-foreground"
       >
         <span aria-hidden="true">←</span> Retour au support
       </Link>
 
-      <div className="card-dark mt-5 p-6 sm:p-8">
-        <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-4">
-          <div className="min-w-0">
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-cyan">
-              {ticket.number}
-            </p>
-            <h1 className="mt-3 text-2xl font-semibold tracking-display">
-              {ticket.title}
-            </h1>
-          </div>
-          <div className="flex shrink-0 flex-wrap items-center gap-2">
-            <StatusBadge
-              label={BUGTRACK_PRIORITY_LABEL[ticket.priority]}
-              tone={BUGTRACK_PRIORITY_TONE[ticket.priority]}
-            />
-            <StatusBadge
-              label={BUGTRACK_STATUS_LABEL[ticket.status]}
-              tone={BUGTRACK_STATUS_TONE[ticket.status]}
-            />
-          </div>
-        </div>
-
-        <div className="mt-6 h-px rule-fade" />
-
-        <div className="mt-5 flex flex-wrap gap-x-8 gap-y-3 text-xs text-muted">
-          <span>Ouvert le {formatDate(ticket.created_at)}</span>
-          <span>Dernière activité le {formatDate(ticket.updated_at)}</span>
-          <span>
-            {sortedMessages.length} message
-            {sortedMessages.length > 1 ? "s" : ""}
-          </span>
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+        <h1 className="portail-title">{ticket.title}</h1>
+        <div className="flex shrink-0 flex-wrap items-center gap-2">
+          <StatusBadge
+            label={BUGTRACK_PRIORITY_LABEL[ticket.priority]}
+            tone={BUGTRACK_PRIORITY_TONE[ticket.priority]}
+          />
+          <StatusBadge
+            label={BUGTRACK_STATUS_LABEL[ticket.status]}
+            tone={BUGTRACK_STATUS_TONE[ticket.status]}
+          />
         </div>
       </div>
 
+      <p className="mt-2 text-[14px] text-muted">
+        {ticket.number} · ouvert le {formatDate(ticket.created_at)}
+      </p>
+
       <TicketActions ticketId={ticket.id} status={ticket.status} />
 
-      <div className="mt-6">
+      <div className="mt-8">
         <TicketThread ticketId={ticket.id} messages={sortedMessages} />
       </div>
     </div>

@@ -29,30 +29,24 @@ export default async function ProfilPage() {
       {/* Raccourci vers l'espace admin, réservé au rôle admin (la page /admin
           revérifie le rôle de son côté). */}
       {profile?.role === "admin" && (
-        <div className="card-dark mb-6 flex flex-wrap items-center justify-between gap-4 px-6 py-5">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-cyan">
-              Outil dev
-            </p>
-            <p className="mt-2 text-xs text-muted">
-              Modifier les textes et les couleurs du site.
-            </p>
-          </div>
+        <div className="card-surface mb-8 flex flex-wrap items-center justify-between gap-4 p-6">
+          <p className="text-muted">
+            Modifier les textes et les couleurs du site.
+          </p>
           <Link
             href="/admin"
-            className="btn-accent shrink-0 px-5 py-2 text-sm font-semibold"
+            className="btn-outline shrink-0 px-5 py-2.5 font-semibold"
           >
             Ouvrir l&apos;outil dev
           </Link>
         </div>
       )}
 
-      <PageHeader
-        title="Mon profil"
-        subtitle="Vos informations de contact, celles que nous utilisons pour vous joindre et établir vos factures."
-      />
+      <PageHeader title="Mon profil" />
 
-      <div className="grid gap-6 lg:grid-cols-[19rem_1fr]">
+      {/* `items-start` : sans lui la carte d'identité s'étire sur toute la
+          hauteur du formulaire et se retrouve à moitié vide. */}
+      <div className="grid items-start gap-6 lg:grid-cols-[17rem_1fr]">
         <ProfileSummary
           firstName={profile?.first_name ?? null}
           lastName={profile?.last_name ?? null}
