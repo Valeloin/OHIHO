@@ -6,7 +6,10 @@ import type { WhyUsContent } from "@/lib/content/types";
 
 export default function WhyUs({ data }: { data: WhyUsContent }) {
   return (
-    <section id="a-propos" className="relative overflow-hidden border-t border-border bg-surface">
+    // Fond par défaut (et non `bg-surface`) : le halo et les lucioles
+    // s'y lisent comme sur le hero — sur le panneau plus clair de
+    // `bg-surface`, ils s'effaçaient presque.
+    <section id="a-propos" className="relative overflow-hidden border-t border-border">
       <SectionBackdrop />
       <div className="relative mx-auto max-w-6xl px-6 py-16 sm:py-20">
         <Reveal>
