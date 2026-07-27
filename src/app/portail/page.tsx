@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { requireProfile } from "@/lib/supabase/session";
 import StatusBadge from "@/components/portail/StatusBadge";
+import PageHeader from "@/components/portail/PageHeader";
 import {
   PROJECT_STATUS_LABEL,
   PROJECT_STATUS_TONE,
@@ -71,15 +72,12 @@ export default async function PortailDashboardPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold tracking-display">
-        Vue d&apos;ensemble
-      </h1>
-      <p className="mt-2 text-sm text-muted">
-        Un coup d&apos;œil sur votre projet, votre facturation et vos
-        demandes de support.
-      </p>
+      <PageHeader
+        title="Vue d'ensemble"
+        subtitle="Un coup d'œil sur votre projet, votre facturation et vos demandes de support."
+      />
 
-      <div className="mt-6 grid gap-5 md:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-3">
         <OverviewTile href="/portail/sites" kicker="Mon projet">
           {project ? (
             <>

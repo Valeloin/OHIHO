@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import ProfileForm from "@/components/portail/ProfileForm";
 import ProfileSummary from "@/components/portail/ProfileSummary";
+import PageHeader from "@/components/portail/PageHeader";
 
 export const metadata: Metadata = {
   title: "Mon profil · OHIHO",
@@ -45,6 +46,11 @@ export default async function ProfilPage() {
           </Link>
         </div>
       )}
+
+      <PageHeader
+        title="Mon profil"
+        subtitle="Vos informations de contact, celles que nous utilisons pour vous joindre et établir vos factures."
+      />
 
       <div className="grid gap-6 lg:grid-cols-[19rem_1fr]">
         <ProfileSummary

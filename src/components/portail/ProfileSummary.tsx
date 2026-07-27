@@ -35,16 +35,18 @@ export default function ProfileSummary({
         {initials(firstName, lastName, email)}
       </div>
 
-      <h2 className="mt-5 text-xl font-semibold tracking-display">
+      <h2 className="mt-5 break-words text-xl font-semibold tracking-display">
         {fullName || email}
       </h2>
-      <p className="mt-1.5 text-sm text-muted">{email}</p>
+      <p className="mt-1.5 break-all text-sm text-muted">{email}</p>
 
       {company && (
-        <span className="pill mt-4 px-3 py-1.5 text-[11px]">{company}</span>
+        <span className="pill mt-4 max-w-full break-words px-3 py-1.5 text-[11px]">
+          {company}
+        </span>
       )}
 
-      <div className="mt-6 flex items-center gap-2 border-t border-border pt-5 text-xs text-muted">
+      <div className="mt-6 flex w-full items-center justify-center gap-2 border-t border-border pt-5 text-xs text-muted">
         <span
           className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-emerald shadow-[0_0_8px_rgba(52,211,153,0.8)]"
           aria-hidden="true"

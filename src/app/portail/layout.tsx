@@ -36,7 +36,7 @@ export default async function PortailLayout({
 
   return (
     <main>
-      <div className="mx-auto max-w-3xl px-6 py-16">
+      <div className="mx-auto max-w-5xl px-6 py-16">
         {/* Panneau profond de la DA « Banderole » : un aplat de nuit plus
             sombre que le fond, cerné d'un filet d'1px, aux angles adoucis et
             posé d'une ombre douce. Le point vert du kicker est la seule

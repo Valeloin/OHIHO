@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireProfile } from "@/lib/supabase/session";
 import StatusBadge from "@/components/portail/StatusBadge";
@@ -16,6 +17,14 @@ export const metadata: Metadata = {
   title: "Ticket · OHIHO",
   robots: { index: false, follow: false },
 };
+
+function formatDate(value: string) {
+  return new Date(value).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
 
 export default async function PortailTicketDetailPage({
   params,
@@ -44,24 +53,44 @@ export default async function PortailTicketDetailPage({
 
   return (
     <div>
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-            {ticket.number}
-          </p>
-          <h1 className="mt-1 text-xl font-semibold tracking-display">
-            {ticket.title}
-          </h1>
+      <Link
+        href="/portail/tickets"
+        className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-foreground"
+      >
+        <span aria-hidden="true">←</span> Retour au support
+      </Link>
+
+      <div className="card-dark mt-5 p-6 sm:p-8">
+        <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-4">
+          <div className="min-w-0">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-cyan">
+              {ticket.number}
+            </p>
+            <h1 className="mt-3 text-2xl font-semibold tracking-display">
+              {ticket.title}
+            </h1>
+          </div>
+          <div className="flex shrink-0 flex-wrap items-center gap-2">
+            <StatusBadge
+              label={BUGTRACK_PRIORITY_LABEL[ticket.priority]}
+              tone={BUGTRACK_PRIORITY_TONE[ticket.priority]}
+            />
+            <StatusBadge
+              label={BUGTRACK_STATUS_LABEL[ticket.status]}
+              tone={BUGTRACK_STATUS_TONE[ticket.status]}
+            />
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <StatusBadge
-            label={BUGTRACK_PRIORITY_LABEL[ticket.priority]}
-            tone={BUGTRACK_PRIORITY_TONE[ticket.priority]}
-          />
-          <StatusBadge
-            label={BUGTRACK_STATUS_LABEL[ticket.status]}
-            tone={BUGTRACK_STATUS_TONE[ticket.status]}
-          />
+
+        <div className="mt-6 h-px rule-fade" />
+
+        <div className="mt-5 flex flex-wrap gap-x-8 gap-y-3 text-xs text-muted">
+          <span>Ouvert le {formatDate(ticket.created_at)}</span>
+          <span>Dernière activité le {formatDate(ticket.updated_at)}</span>
+          <span>
+            {sortedMessages.length} message
+            {sortedMessages.length > 1 ? "s" : ""}
+          </span>
         </div>
       </div>
 
