@@ -163,7 +163,7 @@ export default function Hero({
                        Elle passe de 32 × 20 à 48 × 44. */
                     className="group flex items-center rounded-full px-2 py-5 focus-visible:outline-none"
                   >
-                    <span className="relative block h-1 w-8 overflow-hidden rounded-full bg-border transition-colors group-hover:bg-border/60 group-focus-visible:ring-2 group-focus-visible:ring-accent-cyan/60">
+                    <span className="relative block h-1 w-8 overflow-hidden rounded-full bg-brand-sky/35 transition-colors group-hover:bg-brand-sky/55 group-focus-visible:ring-2 group-focus-visible:ring-accent-cyan/60">
                       <span
                         className={`pv-scene-${n} absolute inset-0 rounded-full bg-brand-teal`}
                       />

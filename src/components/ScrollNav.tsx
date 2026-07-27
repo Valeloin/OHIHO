@@ -70,19 +70,22 @@ export default function ScrollNav() {
       </div>
 
       {/* Flèches de navigation par section — desktop uniquement.
-          Coin BAS-GAUCHE et non bas-droite : le gros rond d'arrivée de la
-          frise vit dans le coin bas-droite du contenu et, quand la section
-          Méthode défile jusqu'au bas de la fenêtre, les deux se
-          télescopaient. La frise occupant toute la largeur, aucun coin n'est
-          totalement libre, mais à gauche les flèches ne croisent qu'un texte
-          discret au lieu du rond lumineux. */}
-      <div className="fixed bottom-6 left-6 z-50 hidden flex-col gap-3 lg:flex">
+          Centrées en haut et en bas de l'écran plutôt qu'empilées dans un
+          coin : chacune reste sur l'axe vertical qu'elle dessert (on monte
+          vers le haut de l'écran, on descend vers le bas), au lieu de
+          partager un seul coin éloigné des deux bords. */}
+      <div
+        className="fixed left-1/2 z-50 hidden -translate-x-1/2 lg:block"
+        style={{ top: "calc(var(--header-h) + 1.5rem)" }}
+      >
         <ArrowButton
           direction="up"
           label="Section précédente"
           onClick={scrollToPrev}
           hidden={atTop}
         />
+      </div>
+      <div className="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 lg:block">
         <ArrowButton
           direction="down"
           label="Section suivante"
