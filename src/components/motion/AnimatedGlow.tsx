@@ -16,22 +16,28 @@ type Wash = {
 const VARIANTS: Record<"hero" | "subtle", Wash[]> = {
   // Hero : la nappe teal centrale de la banderole, plus deux touches de
   // bleu et de vert aux extrémités du dégradé de marque.
+  // Tailles en `clamp(vw)` et non en px fixes : sur un grand écran, le
+  // hero lui-même grandit (voir l'échelle proportionnelle du site) mais un
+  // halo à taille fixe restait planté à sa taille d'origine, de plus en
+  // plus petit à mesure que l'écran s'élargit. Le halo suit maintenant la
+  // largeur de la fenêtre, avec un plancher (petits écrans) et un plafond
+  // (ultra-wide) pour ne jamais devenir minuscule ni démesuré.
   hero: [
     {
       pos: "left-1/2 top-0 -translate-x-1/2 -translate-y-1/4",
-      size: "h-[640px] w-[1100px]",
+      size: "h-[clamp(420px,42vw,900px)] w-[clamp(700px,72vw,1500px)]",
       rgb: TEAL,
       alpha: 0.14,
     },
     {
       pos: "left-[4%] top-[45%]",
-      size: "h-[380px] w-[380px]",
+      size: "h-[clamp(260px,22vw,480px)] w-[clamp(260px,22vw,480px)]",
       rgb: SKY,
       alpha: 0.09,
     },
     {
       pos: "right-[2%] bottom-[6%]",
-      size: "h-[360px] w-[360px]",
+      size: "h-[clamp(240px,20vw,460px)] w-[clamp(240px,20vw,460px)]",
       rgb: EMERALD,
       alpha: 0.09,
     },

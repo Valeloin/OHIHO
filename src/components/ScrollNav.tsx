@@ -108,16 +108,18 @@ function ArrowButton({
   onClick: () => void;
   hidden: boolean;
 }) {
-  // Pilules rondes posées sur la surface nuit bleu-teal : filet fin, fond de
-  // surface, seul le teal interactif marque le survol.
+  // Discrètes par défaut : pas de fond ni d'ombre (`card-surface` les
+  // faisait lire comme un bouton à part entière plutôt que comme un repère
+  // de navigation secondaire), une simple opacité réduite qui monte au
+  // survol pour signaler l'interactivité sans occuper l'œil en continu.
   return (
     <button
       type="button"
       aria-label={label}
       onClick={onClick}
       disabled={hidden}
-      className={`card-surface flex h-11 w-11 items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-accent-cyan ${
-        hidden ? "pointer-events-none opacity-0" : "opacity-100"
+      className={`flex h-11 w-11 items-center justify-center rounded-full border border-border/60 text-muted transition-all duration-300 hover:border-accent-cyan/50 hover:text-accent-cyan hover:opacity-100 ${
+        hidden ? "pointer-events-none opacity-0" : "opacity-40"
       }`}
     >
       <svg
