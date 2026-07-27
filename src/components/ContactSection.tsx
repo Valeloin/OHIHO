@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import ContactForm from "@/components/ContactForm";
 import type { ContactContent } from "@/lib/content/types";
 
 export default function ContactSection({ data }: { data: ContactContent }) {
@@ -48,26 +48,11 @@ export default function ContactSection({ data }: { data: ContactContent }) {
                 {data.cardText}
               </p>
 
-              <div className="mt-8 h-px rule-fade" />
+              <div className="mt-6 h-px rule-fade" />
 
-              <div className="mt-8">
-                <Link
-                  href="/inscription"
-                  className="btn-accent inline-flex px-8 py-3 text-sm"
-                >
-                  {data.cardCta}
-                </Link>
+              <div className="mt-6">
+                <ContactForm ctaLabel={data.cardCta} />
               </div>
-
-              <p className="mt-6 text-sm text-muted">
-                Déjà un compte ?{" "}
-                <Link
-                  href="/connexion"
-                  className="inline-flex min-h-[44px] items-center text-accent-cyan hover:underline"
-                >
-                  Se connecter
-                </Link>
-              </p>
             </div>
           </Reveal>
         </div>

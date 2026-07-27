@@ -134,16 +134,16 @@ export const defaultContent: SiteContent = {
     ],
   },
   contact: {
-    kicker: "Votre projet",
-    title: "Prêt à lancer votre site ou application ?",
+    kicker: "Contact",
+    title: "Discutons de votre projet",
     subtitle:
-      "Créez votre compte en une minute, puis décrivez-nous votre besoin par email. Nous revenons vers vous rapidement pour en discuter.",
+      "Un site vitrine, une application sur mesure, une refonte ? Décrivez-nous votre besoin, nous revenons vers vous rapidement pour en discuter.",
     email: "contact@ohiho.fr",
     responseNote: "Réponse sous 24h ouvrées",
-    cardTitle: "Créer mon compte",
+    cardTitle: "Écrivez-nous",
     cardText:
-      "Créez votre espace client pour suivre vos projets, puis écrivez-nous pour nous parler du vôtre : landing page, site vitrine, application, refonte.",
-    cardCta: "Créer mon compte",
+      "Quelques mots sur votre projet suffisent pour démarrer l'échange.",
+    cardCta: "Envoyer le message",
   },
   footer: {
     tagline:
