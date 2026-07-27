@@ -28,7 +28,9 @@ export default function WhyUs({ data }: { data: WhyUsContent }) {
               hover
               className="card-surface h-full p-5 transition-colors hover:border-accent-cyan/50"
             >
-              <span className="font-mono text-xs tracking-[0.18em] text-brand-teal">
+              {/* Même halo que les icônes du hero (pastille teal tenue) :
+                  cohérence de traitement d'une section à l'autre. */}
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-teal/10 font-mono text-xs tracking-[0.1em] text-brand-teal">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-4 text-lg font-semibold tracking-display">
