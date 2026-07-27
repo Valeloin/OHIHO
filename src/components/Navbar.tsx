@@ -29,6 +29,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [pendingTicketCount, setPendingTicketCount] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -49,6 +50,7 @@ export default function Navbar() {
       if (!user) {
         setFirstName(null);
         setIsAdmin(false);
+        setPendingTicketCount(0);
         return;
       }
 
@@ -61,6 +63,16 @@ export default function Navbar() {
       const name = profile?.full_name?.trim().split(" ")[0];
       setFirstName(name || user.email || "Mon compte");
       setIsAdmin(profile?.role === "admin");
+
+      // Décompte des tickets BugTrack en attente : calculé côté serveur
+      // (route interne), la clé de site ne peut pas être lue ici.
+      try {
+        const res = await fetch("/api/notifications/pending");
+        const data = await res.json();
+        setPendingTicketCount(typeof data.count === "number" ? data.count : 0);
+      } catch {
+        setPendingTicketCount(0);
+      }
     }
 
     loadProfile();
@@ -209,10 +221,18 @@ export default function Navbar() {
             <>
               <Link
                 href="/portail"
-                className="flex min-h-[44px] items-center nav-link"
+                className="flex min-h-[44px] items-center gap-1.5 nav-link"
               >
                 Espace client{" "}
                 <span className="text-accent-cyan">({firstName})</span>
+                {pendingTicketCount > 0 && (
+                  <span
+                    className="inline-flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-brand-emerald px-1 text-[10px] font-semibold text-background"
+                    aria-label={`${pendingTicketCount} notification(s) en attente`}
+                  >
+                    {pendingTicketCount}
+                  </span>
+                )}
               </Link>
               {/* « Mon profil » ne figure plus dans le bandeau du desktop : il
                   faisait doublon avec l'onglet du même nom déjà présent dans
@@ -308,10 +328,18 @@ export default function Navbar() {
                 <Link
                   href="/portail"
                   onClick={() => setOpen(false)}
-                  className="flex min-h-[48px] items-center nav-link"
+                  className="flex min-h-[48px] items-center gap-1.5 nav-link"
                 >
                   Espace client{" "}
                   <span className="text-accent-cyan">({firstName})</span>
+                  {pendingTicketCount > 0 && (
+                    <span
+                      className="inline-flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-brand-emerald px-1 text-[10px] font-semibold text-background"
+                      aria-label={`${pendingTicketCount} notification(s) en attente`}
+                    >
+                      {pendingTicketCount}
+                    </span>
+                  )}
                 </Link>
                 {isAdmin && (
                   <Link
