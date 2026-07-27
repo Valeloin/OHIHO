@@ -5,6 +5,7 @@ const TONE_CLASSES: Record<BadgeTone, string> = {
   teal: "border-accent-cyan/40 bg-accent-cyan/10 text-accent-cyan",
   emerald: "border-brand-emerald/40 bg-brand-emerald/10 text-brand-emerald",
   red: "border-red-400/40 bg-red-400/10 text-red-400",
+  amber: "border-amber-400/40 bg-amber-400/10 text-amber-400",
 };
 
 export default function StatusBadge({
