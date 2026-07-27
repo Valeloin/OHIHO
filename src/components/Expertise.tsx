@@ -11,7 +11,7 @@ export default function Expertise({ data }: { data: ExpertiseContent }) {
           {/* Colonne éditoriale : libellé, titre, filet, prose */}
           <Reveal>
             <span className="kicker">{data.kicker}</span>
-            <h2 className="mt-6 max-w-xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">
+            <h2 className="section-title mt-5 max-w-xl">
               {data.title}
             </h2>
             <div className="mt-10 h-px rule-fade" />

@@ -26,7 +26,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
           <Reveal>
             {/* En-tête éditorial : libellé mono, titre large aligné à gauche. */}
             <span className="kicker">{data.kicker}</span>
-            <h2 className="mt-6 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">
+            <h2 className="section-title mt-5 max-w-3xl">
               {data.title}
             </h2>
             <p className="mt-5 max-w-2xl leading-relaxed text-muted">

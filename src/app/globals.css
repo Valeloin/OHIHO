@@ -113,8 +113,12 @@ body {
      mono, capitales, très espacé, précédé d'un point teal. */
   .kicker {
     font-family: var(--font-mono), monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.2em;
+    /* Remonté de 11 à 12,5 px et interlettrage ramené de 0,2 à 0,14 em : il
+       étiquette la section juste au-dessus d'un titre désormais bien plus
+       grand, il devait suivre pour rester lisible sans se lire lettre à
+       lettre (même correctif que `.nav-link`). */
+    font-size: 0.78125rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgb(var(--brand-teal));
     display: inline-flex;
@@ -322,7 +326,35 @@ body {
   .section-screen {
     display: flex;
     align-items: center;
-    min-height: calc(100svh - var(--header-h));
+  }
+
+  /* Le plein écran ne vaut qu'à partir de la tablette. Sur téléphone, un
+     écran fait environ 700 px de haut pour 375 de large : le même contenu y
+     est bien plus haut une fois les colonnes empilées, si bien qu'une section
+     sur deux dépassait la fenêtre pendant que les plus courtes traînaient du
+     vide. La section y reprend donc la hauteur de son contenu, et c'est le
+     rembourrage interne qui donne le rythme. */
+  @media (min-width: 768px) {
+    .section-screen {
+      min-height: calc(100svh - var(--header-h));
+    }
+  }
+
+  /* Titre de section d'accueil. Une seule définition pour les sept sections :
+     elles portaient jusqu'ici trois réglages différents (sm:text-4xl,
+     sm:text-5xl, et le titre du hero), si bien qu'aucune taille ne signalait
+     « nouvelle section » de façon fiable. Elle monte aussi d'un cran — c'est
+     le repère principal quand chaque section occupe un écran entier et qu'on
+     y arrive d'un coup de flèche.
+
+     `clamp` plutôt que des paliers : le titre suit la largeur de la fenêtre
+     sans saut au franchissement d'un point de rupture. */
+  .section-title {
+    font-size: clamp(2.125rem, 4.6vw, 3.5rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
   }
 
   /* Bandeau qui défile latéralement sans montrer sa barre : la barre native

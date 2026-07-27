@@ -32,17 +32,14 @@ export default function ScrollNav() {
     };
   }, [update]);
 
-  // Points d'arrêt des flèches : le haut de page (le Hero), puis le titre de
-  // chaque section suivante. On exclut le Hero des cibles "titre" (sa 1re étape
-  // est le sommet, à 0), sinon le premier clic vers le bas s'arrêterait sur le
-  // titre du Hero au lieu de sauter à la section Services.
+  // Un arrêt par section, sans exception : chaque section faisant exactement
+  // la hauteur utile de l'écran, caler son bord haut sous le bandeau la fait
+  // remplir la fenêtre au pixel près. Le Hero n'a plus besoin d'être traité à
+  // part — son bord haut est déjà à 0 une fois le bandeau retiré.
   function sectionTargets(): number[] {
-    const sections = Array.from(
-      document.querySelectorAll<HTMLElement>("main > section")
-    );
-    return [0, ...sections.slice(1).map((s) => sectionScrollTarget(s))].sort(
-      (a, b) => a - b
-    );
+    return Array.from(document.querySelectorAll<HTMLElement>("main > section"))
+      .map((s) => sectionScrollTarget(s))
+      .sort((a, b) => a - b);
   }
 
   function scrollToNext() {

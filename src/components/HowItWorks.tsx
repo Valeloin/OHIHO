@@ -25,7 +25,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
         <div className="grid gap-10 lg:grid-cols-[1fr_30rem] lg:items-center">
           <Reveal>
             <span className="kicker">{data.kicker}</span>
-            <h2 className="mt-6 max-w-2xl text-3xl font-semibold tracking-display text-balance sm:text-5xl">
+            <h2 className="section-title mt-5 max-w-2xl">
               {data.title}
             </h2>
           </Reveal>

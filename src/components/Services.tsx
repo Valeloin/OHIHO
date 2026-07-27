@@ -36,7 +36,7 @@ export default function Services({ data }: { data: ServicesContent }) {
             serrée aligné à gauche, sous-titre à largeur de lecture. */}
         <Reveal>
           <span className="kicker">{data.kicker}</span>
-          <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">
+          <h2 className="section-title mt-5 max-w-3xl">
             {data.title}
           </h2>
           <p className="mt-3 max-w-2xl leading-relaxed text-muted">

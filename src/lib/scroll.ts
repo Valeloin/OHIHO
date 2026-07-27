@@ -58,20 +58,24 @@ export function animateScrollTo(
   }, 16);
 }
 
-// Petit espace entre le header et le titre de la section une fois arrivé.
-const LANDING_GAP = 20;
-
-// Position de défilement idéale pour arriver sur une section : on cale son
-// PREMIER TITRE juste sous le header (dont la hauteur est mesurée en direct, car
-// elle varie selon la taille d'écran), plutôt que le bord haut de la section —
-// sinon la grande marge interne de la section laisse une bande vide sous le header.
+// Position de défilement idéale pour arriver sur une section : son BORD HAUT
+// vient se caler juste sous le bandeau, qui est `sticky` et recouvre donc le
+// contenu dès qu'on quitte le haut de page.
+//
+// Depuis que chaque section d'accueil fait exactement la hauteur utile de
+// l'écran (`.section-screen` : 100svh moins le bandeau), cet alignement suffit
+// à ce que la section remplisse la fenêtre au pixel près. La version
+// précédente calait le PREMIER TITRE sous le bandeau : avec des sections au
+// contenu centré verticalement, cela faisait dépasser le haut de la section
+// derrière le bandeau et coupait son bas.
+//
+// La hauteur du bandeau est mesurée en direct plutôt que lue dans
+// `--header-h` : c'est la valeur réellement rendue qui compte.
 export function sectionScrollTarget(section: HTMLElement): number {
   const header = document.querySelector("header");
   const headerH = header ? header.offsetHeight : 72;
-  const anchor =
-    section.querySelector<HTMLElement>("h1, h2, h3, p") ?? section;
-  const anchorTop = anchor.getBoundingClientRect().top + window.scrollY;
-  return Math.max(0, Math.round(anchorTop - headerH - LANDING_GAP));
+  const top = section.getBoundingClientRect().top + window.scrollY;
+  return Math.max(0, Math.round(top - headerH));
 }
 
 // Fait défiler vers la section d'id donné. Retourne false si absente de la page.
