@@ -36,6 +36,12 @@ export default async function PortailTicketDetailPage({
   const ticket = tickets.find((t) => t.id === params.id);
   if (!ticket) notFound();
 
+  // Tri explicite : ne pas dépendre de l'ordre renvoyé par l'API BugTrack,
+  // un chat se lit du plus ancien (en haut) au plus récent (en bas).
+  const sortedMessages = [...messages].sort(
+    (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+  );
+
   return (
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
@@ -62,7 +68,7 @@ export default async function PortailTicketDetailPage({
       <TicketActions ticketId={ticket.id} status={ticket.status} />
 
       <div className="mt-6">
-        <TicketThread ticketId={ticket.id} messages={messages} />
+        <TicketThread ticketId={ticket.id} messages={sortedMessages} />
       </div>
     </div>
   );
