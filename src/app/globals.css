@@ -70,6 +70,33 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ÉCHELLE PROPORTIONNELLE À L'ÉCRAN (tablette et au-dessus).
+
+   Depuis que chaque section d'accueil occupe exactement un écran, sa hauteur
+   suit la fenêtre mais son contenu, lui, gardait des tailles fixes : sur un
+   grand moniteur le texte paraissait minuscule au milieu du vide, sur un
+   portable 13 pouces il touchait les bords. La mise en page ne se lisait pas
+   pareil d'un écran à l'autre.
+
+   On fait donc varier la taille de base du document. Tailwind exprime presque
+   tout en rem — texte, rembourrages, gouttières, arrondis, tailles d'icônes —
+   si bien qu'un seul réglage ici fait grandir ou rétrécir la page ENTIÈRE
+   d'un bloc, en conservant ses proportions.
+
+   `min()` de deux termes, l'un sur la largeur, l'autre sur la hauteur : sans
+   le second, un écran large mais court (portable 16:10, fenêtre réduite en
+   hauteur) grossirait le contenu jusqu'à ce qu'il déborde de la section, qui
+   ne fait qu'un écran de haut. C'est la dimension la plus contraignante qui
+   commande.
+
+   Le téléphone est exclu : il garde la taille de base du navigateur, celle
+   que l'utilisateur a éventuellement réglée lui-même dans ses préférences. */
+@media (min-width: 768px) {
+  html {
+    font-size: clamp(14px, min(0.5vw + 9.6px, 1.05vh + 6px), 20px);
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -347,10 +374,13 @@ body {
      le repère principal quand chaque section occupe un écran entier et qu'on
      y arrive d'un coup de flèche.
 
-     `clamp` plutôt que des paliers : le titre suit la largeur de la fenêtre
-     sans saut au franchissement d'un point de rupture. */
+     La valeur haute est en rem : à partir de la tablette, la taille de base
+     du document suit déjà l'écran (voir le `clamp` sur `html`), le titre
+     grandit donc avec le reste sans avoir à redoubler l'échelle ici. Le
+     `clamp` ne sert plus qu'au téléphone, où cette échelle ne s'applique
+     pas. */
   .section-title {
-    font-size: clamp(2.125rem, 4.6vw, 3.5rem);
+    font-size: clamp(2.125rem, 6.5vw, 3.25rem);
     line-height: 1.05;
     font-weight: 600;
     letter-spacing: -0.03em;
