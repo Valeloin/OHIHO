@@ -39,6 +39,12 @@ export type ServiceOfferContent = {
   label: string;
   tagline: string;
   description: string;
+  /** Paragraphe d'introduction de la page dédiée (/services/…). */
+  pageIntro: string;
+  /** « Ce qui est inclus » — une ligne par point. */
+  features: string[];
+  /** « Pour qui ? » — une ligne par cas d'usage. */
+  useCases: string[];
 };
 
 export type ServicesContent = {

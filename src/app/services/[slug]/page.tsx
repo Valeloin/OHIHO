@@ -55,8 +55,12 @@ export default async function ServicePage({
           <Reveal>
             <span className="kicker">{offer.tagline}</span>
             <h1 className="section-title mt-5">{offer.label}</h1>
+            {/* `pageIntro` et non la description de la vitrine : chaque page
+                porte son propre texte long — quatre pages qui répétaient
+                leurs trois lignes d'accueil se lisaient comme « quatre fois
+                la même page ». */}
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              {offer.description}
+              {offer.pageIntro}
             </p>
 
             <div className="mt-10 h-px rule-fade" />
@@ -72,6 +76,55 @@ export default async function ServicePage({
           <Reveal delay={0.15}>
             <div className="aspect-[400/240] w-full overflow-hidden rounded-xl ring-1 ring-border">
               <ServiceScene type={type} />
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Le contenu PROPRE à la formule : ce qu'elle inclut, et pour qui
+            elle est faite. C'est ce qui différencie réellement les quatre
+            pages. */}
+        <div className="mt-20 grid gap-6 lg:grid-cols-2">
+          <Reveal>
+            <div className="card-surface h-full overflow-hidden">
+              <h2 className="border-b border-border px-6 py-4 font-semibold tracking-display">
+                Ce qui est inclus
+              </h2>
+              <ul className="divide-y divide-border">
+                {offer.features.map((feature) => (
+                  <li
+                    key={feature}
+                    className="flex items-start gap-3 px-6 py-3.5 text-sm leading-relaxed"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-emerald shadow-[0_0_8px_rgba(52,211,153,0.8)]"
+                    />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="card-surface h-full overflow-hidden">
+              <h2 className="border-b border-border px-6 py-4 font-semibold tracking-display">
+                Pour qui ?
+              </h2>
+              <ul className="divide-y divide-border">
+                {offer.useCases.map((useCase) => (
+                  <li
+                    key={useCase}
+                    className="flex items-start gap-3 px-6 py-3.5 text-sm leading-relaxed text-muted"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-sky/70"
+                    />
+                    {useCase}
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
         </div>

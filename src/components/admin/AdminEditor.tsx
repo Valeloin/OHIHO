@@ -245,11 +245,28 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
     const cleaned: SiteContent = {
       ...content,
       theme,
+      services: {
+        ...content.services,
+        offers: {
+          landing: cleanOffer(content.services.offers.landing),
+          intermediaire: cleanOffer(content.services.offers.intermediaire),
+          refonte: cleanOffer(content.services.offers.refonte),
+          application: cleanOffer(content.services.offers.application),
+        },
+      },
       expertise: {
         ...content.expertise,
         coverage: cleanList(content.expertise.coverage),
       },
     };
+
+    function cleanOffer(offer: ServiceOfferContent): ServiceOfferContent {
+      return {
+        ...offer,
+        features: cleanList(offer.features),
+        useCases: cleanList(offer.useCases),
+      };
+    }
     try {
       const result = await saveContent(cleaned);
       if (result.ok) {
@@ -494,6 +511,23 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                       value={offer.description}
                       onChange={(v) => setOffer(key, { description: v })}
                       textarea
+                    />
+                    <Field
+                      label="Introduction de la page dédiée"
+                      value={offer.pageIntro}
+                      onChange={(v) => setOffer(key, { pageIntro: v })}
+                      textarea
+                      hint={`Le paragraphe d'ouverture de /services/… — propre à chaque formule.`}
+                    />
+                    <ListField
+                      label="Ce qui est inclus"
+                      value={offer.features}
+                      onChange={(v) => setOffer(key, { features: v })}
+                    />
+                    <ListField
+                      label="Pour qui ?"
+                      value={offer.useCases}
+                      onChange={(v) => setOffer(key, { useCases: v })}
                     />
                   </div>
                 </div>
