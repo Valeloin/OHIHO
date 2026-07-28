@@ -19,7 +19,6 @@ import { scrollToId } from "@/lib/scroll";
 const NAV_LINKS = [
   { href: "/#services", label: "Services" },
   { href: "/#methode", label: "Méthode" },
-  { href: "/#a-propos", label: "À propos" },
   { href: "/#portfolio", label: "Réalisations" },
   { href: "/#contact", label: "Contact" },
 ];
