@@ -1139,6 +1139,86 @@ body {
   }
 }
 
+/* ---------- Section Services : blocs d'accompagnement de la vitrine ----------
+   Même patron que la frise Méthode (frise-step-*), mais sur l'horloge de la
+   VITRINE (33,6 s) : le bloc dont la scène joue est plein, les trois autres
+   restent lisibles en retrait (0,4) — jamais masqués. Fenêtres identiques à
+   pv-scene-1..4, le lien est garanti par construction. Opacité seule. */
+.sv-step-1,
+.sv-step-2,
+.sv-step-3,
+.sv-step-4 {
+  animation-duration: 33.6s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+.sv-step-1 {
+  animation-name: sv-step-1;
+}
+.sv-step-2 {
+  animation-name: sv-step-2;
+}
+.sv-step-3 {
+  animation-name: sv-step-3;
+}
+.sv-step-4 {
+  animation-name: sv-step-4;
+}
+@keyframes sv-step-1 {
+  0%,
+  24% {
+    opacity: 1;
+  }
+  26%,
+  98% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes sv-step-2 {
+  0%,
+  24% {
+    opacity: 0.4;
+  }
+  26%,
+  49% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.4;
+  }
+}
+@keyframes sv-step-3 {
+  0%,
+  49% {
+    opacity: 0.4;
+  }
+  51%,
+  74% {
+    opacity: 1;
+  }
+  76%,
+  100% {
+    opacity: 0.4;
+  }
+}
+@keyframes sv-step-4 {
+  0%,
+  74% {
+    opacity: 0.4;
+  }
+  76%,
+  98% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
 /* Le gel manuel de la frise Méthode est passé en Web Animations API le
    2026-07-28 (voir HowItWorks.tsx) : un `animation-delay` négatif +
    `paused` ne fige pas à un instant absolu — la position dépendait du
