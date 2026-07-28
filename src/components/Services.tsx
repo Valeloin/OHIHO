@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
@@ -27,15 +26,11 @@ export default function Services({ data }: { data: ServicesContent }) {
       {/* Conteneur plus large que les autres sections (90rem) : c'est lui qui
           donne leur taille aux quatre vignettes — à 7xl elles tombaient à
           ~280 px de large et se lisaient comme des timbres. */}
-            <SectionLabel>{data.kicker}</SectionLabel>
+      <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
 <div className="relative mx-auto w-full max-w-[90rem] px-6 py-10 my-auto">
 
-        <Reveal>
-          <p className="section-lead max-w-4xl">{data.title}</p>
-        </Reveal>
-
-        <RevealGroup className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula) => (
             <RevealItem key={formula.type} hover className="h-full">
               <Link

@@ -1,17 +1,24 @@
 import Reveal from "@/components/motion/Reveal";
 
-// TITRE de la section — c'est bien celui-ci, pas la phrase d'accroche.
-//
-// Il est ÉPINGLÉ en haut de la section, au centre, TOUJOURS à la même
-// hauteur (demande du 2026-07-27) : il vit hors du bloc de contenu, qui se
-// centre lui dans l'espace restant (`my-auto` sur le conteneur de chaque
-// section). Avant, il était centré AVEC le contenu : sa position variait
-// d'une section à l'autre selon la hauteur de ce qu'elle porte.
-export default function SectionLabel({ children }: { children: string }) {
+// EN-TÊTE DE SECTION, unifié (2026-07-28) : le NOM de la section (h2,
+// mono capitales teal, point vert) épinglé en haut au centre, et dessous
+// la PHRASE d'accroche (.section-lead), centrée elle aussi. Toutes les
+// sections s'ouvrent exactement pareil — même position, mêmes tailles.
+export default function SectionLabel({
+  children,
+  lead,
+}: {
+  children: string;
+  /** Phrase d'accroche affichée sous le nom, centrée. */
+  lead?: string;
+}) {
   return (
     <Reveal>
-      <div className="relative z-10 flex justify-center pt-12">
+      <div className="relative z-10 px-6 pt-12 text-center">
         <h2 className="section-name">{children}</h2>
+        {lead && (
+          <p className="section-lead mx-auto mt-4 max-w-3xl">{lead}</p>
+        )}
       </div>
     </Reveal>
   );

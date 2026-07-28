@@ -19,17 +19,14 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
       <SectionBackdrop />
       {/* Rythme resserré : comme Services, cette section porte beaucoup de
           contenu (3 cartes + encart) et doit tenir sur un écran. */}
-            <SectionLabel>{data.kicker}</SectionLabel>
+      <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
 <div className="relative mx-auto w-full max-w-7xl px-6 py-10 my-auto">
-        {/* En-tête éditorial : titre large à gauche, filet. */}
         <Reveal>
-          <p className="section-lead max-w-4xl">{data.title}</p>
-          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
+          <p className="mx-auto max-w-2xl text-center leading-relaxed text-muted">
             {data.subtitle}
           </p>
         </Reveal>
-        <div className="mt-6 h-px rule-fade" />
 
         {/* Les réalisations se lisent d'abord par leur MARQUE : une grande
             tuile portant le favicon du site, cliquable vers le site en ligne.

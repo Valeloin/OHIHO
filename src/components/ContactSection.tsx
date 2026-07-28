@@ -33,7 +33,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <SectionLabel>{data.kicker}</SectionLabel>
+      <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
       {/* `flex-1` : le titre étant épinglé en haut (SectionLabel hors du
           conteneur), le conteneur absorbe toute la hauteur restante et la
@@ -47,12 +47,11 @@ export default function ContactSection({ data }: { data: ContactContent }) {
             la section se remplit. */}
         <div className="grid flex-1 gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
           <Reveal className="flex flex-col">
-            <p className="section-lead max-w-4xl">{data.title}</p>
-            <p className="mt-5 max-w-2xl leading-relaxed text-muted">
+            <p className="max-w-2xl leading-relaxed text-muted">
               {data.subtitle}
             </p>
 
-            <div className="mt-10 h-px rule-fade" />
+            <div className="mt-8 h-px rule-fade" />
 
             {/* L'email n'est plus une simple ligne posée sous un filet : c'est
                 LA façon de nous joindre, il occupe donc un bloc à part

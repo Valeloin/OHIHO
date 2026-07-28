@@ -51,7 +51,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <SectionLabel>{data.kicker}</SectionLabel>
+      <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
       {/* `frise-manual` + `data-step` gèlent TOUTE la section (écran, rail,
           jalons, blocs) sur l'instant représentatif de l'étape choisie —
@@ -60,15 +60,9 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
         className={`relative mx-auto my-auto w-full max-w-5xl px-6 py-8 ${step ? "frise-manual" : ""}`}
         data-step={step ?? undefined}
       >
-        <Reveal>
-          <p className="section-lead mx-auto max-w-3xl text-center">
-            {data.title}
-          </p>
-        </Reveal>
-
         {/* L'écran, seul au centre : c'est LUI que la frise commente. */}
         <Reveal delay={0.1}>
-          <div className="mx-auto mt-8 w-full max-w-2xl overflow-hidden rounded-xl ring-1 ring-border">
+          <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-xl ring-1 ring-border">
             <MethodScenes steps={data.steps.length} />
           </div>
         </Reveal>
