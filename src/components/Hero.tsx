@@ -69,7 +69,10 @@ export default function Hero({
             qui creusait 88 px entre le sous-titre et les boutons au lieu de
             40. C'est le grand vide visible sur les écrans larges de
             téléphone (pliables, tablettes), entre 640 et 1024 px. */}
-        <div className="grid items-center gap-x-12 gap-y-0 lg:gap-y-12 lg:grid-cols-[1fr_minmax(0,27rem)]">
+        {/* Colonne de la vitrine élargie de 27 à 33rem (demande du
+            2026-07-27) : la vignette se lisait comme un timbre à côté du
+            titre. La gouttière absorbe une partie de l'élargissement. */}
+        <div className="grid items-center gap-x-10 gap-y-0 lg:gap-y-12 lg:grid-cols-[1fr_minmax(0,33rem)]">
           {/* En mobile, `contents` dissout cette colonne : ses enfants
               deviennent des cellules de la grille, ce qui permet de glisser
               la vitrine entre le titre et le sous-titre (order-3) — sinon
@@ -133,11 +136,11 @@ export default function Hero({
           >
             {/* Libellé de la formule en cours : les 4 se relaient en
                 fondu sur l'horloge des scènes (pv-title-1..4). */}
-            <div aria-hidden="true" className="relative mb-3 h-7">
+            <div aria-hidden="true" className="relative mb-3 h-8">
               {formulaLabels.map((label, i) => (
                 <span
                   key={label}
-                  className={`pv-title-${i + 1} absolute inset-0 flex items-center justify-center text-center font-mono text-xs uppercase tracking-[0.18em] text-brand-teal`}
+                  className={`pv-title-${i + 1} absolute inset-0 flex items-center justify-center text-center font-mono text-sm uppercase tracking-[0.18em] text-brand-teal`}
                 >
                   {label}
                 </span>
