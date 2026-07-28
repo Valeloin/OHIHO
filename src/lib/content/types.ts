@@ -87,6 +87,15 @@ export type ContactContent = {
   responseNote: string;
   /** URL complète du profil LinkedIn. Vide = bloc LinkedIn masqué. */
   linkedinUrl: string;
+  /** Nom affiché sur la carte de contact. Vide = identité masquée. */
+  personName: string;
+  /** Accroche sous le nom (le « titre » du profil LinkedIn). */
+  personRole: string;
+  /** Ville et région. */
+  personLocation: string;
+  /** Chemin de la photo dans /public (ex. « /valentin.jpg »).
+      Vide = les initiales du nom s'affichent à la place. */
+  personPhoto: string;
 };
 
 export type FooterContent = {

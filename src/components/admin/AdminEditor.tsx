@@ -650,6 +650,32 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
               onChange={(v) => set("contact", { linkedinUrl: v })}
               hint="Le QR code de la section se régénère automatiquement. Vide = carte LinkedIn masquée."
             />
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Field
+                label="Votre nom"
+                value={contact.personName}
+                onChange={(v) => set("contact", { personName: v })}
+                hint="Vide = toute l'identité est masquée sur la carte."
+              />
+              <Field
+                label="Ville / région"
+                value={contact.personLocation}
+                onChange={(v) => set("contact", { personLocation: v })}
+              />
+            </div>
+            <Field
+              label="Votre accroche (sous le nom)"
+              value={contact.personRole}
+              onChange={(v) => set("contact", { personRole: v })}
+              textarea
+            />
+            <Field
+              label="Photo"
+              value={contact.personPhoto}
+              onChange={(v) => set("contact", { personPhoto: v })}
+              hint="Chemin du fichier déposé dans /public, par exemple /valentin.jpg. Vide = vos initiales s'affichent à la place."
+            />
           </Section>
         )}
 

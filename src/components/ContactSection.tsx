@@ -1,8 +1,19 @@
+import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import SectionLabel from "@/components/SectionLabel";
 import LinkedInQr from "@/components/LinkedInQr";
 import type { ContactContent } from "@/lib/content/types";
+
+/** Deux premières lettres du nom, faute de photo déposée. */
+function initiales(nom: string) {
+  return nom
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((mot) => mot[0]?.toUpperCase() ?? "")
+    .join("");
+}
 
 function IconLinkedIn({ className }: { className?: string }) {
   return (
@@ -68,6 +79,48 @@ export default function ContactSection({ data }: { data: ContactContent }) {
           {data.linkedinUrl && (
             <Reveal delay={0.15} className="flex">
               <div className="card-surface flex w-full flex-col items-center justify-center p-8 text-center">
+                {/* Qui est en face. La carte ne portait qu'un QR code : on
+                    savait où scanner, pas à qui on écrivait. Photo (ou
+                    initiales tant qu'aucune n'est déposée), nom, accroche,
+                    ville — tout vient du contenu éditable. */}
+                {data.personName && (
+                  <>
+                    {data.personPhoto ? (
+                      <Image
+                        src={data.personPhoto}
+                        alt={data.personName}
+                        width={96}
+                        height={96}
+                        className="h-24 w-24 rounded-full object-cover ring-1 ring-border"
+                      />
+                    ) : (
+                      <span
+                        aria-hidden="true"
+                        className="flex h-24 w-24 items-center justify-center rounded-full bg-brand-teal/10 text-2xl font-semibold tracking-display text-brand-teal ring-1 ring-brand-teal/20"
+                      >
+                        {initiales(data.personName)}
+                      </span>
+                    )}
+
+                    <p className="mt-5 text-xl font-semibold tracking-display">
+                      {data.personName}
+                    </p>
+                    {data.personRole && (
+                      <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted">
+                        {data.personRole}
+                      </p>
+                    )}
+                    {data.personLocation && (
+                      <p className="mt-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-emerald shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                        {data.personLocation}
+                      </p>
+                    )}
+
+                    <div className="mt-7 h-px w-full rule-fade" />
+                  </>
+                )}
+
                 <LinkedInQr url={data.linkedinUrl} />
 
                 <p className="mt-6 text-sm text-muted">

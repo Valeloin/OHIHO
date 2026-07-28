@@ -141,6 +141,13 @@ export const defaultContent: SiteContent = {
     email: "valentin.condamy@ohiho.fr",
     responseNote: "Réponse sous 24h ouvrées",
     linkedinUrl: "https://www.linkedin.com/in/valentin-condamy-966656423/",
+    personName: "Valentin Condamy",
+    personRole:
+      "Création de sites web sur mesure pour PME. J'aide les entreprises à enfin avoir un site à la hauteur de leur savoir-faire.",
+    personLocation: "Montpellier, Occitanie",
+    // Vide tant que la photo n'est pas déposée dans /public : la carte
+    // affiche alors les initiales, elle ne casse pas.
+    personPhoto: "",
   },
   footer: {
     tagline:
