@@ -22,11 +22,21 @@ export default function ContactSection({ data }: { data: ContactContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-16">
+      {/* `self-stretch` + `flex-col` : `.section-screen` centre son unique
+          enfant (align-items: center), si bien que le contenu — plus court
+          ici que dans les autres sections — flottait au milieu de 300 px de
+          vide. En s'étirant, le conteneur récupère toute la hauteur, et la
+          grille (`flex-1` plus bas) l'absorbe. */}
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col self-stretch px-6 py-16">
         <SectionLabel>{data.kicker}</SectionLabel>
 
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <Reveal>
+        {/* `items-stretch` et non `items-center` : centrées, les deux colonnes
+            se plaçaient chacune selon SA hauteur, et la section — qui fait un
+            écran entier — se retrouvait avec deux blocs courts flottant au
+            milieu d'un grand vide. Étirées, elles occupent la même hauteur et
+            la section se remplit. */}
+        <div className="grid flex-1 gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
+          <Reveal className="flex flex-col">
             <p className="section-lead max-w-4xl">{data.title}</p>
             <p className="mt-5 max-w-2xl leading-relaxed text-muted">
               {data.subtitle}
@@ -34,21 +44,31 @@ export default function ContactSection({ data }: { data: ContactContent }) {
 
             <div className="mt-10 h-px rule-fade" />
 
-            {/* L'email est la seule action de la section : il porte donc la
-                taille d'un titre, pas celle d'une ligne de liste. */}
+            {/* L'email n'est plus une simple ligne posée sous un filet : c'est
+                LA façon de nous joindre, il occupe donc un bloc à part
+                entière, du même poids que la carte LinkedIn en face. Le délai
+                de réponse vit dedans, à côté de l'adresse, au lieu de traîner
+                seul en dessous. */}
             <a
               href={`mailto:${data.email}`}
-              className="mt-8 inline-flex items-center gap-3 text-2xl font-semibold tracking-display transition-colors hover:text-accent-cyan sm:text-3xl"
+              className="group mt-8 flex flex-1 flex-col justify-center rounded-2xl border border-border p-8 transition-colors hover:border-accent-cyan/50"
             >
-              <span className="h-2 w-2 shrink-0 rounded-full bg-brand-emerald shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
-              {data.email}
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-brand-teal">
+                Par email
+              </span>
+              <span className="mt-4 flex items-center gap-3 text-2xl font-semibold tracking-display transition-colors group-hover:text-accent-cyan sm:text-3xl">
+                <span className="h-2 w-2 shrink-0 rounded-full bg-brand-emerald shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
+                {data.email}
+              </span>
+              <span className="mt-4 text-sm text-muted">
+                {data.responseNote}
+              </span>
             </a>
-            <p className="mt-4 text-sm text-muted">{data.responseNote}</p>
           </Reveal>
 
           {data.linkedinUrl && (
-            <Reveal delay={0.15}>
-              <div className="card-surface flex flex-col items-center p-8 text-center">
+            <Reveal delay={0.15} className="flex">
+              <div className="card-surface flex w-full flex-col items-center justify-center p-8 text-center">
                 <LinkedInQr url={data.linkedinUrl} />
 
                 <p className="mt-6 text-sm text-muted">
