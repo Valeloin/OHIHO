@@ -805,35 +805,18 @@ body {
   }
 }
 
-/* UNE SEULE VAGUE (2026-07-27). L'ancienne frise juxtaposait quatre blocs
-   qui réagissaient chacun dans leur coin (grossissement du numéro,
-   déhanchement du texte) : ça se lisait comme des blocs, pas comme une
-   seule animation. Tout découle désormais du remplissage du rail : quand il
-   atteint un jalon, un lien vertical descend du jalon dans le bloc
-   (frise-link-*), puis le bloc entier — numéro, titre, description —
-   s'allume et se lève d'un seul mouvement (frise-step-*). Tout ce que la
-   vague a touché RESTE allumé, puis tout s'éteint ensemble en fin de cycle
-   (94-97 %), exactement comme le trait et les jalons.
-   Opacité + transform uniquement, comme le reste de la frise : tout tourne
-   sur l'horloge du compositeur (voir frise-dot-*), rien ne peut dériver. */
+/* Blocs d'étape de la frise Méthode (refaite de A à Z le 2026-07-27,
+   voir le plan en tête de HowItWorks.tsx). DEUX états seulement : plein
+   quand l'écran joue l'étape, en retrait sinon — fenêtres identiques à
+   celles des scènes (frise-desc-*), la frise et l'écran racontent le même
+   instant par construction. Opacité seule : horloge du compositeur. */
 .frise-step-1,
 .frise-step-2,
 .frise-step-3,
-.frise-step-4,
-.frise-link-1,
-.frise-link-2,
-.frise-link-3,
-.frise-link-4 {
+.frise-step-4 {
   animation-duration: 13.44s;
   animation-timing-function: ease-out;
   animation-iteration-count: infinite;
-}
-/* Le lien se TRACE du jalon vers le bloc : il grandit depuis le haut. */
-.frise-link-1,
-.frise-link-2,
-.frise-link-3,
-.frise-link-4 {
-  transform-origin: center top;
 }
 .frise-step-1 {
   animation-name: frise-step-1;
@@ -847,209 +830,60 @@ body {
 .frise-step-4 {
   animation-name: frise-step-4;
 }
-.frise-link-1 {
-  animation-name: frise-link-1;
-}
-.frise-link-2 {
-  animation-name: frise-link-2;
-}
-.frise-link-3 {
-  animation-name: frise-link-3;
-}
-.frise-link-4 {
-  animation-name: frise-link-4;
-}
 
-/* UN SEUL PROJECTEUR. Chaque bloc a trois états : À VENIR (éteint,
-   opacité 0,35, posé 8px plus bas), ACTIF (plein, levé — UNE seule étape à
-   la fois, celle que la scène joue au même moment), puis FAIT (0,6 : lu
-   comme derrière soi, mais encore lisible). Les fenêtres sont EXACTEMENT
-   celles des scènes (frise-desc-*) : la frise et l'écran racontent le même
-   instant par construction. Le lien vertical n'existe que sous l'étape
-   ACTIVE : c'est le curseur de la frise, il se trace à l'arrivée du trait
-   et s'efface quand le projecteur passe au bloc suivant. */
 @keyframes frise-step-1 {
   0% {
-    opacity: 0.35;
-    transform: translateY(8px);
+    opacity: 0.4;
   }
   1.2%,
-  19% {
+  17.5% {
     opacity: 1;
-    transform: translateY(0);
   }
-  21%,
-  94% {
-    opacity: 0.6;
-    transform: translateY(0);
-  }
-  97%,
+  19%,
   100% {
-    opacity: 0.35;
-    transform: translateY(8px);
+    opacity: 0.4;
   }
 }
 @keyframes frise-step-2 {
   0%,
   19% {
-    opacity: 0.35;
-    transform: translateY(8px);
+    opacity: 0.4;
   }
   21%,
-  37.7% {
+  36.2% {
     opacity: 1;
-    transform: translateY(0);
   }
-  39.7%,
-  94% {
-    opacity: 0.6;
-    transform: translateY(0);
-  }
-  97%,
+  37.7%,
   100% {
-    opacity: 0.35;
-    transform: translateY(8px);
+    opacity: 0.4;
   }
 }
 @keyframes frise-step-3 {
   0%,
   37.7% {
-    opacity: 0.35;
-    transform: translateY(8px);
+    opacity: 0.4;
   }
   39.7%,
-  56.3% {
+  54.8% {
     opacity: 1;
-    transform: translateY(0);
   }
-  58.3%,
-  94% {
-    opacity: 0.6;
-    transform: translateY(0);
-  }
-  97%,
+  56.3%,
   100% {
-    opacity: 0.35;
-    transform: translateY(8px);
+    opacity: 0.4;
   }
 }
 @keyframes frise-step-4 {
   0%,
   56.3% {
-    opacity: 0.35;
-    transform: translateY(8px);
+    opacity: 0.4;
   }
   58.3%,
-  94% {
+  92% {
     opacity: 1;
-    transform: translateY(0);
   }
-  97%,
+  94%,
   100% {
-    opacity: 0.35;
-    transform: translateY(8px);
-  }
-}
-/* Le curseur : tracé de haut en bas à l'ouverture de la fenêtre, effacé
-   (opacité, puis repli invisible) à sa fermeture. Les remises à zéro se
-   font toujours à opacité nulle. */
-@keyframes frise-link-1 {
-  0%,
-  0.4% {
-    transform: scaleY(0);
-    opacity: 1;
-  }
-  2.4%,
-  19% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  20.2% {
-    transform: scaleY(1);
-    opacity: 0;
-  }
-  20.7%,
-  99.5% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scaleY(0);
-    opacity: 1;
-  }
-}
-@keyframes frise-link-2 {
-  0%,
-  19% {
-    transform: scaleY(0);
-    opacity: 1;
-  }
-  21%,
-  37.7% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  38.9% {
-    transform: scaleY(1);
-    opacity: 0;
-  }
-  39.4%,
-  99.5% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scaleY(0);
-    opacity: 1;
-  }
-}
-@keyframes frise-link-3 {
-  0%,
-  37.7% {
-    transform: scaleY(0);
-    opacity: 1;
-  }
-  39.7%,
-  56.3% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  57.5% {
-    transform: scaleY(1);
-    opacity: 0;
-  }
-  58%,
-  99.5% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scaleY(0);
-    opacity: 1;
-  }
-}
-@keyframes frise-link-4 {
-  0%,
-  56.3% {
-    transform: scaleY(0);
-    opacity: 1;
-  }
-  58.3%,
-  94% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  96% {
-    transform: scaleY(1);
-    opacity: 0;
-  }
-  99.5% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scaleY(0);
-    opacity: 1;
+    opacity: 0.4;
   }
 }
 
@@ -1231,45 +1065,45 @@ body {
   17.5% {
     opacity: 1;
   }
-  19%,
+  19.5%,
   100% {
     opacity: 0;
   }
 }
 @keyframes frise-desc-2 {
   0%,
-  19% {
+  17.8% {
     opacity: 0;
   }
-  21%,
+  19.8%,
   36.2% {
     opacity: 1;
   }
-  37.7%,
+  38.2%,
   100% {
     opacity: 0;
   }
 }
 @keyframes frise-desc-3 {
   0%,
-  37.7% {
+  36.5% {
     opacity: 0;
   }
-  39.7%,
+  38.5%,
   54.8% {
     opacity: 1;
   }
-  56.3%,
+  56.8%,
   100% {
     opacity: 0;
   }
 }
 @keyframes frise-desc-4 {
   0%,
-  56.3% {
+  55.1% {
     opacity: 0;
   }
-  58.3%,
+  57.1%,
   96% {
     opacity: 1;
   }
