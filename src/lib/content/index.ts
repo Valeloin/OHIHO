@@ -135,7 +135,16 @@ function mergeContent(stored: Partial<SiteContent> | null): SiteContent {
         },
       },
     },
-    method: { ...defaultContent.method, ...stored.method },
+    method: {
+      ...defaultContent.method,
+      ...stored.method,
+      // Fusion PAR ÉTAPE : un contenu enregistré avant l'ajout des champs de
+      // page (pageIntro, points) écraserait sinon le tableau entier et
+      // laisserait ces champs indéfinis sur les pages /methode/….
+      steps: (stored.method?.steps ?? defaultContent.method.steps).map(
+        (step, i) => ({ ...defaultContent.method.steps[i], ...step })
+      ),
+    },
     expertise: { ...defaultContent.expertise, ...stored.expertise },
     whyUs: { ...defaultContent.whyUs, ...stored.whyUs },
     contact: normalizeLegacy(

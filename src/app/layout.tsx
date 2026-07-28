@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getContent } from "@/lib/content";
 import { SERVICE_PAGES } from "@/lib/services";
+import { METHOD_PAGES } from "@/lib/method";
 import { themeCss } from "@/lib/content/theme-css";
 
 const geistSans = localFont({
@@ -130,6 +131,10 @@ export default async function RootLayout({
             href: `/services/${s.slug}`,
             label: content.services.offers[s.type].label,
           }))}
+          methodLinks={METHOD_PAGES.map((p) => ({
+            href: `/methode/${p.slug}`,
+            label: content.method.steps[p.index]?.title ?? "",
+          })).filter((l) => l.label)}
         />
         {children}
         <Footer data={content.footer} />

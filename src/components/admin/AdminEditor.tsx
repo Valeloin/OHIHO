@@ -254,6 +254,13 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
           application: cleanOffer(content.services.offers.application),
         },
       },
+      method: {
+        ...content.method,
+        steps: content.method.steps.map((step) => ({
+          ...step,
+          points: cleanList(step.points),
+        })),
+      },
       expertise: {
         ...content.expertise,
         coverage: cleanList(content.expertise.coverage),
@@ -566,6 +573,20 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                       setItem("method", "steps", i, { description: v })
                     }
                     textarea
+                  />
+                  <Field
+                    label="Introduction de la page dédiée"
+                    value={step.pageIntro}
+                    onChange={(v) =>
+                      setItem("method", "steps", i, { pageIntro: v })
+                    }
+                    textarea
+                    hint="Le paragraphe d'ouverture de /methode/… — propre à chaque étape."
+                  />
+                  <ListField
+                    label="Concrètement"
+                    value={step.points}
+                    onChange={(v) => setItem("method", "steps", i, { points: v })}
                   />
                 </div>
               </div>

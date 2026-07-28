@@ -27,12 +27,15 @@ type NavItem = { href: string; label: string };
 
 export default function Navbar({
   serviceLinks = [],
+  methodLinks = [],
 }: {
   serviceLinks?: NavItem[];
+  methodLinks?: NavItem[];
 }) {
   // Menus déroulants du bandeau, indexés par le lien qui les porte.
   const DROPDOWNS: Record<string, NavItem[]> = {
     "/#services": serviceLinks,
+    "/#methode": methodLinks,
     "/#portfolio": [{ href: "/bugtrack", label: "BugTrack" }],
   };
 

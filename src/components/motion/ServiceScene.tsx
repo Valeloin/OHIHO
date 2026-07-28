@@ -392,71 +392,115 @@ export function SceneRefonte() {
    plusieurs essais sur un bouton isolé, à chaque fois rejeté.
    ============================================================ */
 export function SceneLanding() {
-  const features = [
-    { x: 24, color: SKY },
-    { x: 148, color: ACCENT },
-    { x: 272, color: EMERALD },
-  ];
+  // Géométrie du bouton d'appel, partagée par ses deux états, le halo,
+  // l'onde et le curseur : un seul endroit à toucher pour le déplacer.
+  const CTA = { x: 24, y: 148, w: 108, h: 26 };
+  const CTA_CX = CTA.x + CTA.w / 2;
+  const CTA_CY = CTA.y + CTA.h / 2;
 
   return (
     <>
-      {/* Menu à un seul onglet, toujours actif — même gabarit que la
-          pastille active du site intermédiaire, pour que le contraste
-          (1 onglet contre 4) se lise au premier coup d'œil entre les
-          deux scènes. */}
-      <rect x="24" y="40" width="90" height="20" rx="10" fill={ACCENT} fillOpacity="0.85" />
-      <rect x="36" y="47" width="46" height="6" rx="3" fill={SCREEN} fillOpacity="0.85" />
+      {/* Colonne de gauche : accroche, titre, sous-titre — aérés, alignés
+          sur une même marge. */}
+      <rect x="24" y="44" width="52" height="10" rx="5" fill={ACCENT} fillOpacity="0.18" />
+      <circle className="pv-dot" cx="32" cy="49" r="2.5" fill={ACCENT} />
+      <rect x="24" y="66" width="150" height="13" rx="4" fill={BRIGHT} fillOpacity="0.9" />
+      <rect x="24" y="85" width="112" height="13" rx="4" fill={BRIGHT} fillOpacity="0.9" />
+      <rect x="24" y="110" width="156" height="6" rx="3" fill={LINE} fillOpacity="0.32" />
+      <rect x="24" y="122" width="128" height="6" rx="3" fill={LINE} fillOpacity="0.26" />
 
-      <defs>
-        <clipPath id="ohv-landing-clip">
-          <rect x="0" y="70" width="400" height="150" />
-        </clipPath>
-      </defs>
-      <g clipPath="url(#ohv-landing-clip)">
-        <g className="pv-scroll">
-          {/* Premier écran, REMPLI : accroche, titre, sous-titre, bouton
-              d'appel — une landing n'est pas une page vide, c'est une page
-              qui ne parle que d'une seule chose. */}
-          <rect x="24" y="84" width="54" height="10" rx="5" fill={ACCENT} fillOpacity="0.18" />
-          <circle cx="32" cy="89" r="2.5" fill={ACCENT} />
-          <rect x="24" y="102" width="160" height="13" rx="4" fill={BRIGHT} fillOpacity="0.85" />
-          <rect x="24" y="119" width="122" height="13" rx="4" fill={BRIGHT} fillOpacity="0.85" />
-          <rect x="24" y="140" width="164" height="6" rx="3" fill={LINE} fillOpacity="0.32" />
-          <rect x="24" y="150" width="148" height="6" rx="3" fill={LINE} fillOpacity="0.28" />
-          <rect x="24" y="160" width="112" height="6" rx="3" fill={LINE} fillOpacity="0.24" />
-          <rect x="24" y="178" width="88" height="20" rx="10" fill={ACCENT} fillOpacity="0.9" />
-          <rect x="38" y="185" width="60" height="6" rx="3" fill={SCREEN} fillOpacity="0.85" />
-
-          {/* Visuel de la page, garni : image, titre, lignes, pastilles */}
-          <rect x="210" y="84" width="166" height="114" rx="12" fill={BLOCKS} fillOpacity="0.35" />
-          <circle cx="244" cy="112" r="15" fill={SKY} fillOpacity="0.5" />
-          <rect x="268" y="102" width="92" height="8" rx="4" fill={BRIGHT} fillOpacity="0.55" />
-          <rect x="268" y="115" width="70" height="6" rx="3" fill={LINE} fillOpacity="0.3" />
-          <rect x="224" y="140" width="136" height="6" rx="3" fill={LINE} fillOpacity="0.3" />
-          <rect x="224" y="151" width="118" height="6" rx="3" fill={LINE} fillOpacity="0.26" />
-          <rect x="224" y="162" width="128" height="6" rx="3" fill={LINE} fillOpacity="0.22" />
-          <rect x="224" y="178" width="52" height="12" rx="6" fill={EMERALD} fillOpacity="0.25" />
-          <rect x="282" y="178" width="52" height="12" rx="6" fill={SKY} fillOpacity="0.2" />
-
-          {/* Sous la ligne de flottaison, révélé par le défilement : trois
-              points clés étoffés puis une bande de témoignage — la page
-              continue, elle n'est pas vide. */}
-          {features.map((f) => (
-            <g key={f.x}>
-              <circle cx={f.x + 8} cy="226" r="5" fill={f.color} />
-              <rect x={f.x + 22} y="222" width="72" height="7" rx="3.5" fill={BRIGHT} fillOpacity="0.55" />
-              <rect x={f.x + 22} y="234" width="86" height="5" rx="2.5" fill={LINE} fillOpacity="0.28" />
-              <rect x={f.x + 22} y="243" width="64" height="5" rx="2.5" fill={LINE} fillOpacity="0.22" />
-            </g>
-          ))}
-
-          <rect x="24" y="264" width="352" height="42" rx="10" fill={BLOCKS} fillOpacity="0.3" />
-          <circle cx="48" cy="285" r="10" fill={ACCENT} fillOpacity="0.4" />
-          <rect x="68" y="276" width="200" height="6" rx="3" fill={BRIGHT} fillOpacity="0.5" />
-          <rect x="68" y="288" width="150" height="5" rx="2.5" fill={LINE} fillOpacity="0.3" />
-          <rect x="300" y="279" width="56" height="14" rx="7" fill={EMERALD} fillOpacity="0.3" />
+      {/* L'HISTOIRE de la scène : une page, un objectif — le visiteur
+          clique. Halo qui respire sous le bouton, curseur qui entre et
+          presse, onde au point de contact, bascule en confirmation
+          (pv-old / pv-new, la bascule de l'horloge commune tombe pile sur
+          le clic à 40-45 %). */}
+      <rect
+        className="pv-cta-glow"
+        x={CTA.x - 6}
+        y={CTA.y - 6}
+        width={CTA.w + 12}
+        height={CTA.h + 12}
+        rx={(CTA.h + 12) / 2}
+        fill={ACCENT}
+      />
+      <circle
+        className="pv-ripple"
+        cx={CTA_CX}
+        cy={CTA_CY}
+        r="15"
+        fill="none"
+        stroke={ACCENT}
+        strokeWidth="2"
+      />
+      <g className="pv-press">
+        <g className="pv-old">
+          <rect x={CTA.x} y={CTA.y} width={CTA.w} height={CTA.h} rx={CTA.h / 2} fill={ACCENT} />
+          <rect
+            x={CTA.x + 24}
+            y={CTA_CY - 3.5}
+            width="60"
+            height="7"
+            rx="3.5"
+            fill={SCREEN}
+            fillOpacity="0.85"
+          />
+        </g>
+        <g className="pv-new">
+          <rect x={CTA.x} y={CTA.y} width={CTA.w} height={CTA.h} rx={CTA.h / 2} fill={EMERALD} />
+          <path
+            d={`M${CTA.x + 22} ${CTA_CY} l5 5 9.5 -10`}
+            fill="none"
+            stroke={SCREEN}
+            strokeOpacity="0.9"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <rect
+            x={CTA.x + 44}
+            y={CTA_CY - 3.5}
+            width="42"
+            height="7"
+            rx="3.5"
+            fill={SCREEN}
+            fillOpacity="0.8"
+          />
         </g>
       </g>
+      <g className="pv-cursor">
+        <path
+          d={`M${CTA_CX + 5} ${CTA_CY + 5} l0 15 l3.9 -4.1 l2.7 5.7 l3 -1.4 l-2.7 -5.6 l5.5 -0.5 z`}
+          fill={BRIGHT}
+          stroke={SCREEN}
+          strokeWidth="1.1"
+          strokeLinejoin="round"
+        />
+      </g>
+
+      {/* Visuel de droite : une image, un titre, deux lignes — sobre. */}
+      <g className="pv-in-2">
+        <rect x="212" y="44" width="164" height="130" rx="12" fill={BLOCKS} fillOpacity="0.35" />
+        <circle cx="248" cy="78" r="17" fill={SKY} fillOpacity="0.5" />
+        <rect x="276" y="66" width="84" height="8" rx="4" fill={BRIGHT} fillOpacity="0.55" />
+        <rect x="276" y="80" width="62" height="6" rx="3" fill={LINE} fillOpacity="0.3" />
+        <rect x="228" y="112" width="132" height="6" rx="3" fill={LINE} fillOpacity="0.3" />
+        <rect x="228" y="124" width="112" height="6" rx="3" fill={LINE} fillOpacity="0.26" />
+        <rect x="228" y="144" width="52" height="14" rx="7" fill={EMERALD} fillOpacity="0.25" />
+        <rect x="288" y="144" width="52" height="14" rx="7" fill={SKY} fillOpacity="0.2" />
+      </g>
+
+      {/* Trois points clés en pied de page, réguliers. */}
+      {[
+        { x: 24, color: SKY },
+        { x: 148, color: ACCENT },
+        { x: 272, color: EMERALD },
+      ].map((f, i) => (
+        <g key={f.x} className={`pv-in-${3 + i}`}>
+          <circle cx={f.x + 6} cy="196" r="4.5" fill={f.color} />
+          <rect x={f.x + 18} y="192" width="60" height="7" rx="3.5" fill={BRIGHT} fillOpacity="0.55" />
+          <rect x={f.x + 18} y="203" width="44" height="5" rx="2.5" fill={LINE} fillOpacity="0.25" />
+        </g>
+      ))}
     </>
   );
 }

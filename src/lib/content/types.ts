@@ -57,6 +57,10 @@ export type ServicesContent = {
 export type MethodStep = {
   title: string;
   description: string;
+  /** Paragraphe d'introduction de la page dédiée (/methode/…). */
+  pageIntro: string;
+  /** « Concrètement » — une ligne par point. */
+  points: string[];
 };
 
 export type MethodContent = {

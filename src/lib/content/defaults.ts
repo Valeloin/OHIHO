@@ -46,7 +46,7 @@ export const defaultContent: SiteContent = {
         description:
           "Une seule page, un seul objectif : que le visiteur vous contacte. Pour un lancement, une campagne, ou une activité qui tient en une page.",
         pageIntro:
-          "Une landing page, c'est une page unique pensée pour convertir : un message clair, une offre, un bouton. Le format idéal pour lancer une activité, accompagner une campagne ou valider une idée — sans investir tout de suite dans un site complet.",
+          "Une seule page, un seul objectif : que le visiteur passe à l'action. Pas de menus, pas de détours — un message clair, une offre, un bouton. Le format idéal pour lancer une activité, accompagner une campagne ou tester une idée sans investir dans un site complet.",
         features: [
           "Une page unique, construite pour amener au contact",
           "Formulaire ou bouton d'appel direct",
@@ -134,21 +134,53 @@ export const defaultContent: SiteContent = {
         title: "Échange initial",
         description:
           "Un échange pour comprendre votre projet, vos objectifs et votre budget, sans engagement.",
+        pageIntro:
+          "Tout commence par une conversation. On parle de votre activité, de vos objectifs, de votre budget et de vos délais — pour vérifier qu'on peut vraiment vous aider, et comment. Sans engagement, et sans jargon.",
+        points: [
+          "Un appel ou un échange par email, comme vous préférez",
+          "On clarifie l'objectif : à quoi doit servir le site ?",
+          "Un budget et un délai posés dès le départ",
+          "Aucun engagement : vous repartez avec un avis honnête",
+        ],
       },
       {
         title: "Maquette & devis",
         description:
           "Une proposition claire, avec maquette visuelle et devis détaillé, avant de commencer le développement.",
+        pageIntro:
+          "Avant d'écrire la moindre ligne de code, vous voyez à quoi ressemblera votre site et combien il coûtera. Une maquette visuelle et un devis détaillé, pour décider en connaissance de cause.",
+        points: [
+          "Une maquette visuelle de votre future page d'accueil",
+          "Un devis détaillé, poste par poste, sans surprise",
+          "Vos retours intégrés jusqu'à validation",
+          "Le développement ne démarre qu'une fois les deux validés",
+        ],
       },
       {
         title: "Développement",
         description:
           "Votre site ou application prend forme, avec des points d'étape réguliers pour suivre l'avancement.",
+        pageIntro:
+          "Votre site prend forme, et vous n'êtes jamais laissé dans le noir : des points d'étape réguliers montrent l'avancement réel, avec des versions à voir en ligne au fil du développement.",
+        points: [
+          "Des points d'étape réguliers, avec des versions consultables en ligne",
+          "Un suivi d'avancement dans votre espace client",
+          "Vos retours pris en compte au fil de l'eau",
+          "Textes, images et contenus mis en place ensemble",
+        ],
       },
       {
         title: "Mise en ligne & suivi",
         description:
           "Déploiement, puis accompagnement dans la durée pour les évolutions et le suivi par email.",
+        pageIntro:
+          "Le site part en ligne sur votre nom de domaine — et l'accompagnement ne s'arrête pas là. Les demandes d'évolution ou de correction se font simplement, et sont suivies jusqu'à leur résolution.",
+        points: [
+          "Mise en ligne sur votre domaine, en HTTPS",
+          "Vérifications finales : mobile, vitesse, référencement",
+          "Corrections et évolutions demandées depuis votre espace client",
+          "Un interlocuteur unique, dans la durée",
+        ],
       },
     ],
   },

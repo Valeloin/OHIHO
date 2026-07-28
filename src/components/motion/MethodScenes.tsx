@@ -158,6 +158,26 @@ function SceneEnLigne() {
 
 const SCENES = [SceneEchange, SceneMaquette, SceneDeveloppement, SceneEnLigne];
 
+/* Une SEULE scène, toujours visible : la version page (/methode/…) de la
+   vitrine. Pas de classe frise-desc-*, donc pas de rotation — les
+   micro-animations internes de la scène continuent de vivre. */
+export function MethodSceneSingle({ index }: { index: number }) {
+  const Scene = SCENES[Math.max(0, Math.min(index, SCENES.length - 1))];
+  return (
+    <svg
+      viewBox="0 0 400 220"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-auto w-full"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect width="400" height="220" fill={SCREEN} />
+      <Scene />
+      <Chrome url="votre-projet.fr" />
+    </svg>
+  );
+}
+
 export default function MethodScenes({ steps }: { steps: number }) {
   // On ne rend que les scènes dont l'étape existe : si l'admin passe de
   // 4 à 3 étapes, la 4e ne s'affiche pas dans le vide.
