@@ -88,29 +88,11 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
               {/* Le titre de l'étape ne se répète plus ici : il est passé dans
                   la légende de la colonne de gauche, avec sa description. */}
 
-              {/* Puces cliquables, comme la vitrine du hero : on peut
-                  choisir son étape au lieu de subir la rotation. */}
-              <div className="mb-2 flex justify-center gap-1">
-                {data.steps.map((item, i) => {
-                  const n = i + 1;
-                  return (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => setStep(step === n ? null : n)}
-                      aria-label={`Voir l'étape ${item.title}`}
-                      aria-pressed={step === n}
-                      className="group flex items-center rounded-full px-2 py-3 focus-visible:outline-none"
-                    >
-                      <span className="relative block h-1 w-8 overflow-hidden rounded-full bg-brand-sky/35 transition-colors group-hover:bg-brand-sky/55 group-focus-visible:ring-2 group-focus-visible:ring-accent-cyan/60">
-                        <span
-                          className={`frise-desc-${n} absolute inset-0 rounded-full bg-brand-teal`}
-                        />
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+              {/* Plus de rangée de puces ici : ce sont les quatre blocs de la
+                  frise, en bas, qui servent de boutons. Ils portent déjà le
+                  numéro, le titre et le jalon de l'étape — une rangée de
+                  puces séparée doublait cet indicateur sans être reliée à
+                  lui. */}
 
               {/* Une scène par étape, dans une fenêtre de navigateur comme
                   les vignettes de Services — la vitrine 3D des deux appareils
@@ -243,7 +225,27 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           </svg>
 
           {data.steps.map((item, i) => (
-            <RevealItem key={i} className="relative pl-6 lg:pl-0 lg:pt-5">
+            <RevealItem
+              key={i}
+              className="group relative cursor-pointer pl-6 lg:pl-0 lg:pt-5"
+            >
+              {/* C'EST CE BLOC LE BOUTON. Le calque couvre toute l'étape et
+                  porte le clic ; le contenu (numéro, titre, description)
+                  reste en dessous, intact.
+                  Un <button> ENVELOPPANT aurait été plus direct, mais un
+                  `h3` dans un `button` est du HTML invalide : le calque
+                  garde la hiérarchie de titres propre tout en offrant une
+                  cible de la taille du bloc entier.
+                  `z-10` : il doit passer devant le filet et le jalon, tous
+                  deux en absolu dans le même bloc. */}
+              <button
+                type="button"
+                onClick={() => setStep(step === i + 1 ? null : i + 1)}
+                aria-pressed={step === i + 1}
+                aria-label={`Voir l'étape ${item.title}`}
+                className="absolute inset-0 z-10 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan/60"
+              />
+
               {/* Rail + remplissage, en mobile / tablette */}
               <div
                 aria-hidden="true"
@@ -302,7 +304,10 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className={`frise-txt-${i + 1}`}>
-                <h3 className="mt-3 text-lg font-semibold tracking-display">
+                {/* Le titre vire au teal au survol du bloc : c'est le seul
+                    signe que l'étape est cliquable, le calque du bouton étant
+                    invisible. */}
+                <h3 className="mt-3 text-lg font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
                   {item.title}
                 </h3>
 
