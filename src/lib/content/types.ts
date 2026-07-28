@@ -45,6 +45,11 @@ export type ServiceOfferContent = {
   features: string[];
   /** « Pour qui ? » — une ligne par cas d'usage. */
   useCases: string[];
+  /** Capture d'un projet réel dans /public (ex. « /captures/cadance.png »).
+      Vide = l'animation de la formule s'affiche à la place. */
+  screenshot: string;
+  /** Délai indicatif affiché sous le palier (ex. « 2 à 3 semaines »). */
+  delay: string;
 };
 
 export type ServicesContent = {

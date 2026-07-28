@@ -60,6 +60,8 @@ export const defaultContent: SiteContent = {
           "Valider une idée avant d'investir dans un site complet",
           "Indépendants qui veulent être joignables en un clic",
         ],
+        screenshot: "",
+        delay: "1 à 2 semaines",
       },
       intermediaire: {
         label: "Site intermédiaire",
@@ -81,6 +83,8 @@ export const defaultContent: SiteContent = {
           "Associations et structures locales",
           "Remplacer une page réseaux sociaux par une vraie présence",
         ],
+        screenshot: "",
+        delay: "3 à 4 semaines",
       },
       refonte: {
         label: "Refonte de site",
@@ -102,6 +106,8 @@ export const defaultContent: SiteContent = {
           "Un site lent, ou que plus personne ne sait modifier",
           "Un changement de nom, d'identité ou d'activité",
         ],
+        screenshot: "",
+        delay: "2 à 4 semaines",
       },
       application: {
         label: "Application web",
@@ -123,6 +129,8 @@ export const defaultContent: SiteContent = {
           "Outil interne pour remplacer les tableurs partagés",
           "Digitaliser un processus métier répétitif",
         ],
+        screenshot: "",
+        delay: "Délai selon le projet",
       },
     },
   },

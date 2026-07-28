@@ -2,37 +2,43 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import SectionLabel from "@/components/SectionLabel";
-import HeroShowcase from "@/components/motion/HeroShowcase";
+import {
+  Chrome,
+  SceneLanding,
+  SceneSitePages,
+  SceneRefonte,
+  SceneApplication,
+} from "@/components/motion/ServiceScene";
 import { SERVICE_TYPES, serviceHref } from "@/lib/services";
-import type { ServicesContent } from "@/lib/content/types";
+import type { ServicesContent, ServiceType } from "@/lib/content/types";
 
 // ============================================================
-// SECTION SERVICES — même patron que la Méthode (2026-07-28) :
+// SECTION SERVICES — un grand cadre navigateur qui met en scène UNE
+// formule à la fois, les 4 paliers toujours visibles dessous.
 //
-//   titre épinglé + phrase (SectionLabel)
-//   ┌──────────────────────────┐
-//   │ écran (UNE formule à la  │  ← la vitrine tournante (33,6 s),
-//   │ fois, en grand)          │    la même mécanique que le hero
-//   └──────────────────────────┘
-//    01        02        03        04   ← les 4 formules TOUJOURS
-//    Landing   Site      Refonte  App     visibles ; celle qui joue
-//                                          est pleine, les autres en
-//                                          retrait (jamais masquées)
-//
-// Les quatre vignettes alignées qui jouaient toutes en même temps ont été
-// remplacées à la demande : une seule formule est mise en scène à la fois,
-// en grand. Cliquer un bloc fige la vitrine sur sa scène (Web Animations
-// API, instant absolu — voir la Méthode) ; recliquer rend la main à la
-// rotation. « Découvrir » reste un vrai lien vers la page de la formule.
+// Le cadre affiche la CAPTURE D'UN PROJET RÉEL quand le palier en a une
+// (champ « Capture » de /admin, image dans /public) et retombe sur
+// l'animation de la formule sinon. Les couches tournent sur l'horloge de
+// la vitrine (pv-scene-1..4, 33,6 s) : le fondu croisé et le gel au clic
+// (Web Animations API, instant absolu) fonctionnent à l'identique pour
+// une image ou une animation.
 // ============================================================
 
-// Instant représentatif de chaque scène sur l'horloge de 33,6 s de la
-// vitrine (milieu de fenêtre : 12 / 37 / 62 / 87 %).
+const SCENES: Record<ServiceType, () => JSX.Element> = {
+  landing: SceneLanding,
+  intermediaire: SceneSitePages,
+  refonte: SceneRefonte,
+  application: SceneApplication,
+};
+
+// Instant représentatif de chaque scène sur l'horloge de 33,6 s (milieu de
+// fenêtre : 12 / 37 / 62 / 87 %).
 const FREEZE_MS: Record<number, number> = {
   1: 4032,
   2: 12432,
@@ -40,17 +46,58 @@ const FREEZE_MS: Record<number, number> = {
   4: 29232,
 };
 
-// Familles d'animations à figer : la ROTATION de la vitrine (scènes,
-// interstitiel) et les blocs qui la suivent. Les micro-animations internes
-// des scènes (8,4 s) continuent de vivre dans la scène figée.
-const FROZEN_PREFIXES = [
-  "pv-scene-",
-  "pv-trans",
-  "pv-spin-vis",
-  "pv-ok",
-  "pv-burst",
-  "sv-step-",
-];
+// Familles gelées au clic : la rotation (pv-scene-*) et tout ce qui suit la
+// sélection (sv-*). Les micro-animations internes des scènes continuent.
+const FROZEN_PREFIXES = ["pv-scene-", "sv-"];
+
+/* Une couche du cadre : la capture réelle du palier, ou son animation. */
+function FrameLayer({
+  type,
+  label,
+  screenshot,
+}: {
+  type: ServiceType;
+  label: string;
+  screenshot: string;
+}) {
+  if (screenshot) {
+    return (
+      <div className="absolute inset-0">
+        {/* Barre de navigateur, version HTML (les scènes portent la leur
+            en SVG) : mêmes proportions, mêmes pastilles de marque. */}
+        <div className="flex h-[11.8%] items-center gap-1.5 bg-[#23405c]/55 px-3">
+          <span className="h-2 w-2 rounded-full bg-brand-sky" />
+          <span className="h-2 w-2 rounded-full bg-accent-cyan" />
+          <span className="h-2 w-2 rounded-full bg-brand-emerald" />
+        </div>
+        <div className="relative h-[88.2%]">
+          <Image
+            src={screenshot}
+            alt={`Capture d'un projet ${label}`}
+            fill
+            sizes="(max-width: 768px) 100vw, 672px"
+            className="object-cover object-top"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  const Scene = SCENES[type];
+  return (
+    <svg
+      viewBox="0 0 400 220"
+      xmlns="http://www.w3.org/2000/svg"
+      className="absolute inset-0 h-full w-full"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect width="400" height="220" fill="var(--pv-screen, #071522)" />
+      <Scene />
+      <Chrome url="votre-projet.fr" />
+    </svg>
+  );
+}
 
 export default function Services({ data }: { data: ServicesContent }) {
   const formulas = SERVICE_TYPES.map((type) => ({
@@ -87,61 +134,106 @@ export default function Services({ data }: { data: ServicesContent }) {
 
       <div
         ref={rootRef}
-        className="relative mx-auto my-auto w-full max-w-6xl px-6 py-8"
+        className="relative mx-auto my-auto w-full max-w-6xl px-6 py-6"
       >
-        {/* L'écran, seul au centre, en grand : une formule à la fois. */}
+        {/* Le cadre, seul au centre : capture réelle ou animation, une
+            formule à la fois. L'aspect est celui des scènes (400/220). */}
         <Reveal delay={0.1}>
-          <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-xl ring-1 ring-border">
-            <HeroShowcase />
+          <div className="relative mx-auto aspect-[400/220] w-full max-w-xl overflow-hidden rounded-xl ring-1 ring-border">
+            {formulas.map((formula, i) => (
+              <div key={formula.type} className={`pv-scene-${i + 1} absolute inset-0`}>
+                <FrameLayer
+                  type={formula.type}
+                  label={formula.label}
+                  screenshot={formula.screenshot}
+                />
+              </div>
+            ))}
           </div>
         </Reveal>
 
-        {/* Les 4 formules, toujours visibles sous l'écran. Le bloc dont la
-            scène joue est plein (sv-step-*), les autres en retrait. */}
-        <RevealGroup className="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Les 4 paliers, toujours visibles. UNE COLONNE sous 768 px : à
+            deux colonnes, les descriptions de 01/02 se faisaient tronquer
+            sur mobile. La coupe à 3 lignes ne vaut qu'à partir de lg, où
+            les colonnes doivent rester à la même hauteur. */}
+        <RevealGroup className="mt-8 grid gap-x-8 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula, i) => (
             <RevealItem
               key={formula.type}
               className="group relative cursor-pointer"
             >
-              {/* Le bloc est le bouton de sélection de la scène (calque
-                  invisible, comme la Méthode). */}
               <button
                 type="button"
                 onClick={() => setScene(scene === i + 1 ? null : i + 1)}
                 aria-pressed={scene === i + 1}
-                aria-label={`Voir l'animation ${formula.label}`}
+                aria-label={`Voir ${formula.label} dans le cadre`}
                 className="absolute inset-0 z-10 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan/60"
               />
 
+              {/* Indicateur de palier ACTIF : filet au dégradé de marque,
+                  sur la même horloge que le cadre (sv-bar-*). */}
+              <div
+                aria-hidden="true"
+                className={`sv-bar-${i + 1} rule-brand mb-4 h-0.5 w-full rounded-full`}
+              />
+
+              {/* Bloc atténué à 0,55 et non 0,4 : à 0,4 le texte passait
+                  sous le seuil AA — à 0,55 le titre tient ~5,2:1 et la
+                  description ~4,6:1 sur le fond nuit. */}
               <div className={`sv-step-${i + 1}`}>
-                <span className="text-gradient inline-block font-mono text-xl font-semibold tracking-display">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-gradient inline-block font-mono text-xl font-semibold tracking-display">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {/* Chevron : les paliers sont cliquables, il faut que ça
+                      se voie même à l'état inactif. */}
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="h-4 w-4 text-muted transition-transform group-hover:translate-x-0.5"
+                  >
+                    <path d="m9 5 7 7-7 7" />
+                  </svg>
+                </div>
                 <h3 className="mt-2 text-base font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
                   {formula.label}
                 </h3>
-                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
+                <p className="mt-2 text-sm leading-relaxed text-muted lg:line-clamp-3">
                   {formula.description}
                 </p>
-                {/* Vrai lien vers la page de la formule, AU-DESSUS du calque
-                    de sélection (z-20). */}
+                {formula.delay && (
+                  <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-teal">
+                    {formula.delay}
+                  </p>
+                )}
                 <Link
                   href={serviceHref(formula.type)}
                   className="relative z-20 mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan"
                 >
                   Découvrir
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform duration-200 group-hover:translate-x-0.5"
-                  >
-                    →
-                  </span>
+                  <span aria-hidden="true">→</span>
                 </Link>
               </div>
             </RevealItem>
           ))}
         </RevealGroup>
+
+        {/* Appel à l'action de fin de section. */}
+        <Reveal>
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/#contact"
+              className="btn-accent inline-flex px-7 py-3 text-sm"
+            >
+              Nous contacter
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

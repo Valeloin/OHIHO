@@ -536,6 +536,19 @@ export default function AdminEditor({ initial }: { initial: SiteContent }) {
                       value={offer.useCases}
                       onChange={(v) => setOffer(key, { useCases: v })}
                     />
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Field
+                        label="Capture (chemin dans /public)"
+                        value={offer.screenshot}
+                        onChange={(v) => setOffer(key, { screenshot: v })}
+                        hint="Ex. /captures/cadance.png — vide : l'animation s'affiche."
+                      />
+                      <Field
+                        label="Délai indicatif"
+                        value={offer.delay}
+                        onChange={(v) => setOffer(key, { delay: v })}
+                      />
+                    </div>
                   </div>
                 </div>
               );

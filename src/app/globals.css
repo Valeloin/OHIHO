@@ -436,7 +436,10 @@ body {
   /* Phrase d'accroche sous le titre de section. Nettement plus petite que
      lui : c'est elle qui explique, pas elle qui nomme. */
   .section-lead {
-    font-size: clamp(1.375rem, 2.4vw, 2rem);
+    /* Plancher abaissé pour le mobile (18 px) : à 22 px, deux lignes
+       d'accroche + le nom de section mangeaient plus du tiers d'un écran
+       de téléphone. */
+    font-size: clamp(1.125rem, 3.4vw, 2rem);
     line-height: 1.25;
     font-weight: 600;
     letter-spacing: -0.015em;
@@ -1258,6 +1261,88 @@ body {
 .sv-step-4 {
   animation-name: sv-step-4;
 }
+/* Barre du palier ACTIF (sous-ligne au dégradé de marque) : visible
+   uniquement pendant la fenêtre de sa scène — c'est l'indicateur demandé
+   pour montrer quel palier joue, en plus du contraste. */
+.sv-bar-1,
+.sv-bar-2,
+.sv-bar-3,
+.sv-bar-4 {
+  animation-duration: 33.6s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+.sv-bar-1 {
+  animation-name: sv-bar-1;
+  /* Sans animation (prefers-reduced-motion) : la scène 1 reste affichée,
+     sa barre aussi. */
+  opacity: 1;
+}
+.sv-bar-2 {
+  animation-name: sv-bar-2;
+}
+.sv-bar-3 {
+  animation-name: sv-bar-3;
+}
+.sv-bar-4 {
+  animation-name: sv-bar-4;
+}
+@keyframes sv-bar-1 {
+  0%,
+  24% {
+    opacity: 1;
+  }
+  26%,
+  98% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes sv-bar-2 {
+  0%,
+  24% {
+    opacity: 0;
+  }
+  26%,
+  49% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sv-bar-3 {
+  0%,
+  49% {
+    opacity: 0;
+  }
+  51%,
+  74% {
+    opacity: 1;
+  }
+  76%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sv-bar-4 {
+  0%,
+  74% {
+    opacity: 0;
+  }
+  76%,
+  98% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes sv-step-1 {
   0%,
   24% {
@@ -1265,7 +1350,7 @@ body {
   }
   26%,
   98% {
-    opacity: 0.4;
+    opacity: 0.55;
   }
   100% {
     opacity: 1;
@@ -1274,7 +1359,7 @@ body {
 @keyframes sv-step-2 {
   0%,
   24% {
-    opacity: 0.4;
+    opacity: 0.55;
   }
   26%,
   49% {
@@ -1282,13 +1367,13 @@ body {
   }
   51%,
   100% {
-    opacity: 0.4;
+    opacity: 0.55;
   }
 }
 @keyframes sv-step-3 {
   0%,
   49% {
-    opacity: 0.4;
+    opacity: 0.55;
   }
   51%,
   74% {
@@ -1296,20 +1381,20 @@ body {
   }
   76%,
   100% {
-    opacity: 0.4;
+    opacity: 0.55;
   }
 }
 @keyframes sv-step-4 {
   0%,
   74% {
-    opacity: 0.4;
+    opacity: 0.55;
   }
   76%,
   98% {
     opacity: 1;
   }
   100% {
-    opacity: 0.4;
+    opacity: 0.55;
   }
 }
 
