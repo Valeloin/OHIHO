@@ -438,17 +438,23 @@ body {
     text-wrap: balance;
   }
 
-  /* Titre du hero (H1) : toujours un cran au-dessus des titres de section,
-     c'est lui le repère principal de la page. */
-  .hero-title {
-    /* Agrandi le 2026-07-27 sur capture annotée du h1 : c'est LE titre que
-       Valentin veut imposant, la hiérarchie descend de lui. */
-    font-size: clamp(3.25rem, 9.2vw, 6.25rem);
-    line-height: 1.03;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
+  /* Variante alignée à gauche du nom de section, pour le hero : sa colonne
+     de texte est à gauche, un intertitre centré y flotterait dans le vide. */
+  .section-name--left {
+    justify-content: flex-start;
+    text-align: left;
+    /* Sur plusieurs lignes (le hero), un point centré verticalement flotte
+       au milieu du pavé : on le cale sur la première ligne. */
+    align-items: flex-start;
   }
+  .section-name--left::before {
+    margin-top: 0.45em;
+  }
+
+  /* Le hero suit le même patron que les sections depuis le 2026-07-27 :
+     le libellé teal est le H1 (en .section-name), la phrase blanche est
+     un sous-titre en .section-lead — l'ancienne .hero-title (jusqu'à
+     6,25rem) a été retirée avec ce changement. */
 
   .section-title {
     /* 4rem et non 5 : à 5rem, un titre de 55 signes tombait sur QUATRE

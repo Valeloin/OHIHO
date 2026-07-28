@@ -79,21 +79,23 @@ export default function Hero({
               elle atterrit sous les boutons, hors écran au premier coup
               d'œil. Dès `lg` la colonne se reforme et les ordres tombent. */}
           <div className="contents lg:block">
-            {/* Libellé mono capitales espacées, comme « ● WEB & DESIGN » sur
-                la banderole : le point vert vient de `.kicker::before`. */}
-            <motion.span variants={ITEM} className="kicker order-1">
-              {data.badge}
-            </motion.span>
-
+            {/* Même patron que les sections (demande du 2026-07-27) : le
+                libellé teal est LE titre (H1, taille des noms de section,
+                aligné à gauche puisque la colonne l'est), et la phrase
+                passe en sous-titre à la taille des .section-lead. */}
             <motion.h1
               variants={ITEM}
-              className="hero-title order-2 mt-6"
+              className="section-name section-name--left order-1"
             >
+              {data.badge}
+            </motion.h1>
+
+            <motion.h2 variants={ITEM} className="section-lead order-2 mt-6">
               {/* Première ligne en blanc, seconde au dégradé de marque
                   (bleu → teal → vert), comme sur la banderole. STATIQUE. */}
               <span className="text-foreground">{data.titleLead}</span>{" "}
               <span className="text-gradient">{data.titleAccent}</span>
-            </motion.h1>
+            </motion.h2>
 
             <motion.p
               variants={ITEM}
