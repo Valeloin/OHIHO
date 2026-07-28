@@ -663,11 +663,11 @@ body {
     transform: scaleX(1);
     opacity: 1;
   }
-  96% {
+  94% {
     transform: scaleX(1);
     opacity: 1;
   }
-  98.5% {
+  97% {
     transform: scaleX(1);
     opacity: 0;
   }
@@ -695,11 +695,11 @@ body {
     transform: scaleY(1);
     opacity: 1;
   }
-  96% {
+  94% {
     transform: scaleY(1);
     opacity: 1;
   }
-  98.5% {
+  97% {
     transform: scaleY(1);
     opacity: 0;
   }
@@ -896,10 +896,10 @@ body {
     opacity: 0.4;
   }
   58.3%,
-  92% {
+  94% {
     opacity: 1;
   }
-  94%,
+  97%,
   100% {
     opacity: 0.4;
   }
@@ -950,7 +950,7 @@ body {
      pleine lumière : on ne voyait plus qu'un anneau délavé et vide sous un
      texte net. */
   75.5%,
-  96% {
+  94% {
     opacity: 1;
     transform: scale(1);
   }
@@ -958,7 +958,7 @@ body {
      disque découvrait le trait derrière lui, qu'on voyait le traverser.
      Le cercle garde sa taille pleine jusqu'à disparition complète, puis
      revient à l'échelle de départ une fois invisible. */
-  98.5% {
+  97% {
     opacity: 0;
     transform: scale(1);
   }
@@ -1031,7 +1031,7 @@ body {
   /* Tenu jusqu'à 96 %, comme le cercle : la gerbe part à 92 % et la coche
      doit encore être là quand elle jaillit. */
   79%,
-  96% {
+  94% {
     stroke-dashoffset: 0;
     opacity: 1;
   }
@@ -1040,7 +1040,7 @@ body {
      REMBOBINAIT à l'écran, bien visible — c'est ce qui se lisait comme un
      bug en fin de course. La remise à zéro se fait juste après, à opacité
      déjà nulle, comme partout ailleurs dans la frise. */
-  98.5% {
+  97% {
     stroke-dashoffset: 0;
     opacity: 0;
   }
@@ -1130,44 +1130,19 @@ body {
     opacity: 0;
   }
   57.1%,
-  96% {
+  94% {
     opacity: 1;
   }
-  98.5%,
+  97%,
   100% {
     opacity: 0;
   }
 }
 
-/* ---------- Frise Méthode : sélection manuelle ----------
-   Comme la vitrine du hero (`pv-manual`) : cliquer une puce fige la frise.
-   Toutes les familles (desc, num, txt, dot, fill) tournent sur la MÊME
-   horloge de 13,44 s — les geler toutes au MÊME instant (délai négatif)
-   suffit à obtenir un état cohérent pour l'étape choisie, sans recalculer
-   chaque famille à la main : le lien est garanti par construction, comme
-   le reste de la frise.
-
-   ⚠️ L'instant retenu doit tomber dans une fenêtre où TOUTES les familles
-   sont posées, jamais en pleine transition : figer un état intermédiaire
-   donne une pièce à moitié jouée, qui se lit comme un bug. C'est ce qui
-   arrivait à l'étape 4 à 76 %, en plein tracé de la coche (elle restait
-   dessinée à moitié). Elle est donc calée à 86 %, après la fin du tracé
-   (79 %) et avant le début du fondu de sortie (92 %). */
-.frise-manual [class*="frise-"] {
-  animation-play-state: paused;
-}
-.frise-manual[data-step="1"] [class*="frise-"] {
-  animation-delay: -1.34s;
-}
-.frise-manual[data-step="2"] [class*="frise-"] {
-  animation-delay: -3.85s;
-}
-.frise-manual[data-step="3"] [class*="frise-"] {
-  animation-delay: -6.35s;
-}
-.frise-manual[data-step="4"] [class*="frise-"] {
-  animation-delay: -11.56s;
-}
+/* Le gel manuel de la frise Méthode est passé en Web Animations API le
+   2026-07-28 (voir HowItWorks.tsx) : un `animation-delay` négatif +
+   `paused` ne fige pas à un instant absolu — la position dépendait du
+   moment du clic. */
 
 /* ---------- Espace tickets (section « Pourquoi OHIHO ») ----------
    Trois demandes ouvertes se règlent l'une après l'autre, puis le cycle

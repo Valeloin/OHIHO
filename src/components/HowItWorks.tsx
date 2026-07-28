@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
@@ -40,10 +40,46 @@ import type { MethodContent } from "@/lib/content/types";
 // passage de l'onglet en arrière-plan.
 // ============================================================
 
+// Instant représentatif de chaque étape, en millisecondes sur l'horloge de
+// 13,44 s : pile à l'arrivée du trait sur le jalon (2,5 / 20,5 / 39,2 %),
+// et 86 % pour l'étape 4 — tout est posé, coche comprise.
+const FREEZE_MS: Record<number, number> = {
+  1: 336,
+  2: 2890,
+  3: 5376,
+  4: 11558,
+};
+
 export default function HowItWorks({ data }: { data: MethodContent }) {
   // `null` = la frise tourne toute seule. Un numéro = le visiteur a choisi
   // son étape en cliquant son bloc ; recliquer rend la main à la rotation.
   const [step, setStep] = useState<number | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  // Gel par la Web Animations API, et non par un `animation-delay` négatif
+  // en CSS : `paused` fige une animation à son temps ÉCOULÉ, et le délai ne
+  // fait que décaler ce temps — la position gelée dépendait donc du moment
+  // du clic, d'où des états incohérents (trait au milieu d'un segment,
+  // scène en plein fondu). Ici on pose `currentTime` : un instant ABSOLU,
+  // le même pour toutes les pièces. À la reprise, elles repartent toutes de
+  // ce même instant, toujours en phase.
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    root.getAnimations({ subtree: true }).forEach((animation) => {
+      if (
+        !(animation instanceof CSSAnimation) ||
+        !animation.animationName.startsWith("frise-")
+      )
+        return;
+      if (step) {
+        animation.currentTime = FREEZE_MS[step];
+        animation.pause();
+      } else {
+        animation.play();
+      }
+    });
+  }, [step]);
 
   return (
     <section
@@ -53,12 +89,12 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
       <SectionBackdrop />
       <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
-      {/* `frise-manual` + `data-step` gèlent TOUTE la section (écran, rail,
-          jalons, blocs) sur l'instant représentatif de l'étape choisie —
-          un seul instant suffit puisque tout partage la même horloge. */}
+      {/* Le gel au clic est géré par la Web Animations API (voir l'effet
+          ci-dessus) : un seul instant absolu, partagé par toutes les pièces
+          puisqu'elles vivent sur la même horloge. */}
       <div
-        className={`relative mx-auto my-auto w-full max-w-5xl px-6 py-8 ${step ? "frise-manual" : ""}`}
-        data-step={step ?? undefined}
+        ref={rootRef}
+        className="relative mx-auto my-auto w-full max-w-5xl px-6 py-8"
       >
         {/* L'écran, seul au centre : c'est LUI que la frise commente. */}
         <Reveal delay={0.1}>
