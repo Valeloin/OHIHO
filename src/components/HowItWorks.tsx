@@ -227,7 +227,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           {data.steps.map((item, i) => (
             <RevealItem
               key={i}
-              className="group relative cursor-pointer pl-6 lg:pl-0 lg:pt-5"
+              className="group relative cursor-pointer pl-6 lg:pt-5"
             >
               {/* C'EST CE BLOC LE BOUTON. Le calque couvre toute l'étape et
                   porte le clic ; le contenu (numéro, titre, description)
@@ -269,41 +269,32 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                 </span>
               </div>
 
-              {/* Filet VERTICAL le long de l'étape dont la scène joue en ce
-                  moment sur l'écran, au-dessus. Sans lui, rien ne reliait les
-                  deux à l'œil : une fois la frise passée, les quatre étapes
-                  s'affichaient à l'identique et rien ne disait laquelle était
-                  illustrée.
-                  Il emprunte la classe `frise-desc-N`, celle qui pilote déjà
-                  l'affichage de la scène correspondante : le lien est garanti
-                  PAR CONSTRUCTION, il n'y a pas un second jeu d'horaires à
-                  tenir aligné à la main.
-                  Il est posé dans la GOUTTIÈRE (-left-4), pas dans le bloc :
-                  le texte garde ainsi son alignement exact avec le jalon de
-                  la frise qui le surplombe.
-                  ⚠️ `opacity-0` et non `hidden` en dessous de `lg` : en
-                  mobile le rail vertical de la frise occupe déjà cette place,
-                  mais `display:none` ARRÊTERAIT l'animation et la ferait
-                  repartir de zéro au retour, désynchronisant ce filet de
-                  toutes les autres pièces de l'horloge. */}
+              {/* LIEN VERTICAL du jalon vers le bloc : il se trace de haut en
+                  bas quand le trait du rail atteint le jalon, et reste tracé.
+                  C'est lui qui fait de la frise UNE SEULE animation : rail →
+                  jalon → lien → bloc, chaque pièce déclenche visuellement la
+                  suivante (voir frise-link-* dans globals.css).
+                  Desktop seulement : en mobile le rail vertical occupe déjà
+                  cette place. `opacity-0` et non `hidden`, comme partout —
+                  `display:none` arrêterait l'animation. */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -left-4 top-8 bottom-0 w-0.5 opacity-0 lg:opacity-100"
+                className="pointer-events-none absolute bottom-0 left-0 top-1.5 w-0.5 -translate-x-1/2 opacity-0 lg:opacity-100"
               >
                 <div
-                  className={`frise-desc-${i + 1} rule-brand-y h-full w-full rounded-full`}
+                  className={`frise-link-${i + 1} rule-brand-y h-full w-full rounded-full`}
                 />
               </div>
 
-              {/* Au passage de la frise : le numéro grossit d'un coup, le
-                  texte se déhanche. Déclenché par les mêmes horloges que le
-                  jalon, donc parfaitement synchrone. */}
-              <span
-                className={`frise-num-${i + 1} text-gradient font-mono text-2xl font-semibold tracking-display`}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className={`frise-txt-${i + 1}`}>
+              {/* Le bloc ENTIER — numéro, titre, description — s'allume et se
+                  lève d'un seul mouvement quand le lien le rejoint. Plus de
+                  réactions séparées par pièce (grossissement du numéro,
+                  déhanchement du texte) : c'était ce qui donnait l'impression
+                  de blocs indépendants. */}
+              <div className={`frise-step-${i + 1}`}>
+                <span className="text-gradient inline-block font-mono text-2xl font-semibold tracking-display">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 {/* Le titre vire au teal au survol du bloc : c'est le seul
                     signe que l'étape est cliquable, le calque du bouton étant
                     invisible. */}

@@ -408,9 +408,9 @@ body {
     justify-content: center;
     gap: 0.65em;
     font-family: var(--font-mono), monospace;
-    /* Réglé en trois passes avec Valentin : 2,75rem (trop), 2,25 (trop
-       peu), 2,5 — ne plus y toucher sans demande explicite. */
-    font-size: clamp(1.625rem, 3.3vw, 2.5rem);
+    /* Réglé en quatre passes avec Valentin : 2,75rem (trop), 2,25 (trop
+       peu), 2,5 (trop), 2rem — ne plus y toucher sans demande explicite. */
+    font-size: clamp(1.375rem, 2.6vw, 2rem);
     line-height: 1.15;
     font-weight: 500;
     text-transform: uppercase;
@@ -792,220 +792,231 @@ body {
   }
 }
 
-/* Réaction de l'étape au passage de la frise : le numéro grossit d'un coup
-   et son texte se déhanche brièvement. Les deux se déclenchent au moment où
-   le remplissage atteint le jalon (0, 18, 36 et 54 % du cycle de 13,44 s),
-   puis plus rien : ce sont des à-coups ponctuels, pas des boucles — le
-   mouvement continu et ondulatoire est proscrit sur ce site.
-   Le grossissement reste contenu (1 → 1.09) pour ne pas faire sauter la
-   mise en page. */
-.frise-num-1,
-.frise-num-2,
-.frise-num-3,
-.frise-num-4,
-.frise-txt-1,
-.frise-txt-2,
-.frise-txt-3,
-.frise-txt-4 {
+/* UNE SEULE VAGUE (2026-07-27). L'ancienne frise juxtaposait quatre blocs
+   qui réagissaient chacun dans leur coin (grossissement du numéro,
+   déhanchement du texte) : ça se lisait comme des blocs, pas comme une
+   seule animation. Tout découle désormais du remplissage du rail : quand il
+   atteint un jalon, un lien vertical descend du jalon dans le bloc
+   (frise-link-*), puis le bloc entier — numéro, titre, description —
+   s'allume et se lève d'un seul mouvement (frise-step-*). Tout ce que la
+   vague a touché RESTE allumé, puis tout s'éteint ensemble en fin de cycle
+   (94-97 %), exactement comme le trait et les jalons.
+   Opacité + transform uniquement, comme le reste de la frise : tout tourne
+   sur l'horloge du compositeur (voir frise-dot-*), rien ne peut dériver. */
+.frise-step-1,
+.frise-step-2,
+.frise-step-3,
+.frise-step-4,
+.frise-link-1,
+.frise-link-2,
+.frise-link-3,
+.frise-link-4 {
   animation-duration: 13.44s;
   animation-timing-function: ease-out;
   animation-iteration-count: infinite;
 }
-/* Le numéro est un <span> : il lui faut inline-block pour accepter une
-   transformation. Le bloc de texte, lui, reste un bloc — le passer en
-   inline-block le ferait se rétracter sur son contenu. */
-.frise-num-1,
-.frise-num-2,
-.frise-num-3,
-.frise-num-4 {
-  display: inline-block;
+/* Le lien se TRACE du jalon vers le bloc : il grandit depuis le haut. */
+.frise-link-1,
+.frise-link-2,
+.frise-link-3,
+.frise-link-4 {
+  transform-origin: center top;
+}
+.frise-step-1 {
+  animation-name: frise-step-1;
+}
+.frise-step-2 {
+  animation-name: frise-step-2;
+}
+.frise-step-3 {
+  animation-name: frise-step-3;
+}
+.frise-step-4 {
+  animation-name: frise-step-4;
+}
+.frise-link-1 {
+  animation-name: frise-link-1;
+}
+.frise-link-2 {
+  animation-name: frise-link-2;
+}
+.frise-link-3 {
+  animation-name: frise-link-3;
+}
+.frise-link-4 {
+  animation-name: frise-link-4;
 }
 
-/* Le grossissement du texte part du bord GAUCHE, pas du centre : il suit
-   ainsi le sens de progression de la frise. Centré, le bloc déborderait des
-   deux côtés à chaque passage et mordrait sur la colonne voisine. */
-.frise-txt-1,
-.frise-txt-2,
-.frise-txt-3,
-.frise-txt-4 {
-  transform-origin: left center;
-}
-.frise-num-1 {
-  animation-name: frise-num-1;
-}
-.frise-num-2 {
-  animation-name: frise-num-2;
-}
-.frise-num-3 {
-  animation-name: frise-num-3;
-}
-.frise-num-4 {
-  animation-name: frise-num-4;
-}
-.frise-txt-1 {
-  animation-name: frise-txt-1;
-}
-.frise-txt-2 {
-  animation-name: frise-txt-2;
-}
-.frise-txt-3 {
-  animation-name: frise-txt-3;
-}
-.frise-txt-4 {
-  animation-name: frise-txt-4;
-}
-
-/* Le numéro reste en retrait (désaturé) tant que la frise ne l'a pas atteint,
-   puis il bondit et prend ses couleurs de marque. C'est ce qui fait qu'on lit
-   la progression sur toute la zone, et pas seulement sur le trait. */
-@keyframes frise-num-1 {
-  0% {
-    transform: scale(1);
-    opacity: 0.35;
+/* Les instants suivent ceux des jalons (0,4 / 19 / 37,7 / 56,3 %) : le
+   lien part quand le trait touche le jalon, le bloc s'allume pendant que le
+   lien descend. La remise à zéro se fait toujours à opacité nulle. */
+@keyframes frise-step-1 {
+  0%,
+  1.6% {
+    opacity: 0.3;
+    transform: translateY(10px);
   }
-  2.4% {
-    transform: scale(1.09);
+  4.2%,
+  94% {
     opacity: 1;
+    transform: translateY(0);
   }
-  5.4%,
-  96% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  98.5%,
+  97%,
   100% {
-    transform: scale(1);
-    opacity: 0.35;
+    opacity: 0.3;
+    transform: translateY(10px);
   }
 }
-@keyframes frise-num-2 {
+@keyframes frise-link-1 {
+  0%,
+  0.4% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  2.6%,
+  94% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  96% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+  99.5% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+}
+@keyframes frise-step-2 {
+  0%,
+  20.2% {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+  22.8%,
+  94% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  97%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+}
+@keyframes frise-link-2 {
   0%,
   19% {
-    transform: scale(1);
-    opacity: 0.35;
-  }
-  21% {
-    transform: scale(1.09);
+    transform: scaleY(0);
     opacity: 1;
   }
-  24%,
+  21.2%,
+  94% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
   96% {
-    transform: scale(1);
-    opacity: 1;
+    transform: scaleY(1);
+    opacity: 0;
   }
-  98.5%,
+  99.5% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
   100% {
-    transform: scale(1);
-    opacity: 0.35;
+    transform: scaleY(0);
+    opacity: 1;
   }
 }
-@keyframes frise-num-3 {
+@keyframes frise-step-3 {
+  0%,
+  38.9% {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+  41.5%,
+  94% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  97%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+}
+@keyframes frise-link-3 {
   0%,
   37.7% {
-    transform: scale(1);
-    opacity: 0.35;
-  }
-  39.7% {
-    transform: scale(1.09);
+    transform: scaleY(0);
     opacity: 1;
   }
-  42.7%,
+  39.9%,
+  94% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
   96% {
-    transform: scale(1);
-    opacity: 1;
+    transform: scaleY(1);
+    opacity: 0;
   }
-  98.5%,
+  99.5% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
   100% {
-    transform: scale(1);
-    opacity: 0.35;
+    transform: scaleY(0);
+    opacity: 1;
   }
 }
-@keyframes frise-num-4 {
+@keyframes frise-step-4 {
+  0%,
+  57.5% {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+  60.1%,
+  94% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  97%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+}
+@keyframes frise-link-4 {
   0%,
   56.3% {
-    transform: scale(1);
-    opacity: 0.35;
-  }
-  58.3% {
-    transform: scale(1.09);
+    transform: scaleY(0);
     opacity: 1;
   }
-  61.3%,
+  58.5%,
+  94% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
   96% {
-    transform: scale(1);
-    opacity: 1;
+    transform: scaleY(1);
+    opacity: 0;
   }
-  98.5%,
+  99.5% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
   100% {
-    transform: scale(1);
-    opacity: 0.35;
+    transform: scaleY(0);
+    opacity: 1;
   }
 }
 
-/* GROSSISSEMENT au passage de la frise, et non plus déhanchement.
-   Le réglage précédent était quatre allers-retours latéraux de 3 px qui
-   s'amortissaient : un tremblement, qui ne racontait rien de la frise et
-   n'avait aucun rapport avec le reste de la section — tout le reste y grandit
-   ou se remplit, rien n'y tremble.
-   Le texte grandit maintenant de 5 % puis revient, exactement comme le numéro
-   qui le surplombe (frise-num-*, déjà un grossissement). Les deux pièces d'un
-   même bloc réagissent donc de la même façon au passage du trait.
-   ⚠️ L'origine est à GAUCHE (voir la règle .frise-txt-*) : le texte grandit
-   dans le sens de progression de la frise. Centré, il déborderait des deux
-   côtés et empiéterait sur la colonne voisine.
-   Les instants de déclenchement sont inchangés — 0, 19, 37,7 et 56,3 % —
-   ce sont ceux où le remplissage atteint réellement chaque jalon. */
-@keyframes frise-txt-1 {
-  0% {
-    transform: scale(1);
-  }
-  1.5% {
-    transform: scale(1.05);
-  }
-  5%,
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes frise-txt-2 {
-  0%,
-  19% {
-    transform: scale(1);
-  }
-  20.5% {
-    transform: scale(1.05);
-  }
-  24%,
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes frise-txt-3 {
-  0%,
-  37.7% {
-    transform: scale(1);
-  }
-  39.2% {
-    transform: scale(1.05);
-  }
-  42.7%,
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes frise-txt-4 {
-  0%,
-  56.3% {
-    transform: scale(1);
-  }
-  57.8% {
-    transform: scale(1.05);
-  }
-  61.3%,
-  100% {
-    transform: scale(1);
-  }
-}
+
+
 
 /* Arrivée de la frise : quand le remplissage atteint le bout (72 % du cycle),
    l'emblème OHIHO apparaît dans son cercle et une gerbe d'étincelles jaillit
