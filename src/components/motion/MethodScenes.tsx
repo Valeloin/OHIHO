@@ -177,6 +177,63 @@ export default function MethodScenes({ steps }: { steps: number }) {
           <Scene />
         </g>
       ))}
+
+      {/* TRANSITION DE MARQUE entre les scènes, la même que la vitrine du
+          hero/services : un voile nuit couvre le changement, l'emblème OHIHO
+          s'y affiche avec son anneau en rotation. Calée sur l'horloge de la
+          frise (classes frise-veil / frise-emblem, quatre passages par
+          cycle) : le préfixe `frise-` garantit qu'elle gèle et reprend avec
+          le reste au clic sur une étape. */}
+      <g className="frise-veil">
+        <rect x="0" y="26" width="400" height="194" fill={SCREEN} opacity="0.94" />
+      </g>
+      <g className="frise-emblem">
+        <svg x="166" y="89" width="68" height="68" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient
+              id="mvt-ring"
+              x1="18"
+              y1="10"
+              x2="86"
+              y2="92"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0" stopColor="rgb(var(--brand-sky))" />
+              <stop offset="0.5" stopColor="rgb(var(--brand-teal))" />
+              <stop offset="1" stopColor="rgb(var(--brand-emerald))" />
+            </linearGradient>
+            <radialGradient id="mvt-disc" cx="0.4" cy="0.32" r="0.9">
+              <stop offset="0" stopColor="#16273f" />
+              <stop offset="1" stopColor="#0a1524" />
+            </radialGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46.5" fill="url(#mvt-disc)" />
+          <circle
+            cx="50"
+            cy="50"
+            r="46.5"
+            fill="none"
+            stroke="var(--pv-blocks, #23405c)"
+            strokeWidth="5"
+          />
+          <g className="pv-rotate">
+            <circle
+              cx="50"
+              cy="50"
+              r="46.5"
+              fill="none"
+              stroke="url(#mvt-ring)"
+              strokeWidth="5"
+              strokeLinecap="round"
+              strokeDasharray="152 140"
+            />
+          </g>
+          <rect x="30" y="28" width="8" height="44" rx="4" fill="rgb(var(--brand-sky))" />
+          <rect x="46" y="21" width="8" height="58" rx="4" fill="rgb(var(--brand-teal))" />
+          <rect x="62" y="28" width="8" height="44" rx="4" fill="rgb(var(--brand-emerald))" />
+        </svg>
+      </g>
+
       <Chrome url="votre-projet.fr" />
     </svg>
   );
