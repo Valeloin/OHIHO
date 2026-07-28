@@ -36,10 +36,14 @@ const ITEM: Variants = {
 export default function Hero({
   data,
   formulaLabels,
+  formulaDescriptions = [],
   showcase,
 }: {
   data: HeroContent;
   formulaLabels: string[];
+  /** Une phrase par formule, relayée sous la vignette sur la même horloge
+      que les scènes (pv-title-*). Même ordre que formulaLabels. */
+  formulaDescriptions?: string[];
   showcase: ReactNode;
 }) {
   // `null` = la vitrine tourne toute seule. Un numéro = le visiteur a choisi
@@ -56,7 +60,10 @@ export default function Hero({
         // comme sur toutes les sections d'accueil depuis le 2026-07-27.
         // Le rembourrage interne reste modeste : il sert de marge minimale
         // quand le contenu approche la hauteur d'écran, pas de rythme.
-        className="relative mx-auto flex w-full max-w-6xl flex-col px-6 py-10"
+        /* `my-auto` : `.section-screen` est une colonne sans centrage depuis
+           que les titres de section sont épinglés en haut — chaque contenu
+           se centre lui-même dans l'espace restant. */
+        className="relative mx-auto my-auto flex w-full max-w-6xl flex-col px-6 py-10"
         variants={CONTAINER}
         initial="hidden"
         animate="visible"
@@ -79,23 +86,26 @@ export default function Hero({
               elle atterrit sous les boutons, hors écran au premier coup
               d'œil. Dès `lg` la colonne se reforme et les ordres tombent. */}
           <div className="contents lg:block">
-            {/* Même patron que les sections (demande du 2026-07-27) : le
-                libellé teal est LE titre (H1, taille des noms de section,
-                aligné à gauche puisque la colonne l'est), et la phrase
-                passe en sous-titre à la taille des .section-lead. */}
+            {/* Libellé mono capitales espacées, comme « ● WEB & DESIGN » sur
+                la banderole : le point vert vient de `.kicker::before`. */}
+            <motion.span variants={ITEM} className="kicker order-1">
+              {data.badge}
+            </motion.span>
+
+            {/* Le TITRE garde son texte mais prend le FORMAT des noms de
+                section (mono capitales teal, point vert, même taille) —
+                précision de Valentin du 2026-07-27 : « changer le format,
+                pas le texte ». La partie accent garde le dégradé de marque
+                pour se distinguer dans les capitales teal. */}
             <motion.h1
               variants={ITEM}
-              className="section-name section-name--left order-1"
+              className="section-name section-name--left order-2 mt-6"
             >
-              {data.badge}
+              <span>
+                {data.titleLead}{" "}
+                <span className="text-gradient">{data.titleAccent}</span>
+              </span>
             </motion.h1>
-
-            <motion.h2 variants={ITEM} className="section-lead order-2 mt-6">
-              {/* Première ligne en blanc, seconde au dégradé de marque
-                  (bleu → teal → vert), comme sur la banderole. STATIQUE. */}
-              <span className="text-foreground">{data.titleLead}</span>{" "}
-              <span className="text-gradient">{data.titleAccent}</span>
-            </motion.h2>
 
             <motion.p
               variants={ITEM}
@@ -232,6 +242,22 @@ export default function Hero({
               <div aria-hidden="true" className="card-surface p-2">
                 {showcase}
               </div>
+            </div>
+
+            {/* Description de la formule en cours, SOUS la vignette (demande
+                du 2026-07-27) : elle se relaie sur la même horloge que les
+                scènes (pv-title-*), le lien est garanti par construction.
+                Hauteur fixe : les quatre phrases sont en absolu, sans elle le
+                bloc serait de hauteur nulle et la mise en page sauterait. */}
+            <div aria-hidden="true" className="relative mt-4 h-12">
+              {formulaDescriptions.map((description, i) => (
+                <p
+                  key={i}
+                  className={`pv-title-${i + 1} absolute inset-0 mx-auto max-w-md text-center text-sm leading-snug text-muted`}
+                >
+                  {description}
+                </p>
+              ))}
             </div>
           </motion.div>
         </div>

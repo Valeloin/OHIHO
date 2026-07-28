@@ -24,22 +24,17 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
+      <SectionLabel>{data.kicker}</SectionLabel>
+
       {/* `frise-manual` + `data-step` gèlent TOUTE la frise (scène, jalons,
-          remplissage, numéros) sur l'instant représentatif de l'étape
+          remplissage, blocs) sur l'instant représentatif de l'étape
           choisie — voir globals.css. Un seul instant suffit pour toutes les
           familles d'animation puisqu'elles partagent la même horloge de
           13,44 s : pas besoin de recalculer chaque état à la main. */}
       <div
-        className={`relative mx-auto w-full max-w-7xl px-6 py-14 ${step ? "frise-manual" : ""}`}
+        className={`relative mx-auto my-auto w-full max-w-7xl px-6 py-10 ${step ? "frise-manual" : ""}`}
         data-step={step ?? undefined}
       >
-        {/* En-tête sur deux colonnes : le titre à gauche, et à droite une
-            carte qui récapitule le déroulé. Elle donne à la section la
-            hauteur des autres et sert de légende à la frise — ses jalons
-            s'allument sur la MÊME horloge que le trait qui se remplit. */}
-        {/* Colonne de droite élargie : elle porte désormais le portable ET le
-            téléphone posé devant lui. */}
-        <SectionLabel>{data.kicker}</SectionLabel>
 
         <div className="grid gap-10 lg:grid-cols-[1fr_30rem] lg:items-center">
           <Reveal>

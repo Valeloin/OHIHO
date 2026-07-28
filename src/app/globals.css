@@ -350,9 +350,14 @@ body {
      Le centrage vertical est porté ici, ce qui permet aux sections de garder
      un rembourrage interne modeste : il sert de marge minimale quand le
      contenu approche la hauteur d'écran, pas de rythme vertical. */
+  /* COLONNE, et non plus centrage direct : le titre de section
+     (SectionLabel) est épinglé en haut, toujours à la même hauteur, et
+     c'est le conteneur de contenu qui se centre dans l'espace restant via
+     `my-auto`. Avec `align-items:center` sur la section, le titre se
+     déplaçait d'une section à l'autre selon la hauteur du contenu. */
   .section-screen {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     /* Le bandeau est `sticky` : sans cette marge, un lien d'ancre
        (« Nous contacter » → #contact) amène le haut de la section tout en
        haut de la fenêtre, donc derrière le bandeau. */
@@ -847,41 +852,115 @@ body {
   animation-name: frise-link-4;
 }
 
-/* Les instants suivent ceux des jalons (0,4 / 19 / 37,7 / 56,3 %) : le
-   lien part quand le trait touche le jalon, le bloc s'allume pendant que le
-   lien descend. La remise à zéro se fait toujours à opacité nulle. */
+/* UN SEUL PROJECTEUR. Chaque bloc a trois états : À VENIR (éteint,
+   opacité 0,35, posé 8px plus bas), ACTIF (plein, levé — UNE seule étape à
+   la fois, celle que la scène joue au même moment), puis FAIT (0,6 : lu
+   comme derrière soi, mais encore lisible). Les fenêtres sont EXACTEMENT
+   celles des scènes (frise-desc-*) : la frise et l'écran racontent le même
+   instant par construction. Le lien vertical n'existe que sous l'étape
+   ACTIVE : c'est le curseur de la frise, il se trace à l'arrivée du trait
+   et s'efface quand le projecteur passe au bloc suivant. */
 @keyframes frise-step-1 {
-  0%,
-  1.6% {
-    opacity: 0.3;
-    transform: translateY(10px);
+  0% {
+    opacity: 0.35;
+    transform: translateY(8px);
   }
-  4.2%,
+  1.2%,
+  19% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  21%,
+  94% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  97%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(8px);
+  }
+}
+@keyframes frise-step-2 {
+  0%,
+  19% {
+    opacity: 0.35;
+    transform: translateY(8px);
+  }
+  21%,
+  37.7% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  39.7%,
+  94% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  97%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(8px);
+  }
+}
+@keyframes frise-step-3 {
+  0%,
+  37.7% {
+    opacity: 0.35;
+    transform: translateY(8px);
+  }
+  39.7%,
+  56.3% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  58.3%,
+  94% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  97%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(8px);
+  }
+}
+@keyframes frise-step-4 {
+  0%,
+  56.3% {
+    opacity: 0.35;
+    transform: translateY(8px);
+  }
+  58.3%,
   94% {
     opacity: 1;
     transform: translateY(0);
   }
   97%,
   100% {
-    opacity: 0.3;
-    transform: translateY(10px);
+    opacity: 0.35;
+    transform: translateY(8px);
   }
 }
+/* Le curseur : tracé de haut en bas à l'ouverture de la fenêtre, effacé
+   (opacité, puis repli invisible) à sa fermeture. Les remises à zéro se
+   font toujours à opacité nulle. */
 @keyframes frise-link-1 {
   0%,
   0.4% {
     transform: scaleY(0);
     opacity: 1;
   }
-  2.6%,
-  94% {
+  2.4%,
+  19% {
     transform: scaleY(1);
     opacity: 1;
   }
-  96% {
+  20.2% {
     transform: scaleY(1);
     opacity: 0;
   }
+  20.7%,
   99.5% {
     transform: scaleY(0);
     opacity: 0;
@@ -889,23 +968,6 @@ body {
   100% {
     transform: scaleY(0);
     opacity: 1;
-  }
-}
-@keyframes frise-step-2 {
-  0%,
-  20.2% {
-    opacity: 0.3;
-    transform: translateY(10px);
-  }
-  22.8%,
-  94% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  97%,
-  100% {
-    opacity: 0.3;
-    transform: translateY(10px);
   }
 }
 @keyframes frise-link-2 {
@@ -914,15 +976,16 @@ body {
     transform: scaleY(0);
     opacity: 1;
   }
-  21.2%,
-  94% {
+  21%,
+  37.7% {
     transform: scaleY(1);
     opacity: 1;
   }
-  96% {
+  38.9% {
     transform: scaleY(1);
     opacity: 0;
   }
+  39.4%,
   99.5% {
     transform: scaleY(0);
     opacity: 0;
@@ -930,23 +993,6 @@ body {
   100% {
     transform: scaleY(0);
     opacity: 1;
-  }
-}
-@keyframes frise-step-3 {
-  0%,
-  38.9% {
-    opacity: 0.3;
-    transform: translateY(10px);
-  }
-  41.5%,
-  94% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  97%,
-  100% {
-    opacity: 0.3;
-    transform: translateY(10px);
   }
 }
 @keyframes frise-link-3 {
@@ -955,15 +1001,16 @@ body {
     transform: scaleY(0);
     opacity: 1;
   }
-  39.9%,
-  94% {
+  39.7%,
+  56.3% {
     transform: scaleY(1);
     opacity: 1;
   }
-  96% {
+  57.5% {
     transform: scaleY(1);
     opacity: 0;
   }
+  58%,
   99.5% {
     transform: scaleY(0);
     opacity: 0;
@@ -973,30 +1020,13 @@ body {
     opacity: 1;
   }
 }
-@keyframes frise-step-4 {
-  0%,
-  57.5% {
-    opacity: 0.3;
-    transform: translateY(10px);
-  }
-  60.1%,
-  94% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  97%,
-  100% {
-    opacity: 0.3;
-    transform: translateY(10px);
-  }
-}
 @keyframes frise-link-4 {
   0%,
   56.3% {
     transform: scaleY(0);
     opacity: 1;
   }
-  58.5%,
+  58.3%,
   94% {
     transform: scaleY(1);
     opacity: 1;

@@ -22,13 +22,12 @@ export default function ContactSection({ data }: { data: ContactContent }) {
       className="section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      {/* `self-stretch` + `flex-col` : `.section-screen` centre son unique
-          enfant (align-items: center), si bien que le contenu — plus court
-          ici que dans les autres sections — flottait au milieu de 300 px de
-          vide. En s'étirant, le conteneur récupère toute la hauteur, et la
-          grille (`flex-1` plus bas) l'absorbe. */}
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col self-stretch px-6 py-16">
-        <SectionLabel>{data.kicker}</SectionLabel>
+      <SectionLabel>{data.kicker}</SectionLabel>
+
+      {/* `flex-1` : le titre étant épinglé en haut (SectionLabel hors du
+          conteneur), le conteneur absorbe toute la hauteur restante et la
+          grille intérieure s'y étire. */}
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 py-10">
 
         {/* `items-stretch` et non `items-center` : centrées, les deux colonnes
             se plaçaient chacune selon SA hauteur, et la section — qui fait un

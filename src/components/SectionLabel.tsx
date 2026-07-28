@@ -1,16 +1,18 @@
 import Reveal from "@/components/motion/Reveal";
 
-// TITRE de la section — c'est bien celui-ci, pas la phrase d'accroche en
-// dessous. Le nom de section (« Nos services », « Méthode », « Contact »)
-// est ce qui dit où l'on est ; la phrase, elle, est un sous-titre.
+// TITRE de la section — c'est bien celui-ci, pas la phrase d'accroche.
 //
-// Il porte donc le h2, en grand, centré en haut de l'écran que la section
-// occupe : c'est le premier élément que l'œil rencontre quand une flèche
-// amène la section pile dans la fenêtre.
+// Il est ÉPINGLÉ en haut de la section, au centre, TOUJOURS à la même
+// hauteur (demande du 2026-07-27) : il vit hors du bloc de contenu, qui se
+// centre lui dans l'espace restant (`my-auto` sur le conteneur de chaque
+// section). Avant, il était centré AVEC le contenu : sa position variait
+// d'une section à l'autre selon la hauteur de ce qu'elle porte.
 export default function SectionLabel({ children }: { children: string }) {
   return (
     <Reveal>
-      <h2 className="section-name mb-8">{children}</h2>
+      <div className="relative z-10 flex justify-center pt-12">
+        <h2 className="section-name">{children}</h2>
+      </div>
     </Reveal>
   );
 }

@@ -12,8 +12,9 @@ export default function WhyUs({ data }: { data: WhyUsContent }) {
     // `bg-surface`, ils s'effaçaient presque.
     <section id="a-propos" className="section-screen relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-12">
-        <SectionLabel>{data.kicker}</SectionLabel>
+            <SectionLabel>{data.kicker}</SectionLabel>
+
+<div className="relative mx-auto w-full max-w-7xl px-6 py-12 my-auto">
         <Reveal>
           <p className="section-lead max-w-4xl">{data.title}</p>
         </Reveal>

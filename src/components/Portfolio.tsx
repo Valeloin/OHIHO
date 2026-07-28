@@ -19,8 +19,9 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
       <SectionBackdrop />
       {/* Rythme resserré : comme Services, cette section porte beaucoup de
           contenu (3 cartes + encart) et doit tenir sur un écran. */}
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-10">
-        <SectionLabel>{data.kicker}</SectionLabel>
+            <SectionLabel>{data.kicker}</SectionLabel>
+
+<div className="relative mx-auto w-full max-w-7xl px-6 py-10 my-auto">
         {/* En-tête éditorial : titre large à gauche, filet. */}
         <Reveal>
           <p className="section-lead max-w-4xl">{data.title}</p>

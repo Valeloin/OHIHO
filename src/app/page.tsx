@@ -22,6 +22,9 @@ export default async function Home() {
       <Hero
         data={content.hero}
         formulaLabels={SERVICE_TYPES.map((t) => content.services.offers[t].label)}
+        formulaDescriptions={SERVICE_TYPES.map(
+          (t) => content.services.offers[t].tagline
+        )}
         showcase={<HeroShowcase />}
       />
       <Services data={content.services} />
