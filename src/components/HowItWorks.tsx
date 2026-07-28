@@ -78,10 +78,13 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
             jalon tombe exactement au-dessus de son bloc. */}
         <RevealGroup className="relative mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Rail + remplissage (desktop). Seul le trait déjà parcouru se
-              voit : le chemin à venir ne se devine pas. */}
+              voit : le chemin à venir ne se devine pas.
+              `right-10` : le rail s'arrête au CENTRE du cercle d'arrivée
+              (80 px de large, calé à droite) au lieu de courir jusqu'au bord
+              — sinon un bout de trait dépassait à droite du cercle. */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-0.5 -translate-y-1/2 opacity-0 lg:opacity-100"
+            className="absolute left-0 right-10 top-0 h-0.5 -translate-y-1/2 opacity-0 lg:opacity-100"
           >
             <div className="frise-fill rule-brand h-full w-full rounded-full" />
           </div>

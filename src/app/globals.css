@@ -641,6 +641,24 @@ body {
     transform: scaleX(0);
     opacity: 1;
   }
+  /* Points de passage intermédiaires : le trait touche chaque jalon PILE à
+     l'instant où celui-ci s'allume (19 / 37,7 / 56,3 %), par construction.
+     Les fractions correspondent à la position des jalons sur le rail
+     raccourci (976 px de contenu, rail arrêté au centre du cercle
+     d'arrivée, 4 colonnes, gouttière de 32 px) : sans elles, le moindre
+     changement de géométrie désaccordait trait et jalons. */
+  19% {
+    transform: scaleX(0.269);
+    opacity: 1;
+  }
+  37.7% {
+    transform: scaleX(0.538);
+    opacity: 1;
+  }
+  56.3% {
+    transform: scaleX(0.808);
+    opacity: 1;
+  }
   72% {
     transform: scaleX(1);
     opacity: 1;
@@ -936,7 +954,15 @@ body {
     opacity: 1;
     transform: scale(1);
   }
-  98.5%,
+  /* Sortie en FONDU PUR, sans rétrécir : en se résorbant (scale 0.6), le
+     disque découvrait le trait derrière lui, qu'on voyait le traverser.
+     Le cercle garde sa taille pleine jusqu'à disparition complète, puis
+     revient à l'échelle de départ une fois invisible. */
+  98.5% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  99.5%,
   100% {
     opacity: 0;
     transform: scale(0.6);
