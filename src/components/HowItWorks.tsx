@@ -79,12 +79,19 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
         <RevealGroup className="relative mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Rail + remplissage (desktop). Seul le trait déjà parcouru se
               voit : le chemin à venir ne se devine pas.
-              `right-10` : le rail s'arrête au CENTRE du cercle d'arrivée
-              (80 px de large, calé à droite) au lieu de courir jusqu'au bord
-              — sinon un bout de trait dépassait à droite du cercle. */}
+
+              `right-16` = LA BORDURE GAUCHE du cercle d'arrivée, pas son
+              centre. Géométrie : le cercle fait 5rem (h-20), son viewBox
+              80 unités → 1 unité = 0,0625rem ; centre cx=40 → 2,5rem du bord
+              droit, rayon r=24 → 1,5rem. Sa bordure gauche tombe donc à
+              2,5 + 1,5 = 4rem, soit `right-16`.
+              À `right-10` (2,5rem) le rail s'arrêtait au CENTRE : il
+              traversait toute la moitié gauche du cercle et ressortait
+              dedans. Tout est en rem, donc le calage tient quand l'échelle
+              du site suit la taille de l'écran. */}
           <div
             aria-hidden="true"
-            className="absolute left-0 right-10 top-0 h-0.5 -translate-y-1/2 opacity-0 lg:opacity-100"
+            className="absolute left-0 right-16 top-0 h-0.5 -translate-y-1/2 opacity-0 lg:opacity-100"
           >
             <div className="frise-fill rule-brand h-full w-full rounded-full" />
           </div>
