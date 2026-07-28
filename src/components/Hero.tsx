@@ -86,16 +86,11 @@ export default function Hero({
               elle atterrit sous les boutons, hors écran au premier coup
               d'œil. Dès `lg` la colonne se reforme et les ordres tombent. */}
           <div className="contents lg:block">
-            {/* Libellé mono capitales espacées, comme « ● WEB & DESIGN » sur
-                la banderole : le point vert vient de `.kicker::before`. */}
-            <motion.span variants={ITEM} className="kicker order-1">
-              {data.badge}
-            </motion.span>
-
-            {/* ANCIEN hero rétabli à la demande (2026-07-27, après deux
-                essais au format des noms de section) : grand titre en blanc,
-                accent au dégradé de marque, comme la banderole. STATIQUE. */}
-            <motion.h1 variants={ITEM} className="hero-title order-2 mt-6">
+            {/* Plus de kicker au-dessus du titre (retiré à la demande,
+                2026-07-27) : le titre ouvre seul la colonne. */}
+            {/* Grand titre en blanc, accent au dégradé de marque, comme la
+                banderole. STATIQUE. */}
+            <motion.h1 variants={ITEM} className="hero-title order-2">
               <span className="text-foreground">{data.titleLead}</span>{" "}
               <span className="text-gradient">{data.titleAccent}</span>
             </motion.h1>

@@ -460,8 +460,10 @@ body {
      2026-07-27 au profit du format des noms de section, puis RÉTABLI le
      jour même à la demande (« reviens à l'ancien hero »). */
   .hero-title {
-    font-size: clamp(3.25rem, 9.2vw, 6.25rem);
-    line-height: 1.03;
+    /* Redescendu d'un cran (« titre en moins gros », 2026-07-27) après le
+       pic à 6,25rem. */
+    font-size: clamp(2.5rem, 6.8vw, 4.5rem);
+    line-height: 1.06;
     font-weight: 600;
     letter-spacing: -0.02em;
     text-wrap: balance;
