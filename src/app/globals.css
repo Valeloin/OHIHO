@@ -456,10 +456,16 @@ body {
     margin-top: 0.45em;
   }
 
-  /* Le hero suit le même patron que les sections depuis le 2026-07-27 :
-     le libellé teal est le H1 (en .section-name), la phrase blanche est
-     un sous-titre en .section-lead — l'ancienne .hero-title (jusqu'à
-     6,25rem) a été retirée avec ce changement. */
+  /* Titre du hero (H1) : grand, blanc + accent au dégradé. Retiré le
+     2026-07-27 au profit du format des noms de section, puis RÉTABLI le
+     jour même à la demande (« reviens à l'ancien hero »). */
+  .hero-title {
+    font-size: clamp(3.25rem, 9.2vw, 6.25rem);
+    line-height: 1.03;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
 
   .section-title {
     /* 4rem et non 5 : à 5rem, un titre de 55 signes tombait sur QUATRE

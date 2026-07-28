@@ -92,19 +92,12 @@ export default function Hero({
               {data.badge}
             </motion.span>
 
-            {/* Le TITRE garde son texte mais prend le FORMAT des noms de
-                section (mono capitales teal, point vert, même taille) —
-                précision de Valentin du 2026-07-27 : « changer le format,
-                pas le texte ». La partie accent garde le dégradé de marque
-                pour se distinguer dans les capitales teal. */}
-            <motion.h1
-              variants={ITEM}
-              className="section-name section-name--left order-2 mt-6"
-            >
-              <span>
-                {data.titleLead}{" "}
-                <span className="text-gradient">{data.titleAccent}</span>
-              </span>
+            {/* ANCIEN hero rétabli à la demande (2026-07-27, après deux
+                essais au format des noms de section) : grand titre en blanc,
+                accent au dégradé de marque, comme la banderole. STATIQUE. */}
+            <motion.h1 variants={ITEM} className="hero-title order-2 mt-6">
+              <span className="text-foreground">{data.titleLead}</span>{" "}
+              <span className="text-gradient">{data.titleAccent}</span>
             </motion.h1>
 
             <motion.p
