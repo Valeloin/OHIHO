@@ -35,7 +35,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
             Les projets à venir gardent une tuile en pointillés, non cliquable
             et sans icône : on n'invente pas de favicon pour un site qui
             n'existe pas. */}
-        <RevealGroup className="mt-6 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+        <RevealGroup className="mt-6 grid gap-5 sm:grid-cols-2">
           {PROJECTS.map((project) => {
             const isExternal = project.href?.startsWith("http");
             const enLigne = Boolean(project.href);

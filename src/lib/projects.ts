@@ -44,18 +44,7 @@ export const PROJECTS: Project[] = [
     // mais une page de présentation dédiée sur ohiho.fr depuis le 2026-07-27.
     href: "/bugtrack",
   },
-  {
-    title: "Mailys Solutions",
-    category: "Site vitrine & back-office",
-    description:
-      "Site d'un éditeur d'applications métier, construit pour le référencement : une page par requête, données structurées, blog. Un back-office complet permet de modifier tous les textes, les articles et les pages d'atterrissage sans toucher au code.",
-    href: "https://mailys-solutions.vercel.app",
-    // Logo recadré pour l'affichage en grand format (voir le fichier).
-    icon: "/realisations/mailys-solutions.svg",
-    // Fond TRANSPARENT et non blanc : le logo Mailys est fait de tracés
-    // colorés sans aplat, la tuile blanche jurait sur le fond nuit du site
-    // là où les deux autres portent leur couleur de marque. `transparent`
-    // laisse la tuile prendre le fond de la carte, le logo s'y pose seul.
-    iconBg: "transparent",
-  },
 ];
+// Mailys Solutions a été retiré des réalisations le 2026-07-28 à la demande
+// de Valentin (l'icône /realisations/mailys-solutions.svg reste dans /public
+// si le projet doit revenir).
