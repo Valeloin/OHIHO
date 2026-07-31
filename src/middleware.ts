@@ -5,8 +5,38 @@ import type { Database } from "@/lib/supabase/types";
 const PROTECTED_PREFIXES = ["/portail", "/admin"];
 const AUTH_PAGES = ["/connexion", "/inscription"];
 
+// SITE EN CONSTRUCTION (demande du 2026-07-28) : tant que ce booléen est à
+// true, toutes les pages publiques affichent /construction. Restent
+// accessibles : la connexion, l'espace client, l'admin et les routes
+// techniques — Valentin garde donc la main pour tout rouvrir.
+// Pour rouvrir le site : passer à false et pousser.
+const EN_CONSTRUCTION = true;
+
+const CONSTRUCTION_ALLOWED_PREFIXES = [
+  "/construction",
+  "/connexion",
+  "/nouveau-mot-de-passe",
+  "/portail",
+  "/admin",
+  "/auth",
+  "/api",
+];
+
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
+
+  if (EN_CONSTRUCTION) {
+    const { pathname } = request.nextUrl;
+    const allowed = CONSTRUCTION_ALLOWED_PREFIXES.some((prefix) =>
+      pathname.startsWith(prefix)
+    );
+    if (!allowed) {
+      // Réécriture et non redirection : l'URL demandée reste dans la barre
+      // d'adresse, le visiteur retrouvera la page au même endroit à la
+      // réouverture.
+      return NextResponse.rewrite(new URL("/construction", request.url));
+    }
+  }
 
   // Sécurité : si Supabase n'est pas encore configuré, on laisse passer
   // toutes les requêtes plutôt que de casser l'ensemble du site.
