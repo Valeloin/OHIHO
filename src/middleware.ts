@@ -10,7 +10,7 @@ const AUTH_PAGES = ["/connexion", "/inscription"];
 // accessibles : la connexion, l'espace client, l'admin et les routes
 // techniques — Valentin garde donc la main pour tout rouvrir.
 // Pour rouvrir le site : passer à false et pousser.
-const EN_CONSTRUCTION = true;
+const EN_CONSTRUCTION = false;
 
 const CONSTRUCTION_ALLOWED_PREFIXES = [
   "/construction",
