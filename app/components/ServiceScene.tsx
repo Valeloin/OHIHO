@@ -468,13 +468,12 @@ export function SceneLanding() {
         </g>
       </g>
       <g className="pv-cursor">
-        <path
-          d={`M${CTA_CX + 5} ${CTA_CY + 5} l0 15 l3.9 -4.1 l2.7 5.7 l3 -1.4 l-2.7 -5.6 l5.5 -0.5 z`}
-          fill={BRIGHT}
-          stroke={SCREEN}
-          strokeWidth="1.1"
-          strokeLinejoin="round"
-        />
+        <g transform={`translate(${CTA_CX - 8} ${CTA_CY - 12}) rotate(-16 8 12)`}>
+          <rect width="16" height="25" rx="8" fill="#f8fbff" stroke={SKY} strokeWidth="1.2" />
+          <path d="M8 1.4v8.2" stroke={SCREEN} strokeOpacity=".34" strokeWidth="1" />
+          <rect x="7.25" y="4" width="1.5" height="4.2" rx=".75" fill={SCREEN} fillOpacity=".58" />
+          <ellipse cx="8" cy="21" rx="4.8" ry="1.25" fill={SCREEN} fillOpacity=".12" />
+        </g>
       </g>
 
       {/* Visuel de droite : une image, un titre, deux lignes — sobre. */}
@@ -719,4 +718,3 @@ export default function ServiceScene({ type }: { type: ServiceType }) {
     </svg>
   );
 }
-
