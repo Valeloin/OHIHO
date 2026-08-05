@@ -468,12 +468,14 @@ export function SceneLanding() {
         </g>
       </g>
       <g className="pv-cursor">
-        <g transform={`translate(${CTA_CX - 8} ${CTA_CY - 12}) rotate(-16 8 12)`}>
-          <rect width="16" height="25" rx="8" fill="#f8fbff" stroke={SKY} strokeWidth="1.2" />
-          <path d="M8 1.4v8.2" stroke={SCREEN} strokeOpacity=".34" strokeWidth="1" />
-          <rect x="7.25" y="4" width="1.5" height="4.2" rx=".75" fill={SCREEN} fillOpacity=".58" />
-          <ellipse cx="8" cy="21" rx="4.8" ry="1.25" fill={SCREEN} fillOpacity=".12" />
-        </g>
+        <path
+          d={`M${CTA_CX + 3} ${CTA_CY + 2}v22.5l6.1-5.8 4.2 9 4.1-1.9-4.2-8.8 8.3-.5z`}
+          fill="#ffffff"
+          stroke="#071522"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </g>
 
       {/* Visuel de droite : une image, un titre, deux lignes — sobre. */}
