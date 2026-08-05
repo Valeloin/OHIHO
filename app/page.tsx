@@ -1,3 +1,5 @@
+import HeroShowcase from "./components/HeroShowcase";
+
 const services = [
   {
     number: "01",
@@ -61,29 +63,16 @@ export default function Home() {
       </section>
 
       <section className="service-preview" aria-label="Aperçu animé des services OHIHO">
-        <div className="preview-title-stack" aria-live="off">
-          <span>Landing page</span><span>Site intermédiaire</span><span>Refonte de site</span><span>Application web</span>
+        <div className="claude-preview-title" aria-hidden="true">
+          <span className="pv-title-1">Landing page</span><span className="pv-title-2">Site intermédiaire</span><span className="pv-title-3">Refonte de site</span><span className="pv-title-4">Application web</span>
         </div>
-        <div className="preview-progress" aria-hidden="true"><i/><i/><i/><i/></div>
-        <div className="preview-browser">
-          <div className="browser-top"><div className="browser-dots"><i/><i/><i/></div><span>votre-projet.fr</span></div>
-          <div className="preview-stage">
-            <div className="preview-scene scene-landing">
-              <div className="mock-nav"/><div className="mock-hero-lines"><i/><i/><i/></div><div className="mock-cta"/>
-              <div className="mock-card"><b/><i/><i/></div><div className="mock-check">✓</div>
-            </div>
-            <div className="preview-scene scene-pages">
-              <div className="mock-nav wide"/><div className="page-grid"><i/><i/><i/><i/><i/><i/></div><div className="mock-cursor">↖</div>
-            </div>
-            <div className="preview-scene scene-refonte">
-              <div className="before-panel"><small>Avant</small><i/><i/><i/></div><div className="after-panel"><small>Après</small><i/><i/><i/></div><div className="shine"/>
-            </div>
-            <div className="preview-scene scene-app">
-              <div className="app-side"><i/><i/><i/><i/></div><div className="app-main"><div className="app-kpis"><i/><i/><i/></div><div className="app-chart"><b/><b/><b/><b/><b/></div><div className="app-line"/></div>
-            </div>
-          </div>
+        <div className="claude-preview-progress" aria-hidden="true">
+          {[1, 2, 3, 4].map((scene) => <i key={scene}><span className={`pv-scene-${scene}`} /></i>)}
         </div>
-        <div className="preview-caption"><span>Une page, un objectif</span><span>Plusieurs pages</span><span>Un site à rafraîchir</span><span>Sur mesure</span></div>
+        <div className="claude-preview-frame"><HeroShowcase /></div>
+        <div className="claude-preview-caption" aria-hidden="true">
+          <span className="pv-title-1">Une page, un objectif</span><span className="pv-title-2">Plusieurs pages, une même histoire</span><span className="pv-title-3">Avant terne, après remarquable</span><span className="pv-title-4">Votre outil métier, enfin simple</span>
+        </div>
       </section>
 
       <section className="intro section-pad">
