@@ -51,9 +51,9 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <h1 className="sr-only">OHIHO — Sites web et applications sur mesure</h1>
+        <h1 className="sr-only">Construisons un site qui vous ressemble.</h1>
         <div className="hero-media" aria-label="Aperçu de la direction artistique OHIHO">
-          <img src="/hero-main.png" alt="Construisons quelque chose de remarquable — direction artistique OHIHO" />
+          <img src="/hero-main.png" alt="Construisons un site qui vous ressemble — OHIHO" />
           <div className="fireflies" aria-hidden="true">
             {Array.from({ length: 18 }, (_, index) => <span key={index} />)}
           </div>
