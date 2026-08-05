@@ -217,6 +217,7 @@ export default function Services({ data }: { data: ServicesContent }) {
           {formulas.map((formula, i) => (
             <RevealItem
               key={formula.type}
+              dataFormat={String(i + 1).padStart(2, "0")}
               className={`service-offer-card sv-card-${i + 1} group relative h-full cursor-pointer overflow-hidden rounded-2xl`}
             >
               <button

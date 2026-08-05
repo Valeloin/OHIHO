@@ -8,14 +8,17 @@ export default function RevealItem({
   children,
   className,
   hover = false,
+  dataFormat,
 }: {
   children: ReactNode;
   className?: string;
   hover?: boolean;
+  dataFormat?: string;
 }) {
   return (
     <motion.div
       className={className}
+      data-format={dataFormat}
       variants={REVEAL_ITEM}
       whileHover={
         hover ? { y: -6, transition: { duration: 0.25, ease: "easeOut" } } : undefined

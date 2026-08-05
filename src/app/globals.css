@@ -1343,38 +1343,59 @@ body {
    restent lisibles en retrait (0,4) — jamais masqués. Fenêtres identiques à
    pv-scene-1..4, le lien est garanti par construction. Opacité seule. */
 .service-offer-card {
-  border: 1px solid rgb(255 255 255 / 0.72);
-  background: #edf8fb;
+  --card-accent: #38bdf8;
+  --card-wash: #e8f6fc;
+  border: 1px solid #fff;
+  border-radius: 26px;
+  background: linear-gradient(155deg, #fff 0%, #f9fcfd 56%, var(--card-wash) 145%);
   color: #09283a;
-  box-shadow: inset 0 1px 0 #fff, 0 18px 45px rgb(7 29 43 / 0.16);
+  box-shadow: 0 14px 34px rgb(7 29 43 / 0.11), 0 2px 8px rgb(7 29 43 / 0.06);
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
-.sv-card-1 { background: linear-gradient(145deg, #f5fbfe, #d8eef7 78%); }
-.sv-card-2 { background: linear-gradient(145deg, #f3fcfb, #d8f1ee 78%); }
-.sv-card-3 { background: linear-gradient(145deg, #f4fcf8, #d9f2e4 78%); }
-.sv-card-4 { background: linear-gradient(145deg, #f7fcf5, #e0f3df 78%); }
+.sv-card-1 { --card-accent: #38bdf8; --card-wash: #e4f5fc; }
+.sv-card-2 { --card-accent: #22d3c4; --card-wash: #e1f8f5; }
+.sv-card-3 { --card-accent: #27caa4; --card-wash: #e0f7ee; }
+.sv-card-4 { --card-accent: #34d399; --card-wash: #e2f7e9; }
+.service-offer-card::after {
+  content: attr(data-format);
+  position: absolute;
+  z-index: 0;
+  right: 14px;
+  bottom: -12px;
+  color: rgb(9 40 58 / .045);
+  font: 600 76px/.9 var(--font-mono), monospace;
+  letter-spacing: -.09em;
+  pointer-events: none;
+}
+.service-offer-card .sv-step-1,.service-offer-card .sv-step-2,.service-offer-card .sv-step-3,.service-offer-card .sv-step-4 { position: relative; z-index: 1; }
 .service-offer-card h3,.service-offer-card .service-offer-link { color: #09283a !important; }
 .service-offer-card h3 + p { color: rgb(9 40 58 / .7) !important; }
 .service-offer-card .service-offer-number,.service-offer-card h3 + p + p { color: #147c77 !important; }
 .service-offer-card::before {
   content: "";
   position: absolute;
-  width: 8rem;
-  height: 8rem;
-  right: -4.5rem;
-  top: -4.5rem;
+  width: 7rem;
+  height: 7rem;
+  right: -3.8rem;
+  top: -4rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(52 211 153 / 0.2), transparent 68%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--card-accent) 24%, transparent), transparent 68%);
   pointer-events: none;
 }
 .service-offer-card:hover {
-  transform: translateY(-5px);
-  border-color: rgb(255 255 255 / 0.48);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 24px 55px rgb(7 29 43 / 0.22);
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--card-accent) 42%, #fff);
+  box-shadow: 0 22px 45px rgb(7 29 43 / 0.15), 0 3px 10px rgb(7 29 43 / 0.07);
 }
 .service-offer-progress {
-  background: linear-gradient(90deg, #38bdf8, #22d3c4 52%, #34d399);
-  box-shadow: 0 0 14px rgb(143 246 202 / 0.72);
+  left: 18px !important;
+  right: auto !important;
+  top: 12px !important;
+  width: 34px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--card-accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--card-accent) 55%, transparent);
 }
 .service-offer-number { color: #147c77; }
 .service-offer-glyph {
@@ -1410,10 +1431,10 @@ body {
 .svc-selected-1 .sv-step-1,.svc-selected-2 .sv-step-2,.svc-selected-3 .sv-step-3,.svc-selected-4 .sv-step-4 { opacity: 1 !important; }
 .svc-selected-1 .sv-bar-1,.svc-selected-2 .sv-bar-2,.svc-selected-3 .sv-bar-3,.svc-selected-4 .sv-bar-4 { opacity: 1 !important; }
 .svc-selected-1 .sv-card-1,.svc-selected-2 .sv-card-2,.svc-selected-3 .sv-card-3,.svc-selected-4 .sv-card-4 {
-  border-color: #68e5bd;
-  background: linear-gradient(135deg, #ffffff 0%, #dcf8ef 58%, #c8efdc 100%);
-  box-shadow: inset 0 1px 0 #fff, 0 18px 45px rgb(7 29 43 / .2), 0 0 28px rgb(104 229 189 / .38);
-  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--card-accent) 50%, #fff);
+  background: linear-gradient(150deg, #fff 0%, var(--card-wash) 100%);
+  box-shadow: 0 24px 48px rgb(7 29 43 / .16), 0 0 0 3px color-mix(in srgb, var(--card-accent) 18%, transparent);
+  transform: translateY(-6px);
 }
 
 .sv-step-1,
