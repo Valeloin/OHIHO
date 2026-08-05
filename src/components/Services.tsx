@@ -38,6 +38,13 @@ const SCENES: Record<ServiceType, () => JSX.Element> = {
   application: SceneApplication,
 };
 
+const FREEZE_MS: Record<number, number> = {
+  1: 4032,
+  2: 12432,
+  3: 20832,
+  4: 29232,
+};
+
 // Familles gelées au clic : la rotation du carrousel (svc-carousel-*) et
 // tout ce qui suit la sélection (sv-*). Les micro-animations internes des
 // scènes continuent. Noms distincts de pv-scene-* : ces classes-là sont
@@ -102,17 +109,65 @@ export default function Services({ data }: { data: ServicesContent }) {
 
   const [scene, setScene] = useState<number | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const manualAnimationsRef = useRef<Animation[]>([]);
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    const animations = root.getAnimations({ subtree: true }).filter(
+    const cssAnimations = root.getAnimations({ subtree: true }).filter(
       (animation): animation is CSSAnimation =>
         animation instanceof CSSAnimation &&
         FROZEN_PREFIXES.some((p) => animation.animationName.startsWith(p))
     );
+    const carousel = [1, 2, 3, 4]
+      .map((index) => root.querySelector<HTMLElement>(`.svc-carousel-${index}`))
+      .filter((element): element is HTMLElement => Boolean(element));
 
-    animations.forEach((animation) => (scene ? animation.pause() : animation.play()));
+    if (!scene) {
+      manualAnimationsRef.current.forEach((animation) => animation.cancel());
+      manualAnimationsRef.current = [];
+      cssAnimations.forEach((animation) => animation.play());
+      return;
+    }
+
+    // Lire les positions réellement affichées AVANT de retirer une éventuelle
+    // transition précédente : le nouveau trajet repart ainsi du pixel exact
+    // où se trouve chaque vignette, sans saut.
+    const starts = carousel.map((element) => {
+      const style = getComputedStyle(element);
+      return {
+        left: style.left,
+        transform: style.transform,
+        opacity: style.opacity,
+        filter: style.filter,
+      };
+    });
+    manualAnimationsRef.current.forEach((animation) => animation.cancel());
+    cssAnimations.forEach((animation) => animation.pause());
+
+    const slots = [
+      { left: "50%", transform: "translate(-50%, -50%) scale(.92)", opacity: 1, filter: "brightness(1)" },
+      { left: "84%", transform: "translate(-50%, -50%) scale(.56)", opacity: .7, filter: "brightness(.8)" },
+      { left: "50%", transform: "translate(-50%, -50%) scale(.4)", opacity: .32, filter: "brightness(.6)" },
+      { left: "16%", transform: "translate(-50%, -50%) scale(.56)", opacity: .65, filter: "brightness(.78)" },
+    ];
+
+    const manualAnimations = carousel.map((element, index) => {
+      const slot = (index - (scene - 1) + 4) % 4;
+      return element.animate([starts[index], slots[slot]], {
+        duration: 2400,
+        easing: "cubic-bezier(.45, 0, .2, 1)",
+        fill: "forwards",
+      });
+    });
+    manualAnimationsRef.current = manualAnimations;
+
+    Promise.allSettled(manualAnimations.map((animation) => animation.finished)).then(() => {
+      cssAnimations.forEach((animation) => {
+        animation.currentTime = FREEZE_MS[scene];
+        animation.pause();
+      });
+    });
   }, [scene]);
 
   return (
@@ -125,7 +180,7 @@ export default function Services({ data }: { data: ServicesContent }) {
 
       <div
         ref={rootRef}
-        className={`site-shell relative my-auto py-2 ${scene ? `svc-manual svc-target-${scene}` : ""}`}
+        className={`site-shell relative my-auto py-2 ${scene ? `svc-manual svc-selected-${scene}` : ""}`}
       >
         {/* Carrousel « coverflow » : les 4 formules tournent côte à côte —
             une nette au centre, une réduite à droite, une à l'arrière, une
