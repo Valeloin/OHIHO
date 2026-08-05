@@ -14,12 +14,13 @@ export default function ContactSection({ data }: { data: ContactContent }) {
 
       <div className="codex-contact-head">
         <p>Votre projet</p>
+        <h2 className="section-name codex-contact-name">Contact</h2>
         <span>Disponible pour de nouveaux projets</span>
       </div>
 
       <div className="codex-contact-grid">
         <div className="codex-contact-main">
-          <h2><span>Un projet</span><span>en tête&nbsp;<b className="codex-contact-question">?</b></span><em>Parlons-en.</em></h2>
+          <h3><span>Un projet</span><span>en tête&nbsp;<b className="codex-contact-question">?</b></span><em>Parlons-en.</em></h3>
           <p>Une idée à lancer, un site à repenser ou un outil à imaginer&nbsp;? Racontez-moi où vous en êtes. Je vous réponds avec un premier regard clair et des pistes concrètes.</p>
           <div className="codex-contact-answer"><i />{data.responseNote || "Réponse sous 24h ouvrées"}</div>
         </div>
