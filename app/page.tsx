@@ -135,27 +135,39 @@ export default function Home() {
       </section>
 
       <section className="work section-pad" id="realisations">
-        <div className="section-head">
-          <p className="section-label">Réalisations</p>
-          <p className="section-count">Des projets concrets</p>
+        <div className="work-intro">
+          <div><p className="section-label">Réalisations</p><span>02 projets livrés</span></div>
+          <h2>Des projets pensés<br />pour être <em>utilisés.</em></h2>
+          <p>Deux besoins très différents, une même exigence&nbsp;: concevoir des interfaces claires, utiles et simples à prendre en main.</p>
         </div>
-        <div className="project-grid">
-          <a className="project project-cadance" href="https://cadance-coaching.vercel.app" target="_blank" rel="noreferrer">
-            <div className="project-card-head"><span>01 · Site vitrine</span><span>Sport & coaching ↗</span></div>
-            <div className="project-visual">
-              <div className="cadance-stage"><span className="cadance-c">C</span><div className="cadance-lines"><i/><i/><i/></div></div>
+        <div className="case-list">
+          <a className="case-study case-cadance" href="https://cadance-coaching.vercel.app" target="_blank" rel="noreferrer">
+            <div className="case-copy">
+              <div className="case-index"><span>01</span><span>Site vitrine · Sport & coaching</span></div>
+              <div><img src="/cadance-coaching.svg" alt="Logo Cadance Coaching" /><h3>Cadance<br />Coaching</h3></div>
+              <p>Un site administrable pour présenter la salle, ses cours et ses tarifs. Le client peut modifier seul les textes, la galerie et le planning, sans toucher au code.</p>
+              <span className="case-link">Découvrir le site <i>↗</i></span>
             </div>
-            <div className="project-info"><div><h3>Cadance Coaching</h3><p>Un site énergique et administrable pour présenter l’accompagnement et faciliter les demandes.</p></div><span>Design · Développement · Administration</span></div>
+            <div className="case-art cadance-art" aria-hidden="true">
+              <div className="cadance-word">BOUGER<br /><em>PLUS.</em></div>
+              <div className="cadance-browser"><span /><div><b>Planning des cours</b><i /><i /><i /></div></div>
+              <div className="cadance-badge">Site administrable <span>↗</span></div>
+            </div>
           </a>
-          <a className="project project-bug" href="https://www.ohiho.fr/bugtrack" target="_blank" rel="noreferrer">
-            <div className="project-card-head"><span>02 · Application web</span><span>Outil métier ↗</span></div>
-            <div className="project-visual">
-              <div className="bug-window">
-                <div className="bug-dots"><i/><i/><i/></div>
-                <div className="bug-layout"><div className="bug-side"><i/><i/><i/></div><div className="bug-content"><span/><span/><span/><b/></div></div>
+          <a className="case-study case-bugtrack" href="https://www.ohiho.fr/bugtrack" target="_blank" rel="noreferrer">
+            <div className="case-art bug-art" aria-hidden="true">
+              <div className="bug-dashboard">
+                <div className="bug-dash-head"><i /><i /><i /><span>BugTrack</span></div>
+                <div className="bug-dash-body"><aside><img src="/bugtrack.svg" alt="" /><i /><i /><i /></aside><div><span /><b>Demandes en cours</b><div className="bug-tickets"><i /><i /><i /></div></div></div>
               </div>
+              <div className="bug-status"><i /> Ticket résolu</div>
             </div>
-            <div className="project-info"><div><h3>BugTrack</h3><p>Une application simple pour centraliser les demandes, suivre leur traitement et garder un historique clair.</p></div><span>Produit · UX/UI · Développement</span></div>
+            <div className="case-copy">
+              <div className="case-index"><span>02</span><span>Application web · Outil métier</span></div>
+              <div><img src="/bugtrack.svg" alt="Logo BugTrack" /><h3>BugTrack</h3></div>
+              <p>Une application pour créer, prioriser et suivre les demandes. Chaque client dispose de son espace, d’un fil de discussion et de notifications par e-mail.</p>
+              <span className="case-link">Explorer l’application <i>↗</i></span>
+            </div>
           </a>
         </div>
       </section>
