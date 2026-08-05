@@ -115,17 +115,49 @@ export default function Services({ data }: { data: ServicesContent }) {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    root.getAnimations({ subtree: true }).forEach((animation) => {
-      if (!(animation instanceof CSSAnimation)) return;
-      const name = animation.animationName;
-      if (!FROZEN_PREFIXES.some((p) => name.startsWith(p))) return;
-      if (scene) {
-        animation.currentTime = FREEZE_MS[scene];
+    const animations = root.getAnimations({ subtree: true }).filter(
+      (animation): animation is CSSAnimation =>
+        animation instanceof CSSAnimation &&
+        FROZEN_PREFIXES.some((p) => animation.animationName.startsWith(p))
+    );
+
+    if (!scene) {
+      animations.forEach((animation) => animation.play());
+      return;
+    }
+
+    const cycle = 33_600;
+    const target = FREEZE_MS[scene];
+    const current = Number(animations[0]?.currentTime ?? 0) % cycle;
+    const distance = (target - current + cycle) % cycle;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion || distance < 30) {
+      animations.forEach((animation) => {
+        animation.currentTime = target;
         animation.pause();
-      } else {
-        animation.play();
-      }
-    });
+      });
+      return;
+    }
+
+    // Le choix d'un format fait avancer tout le carrousel sur son orbite
+    // jusqu'à la scène demandée. Les scènes et leurs cartes restent sur la
+    // même horloge, mais le changement n'est plus un saut instantané.
+    animations.forEach((animation) => animation.pause());
+    const startedAt = performance.now();
+    const travelDuration = 700 + (distance / cycle) * 900;
+    let frame = 0;
+    const travel = (now: number) => {
+      const progress = Math.min((now - startedAt) / travelDuration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const time = (current + distance * eased) % cycle;
+      animations.forEach((animation) => {
+        animation.currentTime = time;
+      });
+      if (progress < 1) frame = requestAnimationFrame(travel);
+    };
+    frame = requestAnimationFrame(travel);
+    return () => cancelAnimationFrame(frame);
   }, [scene]);
 
   return (
@@ -138,7 +170,7 @@ export default function Services({ data }: { data: ServicesContent }) {
 
       <div
         ref={rootRef}
-        className="site-shell relative my-auto py-6"
+        className="site-shell relative my-auto py-2"
       >
         {/* Carrousel « coverflow » : les 4 formules tournent côte à côte —
             une nette au centre, une réduite à droite, une à l'arrière, une
@@ -150,7 +182,7 @@ export default function Services({ data }: { data: ServicesContent }) {
         <Reveal delay={0.1}>
           <div
             className="relative mx-auto w-full max-w-5xl"
-            style={{ aspectRatio: "2.72 / 1" }}
+            style={{ aspectRatio: "3.25 / 1" }}
           >
             {formulas.map((formula, i) => (
               <div
@@ -171,7 +203,7 @@ export default function Services({ data }: { data: ServicesContent }) {
             deux colonnes, les descriptions de 01/02 se faisaient tronquer
             sur mobile. La coupe à 3 lignes ne vaut qu'à partir de lg, où
             les colonnes doivent rester à la même hauteur. */}
-        <RevealGroup className="mt-7 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula, i) => (
             <RevealItem
               key={formula.type}
@@ -191,27 +223,27 @@ export default function Services({ data }: { data: ServicesContent }) {
                 className={`sv-bar-${i + 1} service-offer-progress absolute inset-x-0 top-0 h-[3px] origin-left`}
               />
 
-              <div className={`sv-step-${i + 1} flex min-h-[205px] h-full flex-col p-5`}>
+              <div className={`sv-step-${i + 1} flex min-h-[168px] h-full flex-col p-4`}>
                 <div className="flex items-center justify-between gap-2">
                   <span className="service-offer-number font-mono text-[11px] font-semibold uppercase tracking-[0.18em]">
                     Format {String(i + 1).padStart(2, "0")}
                   </span>
                   <span aria-hidden="true" className="service-offer-glyph"><i /><i /><i /></span>
                 </div>
-                <h3 className="mt-5 text-[17px] font-semibold tracking-display text-white">
+                <h3 className="mt-3 text-[16px] font-semibold tracking-display text-white">
                   {formula.label}
                 </h3>
-                <p className="mt-2 text-[13px] leading-[1.55] text-white/75 lg:line-clamp-3">
+                <p className="mt-1 line-clamp-1 text-[12px] leading-[1.5] text-white/75">
                   {formula.description}
                 </p>
                 {formula.delay && (
-                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-[#a6f8d5]">
+                  <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.15em] text-[#a6f8d5]">
                     {formula.delay}
                   </p>
                 )}
                 <Link
                   href={serviceHref(formula.type)}
-                  className="service-offer-link relative z-20 mt-auto pt-4 inline-flex items-center justify-between gap-3 text-[12px] font-semibold text-white"
+                  className="service-offer-link relative z-20 mt-auto pt-3 inline-flex items-center justify-between gap-3 text-[12px] font-semibold text-white"
                 >
                   <span>Découvrir</span>
                   <span aria-hidden="true" className="service-offer-arrow">↗</span>
