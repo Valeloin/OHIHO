@@ -60,13 +60,6 @@ export default function Home() {
             <p>Votre projet</p>
             <h1><span>Imaginez</span><span>un site qui vous</span><em>ressemble.</em></h1>
           </div>
-          <div className="hero-support">
-            <p>De l’idée à la mise en ligne, je conçois votre site ou votre application sur mesure, avec un accompagnement simple et direct.</p>
-            <div>
-              <a className="hero-primary" href="#contact">Parler de votre projet <span>↗</span></a>
-              <a className="hero-secondary" href="#realisations">Voir mes réalisations</a>
-            </div>
-          </div>
           <div className="hero-showcase-loop" aria-label="Aperçu animé des sites et applications OHIHO">
             <div className="hero-showcase-title" aria-hidden="true">
               <span className="pv-title-1">Landing page</span><span className="pv-title-2">Site vitrine</span><span className="pv-title-3">Refonte de site</span><span className="pv-title-4">Application web</span>
@@ -75,20 +68,10 @@ export default function Home() {
               {[1, 2, 3, 4].map((scene) => <i key={scene}><span className={`pv-scene-${scene}`} /></i>)}
             </div>
             <div className="hero-showcase-window"><HeroShowcase /></div>
-            <div className="hero-showcase-copy" aria-hidden="true">
-              <span className="pv-title-1">Une page claire pour transformer une idée en prise de contact.</span>
-              <span className="pv-title-2">Un site complet pour présenter votre activité avec justesse.</span>
-              <span className="pv-title-3">Une nouvelle base, plus lisible, rapide et actuelle.</span>
-              <span className="pv-title-4">Un outil web pensé autour de votre façon de travailler.</span>
-            </div>
           </div>
+          <div className="hero-email-copy"><p>Une idée, une refonte ou simplement une question ?<br />Écrivez-moi. Je vous réponds sous 24 heures ouvrées.</p><a href="mailto:valentin.condamy@ohiho.fr">valentin.condamy@ohiho.fr <span>↗</span></a></div>
           <div className="hero-studio"><span /> Studio web indépendant · Montpellier</div>
-          <div className="hero-benefits" aria-label="Les engagements OHIHO">
-            <div><b>Sur mesure</b><span>Approche</span></div>
-            <div><b>De A à Z</b><span>Accompagnement</span></div>
-            <div><b>Clair</b><span>Design</span></div>
-            <div><b>Évolutif</b><span>Technique</span></div>
-          </div>
+          <a className="hero-contact" href="#contact">Discuter de votre projet <span>↗</span></a>
         </div>
       </section>
 
