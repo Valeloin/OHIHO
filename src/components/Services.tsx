@@ -38,15 +38,6 @@ const SCENES: Record<ServiceType, () => JSX.Element> = {
   application: SceneApplication,
 };
 
-// Instant représentatif de chaque scène sur l'horloge de 33,6 s (milieu de
-// fenêtre : 12 / 37 / 62 / 87 %).
-const FREEZE_MS: Record<number, number> = {
-  1: 4032,
-  2: 12432,
-  3: 20832,
-  4: 29232,
-};
-
 // Familles gelées au clic : la rotation du carrousel (svc-carousel-*) et
 // tout ce qui suit la sélection (sv-*). Les micro-animations internes des
 // scènes continuent. Noms distincts de pv-scene-* : ces classes-là sont
@@ -121,49 +112,7 @@ export default function Services({ data }: { data: ServicesContent }) {
         FROZEN_PREFIXES.some((p) => animation.animationName.startsWith(p))
     );
 
-    if (!scene) {
-      animations.forEach((animation) => animation.play());
-      return;
-    }
-
-    const cycle = 33_600;
-    const target = FREEZE_MS[scene];
-    const current = Number(animations[0]?.currentTime ?? 0) % cycle;
-    const distance = (target - current + cycle) % cycle;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reduceMotion || distance < 30) {
-      animations.forEach((animation) => {
-        animation.currentTime = target;
-        animation.pause();
-      });
-      return;
-    }
-
-    // Le choix d'un format fait avancer tout le carrousel sur son orbite
-    // jusqu'à la scène demandée. Les scènes et leurs cartes restent sur la
-    // même horloge, mais le changement n'est plus un saut instantané.
-    animations.forEach((animation) => animation.pause());
-    const startedAt = performance.now();
-    // Entre 1,8 et 3,4 secondes selon la distance à parcourir : assez lent
-    // pour que l'œil suive réellement la rotation, sans temps mort lorsque
-    // le format choisi est déjà proche du centre.
-    const travelDuration = 1_800 + (distance / cycle) * 1_600;
-    let frame = 0;
-    const travel = (now: number) => {
-      const progress = Math.min((now - startedAt) / travelDuration, 1);
-      const eased =
-        progress < 0.5
-          ? 2 * progress * progress
-          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-      const time = (current + distance * eased) % cycle;
-      animations.forEach((animation) => {
-        animation.currentTime = time;
-      });
-      if (progress < 1) frame = requestAnimationFrame(travel);
-    };
-    frame = requestAnimationFrame(travel);
-    return () => cancelAnimationFrame(frame);
+    animations.forEach((animation) => (scene ? animation.pause() : animation.play()));
   }, [scene]);
 
   return (
@@ -176,7 +125,7 @@ export default function Services({ data }: { data: ServicesContent }) {
 
       <div
         ref={rootRef}
-        className="site-shell relative my-auto py-2"
+        className={`site-shell relative my-auto py-2 ${scene ? `svc-manual svc-target-${scene}` : ""}`}
       >
         {/* Carrousel « coverflow » : les 4 formules tournent côte à côte —
             une nette au centre, une réduite à droite, une à l'arrière, une
