@@ -57,6 +57,9 @@ export default function Home() {
           <div className="fireflies" aria-hidden="true">
             {Array.from({ length: 18 }, (_, index) => <span key={index} />)}
           </div>
+          <div className="hero-showcase-loop" aria-label="Aperçu animé des sites et applications OHIHO">
+            <HeroShowcase />
+          </div>
           <div className="hero-studio"><span /> Studio web indépendant · Montpellier</div>
           <a className="hero-contact" href="#contact">Discuter de votre projet <span>↗</span></a>
         </div>
