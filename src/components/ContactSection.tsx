@@ -19,7 +19,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
 
       <div className="codex-contact-grid">
         <div className="codex-contact-main">
-          <h2><span>Un projet</span><span>en tête&nbsp;?</span><em>Parlons-en.</em></h2>
+          <h2><span>Un projet</span><span>en tête&nbsp;<b className="codex-contact-question">?</b></span><em>Parlons-en.</em></h2>
           <p>Une idée à lancer, un site à repenser ou un outil à imaginer&nbsp;? Racontez-moi où vous en êtes. Je vous réponds avec un premier regard clair et des pistes concrètes.</p>
           <div className="codex-contact-answer"><i />{data.responseNote || "Réponse sous 24h ouvrées"}</div>
         </div>
