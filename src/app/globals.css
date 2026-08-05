@@ -3491,3 +3491,141 @@ html.hide-scrollbar::-webkit-scrollbar {
     animation: pv-rotate 2.2s linear infinite;
   }
 }
+
+/* ============================================================
+   SECTION CONTACT — passation du 2026-08-05
+   (branche agent/contact-section-handoff, CLAUDE-HANDOFF-CONTACT.md).
+   Classes et keyframes propres à cette section, distinctes de
+   .section-screen et des autres familles pv-*/sv-* pour ne rien changer
+   ailleurs sur le site.
+
+   Le repli sans animation (prefers-reduced-motion: reduce) est déjà
+   couvert par la règle globale plus haut dans ce fichier
+   (`* { animation-duration: 0.01ms !important }`) — pas besoin d'un
+   second repli ici.
+   ============================================================ */
+
+/* Hauteur : écran exact seulement à partir de 1121 px (« ordinateur »,
+   quand le noyau orbital et les trois colonnes sont visibles). En
+   dessous, hauteur automatique avec un plancher d'un écran — le contenu
+   empilé peut dépasser sur petit écran plutôt que se faire couper. */
+.contact-stage {
+  min-height: 100svh;
+}
+@media (min-width: 1121px) {
+  .contact-stage {
+    height: 100svh;
+    min-height: 0;
+  }
+}
+
+/* Colonnes : empilées sous 901 px, deux colonnes (CTA + carte, noyau
+   masqué) entre 901 et 1120, trois colonnes à partir de 1121. Le noyau
+   reste dans le DOM à toutes les tailles ; masqué (`display:none`) il ne
+   consomme pas de piste de grille, la grille à deux colonnes retombe
+   donc naturellement sur CTA + carte. */
+.contact-cols {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 901px) {
+  .contact-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
+  }
+}
+@media (min-width: 1121px) {
+  .contact-cols {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.55fr) minmax(0, 0.85fr);
+  }
+}
+.contact-core {
+  display: none;
+}
+@media (min-width: 1121px) {
+  .contact-core {
+    display: flex;
+  }
+}
+
+@keyframes contact-orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Trois vagues concentriques. Chacune ne grandit/s'efface que sur le
+   premier tiers de son propre cycle (9 s) et reste invisible le reste du
+   temps ; décalées de 3 s (un tiers de cycle) chacune, elles se
+   succèdent sans jamais se superposer. */
+.contact-ripple {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.2);
+  opacity: 0;
+  animation: contact-ripple 9s ease-out infinite;
+}
+@keyframes contact-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.55;
+  }
+  28% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Lucioles blanc-vert de la section Contact : composant visuel distinct
+   des lucioles vertes partagées (.firefly, ailleurs sur le site) — leur
+   halo est ici blanc et non teal, `firefly-drift` (la dérive) reste
+   partagée car elle ne touche pas la couleur. */
+.contact-firefly {
+  background: #eafff4;
+  animation-name: contact-firefly-glow, firefly-drift;
+  animation-timing-function: ease-in-out, linear;
+  animation-iteration-count: infinite;
+}
+@keyframes contact-firefly-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+    box-shadow: 0 0 2px rgba(234, 255, 244, 0.35);
+  }
+  50% {
+    opacity: var(--fly-peak, 0.85);
+    box-shadow: 0 0 var(--fly-halo, 7px) rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* Reflet qui traverse le badge « Réponse sous 24h ouvrées » toutes les
+   5 s. Le badge porte `overflow-hidden` : la barre part hors cadre à
+   gauche et ressort hors cadre à droite. */
+.contact-badge-shine {
+  animation: contact-badge-shine 5s ease-in-out infinite;
+}
+@keyframes contact-badge-shine {
+  0% {
+    transform: translateX(-40%) skewX(-15deg);
+  }
+  55%,
+  100% {
+    transform: translateX(340%) skewX(-15deg);
+  }
+}
+.contact-badge {
+  animation: contact-badge-float 5s ease-in-out infinite;
+}
+@keyframes contact-badge-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

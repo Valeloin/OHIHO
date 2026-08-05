@@ -31,6 +31,20 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
+        // Réservé à l'accent « Parlons-en. » de la section Contact
+        // (passation du 2026-08-05) : seule apparition d'une serif sur le
+        // site, le reste de la DA est entièrement en sans-serif. Pile
+        // système (pas de next/font/google) : cet environnement de dev a
+        // un accès très lent à Google Fonts (~7 s par requête), et une
+        // police système reste cohérente en prod comme en local.
+        serif: [
+          "ui-serif",
+          "Georgia",
+          "Cambria",
+          "Times New Roman",
+          "Times",
+          "serif",
+        ],
       },
       borderRadius: {
         // Le rayon des cartes vient du token CSS ; les pilules gardent
