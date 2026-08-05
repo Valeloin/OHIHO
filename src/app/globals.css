@@ -1090,10 +1090,12 @@ body {
   opacity: 1;
   mix-blend-mode: normal;
   filter: saturate(1.08) contrast(1.03);
+  /* Nébuleuse du Crabe (M1), mosaïque Hubble réétalonnée dans la palette
+     OHIHO. Source : NASA, ESA et Hubble Heritage Team (STScI/AURA). */
   background:
     linear-gradient(90deg, rgb(7 21 34 / 0.78) 0%, rgb(7 21 34 / 0.38) 38%, rgb(7 21 34 / 0.14) 72%, rgb(7 21 34 / 0.32) 100%),
     linear-gradient(180deg, rgb(7 21 34 / 0.22), rgb(7 21 34 / 0.08) 58%, rgb(7 21 34 / 0.48)),
-    url("/images/hero-nebula-ohiho.jpg") center / cover no-repeat;
+    url("/images/hero-crab-nebula-hubble-ohiho.jpg") center / cover no-repeat;
 }
 
 /* Filaments irréguliers propres au hero. Ils transforment les grands halos
