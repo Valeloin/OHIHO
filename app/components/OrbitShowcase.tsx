@@ -10,10 +10,9 @@ const scenes = [
 export default function OrbitShowcase() {
   return (
     <div className="orbit-showcase" aria-hidden="true">
-      <div className="orbit-path" />
-      <div className="orbit-center">
-        <img src="/logo-mark.svg" alt="" />
-        <span>OHIHO</span>
+      <div className="satellite-network">
+        <b />
+        {Array.from({ length: 8 }, (_, index) => <i key={index} />)}
       </div>
       {scenes.map((scene, index) => (
         <figure className={`orbit-card orbit-card-${index + 1}`} key={scene.type}>
@@ -21,6 +20,10 @@ export default function OrbitShowcase() {
           <div><ServiceScene type={scene.type} /></div>
         </figure>
       ))}
+      <div className="orbit-signature">
+        <img src="/logo-mark.svg" alt="" />
+        <span>OHIHO · STUDIO WEB</span>
+      </div>
     </div>
   );
 }
