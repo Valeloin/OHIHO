@@ -178,6 +178,7 @@ export default function Home() {
             </div>
           </div>
           <div className="contact-bridge" aria-hidden="true">
+            <img src="/logo-mark.svg" alt="" />
             <span><i />Une idée</span>
             <span><i />Un échange</span>
             <span><i />Un projet</span>
