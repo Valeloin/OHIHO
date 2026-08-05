@@ -446,6 +446,17 @@ body {
     text-wrap: balance;
   }
 
+  /* Section Services vivante (fond dégradé, passation carrousel
+     2026-08-05) : le kicker teal et le texte atténué, réglés pour le
+     fond nuit des autres sections, se fondaient dans ce fond plus clair.
+     Repris en blanc plein / blanc atténué pour cette seule section. */
+  .services-vivid .section-name {
+    color: #fff;
+  }
+  .services-vivid .text-muted {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
   /* Variante alignée à gauche du nom de section, pour le hero : sa colonne
      de texte est à gauche, un intertitre centré y flotterait dans le vide. */
   .section-name--left {
@@ -2734,6 +2745,182 @@ html.hide-scrollbar::-webkit-scrollbar {
     opacity: 0;
   }
 }
+
+/* ---------- Carrousel Services (coverflow, 33,6 s) ----------
+   Repris de la passation carrousel (2026-08-05) : une carte nette au
+   centre, une réduite à droite, une à l'arrière, une réduite à gauche.
+   Strictement latéral — `top` ne bouge jamais, seuls `left`, l'échelle,
+   l'opacité et la luminosité changent. Noms distincts de pv-scene-* :
+   ces dernières pilotent aussi le crossfade de la vitrine du hero
+   (HeroShowcase), les toucher aurait cassé ce second usage.
+   Les quatre cartes se partagent les MÊMES quatre positions, décalées
+   d'un quart de tour chacune (même patron que sv-step-1..4 plus bas) :
+   à tout instant, une carte occupe chaque position. */
+@keyframes svc-carousel-1 {
+  0%,
+  24% {
+    left: 50%;
+    z-index: 5;
+    opacity: 1;
+    filter: brightness(1);
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  26%,
+  49% {
+    left: 84%;
+    z-index: 3;
+    opacity: 0.7;
+    filter: brightness(0.8);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+  51%,
+  74% {
+    left: 50%;
+    z-index: 1;
+    opacity: 0.32;
+    filter: brightness(0.6);
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  76%,
+  98% {
+    left: 16%;
+    z-index: 3;
+    opacity: 0.65;
+    filter: brightness(0.78);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+  100% {
+    left: 50%;
+    z-index: 5;
+    opacity: 1;
+    filter: brightness(1);
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+}
+@keyframes svc-carousel-2 {
+  0%,
+  24% {
+    left: 84%;
+    z-index: 3;
+    opacity: 0.7;
+    filter: brightness(0.8);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+  26%,
+  49% {
+    left: 50%;
+    z-index: 1;
+    opacity: 0.32;
+    filter: brightness(0.6);
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  51%,
+  74% {
+    left: 16%;
+    z-index: 3;
+    opacity: 0.65;
+    filter: brightness(0.78);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+  76%,
+  98% {
+    left: 50%;
+    z-index: 5;
+    opacity: 1;
+    filter: brightness(1);
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  100% {
+    left: 84%;
+    z-index: 3;
+    opacity: 0.7;
+    filter: brightness(0.8);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+}
+@keyframes svc-carousel-3 {
+  0%,
+  24% {
+    left: 50%;
+    z-index: 1;
+    opacity: 0.32;
+    filter: brightness(0.6);
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  26%,
+  49% {
+    left: 16%;
+    z-index: 3;
+    opacity: 0.65;
+    filter: brightness(0.78);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+  51%,
+  74% {
+    left: 50%;
+    z-index: 5;
+    opacity: 1;
+    filter: brightness(1);
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  76%,
+  98% {
+    left: 84%;
+    z-index: 3;
+    opacity: 0.7;
+    filter: brightness(0.8);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+  100% {
+    left: 50%;
+    z-index: 1;
+    opacity: 0.32;
+    filter: brightness(0.6);
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+}
+@keyframes svc-carousel-4 {
+  0%,
+  24% {
+    left: 16%;
+    z-index: 3;
+    opacity: 0.65;
+    filter: brightness(0.78);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+  26%,
+  49% {
+    left: 50%;
+    z-index: 5;
+    opacity: 1;
+    filter: brightness(1);
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  51%,
+  74% {
+    left: 84%;
+    z-index: 3;
+    opacity: 0.7;
+    filter: brightness(0.8);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+  76%,
+  98% {
+    left: 50%;
+    z-index: 1;
+    opacity: 0.32;
+    filter: brightness(0.6);
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  100% {
+    left: 16%;
+    z-index: 3;
+    opacity: 0.65;
+    filter: brightness(0.78);
+    transform: translate(-50%, -50%) scale(0.56);
+  }
+}
+
 /* Titres : cross-slide — l'ancien titre s'efface vers le haut, le
    nouveau monte depuis le bas, calé sur les fondus des scènes
    (fenêtres 24-26 / 49-51 / 74-76 / 98-100). À poser sur les
@@ -3125,6 +3312,14 @@ html.hide-scrollbar::-webkit-scrollbar {
 .pv-err {
   opacity: 0;
 }
+/* Repli du carrousel Services sans animation (prefers-reduced-motion) :
+   seule la première carte reste visible, centrée — même logique que
+   pv-scene-2..4 ci-dessus. */
+.svc-carousel-2,
+.svc-carousel-3,
+.svc-carousel-4 {
+  opacity: 0;
+}
 .pv-scroll {
   transform: translateY(-110px);
 }
@@ -3255,6 +3450,18 @@ html.hide-scrollbar::-webkit-scrollbar {
   }
   .pv-scene-4 {
     animation: pv-scene-4 33.6s linear infinite;
+  }
+  .svc-carousel-1 {
+    animation: svc-carousel-1 33.6s linear infinite;
+  }
+  .svc-carousel-2 {
+    animation: svc-carousel-2 33.6s linear infinite;
+  }
+  .svc-carousel-3 {
+    animation: svc-carousel-3 33.6s linear infinite;
+  }
+  .svc-carousel-4 {
+    animation: svc-carousel-4 33.6s linear infinite;
   }
   .pv-title-1 {
     animation: pv-title-1 33.6s ease-in-out infinite;

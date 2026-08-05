@@ -6,7 +6,7 @@ import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
-import SectionBackdrop from "@/components/motion/SectionBackdrop";
+import ServicesBackdrop from "@/components/motion/ServicesBackdrop";
 import SectionLabel from "@/components/SectionLabel";
 import {
   Chrome,
@@ -19,15 +19,16 @@ import { SERVICE_TYPES, serviceHref } from "@/lib/services";
 import type { ServicesContent, ServiceType } from "@/lib/content/types";
 
 // ============================================================
-// SECTION SERVICES — un grand cadre navigateur qui met en scène UNE
-// formule à la fois, les 4 paliers toujours visibles dessous.
+// SECTION SERVICES — carrousel coverflow des 4 formules (fond dégradé +
+// carrousel repris de la passation du 2026-08-05), les 4 paliers toujours
+// visibles dessous.
 //
-// Le cadre affiche la CAPTURE D'UN PROJET RÉEL quand le palier en a une
-// (champ « Capture » de /admin, image dans /public) et retombe sur
-// l'animation de la formule sinon. Les couches tournent sur l'horloge de
-// la vitrine (pv-scene-1..4, 33,6 s) : le fondu croisé et le gel au clic
-// (Web Animations API, instant absolu) fonctionnent à l'identique pour
-// une image ou une animation.
+// Chaque carte affiche la CAPTURE D'UN PROJET RÉEL quand le palier en a
+// une (champ « Capture » de /admin, image dans /public) et retombe sur
+// l'animation de la formule sinon. Les cartes tournent sur l'horloge de
+// la vitrine (svc-carousel-1..4, 33,6 s) : le mouvement latéral et le gel
+// au clic (Web Animations API, instant absolu) fonctionnent à l'identique
+// pour une image ou une animation.
 // ============================================================
 
 const SCENES: Record<ServiceType, () => JSX.Element> = {
@@ -46,9 +47,12 @@ const FREEZE_MS: Record<number, number> = {
   4: 29232,
 };
 
-// Familles gelées au clic : la rotation (pv-scene-*) et tout ce qui suit la
-// sélection (sv-*). Les micro-animations internes des scènes continuent.
-const FROZEN_PREFIXES = ["pv-scene-", "sv-"];
+// Familles gelées au clic : la rotation du carrousel (svc-carousel-*) et
+// tout ce qui suit la sélection (sv-*). Les micro-animations internes des
+// scènes continuent. Noms distincts de pv-scene-* : ces classes-là sont
+// partagées avec la vitrine du hero (HeroShowcase), les toucher casserait
+// son crossfade.
+const FROZEN_PREFIXES = ["svc-carousel-", "sv-"];
 
 /* Une couche du cadre : la capture réelle du palier, ou son animation. */
 function FrameLayer({
@@ -127,21 +131,32 @@ export default function Services({ data }: { data: ServicesContent }) {
   return (
     <section
       id="services"
-      className="section-screen relative overflow-hidden border-t border-border"
+      className="services-vivid section-screen relative overflow-hidden border-t border-border"
     >
-      <SectionBackdrop />
+      <ServicesBackdrop />
       <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
       <div
         ref={rootRef}
         className="relative mx-auto my-auto w-full max-w-6xl px-6 py-6"
       >
-        {/* Le cadre, seul au centre : capture réelle ou animation, une
-            formule à la fois. L'aspect est celui des scènes (400/220). */}
+        {/* Carrousel « coverflow » : les 4 formules tournent côte à côte —
+            une nette au centre, une réduite à droite, une à l'arrière, une
+            réduite à gauche — plutôt que de se succéder dans un cadre
+            unique. Mouvement strictement latéral (svc-carousel-1..4,
+            globals.css), même horloge de 33,6 s que le reste de la
+            vitrine. `overflow-visible` : les cartes de côté débordent
+            volontairement du conteneur pour se laisser deviner. */}
         <Reveal delay={0.1}>
-          <div className="relative mx-auto aspect-[400/220] w-full max-w-xl overflow-hidden rounded-xl ring-1 ring-border">
+          <div
+            className="relative mx-auto w-full max-w-3xl"
+            style={{ aspectRatio: "2 / 1" }}
+          >
             {formulas.map((formula, i) => (
-              <div key={formula.type} className={`pv-scene-${i + 1} absolute inset-0`}>
+              <div
+                key={formula.type}
+                className={`svc-carousel-${i + 1} absolute left-1/2 top-1/2 w-[58%] -translate-x-1/2 -translate-y-1/2 aspect-[400/220] overflow-hidden rounded-xl ring-1 ring-white/20 shadow-2xl shadow-black/30`}
+              >
                 <FrameLayer
                   type={formula.type}
                   label={formula.label}
@@ -182,7 +197,10 @@ export default function Services({ data }: { data: ServicesContent }) {
                   description ~4,6:1 sur le fond nuit. */}
               <div className={`sv-step-${i + 1}`}>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-gradient inline-block font-mono text-xl font-semibold tracking-display">
+                  {/* Bleu nuit et non le dégradé teal habituel : sur le
+                      fond vivant de cette section, le dégradé se fondait
+                      dans le bleu-vert du fond. */}
+                  <span className="inline-block font-mono text-xl font-semibold tracking-display text-[#091a29]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {/* Chevron : les paliers sont cliquables, il faut que ça
