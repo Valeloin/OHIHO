@@ -468,8 +468,90 @@ body {
   .services-vivid .section-name {
     color: #fff;
   }
-  .services-vivid .text-muted {
+.services-vivid .text-muted {
     color: rgba(255, 255, 255, 0.82);
+  }
+
+  /* Services reprend la construction éditoriale de Contact : un fin
+     en-tête tripartite, une accroche forte à gauche et l'objet animé à
+     droite. Le rail des formats conclut la composition en bas. */
+  .services-editorial-head {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2.8rem;
+  }
+  .services-editorial-head > p,
+  .services-editorial-head > span {
+    margin: 0;
+    font-family: var(--font-mono), monospace;
+    font-size: 0.67rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.82);
+  }
+  .services-editorial-head > h2 {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 1.4rem);
+    margin: 0;
+    color: #fff;
+    transform: translate(-50%, -50%);
+  }
+  .services-editorial-main {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: clamp(2rem, 4vw, 5rem);
+  }
+  .services-editorial-copy { max-width: 32rem; }
+  .services-editorial-copy > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font: 600 0.65rem/1 var(--font-mono), monospace;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #b9ffe3;
+  }
+  .services-editorial-copy > span::before {
+    content: "";
+    width: 1.6rem;
+    height: 1px;
+    background: #b9ffe3;
+  }
+  .services-editorial-copy h3 {
+    max-width: 10ch;
+    margin: 1rem 0 0;
+    color: #fff;
+    font-size: clamp(2.25rem, 4vw, 4.5rem);
+    font-weight: 580;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+  }
+  .services-editorial-copy p {
+    max-width: 29rem;
+    margin: 1.25rem 0 0;
+    padding-left: 1rem;
+    border-left: 1px solid rgb(255 255 255 / 0.42);
+    color: rgb(255 255 255 / 0.82);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+  @media (max-width: 900px) {
+    .services-editorial-head > span { display: none; }
+    .services-editorial-main { grid-template-columns: 1fr; gap: 1.5rem; }
+    .services-editorial-copy { text-align: center; margin-inline: auto; }
+    .services-editorial-copy h3 { max-width: none; }
+    .services-editorial-copy p { margin-inline: auto; text-align: left; }
+  }
+  @media (max-width: 560px) {
+    .services-editorial-head > p { visibility: hidden; }
   }
 
   /* Variante alignée à gauche du nom de section, pour le hero : sa colonne

@@ -7,7 +7,6 @@ import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import ServicesBackdrop from "@/components/motion/ServicesBackdrop";
-import SectionLabel from "@/components/SectionLabel";
 import {
   Chrome,
   SceneLanding,
@@ -176,11 +175,16 @@ export default function Services({ data }: { data: ServicesContent }) {
       className="services-vivid section-screen relative overflow-hidden border-t border-border"
     >
       <ServicesBackdrop />
-      <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
+
+      <div className="services-editorial-head site-shell">
+        <p>Quatre formats</p>
+        <h2 className="section-name">{data.kicker}</h2>
+        <span>Du site essentiel à l’outil métier</span>
+      </div>
 
       <div
         ref={rootRef}
-        className={`site-shell relative my-auto py-2 ${scene ? `svc-manual svc-selected-${scene}` : ""}`}
+        className={`site-shell relative my-auto py-4 ${scene ? `svc-manual svc-selected-${scene}` : ""}`}
       >
         {/* Carrousel « coverflow » : les 4 formules tournent côte à côte —
             une nette au centre, une réduite à droite, une à l'arrière, une
@@ -189,31 +193,41 @@ export default function Services({ data }: { data: ServicesContent }) {
             globals.css), même horloge de 33,6 s que le reste de la
             vitrine. `overflow-visible` : les cartes de côté débordent
             volontairement du conteneur pour se laisser deviner. */}
-        <Reveal delay={0.1}>
-          <div
-            className="relative mx-auto w-full max-w-5xl"
-            style={{ aspectRatio: "3.25 / 1" }}
-          >
-            {formulas.map((formula, i) => (
-              <div
-                key={formula.type}
-                className={`svc-carousel-${i + 1} absolute left-1/2 top-1/2 w-[64%] -translate-x-1/2 -translate-y-1/2 aspect-[400/220] overflow-hidden rounded-xl ring-1 ring-white/25 shadow-2xl shadow-black/30`}
-              >
-                <FrameLayer
-                  type={formula.type}
-                  label={formula.label}
-                  screenshot={formula.screenshot}
-                />
-              </div>
-            ))}
-          </div>
-        </Reveal>
+        <div className="services-editorial-main">
+          <Reveal>
+            <div className="services-editorial-copy">
+              <span>Le bon format, au bon moment.</span>
+              <h3>{data.title}</h3>
+              <p>Une page pour aller droit au but, plusieurs pour raconter votre activité, une refonte pour repartir proprement ou un outil conçu autour de votre métier.</p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div
+              className="relative mx-auto w-full"
+              style={{ aspectRatio: "3.1 / 1" }}
+            >
+              {formulas.map((formula, i) => (
+                <div
+                  key={formula.type}
+                  className={`svc-carousel-${i + 1} absolute left-1/2 top-1/2 w-[64%] -translate-x-1/2 -translate-y-1/2 aspect-[400/220] overflow-hidden rounded-xl ring-1 ring-white/25 shadow-2xl shadow-black/30`}
+                >
+                  <FrameLayer
+                    type={formula.type}
+                    label={formula.label}
+                    screenshot={formula.screenshot}
+                  />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
 
         {/* Les 4 paliers, toujours visibles. UNE COLONNE sous 768 px : à
             deux colonnes, les descriptions de 01/02 se faisaient tronquer
             sur mobile. La coupe à 3 lignes ne vaut qu'à partir de lg, où
             les colonnes doivent rester à la même hauteur. */}
-        <RevealGroup className="mt-7 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula, i) => (
             <RevealItem
               key={formula.type}
