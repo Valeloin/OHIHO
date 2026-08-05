@@ -162,6 +162,9 @@ export default function Home() {
 
       <section className="contact section-pad" id="contact">
         <div className="contact-orbits" aria-hidden="true"><i /><i /><i /></div>
+        <div className="contact-fireflies" aria-hidden="true">
+          {Array.from({ length: 14 }, (_, index) => <span key={index} />)}
+        </div>
         <div className="contact-head">
           <p className="section-label light">Votre projet</p>
           <span>Disponible pour de nouveaux projets</span>
