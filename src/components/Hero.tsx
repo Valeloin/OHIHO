@@ -4,7 +4,7 @@ import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
-import Fireflies from "@/components/motion/Fireflies";
+import HeroStars from "@/components/motion/HeroStars";
 import Nebulae from "@/components/motion/Nebulae";
 import StatGlyph from "@/components/motion/StatGlyph";
 import type { HeroContent } from "@/lib/content/types";
@@ -55,7 +55,7 @@ export default function Hero({
     <section className="section-screen relative overflow-hidden">
       <AnimatedGlow variant="hero" />
       <Nebulae className="nebula-field--hero" />
-      <Fireflies />
+      <HeroStars />
 
       <motion.div
         // Hauteur d'écran et centrage vertical portés par `.section-screen`,
@@ -65,7 +65,7 @@ export default function Hero({
         /* `my-auto` : `.section-screen` est une colonne sans centrage depuis
            que les titres de section sont épinglés en haut — chaque contenu
            se centre lui-même dans l'espace restant. */
-        className="site-shell relative my-auto flex flex-col py-10"
+        className="site-shell relative z-10 my-auto flex flex-col py-10"
         variants={CONTAINER}
         initial="hidden"
         animate="visible"

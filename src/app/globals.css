@@ -1088,12 +1088,46 @@ body {
 
 .nebula-field--hero {
   opacity: 1;
-  filter: saturate(1.18) contrast(1.04);
+  mix-blend-mode: normal;
+  filter: saturate(1.08) contrast(1.03);
   background:
-    radial-gradient(ellipse at 8% 82%, rgb(56 189 248 / 0.2), transparent 38%),
-    radial-gradient(ellipse at 48% 12%, rgb(34 211 196 / 0.17), transparent 42%),
-    radial-gradient(ellipse at 94% 70%, rgb(52 211 153 / 0.2), transparent 40%),
-    linear-gradient(118deg, rgb(56 189 248 / 0.05), transparent 38%, rgb(52 211 153 / 0.06));
+    linear-gradient(90deg, rgb(7 21 34 / 0.32) 0%, transparent 46%, rgb(7 21 34 / 0.06) 100%),
+    linear-gradient(180deg, rgb(7 21 34 / 0.16), transparent 58%, rgb(7 21 34 / 0.28)),
+    url("/images/hero-nebula-stars-ohiho.jpg") center / cover no-repeat;
+}
+
+.hero-stars { z-index: 2; }
+.hero-star {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: #d9f8ff;
+  box-shadow: 0 0 5px #a8efff, 0 0 14px rgb(56 189 248 / 0.65);
+  opacity: 0.42;
+  animation: hero-star-twinkle 6s ease-in-out infinite;
+  transform: translate(-50%, -50%) scale(.78);
+}
+.hero-star::before,
+.hero-star::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: linear-gradient(90deg, transparent, rgb(209 250 255 / 0.72), transparent);
+  transform: translate(-50%, -50%);
+}
+.hero-star::before { width: 1.15rem; height: 1px; }
+.hero-star::after { width: 1px; height: 1.15rem; }
+.hero-star--emerald {
+  background: #dbfff1;
+  box-shadow: 0 0 5px #a7f3d0, 0 0 14px rgb(52 211 153 / 0.65);
+}
+
+@keyframes hero-star-twinkle {
+  0%, 100% { opacity: .34; transform: translate(-50%, -50%) scale(.72); }
+  48% { opacity: .58; transform: translate(-50%, -50%) scale(.92); }
+  55% { opacity: 1; transform: translate(-50%, -50%) scale(1.18); }
+  64% { opacity: .52; transform: translate(-50%, -50%) scale(.86); }
 }
 
 /* Filaments irréguliers propres au hero. Ils transforment les grands halos
