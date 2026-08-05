@@ -1087,11 +1087,47 @@ body {
 }
 
 .nebula-field--hero {
-  opacity: 0.94;
+  opacity: 1;
+  filter: saturate(1.18) contrast(1.04);
   background:
-    radial-gradient(ellipse at 22% 72%, rgb(56 189 248 / 0.08), transparent 36%),
-    radial-gradient(ellipse at 56% 24%, rgb(34 211 196 / 0.07), transparent 38%),
-    radial-gradient(ellipse at 82% 62%, rgb(52 211 153 / 0.08), transparent 34%);
+    radial-gradient(ellipse at 8% 82%, rgb(56 189 248 / 0.2), transparent 38%),
+    radial-gradient(ellipse at 48% 12%, rgb(34 211 196 / 0.17), transparent 42%),
+    radial-gradient(ellipse at 94% 70%, rgb(52 211 153 / 0.2), transparent 40%),
+    linear-gradient(118deg, rgb(56 189 248 / 0.05), transparent 38%, rgb(52 211 153 / 0.06));
+}
+
+/* Filaments irréguliers propres au hero. Ils transforment les grands halos
+   ronds en nappes gazeuses lisibles, sans ajouter d'image lourde. */
+.nebula-field--hero::before,
+.nebula-field--hero::after {
+  content: "";
+  position: absolute;
+  display: block;
+  border-radius: 48% 52% 63% 37% / 57% 38% 62% 43%;
+  filter: blur(clamp(30px, 4vw, 64px));
+  will-change: transform, opacity;
+}
+.nebula-field--hero::before {
+  left: -7%;
+  top: 5%;
+  width: 72%;
+  height: 55%;
+  background:
+    radial-gradient(ellipse at 30% 55%, rgb(var(--brand-sky) / 0.27), transparent 42%),
+    radial-gradient(ellipse at 72% 35%, rgb(var(--brand-teal) / 0.2), transparent 48%);
+  transform: rotate(-10deg);
+  animation: nebula-filament-left 32s ease-in-out infinite alternate;
+}
+.nebula-field--hero::after {
+  right: -9%;
+  bottom: -2%;
+  width: 68%;
+  height: 58%;
+  background:
+    radial-gradient(ellipse at 35% 58%, rgb(var(--brand-teal) / 0.2), transparent 45%),
+    radial-gradient(ellipse at 78% 44%, rgb(var(--brand-emerald) / 0.29), transparent 43%);
+  transform: rotate(9deg);
+  animation: nebula-filament-right 38s ease-in-out infinite alternate;
 }
 
 .nebula {
@@ -1152,8 +1188,8 @@ body {
   aspect-ratio: 1.8;
   background: radial-gradient(
     ellipse at 50% 50%,
-    rgb(var(--brand-teal) / 0.15) 0%,
-    rgb(var(--brand-sky) / 0.07) 42%,
+    rgb(var(--brand-teal) / 0.27) 0%,
+    rgb(var(--brand-sky) / 0.13) 42%,
     transparent 76%
   );
   animation: nebula-drift-center 35s ease-in-out infinite alternate;
@@ -1167,8 +1203,8 @@ body {
   aspect-ratio: 1.55;
   background: radial-gradient(
     ellipse at 48% 52%,
-    rgb(var(--brand-emerald) / 0.14) 0%,
-    rgb(var(--brand-teal) / 0.065) 44%,
+    rgb(var(--brand-emerald) / 0.26) 0%,
+    rgb(var(--brand-teal) / 0.12) 44%,
     transparent 75%
   );
   animation: nebula-drift-upper 29s ease-in-out infinite alternate;
@@ -1199,8 +1235,20 @@ body {
   to { transform: translate3d(-10%, 9%, 0) rotate(-5deg) scale(.95); opacity: .92; }
 }
 
+@keyframes nebula-filament-left {
+  from { transform: translate3d(-4%, -3%, 0) rotate(-10deg) scale(1); opacity: .72; }
+  to { transform: translate3d(8%, 7%, 0) rotate(-3deg) scale(1.12); opacity: 1; }
+}
+
+@keyframes nebula-filament-right {
+  from { transform: translate3d(5%, 6%, 0) rotate(9deg) scale(1.08); opacity: .76; }
+  to { transform: translate3d(-8%, -5%, 0) rotate(2deg) scale(.96); opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nebula { animation: none; }
+  .nebula-field--hero::before,
+  .nebula-field--hero::after { animation: none; }
 }
 
 /* ---------- Frise de la méthode ----------
