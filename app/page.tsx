@@ -161,13 +161,25 @@ export default function Home() {
       </section>
 
       <section className="contact section-pad" id="contact">
-        <p className="section-label light">Votre projet</p>
+        <div className="contact-orbits" aria-hidden="true"><i /><i /><i /></div>
+        <div className="contact-head">
+          <p className="section-label light">Votre projet</p>
+          <span>Disponible pour de nouveaux projets</span>
+        </div>
         <div className="contact-copy">
-          <h2>Un projet en tête ?<br /><em>Parlons-en.</em></h2>
+          <div className="contact-main">
+            <h2>Un projet<br />en tête ?<br /><em>Parlons-en.</em></h2>
+            <p className="contact-intro">Une idée à lancer, un site à repenser ou un outil à imaginer&nbsp;? Racontez-moi votre projet. Je vous réponds avec un premier regard clair, sans jargon.</p>
+            <div className="contact-details" aria-label="Informations pratiques">
+              <span><i />Réponse sous 24h ouvrées</span>
+              <span><i />Montpellier · Partout en France</span>
+            </div>
+          </div>
           <div className="contact-side">
             <a className="linkedin-qr" href="https://www.linkedin.com/in/valentin-condamy-966656423/" target="_blank" rel="noreferrer" aria-label="Ouvrir le profil LinkedIn de Valentin Condamy">
+              <span className="qr-card-head"><i>in</i><span><small>Le plus simple pour commencer</small><b>Échangeons sur LinkedIn</b></span><strong>↗</strong></span>
               <span className="qr-frame"><img src="/linkedin-qr.png" alt="QR code vers le profil LinkedIn de Valentin Condamy" /></span>
-              <span className="qr-copy"><b><i>in</i> Retrouvons-nous sur LinkedIn</b><small>Scannez le QR code ou cliquez pour ouvrir mon profil.</small></span>
+              <span className="qr-copy"><b>Scannez pour ouvrir mon profil</b><small>Ou cliquez directement sur la carte</small></span>
             </a>
           </div>
         </div>
