@@ -37,7 +37,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Ohiho, accueil">
-          <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
+          <img className="brand-logo" src="/logo-mark.svg" alt="" />
           <span>OHIHO</span>
         </a>
         <nav aria-label="Navigation principale">
@@ -146,7 +146,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="brand footer-brand" href="#top"><span className="brand-mark" aria-hidden="true"><i/><i/><i/></span><span>OHIHO</span></a>
+        <a className="brand footer-brand" href="#top"><img className="brand-logo" src="/logo-mark.svg" alt="" /><span>OHIHO</span></a>
         <div className="footer-meta"><span>Valentin Condamy · Montpellier</span><span>© 2026 OHIHO</span><a href="https://www.linkedin.com/in/valentin-condamy-966656423/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
       </footer>
     </main>
