@@ -1,158 +1,153 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
 import SectionBackdrop from "@/components/motion/SectionBackdrop";
-import SectionLabel from "@/components/SectionLabel";
 import { PROJECTS } from "@/lib/projects";
 import type { PortfolioContent } from "@/lib/content/types";
 
+function projectLinkProps(href?: string) {
+  const external = href?.startsWith("http");
+  return {
+    href: href ?? "/#contact",
+    target: external ? "_blank" : undefined,
+    rel: external ? "noopener noreferrer" : undefined,
+  };
+}
+
 export default function Portfolio({ data }: { data: PortfolioContent }) {
-  // Fond par défaut : la section est entre deux sections sur --surface
-  // (Pourquoi OHIHO et Votre projet), l'alternance reste lisible.
+  const featured = PROJECTS[0];
+  const secondary = PROJECTS[1];
+
   return (
     <section
       id="portfolio"
-      className="section-screen relative overflow-hidden border-t border-border"
+      className="portfolio-editorial section-screen relative overflow-hidden border-t border-border"
     >
       <SectionBackdrop />
-      {/* Rythme resserré : comme Services, cette section porte beaucoup de
-          contenu (3 cartes + encart) et doit tenir sur un écran. */}
-      <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
-<div className="site-shell relative py-10 my-auto">
-        <Reveal>
-          <p className="mx-auto max-w-2xl text-center leading-relaxed text-muted">
-            {data.subtitle}
-          </p>
-        </Reveal>
+      <div className="portfolio-editorial-head site-shell">
+        <p>Projets livrés</p>
+        <h2 className="section-name">{data.kicker}</h2>
+        <span>Conçus · développés · mis en ligne</span>
+      </div>
 
-        {/* Les réalisations se lisent d'abord par leur MARQUE : une grande
-            tuile portant le favicon du site, cliquable vers le site en ligne.
-            Les favicons sont servies depuis /public — aucun appel externe
-            depuis le navigateur du visiteur.
-            Les projets à venir gardent une tuile en pointillés, non cliquable
-            et sans icône : on n'invente pas de favicon pour un site qui
-            n'existe pas. */}
-        <RevealGroup className="mt-6 grid gap-5 sm:grid-cols-2">
-          {PROJECTS.map((project) => {
-            const isExternal = project.href?.startsWith("http");
-            const enLigne = Boolean(project.href);
+      <div className="site-shell relative my-auto py-4">
+        <div className="portfolio-editorial-main">
+          <Reveal>
+            <div className="portfolio-editorial-copy">
+              <span>Du concret, pas des promesses.</span>
+              <h3>{data.title}</h3>
+              <p>{data.subtitle}</p>
+              <Link href="/#contact" className="portfolio-editorial-cta">
+                {data.ctaButton}
+                <b aria-hidden="true">↗</b>
+              </Link>
+            </div>
+          </Reveal>
 
-            const content = (
-              <>
-                {/* Tuile d'icône en grand format, carrée. */}
-                <div className="flex items-center gap-4">
-                  {project.icon ? (
-                    <span
-                      className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl"
-                      style={{ background: project.iconBg }}
-                    >
-                      <Image
-                        src={project.icon}
-                        alt={`Logo ${project.title}`}
-                        width={80}
-                        height={80}
-                        className="h-20 w-20"
-                      />
-                    </span>
-                  ) : (
-                    /* Emplacement à venir : pointillés, aucune icône. */
-                    <span
-                      aria-hidden="true"
-                      className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-dashed border-border text-2xl text-muted/50"
-                    >
-                      ·
-                    </span>
-                  )}
-                  <div className="min-w-0">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-teal">
-                      {project.category}
-                    </p>
-                    {/* `truncate` seulement à partir de `sm` : en une seule
-                        colonne, la tuile est assez large pour laisser le
-                        titre passer à la ligne, et un nom coupé par une
-                        ellipse sur mobile se lit mal. L'ellipse ne sert que
-                        dans les grilles à 2 et 3 colonnes, où les tuiles
-                        doivent rester de même hauteur. */}
-                    <h3 className="mt-2 text-lg font-semibold tracking-display sm:truncate">
-                      {project.title}
-                    </h3>
+          {featured && (
+            <Reveal delay={0.1}>
+              <div className="portfolio-stage">
+                <Link
+                  {...projectLinkProps(featured.href)}
+                  className="portfolio-browser group"
+                  aria-label={`Découvrir ${featured.title}`}
+                >
+                  <div className="portfolio-browser-bar" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
+                    <i>cadance-coaching.fr</i>
                   </div>
-                </div>
+                  <div className="portfolio-browser-body">
+                    <div className="portfolio-browser-brand">
+                      {featured.icon && (
+                        <span style={{ background: featured.iconBg }}>
+                          <Image
+                            src={featured.icon}
+                            alt=""
+                            width={96}
+                            height={96}
+                          />
+                        </span>
+                      )}
+                      <div>
+                        <small>{featured.category}</small>
+                        <strong>{featured.title}</strong>
+                        <em>Identité, contenus et autonomie réunis.</em>
+                      </div>
+                    </div>
+                    <div className="portfolio-browser-ui" aria-hidden="true">
+                      <div className="portfolio-ui-title" />
+                      <div className="portfolio-ui-line" />
+                      <div className="portfolio-ui-line portfolio-ui-line--short" />
+                      <div className="portfolio-ui-cards">
+                        <span />
+                        <span />
+                        <span />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
 
-                <p className="mt-5 text-sm leading-relaxed text-muted">
-                  {project.description}
-                </p>
-
-                {/* mt-auto : l'action reste collée en bas, les tuiles étant
-                    à hauteur égale sur la rangée. */}
-                {enLigne ? (
-                  <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-accent-cyan">
-                    {isExternal ? "Voir le site" : "En savoir plus"}
-                    <span aria-hidden="true">→</span>
-                  </span>
-                ) : (
-                  <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-muted">
-                    {project.note ?? "Bientôt en ligne"}
-                  </span>
-                )}
-              </>
-            );
-
-            // Carte à plat : un simple filet, sans dégradé ni double
-            // enveloppe (la version en bordure dégradée + fond teinté a été
-            // jugée trop lourde, comme les cartes du hero). Seul le filet
-            // s'éclaircit au survol des projets accessibles ; les
-            // emplacements à venir gardent des pointillés, atténués.
-
-            return (
-              // `min-w-0` : une cellule de grille refuse par défaut de
-              // descendre sous la largeur minimale de son contenu. Le titre
-              // étant en `truncate` (donc insécable), la tuile réclamait
-              // 301 px et débordait de sa colonne de 272 sur un écran de
-              // 320. Avec `min-w-0`, elle se plie à sa colonne et c'est
-              // l'ellipse du titre qui absorbe le manque.
-              <RevealItem
-                key={project.title}
-                hover={enLigne}
-                className="h-full min-w-0"
-              >
-                {project.href ? (
+                {secondary && (
                   <Link
-                    href={project.href}
-                    className="group flex h-full flex-col rounded-2xl border border-border p-6 transition-colors hover:border-accent-cyan/50"
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    {...projectLinkProps(secondary.href)}
+                    className="portfolio-float group"
+                    aria-label={`Découvrir ${secondary.title}`}
                   >
-                    {content}
+                    {secondary.icon && (
+                      <span className="portfolio-float-icon">
+                        <Image
+                          src={secondary.icon}
+                          alt=""
+                          width={64}
+                          height={64}
+                        />
+                      </span>
+                    )}
+                    <span>
+                      <small>{secondary.category}</small>
+                      <strong>{secondary.title}</strong>
+                    </span>
+                    <b aria-hidden="true">↗</b>
                   </Link>
-                ) : (
-                  <div className="flex h-full flex-col rounded-2xl border border-dashed border-border p-6 opacity-70">
-                    {content}
-                  </div>
                 )}
-              </RevealItem>
-            );
-          })}
-        </RevealGroup>
+              </div>
+            </Reveal>
+          )}
+        </div>
 
-        <Reveal>
-          {/* Encart de fin en carte : texte à gauche, bouton à droite ;
-              empilé sous sm. */}
-          <div className="card-surface mt-6 flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-xl text-sm leading-relaxed text-muted">
-              {data.ctaText}
-            </p>
-            <Link
-              href="/#contact"
-              className="btn-accent inline-flex shrink-0 px-6 py-3 text-sm"
-            >
-              {data.ctaButton}
-            </Link>
-          </div>
-        </Reveal>
+        <RevealGroup className="portfolio-project-rail">
+          {PROJECTS.map((project, index) => (
+            <RevealItem key={project.title} hover={Boolean(project.href)}>
+              <Link
+                {...projectLinkProps(project.href)}
+                className="portfolio-project-card group"
+              >
+                <span className="portfolio-project-number">0{index + 1}</span>
+                {project.icon && (
+                  <span
+                    className="portfolio-project-icon"
+                    style={{ background: project.iconBg }}
+                  >
+                    <Image src={project.icon} alt="" width={48} height={48} />
+                  </span>
+                )}
+                <span className="portfolio-project-meta">
+                  <small>{project.category}</small>
+                  <strong>{project.title}</strong>
+                </span>
+                <span className="portfolio-project-description">
+                  {project.description}
+                </span>
+                <b aria-hidden="true">↗</b>
+              </Link>
+            </RevealItem>
+          ))}
+        </RevealGroup>
       </div>
     </section>
   );
