@@ -213,7 +213,7 @@ export default function Services({ data }: { data: ServicesContent }) {
             deux colonnes, les descriptions de 01/02 se faisaient tronquer
             sur mobile. La coupe à 3 lignes ne vaut qu'à partir de lg, où
             les colonnes doivent rester à la même hauteur. */}
-        <RevealGroup className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="mt-7 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula, i) => (
             <RevealItem
               key={formula.type}
@@ -234,7 +234,7 @@ export default function Services({ data }: { data: ServicesContent }) {
                 className={`sv-bar-${i + 1} service-offer-progress absolute inset-x-0 top-0 h-[3px] origin-left`}
               />
 
-              <div className={`sv-step-${i + 1} flex min-h-[168px] h-full flex-col p-4`}>
+              <div className={`sv-step-${i + 1} flex min-h-[172px] h-full flex-col px-5 py-4`}>
                 <div className="flex items-center justify-between gap-2">
                   <span className="service-offer-number font-mono text-[11px] font-semibold uppercase tracking-[0.18em]">
                     Format {String(i + 1).padStart(2, "0")}
