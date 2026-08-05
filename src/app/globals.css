@@ -360,17 +360,12 @@ body {
     color: var(--foreground);
   }
 
-  /* Section d'accueil : une par écran.
+  /* Section d'accueil : même hauteur de référence que Contact.
 
-     `min-height` et non `height` : si le contenu dépasse (petit portable en
-     paysage, texte agrandi par le navigateur, mobile étroit), la section
-     grandit au lieu de couper. Sur un écran normal elle fait exactement la
-     hauteur utile — l'écran moins le bandeau, qui est fixe et recouvrirait
-     sinon le haut de chaque section.
-
-     Le centrage vertical est porté ici, ce qui permet aux sections de garder
-     un rembourrage interne modeste : il sert de marge minimale quand le
-     contenu approche la hauteur d'écran, pas de rythme vertical. */
+     Chaque section occupe au minimum un écran complet (`100svh`). Sur les
+     grands écrans elle en occupe exactement un, comme `.codex-contact` ; sur
+     mobile, `min-height` lui permet de grandir si les colonnes empilées sont
+     plus hautes que la fenêtre, sans couper le contenu. */
   /* COLONNE, et non plus centrage direct : le titre de section
      (SectionLabel) est épinglé en haut, toujours à la même hauteur, et
      c'est le conteneur de contenu qui se centre dans l'espace restant via
@@ -379,29 +374,18 @@ body {
   .section-screen {
     display: flex;
     flex-direction: column;
+    min-height: 100svh;
     /* Le bandeau est `sticky` : sans cette marge, un lien d'ancre
        (« Nous contacter » → #contact) amène le haut de la section tout en
        haut de la fenêtre, donc derrière le bandeau. */
     scroll-margin-top: var(--header-h);
   }
 
-  /* Le plein écran ne vaut qu'à partir de la tablette. Sur téléphone, un
-     écran fait environ 700 px de haut pour 375 de large : le même contenu y
-     est bien plus haut une fois les colonnes empilées, si bien qu'une section
-     sur deux dépassait la fenêtre pendant que les plus courtes traînaient du
-     vide. La section y reprend donc la hauteur de son contenu, et c'est le
-     rembourrage interne qui donne le rythme.
-
-     Plafonné à 900 px : sur un grand ou très haut écran (4K, ultra-wide),
-     le contenu ne peut pas grandir indéfiniment — sa taille est elle-même
-     plafonnée (voir le `clamp` du hero et de `.section-title`) — si bien
-     qu'une section forcée à occuper TOUTE la hauteur y flottait dans un
-     immense vide, centrée entre deux bandes vides. Passé 900 px de hauteur
-     utile, la section reprend donc la taille de son contenu et laisse voir
-     le début de la section suivante plutôt que d'étirer du vide. */
-  @media (min-width: 768px) {
+  /* Même seuil desktop et même garde-fou de hauteur que la section Contact. */
+  @media (min-width: 1121px) {
     .section-screen {
-      min-height: min(calc(100svh - var(--header-h)), 900px);
+      height: 100svh;
+      min-height: 620px;
     }
   }
 
