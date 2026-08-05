@@ -16,12 +16,10 @@ export default function OrbitShowcase() {
         <span>OHIHO</span>
       </div>
       {scenes.map((scene, index) => (
-        <div className={`orbit-slot orbit-slot-${index + 1}`} key={scene.type}>
-          <figure className="orbit-card">
-            <figcaption><span>0{index + 1}</span>{scene.label}</figcaption>
-            <div><ServiceScene type={scene.type} /></div>
-          </figure>
-        </div>
+        <figure className={`orbit-card orbit-card-${index + 1}`} key={scene.type}>
+          <figcaption><span>0{index + 1}</span>{scene.label}</figcaption>
+          <div><ServiceScene type={scene.type} /></div>
+        </figure>
       ))}
     </div>
   );
