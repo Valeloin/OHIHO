@@ -1,4 +1,5 @@
 import HeroShowcase from "./components/HeroShowcase";
+import OrbitShowcase from "./components/OrbitShowcase";
 
 const services = [
   {
@@ -80,17 +81,11 @@ export default function Home() {
             <p className="section-label light">Quatre formats, un même soin</p>
             <h2>Le bon site dépend d’abord de ce qu’il doit faire.</h2>
             <p className="preview-intro">Présenter une offre, structurer plusieurs contenus, repartir sur de bonnes bases ou créer un outil métier : chaque projet commence par un besoin concret.</p>
-            <div className="claude-preview-title" aria-hidden="true">
-              <span className="pv-title-1">Landing page</span><span className="pv-title-2">Site vitrine</span><span className="pv-title-3">Refonte de site</span><span className="pv-title-4">Application web</span>
-            </div>
-            <div className="claude-preview-caption" aria-hidden="true">
-              <span className="pv-title-1">Une offre claire et un parcours court jusqu’à la prise de contact.</span><span className="pv-title-2">Plusieurs pages pour présenter votre activité sans perdre le visiteur.</span><span className="pv-title-3">Une structure plus claire, plus rapide et adaptée aux usages actuels.</span><span className="pv-title-4">Un outil conçu autour de votre organisation et de vos utilisateurs.</span>
-            </div>
-            <div className="claude-preview-progress" aria-hidden="true">
-              {[1, 2, 3, 4].map((scene) => <i key={scene}><span className={`pv-scene-${scene}`} /></i>)}
+            <div className="format-key" aria-label="Formats proposés">
+              <span><i />Landing page</span><span><i />Site vitrine</span><span><i />Refonte</span><span><i />Application web</span>
             </div>
           </div>
-          <div className="claude-preview-frame"><HeroShowcase /></div>
+          <OrbitShowcase />
         </div>
       </section>
 
