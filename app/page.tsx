@@ -63,15 +63,22 @@ export default function Home() {
       </section>
 
       <section className="service-preview" aria-label="Aperçu animé des services OHIHO">
-        <div className="claude-preview-title" aria-hidden="true">
-          <span className="pv-title-1">Landing page</span><span className="pv-title-2">Site intermédiaire</span><span className="pv-title-3">Refonte de site</span><span className="pv-title-4">Application web</span>
-        </div>
-        <div className="claude-preview-progress" aria-hidden="true">
-          {[1, 2, 3, 4].map((scene) => <i key={scene}><span className={`pv-scene-${scene}`} /></i>)}
-        </div>
-        <div className="claude-preview-frame"><HeroShowcase /></div>
-        <div className="claude-preview-caption" aria-hidden="true">
-          <span className="pv-title-1">Présenter une offre et générer des contacts</span><span className="pv-title-2">Expliquer votre activité sans perdre le visiteur</span><span className="pv-title-3">Repartir sur une base claire et efficace</span><span className="pv-title-4">Un outil construit autour de vos besoins</span>
+        <div className="claude-preview-layout">
+          <div className="claude-preview-copy">
+            <p className="section-label light">Quatre formats, un même soin</p>
+            <h2>Le bon site dépend d’abord de ce qu’il doit faire.</h2>
+            <p className="preview-intro">Présenter une offre, structurer plusieurs contenus, repartir sur de bonnes bases ou créer un outil métier : chaque projet commence par un besoin concret.</p>
+            <div className="claude-preview-title" aria-hidden="true">
+              <span className="pv-title-1">Landing page</span><span className="pv-title-2">Site vitrine</span><span className="pv-title-3">Refonte de site</span><span className="pv-title-4">Application web</span>
+            </div>
+            <div className="claude-preview-caption" aria-hidden="true">
+              <span className="pv-title-1">Une offre claire et un parcours court jusqu’à la prise de contact.</span><span className="pv-title-2">Plusieurs pages pour présenter votre activité sans perdre le visiteur.</span><span className="pv-title-3">Une structure plus claire, plus rapide et adaptée aux usages actuels.</span><span className="pv-title-4">Un outil conçu autour de votre organisation et de vos utilisateurs.</span>
+            </div>
+            <div className="claude-preview-progress" aria-hidden="true">
+              {[1, 2, 3, 4].map((scene) => <i key={scene}><span className={`pv-scene-${scene}`} /></i>)}
+            </div>
+          </div>
+          <div className="claude-preview-frame"><HeroShowcase /></div>
         </div>
       </section>
 
@@ -107,7 +114,7 @@ export default function Home() {
       <section className="method section-pad" id="methode">
         <div className="method-title">
           <p className="section-label light">La méthode</p>
-          <h2>Vous savez<br />où l’on va.<br /><em>Et pourquoi.</em></h2>
+          <h2>De votre idée<br />à un site<br /><em>en ligne.</em></h2>
         </div>
         <div className="steps">
           {steps.map(([number, title, text]) => (
@@ -127,21 +134,21 @@ export default function Home() {
         </div>
         <div className="project-grid">
           <a className="project project-cadance" href="https://cadance-coaching.vercel.app" target="_blank" rel="noreferrer">
+            <div className="project-card-head"><span>01 · Site vitrine</span><span>Sport & coaching ↗</span></div>
             <div className="project-visual">
-              <span className="cadance-c">C</span>
-              <div className="project-tag">Site vitrine · Sport</div>
+              <div className="cadance-stage"><span className="cadance-c">C</span><div className="cadance-lines"><i/><i/><i/></div></div>
             </div>
-            <div className="project-info"><h3>Cadance Coaching</h3><span>Design · Développement · Admin ↗</span></div>
+            <div className="project-info"><div><h3>Cadance Coaching</h3><p>Un site énergique et administrable pour présenter l’accompagnement et faciliter les demandes.</p></div><span>Design · Développement · Administration</span></div>
           </a>
           <a className="project project-bug" href="https://www.ohiho.fr/bugtrack" target="_blank" rel="noreferrer">
+            <div className="project-card-head"><span>02 · Application web</span><span>Outil métier ↗</span></div>
             <div className="project-visual">
               <div className="bug-window">
                 <div className="bug-dots"><i/><i/><i/></div>
-                <div className="bug-content"><span/><span/><span/></div>
+                <div className="bug-layout"><div className="bug-side"><i/><i/><i/></div><div className="bug-content"><span/><span/><span/><b/></div></div>
               </div>
-              <div className="project-tag">Application web · SaaS</div>
             </div>
-            <div className="project-info"><h3>BugTrack</h3><span>Produit · UX/UI · Développement ↗</span></div>
+            <div className="project-info"><div><h3>BugTrack</h3><p>Une application simple pour centraliser les demandes, suivre leur traitement et garder un historique clair.</p></div><span>Produit · UX/UI · Développement</span></div>
           </a>
         </div>
       </section>
