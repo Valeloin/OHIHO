@@ -165,8 +165,10 @@ export default function Home() {
         <div className="contact-copy">
           <h2>Un projet en tête ?<br /><em>Parlons-en.</em></h2>
           <div className="contact-side">
-            <p>Expliquez-moi votre besoin, même s’il n’est pas encore complètement défini. Je vous réponds sous 24 heures ouvrées.</p>
-            <a className="mail-link" href="mailto:valentin.condamy@ohiho.fr">valentin.condamy@ohiho.fr <span>↗</span></a>
+            <a className="linkedin-qr" href="https://www.linkedin.com/in/valentin-condamy-966656423/" target="_blank" rel="noreferrer" aria-label="Ouvrir le profil LinkedIn de Valentin Condamy">
+              <span className="qr-frame"><img src="/linkedin-qr.png" alt="QR code vers le profil LinkedIn de Valentin Condamy" /></span>
+              <span className="qr-copy"><b><i>in</i> Retrouvons-nous sur LinkedIn</b><small>Scannez le QR code ou cliquez pour ouvrir mon profil.</small></span>
+            </a>
           </div>
         </div>
       </section>
