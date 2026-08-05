@@ -51,11 +51,13 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <h1 className="sr-only">Construisons un site qui vous ressemble.</h1>
         <div className="hero-media" aria-label="Aperçu de la direction artistique OHIHO">
-          <img src="/hero-main.png" alt="Construisons un site qui vous ressemble — OHIHO" />
           <div className="fireflies" aria-hidden="true">
             {Array.from({ length: 18 }, (_, index) => <span key={index} />)}
+          </div>
+          <div className="hero-title-copy">
+            <p>Votre projet</p>
+            <h1><span>Construisons</span><span>un site qui vous</span><em>ressemble.</em></h1>
           </div>
           <div className="hero-showcase-loop" aria-label="Aperçu animé des sites et applications OHIHO">
             <div className="hero-showcase-title" aria-hidden="true">
@@ -66,6 +68,7 @@ export default function Home() {
             </div>
             <div className="hero-showcase-window"><HeroShowcase /></div>
           </div>
+          <div className="hero-email-copy"><p>Une idée, une refonte ou simplement une question ?<br />Écrivez-moi. Je vous réponds sous 24 heures ouvrées.</p><a href="mailto:valentin.condamy@ohiho.fr">valentin.condamy@ohiho.fr <span>↗</span></a></div>
           <div className="hero-studio"><span /> Studio web indépendant · Montpellier</div>
           <a className="hero-contact" href="#contact">Discuter de votre projet <span>↗</span></a>
         </div>
