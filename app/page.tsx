@@ -175,7 +175,6 @@ export default function Home() {
             <p className="contact-intro">Une idée à lancer, un site à repenser ou un outil à imaginer&nbsp;? Racontez-moi où vous en êtes. Je vous réponds avec un premier regard clair et des pistes concrètes.</p>
             <div className="contact-details" aria-label="Informations pratiques">
               <span><i />Réponse sous 24h ouvrées</span>
-              <span><i />Montpellier · Partout en France</span>
             </div>
           </div>
           <div className="contact-side">
