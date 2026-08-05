@@ -9,6 +9,8 @@ export default function Nebulae({ className = "" }: { className?: string }) {
       <span className="nebula nebula-cyan" />
       <span className="nebula nebula-teal" />
       <span className="nebula nebula-emerald" />
+      <span className="nebula nebula-hero-center" />
+      <span className="nebula nebula-hero-upper" />
     </div>
   );
 }

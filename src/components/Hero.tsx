@@ -54,7 +54,7 @@ export default function Hero({
   return (
     <section className="section-screen relative overflow-hidden">
       <AnimatedGlow variant="hero" />
-      <Nebulae className="opacity-90" />
+      <Nebulae className="nebula-field--hero" />
       <Fireflies />
 
       <motion.div

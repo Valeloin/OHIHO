@@ -739,6 +739,14 @@ body {
   mix-blend-mode: screen;
 }
 
+.nebula-field--hero {
+  opacity: 0.94;
+  background:
+    radial-gradient(ellipse at 22% 72%, rgb(56 189 248 / 0.08), transparent 36%),
+    radial-gradient(ellipse at 56% 24%, rgb(34 211 196 / 0.07), transparent 38%),
+    radial-gradient(ellipse at 82% 62%, rgb(52 211 153 / 0.08), transparent 34%);
+}
+
 .nebula {
   position: absolute;
   display: block;
@@ -786,6 +794,39 @@ body {
   animation: nebula-drift-emerald 27s ease-in-out infinite alternate;
 }
 
+.nebula-hero-center,
+.nebula-hero-upper { display: none; }
+
+.nebula-field--hero .nebula-hero-center {
+  display: block;
+  left: 22%;
+  top: 42%;
+  width: clamp(30rem, 58vw, 68rem);
+  aspect-ratio: 1.8;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgb(var(--brand-teal) / 0.15) 0%,
+    rgb(var(--brand-sky) / 0.07) 42%,
+    transparent 76%
+  );
+  animation: nebula-drift-center 35s ease-in-out infinite alternate;
+}
+
+.nebula-field--hero .nebula-hero-upper {
+  display: block;
+  right: 4%;
+  top: -8%;
+  width: clamp(25rem, 46vw, 54rem);
+  aspect-ratio: 1.55;
+  background: radial-gradient(
+    ellipse at 48% 52%,
+    rgb(var(--brand-emerald) / 0.14) 0%,
+    rgb(var(--brand-teal) / 0.065) 44%,
+    transparent 75%
+  );
+  animation: nebula-drift-upper 29s ease-in-out infinite alternate;
+}
+
 @keyframes nebula-drift-cyan {
   from { transform: translate3d(-3%, -2%, 0) rotate(-5deg) scale(1); opacity: 0.7; }
   to { transform: translate3d(12%, 9%, 0) rotate(5deg) scale(1.12); opacity: 1; }
@@ -799,6 +840,16 @@ body {
 @keyframes nebula-drift-emerald {
   from { transform: translate3d(4%, 7%, 0) rotate(7deg) scale(1.06); opacity: 0.65; }
   to { transform: translate3d(-12%, -8%, 0) rotate(-4deg) scale(0.96); opacity: 1; }
+}
+
+@keyframes nebula-drift-center {
+  from { transform: translate3d(-8%, 5%, 0) rotate(-3deg) scale(.96); opacity: .65; }
+  to { transform: translate3d(7%, -6%, 0) rotate(4deg) scale(1.1); opacity: 1; }
+}
+
+@keyframes nebula-drift-upper {
+  from { transform: translate3d(6%, -4%, 0) rotate(5deg) scale(1.05); opacity: .58; }
+  to { transform: translate3d(-10%, 9%, 0) rotate(-5deg) scale(.95); opacity: .92; }
 }
 
 @media (prefers-reduced-motion: reduce) {
