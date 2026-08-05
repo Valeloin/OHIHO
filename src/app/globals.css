@@ -3496,7 +3496,7 @@ html.hide-scrollbar::-webkit-scrollbar {
    SECTION CONTACT — passation du 2026-08-05
    (branche agent/contact-section-handoff, CLAUDE-HANDOFF-CONTACT.md).
    Classes et keyframes propres à cette section, distinctes de
-   .section-screen et des autres familles pv-*/sv-* pour ne rien changer
+   .section-screen et des autres familles pv- / sv- pour ne rien changer
    ailleurs sur le site.
 
    Le repli sans animation (prefers-reduced-motion: reduce) est déjà

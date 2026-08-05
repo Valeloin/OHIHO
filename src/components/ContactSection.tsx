@@ -166,7 +166,7 @@ export default function ContactSection({ data }: { data: ContactContent }) {
                 {data.responseNote}
                 <span
                   aria-hidden="true"
-                  className="contact-badge-shine pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/80 to-transparent"
+                  className="contact-badge-shine pointer-events-none absolute inset-y-0 -left-[33%] w-[33%] bg-gradient-to-r from-transparent via-white/80 to-transparent"
                 />
               </div>
             </div>
