@@ -149,13 +149,13 @@ export default function Services({ data }: { data: ServicesContent }) {
             volontairement du conteneur pour se laisser deviner. */}
         <Reveal delay={0.1}>
           <div
-            className="relative mx-auto w-full max-w-3xl"
-            style={{ aspectRatio: "2.8 / 1" }}
+            className="relative mx-auto w-full max-w-4xl"
+            style={{ aspectRatio: "2.72 / 1" }}
           >
             {formulas.map((formula, i) => (
               <div
                 key={formula.type}
-                className={`svc-carousel-${i + 1} absolute left-1/2 top-1/2 w-[58%] -translate-x-1/2 -translate-y-1/2 aspect-[400/220] overflow-hidden rounded-xl ring-1 ring-white/20 shadow-2xl shadow-black/30`}
+                className={`svc-carousel-${i + 1} absolute left-1/2 top-1/2 w-[64%] -translate-x-1/2 -translate-y-1/2 aspect-[400/220] overflow-hidden rounded-xl ring-1 ring-white/25 shadow-2xl shadow-black/30`}
               >
                 <FrameLayer
                   type={formula.type}
@@ -171,70 +171,50 @@ export default function Services({ data }: { data: ServicesContent }) {
             deux colonnes, les descriptions de 01/02 se faisaient tronquer
             sur mobile. La coupe à 3 lignes ne vaut qu'à partir de lg, où
             les colonnes doivent rester à la même hauteur. */}
-        <RevealGroup className="mt-8 grid gap-x-8 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="mt-7 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {formulas.map((formula, i) => (
             <RevealItem
               key={formula.type}
-              className="group relative cursor-pointer"
+              className={`service-offer-card sv-card-${i + 1} group relative h-full cursor-pointer overflow-hidden rounded-2xl`}
             >
               <button
                 type="button"
                 onClick={() => setScene(scene === i + 1 ? null : i + 1)}
                 aria-pressed={scene === i + 1}
                 aria-label={`Voir ${formula.label} dans le cadre`}
-                className="absolute inset-0 z-10 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan/60"
+                className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               />
 
-              {/* Indicateur de palier ACTIF : filet au dégradé de marque,
-                  sur la même horloge que le cadre (sv-bar-*). */}
+              {/* Filet actif synchronisé avec la fenêtre du carrousel. */}
               <div
                 aria-hidden="true"
-                className={`sv-bar-${i + 1} rule-brand mb-4 h-0.5 w-full rounded-full`}
+                className={`sv-bar-${i + 1} service-offer-progress absolute inset-x-0 top-0 h-[3px] origin-left`}
               />
 
-              {/* Bloc atténué à 0,55 et non 0,4 : à 0,4 le texte passait
-                  sous le seuil AA — à 0,55 le titre tient ~5,2:1 et la
-                  description ~4,6:1 sur le fond nuit. */}
-              <div className={`sv-step-${i + 1}`}>
+              <div className={`sv-step-${i + 1} flex min-h-[205px] h-full flex-col p-5`}>
                 <div className="flex items-center justify-between gap-2">
-                  {/* Bleu nuit et non le dégradé teal habituel : sur le
-                      fond vivant de cette section, le dégradé se fondait
-                      dans le bleu-vert du fond. */}
-                  <span className="inline-block font-mono text-xl font-semibold tracking-display text-[#091a29]">
-                    {String(i + 1).padStart(2, "0")}
+                  <span className="service-offer-number font-mono text-[11px] font-semibold uppercase tracking-[0.18em]">
+                    Format {String(i + 1).padStart(2, "0")}
                   </span>
-                  {/* Chevron : les paliers sont cliquables, il faut que ça
-                      se voie même à l'état inactif. */}
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="h-4 w-4 text-muted transition-transform group-hover:translate-x-0.5"
-                  >
-                    <path d="m9 5 7 7-7 7" />
-                  </svg>
+                  <span aria-hidden="true" className="service-offer-glyph"><i /><i /><i /></span>
                 </div>
-                <h3 className="mt-2 text-base font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
+                <h3 className="mt-5 text-[17px] font-semibold tracking-display text-white">
                   {formula.label}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted lg:line-clamp-3">
+                <p className="mt-2 text-[13px] leading-[1.55] text-white/75 lg:line-clamp-3">
                   {formula.description}
                 </p>
                 {formula.delay && (
-                  <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-brand-teal">
+                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-[#a6f8d5]">
                     {formula.delay}
                   </p>
                 )}
                 <Link
                   href={serviceHref(formula.type)}
-                  className="relative z-20 mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent-cyan"
+                  className="service-offer-link relative z-20 mt-auto pt-4 inline-flex items-center justify-between gap-3 text-[12px] font-semibold text-white"
                 >
-                  Découvrir
-                  <span aria-hidden="true">→</span>
+                  <span>Découvrir</span>
+                  <span aria-hidden="true" className="service-offer-arrow">↗</span>
                 </Link>
               </div>
             </RevealItem>

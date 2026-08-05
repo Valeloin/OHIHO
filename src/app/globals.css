@@ -1349,6 +1349,61 @@ body {
    VITRINE (33,6 s) : le bloc dont la scène joue est plein, les trois autres
    restent lisibles en retrait (0,4) — jamais masqués. Fenêtres identiques à
    pv-scene-1..4, le lien est garanti par construction. Opacité seule. */
+.service-offer-card {
+  border: 1px solid rgb(255 255 255 / 0.22);
+  background:
+    linear-gradient(145deg, rgb(7 29 43 / 0.58), rgb(10 75 88 / 0.3)),
+    rgb(7 29 43 / 0.18);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1), 0 18px 45px rgb(7 29 43 / 0.14);
+  backdrop-filter: blur(15px) saturate(1.15);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.service-offer-card::before {
+  content: "";
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  right: -4.5rem;
+  top: -4.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(52 211 153 / 0.2), transparent 68%);
+  pointer-events: none;
+}
+.service-offer-card:hover {
+  transform: translateY(-5px);
+  border-color: rgb(255 255 255 / 0.48);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 24px 55px rgb(7 29 43 / 0.22);
+}
+.service-offer-progress {
+  background: linear-gradient(90deg, #38bdf8, #22d3c4 52%, #34d399);
+  box-shadow: 0 0 14px rgb(143 246 202 / 0.72);
+}
+.service-offer-number { color: rgb(166 248 213 / 0.9); }
+.service-offer-glyph {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 22px;
+  padding: 0 7px;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 999px;
+  background: rgb(7 29 43 / 0.2);
+}
+.service-offer-glyph i { width: 4px; height: 4px; border-radius: 50%; background: rgb(255 255 255 / 0.42); }
+.service-offer-glyph i:first-child { background: #38bdf8; }
+.service-offer-glyph i:last-child { background: #34d399; }
+.service-offer-link { border-top: 1px solid rgb(255 255 255 / 0.14); }
+.service-offer-arrow {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.1);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.service-offer-card:hover .service-offer-arrow { transform: translate(2px, -2px); background: rgb(52 211 153 / 0.22); }
+
 .sv-step-1,
 .sv-step-2,
 .sv-step-3,
@@ -1458,7 +1513,7 @@ body {
   }
   26%,
   98% {
-    opacity: 0.55;
+    opacity: 0.76;
   }
   100% {
     opacity: 1;
@@ -1467,7 +1522,7 @@ body {
 @keyframes sv-step-2 {
   0%,
   24% {
-    opacity: 0.55;
+    opacity: 0.76;
   }
   26%,
   49% {
@@ -1475,13 +1530,13 @@ body {
   }
   51%,
   100% {
-    opacity: 0.55;
+    opacity: 0.76;
   }
 }
 @keyframes sv-step-3 {
   0%,
   49% {
-    opacity: 0.55;
+    opacity: 0.76;
   }
   51%,
   74% {
@@ -1489,20 +1544,20 @@ body {
   }
   76%,
   100% {
-    opacity: 0.55;
+    opacity: 0.76;
   }
 }
 @keyframes sv-step-4 {
   0%,
   74% {
-    opacity: 0.55;
+    opacity: 0.76;
   }
   76%,
   98% {
     opacity: 1;
   }
   100% {
-    opacity: 0.55;
+    opacity: 0.76;
   }
 }
 
@@ -3665,7 +3720,7 @@ html.hide-scrollbar::-webkit-scrollbar {
 @keyframes contact-ripple {
   0% {
     transform: translate(-50%, -50%) scale(0.2);
-    opacity: 0.55;
+    opacity: 0.76;
   }
   28% {
     transform: translate(-50%, -50%) scale(1);
