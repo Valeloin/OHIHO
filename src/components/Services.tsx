@@ -138,7 +138,7 @@ export default function Services({ data }: { data: ServicesContent }) {
 
       <div
         ref={rootRef}
-        className="relative mx-auto my-auto w-full max-w-6xl px-6 py-6"
+        className="relative mx-auto my-auto w-full max-w-7xl px-6 py-6"
       >
         {/* Carrousel « coverflow » : les 4 formules tournent côte à côte —
             une nette au centre, une réduite à droite, une à l'arrière, une
@@ -149,7 +149,7 @@ export default function Services({ data }: { data: ServicesContent }) {
             volontairement du conteneur pour se laisser deviner. */}
         <Reveal delay={0.1}>
           <div
-            className="relative mx-auto w-full max-w-4xl"
+            className="relative mx-auto w-full max-w-5xl"
             style={{ aspectRatio: "2.72 / 1" }}
           >
             {formulas.map((formula, i) => (
