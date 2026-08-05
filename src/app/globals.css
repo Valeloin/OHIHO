@@ -652,6 +652,82 @@ body {
   animation-iteration-count: infinite;
 }
 
+/* Nébuleuses des sections nuit : grandes nappes gazeuses cyan, teal et
+   émeraude. Les formes sont volontairement décentrées et très floues pour
+   éviter l'effet de simples cercles. Leur dérive reste lente et indépendante
+   des lucioles ; aucun élément de contenu n'est animé avec elles. */
+.nebula-field {
+  z-index: 0;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+}
+
+.nebula {
+  position: absolute;
+  display: block;
+  width: clamp(24rem, 48vw, 52rem);
+  aspect-ratio: 1.45;
+  border-radius: 47% 53% 61% 39% / 42% 37% 63% 58%;
+  filter: blur(clamp(48px, 6vw, 94px));
+  will-change: transform, opacity;
+}
+
+.nebula-cyan {
+  left: -18%;
+  top: -19%;
+  background: radial-gradient(
+    ellipse at 58% 54%,
+    rgb(var(--brand-sky) / 0.2) 0%,
+    rgb(var(--brand-sky) / 0.09) 34%,
+    transparent 72%
+  );
+  animation: nebula-drift-cyan 24s ease-in-out infinite alternate;
+}
+
+.nebula-teal {
+  left: 34%;
+  top: 27%;
+  width: clamp(21rem, 40vw, 45rem);
+  background: radial-gradient(
+    ellipse at 45% 48%,
+    rgb(var(--brand-teal) / 0.14) 0%,
+    rgb(var(--brand-teal) / 0.06) 40%,
+    transparent 73%
+  );
+  animation: nebula-drift-teal 31s ease-in-out infinite alternate;
+}
+
+.nebula-emerald {
+  right: -17%;
+  bottom: -22%;
+  background: radial-gradient(
+    ellipse at 42% 43%,
+    rgb(var(--brand-emerald) / 0.19) 0%,
+    rgb(var(--brand-emerald) / 0.08) 36%,
+    transparent 72%
+  );
+  animation: nebula-drift-emerald 27s ease-in-out infinite alternate;
+}
+
+@keyframes nebula-drift-cyan {
+  from { transform: translate3d(-3%, -2%, 0) rotate(-5deg) scale(1); opacity: 0.7; }
+  to { transform: translate3d(12%, 9%, 0) rotate(5deg) scale(1.12); opacity: 1; }
+}
+
+@keyframes nebula-drift-teal {
+  from { transform: translate3d(5%, -8%, 0) rotate(4deg) scale(0.94); opacity: 0.55; }
+  to { transform: translate3d(-9%, 11%, 0) rotate(-7deg) scale(1.08); opacity: 0.9; }
+}
+
+@keyframes nebula-drift-emerald {
+  from { transform: translate3d(4%, 7%, 0) rotate(7deg) scale(1.06); opacity: 0.65; }
+  to { transform: translate3d(-12%, -8%, 0) rotate(-4deg) scale(0.96); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nebula { animation: none; }
+}
+
 /* ---------- Frise de la méthode ----------
    Le trait de la frise se remplit de gauche à droite et les 4 jalons
    s'allument l'un après l'autre, au moment où le remplissage les atteint.

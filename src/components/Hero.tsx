@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import AnimatedGlow from "@/components/motion/AnimatedGlow";
 import Fireflies from "@/components/motion/Fireflies";
+import Nebulae from "@/components/motion/Nebulae";
 import StatGlyph from "@/components/motion/StatGlyph";
 import type { HeroContent } from "@/lib/content/types";
 
@@ -53,6 +54,7 @@ export default function Hero({
   return (
     <section className="section-screen relative overflow-hidden">
       <AnimatedGlow variant="hero" />
+      <Nebulae className="opacity-90" />
       <Fireflies />
 
       <motion.div
