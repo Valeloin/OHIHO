@@ -63,7 +63,7 @@ export default function Hero({
         /* `my-auto` : `.section-screen` est une colonne sans centrage depuis
            que les titres de section sont épinglés en haut — chaque contenu
            se centre lui-même dans l'espace restant. */
-        className="relative mx-auto my-auto flex w-full max-w-6xl flex-col px-6 py-10"
+        className="relative mx-auto my-auto flex w-full max-w-7xl flex-col px-6 py-10"
         variants={CONTAINER}
         initial="hidden"
         animate="visible"
