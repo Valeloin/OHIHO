@@ -58,7 +58,7 @@ export default function Home() {
           </div>
           <div className="hero-title-copy">
             <p>Votre projet</p>
-            <h1><span>Construisons</span><span>un site qui vous</span><em>ressemble.</em></h1>
+            <h1><span>Imaginez</span><span>un site qui vous</span><em>ressemble.</em></h1>
           </div>
           <div className="hero-showcase-loop" aria-label="Aperçu animé des sites et applications OHIHO">
             <div className="hero-showcase-title" aria-hidden="true">
