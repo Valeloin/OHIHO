@@ -168,8 +168,8 @@ export default function Home() {
         </div>
         <div className="contact-copy">
           <div className="contact-main">
-            <h2>Un projet<br />en tête ?<br /><em>Parlons-en.</em></h2>
-            <p className="contact-intro">Une idée à lancer, un site à repenser ou un outil à imaginer&nbsp;? Racontez-moi votre projet. Je vous réponds avec un premier regard clair, sans jargon.</p>
+            <h2><span>Un projet</span><span>en tête&nbsp;?</span><em>Parlons-en.</em></h2>
+            <p className="contact-intro">Une idée à lancer, un site à repenser ou un outil à imaginer&nbsp;? Racontez-moi où vous en êtes. Je vous réponds avec un premier regard clair et des pistes concrètes.</p>
             <div className="contact-details" aria-label="Informations pratiques">
               <span><i />Réponse sous 24h ouvrées</span>
               <span><i />Montpellier · Partout en France</span>
@@ -179,9 +179,13 @@ export default function Home() {
             <a className="linkedin-qr" href="https://www.linkedin.com/in/valentin-condamy-966656423/" target="_blank" rel="noreferrer" aria-label="Ouvrir le profil LinkedIn de Valentin Condamy">
               <span className="qr-card-head"><i>in</i><span><small>Le plus simple pour commencer</small><b>Échangeons sur LinkedIn</b></span><strong>↗</strong></span>
               <span className="qr-frame"><img src="/linkedin-qr.png" alt="QR code vers le profil LinkedIn de Valentin Condamy" /></span>
-              <span className="qr-copy"><b>Scannez pour ouvrir mon profil</b><small>Ou cliquez directement sur la carte</small></span>
+              <span className="qr-copy"><span><b>Valentin Condamy</b><small>Fondateur & designer-développeur · OHIHO</small></span><strong>Scannez<br />ou cliquez <i>↗</i></strong></span>
             </a>
           </div>
+        </div>
+        <div className="contact-footer">
+          <p><span>01</span>Premier échange libre, sans engagement.</p>
+          <div aria-label="Types de projets"><span>Site vitrine</span><i /> <span>Landing page</span><i /> <span>Refonte</span><i /> <span>Application web</span></div>
         </div>
       </section>
 
