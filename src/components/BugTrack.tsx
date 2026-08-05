@@ -50,7 +50,7 @@ export default function BugTrack() {
           les autres (chapeau, carte produit, vignette animée, quatre
           capacités), les 8 px de rembourrage supplémentaire suffisaient à la
           faire dépasser d'un écran. */}
-      <div className="relative mx-auto max-w-6xl px-6 py-9">
+      <div className="relative mx-auto w-full max-w-[83rem] px-6 py-9">
         <Reveal>
           <span className="kicker">Notre outil</span>
           <h2 className="mt-3 max-w-3xl text-3xl font-semibold tracking-display text-balance sm:text-4xl">
