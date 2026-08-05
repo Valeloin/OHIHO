@@ -58,7 +58,13 @@ export default function Home() {
             {Array.from({ length: 18 }, (_, index) => <span key={index} />)}
           </div>
           <div className="hero-showcase-loop" aria-label="Aperçu animé des sites et applications OHIHO">
-            <HeroShowcase />
+            <div className="hero-showcase-title" aria-hidden="true">
+              <span className="pv-title-1">Landing page</span><span className="pv-title-2">Site vitrine</span><span className="pv-title-3">Refonte de site</span><span className="pv-title-4">Application web</span>
+            </div>
+            <div className="hero-showcase-tabs" aria-hidden="true">
+              {[1, 2, 3, 4].map((scene) => <i key={scene}><span className={`pv-scene-${scene}`} /></i>)}
+            </div>
+            <div className="hero-showcase-window"><HeroShowcase /></div>
           </div>
           <div className="hero-studio"><span /> Studio web indépendant · Montpellier</div>
           <a className="hero-contact" href="#contact">Discuter de votre projet <span>↗</span></a>
