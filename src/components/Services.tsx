@@ -240,18 +240,6 @@ export default function Services({ data }: { data: ServicesContent }) {
             </RevealItem>
           ))}
         </RevealGroup>
-
-        {/* Appel à l'action de fin de section. */}
-        <Reveal>
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/#contact"
-              className="btn-accent inline-flex px-7 py-3 text-sm"
-            >
-              Nous contacter
-            </Link>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
