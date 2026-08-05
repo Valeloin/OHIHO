@@ -94,7 +94,7 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
           puisqu'elles vivent sur la même horloge. */}
       <div
         ref={rootRef}
-        className="relative mx-auto my-auto w-full max-w-[83rem] px-6 py-8"
+        className="site-shell relative my-auto py-8"
       >
         {/* L'écran, seul au centre : c'est LUI que la frise commente. */}
         <Reveal delay={0.1}>

@@ -14,7 +14,7 @@ export default function WhyUs({ data }: { data: WhyUsContent }) {
       <SectionBackdrop />
             <SectionLabel>{data.kicker}</SectionLabel>
 
-<div className="relative mx-auto w-full max-w-[83rem] px-6 py-12 my-auto">
+<div className="site-shell relative py-12 my-auto">
         <Reveal>
           <p className="section-lead max-w-4xl">{data.title}</p>
         </Reveal>

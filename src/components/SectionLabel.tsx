@@ -14,7 +14,7 @@ export default function SectionLabel({
 }) {
   return (
     <Reveal>
-      <div className="relative z-10 px-6 pt-12 text-center">
+      <div className="site-shell relative z-10 pt-12 text-center">
         <h2 className="section-name">{children}</h2>
         {lead && (
           <p className="section-lead mx-auto mt-4 max-w-3xl">{lead}</p>

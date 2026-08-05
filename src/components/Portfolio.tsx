@@ -21,7 +21,7 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
           contenu (3 cartes + encart) et doit tenir sur un écran. */}
       <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
-<div className="relative mx-auto w-full max-w-[83rem] px-6 py-10 my-auto">
+<div className="site-shell relative py-10 my-auto">
         <Reveal>
           <p className="mx-auto max-w-2xl text-center leading-relaxed text-muted">
             {data.subtitle}

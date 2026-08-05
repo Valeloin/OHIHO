@@ -381,6 +381,15 @@ body {
     scroll-margin-top: var(--header-h);
   }
 
+  /* Grille horizontale commune : 90 % de la fenêtre, comme l'amplitude
+     perçue de la section Contact. Sur les petits écrans, une marge de 20 px
+     de chaque côté évite que le contenu touche les bords. */
+  .site-shell {
+    width: min(90%, calc(100% - 40px));
+    max-width: none;
+    margin-inline: auto;
+  }
+
   /* Même seuil desktop et même garde-fou de hauteur que la section Contact. */
   @media (min-width: 1121px) {
     .section-screen {

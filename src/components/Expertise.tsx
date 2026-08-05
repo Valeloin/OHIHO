@@ -7,7 +7,7 @@ export default function Expertise({ data }: { data: ExpertiseContent }) {
   return (
     <section id="expertise" className="section-screen relative overflow-hidden border-t border-border">
       <SectionBackdrop />
-      <div className="relative mx-auto w-full max-w-[83rem] px-6 py-16">
+      <div className="site-shell relative py-16">
         <SectionLabel>{data.kicker}</SectionLabel>
 
         <div className="grid gap-14 lg:grid-cols-2 lg:items-start">

@@ -138,7 +138,7 @@ export default function Services({ data }: { data: ServicesContent }) {
 
       <div
         ref={rootRef}
-        className="relative mx-auto my-auto w-full max-w-[83rem] px-6 py-6"
+        className="site-shell relative my-auto py-6"
       >
         {/* Carrousel « coverflow » : les 4 formules tournent côte à côte —
             une nette au centre, une réduite à droite, une à l'arrière, une
