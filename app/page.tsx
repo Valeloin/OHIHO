@@ -49,21 +49,15 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
+        <h1 className="sr-only">OHIHO — Sites web et applications sur mesure</h1>
         <div className="hero-media" aria-label="Aperçu de la direction artistique OHIHO">
           <img src="/hero-main.png" alt="Construisons quelque chose de remarquable — direction artistique OHIHO" />
           <div className="fireflies" aria-hidden="true">
             {Array.from({ length: 18 }, (_, index) => <span key={index} />)}
           </div>
+          <div className="hero-studio"><span /> Studio web indépendant · Montpellier</div>
+          <a className="hero-contact" href="#contact">Parlons de votre projet <span>↗</span></a>
         </div>
-        <div className="hero-copy">
-          <p className="eyebrow"><span /> Studio web indépendant · Montpellier</p>
-          <h1>Votre savoir-faire<br />mérite un site<br /><em>à sa hauteur.</em></h1>
-          <div className="hero-bottom">
-            <p>Sites et applications web sur mesure, conçus avec soin pour être beaux, rapides et utiles — aujourd’hui comme demain.</p>
-            <a className="circle-link" href="#services" aria-label="Découvrir les services">↓</a>
-          </div>
-        </div>
-        <div className="availability"><span /> Nouveaux projets · automne 2026</div>
       </section>
 
       <section className="service-preview" aria-label="Aperçu animé des services OHIHO">
