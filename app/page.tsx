@@ -49,16 +49,19 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-orbit" aria-hidden="true">
-          <div className="orbit orbit-one" />
-          <div className="orbit orbit-two" />
-          <div className="orbit-core"><span>O</span></div>
+        <div className="hero-media" aria-label="Aperçu de la direction artistique OHIHO">
+          <img src="/hero-main.png" alt="Construisons quelque chose de remarquable — direction artistique OHIHO" />
+          <div className="fireflies" aria-hidden="true">
+            {Array.from({ length: 18 }, (_, index) => <span key={index} />)}
+          </div>
         </div>
-        <p className="eyebrow"><span /> Studio web indépendant · Montpellier</p>
-        <h1>Votre savoir-faire<br />mérite un site<br /><em>à sa hauteur.</em></h1>
-        <div className="hero-bottom">
-          <p>Sites et applications web sur mesure, conçus avec soin pour être beaux, rapides et utiles — aujourd’hui comme demain.</p>
-          <a className="circle-link" href="#services" aria-label="Découvrir les services">↓</a>
+        <div className="hero-copy">
+          <p className="eyebrow"><span /> Studio web indépendant · Montpellier</p>
+          <h1>Votre savoir-faire<br />mérite un site<br /><em>à sa hauteur.</em></h1>
+          <div className="hero-bottom">
+            <p>Sites et applications web sur mesure, conçus avec soin pour être beaux, rapides et utiles — aujourd’hui comme demain.</p>
+            <a className="circle-link" href="#services" aria-label="Découvrir les services">↓</a>
+          </div>
         </div>
         <div className="availability"><span /> Nouveaux projets · automne 2026</div>
       </section>
