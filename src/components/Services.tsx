@@ -145,11 +145,17 @@ export default function Services({ data }: { data: ServicesContent }) {
     // même horloge, mais le changement n'est plus un saut instantané.
     animations.forEach((animation) => animation.pause());
     const startedAt = performance.now();
-    const travelDuration = 700 + (distance / cycle) * 900;
+    // Entre 1,8 et 3,4 secondes selon la distance à parcourir : assez lent
+    // pour que l'œil suive réellement la rotation, sans temps mort lorsque
+    // le format choisi est déjà proche du centre.
+    const travelDuration = 1_800 + (distance / cycle) * 1_600;
     let frame = 0;
     const travel = (now: number) => {
       const progress = Math.min((now - startedAt) / travelDuration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased =
+        progress < 0.5
+          ? 2 * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
       const time = (current + distance * eased) % cycle;
       animations.forEach((animation) => {
         animation.currentTime = time;
