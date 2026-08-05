@@ -177,6 +177,12 @@ export default function Home() {
               <span><i />Réponse sous 24h ouvrées</span>
             </div>
           </div>
+          <div className="contact-bridge" aria-hidden="true">
+            <span><i />Une idée</span>
+            <span><i />Un échange</span>
+            <span><i />Un projet</span>
+            <b />
+          </div>
           <div className="contact-side">
             <a className="linkedin-qr" href="https://www.linkedin.com/in/valentin-condamy-966656423/" target="_blank" rel="noreferrer" aria-label="Ouvrir le profil LinkedIn de Valentin Condamy">
               <span className="qr-card-head"><i>in</i><span><small>Le plus simple pour commencer</small><b>Échangeons sur LinkedIn</b></span><strong>↗</strong></span>
