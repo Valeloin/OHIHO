@@ -4,34 +4,34 @@ const services = [
   {
     number: "01",
     title: "Landing page",
-    text: "Une page précise, pensée pour transformer une visite en prise de contact.",
+    text: "Une page pour présenter une offre clairement et obtenir plus de demandes.",
     delay: "1—2 semaines",
   },
   {
     number: "02",
     title: "Site vitrine",
-    text: "Un site complet qui raconte votre activité et inspire confiance dès le premier regard.",
+    text: "Un site complet pour expliquer votre activité, rassurer et faciliter la prise de contact.",
     delay: "3—4 semaines",
   },
   {
     number: "03",
     title: "Refonte",
-    text: "Une nouvelle identité, de meilleures performances et une expérience mobile irréprochable.",
+    text: "Un site plus clair, plus rapide et plus simple à utiliser, sur mobile comme sur ordinateur.",
     delay: "2—4 semaines",
   },
   {
     number: "04",
     title: "Application web",
-    text: "Un outil métier sur mesure : espace client, réservation, dashboard ou plateforme interne.",
+    text: "Un outil adapté à votre façon de travailler : espace client, réservation ou gestion interne.",
     delay: "Sur devis",
   },
 ];
 
 const steps = [
-  ["01", "Échange", "On clarifie vos objectifs, votre public et les contours du projet."],
-  ["02", "Direction", "Je transforme vos idées en une direction visuelle et un devis clair."],
-  ["03", "Création", "Le site prend forme avec des points d’étape simples et réguliers."],
-  ["04", "Mise en ligne", "Je déploie, vérifie et reste disponible pour faire évoluer votre projet."],
+  ["01", "Cadrage", "On précise ce que le site doit faire, pour qui et avec quelles priorités."],
+  ["02", "Proposition", "Vous recevez une direction claire, un périmètre précis et un devis détaillé."],
+  ["03", "Conception", "Je conçois et développe le site. Vous suivez l’avancement à chaque étape."],
+  ["04", "Mise en ligne", "Je vérifie, publie et vous accompagne pour la prise en main et la suite."],
 ];
 
 export default function Home() {
@@ -47,7 +47,7 @@ export default function Home() {
           <a href="#methode">Méthode</a>
           <a href="#realisations">Réalisations</a>
         </nav>
-        <a className="header-cta" href="#contact">Parlons de votre projet <span>↗</span></a>
+        <a className="header-cta" href="#contact">Discuter de votre projet <span>↗</span></a>
       </header>
 
       <section className="hero" id="top">
@@ -58,7 +58,7 @@ export default function Home() {
             {Array.from({ length: 18 }, (_, index) => <span key={index} />)}
           </div>
           <div className="hero-studio"><span /> Studio web indépendant · Montpellier</div>
-          <a className="hero-contact" href="#contact">Parlons de votre projet <span>↗</span></a>
+          <a className="hero-contact" href="#contact">Discuter de votre projet <span>↗</span></a>
         </div>
       </section>
 
@@ -71,25 +71,25 @@ export default function Home() {
         </div>
         <div className="claude-preview-frame"><HeroShowcase /></div>
         <div className="claude-preview-caption" aria-hidden="true">
-          <span className="pv-title-1">Une page, un objectif</span><span className="pv-title-2">Plusieurs pages, une même histoire</span><span className="pv-title-3">Avant terne, après remarquable</span><span className="pv-title-4">Votre outil métier, enfin simple</span>
+          <span className="pv-title-1">Présenter une offre et générer des contacts</span><span className="pv-title-2">Expliquer votre activité sans perdre le visiteur</span><span className="pv-title-3">Repartir sur une base claire et efficace</span><span className="pv-title-4">Un outil construit autour de vos besoins</span>
         </div>
       </section>
 
       <section className="intro section-pad">
         <p className="section-label">Le studio</p>
         <div className="intro-copy">
-          <h2>De l’idée à la mise en ligne,<br /><span>un seul interlocuteur.</span></h2>
+          <h2>Un site utile à votre activité.<br /><span>Un seul interlocuteur.</span></h2>
           <div>
-            <p>OHIHO accompagne entreprises et indépendants dans la création d’expériences web singulières. Pas de solution générique : chaque détail répond à votre histoire, vos objectifs et vos utilisateurs.</p>
-            <a className="text-link" href="#contact">Démarrer un projet <span>↗</span></a>
+            <p>Je conçois et développe des sites et des applications web pour les entreprises et les indépendants. L’objectif : présenter votre offre clairement, faciliter les contacts et vous donner un outil simple à faire évoluer.</p>
+            <a className="text-link" href="#contact">Me parler de votre projet <span>↗</span></a>
           </div>
         </div>
       </section>
 
       <section className="services section-pad" id="services">
         <div className="section-head">
-          <p className="section-label">Ce que je crée</p>
-          <p className="section-count">04 expertises</p>
+          <p className="section-label">Les solutions</p>
+          <p className="section-count">Selon vos besoins</p>
         </div>
         <div className="service-list">
           {services.map((service) => (
@@ -107,7 +107,7 @@ export default function Home() {
       <section className="method section-pad" id="methode">
         <div className="method-title">
           <p className="section-label light">La méthode</p>
-          <h2>Simple.<br />Transparent.<br /><em>Humain.</em></h2>
+          <h2>Vous savez<br />où l’on va.<br /><em>Et pourquoi.</em></h2>
         </div>
         <div className="steps">
           {steps.map(([number, title, text]) => (
@@ -122,8 +122,8 @@ export default function Home() {
 
       <section className="work section-pad" id="realisations">
         <div className="section-head">
-          <p className="section-label">Projets choisis</p>
-          <p className="section-count">Réalisations récentes</p>
+          <p className="section-label">Réalisations</p>
+          <p className="section-count">Des projets concrets</p>
         </div>
         <div className="project-grid">
           <a className="project project-cadance" href="https://cadance-coaching.vercel.app" target="_blank" rel="noreferrer">
@@ -149,9 +149,9 @@ export default function Home() {
       <section className="contact section-pad" id="contact">
         <p className="section-label light">Votre projet</p>
         <div className="contact-copy">
-          <h2>Construisons quelque<br />chose de <em>remarquable.</em></h2>
+          <h2>Un projet en tête ?<br /><em>Parlons-en.</em></h2>
           <div className="contact-side">
-            <p>Une idée, une refonte ou simplement une question ? Écrivez-moi. Je vous réponds sous 24h ouvrées.</p>
+            <p>Expliquez-moi votre besoin, même s’il n’est pas encore complètement défini. Je vous réponds sous 24 heures ouvrées.</p>
             <a className="mail-link" href="mailto:valentin.condamy@ohiho.fr">valentin.condamy@ohiho.fr <span>↗</span></a>
           </div>
         </div>

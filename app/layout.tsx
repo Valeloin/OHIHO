@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const protocol = headerStore.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
   const base = new URL(`${protocol}://${host}`);
   const title = "OHIHO · Sites web & applications sur mesure";
-  const description = "OHIHO conçoit des sites web et applications sur mesure, de l’idée à la mise en ligne. Studio indépendant à Montpellier.";
+  const description = "Création et refonte de sites web, landing pages et applications sur mesure. Un accompagnement direct, de la première idée à la mise en ligne.";
   return {
     metadataBase: base,
     title,
