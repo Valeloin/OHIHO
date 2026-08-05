@@ -150,7 +150,7 @@ export default function Services({ data }: { data: ServicesContent }) {
         <Reveal delay={0.1}>
           <div
             className="relative mx-auto w-full max-w-3xl"
-            style={{ aspectRatio: "2 / 1" }}
+            style={{ aspectRatio: "2.8 / 1" }}
           >
             {formulas.map((formula, i) => (
               <div
