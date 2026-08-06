@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 import RevealGroup from "@/components/motion/RevealGroup";
 import RevealItem from "@/components/motion/RevealItem";
-import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import SectionLabel from "@/components/SectionLabel";
 import MethodScenes from "@/components/motion/MethodScenes";
 import type { MethodContent } from "@/lib/content/types";
@@ -84,9 +83,21 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
   return (
     <section
       id="methode"
-      className="section-screen relative overflow-hidden border-t border-border"
+      className="methode-vivid section-screen relative overflow-hidden border-t border-border"
     >
-      <SectionBackdrop />
+      {/* Fond dégradé vif, aligné sur la même famille que Contact :
+          Méthode était la seule section intérieure restée sur l'ancien
+          voile nuit, ce qui la désaccordait du reste du site. */}
+      <div className="methode-waves" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
+      <div className="methode-flies" aria-hidden="true">
+        {Array.from({ length: 14 }, (_, index) => (
+          <span key={index} />
+        ))}
+      </div>
       <SectionLabel lead={data.title}>{data.kicker}</SectionLabel>
 
       {/* Le gel au clic est géré par la Web Animations API (voir l'effet
@@ -230,7 +241,10 @@ export default function HowItWorks({ data }: { data: MethodContent }) {
                   cette étape (mêmes fenêtres que les scènes), en retrait
                   sinon. */}
               <div className={`frise-step-${i + 1}`}>
-                <span className="text-gradient inline-block font-mono text-xl font-semibold tracking-display">
+                {/* Bleu nuit et non le dégradé teal habituel : sur le fond
+                    vivant de cette section, le dégradé se fondait dans le
+                    bleu-vert du fond (même correctif que Services). */}
+                <span className="inline-block font-mono text-xl font-semibold tracking-display text-[#091a29]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-2 text-base font-semibold tracking-display transition-colors group-hover:text-accent-cyan">
