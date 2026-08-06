@@ -461,16 +461,14 @@ body {
     text-wrap: balance;
   }
 
-  /* Sections vivantes (fond dégradé — Services, Méthode) : le kicker teal
-     et le texte atténué, réglés pour le fond nuit des autres sections, se
-     fondaient dans ce fond plus clair. Repris en blanc plein / blanc
-     atténué pour ces sections. */
-  .services-vivid .section-name,
-  .methode-vivid .section-name {
+  /* Section Services vivante (fond dégradé, passation carrousel
+     2026-08-05) : le kicker teal et le texte atténué, réglés pour le
+     fond nuit des autres sections, se fondaient dans ce fond plus clair.
+     Repris en blanc plein / blanc atténué pour cette seule section. */
+  .services-vivid .section-name {
     color: #fff;
   }
-.services-vivid .text-muted,
-.methode-vivid .text-muted {
+.services-vivid .text-muted {
     color: rgba(255, 255, 255, 0.82);
   }
 
@@ -662,15 +660,13 @@ body {
     transform: rotate(45deg);
   }
 
-  /* Fond dégradé vif de la section — MÊME valeur que Contact
-     (`.codex-contact`) et Services (ServicesBackdrop.tsx). Trois variantes
-     légèrement différentes coexistaient jusqu'au 2026-08-06, ce qui cassait
-     l'unité du site d'une section à l'autre ; une seule palette maintenant.
-     L'anneau décorateur ci-dessous reste en haut à gauche (Contact le porte
-     en bas à droite) pour que les deux compositions restent distinctes
-     malgré le fond identique. */
+  /* Fond dégradé vif de la section, même famille que Contact/Services
+     (passation du 2026-08-05) mais variante propre : angle et teintes
+     légèrement décalés pour rester reconnaissable d'une section à
+     l'autre. Anneau décorateur en haut à gauche (Contact le porte en
+     bas à droite) pour ne pas répéter exactement la même composition. */
   .portfolio-vivid {
-    background: linear-gradient(118deg, #1e84ba 0%, #199aab 38%, #17aa91 72%, #2bb67e 112%);
+    background: linear-gradient(132deg, #1c76b0 0%, #17969f 34%, #14a68f 66%, #22b073 100%);
     color: #eef4fc;
   }
   .portfolio-vivid::before {
@@ -1001,90 +997,6 @@ body {
     .portfolio-orbit-info em { white-space: normal; }
   }
 
-  /* Section Méthode — ajoutée le 2026-08-06 à la famille des sections
-     vivantes (MÊME palette que Contact/Services/Réalisations) : c'était
-     la seule section intérieure restée sur l'ancien voile nuit, ce qui
-     rompait l'unité du site d'une section à l'autre. Anneau décorateur en
-     bas à gauche, pour varier des trois autres compositions. */
-  .methode-vivid {
-    background: linear-gradient(118deg, #1e84ba 0%, #199aab 38%, #17aa91 72%, #2bb67e 112%);
-    color: #eef4fc;
-  }
-  .methode-vivid::before {
-    content: "";
-    position: absolute;
-    z-index: -2;
-    inset: 0;
-    background:
-      radial-gradient(circle at 14% 88%, rgb(255 255 255 / 0.13), transparent 26%),
-      radial-gradient(circle at 90% 10%, rgb(7 29 43 / 0.15), transparent 32%);
-  }
-  .methode-vivid::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    right: -12vw;
-    bottom: -20vw;
-    width: 38vw;
-    height: 38vw;
-    border: 1px solid rgb(255 255 255 / 0.14);
-    border-radius: 50%;
-    box-shadow: 0 0 0 5vw rgb(255 255 255 / 0.02), 0 0 0 11vw rgb(255 255 255 / 0.016);
-  }
-  .methode-waves {
-    position: absolute;
-    z-index: -1;
-    left: 22%;
-    top: 55%;
-    width: min(44vw, 680px);
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-  .methode-waves i {
-    position: absolute;
-    inset: 24%;
-    border: 1px solid rgb(231 255 248 / 0.4);
-    border-radius: 50%;
-    box-shadow: 0 0 24px rgb(143 246 202 / 0.08);
-    animation: codex-ripple 7.6s cubic-bezier(0.2, 0.55, 0.35, 1) infinite;
-  }
-  .methode-waves i:nth-child(2) { animation-delay: -2.5s; }
-  .methode-waves i:nth-child(3) { animation-delay: -5s; }
-  .methode-flies {
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .methode-flies span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: #e8fff5;
-    box-shadow: 0 0 9px 3px rgb(189 255 226 / 0.6);
-    animation: codex-fly 12s ease-in-out infinite, codex-fly-glow 6s ease-in-out infinite;
-  }
-  .methode-flies span:nth-child(1) { left: 6%; top: 26%; animation-delay: -2s, -3s; }
-  .methode-flies span:nth-child(2) { left: 14%; top: 72%; animation-delay: -7s, -1s; }
-  .methode-flies span:nth-child(3) { left: 25%; top: 44%; animation-delay: -4s, -5s; }
-  .methode-flies span:nth-child(4) { left: 35%; top: 88%; animation-delay: -9s, -2s; }
-  .methode-flies span:nth-child(5) { left: 45%; top: 16%; animation-delay: -3s, -4s; }
-  .methode-flies span:nth-child(6) { left: 55%; top: 62%; animation-delay: -8s, -1s; }
-  .methode-flies span:nth-child(7) { left: 64%; top: 32%; animation-delay: -5s, -6s; }
-  .methode-flies span:nth-child(8) { left: 73%; top: 80%; animation-delay: -10s, -2s; }
-  .methode-flies span:nth-child(9) { left: 82%; top: 50%; animation-delay: -6s, -3s; }
-  .methode-flies span:nth-child(10) { left: 91%; top: 24%; animation-delay: -4s, -5s; }
-  .methode-flies span:nth-child(11) { left: 19%; top: 94%; animation-delay: -11s, -1s; }
-  .methode-flies span:nth-child(12) { left: 51%; top: 8%; animation-delay: -2s, -6s; }
-  .methode-flies span:nth-child(13) { left: 69%; top: 58%; animation-delay: -7s, -2s; }
-  .methode-flies span:nth-child(14) { left: 96%; top: 82%; animation-delay: -5s, -4s; }
-  @media (max-width: 700px) {
-    .methode-waves { left: 82%; top: 20%; width: 65vw; }
-  }
-
   /* Variante alignée à gauche du nom de section, pour le hero : sa colonne
      de texte est à gauche, un intertitre centré y flotterait dans le vide. */
   .section-name--left {
@@ -1109,79 +1021,6 @@ body {
     font-weight: 600;
     letter-spacing: -0.02em;
     text-wrap: balance;
-  }
-
-  /* Bloc des quatre arguments du hero, repris le 2026-08-06 dans la
-     grammaire éditoriale du reste du site (kicker mono + point vert,
-     cartes bordées translucides) plutôt que la pastille + texte nu
-     d'origine, qui se lisait mal sur le fond nébuleuse. */
-  .hero-stats-head {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono), monospace;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgb(var(--brand-teal));
-  }
-  .hero-stats-head::before {
-    content: "";
-    width: 0.35em;
-    height: 0.35em;
-    border-radius: 9999px;
-    background: rgb(var(--brand-emerald));
-    box-shadow: 0 0 10px rgb(52 211 153 / 0.7);
-  }
-  .hero-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin-top: 1rem;
-  }
-  @media (min-width: 1280px) {
-    .hero-stats-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-  .hero-stat {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.9rem 1rem;
-    border: 1px solid rgb(255 255 255 / 0.1);
-    border-radius: 1rem;
-    background: rgb(255 255 255 / 0.03);
-    backdrop-filter: blur(10px);
-    transition: border-color 240ms ease, background 240ms ease, transform 240ms ease;
-  }
-  .hero-stat:hover {
-    border-color: rgb(52 211 153 / 0.35);
-    background: rgb(52 211 153 / 0.06);
-    transform: translateY(-2px);
-  }
-  .hero-stat-icon {
-    display: grid;
-    flex: none;
-    place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 9999px;
-    background: rgb(34 211 196 / 0.1);
-    color: rgb(var(--brand-teal));
-  }
-  .hero-stat-value {
-    font-size: 0.86rem;
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-  }
-  .hero-stat-label {
-    margin-top: 0.2rem;
-    font-size: 0.72rem;
-    line-height: 1.4;
-    color: var(--muted);
   }
 
   .section-title {
