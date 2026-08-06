@@ -99,14 +99,14 @@ export default function Hero({
 
             <motion.p
               variants={ITEM}
-              className="order-4 mt-5 max-w-xl text-lg leading-relaxed text-muted"
+              className="order-4 mt-4 max-w-xl text-lg leading-relaxed text-muted"
             >
               {data.subtitle}
             </motion.p>
 
             <motion.div
               variants={ITEM}
-              className="order-5 mt-7 flex flex-col gap-3 sm:flex-row"
+              className="order-5 mt-6 flex flex-col gap-3 sm:flex-row"
             >
               <Link
                 href="/#contact"
@@ -201,7 +201,7 @@ export default function Hero({
             <div className="relative">
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -inset-14 -z-10"
+                className="pointer-events-none absolute -inset-8 -z-10"
               >
                 {/* Nappe centrale teal : le cœur de la source. */}
                 <div
@@ -229,7 +229,7 @@ export default function Hero({
                 />
               </div>
 
-              <div aria-hidden="true" className="card-surface p-2">
+              <div aria-hidden="true" className="card-surface p-1.5">
                 {showcase}
               </div>
             </div>
@@ -268,7 +268,7 @@ export default function Hero({
             cartes qui viendrait concurrencer le hero. */}
         <motion.div
           variants={ITEM}
-          className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 xl:grid-cols-4"
+          className="mt-5 grid grid-cols-2 gap-x-6 gap-y-4 xl:grid-cols-4"
         >
           {data.stats.map((item, i) => (
             <div key={item.label} className="flex items-start gap-2.5">

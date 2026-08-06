@@ -1017,11 +1017,13 @@ body {
      jour même à la demande (« reviens à l'ancien hero »). */
   .hero-title {
     /* Redescendu par paliers avec Valentin : 6,25rem → 4,5 → 3,5rem
-       (2026-07-28). */
-    font-size: clamp(2rem, 5.2vw, 3.5rem);
-    line-height: 1.08;
+       (2026-07-28), puis remonté à 4,5rem (2026-08-06) en reprenant la
+       force de la typographie de Contact — mais pas jusqu'à 6,25rem :
+       le hero reste en deux colonnes (texte + vitrine), Contact non. */
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.02;
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
 
