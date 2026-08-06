@@ -1,8 +1,13 @@
 import Fireflies from "@/components/motion/Fireflies";
 
-// Fond de la section Services — repris de la passation « fond du héros et
-// carrousel » (2026-08-05) : dégradé continu bleu → vert émeraude, plus vif
-// que le voile nuit des autres sections.
+// Fond de la section Services — dégradé continu bleu → vert émeraude, plus
+// vif que le voile nuit des autres sections.
+//
+// Valeur alignée le 2026-08-06 sur celle de Contact (`.codex-contact`) et de
+// Réalisations (`.portfolio-vivid`) : les trois sections vivantes portaient
+// chacune une variante légèrement différente, ce qui cassait l'unité du
+// site d'une section à l'autre. Une seule palette maintenant — ne plus la
+// faire dériver sans la reporter aussi dans globals.css et Portfolio.tsx.
 //
 // Les lucioles restent le composant partagé (couleur/taille fixées par
 // `.firefly` dans globals.css, communes à tout le site — pas touché ici).
@@ -18,7 +23,7 @@ export default function ServicesBackdrop() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(118deg, #2187ba 0%, #1f91b1 31%, #19a99c 67%, #28b681 112%)",
+            "linear-gradient(118deg, #1e84ba 0%, #199aab 38%, #17aa91 72%, #2bb67e 112%)",
         }}
       />
       <div

@@ -252,45 +252,29 @@ export default function Hero({
           </motion.div>
         </div>
 
-        {/* Les quatre arguments, désormais en CARTES individuelles plutôt
-            qu'en colonnes séparées de filets dans un cadre commun. Le cadre
-            unique laissait quatre pictogrammes nus flotter dans du vide, avec
-            des filets pour seule structure — c'est ce que Valentin trouvait
-            « moche ». Chaque argument est maintenant une petite carte à part
-            entière : son pictogramme dans une tuile teintée de marque, son
-            titre, sa phrase. Le bloc se lit comme une rangée de features,
-            plus comme un tableau. */}
-        {/* Repris à plat, sans cadre ni dégradé : la version en cartes
-            (bordure au dégradé de marque, fond teinté, tuile d'icône) a été
-            jugée trop grosse et « moche ». Ici, juste une pastille d'icône
-            et deux lignes de texte, sans boîte autour — ça se lit comme
-            une légende à côté de la vitrine, pas comme un second bloc de
-            cartes qui viendrait concurrencer le hero. */}
-        <motion.div
-          variants={ITEM}
-          className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 xl:grid-cols-4"
-        >
-          {data.stats.map((item, i) => (
-            <div key={item.label} className="flex items-start gap-2.5">
-              <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-teal/10 text-brand-teal">
-                <StatGlyph index={i} className="h-3.5 w-3.5" />
-              </span>
-              {/* `value` porte le mot-clé court (titre), `label` la phrase
-                  qui l'explique. Volontairement PAS un h3 : ces lignes sont
-                  des mini-statistiques dans le hero, pas de nouvelles
-                  sections de contenu — un h3 ici sauterait le h2 (la
-                  hiérarchie de titres reprend proprement à la section
-                  Services). */}
-              <div className="min-w-0">
-                <p className="text-sm font-semibold leading-tight tracking-display">
-                  {item.value}
-                </p>
-                <p className="mt-1 text-xs leading-snug text-muted">
-                  {item.label}
-                </p>
+        {/* Les quatre arguments, repris le 2026-08-06 dans la grammaire
+            éditoriale du reste du site (Contact, Services, Réalisations) :
+            un kicker mono en tête de bloc, puis des cartes bordées plutôt
+            que de simples pastilles + texte nu — ce dernier traitement se
+            perdait sur le fond nébuleuse du hero. Volontairement PAS de h3
+            sur les valeurs : ce sont des mini-arguments dans le hero, pas
+            de nouvelles sections de contenu — la hiérarchie de titres
+            reprend proprement à la section Services. */}
+        <motion.div variants={ITEM} className="mt-10">
+          <p className="hero-stats-head">Pourquoi OHIHO</p>
+          <div className="hero-stats-grid">
+            {data.stats.map((item, i) => (
+              <div key={item.label} className="hero-stat">
+                <span className="hero-stat-icon">
+                  <StatGlyph index={i} className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="hero-stat-value">{item.value}</p>
+                  <p className="hero-stat-label">{item.label}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </motion.div>
       </motion.div>
     </section>
