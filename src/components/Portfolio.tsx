@@ -1,9 +1,7 @@
+import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
-import RevealGroup from "@/components/motion/RevealGroup";
-import RevealItem from "@/components/motion/RevealItem";
-import SectionBackdrop from "@/components/motion/SectionBackdrop";
 import { PROJECTS } from "@/lib/projects";
 import type { PortfolioContent } from "@/lib/content/types";
 
@@ -16,16 +14,35 @@ function projectLinkProps(href?: string) {
   };
 }
 
+// ============================================================
+// SECTION RÉALISATIONS — refonte du 2026-08-06 : même ligne éditoriale
+// que Contact (fond dégradé vif, ondes, lucioles, noyau orbital), mais
+// composition entièrement nouvelle plutôt qu'une simple reteinte de
+// l'ancien mockup de navigateur. Deux projets réels seulement
+// (lib/projects.ts) : plutôt qu'un rail qui les répète, ils sont mis en
+// scène directement dans le noyau — le projet phare au centre, le
+// second en satellite — sur le même principe que le noyau décoratif de
+// Contact, mais ICI les deux cartes sont de vrais liens cliquables.
+// ============================================================
 export default function Portfolio({ data }: { data: PortfolioContent }) {
   const featured = PROJECTS[0];
-  const secondary = PROJECTS[1];
+  const satellite = PROJECTS[1];
 
   return (
     <section
       id="portfolio"
-      className="portfolio-editorial section-screen relative overflow-hidden border-t border-border"
+      className="portfolio-vivid section-screen relative overflow-hidden border-t border-border"
     >
-      <SectionBackdrop />
+      <div className="portfolio-waves" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
+      <div className="portfolio-flies" aria-hidden="true">
+        {Array.from({ length: 14 }, (_, index) => (
+          <span key={index} />
+        ))}
+      </div>
 
       <div className="portfolio-editorial-head site-shell">
         <p>Projets livrés</p>
@@ -47,107 +64,95 @@ export default function Portfolio({ data }: { data: PortfolioContent }) {
             </div>
           </Reveal>
 
-          {featured && (
-            <Reveal delay={0.1}>
-              <div className="portfolio-stage">
+          <Reveal delay={0.1}>
+            <div className="portfolio-orbit">
+              <span className="portfolio-orbit-ring" aria-hidden="true">
+                <b />
+              </span>
+
+              {featured && (
                 <Link
                   {...projectLinkProps(featured.href)}
-                  className="portfolio-browser group"
+                  className="portfolio-orbit-main group"
                   aria-label={`Découvrir ${featured.title}`}
                 >
-                  <div className="portfolio-browser-bar" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
-                    <i>cadance-coaching.fr</i>
-                  </div>
-                  <div className="portfolio-browser-body">
-                    <div className="portfolio-browser-brand">
-                      {featured.icon && (
-                        <span style={{ background: featured.iconBg }}>
-                          <Image
-                            src={featured.icon}
-                            alt=""
-                            width={96}
-                            height={96}
-                          />
-                        </span>
-                      )}
-                      <div>
-                        <small>{featured.category}</small>
-                        <strong>{featured.title}</strong>
-                        <em>Identité, contenus et autonomie réunis.</em>
-                      </div>
-                    </div>
-                    <div className="portfolio-browser-ui" aria-hidden="true">
-                      <div className="portfolio-ui-title" />
-                      <div className="portfolio-ui-line" />
-                      <div className="portfolio-ui-line portfolio-ui-line--short" />
-                      <div className="portfolio-ui-cards">
-                        <span />
-                        <span />
-                        <span />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-
-                {secondary && (
-                  <Link
-                    {...projectLinkProps(secondary.href)}
-                    className="portfolio-float group"
-                    aria-label={`Découvrir ${secondary.title}`}
-                  >
-                    {secondary.icon && (
-                      <span className="portfolio-float-icon">
+                  <span className="portfolio-orbit-bar" aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                  <span className="portfolio-orbit-body">
+                    {featured.icon && (
+                      <span
+                        className="portfolio-orbit-icon"
+                        style={{ background: featured.iconBg }}
+                      >
                         <Image
-                          src={secondary.icon}
+                          src={featured.icon}
                           alt=""
                           width={64}
                           height={64}
                         />
                       </span>
                     )}
-                    <span>
-                      <small>{secondary.category}</small>
-                      <strong>{secondary.title}</strong>
+                    <span className="portfolio-orbit-info">
+                      <small>{featured.category}</small>
+                      <strong>{featured.title}</strong>
+                      <em>{featured.description}</em>
                     </span>
                     <b aria-hidden="true">↗</b>
-                  </Link>
-                )}
-              </div>
-            </Reveal>
-          )}
+                  </span>
+                </Link>
+              )}
+
+              {satellite && (
+                <Link
+                  {...projectLinkProps(satellite.href)}
+                  className="portfolio-orbit-satellite group"
+                  aria-label={`Découvrir ${satellite.title}`}
+                >
+                  {satellite.icon && (
+                    <span
+                      className="portfolio-orbit-satellite-icon"
+                      style={{ background: satellite.iconBg }}
+                    >
+                      <Image
+                        src={satellite.icon}
+                        alt=""
+                        width={48}
+                        height={48}
+                      />
+                    </span>
+                  )}
+                  <span>
+                    <small>{satellite.category}</small>
+                    <strong>{satellite.title}</strong>
+                  </span>
+                  <b aria-hidden="true">↗</b>
+                </Link>
+              )}
+            </div>
+          </Reveal>
         </div>
 
-        <RevealGroup className="portfolio-project-rail">
-          {PROJECTS.map((project, index) => (
-            <RevealItem key={project.title} hover={Boolean(project.href)}>
-              <Link
-                {...projectLinkProps(project.href)}
-                className="portfolio-project-card group"
-              >
-                <span className="portfolio-project-number">0{index + 1}</span>
-                {project.icon && (
-                  <span
-                    className="portfolio-project-icon"
-                    style={{ background: project.iconBg }}
-                  >
-                    <Image src={project.icon} alt="" width={48} height={48} />
-                  </span>
-                )}
-                <span className="portfolio-project-meta">
-                  <small>{project.category}</small>
-                  <strong>{project.title}</strong>
-                </span>
-                <span className="portfolio-project-description">
-                  {project.description}
-                </span>
-                <b aria-hidden="true">↗</b>
-              </Link>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <Reveal delay={0.15}>
+          <div className="portfolio-vivid-footer">
+            <p>
+              <span>02</span>
+              {PROJECTS.length} projets livrés, d&apos;autres en cours.
+            </p>
+            <div>
+              {Array.from(new Set(PROJECTS.map((p) => p.category))).map(
+                (category, i, arr) => (
+                  <Fragment key={category}>
+                    <span>{category}</span>
+                    {i < arr.length - 1 && <i aria-hidden="true" />}
+                  </Fragment>
+                )
+              )}
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
