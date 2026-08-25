@@ -1,25 +1,19 @@
 import type { MetadataRoute } from "next";
-import { SERVICE_PAGES } from "@/lib/services";
-import { METHOD_PAGES } from "@/lib/method";
+import { OFFRES, offreHref } from "@/lib/offres";
 
+// Le plan du site se déduit de la liste des offres : ajouter une offre dans
+// src/lib/offres.ts suffit, il n'y a pas de liste à tenir à jour ici.
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://ohiho.fr";
 
   return [
     { url: base, changeFrequency: "weekly", priority: 1 },
-    // Une page par formule depuis le 2026-07-27 : ce sont les seules pages de
-    // contenu du site en dehors de l'accueil, elles doivent être indexées.
-    ...METHOD_PAGES.map((p) => ({
-      url: `${base}/methode/${p.slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })),
-    ...SERVICE_PAGES.map((s) => ({
-      url: `${base}/services/${s.slug}`,
+    ...OFFRES.map((offre) => ({
+      url: `${base}${offreHref(offre.slug)}`,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    { url: `${base}/bugtrack`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/inscription`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/mentions-legales`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${base}/confidentialite`, changeFrequency: "yearly", priority: 0.2 },
   ];
 }

@@ -1,39 +1,21 @@
-import Hero from "@/components/Hero";
-import HeroShowcase from "@/components/motion/HeroShowcase";
-import Services from "@/components/Services";
-import Portfolio from "@/components/Portfolio";
-import HowItWorks from "@/components/HowItWorks";
-import ContactSection from "@/components/ContactSection";
-import ScrollNav from "@/components/ScrollNav";
-import { getContent } from "@/lib/content";
-import { SERVICE_TYPES } from "@/lib/services";
+import Hero from "@/components/home/Hero";
+import Offres from "@/components/home/Offres";
+import Methode from "@/components/home/Methode";
+import Realisations from "@/components/home/Realisations";
+import Preuves from "@/components/home/Preuves";
+import Contact from "@/components/home/Contact";
 
-
-export default async function Home() {
-  const content = await getContent();
-
+// Accueil : une seule page longue, dans cet ordre. Ce qu'on propose, comment
+// on travaille, ce qu'on a livré, ce qui rassure, comment nous joindre.
+export default function Home() {
   return (
     <main>
-      {/* La vitrine est passée en prop (et non importée par Hero) : Hero est
-          un composant client, un import y embarquerait tout le SVG des scènes
-          dans le bundle. Les libellés suivent l'ordre de SERVICE_TYPES, qui
-          est aussi celui des scènes de la vitrine. */}
-      <Hero
-        data={content.hero}
-        formulaLabels={SERVICE_TYPES.map((t) => content.services.offers[t].label)}
-        formulaDescriptions={SERVICE_TYPES.map(
-          (t) => content.services.offers[t].tagline
-        )}
-        showcase={<HeroShowcase />}
-      />
-      <Services data={content.services} />
-      <HowItWorks data={content.method} />
-      {/* BugTrack a sa propre page (/bugtrack) depuis le 2026-07-27, reliée
-          par la tuile « BugTrack » de Réalisations juste en dessous — plus
-          de section dédiée ici sur l'accueil. */}
-      <Portfolio data={content.portfolio} />
-      <ContactSection data={content.contact} />
-      <ScrollNav />
+      <Hero />
+      <Offres />
+      <Methode />
+      <Realisations />
+      <Preuves />
+      <Contact />
     </main>
   );
 }

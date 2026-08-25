@@ -1,53 +1,54 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { getContent } from "@/lib/content";
-import { SERVICE_PAGES } from "@/lib/services";
-import { METHOD_PAGES } from "@/lib/method";
-import { themeCss } from "@/lib/content/theme-css";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { SITE } from "@/lib/site";
 
+// Polices servies depuis le dépôt : aucune requête vers un domaine extérieur,
+// donc pas de texte invisible le temps du chargement.
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-sans",
   weight: "100 900",
+  display: "swap",
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-mono",
   weight: "100 900",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
-  title: "OHIHO · Création de sites web & applications sur mesure",
+  title: {
+    default: "OHIHO · Création de sites web et applications sur mesure",
+    template: "%s · OHIHO",
+  },
   description:
-    "OHIHO conçoit et développe des sites web et applications sur mesure, pour entreprises et particuliers, de l'idée à la mise en ligne et au-delà.",
+    "OHIHO conçoit et développe des sites vitrines et applications web sur mesure à Montpellier. Un interlocuteur unique, un devis clair, une date tenue.",
   keywords: [
-    "création site web",
-    "développement web",
-    "application web sur mesure",
+    "création site web Montpellier",
     "développeur web freelance",
+    "site vitrine sur mesure",
     "refonte site web",
+    "application web sur mesure",
     "OHIHO",
   ],
-  alternates: {
-    canonical: "https://ohiho.fr",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "OHIHO · Création de sites web & applications sur mesure",
+    title: "OHIHO · Création de sites web et applications sur mesure",
     description:
-      "Des sites et applications web sur mesure, de l'idée à la mise en ligne.",
+      "Des sites vitrines et applications web sur mesure, de l'idée à la mise en ligne.",
     type: "website",
     locale: "fr_FR",
     url: "https://ohiho.fr",
     siteName: "OHIHO",
-    // PNG et non SVG : la plupart des réseaux sociaux (Facebook, LinkedIn,
-    // X) n'affichent pas les images SVG en partage — la carte apparaissait
-    // sans image. logo_horizontal_dark.png (1192×360) reste le meilleur
-    // visuel disponible en attendant une vraie image dédiée au partage
-    // (1200×630, texte + logo).
+    // PNG et non SVG : la plupart des réseaux sociaux n'affichent pas les
+    // images SVG en partage. Ce visuel est sur fond sombre alors que le site
+    // est passé en clair — une image de partage dédiée (1200×630) reste à
+    // produire.
     images: [
       {
         url: "/logo_horizontal_dark.png",
@@ -59,15 +60,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OHIHO · Création de sites web & applications sur mesure",
+    title: "OHIHO · Création de sites web et applications sur mesure",
     description:
-      "Des sites et applications web sur mesure, de l'idée à la mise en ligne.",
+      "Des sites vitrines et applications web sur mesure, de l'idée à la mise en ligne.",
     images: ["/logo_horizontal_dark.png"],
   },
   // Le SVG est déclaré en premier : les navigateurs modernes le préfèrent et
-  // il porte l'anneau au dégradé de marque. Les PNG restent en repli pour les
-  // navigateurs sans support SVG : ils datent de l'anneau argenté et sont
-  // encore à régénérer.
+  // il porte l'anneau au dégradé de marque. Les PNG restent en repli — ils
+  // datent de l'anneau argenté et sont encore à régénérer.
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -81,63 +81,64 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#091a29",
+  // La barre d'adresse des navigateurs mobiles prend la couleur du fond.
+  themeColor: "#dce9fa",
 };
 
-// Donnée structurée (schema.org) : permet aux moteurs de recherche de
-// comprendre OHIHO comme une entreprise plutôt qu'une simple page.
-const ORGANIZATION_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "OHIHO",
-  url: "https://ohiho.fr",
-  logo: "https://ohiho.fr/logo-mark.png",
-  description:
-    "OHIHO conçoit et développe des sites web et applications sur mesure, pour entreprises et particuliers, de l'idée à la mise en ligne et au-delà.",
-  email: "valentin.condamy@ohiho.fr",
-};
+// Posé sur <html> avant la première peinture : c'est lui qui autorise l'état
+// caché des apparitions au défilement. Sans JavaScript, la classe n'arrive
+// jamais et tout le contenu reste visible (voir la fin de globals.css).
+const MARQUEUR_JS = `document.documentElement.classList.add('js')`;
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  // Contenu éditable depuis /admin : couleurs du thème + texte du footer.
-  // Les couleurs personnalisées sont injectées en <style> après validation
-  // (voir themeCss) ; vide tant que rien ne diffère des valeurs par défaut.
-  const content = await getContent();
-  const customThemeCss = themeCss(content.theme);
-
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr">
-      {/* Pas de <head> manuel (source d'erreurs d'hydratation dans l'App
-          Router) : le style du thème est rendu en tête de body, les
-          navigateurs l'appliquent à l'identique. Jamais de chaîne vide ici
-          (nœud texte parasite) : ternaire null. */}
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
-      >
+    // suppressHydrationWarning : le script ci-dessous ajoute la classe `js` à
+    // <html> avant l'hydratation, ce que React signalerait sinon comme une
+    // divergence serveur/client. C'est le seul attribut concerné.
+    <html
+      lang="fr"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: MARQUEUR_JS }} />
+      </head>
+      <body className="flex min-h-screen flex-col">
+        <a
+          href="#contenu"
+          className="btn btn-ink sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60]"
+        >
+          Aller au contenu
+        </a>
+        <Header />
+        <div id="contenu" className="flex-1">
+          {children}
+        </div>
+        <Footer />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: SITE.name,
+              description: SITE.tagline,
+              url: SITE.url,
+              email: SITE.email,
+              founder: { "@type": "Person", name: SITE.person },
+              areaServed: "France",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: SITE.city,
+                addressRegion: SITE.region,
+                addressCountry: "FR",
+              },
+              sameAs: [SITE.linkedin],
+            }),
+          }}
         />
-        {customThemeCss ? (
-          <style dangerouslySetInnerHTML={{ __html: customThemeCss }} />
-        ) : null}
-        {/* Les libellés des formules viennent du contenu éditable : le menu
-            déroulant « Services » suit donc un renommage fait depuis /admin. */}
-        <Navbar
-          serviceLinks={SERVICE_PAGES.map((s) => ({
-            href: `/services/${s.slug}`,
-            label: content.services.offers[s.type].label,
-          }))}
-          methodLinks={METHOD_PAGES.map((p) => ({
-            href: `/methode/${p.slug}`,
-            label: content.method.steps[p.index]?.title ?? "",
-          })).filter((l) => l.label)}
-        />
-        {children}
-        <Footer data={content.footer} />
       </body>
     </html>
   );
