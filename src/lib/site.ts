@@ -3,7 +3,10 @@
 
 export const SITE = {
   name: "OHIHO",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ohiho.fr",
+  // NEXT_PUBLIC_APP_URL : nom retenu par convention sur le VPS, où tous les
+  // sites l'utilisent. Figée au build par Next (préfixe NEXT_PUBLIC_) : la
+  // changer oblige à reconstruire l'image.
+  url: process.env.NEXT_PUBLIC_APP_URL ?? "https://ohiho.fr",
   email: "valentin.condamy@ohiho.fr",
   person: "Valentin Condamy",
   city: "Montpellier",

@@ -61,12 +61,15 @@ export async function POST(request: NextRequest) {
   if (societe) return NextResponse.json({ ok: true });
 
   const resend = new Resend(cle);
-  const destinataire = process.env.CONTACT_TO ?? SITE.email;
+  // Mêmes noms de variables que les autres sites du VPS.
+  const destinataire = process.env.CONTACT_EMAIL ?? SITE.email;
+  const expediteur =
+    process.env.EMAIL_FROM ?? "Formulaire OHIHO <contact@ohiho.fr>";
 
   const { error } = await resend.emails.send({
     // Expéditeur sur le domaine vérifié ; l'adresse du visiteur passe en
     // « répondre à », pour pouvoir lui répondre directement.
-    from: `Formulaire OHIHO <contact@ohiho.fr>`,
+    from: expediteur,
     to: destinataire,
     replyTo: email,
     subject: `Nouvelle demande — ${labelSujet(sujet)} — ${nom}`,

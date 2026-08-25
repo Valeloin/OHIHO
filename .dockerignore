@@ -1,0 +1,24 @@
+# ============================================================
+# FICHIERS EXCLUS DE L'IMAGE DOCKER
+# Règle d'or : JAMAIS de secrets (.env*) dans une image.
+# ============================================================
+
+# Dépendances et build : réinstallés/recompilés DANS l'image
+node_modules
+.next
+
+# Historique git : inutile dans l'image
+.git
+
+# Secrets : les vraies valeurs sont injectées au DÉMARRAGE via
+# env_file dans docker-compose.yml, jamais copiées dans l'image
+.env*
+
+# Documentation et fichiers hors application
+*.md
+vps
+scripts
+.claude
+.vercel
+.DS_Store
+tsconfig.tsbuildinfo

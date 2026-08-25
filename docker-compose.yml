@@ -1,0 +1,74 @@
+# ============================================================
+# DOCKER COMPOSE DE PRODUCTION — ohiho.fr sur le VPS OVH.
+#
+# UN SEUL service : le site. Pas de base de données, pas de sauvegardes —
+# depuis la refonte du 2026-08-25 le site est une vitrine pure, tout le
+# contenu vit dans Git.
+#
+# ARCHITECTURE WEB DU VPS : Caddy est installé DIRECTEMENT sur le serveur
+# (paquet système, service systemd) et détient les ports 80/443. Il sert déjà
+# bugtrack.fr et les sous-domaines ohiho.fr. On ne lance donc PAS de Caddy en
+# conteneur : on AJOUTE un bloc au /etc/caddy/Caddyfile existant, qui renvoie
+# vers 127.0.0.1:APP_PORT. On ne réécrit jamais ce fichier.
+#
+# Variables lues dans le fichier .env de ce dossier (voir .env.example) :
+# APP_NAME, APP_PORT, NEXT_PUBLIC_APP_URL.
+#
+# Mode d'emploi complet : vps/README.md
+# ============================================================
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        # Cette URL est FIGÉE dans le code au moment du build (règle Next.js
+        # sur les variables NEXT_PUBLIC_*). Elle doit donc être définie dans
+        # le .env AVANT de construire l'image.
+        # ":?" = docker compose REFUSE de construire si la variable manque,
+        # au lieu de retomber en silence sur localhost (site en ligne avec
+        # des liens de partage et un plan de site cassés).
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:?Definissez NEXT_PUBLIC_APP_URL (URL publique HTTPS) dans le .env}
+    container_name: ${APP_NAME:-ohiho}-app
+
+    # Variables d'environnement injectées au DÉMARRAGE depuis le .env
+    # (clé Resend, adresse de réception, voile « en construction ») —
+    # jamais copiées dans l'image.
+    env_file: .env
+
+    environment:
+      # Active le contrôle de l'URL publique en production (voir
+      # src/app/api/health/route.ts) : si NEXT_PUBLIC_APP_URL pointe encore
+      # vers localhost, /api/health répond en erreur — le déploiement est
+      # signalé comme raté au lieu de passer inaperçu.
+      # Cette variable n'existe QUE dans ce conteneur : en local, le
+      # contrôle reste inactif.
+      ENFORCE_PUBLIC_URL: "1"
+
+    restart: unless-stopped
+
+    ports:
+      # SÉCURITÉ — l'adresse "127.0.0.1:" en préfixe est INDISPENSABLE : elle
+      # limite l'écoute à la machine elle-même, donc au seul Caddy local.
+      # Sans ce préfixe, Docker ouvrirait le port à tout Internet en
+      # contournant le pare-feu UFW (Docker écrit ses propres règles iptables,
+      # en amont d'UFW) : le site serait joignable en http sur le port brut,
+      # sans HTTPS ni en-têtes de sécurité.
+      - "127.0.0.1:${APP_PORT:-3006}:3000"
+
+    # Vérification interne : Docker redémarre le conteneur si le site ne
+    # répond plus. wget est présent dans l'image node:alpine.
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+    # Limite les journaux à 3 fichiers de 10 Mo : sans cela, un site qui
+    # tourne des mois finit par remplir le disque du VPS.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
