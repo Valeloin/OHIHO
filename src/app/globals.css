@@ -2,14 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Thème OHIHO — aligné sur la DA de mycalories (2026-08-26).
+/* Thème OHIHO (2026-08-26).
+
+   Base : la DA de mycalories.ohiho.fr, dont les tokens de gris ont été
+   RELEVÉS sur sa feuille de style. Accent : le VIOLET EN DÉGRADÉ, repris de
+   la référence envoyée par Valentin (jelouemonsiteweb.com) — sa DA, pas son
+   contenu. Le vert de mycalories a donc cédé la place au violet.
+
 
    Valentin a demandé de partir de la direction artistique de son SaaS
    mycalories.ohiho.fr plutôt que d'en inventer une : les valeurs ci-dessous
    sont RELEVÉES sur sa feuille de style, pas approchées à l'œil.
 
    Ce qu'elle impose :
-   - une pile de gris bleutés (Slate) et un VERT VIF comme unique accent ;
+   - une pile de gris bleutés (Slate), et un accent unique ;
    - la police SYSTÈME, pas une police chargée — c'est ce qui donne le gras
      net des titres, et ça évite l'attente au chargement ;
    - des coins à 8 px pour les contrôles, 14 px pour les cartes ;
@@ -44,13 +50,20 @@
   --ink-muted: #5a6a80;
   --ink-fine: #55637a;
 
-  /* Le vert de marque. `--accent` sert d'aplat (boutons, filets), et
-     `--accent-text` est sa version lisible EN TEXTE sur fond clair : le vert
-     d'aplat sur du blanc ne passe pas le contraste. */
-  --accent: #00c853;
-  --accent-hover: #00a844;
-  --accent-text: #067a3a;
-  --on-accent: #04240f;
+  /* `--accent` sert d'aplat (filets, pastilles), `--accent-grad` habille le
+     bouton principal, et `--accent-text` est la version lisible EN TEXTE :
+     l'aplat sur du blanc ne passe pas toujours le contraste. */
+  --accent: #a21caf;
+  --accent-hover: #86198f;
+  --accent-text: #86198f;
+  --on-accent: #ffffff;
+  /* Le dégradé violet des boutons, marque de fabrique de la référence. */
+  --accent-grad: linear-gradient(100deg, #3b0764, #c026d3);
+  /* Le bandeau du hero : beaucoup plus PROFOND que le bouton. Chez la
+     référence, ce fond est une photo assombrie ; un violet vif plein écran
+     vire au criard. Identique dans les deux thèmes : c'est un aplat sombre,
+     il n'a pas de version claire. */
+  --hero-grad: linear-gradient(120deg, #170428 0%, #3d0a52 52%, #7a1a8c 100%);
 
   /* Bande d'appui à fond plein. */
   --deep: #0f172a;
@@ -90,10 +103,11 @@
     --ink-muted: #8e8e97;
     --ink-fine: #a1a1aa;
 
-    --accent: #00e676;
-    --accent-hover: #5cffab;
-    --accent-text: #4dffa0;
-    --on-accent: #04240f;
+    --accent: #c026d3;
+    --accent-hover: #d946ef;
+    --accent-text: #e879f9;
+    --on-accent: #ffffff;
+    --accent-grad: linear-gradient(100deg, #6b21a8, #d946ef);
 
     /* En sombre la bande d'appui est plus CLAIRE que la page : c'est le
        contraste qui compte, pas le sens. */
@@ -127,10 +141,11 @@
   --ink-muted: #8e8e97;
   --ink-fine: #a1a1aa;
 
-  --accent: #00e676;
-  --accent-hover: #5cffab;
-  --accent-text: #4dffa0;
-  --on-accent: #04240f;
+  --accent: #c026d3;
+  --accent-hover: #d946ef;
+  --accent-text: #e879f9;
+  --on-accent: #ffffff;
+  --accent-grad: linear-gradient(100deg, #6b21a8, #d946ef);
 
   --deep: #1e1e24;
   --deep-alt: #2a2a32;
@@ -191,7 +206,7 @@ body {
 
   /* ---------- Typographie ---------- */
 
-  /* Micro-libellé mono capitales précédé d'un point vert. Vitrine seulement :
+  /* Micro-libellé mono capitales précédé d'un point coloré. Vitrine seule :
      illisible dans un écran dense. */
   .kicker {
     @apply inline-flex items-center gap-2.5 font-mono text-[11px] uppercase
@@ -203,8 +218,8 @@ body {
     background: var(--accent);
   }
 
-  /* Les titres sont GRAS, pas medium : c'est le trait de mycalories, et la
-     police système ne tient pas la comparaison en graisse intermédiaire. */
+  /* Titres GRAS : c'est le trait commun aux deux références, et la police
+     système ne tient pas la comparaison en graisse intermédiaire. */
   .h-display {
     @apply text-[2.6rem] font-bold leading-[1.03] tracking-[-0.035em]
       sm:text-6xl lg:text-7xl;
@@ -226,8 +241,7 @@ body {
     color: var(--ink-fine);
   }
 
-  /* Fragment de titre en vert. Sur fond clair, l'aplat vert ne passe pas le
-     contraste en texte : on prend sa déclinaison lisible. */
+  /* Fragment de titre en couleur d'accent, dans sa déclinaison lisible. */
   .accent-text {
     color: var(--accent-text);
   }
@@ -241,12 +255,15 @@ body {
     padding: 0.75rem 1.5rem;
   }
 
+  /* Bouton principal : le DÉGRADÉ violet, pas un aplat. C'est la signature
+     de la DA de référence — un aplat unique la ferait disparaître. */
   .btn-primary {
-    background: var(--accent);
+    background: var(--accent-grad);
     color: var(--on-accent);
+    transition: filter 150ms;
   }
   .btn-primary:hover {
-    background: var(--accent-hover);
+    filter: brightness(1.15);
   }
 
   /* `inherit` et non var(--ink) : le bouton à filet doit prendre la couleur
