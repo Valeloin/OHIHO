@@ -27,7 +27,7 @@ export default function ConstructionPage() {
       <div>
         <p className="kicker justify-center">Site en construction</p>
         <h1 className="h-section mt-6">
-          Le nouveau site <span className="gradient-text">arrive.</span>
+          Le nouveau site <span className="accent-text">arrive.</span>
         </h1>
         <p className="lede mx-auto mt-5 text-center">
           Nous le refaisons de fond en comble. En attendant, écrivez-nous — la

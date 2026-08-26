@@ -55,7 +55,7 @@ export default function OffrePage({ params }: Params) {
             <p className="kicker mt-8">{offre.tagline}</p>
             <h1 className="h-display mt-5 max-w-3xl">
               {offre.label}{" "}
-              <span className="gradient-text">sur mesure.</span>
+              <span className="accent-text">sur mesure.</span>
             </h1>
             <p className="lede mt-6">{offre.intro}</p>
 
@@ -81,7 +81,7 @@ export default function OffrePage({ params }: Params) {
                   <li key={point} className="flex gap-3 text-sm leading-relaxed">
                     <span
                       className="mt-[7px] h-[6px] w-[6px] shrink-0 rounded-full"
-                      style={{ background: "rgb(var(--brand-emerald))" }}
+                      style={{ background: "var(--accent)" }}
                     />
                     {point}
                   </li>
@@ -98,7 +98,7 @@ export default function OffrePage({ params }: Params) {
                   <li key={cas} className="flex gap-3 text-sm leading-relaxed">
                     <span
                       className="mt-[7px] h-[6px] w-[6px] shrink-0 rounded-full"
-                      style={{ background: "rgb(var(--brand-teal))" }}
+                      style={{ background: "var(--accent)" }}
                     />
                     {cas}
                   </li>

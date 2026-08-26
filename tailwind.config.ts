@@ -8,40 +8,34 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // DA « Ciel » (2026-08-25). Les valeurs vivent dans globals.css :
-        // aucune couleur n'est écrite en dur ici ni dans les composants.
+        // Tokens relevés sur la DA de mycalories. Les valeurs vivent dans
+        // globals.css : aucune couleur n'est écrite en dur ici ni dans les
+        // composants.
         page: "var(--page)",
         surface: "var(--surface)",
         "surface-alt": "var(--surface-alt)",
+        line: "var(--line)",
+        "line-strong": "var(--line-strong)",
         ink: "var(--ink)",
         "ink-muted": "var(--ink-muted)",
-        line: "var(--line)",
-        // Fond bleu nuit des sections d'appui, et ses deux teintes de texte.
+        accent: "var(--accent)",
+        "accent-text": "var(--accent-text)",
+        "on-accent": "var(--on-accent)",
         deep: "var(--deep)",
         "deep-alt": "var(--deep-alt)",
         "on-deep": "var(--on-deep)",
         "on-deep-muted": "var(--on-deep-muted)",
-        // Trio de marque du logo, en canaux RGB pour que les modificateurs
-        // d'opacité de Tailwind fonctionnent (`bg-brand-emerald/10`).
-        brand: {
-          sky: "rgb(var(--brand-sky) / <alpha-value>)",
-          teal: "rgb(var(--brand-teal) / <alpha-value>)",
-          emerald: "rgb(var(--brand-emerald) / <alpha-value>)",
-        },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        sans: ["var(--font-sans)"],
+        mono: ["var(--font-mono)"],
       },
       borderRadius: {
-        DEFAULT: "var(--radius)",
-        md: "calc(var(--radius) - 6px)",
-        lg: "calc(var(--radius) - 3px)",
+        DEFAULT: "var(--radius-control)",
+        md: "var(--radius-control)",
+        lg: "var(--radius-control)",
         xl: "var(--radius)",
-        "2xl": "calc(var(--radius) + 8px)",
-      },
-      letterSpacing: {
-        display: "-0.035em",
+        "2xl": "var(--radius)",
       },
       maxWidth: {
         prose: "62ch",

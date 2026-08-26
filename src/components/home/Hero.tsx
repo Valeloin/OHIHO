@@ -1,56 +1,40 @@
 import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
+import { SITE } from "@/lib/site";
 
-// Hero court, et qui parle au VISITEUR plutôt que de nous (2026-08-26).
-//
-// L'ancienne version annonçait ce qu'on est (« un site à la hauteur de votre
-// savoir-faire ») puis listait nos formats. Elle ne disait pas ce que le
-// visiteur y gagne. Le titre nomme donc maintenant ce qu'il évite — le site
-// modèle, le gabarit — et le sous-titre dit ce qu'il obtient à la place.
-//
-// Les trois repères tiennent sur une ligne : ils rassurent sans repousser les
-// offres sous la ligne de flottaison, qui est le point de la page.
-const REPERES = [
-  "Réponse sous 24 h ouvrées",
-  "En ligne en 1 à 4 semaines",
-  "Un seul interlocuteur",
-];
-
+// Hero CENTRÉ (2026-08-26), sur le modèle de mycalories : une seule colonne,
+// titre large, deux boutons, rien d'autre. La version précédente alignait
+// tout à gauche et laissait la moitié droite de l'écran vide.
 export default function Hero() {
   return (
-    <section className="pb-6 pt-8 sm:pb-8 sm:pt-12">
+    <section className="pb-14 pt-16 text-center sm:pb-16 sm:pt-24">
       <div className="shell">
         <Reveal>
-          <h1 className="h-display max-w-[19ch]">
+          <p className="pill mx-auto">{SITE.responseNote}</p>
+
+          <h1 className="h-display mx-auto mt-7 max-w-[17ch]">
             Votre savoir-faire mérite mieux qu&apos;un{" "}
-            <span className="gradient-text">site modèle.</span>
+            <span className="accent-text">site modèle.</span>
           </h1>
 
-          <p className="lede mt-5 max-w-[52ch]">
+          <p className="lede mx-auto mt-6 max-w-[56ch] text-center">
             Sites vitrines, refontes et applications web, écrits sur mesure pour
             votre activité — jamais achetés sur étagère.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link href="#contact" className="btn btn-primary">
               Demander un devis
             </Link>
-            <Link href="#realisations" className="btn btn-outline">
-              Voir les réalisations
+            <Link href="#offres" className="btn btn-outline">
+              Voir les offres
             </Link>
           </div>
 
-          <ul className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
-            {REPERES.map((repere) => (
-              <li key={repere} className="text-fine flex items-center gap-2">
-                <span
-                  className="h-[6px] w-[6px] shrink-0 rounded-full"
-                  style={{ background: "rgb(var(--brand-emerald))" }}
-                />
-                {repere}
-              </li>
-            ))}
-          </ul>
+          <p className="text-fine mt-6">
+            Devis sans engagement. En ligne en 1 à 4 semaines. Un seul
+            interlocuteur, du début à la fin.
+          </p>
         </Reveal>
       </div>
     </section>

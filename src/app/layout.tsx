@@ -1,24 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SITE } from "@/lib/site";
 
-// Polices servies depuis le dépôt : aucune requête vers un domaine extérieur,
-// donc pas de texte invisible le temps du chargement.
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-sans",
-  weight: "100 900",
-  display: "swap",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-mono",
-  weight: "100 900",
-  display: "swap",
-});
+// Aucune police n'est chargée : la DA de mycalories utilise la pile SYSTÈME,
+// et OHIHO s'aligne dessus. Rien à télécharger, donc rien qui clignote au
+// chargement, et le même gras net que sur mycalories.
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ohiho.fr"),
@@ -86,8 +74,8 @@ export const viewport: Viewport = {
   // (Ces deux valeurs suivent le réglage du système, pas la bascule manuelle :
   // c'est une balise statique, le navigateur ne la recalcule pas.)
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#dce9fa" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0d0f" },
+    { media: "(prefers-color-scheme: light)", color: "#fafbfc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0d10" },
   ],
 };
 
@@ -110,11 +98,7 @@ export default function RootLayout({
     // suppressHydrationWarning : le script ci-dessous ajoute la classe `js` à
     // <html> avant l'hydratation, ce que React signalerait sinon comme une
     // divergence serveur/client. C'est le seul attribut concerné.
-    <html
-      lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="fr" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_INITIAL }} />
       </head>

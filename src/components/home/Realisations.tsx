@@ -1,60 +1,59 @@
 import Image from "next/image";
-import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
-import SectionHead from "@/components/ui/SectionHead";
 import { REALISATIONS } from "@/lib/realisations";
 
+// PLEINE LARGEUR, une réalisation par ligne (2026-08-26) : à deux projets,
+// une grille de deux cartes laissait la page vide et rendait chaque projet
+// minuscule. En bandeau, chacun a la place de se raconter.
 export default function Realisations() {
   return (
     <section id="realisations" className="section">
       <div className="shell">
-        <SectionHead
-          kicker="Réalisations"
-          title="Livré, en service"
-        />
+        <Reveal className="text-center">
+          <p className="kicker">Réalisations</p>
+          <h2 className="h-section mt-4">Livré, en service</h2>
+        </Reveal>
 
-        <ul className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="mt-12">
           {REALISATIONS.map((projet, index) => (
-            <li key={projet.title}>
-              <Reveal delay={index * 80} className="h-full">
-                <article className="card flex h-full flex-col p-7">
-                  <div className="flex items-center gap-4">
-                    <span
-                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
-                      style={{ background: projet.iconBg }}
-                    >
-                      <Image
-                        src={projet.icon}
-                        alt=""
-                        width={28}
-                        height={28}
-                        className="h-7 w-7"
-                      />
-                    </span>
-                    <div>
-                      <h3 className="h-card">{projet.title}</h3>
-                      <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-muted">
-                        {projet.category}
-                      </p>
-                    </div>
+            <Reveal key={projet.title} delay={index * 80}>
+              <article
+                className="grid gap-6 border-t py-10 md:grid-cols-[220px_1fr] md:gap-12"
+                style={{ borderColor: "var(--line)" }}
+              >
+                <div className="flex items-start gap-4">
+                  <span
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl"
+                    style={{ background: projet.iconBg }}
+                  >
+                    <Image
+                      src={projet.icon}
+                      alt=""
+                      width={32}
+                      height={32}
+                      className="h-8 w-8"
+                    />
+                  </span>
+                  <div>
+                    <h3 className="h-card text-xl">{projet.title}</h3>
+                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-muted">
+                      {projet.category}
+                    </p>
                   </div>
+                </div>
 
-                  <p className="mt-5 flex-1 text-sm leading-relaxed text-ink-muted">
+                <div>
+                  <p className="text-base leading-relaxed text-ink-muted">
                     {projet.description}
                   </p>
-
-                  <p className="mt-5 flex gap-2.5 text-sm">
+                  <p className="mt-4 flex gap-3 text-[15px] font-medium">
                     <span
                       className="mt-2 h-[6px] w-[6px] shrink-0 rounded-full"
-                      style={{ background: "rgb(var(--brand-emerald))" }}
+                      style={{ background: "var(--accent)" }}
                     />
                     {projet.resultat}
                   </p>
-
-                  <div
-                    className="mt-6 border-t pt-4"
-                    style={{ borderColor: "var(--line)" }}
-                  >
+                  <div className="mt-5">
                     {projet.href ? (
                       <a
                         href={projet.href}
@@ -68,25 +67,11 @@ export default function Realisations() {
                       <p className="text-fine">{projet.note}</p>
                     )}
                   </div>
-                </article>
-              </Reveal>
-            </li>
+                </div>
+              </article>
+            </Reveal>
           ))}
-        </ul>
-
-        <Reveal delay={160}>
-          <div
-            className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-xl border p-7"
-            style={{ borderColor: "var(--line)" }}
-          >
-            <p className="text-[15px] font-medium">
-              Votre projet peut être le prochain.
-            </p>
-            <Link href="#contact" className="btn btn-ink">
-              Demander un devis
-            </Link>
-          </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

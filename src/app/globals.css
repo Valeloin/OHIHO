@@ -2,180 +2,155 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Thème OHIHO — DA « Ciel » (2026-08-25).
+/* Thème OHIHO — aligné sur la DA de mycalories (2026-08-26).
 
-   Rupture avec la DA « Banderole » (fond nuit bleu-teal, halos, ciel étoilé) :
-   le site passe en CLAIR. Fond bleu pastel, texte bleu nuit, blanc pour les
-   cartes. Le trio de marque du logo (bleu ciel → teal → vert émeraude) est
-   conservé et devient la SEULE touche colorée.
+   Valentin a demandé de partir de la direction artistique de son SaaS
+   mycalories.ohiho.fr plutôt que d'en inventer une : les valeurs ci-dessous
+   sont RELEVÉES sur sa feuille de style, pas approchées à l'œil.
 
-   Le dégradé de marque ne sert qu'à quatre endroits :
-   1. le « I » du wordmark,
-   2. un fragment de titre, une fois par page,
-   3. le bouton principal,
-   4. un filet de 3 px en tête de carte.
-   Jamais en fond de section, jamais animé.
+   Ce qu'elle impose :
+   - une pile de gris bleutés (Slate) et un VERT VIF comme unique accent ;
+   - la police SYSTÈME, pas une police chargée — c'est ce qui donne le gras
+     net des titres, et ça évite l'attente au chargement ;
+   - des coins à 8 px pour les contrôles, 14 px pour les cartes ;
+   - deux thèmes définis d'emblée, clair et sombre.
 
-   MODE SOMBRE (2026-08-26) : le clair reste la version de référence, le
-   sombre en est la transposition. Trois états possibles, dans cet ordre de
-   priorité :
-   1. `[data-theme="dark"]` / `[data-theme="light"]` — choix explicite du
-      visiteur, mémorisé dans le navigateur ;
-   2. `prefers-color-scheme` — le réglage de son système, s'il n'a rien
-      choisi ;
-   3. le clair, par défaut.
-   Chaque couleur est donc définie DEUX fois, jamais plus : ici en clair,
-   plus bas en sombre. Une couleur déclarée uniquement dans le bloc sombre
-   serait absente en clair.
+   Le dégradé sky → teal → emerald de l'ancienne DA a disparu : il n'existait
+   pas chez mycalories et jurait avec le vert. Il ne subsiste que dans
+   l'anneau du logo (public/logo-mark.svg), qui reste le logo.
 
-   Toutes les valeurs sont déclarées ici et exposées à Tailwind par
-   tailwind.config.ts — aucune couleur en dur dans les composants. */
+   Trois états de thème, par priorité : choix explicite du visiteur
+   (`data-theme`), puis réglage du système, puis le clair. */
 :root {
   color-scheme: light;
 
-  --page: #dce9fa;
+  /* Piles reprises telles quelles de mycalories : aucune police n'est
+     téléchargée, donc rien à attendre au chargement. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    monospace;
+
+  --page: #fafbfc;
   --surface: #ffffff;
-  --surface-alt: #eef4fd;
-  --line: #c2d6ee;
+  --surface-alt: #f1f5f9;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
 
-  /* Bleu nuit : c'est à la fois la couleur du texte et celle des sections
-     d'appui à fond plein, d'où les deux noms pour la même valeur. */
-  --ink: #0b2c6b;
-  --deep: #0b2c6b;
-  --deep-alt: #0f3a86;
+  --ink: #0f172a;
+  /* Le gris de mycalories est #64748b. Assombri d'un demi-cran ici : posé sur
+     la surface secondaire (#f1f5f9), il tombait à 4,34:1, juste sous le seuil
+     AA. À 5,03 il passe partout, et reste visiblement gris. */
+  --ink-muted: #5a6a80;
+  --ink-fine: #55637a;
 
-  /* Texte secondaire. Mesuré sur le fond pastel : 4,84:1, au-dessus du seuil
-     AA de 4,5. Ne pas l'éclaircir sans remesurer — la teinte précédente
-     (#4a6a99) tombait à 4,48 et échouait de peu.
-     En dessous de 14 px, on utilise .text-fine, qui assombrit encore. */
-  --ink-muted: #476590;
+  /* Le vert de marque. `--accent` sert d'aplat (boutons, filets), et
+     `--accent-text` est sa version lisible EN TEXTE sur fond clair : le vert
+     d'aplat sur du blanc ne passe pas le contraste. */
+  --accent: #00c853;
+  --accent-hover: #00a844;
+  --accent-text: #067a3a;
+  --on-accent: #04240f;
 
+  /* Bande d'appui à fond plein. */
+  --deep: #0f172a;
+  --deep-alt: #1e293b;
   --on-deep: #ffffff;
-  --on-deep-muted: #9fbee6;
-
-  /* Texte posé sur un aplat couleur ".ink" (bouton plein). En sombre, .ink
-     devient presque blanc : le blanc en dur y serait invisible. */
+  --on-deep-muted: #94a3b8;
   --on-ink: #ffffff;
 
-  /* Texte fin, texte d'aide et erreur. Déclarés en tokens : leurs valeurs
-     claires seraient illisibles en sombre. */
-  --ink-fine: #3d5c88;
-  --placeholder: #5b779c;
-  --danger: #c0392b;
+  --field: #f1f5f9;
+  --placeholder: #64748b;
+  --danger: #dc2626;
 
-  /* Trio de marque, repris tel quel du logo (public/logo-mark.svg).
-     Déclaré en CANAUX RGB pour les modificateurs d'opacité de Tailwind. */
-  --brand-sky: 56 189 248; /* #38bdf8 */
-  --brand-teal: 34 211 196; /* #22d3c4 */
-  --brand-emerald: 52 211 153; /* #34d399 */
+  --page-blur: rgb(250 251 252 / 0.86);
 
-  --gradient: linear-gradient(100deg, #38bdf8, #22d3c4, #34d399);
-  /* Le texte posé sur le dégradé : un vert-noir très foncé plutôt que du
-     blanc, qui ne passait pas le contraste sur la partie émeraude. */
-  --on-gradient: #04262b;
-
-  /* Fond du bandeau collant : le fond de page en translucide, pour que le
-     contenu se devine dessous. Déclaré en dur plutôt qu'en modificateur
-     d'opacité Tailwind, qui ne s'applique pas aux couleurs déclarées comme
-     simples variables CSS. */
-  --page-blur: rgb(220 233 250 / 0.86);
-
-  --radius: 16px;
+  --radius: 0.875rem;
+  --radius-control: 0.5rem;
   --header-h: 72px;
-  --card-shadow: 0 1px 2px rgb(11 44 107 / 0.06),
-    0 12px 32px -18px rgb(11 44 107 / 0.28);
+  --card-shadow: 0 1px 2px rgb(15 23 42 / 0.04),
+    0 12px 32px -20px rgb(15 23 42 / 0.24);
 }
 
 /* ---------- Mode sombre ----------
-
-   Transposition du clair, pas une seconde direction artistique : mêmes
-   rôles, mêmes rapports. Le fond devient un bleu nuit très profond, les
-   cartes un navy plus clair que le fond (en clair elles sont plus claires
-   que la page : le rapport est conservé).
-
-   Le trio de marque et le dégradé ne changent PAS — c'est le logo, il doit
-   rester identique dans les deux modes.
-
-   Les deux blocs ci-dessous sont identiques. Le premier suit le réglage du
-   système, mais s'efface si le visiteur a explicitement choisi le clair ;
-   le second applique son choix explicite du sombre. */
+   Les deux blocs sont identiques : le premier suit le réglage du système et
+   s'efface si le visiteur a choisi le clair, le second applique son choix
+   explicite du sombre. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    /* Gris neutres, PAS de bleu (demande du 2026-08-26) : en sombre, le bleu
-       nuit du thème clair virait au marine et écrasait tout. Le fond est donc
-       une échelle de gris froids, et le trio de marque reste la seule couleur
-       de la page. */
-    --page: #0d0d0f;
-    --surface: #17181b;
-    --surface-alt: #111214;
-    --line: #2b2d32;
+    --page: #0d0d10;
+    --surface: #16161a;
+    --surface-alt: #1e1e24;
+    --line: #292930;
+    --line-strong: #3a3a44;
 
-    --ink: #f2f3f5;
-    --ink-muted: #a7aab2;
+    --ink: #f4f4f5;
+    --ink-muted: #8e8e97;
+    --ink-fine: #a1a1aa;
 
-    /* La bande d'appui reste DISTINCTE du fond : en sombre elle est plus
-       claire que la page, alors qu'en clair elle est plus foncée. C'est le
+    --accent: #00e676;
+    --accent-hover: #5cffab;
+    --accent-text: #4dffa0;
+    --on-accent: #04240f;
+
+    /* En sombre la bande d'appui est plus CLAIRE que la page : c'est le
        contraste qui compte, pas le sens. */
-    --deep: #2b2e36;
-    --deep-alt: #3a3e49;
-    --on-deep: #ffffff;
-    --on-deep-muted: #b5b8bf;
-    --on-ink: #0d0d0f;
+    --deep: #1e1e24;
+    --deep-alt: #2a2a32;
+    --on-deep: #f4f4f5;
+    --on-deep-muted: #8e8e97;
+    --on-ink: #0d0d10;
 
-    --ink-fine: #bdc0c7;
-    --placeholder: #86898f;
-    --danger: #ff9082;
+    --field: #1e1e24;
+    --placeholder: #8e8e97;
+    --danger: #f87171;
 
-    --page-blur: rgb(13 13 15 / 0.88);
+    --page-blur: rgb(13 13 16 / 0.86);
 
-    /* Une ombre portée ne se voit pas sur un fond sombre : c'est un liseré
-       clair qui détache la carte. */
-    --card-shadow: 0 0 0 1px rgb(255 255 255 / 0.07),
-      0 12px 32px -18px rgb(0 0 0 / 0.9);
+    --card-shadow: 0 0 0 1px rgb(255 255 255 / 0.05),
+      0 12px 32px -20px rgb(0 0 0 / 0.9);
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  /* Gris neutres, PAS de bleu (demande du 2026-08-26) : en sombre, le bleu
-     nuit du thème clair virait au marine et écrasait tout. Le fond est donc
-     une échelle de gris froids, et le trio de marque reste la seule couleur
-     de la page. */
-  --page: #0d0d0f;
-  --surface: #17181b;
-  --surface-alt: #111214;
-  --line: #2b2d32;
+  --page: #0d0d10;
+  --surface: #16161a;
+  --surface-alt: #1e1e24;
+  --line: #292930;
+  --line-strong: #3a3a44;
 
-  --ink: #f2f3f5;
-  --ink-muted: #a7aab2;
+  --ink: #f4f4f5;
+  --ink-muted: #8e8e97;
+  --ink-fine: #a1a1aa;
 
-  /* La bande d'appui reste DISTINCTE du fond : en sombre elle est plus
-     claire que la page, alors qu'en clair elle est plus foncée. C'est le
-     contraste qui compte, pas le sens. */
-  --deep: #2b2e36;
-  --deep-alt: #3a3e49;
-  --on-deep: #ffffff;
-  --on-deep-muted: #b5b8bf;
-  --on-ink: #0d0d0f;
+  --accent: #00e676;
+  --accent-hover: #5cffab;
+  --accent-text: #4dffa0;
+  --on-accent: #04240f;
 
-  --ink-fine: #bdc0c7;
-  --placeholder: #86898f;
-  --danger: #ff9082;
+  --deep: #1e1e24;
+  --deep-alt: #2a2a32;
+  --on-deep: #f4f4f5;
+  --on-deep-muted: #8e8e97;
+  --on-ink: #0d0d10;
 
-  --page-blur: rgb(13 13 15 / 0.88);
+  --field: #1e1e24;
+  --placeholder: #8e8e97;
+  --danger: #f87171;
 
-  /* Une ombre portée ne se voit pas sur un fond sombre : c'est un liseré
-     clair qui détache la carte. */
-  --card-shadow: 0 0 0 1px rgb(255 255 255 / 0.07),
-    0 12px 32px -18px rgb(0 0 0 / 0.9);
+  --page-blur: rgb(13 13 16 / 0.86);
+
+  --card-shadow: 0 0 0 1px rgb(255 255 255 / 0.05),
+    0 12px 32px -20px rgb(0 0 0 / 0.9);
 }
 
 html {
   scroll-behavior: smooth;
-  /* Les ancres de la navigation ne doivent pas passer sous le bandeau collant. */
+  /* Les ancres ne doivent pas passer sous le bandeau collant. */
   scroll-padding-top: calc(var(--header-h) + 16px);
 }
 
@@ -188,18 +163,17 @@ html {
 body {
   background: var(--page);
   color: var(--ink);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgb(var(--brand-teal) / 0.25);
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
   color: var(--ink);
 }
 
-/* Anneau de focus visible sur les deux fonds (pastel clair et gris sombre). */
 :focus-visible {
-  outline: 2px solid rgb(var(--brand-teal));
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -207,21 +181,18 @@ body {
 @layer components {
   /* ---------- Trame ---------- */
 
-  /* Largeur de lecture commune à toutes les sections. */
   .shell {
     @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
   }
 
-  /* Rythme vertical des sections. Une seule valeur, pour que la page ait un
-     pas régulier de bout en bout. */
   .section {
-    @apply py-20 sm:py-28;
+    @apply py-20 sm:py-24;
   }
 
   /* ---------- Typographie ---------- */
 
-  /* Micro-libellé mono capitales précédé d'un point vert. Réservé à la
-     vitrine : illisible dans un écran dense. */
+  /* Micro-libellé mono capitales précédé d'un point vert. Vitrine seulement :
+     illisible dans un écran dense. */
   .kicker {
     @apply inline-flex items-center gap-2.5 font-mono text-[11px] uppercase
       tracking-[0.16em] text-ink-muted;
@@ -229,73 +200,71 @@ body {
   .kicker::before {
     content: "";
     @apply h-[6px] w-[6px] shrink-0 rounded-full;
-    background: rgb(var(--brand-emerald));
+    background: var(--accent);
   }
 
-  /* Titre de première page. Monté d'un cran le 2026-08-26 : le hero manquait
-     d'impact. `text-balance` répartit les mots entre les lignes plutôt que de
-     laisser un mot seul en bas. */
+  /* Les titres sont GRAS, pas medium : c'est le trait de mycalories, et la
+     police système ne tient pas la comparaison en graisse intermédiaire. */
   .h-display {
-    @apply text-[2.6rem] font-medium leading-[1.02] tracking-display
+    @apply text-[2.6rem] font-bold leading-[1.03] tracking-[-0.035em]
       sm:text-6xl lg:text-7xl;
     text-wrap: balance;
   }
   .h-section {
-    @apply text-3xl font-medium leading-[1.1] tracking-display sm:text-4xl;
+    @apply text-3xl font-bold leading-[1.1] tracking-[-0.03em] sm:text-4xl;
   }
   .h-card {
-    @apply text-lg font-medium leading-snug tracking-[-0.015em];
+    @apply text-lg font-semibold leading-snug tracking-[-0.015em];
   }
 
   .lede {
     @apply max-w-prose text-base leading-relaxed text-ink-muted sm:text-lg;
   }
 
-  /* Texte fin (mentions, légendes) : le gris courant devient trop pâle en
-     dessous de 14 px, on l'assombrit. */
   .text-fine {
     @apply text-[13px] leading-relaxed;
     color: var(--ink-fine);
   }
 
-  /* Fragment de titre en dégradé de marque. Une seule occurrence par page. */
-  .gradient-text {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Fragment de titre en vert. Sur fond clair, l'aplat vert ne passe pas le
+     contraste en texte : on prend sa déclinaison lisible. */
+  .accent-text {
+    color: var(--accent-text);
   }
 
   /* ---------- Boutons ---------- */
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full
-      px-6 py-3 text-sm font-medium transition-transform duration-150
-      active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 text-sm font-semibold
+      transition-colors duration-150 active:scale-[0.98];
+    border-radius: var(--radius-control);
+    padding: 0.75rem 1.5rem;
   }
 
-  /* Bouton principal : le dégradé de marque. Un seul par écran. */
   .btn-primary {
-    background: var(--gradient);
-    color: var(--on-gradient);
+    background: var(--accent);
+    color: var(--on-accent);
   }
   .btn-primary:hover {
-    filter: brightness(1.06);
+    background: var(--accent-hover);
   }
 
+  /* `inherit` et non var(--ink) : le bouton à filet doit prendre la couleur
+     de la section qui l'accueille — texte de page sur la page, texte clair
+     à l'intérieur d'une bande sombre. Un token figé se trompait dans l'un
+     des deux cas. */
   .btn-outline {
     @apply border bg-transparent;
-    border-color: var(--line);
-    color: var(--ink);
+    border-color: var(--line-strong);
+    color: inherit;
   }
   .btn-outline:hover {
-    background: var(--surface);
+    background: var(--surface-alt);
   }
 
-  /* Sur fond bleu nuit, le contour clair remplace le contour bleuté. */
   .btn-on-deep {
     @apply border bg-transparent;
-    border-color: rgb(255 255 255 / 0.24);
+    border-color: var(--line-strong);
     color: var(--on-deep);
   }
   .btn-on-deep:hover {
@@ -308,40 +277,43 @@ body {
   }
   .btn-ink:hover {
     background: var(--deep-alt);
+    color: var(--on-deep);
   }
 
   /* ---------- Surfaces ---------- */
 
   .card {
-    @apply rounded-xl bg-surface p-6;
-    box-shadow: var(--card-shadow);
+    @apply border bg-surface p-6;
+    border-radius: var(--radius);
+    border-color: var(--line);
   }
 
   .card-deep {
-    @apply rounded-xl p-6;
+    @apply p-6;
+    border-radius: var(--radius);
     background: var(--deep);
     color: var(--on-deep);
   }
 
-  /* Filet de marque en tête de carte : 3 px, 28 px de large. */
+  /* Filet vert en tête de carte. */
   .card-rule::before {
     content: "";
     @apply mb-4 block h-[3px] w-7 rounded-full;
-    background: var(--gradient);
+    background: var(--accent);
   }
 
-  /* Badge pilule : disponibilité, étiquette de projet. */
   .pill {
-    @apply inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5
+    @apply inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5
       text-[13px] text-ink;
+    background: var(--surface);
+    border-color: var(--line);
   }
   .pill::before {
     content: "";
     @apply h-[6px] w-[6px] shrink-0 rounded-full;
-    background: rgb(var(--brand-emerald));
+    background: var(--accent);
   }
 
-  /* Lien souligné par le dégradé au survol. */
   .link-brand {
     @apply relative inline-flex items-center gap-1.5 text-sm font-medium;
   }
@@ -349,7 +321,7 @@ body {
     content: "";
     @apply absolute -bottom-1 left-0 h-[2px] w-0 rounded-full transition-[width]
       duration-200;
-    background: var(--gradient);
+    background: var(--accent);
   }
   .link-brand:hover::after {
     @apply w-full;
@@ -358,19 +330,18 @@ body {
   /* ---------- Formulaires ---------- */
 
   .field {
-    @apply w-full rounded-lg border bg-surface px-4 py-3 text-sm text-ink;
+    @apply w-full border px-4 py-3 text-sm text-ink;
+    border-radius: var(--radius-control);
+    background: var(--field);
     border-color: var(--line);
   }
-  /* Les couleurs du thème sont de simples variables CSS : les modificateurs
-     d'opacité de Tailwind ne s'y appliquent pas, d'où la valeur littérale.
-     Choisie à 4,6:1 sur blanc : un texte d'aide reste du texte. */
   .field::placeholder {
     color: var(--placeholder);
   }
   .field:focus {
     outline: none;
-    border-color: rgb(var(--brand-teal));
-    box-shadow: 0 0 0 3px rgb(var(--brand-teal) / 0.16);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
   }
   .field-error {
     border-color: var(--danger);
@@ -379,14 +350,11 @@ body {
 
 /* ---------- Apparition au défilement ----------
 
-   En CSS pur, piloté par un IntersectionObserver de quelques lignes
-   (components/ui/Reveal.tsx) : pas de bibliothèque d'animation embarquée.
-
    L'état caché est conditionné à la classe `.js`, posée sur <html> par un
    script en ligne du layout AVANT le premier rendu. Sans JavaScript la règle
    ne s'applique jamais et le contenu reste visible ; et comme la classe est
-   posée avant peinture, on évite aussi le clignotement « visible puis caché »
-   d'une bascule faite après le montage. */
+   posée avant peinture, on évite le clignotement d'une bascule faite après
+   le montage. */
 [data-reveal] {
   transition: opacity 550ms ease-out, transform 550ms ease-out;
 }

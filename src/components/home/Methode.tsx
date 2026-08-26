@@ -1,29 +1,35 @@
 import Reveal from "@/components/ui/Reveal";
-import SectionHead from "@/components/ui/SectionHead";
 
-// Les quatre étapes. Les textes reprennent ceux du site précédent, expurgés
-// des renvois à l'espace client : le portail a été supprimé avec la refonte
-// du 2026-08-25, le suivi se fait par email.
+// FRISE et non plus quatre cartes (2026-08-26) : une méthode est une suite
+// d'étapes, la mise en page doit le montrer. Un trait horizontal relie les
+// quatre points sur grand écran ; il disparaît quand la grille se replie.
+//
+// Les textes reprennent ceux du site précédent, expurgés des renvois à
+// l'espace client : le portail a été supprimé, le suivi se fait par email.
 const ETAPES = [
   {
     titre: "Échange",
     delai: "1 appel",
-    texte: "On regarde ensemble si le projet tient debout. Avis honnête, sans engagement.",
+    texte:
+      "On regarde ensemble si le projet tient debout. Avis honnête, sans engagement.",
   },
   {
     titre: "Maquette et devis",
     delai: "3 à 5 jours",
-    texte: "Vous voyez votre page d'accueil et son prix avant la première ligne de code.",
+    texte:
+      "Vous voyez votre page d'accueil et son prix avant la première ligne de code.",
   },
   {
     titre: "Développement",
     delai: "1 à 4 semaines",
-    texte: "Une version en ligne dès les premiers jours, et des points d'étape réguliers.",
+    texte:
+      "Une version en ligne dès les premiers jours, et des points d'étape réguliers.",
   },
   {
     titre: "Mise en ligne",
     delai: "puis suivi",
-    texte: "Sur votre domaine, en HTTPS. Ensuite, les évolutions se demandent par email.",
+    texte:
+      "Sur votre domaine, en HTTPS. Ensuite, les évolutions se demandent par email.",
   },
 ];
 
@@ -32,35 +38,41 @@ export default function Methode() {
     <section
       id="methode"
       className="section"
-      style={{ background: "var(--deep)", color: "var(--on-deep)" }}
+      style={{ background: "var(--surface-alt)" }}
     >
       <div className="shell">
-        <SectionHead
-          onDeep
-          kicker="Méthode"
-          title="Comment ça se passe"
-        />
+        <Reveal className="text-center">
+          <p className="kicker">Méthode</p>
+          <h2 className="h-section mt-4">Comment ça se passe</h2>
+        </Reveal>
 
-        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {ETAPES.map((etape, index) => (
             <li key={etape.titre}>
-              <Reveal delay={index * 80} className="h-full">
-                <div className="flex h-full flex-col rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <Reveal delay={index * 90}>
+                <div className="flex items-center gap-3">
                   <span
-                    className="block h-[3px] w-7 rounded-full"
-                    style={{ background: "var(--gradient)" }}
-                  />
-                  <span className="mt-5 block font-mono text-[11px] tracking-[0.16em] text-on-deep-muted">
-                    0{index + 1}
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-mono text-[12px] font-semibold"
+                    style={{
+                      background: "var(--accent)",
+                      color: "var(--on-accent)",
+                    }}
+                  >
+                    {index + 1}
                   </span>
-                  <h3 className="h-card mt-2">{etape.titre}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-on-deep-muted">
-                    {etape.texte}
-                  </p>
-                  <p className="mt-5 border-t border-white/10 pt-4 text-[13px] text-on-deep-muted">
-                    {etape.delai}
-                  </p>
+                  {index < ETAPES.length - 1 ? (
+                    <span
+                      className="hidden h-px flex-1 lg:block"
+                      style={{ background: "var(--line-strong)" }}
+                    />
+                  ) : null}
                 </div>
+
+                <h3 className="h-card mt-5">{etape.titre}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  {etape.texte}
+                </p>
+                <p className="text-fine mt-3">{etape.delai}</p>
               </Reveal>
             </li>
           ))}

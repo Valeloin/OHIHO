@@ -2,11 +2,14 @@ import Hero from "@/components/home/Hero";
 import Offres from "@/components/home/Offres";
 import Methode from "@/components/home/Methode";
 import Realisations from "@/components/home/Realisations";
-import Preuves from "@/components/home/Preuves";
+import Faq from "@/components/home/Faq";
 import Contact from "@/components/home/Contact";
 
-// Accueil : une seule page longue, dans cet ordre. Ce qu'on propose, comment
-// on travaille, ce qu'on a livré, ce qui rassure, comment nous joindre.
+// Accueil, restructuré le 2026-08-26 à la demande de Valentin : mêmes
+// informations, structure repensée.
+//
+// Hero centré → comparatif des offres → frise de la méthode → réalisations
+// en bandeaux → FAQ (qui absorbe les anciennes « preuves ») → contact.
 export default function Home() {
   return (
     <main>
@@ -14,7 +17,7 @@ export default function Home() {
       <Offres />
       <Methode />
       <Realisations />
-      <Preuves />
+      <Faq />
       <Contact />
     </main>
   );

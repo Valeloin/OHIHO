@@ -24,7 +24,7 @@ export default function Wordmark({ size = 28, className = "" }: Props) {
         className="font-medium tracking-[0.06em]"
         style={{ fontSize: Math.round(size * 0.68) }}
       >
-        OH<span className="gradient-text">I</span>HO
+        OH<span className="accent-text">I</span>HO
       </span>
     </span>
   );
