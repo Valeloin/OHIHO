@@ -1,19 +1,22 @@
 import Hero from "@/components/home/Hero";
+import Arguments from "@/components/home/Arguments";
 import Offres from "@/components/home/Offres";
 import Methode from "@/components/home/Methode";
 import Realisations from "@/components/home/Realisations";
 import Faq from "@/components/home/Faq";
 import Contact from "@/components/home/Contact";
 
-// Accueil, restructuré le 2026-08-26 à la demande de Valentin : mêmes
-// informations, structure repensée.
+// Landing refaite de bout en bout le 2026-08-26.
 //
-// Hero centré → comparatif des offres → frise de la méthode → réalisations
-// en bandeaux → FAQ (qui absorbe les anciennes « preuves ») → contact.
+// L'ordre suit le chemin d'un visiteur : ce qu'on lui promet (hero), pourquoi
+// il peut le croire (arguments), ce qu'il peut acheter (offres), comment ça
+// se passe (méthode), la preuve que ça tourne (réalisations), ses dernières
+// objections (FAQ), et comment nous joindre (contact).
 export default function Home() {
   return (
     <main>
       <Hero />
+      <Arguments />
       <Offres />
       <Methode />
       <Realisations />
