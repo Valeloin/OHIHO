@@ -37,7 +37,8 @@ export const REALISATIONS: Realisation[] = [
   },
   {
     title: "BugTrack",
-    category: "Application web",
+    // Les deux à la fois : une application web, vendue par abonnement.
+    category: "Application web / SaaS",
     description:
       "Suivi des demandes et des anomalies : tickets, priorités, statuts, fil de discussion et notifications par email.",
     resultat: "Plus aucune demande client perdue dans une boîte mail.",
