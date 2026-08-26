@@ -21,36 +21,40 @@ export default function Realisations() {
                 className="grid gap-6 border-t py-10 md:grid-cols-[220px_1fr] md:gap-12"
                 style={{ borderColor: "var(--line)" }}
               >
-                <div className="flex items-start gap-4">
+                <div>
                   <span
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl"
+                    className="flex h-16 w-16 items-center justify-center rounded-2xl"
                     style={{ background: projet.iconBg }}
                   >
                     <Image
                       src={projet.icon}
                       alt=""
-                      width={32}
-                      height={32}
-                      className="h-8 w-8"
+                      width={36}
+                      height={36}
+                      className="h-9 w-9"
                     />
                   </span>
-                  <div>
-                    <h3 className="h-card text-xl">{projet.title}</h3>
-                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-muted">
-                      {projet.category}
-                    </p>
-                  </div>
+                  <h3 className="h-card mt-5 text-2xl">{projet.title}</h3>
+                  <p
+                    className="mt-2 inline-flex rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em]"
+                    style={{
+                      background:
+                        "color-mix(in srgb, var(--accent) 12%, transparent)",
+                      color: "var(--accent-text)",
+                    }}
+                  >
+                    {projet.category}
+                  </p>
                 </div>
 
                 <div>
                   <p className="text-base leading-relaxed text-ink-muted">
                     {projet.description}
                   </p>
-                  <p className="mt-4 flex gap-3 text-[15px] font-medium">
-                    <span
-                      className="mt-2 h-[6px] w-[6px] shrink-0 rounded-full"
-                      style={{ background: "var(--accent)" }}
-                    />
+                  {/* Le résultat est ce qui intéresse un prospect, plus que la
+                      description : il a droit à la taille au-dessus. */}
+                  <p className="mt-5 text-lg font-semibold leading-snug">
+                    <span style={{ color: "var(--accent-text)" }}>&#8250; </span>
                     {projet.resultat}
                   </p>
                   <div className="mt-5">

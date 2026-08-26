@@ -19,20 +19,16 @@ export default function Contact() {
       style={{ background: "var(--surface-alt)" }}
     >
       <div className="shell max-w-2xl">
+        {/* En-tête volontairement sobre : la relance juste au-dessus
+            (AppelFinal) porte déjà le grand titre et l'argument. Deux titres
+            de même poids à la suite se neutraliseraient. */}
         <Reveal className="text-center">
           <p className="kicker">Contact</p>
-          <h2 className="h-section mt-4">
-            Parlons de votre projet,{" "}
-            <span className="accent-text">sans engagement.</span>
-          </h2>
-          <p className="lede mx-auto mt-5 text-center">
-            Décrivez votre besoin en quelques lignes. Réponse d&apos;une
-            personne, pas d&apos;un robot, sous 24 h ouvrées.
-          </p>
+          <h2 className="h-card mt-3 text-xl">Le formulaire</h2>
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="mt-10">
+          <div className="mt-8">
             {formulaireActif ? (
               <ContactForm />
             ) : (

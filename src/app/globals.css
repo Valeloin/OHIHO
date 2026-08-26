@@ -188,9 +188,14 @@ body {
 
   /* Titres GRAS : c'est le trait commun aux deux références, et la police
      système ne tient pas la comparaison en graisse intermédiaire. */
+  /* Le titre de première page suit la largeur de l'écran EN CONTINU plutôt
+     que par paliers : plus de saut brutal d'une taille d'écran à l'autre, et
+     il ne casse plus au mauvais endroit sur les formats intermédiaires. */
   .h-display {
-    @apply text-[2.6rem] font-bold leading-[1.03] tracking-[-0.035em]
-      sm:text-6xl lg:text-7xl;
+    font-size: clamp(2.5rem, 5.2vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    font-weight: 700;
     text-wrap: balance;
   }
   .h-section {
@@ -271,6 +276,16 @@ body {
     @apply border bg-surface p-6;
     border-radius: var(--radius);
     border-color: var(--line);
+    transition: border-color 200ms, box-shadow 200ms, transform 200ms;
+  }
+  /* Une carte cliquable se soulève et son filet s'allume. Réservé aux cartes
+     qui sont vraiment des liens : sur une carte inerte, l'effet promet une
+     interaction qui n'existe pas. */
+  a.card:hover,
+  .card-lien:hover {
+    transform: translateY(-3px);
+    border-color: var(--line-strong);
+    box-shadow: var(--card-shadow);
   }
 
   .card-deep {

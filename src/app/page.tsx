@@ -3,6 +3,7 @@ import Offres from "@/components/home/Offres";
 import Methode from "@/components/home/Methode";
 import Realisations from "@/components/home/Realisations";
 import Faq from "@/components/home/Faq";
+import AppelFinal from "@/components/home/AppelFinal";
 import Contact from "@/components/home/Contact";
 
 // Accueil. L'ordre suit le chemin d'un visiteur : ce qu'on lui promet et ce
@@ -21,6 +22,7 @@ export default function Home() {
       <Methode />
       <Realisations />
       <Faq />
+      <AppelFinal />
       <Contact />
     </main>
   );
