@@ -24,7 +24,7 @@ export const REALISATIONS: Realisation[] = [
     title: "Cadance Coaching",
     category: "Site vitrine",
     description:
-      "Site vitrine d'une salle de sport, avec un espace d'administration qui permet au client de modifier lui-même les textes, la galerie, le planning des cours et les tarifs.",
+      "Site d'une salle de sport, avec un espace d'administration pour les textes, la galerie, le planning et les tarifs.",
     resultat: "Le client met son planning à jour seul, sans nous appeler.",
     href: "https://cadance-coaching.vercel.app",
     // Icône reprise telle quelle du projet, en SVG : elle reste nette en
@@ -36,7 +36,7 @@ export const REALISATIONS: Realisation[] = [
     title: "BugTrack",
     category: "Application web",
     description:
-      "Outil de suivi des demandes et des anomalies : tickets, priorités, statuts, fil de discussion avec le client et notifications par email. Chaque compte dispose de son espace.",
+      "Suivi des demandes et des anomalies : tickets, priorités, statuts, fil de discussion et notifications par email.",
     resultat: "Plus aucune demande client perdue dans une boîte mail.",
     note: "Réservé aux comptes clients",
     icon: "/realisations/bugtrack.svg",

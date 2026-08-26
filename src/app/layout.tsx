@@ -87,7 +87,7 @@ export const viewport: Viewport = {
   // c'est une balise statique, le navigateur ne la recalcule pas.)
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#dce9fa" },
-    { media: "(prefers-color-scheme: dark)", color: "#071528" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0d0f" },
   ],
 };
 

@@ -20,7 +20,6 @@ export default function Contact() {
               <span className="gradient-text">sans engagement.</span>
             </>
           }
-          lede="Décrivez votre besoin en quelques lignes. Vous aurez une réponse d'une personne, pas d'un robot, sous 24 h ouvrées."
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.15fr]">

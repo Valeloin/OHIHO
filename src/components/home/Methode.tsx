@@ -6,28 +6,24 @@ import SectionHead from "@/components/ui/SectionHead";
 // du 2026-08-25, le suivi se fait par email.
 const ETAPES = [
   {
-    titre: "Échange initial",
+    titre: "Échange",
     delai: "1 appel",
-    texte:
-      "On parle de votre activité, de vos objectifs, de votre budget et de vos délais. Vous repartez avec un avis honnête, même si la réponse est « vous n'avez pas besoin de ça ».",
+    texte: "On regarde ensemble si le projet tient debout. Avis honnête, sans engagement.",
   },
   {
     titre: "Maquette et devis",
     delai: "3 à 5 jours",
-    texte:
-      "Avant la moindre ligne de code, vous voyez à quoi ressemblera votre page d'accueil et ce qu'elle coûtera. Devis détaillé poste par poste, vos retours intégrés jusqu'à validation.",
+    texte: "Vous voyez votre page d'accueil et son prix avant la première ligne de code.",
   },
   {
     titre: "Développement",
     delai: "1 à 4 semaines",
-    texte:
-      "Votre site prend forme, avec une version consultable en ligne dès les premiers jours. Points d'étape réguliers, retours pris en compte au fil de l'eau.",
+    texte: "Une version en ligne dès les premiers jours, et des points d'étape réguliers.",
   },
   {
-    titre: "Mise en ligne et suivi",
-    delai: "En continu",
-    texte:
-      "Mise en ligne sur votre nom de domaine, en HTTPS, après vérification du mobile, de la vitesse et du référencement. Ensuite, les évolutions se demandent par email.",
+    titre: "Mise en ligne",
+    delai: "puis suivi",
+    texte: "Sur votre domaine, en HTTPS. Ensuite, les évolutions se demandent par email.",
   },
 ];
 
@@ -42,8 +38,7 @@ export default function Methode() {
         <SectionHead
           onDeep
           kicker="Méthode"
-          title="Comment on travaille ensemble"
-          lede="Quatre étapes, dans cet ordre, à chaque projet. Rien ne démarre tant que le devis et la maquette ne sont pas validés."
+          title="Comment ça se passe"
         />
 
         <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

@@ -10,8 +10,7 @@ export default function Realisations() {
       <div className="shell">
         <SectionHead
           kicker="Réalisations"
-          title="Des projets livrés, en service"
-          lede="Deux projets réels : un site vitrine que son client administre lui-même, et l'outil de suivi que nous utilisons avec nos clients."
+          title="Livré, en service"
         />
 
         <ul className="mt-12 grid gap-5 md:grid-cols-2">
@@ -80,8 +79,8 @@ export default function Realisations() {
             className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-xl border p-7"
             style={{ borderColor: "var(--line)" }}
           >
-            <p className="lede text-[15px]">
-              Votre projet peut être le prochain. On en parle sans engagement.
+            <p className="text-[15px] font-medium">
+              Votre projet peut être le prochain.
             </p>
             <Link href="#contact" className="btn btn-ink">
               Demander un devis

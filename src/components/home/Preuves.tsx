@@ -10,23 +10,19 @@ import Reveal from "@/components/ui/Reveal";
 const PROMESSES = [
   {
     titre: "Un interlocuteur, pas un standard",
-    texte:
-      "Vous écrivez à la personne qui développe votre site. Pas de chef de projet intermédiaire.",
+    texte: "Vous écrivez à la personne qui code votre site.",
   },
   {
-    titre: "Le prix est fixé avant de commencer",
-    texte:
-      "Devis détaillé, validé avant la première ligne de code. Ce qui n'y figure pas ne vous est pas facturé.",
+    titre: "Prix fixé avant de commencer",
+    texte: "Ce qui n'est pas au devis ne vous est pas facturé.",
   },
   {
     titre: "Le site vous appartient",
-    texte:
-      "Code, domaine, hébergement, contenus : tout est à votre nom. Vous pouvez partir avec.",
+    texte: "Code, domaine, hébergement : tout est à votre nom.",
   },
   {
     titre: "Pas de gabarit revendu",
-    texte:
-      "Chaque site est écrit pour son activité. Pas de thème acheté, pas d'extensions qui cassent.",
+    texte: "Écrit pour votre activité, sans extensions qui cassent.",
   },
 ];
 
