@@ -5,25 +5,19 @@
 /* Thème OHIHO (2026-08-26).
 
    Base : la DA de mycalories.ohiho.fr, dont les tokens de gris ont été
-   RELEVÉS sur sa feuille de style. Accent : le VIOLET EN DÉGRADÉ, repris de
-   la référence envoyée par Valentin (jelouemonsiteweb.com) — sa DA, pas son
-   contenu. Le vert de mycalories a donc cédé la place au violet.
+   RELEVÉS sur sa feuille de style. Mise en page inspirée de la référence
+   envoyée par Valentin (jelouemonsiteweb.com) — sa DA, pas son contenu.
 
+   ACCENT : le TRIO DE MARQUE du logo, bleu ciel → teal → émeraude. Il a
+   remplacé le violet le 2026-08-26 : c'est la couleur du logo, elle n'avait
+   aucune raison d'être absente du site.
 
-   Valentin a demandé de partir de la direction artistique de son SaaS
-   mycalories.ohiho.fr plutôt que d'en inventer une : les valeurs ci-dessous
-   sont RELEVÉES sur sa feuille de style, pas approchées à l'œil.
-
-   Ce qu'elle impose :
+   Ce que la base impose :
    - une pile de gris bleutés (Slate), et un accent unique ;
    - la police SYSTÈME, pas une police chargée — c'est ce qui donne le gras
      net des titres, et ça évite l'attente au chargement ;
    - des coins à 8 px pour les contrôles, 14 px pour les cartes ;
    - deux thèmes définis d'emblée, clair et sombre.
-
-   Le dégradé sky → teal → emerald de l'ancienne DA a disparu : il n'existait
-   pas chez mycalories et jurait avec le vert. Il ne subsiste que dans
-   l'anneau du logo (public/logo-mark.svg), qui reste le logo.
 
    Trois états de thème, par priorité : choix explicite du visiteur
    (`data-theme`), puis réglage du système, puis le clair. */
@@ -53,17 +47,21 @@
   /* `--accent` sert d'aplat (filets, pastilles), `--accent-grad` habille le
      bouton principal, et `--accent-text` est la version lisible EN TEXTE :
      l'aplat sur du blanc ne passe pas toujours le contraste. */
-  --accent: #a21caf;
-  --accent-hover: #86198f;
-  --accent-text: #86198f;
-  --on-accent: #ffffff;
-  /* Le dégradé violet des boutons, marque de fabrique de la référence. */
-  --accent-grad: linear-gradient(100deg, #3b0764, #c026d3);
-  /* Le bandeau du hero : beaucoup plus PROFOND que le bouton. Chez la
-     référence, ce fond est une photo assombrie ; un violet vif plein écran
-     vire au criard. Identique dans les deux thèmes : c'est un aplat sombre,
-     il n'a pas de version claire. */
-  --hero-grad: linear-gradient(120deg, #170428 0%, #3d0a52 52%, #7a1a8c 100%);
+  --accent: #14b8a6;
+  --accent-hover: #0d9488;
+  /* Version LISIBLE en texte : le teal d'aplat sur du blanc ne passe pas le
+     contraste, il faut descendre de deux crans. */
+  --accent-text: #0f766e;
+  /* Texte posé SUR le dégradé : un vert-noir très foncé. Le blanc échoue sur
+     la partie émeraude, qui est claire. */
+  --on-accent: #04262b;
+  /* Le trio de marque, repris tel quel du logo : bleu ciel, teal, émeraude. */
+  --accent-grad: linear-gradient(100deg, #38bdf8, #22d3c4, #34d399);
+  /* Le bandeau du hero : la MÊME famille de couleurs, mais profonde. Le trio
+     de marque est clair — en aplat plein écran il ne laisserait pas passer du
+     texte blanc. Identique dans les deux thèmes : c'est un fond sombre, il
+     n'a pas de version claire. */
+  --hero-grad: linear-gradient(120deg, #03161f 0%, #063a45 50%, #0a6459 100%);
 
   /* Bande d'appui à fond plein. */
   --deep: #0f172a;
@@ -103,11 +101,11 @@
     --ink-muted: #8e8e97;
     --ink-fine: #a1a1aa;
 
-    --accent: #c026d3;
-    --accent-hover: #d946ef;
-    --accent-text: #e879f9;
-    --on-accent: #ffffff;
-    --accent-grad: linear-gradient(100deg, #6b21a8, #d946ef);
+    --accent: #2dd4bf;
+    --accent-hover: #5eead4;
+    --accent-text: #5eead4;
+    --on-accent: #04262b;
+    --accent-grad: linear-gradient(100deg, #38bdf8, #22d3c4, #34d399);
 
     /* En sombre la bande d'appui est plus CLAIRE que la page : c'est le
        contraste qui compte, pas le sens. */
@@ -141,11 +139,11 @@
   --ink-muted: #8e8e97;
   --ink-fine: #a1a1aa;
 
-  --accent: #c026d3;
-  --accent-hover: #d946ef;
-  --accent-text: #e879f9;
-  --on-accent: #ffffff;
-  --accent-grad: linear-gradient(100deg, #6b21a8, #d946ef);
+  --accent: #2dd4bf;
+  --accent-hover: #5eead4;
+  --accent-text: #5eead4;
+  --on-accent: #04262b;
+  --accent-grad: linear-gradient(100deg, #38bdf8, #22d3c4, #34d399);
 
   --deep: #1e1e24;
   --deep-alt: #2a2a32;

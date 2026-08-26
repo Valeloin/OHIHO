@@ -42,7 +42,7 @@ export default function Hero() {
           <Reveal>
             <p
               className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[13px] font-semibold"
-              style={{ background: "#ffffff", color: "#3b0764" }}
+              style={{ background: "#ffffff", color: "#04262b" }}
             >
               {SITE.responseNote}
             </p>
@@ -56,18 +56,16 @@ export default function Hero() {
 
             <p
               className="mx-auto mt-6 max-w-[54ch] text-base leading-relaxed sm:text-lg"
-              style={{ color: "rgb(255 255 255 / 0.82)" }}
+              style={{ color: "rgb(255 255 255 / 0.92)" }}
             >
               Sites vitrines, refontes et applications web, écrits sur mesure
               pour votre activité — jamais achetés sur étagère.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                href="#contact"
-                className="btn"
-                style={{ background: "#ffffff", color: "#3b0764" }}
-              >
+              {/* Le bouton principal porte le dégradé de marque : c'est là,
+                  sur le fond profond, qu'il ressort le mieux. */}
+              <Link href="#contact" className="btn btn-primary">
                 Demander un devis
               </Link>
               <Link
@@ -92,7 +90,7 @@ export default function Hero() {
             style={{
               borderColor: "var(--line)",
               background: "var(--surface)",
-              boxShadow: "0 40px 80px -40px rgb(23 4 40 / 0.55)",
+              boxShadow: "0 40px 80px -40px rgb(3 26 38 / 0.6)",
             }}
           >
             <p
