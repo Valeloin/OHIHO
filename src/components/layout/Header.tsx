@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Wordmark from "@/components/ui/Wordmark";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 // Les liens pointent vers des ancres de l'accueil en chemin ABSOLU : depuis
 // une page d'offre, « /#offres » ramène à l'accueil au bon endroit, là où un
@@ -55,18 +56,21 @@ export default function Header() {
           <Link href="/#contact" className="btn btn-ink px-5 py-2.5">
             Demander un devis
           </Link>
+          <ThemeToggle />
         </nav>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="menu-mobile"
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-          className="rounded-full border p-2.5 md:hidden"
-          style={{ borderColor: "var(--line)" }}
-        >
-          {/* Deux barres qui se croisent : pas d'icône importée pour ça. */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            className="rounded-full border p-2.5"
+            style={{ borderColor: "var(--line)" }}
+          >
+            {/* Deux barres qui se croisent : pas d'icône importée pour ça. */}
           <span className="relative block h-4 w-5">
             <span
               className="absolute left-0 block h-[2px] w-5 bg-ink transition-transform duration-200"
@@ -82,8 +86,9 @@ export default function Header() {
                 transform: open ? "rotate(-45deg)" : "none",
               }}
             />
-          </span>
-        </button>
+            </span>
+          </button>
+        </div>
       </div>
 
       {open ? (

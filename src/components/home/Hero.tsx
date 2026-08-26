@@ -2,33 +2,33 @@ import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import { SITE } from "@/lib/site";
 
-// Trois repères factuels plutôt que des chiffres inventés : un délai de
-// réponse, une fourchette de délai de projet, un interlocuteur.
+// Hero volontairement court (2026-08-26) : la demande est que le visiteur
+// voie « 90 % de ce qu'on vend » sans défiler. Tout ce qui n'amène pas
+// directement aux offres a donc été retiré ou réduit à une ligne — les trois
+// repères, qui occupaient une rangée de cartes entière, tiennent maintenant
+// sur une seule ligne de texte fin.
 const REPERES = [
-  { valeur: "24 h", libelle: "pour vous répondre, jours ouvrés" },
-  { valeur: "1 à 4 sem.", libelle: "de l'accord à la mise en ligne" },
-  { valeur: "1", libelle: "interlocuteur, du début à la fin" },
+  "Réponse sous 24 h ouvrées",
+  "En ligne en 1 à 4 semaines",
+  "Un seul interlocuteur",
 ];
 
 export default function Hero() {
   return (
-    <section className="pb-16 pt-16 sm:pb-24 sm:pt-24">
+    <section className="pb-8 pt-10 sm:pb-10 sm:pt-14">
       <div className="shell">
         <Reveal>
-          <p className="pill">{SITE.responseNote}</p>
-
-          <h1 className="h-display mt-7 max-w-4xl">
+          <h1 className="h-display max-w-4xl">
             Un site à la hauteur{" "}
             <span className="gradient-text">de votre savoir-faire.</span>
           </h1>
 
-          <p className="lede mt-6">
-            Sites vitrines, refontes et applications web sur mesure. De l&apos;idée
-            à la mise en ligne, avec un devis clair avant de commencer et une
-            personne qui répond quand vous écrivez.
+          <p className="lede mt-5">
+            Sites vitrines, refontes et applications web sur mesure, conçus et
+            développés à {SITE.city}.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link href="#contact" className="btn btn-primary">
               Demander un devis
             </Link>
@@ -36,18 +36,15 @@ export default function Hero() {
               Voir les réalisations
             </Link>
           </div>
-        </Reveal>
 
-        <Reveal delay={120}>
-          <ul className="mt-14 grid gap-4 sm:grid-cols-3">
+          <ul className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
             {REPERES.map((repere) => (
-              <li key={repere.libelle} className="card card-rule">
-                <p className="text-3xl font-medium tracking-display">
-                  {repere.valeur}
-                </p>
-                <p className="mt-1.5 text-sm text-ink-muted">
-                  {repere.libelle}
-                </p>
+              <li key={repere} className="text-fine flex items-center gap-2">
+                <span
+                  className="h-[6px] w-[6px] shrink-0 rounded-full"
+                  style={{ background: "rgb(var(--brand-emerald))" }}
+                />
+                {repere}
               </li>
             ))}
           </ul>

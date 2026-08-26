@@ -81,14 +81,27 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  // La barre d'adresse des navigateurs mobiles prend la couleur du fond.
-  themeColor: "#dce9fa",
+  // La barre d'adresse des navigateurs mobiles prend la couleur du fond —
+  // une valeur par mode, sinon elle reste bleu pastel sur un site sombre.
+  // (Ces deux valeurs suivent le réglage du système, pas la bascule manuelle :
+  // c'est une balise statique, le navigateur ne la recalcule pas.)
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#dce9fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#071528" },
+  ],
 };
 
-// Posé sur <html> avant la première peinture : c'est lui qui autorise l'état
-// caché des apparitions au défilement. Sans JavaScript, la classe n'arrive
-// jamais et tout le contenu reste visible (voir la fin de globals.css).
-const MARQUEUR_JS = `document.documentElement.classList.add('js')`;
+// Exécuté AVANT la première peinture. Deux choses :
+//
+// 1. la classe `js` sur <html>, qui autorise l'état caché des apparitions au
+//    défilement — sans JavaScript elle n'arrive jamais et tout le contenu
+//    reste visible (voir la fin de globals.css) ;
+// 2. le thème choisi par le visiteur, relu depuis le navigateur. Il DOIT
+//    être posé ici et pas dans un effet React : appliqué après le montage,
+//    la page s'afficherait en clair puis basculerait en sombre sous les yeux
+//    du visiteur. Sans choix enregistré, on ne pose rien et le CSS suit le
+//    réglage du système.
+const SCRIPT_INITIAL = `(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('ohiho-theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t)}catch(e){}})()`;
 
 export default function RootLayout({
   children,
@@ -103,7 +116,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: MARQUEUR_JS }} />
+        <script dangerouslySetInnerHTML={{ __html: SCRIPT_INITIAL }} />
       </head>
       <body className="flex min-h-screen flex-col">
         <a

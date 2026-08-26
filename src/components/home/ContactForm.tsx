@@ -146,7 +146,7 @@ export default function ContactForm() {
       </div>
 
       {echec ? (
-        <p className="mt-5 text-[13px]" style={{ color: "#c0392b" }} role="alert">
+        <p className="mt-5 text-[13px]" style={{ color: "var(--danger)" }} role="alert">
           {echec}
         </p>
       ) : null}
@@ -187,7 +187,7 @@ function Champ({
       </label>
       {children}
       {erreur ? (
-        <p className="mt-2 text-[13px]" style={{ color: "#c0392b" }}>
+        <p className="mt-2 text-[13px]" style={{ color: "var(--danger)" }}>
           {erreur}
         </p>
       ) : null}

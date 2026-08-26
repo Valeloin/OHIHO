@@ -16,10 +16,23 @@
    4. un filet de 3 px en tête de carte.
    Jamais en fond de section, jamais animé.
 
-   Thème clair uniquement : pas de bascule sombre. Toutes les valeurs sont
-   déclarées ici et exposées à Tailwind par tailwind.config.ts — aucune
-   couleur en dur dans les composants. */
+   MODE SOMBRE (2026-08-26) : le clair reste la version de référence, le
+   sombre en est la transposition. Trois états possibles, dans cet ordre de
+   priorité :
+   1. `[data-theme="dark"]` / `[data-theme="light"]` — choix explicite du
+      visiteur, mémorisé dans le navigateur ;
+   2. `prefers-color-scheme` — le réglage de son système, s'il n'a rien
+      choisi ;
+   3. le clair, par défaut.
+   Chaque couleur est donc définie DEUX fois, jamais plus : ici en clair,
+   plus bas en sombre. Une couleur déclarée uniquement dans le bloc sombre
+   serait absente en clair.
+
+   Toutes les valeurs sont déclarées ici et exposées à Tailwind par
+   tailwind.config.ts — aucune couleur en dur dans les composants. */
 :root {
+  color-scheme: light;
+
   --page: #dce9fa;
   --surface: #ffffff;
   --surface-alt: #eef4fd;
@@ -39,6 +52,16 @@
 
   --on-deep: #ffffff;
   --on-deep-muted: #9fbee6;
+
+  /* Texte posé sur un aplat couleur ".ink" (bouton plein). En sombre, .ink
+     devient presque blanc : le blanc en dur y serait invisible. */
+  --on-ink: #ffffff;
+
+  /* Texte fin, texte d'aide et erreur. Déclarés en tokens : leurs valeurs
+     claires seraient illisibles en sombre. */
+  --ink-fine: #3d5c88;
+  --placeholder: #5b779c;
+  --danger: #c0392b;
 
   /* Trio de marque, repris tel quel du logo (public/logo-mark.svg).
      Déclaré en CANAUX RGB pour les modificateurs d'opacité de Tailwind. */
@@ -61,6 +84,81 @@
   --header-h: 72px;
   --card-shadow: 0 1px 2px rgb(11 44 107 / 0.06),
     0 12px 32px -18px rgb(11 44 107 / 0.28);
+}
+
+/* ---------- Mode sombre ----------
+
+   Transposition du clair, pas une seconde direction artistique : mêmes
+   rôles, mêmes rapports. Le fond devient un bleu nuit très profond, les
+   cartes un navy plus clair que le fond (en clair elles sont plus claires
+   que la page : le rapport est conservé).
+
+   Le trio de marque et le dégradé ne changent PAS — c'est le logo, il doit
+   rester identique dans les deux modes.
+
+   Les deux blocs ci-dessous sont identiques. Le premier suit le réglage du
+   système, mais s'efface si le visiteur a explicitement choisi le clair ;
+   le second applique son choix explicite du sombre. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --page: #071528;
+    --surface: #0e2340;
+    --surface-alt: #0a1c33;
+    --line: #1e3c62;
+
+    --ink: #e7effb;
+    /* Mesuré sur le fond sombre : 6,4:1. */
+    --ink-muted: #9db4d4;
+
+    /* La bande d'appui doit rester DISTINCTE du fond : en sombre elle est
+       donc plus claire que la page, alors qu'en clair elle est plus foncée.
+       C'est le contraste qui compte, pas le sens. */
+    --deep: #173a62;
+    --deep-alt: #22528c;
+    --on-deep: #ffffff;
+    --on-deep-muted: #a9c3e3;
+    --on-ink: #071528;
+
+    --ink-fine: #b6c9e4;
+    --placeholder: #7c97bd;
+    --danger: #ff9082;
+
+    --page-blur: rgb(7 21 40 / 0.88);
+
+    /* Une ombre portée ne se voit pas sur un fond sombre : c'est un liseré
+       clair qui détache la carte. */
+    --card-shadow: 0 0 0 1px rgb(255 255 255 / 0.06),
+      0 12px 32px -18px rgb(0 0 0 / 0.8);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page: #071528;
+  --surface: #0e2340;
+  --surface-alt: #0a1c33;
+  --line: #1e3c62;
+
+  --ink: #e7effb;
+  --ink-muted: #9db4d4;
+
+  --deep: #173a62;
+  --deep-alt: #22528c;
+  --on-deep: #ffffff;
+  --on-deep-muted: #a9c3e3;
+  --on-ink: #071528;
+
+  --ink-fine: #b6c9e4;
+  --placeholder: #7c97bd;
+  --danger: #ff9082;
+
+  --page-blur: rgb(7 21 40 / 0.88);
+
+  --card-shadow: 0 0 0 1px rgb(255 255 255 / 0.06),
+    0 12px 32px -18px rgb(0 0 0 / 0.8);
 }
 
 html {
@@ -141,7 +239,7 @@ body {
      dessous de 14 px, on l'assombrit. */
   .text-fine {
     @apply text-[13px] leading-relaxed;
-    color: #3d5c88;
+    color: var(--ink-fine);
   }
 
   /* Fragment de titre en dégradé de marque. Une seule occurrence par page. */
@@ -190,7 +288,7 @@ body {
 
   .btn-ink {
     background: var(--ink);
-    color: #ffffff;
+    color: var(--on-ink);
   }
   .btn-ink:hover {
     background: var(--deep-alt);
@@ -251,7 +349,7 @@ body {
      d'opacité de Tailwind ne s'y appliquent pas, d'où la valeur littérale.
      Choisie à 4,6:1 sur blanc : un texte d'aide reste du texte. */
   .field::placeholder {
-    color: #5b779c;
+    color: var(--placeholder);
   }
   .field:focus {
     outline: none;
@@ -259,7 +357,7 @@ body {
     box-shadow: 0 0 0 3px rgb(var(--brand-teal) / 0.16);
   }
   .field-error {
-    border-color: #c0392b;
+    border-color: var(--danger);
   }
 }
 
