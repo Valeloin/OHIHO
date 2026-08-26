@@ -21,16 +21,17 @@ export type Realisation = {
 
 export const REALISATIONS: Realisation[] = [
   {
-    title: "Cadance Coaching",
-    category: "Site vitrine",
+    title: "mycalories",
+    category: "Application web",
     description:
-      "Site d'une salle de sport, avec un espace d'administration pour les textes, la galerie, le planning et les tarifs.",
-    resultat: "Le client met son planning à jour seul, sans nous appeler.",
-    href: "https://cadance-coaching.vercel.app",
-    // Icône reprise telle quelle du projet, en SVG : elle reste nette en
-    // grand format, là où un favicon 32 px baverait.
-    icon: "/realisations/cadance-coaching.svg",
-    iconBg: "#E11D2A",
+      "Suivi de calories par abonnement : on décrit son repas en une phrase, l'outil estime les calories et les macronutriments. Journal, calendrier, entraînements et commande vocale.",
+    resultat: "Aucun aliment à chercher dans une base : on écrit, ou on dicte.",
+    href: "https://mycalories.ohiho.fr",
+    // ⚠️ Icône PROVISOIRE, dessinée ici : le projet n'en sert aucune (pas de
+    // favicon sur mycalories.ohiho.fr). À remplacer par la vraie dès qu'elle
+    // existe, comme pour les autres tuiles reprises telles quelles du projet.
+    icon: "/realisations/mycalories.svg",
+    iconBg: "#15A34A",
   },
   {
     title: "BugTrack",
@@ -47,3 +48,10 @@ export const REALISATIONS: Realisation[] = [
 // Mailys Solutions a été retiré des réalisations le 2026-07-28 à la demande
 // de Valentin. L'icône /realisations/mailys-solutions.svg reste dans /public
 // si le projet doit revenir.
+//
+// Cadance Coaching a été retiré le 2026-08-26, remplacé par mycalories, à la
+// demande de Valentin. Son icône reste elle aussi dans /public.
+// ⚠️ C'était le SEUL projet client de la liste : les deux réalisations
+// affichées sont désormais des produits maison. Un site vitrine dont les
+// références sont toutes internes convainc moins — à rouvrir dès qu'un
+// projet client peut être montré.
