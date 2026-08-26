@@ -57,10 +57,14 @@
   --on-accent: #04262b;
   /* Le trio de marque, repris tel quel du logo : bleu ciel, teal, émeraude. */
   --accent-grad: linear-gradient(100deg, #38bdf8, #22d3c4, #34d399);
-  /* Le bandeau du hero : la MÊME famille de couleurs, mais profonde. Le trio
-     de marque est clair — en aplat plein écran il ne laisserait pas passer du
-     texte blanc. Identique dans les deux thèmes : c'est un fond sombre, il
-     n'a pas de version claire. */
+  /* Le bandeau du hero : la même famille que le dégradé de marque, mais
+     PROFONDE. Deux essais ont été écartés à l'écran : le dégradé des boutons
+     tel quel (trop clair, il force l'encre foncée et écrase la page) et un
+     bleu-cyan plus vif. Les trois teintes ci-dessous sont choisies aussi
+     sombres que nécessaire pour que le blanc reste lisible : mesuré, le pire
+     cas est le sous-texte des cartes de verre sur la teinte la plus claire,
+     à 4,97:1. Les éclaircir sans remesurer ferait passer le hero sous AA.
+     Identique dans les deux thèmes. */
   --hero-grad: linear-gradient(120deg, #03161f 0%, #063a45 50%, #0a6459 100%);
 
   /* Bande d'appui à fond plein. */
