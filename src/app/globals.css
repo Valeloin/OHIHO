@@ -88,48 +88,14 @@
 }
 
 /* ---------- Mode sombre ----------
-   Les deux blocs sont identiques : le premier suit le réglage du système et
-   s'efface si le visiteur a choisi le clair, le second applique son choix
-   explicite du sombre. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
 
-    --page: #0d0d10;
-    --surface: #16161a;
-    --surface-alt: #1e1e24;
-    --line: #292930;
-    --line-strong: #3a3a44;
+   Il ne s'applique QUE sur choix explicite du visiteur — le bouton du
+   bandeau, qui pose data-theme="dark" et le mémorise.
 
-    --ink: #f4f4f5;
-    --ink-muted: #8e8e97;
-    --ink-fine: #a1a1aa;
-
-    --accent: #2dd4bf;
-    --accent-hover: #5eead4;
-    --accent-text: #5eead4;
-    --on-accent: #04262b;
-    --accent-grad: linear-gradient(100deg, #38bdf8, #22d3c4, #34d399);
-
-    /* En sombre la bande d'appui est plus CLAIRE que la page : c'est le
-       contraste qui compte, pas le sens. */
-    --deep: #1e1e24;
-    --deep-alt: #2a2a32;
-    --on-deep: #f4f4f5;
-    --on-deep-muted: #8e8e97;
-    --on-ink: #0d0d10;
-
-    --field: #1e1e24;
-    --placeholder: #8e8e97;
-    --danger: #f87171;
-
-    --page-blur: rgb(13 13 16 / 0.86);
-
-    --card-shadow: 0 0 0 1px rgb(255 255 255 / 0.05),
-      0 12px 32px -20px rgb(0 0 0 / 0.9);
-  }
-}
-
+   Le site ne suit PLUS le réglage du système (2026-08-26) : la vitrine est
+   pensée en clair, et un visiteur dont le système est en sombre la recevait
+   en quasi-noir sans l'avoir demandé. Ne pas remettre de bloc
+   `@media (prefers-color-scheme: dark)` ici sans en reparler. */
 :root[data-theme="dark"] {
   color-scheme: dark;
 

@@ -73,10 +73,10 @@ export const viewport: Viewport = {
   // une valeur par mode, sinon elle reste bleu pastel sur un site sombre.
   // (Ces deux valeurs suivent le réglage du système, pas la bascule manuelle :
   // c'est une balise statique, le navigateur ne la recalcule pas.)
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafbfc" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0d10" },
-  ],
+  // Une seule valeur : le site est clair par défaut pour tout le monde, il ne
+  // suit plus le réglage du système. Deux valeurs conditionnelles auraient
+  // teinté la barre d'adresse en sombre sur un site affiché en clair.
+  themeColor: "#fafbfc",
 };
 
 // Exécuté AVANT la première peinture. Deux choses :

@@ -10,9 +10,9 @@ import { useEffect, useState } from "react";
 // montage, sinon le bouton afficherait la mauvaise icône une fraction de
 // seconde.
 //
-// Trois états côté visiteur : clair explicite, sombre explicite, ou rien
-// choisi (on suit le système). Le bouton ne montre que deux positions —
-// « ce que j'affiche maintenant » et « ce vers quoi je bascule ».
+// Deux états seulement : le site est CLAIR par défaut, et le visiteur peut
+// passer au sombre. Il ne suit pas le réglage du système — voir le bloc
+// « Mode sombre » de globals.css.
 
 const CLE = "ohiho-theme";
 
@@ -20,24 +20,17 @@ export default function ThemeToggle() {
   const [sombre, setSombre] = useState(false);
 
   useEffect(() => {
-    // L'attribut est déjà posé par le script en ligne ; s'il est absent,
-    // c'est qu'on suit le système.
-    const pose = document.documentElement.getAttribute("data-theme");
-    setSombre(
-      pose
-        ? pose === "dark"
-        : window.matchMedia("(prefers-color-scheme: dark)").matches
-    );
+    // L'attribut est déjà posé par le script en ligne. S'il est absent, le
+    // site est en CLAIR : il ne suit pas le réglage du système.
+    setSombre(document.documentElement.getAttribute("data-theme") === "dark");
   }, []);
 
   function basculer() {
     // On lit l'état RÉEL du document, pas la variable du composant : deux
     // clics rapprochés dans le même cycle de rendu liraient deux fois la
     // même valeur périmée et la seconde bascule ne ferait rien.
-    const pose = document.documentElement.getAttribute("data-theme");
-    const estSombre = pose
-      ? pose === "dark"
-      : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const estSombre =
+      document.documentElement.getAttribute("data-theme") === "dark";
 
     const prochain = estSombre ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", prochain);
