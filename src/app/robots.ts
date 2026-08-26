@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       // La page de construction ne doit jamais être indexée : elle
       // remplacerait l'accueil dans les résultats de recherche.
-      disallow: ["/construction"],
+      disallow: ["/construction", "/apercus"],
     },
     sitemap: "https://ohiho.fr/sitemap.xml",
   };
