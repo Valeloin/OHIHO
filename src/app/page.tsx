@@ -1,22 +1,22 @@
 import Hero from "@/components/home/Hero";
-import Arguments from "@/components/home/Arguments";
 import Offres from "@/components/home/Offres";
 import Methode from "@/components/home/Methode";
 import Realisations from "@/components/home/Realisations";
 import Faq from "@/components/home/Faq";
 import Contact from "@/components/home/Contact";
 
-// Landing refaite de bout en bout le 2026-08-26.
+// Accueil. L'ordre suit le chemin d'un visiteur : ce qu'on lui promet et ce
+// qu'on vend (hero), le détail des formules, comment ça se passe, la preuve
+// que ça tourne, ses dernières objections, et comment nous joindre.
 //
-// L'ordre suit le chemin d'un visiteur : ce qu'on lui promet (hero), pourquoi
-// il peut le croire (arguments), ce qu'il peut acheter (offres), comment ça
-// se passe (méthode), la preuve que ça tourne (réalisations), ses dernières
-// objections (FAQ), et comment nous joindre (contact).
+// Le bandeau des six arguments qui vivait ici a été supprimé le 2026-08-26 :
+// quatre de ses six promesses étaient déjà, mot pour mot, des questions de la
+// FAQ. Deux formulations de la même chose sur une même page, c'est ce qui
+// rendait le haut de page confus.
 export default function Home() {
   return (
     <main>
       <Hero />
-      <Arguments />
       <Offres />
       <Methode />
       <Realisations />
