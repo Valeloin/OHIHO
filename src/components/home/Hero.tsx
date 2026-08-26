@@ -1,12 +1,15 @@
 import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
-import { SITE } from "@/lib/site";
 
-// Hero volontairement court (2026-08-26) : la demande est que le visiteur
-// voie « 90 % de ce qu'on vend » sans défiler. Tout ce qui n'amène pas
-// directement aux offres a donc été retiré ou réduit à une ligne — les trois
-// repères, qui occupaient une rangée de cartes entière, tiennent maintenant
-// sur une seule ligne de texte fin.
+// Hero court, et qui parle au VISITEUR plutôt que de nous (2026-08-26).
+//
+// L'ancienne version annonçait ce qu'on est (« un site à la hauteur de votre
+// savoir-faire ») puis listait nos formats. Elle ne disait pas ce que le
+// visiteur y gagne. Le titre nomme donc maintenant ce qu'il évite — le site
+// modèle, le gabarit — et le sous-titre dit ce qu'il obtient à la place.
+//
+// Les trois repères tiennent sur une ligne : ils rassurent sans repousser les
+// offres sous la ligne de flottaison, qui est le point de la page.
 const REPERES = [
   "Réponse sous 24 h ouvrées",
   "En ligne en 1 à 4 semaines",
@@ -15,17 +18,17 @@ const REPERES = [
 
 export default function Hero() {
   return (
-    <section className="pb-8 pt-10 sm:pb-10 sm:pt-14">
+    <section className="pb-6 pt-8 sm:pb-8 sm:pt-12">
       <div className="shell">
         <Reveal>
-          <h1 className="h-display max-w-4xl">
-            Un site à la hauteur{" "}
-            <span className="gradient-text">de votre savoir-faire.</span>
+          <h1 className="h-display max-w-[19ch]">
+            Votre savoir-faire mérite mieux qu&apos;un{" "}
+            <span className="gradient-text">site modèle.</span>
           </h1>
 
-          <p className="lede mt-5">
-            Sites vitrines, refontes et applications web sur mesure, conçus et
-            développés à {SITE.city}.
+          <p className="lede mt-5 max-w-[52ch]">
+            Sites vitrines, refontes et applications web, écrits sur mesure pour
+            votre activité — jamais achetés sur étagère.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">

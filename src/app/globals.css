@@ -232,9 +232,13 @@ body {
     background: rgb(var(--brand-emerald));
   }
 
+  /* Titre de première page. Monté d'un cran le 2026-08-26 : le hero manquait
+     d'impact. `text-balance` répartit les mots entre les lignes plutôt que de
+     laisser un mot seul en bas. */
   .h-display {
-    @apply text-4xl font-medium leading-[1.05] tracking-display sm:text-5xl
-      lg:text-6xl;
+    @apply text-[2.6rem] font-medium leading-[1.02] tracking-display
+      sm:text-6xl lg:text-7xl;
+    text-wrap: balance;
   }
   .h-section {
     @apply text-3xl font-medium leading-[1.1] tracking-display sm:text-4xl;
