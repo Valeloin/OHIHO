@@ -22,7 +22,9 @@ export type Realisation = {
 export const REALISATIONS: Realisation[] = [
   {
     title: "mycalories",
-    category: "Application web",
+    // « SaaS » et non « Application web » : c'est un produit vendu par
+    // abonnement, pas une application développée pour un client.
+    category: "SaaS",
     description:
       "Suivi de calories par abonnement : on décrit son repas en une phrase, l'outil estime les calories et les macronutriments. Journal, calendrier, entraînements et commande vocale.",
     resultat: "Aucun aliment à chercher dans une base : on écrit, ou on dicte.",
